@@ -2,15 +2,15 @@ package main
 
 import (
 	"flag"
-	"os"
 	"log"
+	"os"
 
+	"code.cloudfoundry.org/lager"
+	"fmt"
 	"github.com/alphagov/paas-go/broker"
 	"github.com/alphagov/paas-s3-broker/provider"
 	"net"
-	"fmt"
 	"net/http"
-	"code.cloudfoundry.org/lager"
 )
 
 var configFilePath string

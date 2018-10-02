@@ -3,6 +3,7 @@
         "basic_auth_password": "password",
         "log_level": "info",
         "aws_region": "eu-west-2",
+        "bucket_prefix": "bucket-names-will-start-with-this-",
         "catalog": {
                 "services": [{
                         "id": "uuid-1",
