@@ -52,7 +52,15 @@ func (s *S3Provider) Deprovision(ctx context.Context, deprovisionData providerif
 
 func (s *S3Provider) Bind(ctx context.Context, bindData provideriface.BindData) (
 	binding brokerapi.Binding, err error) {
-	return brokerapi.Binding{}, errors.New("not implemented")
+
+	bucketCredentials, err := s.Client.AddUserToBucket(bindData.BindingID, bindData.InstanceID)
+	if err != nil {
+		return brokerapi.Binding{}, err
+	}
+
+	return brokerapi.Binding{
+		Credentials: bucketCredentials,
+	}, nil
 }
 
 func (s *S3Provider) Unbind(ctx context.Context, unbindData provideriface.UnbindData) (

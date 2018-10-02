@@ -6,8 +6,10 @@ import (
 
 	"context"
 	"errors"
+
 	provideriface "github.com/alphagov/paas-go/provider"
 	"github.com/alphagov/paas-s3-broker/provider"
+	"github.com/alphagov/paas-s3-broker/s3"
 	fakeClient "github.com/alphagov/paas-s3-broker/s3/fakes"
 )
 
@@ -42,11 +44,11 @@ var _ = Describe("Provider", func() {
 			provisionData := provideriface.ProvisionData{
 				InstanceID: "09E1993E-62E2-4040-ADF2-4D3EC741EFE6",
 			}
-			fakeClientErr := errors.New("error provisioning")
-			fakeS3Client.CreateBucketReturns(fakeClientErr)
+			errProvisioning := errors.New("error provisioning")
+			fakeS3Client.CreateBucketReturns(errProvisioning)
 
 			_, _, _, err := s3Provider.Provision(context.Background(), provisionData)
-			Expect(err).To(MatchError(fakeClientErr))
+			Expect(err).To(MatchError(errProvisioning))
 		})
 	})
 
@@ -66,11 +68,46 @@ var _ = Describe("Provider", func() {
 			deprovisionData := provideriface.DeprovisionData{
 				InstanceID: "09E1993E-62E2-4040-ADF2-4D3EC741EFE6",
 			}
-			fakeClientErr := errors.New("error deprovisioning")
-			fakeS3Client.DeleteBucketReturns(fakeClientErr)
+			errDeprovisioning := errors.New("error deprovisioning")
+			fakeS3Client.DeleteBucketReturns(errDeprovisioning)
 
 			_, _, err := s3Provider.Deprovision(context.Background(), deprovisionData)
-			Expect(err).To(MatchError(fakeClientErr))
+			Expect(err).To(MatchError(errDeprovisioning))
+		})
+	})
+
+	Describe("Bind", func() {
+		It("passes the correct parameters to the client", func() {
+			instanceID := "09E1993E-62E2-4040-ADF2-4D3EC741EFE6"
+			bindingID := "D26EA3FB-AA78-451C-9ED0-233935ED388F"
+
+			bindData := provideriface.BindData{
+				InstanceID: instanceID,
+				BindingID:  bindingID,
+			}
+			returnedBucketCredentials := s3.BucketCredentials{
+				BucketName:         s3Provider.Config.BucketPrefix + "bucketName",
+				AWSAccessKeyID:     "aws-access-key-id",
+				AWSSecretAccessKey: "aws-secret-access-key",
+			}
+			fakeS3Client.AddUserToBucketReturns(returnedBucketCredentials, nil)
+
+			binding, err := s3Provider.Bind(context.Background(), bindData)
+			Expect(err).NotTo(HaveOccurred())
+			actualUsername, actualBucketName := fakeS3Client.AddUserToBucketArgsForCall(0)
+			Expect(actualUsername).To(Equal(bindingID))
+			Expect(actualBucketName).To(Equal(instanceID))
+
+			Expect(binding.Credentials).To(Equal(returnedBucketCredentials))
+		})
+
+		It("errors when adding the user errors", func() {
+			bindData := provideriface.BindData{}
+			errAddingUser := errors.New("error-adding-user")
+			fakeS3Client.AddUserToBucketReturns(s3.BucketCredentials{}, errAddingUser)
+
+			_, err := s3Provider.Bind(context.Background(), bindData)
+			Expect(err).To(MatchError(errAddingUser))
 		})
 	})
 

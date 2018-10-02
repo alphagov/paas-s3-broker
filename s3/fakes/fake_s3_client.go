@@ -30,6 +30,20 @@ type FakeClient struct {
 	deleteBucketReturnsOnCall map[int]struct {
 		result1 error
 	}
+	AddUserToBucketStub        func(username, bucketName string) (s3.BucketCredentials, error)
+	addUserToBucketMutex       sync.RWMutex
+	addUserToBucketArgsForCall []struct {
+		username   string
+		bucketName string
+	}
+	addUserToBucketReturns struct {
+		result1 s3.BucketCredentials
+		result2 error
+	}
+	addUserToBucketReturnsOnCall map[int]struct {
+		result1 s3.BucketCredentials
+		result2 error
+	}
 	invocations      map[string][][]interface{}
 	invocationsMutex sync.RWMutex
 }
@@ -130,6 +144,58 @@ func (fake *FakeClient) DeleteBucketReturnsOnCall(i int, result1 error) {
 	}{result1}
 }
 
+func (fake *FakeClient) AddUserToBucket(username string, bucketName string) (s3.BucketCredentials, error) {
+	fake.addUserToBucketMutex.Lock()
+	ret, specificReturn := fake.addUserToBucketReturnsOnCall[len(fake.addUserToBucketArgsForCall)]
+	fake.addUserToBucketArgsForCall = append(fake.addUserToBucketArgsForCall, struct {
+		username   string
+		bucketName string
+	}{username, bucketName})
+	fake.recordInvocation("AddUserToBucket", []interface{}{username, bucketName})
+	fake.addUserToBucketMutex.Unlock()
+	if fake.AddUserToBucketStub != nil {
+		return fake.AddUserToBucketStub(username, bucketName)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fake.addUserToBucketReturns.result1, fake.addUserToBucketReturns.result2
+}
+
+func (fake *FakeClient) AddUserToBucketCallCount() int {
+	fake.addUserToBucketMutex.RLock()
+	defer fake.addUserToBucketMutex.RUnlock()
+	return len(fake.addUserToBucketArgsForCall)
+}
+
+func (fake *FakeClient) AddUserToBucketArgsForCall(i int) (string, string) {
+	fake.addUserToBucketMutex.RLock()
+	defer fake.addUserToBucketMutex.RUnlock()
+	return fake.addUserToBucketArgsForCall[i].username, fake.addUserToBucketArgsForCall[i].bucketName
+}
+
+func (fake *FakeClient) AddUserToBucketReturns(result1 s3.BucketCredentials, result2 error) {
+	fake.AddUserToBucketStub = nil
+	fake.addUserToBucketReturns = struct {
+		result1 s3.BucketCredentials
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeClient) AddUserToBucketReturnsOnCall(i int, result1 s3.BucketCredentials, result2 error) {
+	fake.AddUserToBucketStub = nil
+	if fake.addUserToBucketReturnsOnCall == nil {
+		fake.addUserToBucketReturnsOnCall = make(map[int]struct {
+			result1 s3.BucketCredentials
+			result2 error
+		})
+	}
+	fake.addUserToBucketReturnsOnCall[i] = struct {
+		result1 s3.BucketCredentials
+		result2 error
+	}{result1, result2}
+}
+
 func (fake *FakeClient) Invocations() map[string][][]interface{} {
 	fake.invocationsMutex.RLock()
 	defer fake.invocationsMutex.RUnlock()
@@ -137,6 +203,8 @@ func (fake *FakeClient) Invocations() map[string][][]interface{} {
 	defer fake.createBucketMutex.RUnlock()
 	fake.deleteBucketMutex.RLock()
 	defer fake.deleteBucketMutex.RUnlock()
+	fake.addUserToBucketMutex.RLock()
+	defer fake.addUserToBucketMutex.RUnlock()
 	copiedInvocations := map[string][][]interface{}{}
 	for key, value := range fake.invocations {
 		copiedInvocations[key] = value
