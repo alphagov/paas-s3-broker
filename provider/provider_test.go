@@ -11,6 +11,7 @@ import (
 	"github.com/alphagov/paas-s3-broker/provider"
 	"github.com/alphagov/paas-s3-broker/s3"
 	fakeClient "github.com/alphagov/paas-s3-broker/s3/fakes"
+	"github.com/pivotal-cf/brokerapi"
 )
 
 var _ = Describe("Provider", func() {
@@ -62,6 +63,12 @@ var _ = Describe("Provider", func() {
 			_, _, err := s3Provider.Deprovision(context.Background(), deprovisionData)
 			Expect(err).NotTo(HaveOccurred())
 			Expect(fakeS3Client.DeleteBucketArgsForCall(0)).To(Equal(deprovisionData.InstanceID))
+		})
+
+		It("returns a specific error if the bucket does not exist", func() {
+			fakeS3Client.DeleteBucketReturns(errors.New("NoSuchBucket: The specified bucket does not exist"))
+			_, _, err := s3Provider.Deprovision(context.Background(), provideriface.DeprovisionData{})
+			Expect(err).To(MatchError(brokerapi.ErrInstanceDoesNotExist))
 		})
 
 		It("errors if the client errors", func() {

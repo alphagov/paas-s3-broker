@@ -7,6 +7,7 @@ import (
 	provideriface "github.com/alphagov/paas-go/provider"
 	"github.com/alphagov/paas-s3-broker/s3"
 	"github.com/pivotal-cf/brokerapi"
+	"strings"
 )
 
 type S3Provider struct {
@@ -47,6 +48,11 @@ func (s *S3Provider) Deprovision(ctx context.Context, deprovisionData providerif
 	operationData string, isAsync bool, err error) {
 
 	err = s.Client.DeleteBucket(deprovisionData.InstanceID)
+	if err != nil {
+		if strings.Contains(err.Error(), "NoSuchBucket: The specified bucket does not exist") {
+			return "", true, brokerapi.ErrInstanceDoesNotExist
+		}
+	}
 	return "", true, err
 }
 
