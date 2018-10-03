@@ -118,6 +118,34 @@ var _ = Describe("Provider", func() {
 		})
 	})
 
+	Describe("Unbind", func() {
+		It("passes the correct parameters to the client", func() {
+			instanceID := "09E1993E-62E2-4040-ADF2-4D3EC741EFE6"
+			bindingID := "D26EA3FB-AA78-451C-9ED0-233935ED388F"
+
+			unbindData := provideriface.UnbindData{
+				InstanceID: instanceID,
+				BindingID:  bindingID,
+			}
+			fakeS3Client.RemoveUserFromBucketReturns(nil)
+
+			_, err := s3Provider.Unbind(context.Background(), unbindData)
+			Expect(err).NotTo(HaveOccurred())
+			actualUsername, actualBucketName := fakeS3Client.RemoveUserFromBucketArgsForCall(0)
+			Expect(actualUsername).To(Equal(bindingID))
+			Expect(actualBucketName).To(Equal(instanceID))
+		})
+
+		It("errors when adding the user errors", func() {
+			unbindData := provideriface.UnbindData{}
+			errRemovingUser := errors.New("error-removing-user")
+			fakeS3Client.RemoveUserFromBucketReturns(errRemovingUser)
+
+			_, err := s3Provider.Unbind(context.Background(), unbindData)
+			Expect(err).To(MatchError(errRemovingUser))
+		})
+	})
+
 	Describe("Update", func() {
 		It("does not support updating a bucket", func() {
 			updateData := provideriface.UpdateData{
@@ -126,6 +154,15 @@ var _ = Describe("Provider", func() {
 
 			_, _, err := s3Provider.Update(context.Background(), updateData)
 			Expect(err).To(MatchError(provider.ErrUpdateNotSupported))
+		})
+	})
+
+	Describe("LastOperation", func() {
+		It("returns success unconditionally", func() {
+			state, description, err := s3Provider.LastOperation(context.Background(), provideriface.LastOperationData{})
+			Expect(err).NotTo(HaveOccurred())
+			Expect(description).To(Equal("Last operation polling not required. All operations are synchronous."))
+			Expect(state).To(Equal(brokerapi.Succeeded))
 		})
 	})
 })

@@ -44,6 +44,18 @@ type FakeClient struct {
 		result1 s3.BucketCredentials
 		result2 error
 	}
+	RemoveUserFromBucketStub        func(username, bucketName string) error
+	removeUserFromBucketMutex       sync.RWMutex
+	removeUserFromBucketArgsForCall []struct {
+		username   string
+		bucketName string
+	}
+	removeUserFromBucketReturns struct {
+		result1 error
+	}
+	removeUserFromBucketReturnsOnCall map[int]struct {
+		result1 error
+	}
 	invocations      map[string][][]interface{}
 	invocationsMutex sync.RWMutex
 }
@@ -196,6 +208,55 @@ func (fake *FakeClient) AddUserToBucketReturnsOnCall(i int, result1 s3.BucketCre
 	}{result1, result2}
 }
 
+func (fake *FakeClient) RemoveUserFromBucket(username string, bucketName string) error {
+	fake.removeUserFromBucketMutex.Lock()
+	ret, specificReturn := fake.removeUserFromBucketReturnsOnCall[len(fake.removeUserFromBucketArgsForCall)]
+	fake.removeUserFromBucketArgsForCall = append(fake.removeUserFromBucketArgsForCall, struct {
+		username   string
+		bucketName string
+	}{username, bucketName})
+	fake.recordInvocation("RemoveUserFromBucket", []interface{}{username, bucketName})
+	fake.removeUserFromBucketMutex.Unlock()
+	if fake.RemoveUserFromBucketStub != nil {
+		return fake.RemoveUserFromBucketStub(username, bucketName)
+	}
+	if specificReturn {
+		return ret.result1
+	}
+	return fake.removeUserFromBucketReturns.result1
+}
+
+func (fake *FakeClient) RemoveUserFromBucketCallCount() int {
+	fake.removeUserFromBucketMutex.RLock()
+	defer fake.removeUserFromBucketMutex.RUnlock()
+	return len(fake.removeUserFromBucketArgsForCall)
+}
+
+func (fake *FakeClient) RemoveUserFromBucketArgsForCall(i int) (string, string) {
+	fake.removeUserFromBucketMutex.RLock()
+	defer fake.removeUserFromBucketMutex.RUnlock()
+	return fake.removeUserFromBucketArgsForCall[i].username, fake.removeUserFromBucketArgsForCall[i].bucketName
+}
+
+func (fake *FakeClient) RemoveUserFromBucketReturns(result1 error) {
+	fake.RemoveUserFromBucketStub = nil
+	fake.removeUserFromBucketReturns = struct {
+		result1 error
+	}{result1}
+}
+
+func (fake *FakeClient) RemoveUserFromBucketReturnsOnCall(i int, result1 error) {
+	fake.RemoveUserFromBucketStub = nil
+	if fake.removeUserFromBucketReturnsOnCall == nil {
+		fake.removeUserFromBucketReturnsOnCall = make(map[int]struct {
+			result1 error
+		})
+	}
+	fake.removeUserFromBucketReturnsOnCall[i] = struct {
+		result1 error
+	}{result1}
+}
+
 func (fake *FakeClient) Invocations() map[string][][]interface{} {
 	fake.invocationsMutex.RLock()
 	defer fake.invocationsMutex.RUnlock()
@@ -205,6 +266,8 @@ func (fake *FakeClient) Invocations() map[string][][]interface{} {
 	defer fake.deleteBucketMutex.RUnlock()
 	fake.addUserToBucketMutex.RLock()
 	defer fake.addUserToBucketMutex.RUnlock()
+	fake.removeUserFromBucketMutex.RLock()
+	defer fake.removeUserFromBucketMutex.RUnlock()
 	copiedInvocations := map[string][][]interface{}{}
 	for key, value := range fake.invocations {
 		copiedInvocations[key] = value

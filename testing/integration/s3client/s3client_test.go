@@ -59,7 +59,16 @@ var _ = Describe("S3client", func() {
 		By("preserving the first user's access")
 		assertBucketAccess(user1Creds, bucketName)
 
-		By("deleting the user")
+		By("deleting a user")
+		err = s3Client.RemoveUserFromBucket(user1, bucketName)
+		Expect(err).NotTo(HaveOccurred())
+
+		By("preserving the second user's access")
+		assertBucketAccess(user2Creds, bucketName)
+
+		By("deleting the final user")
+		err = s3Client.RemoveUserFromBucket(user2, bucketName)
+		Expect(err).NotTo(HaveOccurred())
 
 		By("deleting the bucket")
 		err = s3Client.DeleteBucket(bucketName)

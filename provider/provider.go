@@ -41,7 +41,7 @@ func (s *S3Provider) Provision(ctx context.Context, provisionData provideriface.
 	dashboardURL, operationData string, isAsync bool, err error) {
 
 	err = s.Client.CreateBucket(provisionData.InstanceID)
-	return "", "", true, err
+	return "", "", false, err
 }
 
 func (s *S3Provider) Deprovision(ctx context.Context, deprovisionData provideriface.DeprovisionData) (
@@ -50,10 +50,10 @@ func (s *S3Provider) Deprovision(ctx context.Context, deprovisionData providerif
 	err = s.Client.DeleteBucket(deprovisionData.InstanceID)
 	if err != nil {
 		if strings.Contains(err.Error(), "NoSuchBucket: The specified bucket does not exist") {
-			return "", true, brokerapi.ErrInstanceDoesNotExist
+			return "", false, brokerapi.ErrInstanceDoesNotExist
 		}
 	}
-	return "", true, err
+	return "", false, err
 }
 
 func (s *S3Provider) Bind(ctx context.Context, bindData provideriface.BindData) (
@@ -65,23 +65,31 @@ func (s *S3Provider) Bind(ctx context.Context, bindData provideriface.BindData) 
 	}
 
 	return brokerapi.Binding{
+		IsAsync:     false,
 		Credentials: bucketCredentials,
 	}, nil
 }
 
 func (s *S3Provider) Unbind(ctx context.Context, unbindData provideriface.UnbindData) (
 	unbinding brokerapi.UnbindSpec, err error) {
-	return brokerapi.UnbindSpec{}, errors.New("not implemented")
+
+	err = s.Client.RemoveUserFromBucket(unbindData.BindingID, unbindData.InstanceID)
+	if err != nil {
+		return brokerapi.UnbindSpec{}, err
+	}
+	return brokerapi.UnbindSpec{
+		IsAsync: false,
+	}, nil
 }
 
 var ErrUpdateNotSupported = errors.New("Updating the S3 bucket is currently not supported")
 
 func (s *S3Provider) Update(ctx context.Context, updateData provideriface.UpdateData) (
 	operationData string, isAsync bool, err error) {
-	return "", true, ErrUpdateNotSupported
+	return "", false, ErrUpdateNotSupported
 }
 
 func (s *S3Provider) LastOperation(ctx context.Context, lastOperationData provideriface.LastOperationData) (
 	state brokerapi.LastOperationState, description string, err error) {
-	return "", "", errors.New("not implemented")
+	return brokerapi.Succeeded, "Last operation polling not required. All operations are synchronous.", nil
 }
