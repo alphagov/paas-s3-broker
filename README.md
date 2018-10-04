@@ -49,6 +49,28 @@ Unwanted access to S3 or IAM resources will be protected by using a couple of na
 
 Also, by the nature of bucket policies, a full user name and bucket name have to be provided. This means unnecessarily broad access permissions cannot be granted.
 
+Here is an example bucket policy the broker will apply:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "s3:DeleteObject",
+        "s3:GetObject",
+        "s3:PutObject"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:aws:s3:::bucket-name-prefix-instance-id/*",
+      "Principal": {
+        "AWS": "arn:aws:iam::<account-number>:user/s3-broker/some-user-id"
+      }
+    }
+  ]
+}
+```
+
 ## Running
 
 Minimal example:
