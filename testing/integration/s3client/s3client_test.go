@@ -1,15 +1,8 @@
 package s3client_test
 
 import (
-	"io/ioutil"
-	"os"
-	"path/filepath"
-
 	"github.com/alphagov/paas-s3-broker/s3"
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/credentials"
-	"github.com/aws/aws-sdk-go/aws/session"
-	awsS3 "github.com/aws/aws-sdk-go/service/s3"
+	"github.com/alphagov/paas-s3-broker/testing/integration/helpers"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/satori/go.uuid"
@@ -18,8 +11,6 @@ import (
 const (
 	region       = "eu-west-2"
 	bucketPrefix = "gds-paas-s3-broker-testing-"
-	fixturesPath = "../../fixtures/"
-	testFileKey  = "file.txt"
 )
 
 var _ = Describe("S3client", func() {
@@ -47,24 +38,25 @@ var _ = Describe("S3client", func() {
 		Expect(err).NotTo(HaveOccurred())
 
 		By("using the returned credentials to prove access")
-		assertBucketAccess(user1Creds, bucketName)
+
+		helpers.AssertBucketAccess(user1Creds, bucketPrefix, bucketName, region)
 
 		By("adding another user to the bucket policy")
 		user2Creds, err := s3Client.AddUserToBucket(user2, bucketName)
 		Expect(err).NotTo(HaveOccurred())
 
 		By("using the returned credentials to prove access")
-		assertBucketAccess(user2Creds, bucketName)
+		helpers.AssertBucketAccess(user2Creds, bucketPrefix, bucketName, region)
 
 		By("preserving the first user's access")
-		assertBucketAccess(user1Creds, bucketName)
+		helpers.AssertBucketAccess(user1Creds, bucketPrefix, bucketName, region)
 
 		By("deleting a user")
 		err = s3Client.RemoveUserFromBucket(user1, bucketName)
 		Expect(err).NotTo(HaveOccurred())
 
 		By("preserving the second user's access")
-		assertBucketAccess(user2Creds, bucketName)
+		helpers.AssertBucketAccess(user2Creds, bucketPrefix, bucketName, region)
 
 		By("deleting the final user")
 		err = s3Client.RemoveUserFromBucket(user2, bucketName)
@@ -75,36 +67,3 @@ var _ = Describe("S3client", func() {
 		Expect(err).NotTo(HaveOccurred())
 	})
 })
-
-func assertBucketAccess(creds s3.BucketCredentials, bucketName string) {
-	sess := session.Must(session.NewSession(&aws.Config{
-		Region:      aws.String(region),
-		Credentials: credentials.NewStaticCredentials(creds.AWSAccessKeyID, creds.AWSSecretAccessKey, ""),
-	}))
-	userS3Client := awsS3.New(sess)
-	file, err := os.Open(filepath.Join(fixturesPath, testFileKey))
-	Expect(err).NotTo(HaveOccurred())
-	defer file.Close()
-
-	_, err = userS3Client.PutObject(&awsS3.PutObjectInput{
-		Bucket: aws.String(bucketPrefix + bucketName),
-		Key:    aws.String(testFileKey),
-		Body:   file,
-	})
-	Expect(err).NotTo(HaveOccurred())
-
-	getObjectOutput, err := userS3Client.GetObject(&awsS3.GetObjectInput{
-		Bucket: aws.String(bucketPrefix + bucketName),
-		Key:    aws.String(testFileKey),
-	})
-	Expect(err).NotTo(HaveOccurred())
-	fileContents, err := ioutil.ReadAll(getObjectOutput.Body)
-	Expect(err).NotTo(HaveOccurred())
-	Expect(string(fileContents)).To(ContainSubstring("This is a file"))
-
-	_, err = userS3Client.DeleteObject(&awsS3.DeleteObjectInput{
-		Bucket: aws.String(bucketPrefix + bucketName),
-		Key:    aws.String(testFileKey),
-	})
-	Expect(err).NotTo(HaveOccurred())
-}
