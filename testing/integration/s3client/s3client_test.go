@@ -5,7 +5,6 @@ import (
 	"github.com/alphagov/paas-s3-broker/testing/integration/helpers"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	"github.com/satori/go.uuid"
 )
 
 const (
@@ -38,7 +37,6 @@ var _ = Describe("S3client", func() {
 		Expect(err).NotTo(HaveOccurred())
 
 		By("using the returned credentials to prove access")
-
 		helpers.AssertBucketAccess(user1Creds, bucketPrefix, bucketName, region)
 
 		By("adding another user to the bucket policy")
