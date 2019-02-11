@@ -21,7 +21,7 @@ The IAM role for the broker must include at least the following policy:
         "s3:GetBucketPolicy"
       ],
       "Effect": "Allow",
-      "Resource": "arn:aws:s3:::bucket-name-prefix-*"
+      "Resource": "arn:aws:s3:::paas-s3-broker-*"
     },
     {
       "Action": [
@@ -31,7 +31,7 @@ The IAM role for the broker must include at least the following policy:
       ],
       "Effect": "Allow",
       "Resource": [
-        "arn:aws:iam::*:user/s3-broker/*"
+        "arn:aws:iam::*:user/paas-s3-broker/*"
       ]
     }
   ]
@@ -62,9 +62,9 @@ Here is an example bucket policy the broker will apply:
         "s3:PutObject"
       ],
       "Effect": "Allow",
-      "Resource": "arn:aws:s3:::bucket-name-prefix-instance-id/*",
+      "Resource": "arn:aws:s3:::paas-s3-broker-instance-id/*",
       "Principal": {
-        "AWS": "arn:aws:iam::<account-number>:user/s3-broker/some-user-id"
+        "AWS": "arn:aws:iam::<account-number>:user/paas-s3-broker/some-user-id"
       }
     }
   ]
@@ -83,14 +83,15 @@ go run main.go -config examples/config.json
 
 The following options can be added to the configuration file:
 
-| Field | Default value | Type | Values |
-|---|---|---|---|
-| `basic_auth_username` | empty string | string | any non-empty string |
-| `basic_auth_password` | empty string | string | any non-empty string |
-| `port` | 3000 | string | any free port |
-| `log_level` | debug | string | debug,info,error,fatal |
-| `aws_region` | empty string | string | any [AWS region](https://docs.aws.amazon.com/general/latest/gr/rande.html) |
-| `bucket_prefix` | empty string | string | any |
+| Field                 | Default value | Type   | Values                                                                     |
+| --------------------- | ------------- | ------ | -------------------------------------------------------------------------- |
+| `basic_auth_username` | empty string  | string | any non-empty string                                                       |
+| `basic_auth_password` | empty string  | string | any non-empty string                                                       |
+| `port`                | 3000          | string | any free port                                                              |
+| `log_level`           | debug         | string | debug,info,error,fatal                                                     |
+| `aws_region`          | empty string  | string | any [AWS region](https://docs.aws.amazon.com/general/latest/gr/rande.html) |
+| `bucket_prefix`       | empty string  | string | any                                                                        |
+| `iam_user_path`       | empty string  | string | it should be in "/path/" format                                            |
 
 ## Testing
 

@@ -5,11 +5,13 @@ import (
 	"github.com/alphagov/paas-s3-broker/testing/integration/helpers"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"github.com/satori/go.uuid"
 )
 
 const (
 	region       = "eu-west-2"
-	bucketPrefix = "gds-paas-s3-broker-testing-"
+	bucketPrefix = "test-paas-s3-broker-"
+	iamUserPath  = "/test-paas-s3-broker/"
 )
 
 var _ = Describe("S3client", func() {
@@ -21,7 +23,7 @@ var _ = Describe("S3client", func() {
 	)
 
 	BeforeEach(func() {
-		s3Client = s3.NewS3Client(bucketPrefix, region)
+		s3Client = s3.NewS3Client(bucketPrefix, iamUserPath, region)
 		bucketName = uuid.NewV4().String()
 		user1 = uuid.NewV4().String()
 		user2 = uuid.NewV4().String()

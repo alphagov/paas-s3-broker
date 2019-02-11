@@ -4,10 +4,11 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"strings"
+
 	provideriface "github.com/alphagov/paas-go/provider"
 	"github.com/alphagov/paas-s3-broker/s3"
 	"github.com/pivotal-cf/brokerapi"
-	"strings"
 )
 
 type S3Provider struct {
@@ -16,15 +17,13 @@ type S3Provider struct {
 }
 
 func NewS3Provider(configJSON []byte) (*S3Provider, error) {
-	config := &Config{
-		AWSRegion: "eu-west-2",
-	}
+	config := &Config{}
 	err := json.Unmarshal(configJSON, &config)
 	if err != nil {
 		return nil, err
 	}
 
-	client := s3.NewS3Client(config.BucketPrefix, config.AWSRegion)
+	client := s3.NewS3Client(config.BucketPrefix, config.IAMUserPath, config.AWSRegion)
 
 	return &S3Provider{
 		Client: client,
@@ -33,14 +32,17 @@ func NewS3Provider(configJSON []byte) (*S3Provider, error) {
 }
 
 type Config struct {
-	AWSRegion    string `json:"aws_region"`
-	BucketPrefix string `json:"bucket_prefix"`
+	AWSRegion         string `json:"aws_region"`
+	BucketPrefix      string `json:"bucket_prefix"`
+	IAMUserPath       string `json:"iam_user_path"`
+	DeployEnvironment string `json:"deploy_env"`
 }
 
 func (s *S3Provider) Provision(ctx context.Context, provisionData provideriface.ProvisionData) (
 	dashboardURL, operationData string, isAsync bool, err error) {
 
-	err = s.Client.CreateBucket(provisionData.InstanceID)
+	err = s.Client.CreateBucket(provisionData, s.Config.DeployEnvironment)
+
 	return "", "", false, err
 }
 
@@ -59,7 +61,7 @@ func (s *S3Provider) Deprovision(ctx context.Context, deprovisionData providerif
 func (s *S3Provider) Bind(ctx context.Context, bindData provideriface.BindData) (
 	binding brokerapi.Binding, err error) {
 
-	bucketCredentials, err := s.Client.AddUserToBucket(bindData.BindingID, bindData.InstanceID)
+	bucketCredentials, err := s.Client.AddUserToBucket(bindData.BindingID, bindData.InstanceID, s.Config.AWSRegion)
 	if err != nil {
 		return brokerapi.Binding{}, err
 	}
