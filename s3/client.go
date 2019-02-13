@@ -7,9 +7,9 @@ import (
 
 	"strings"
 
+	"code.cloudfoundry.org/lager"
 	"github.com/alphagov/paas-go/provider"
 	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/iam"
 	"github.com/aws/aws-sdk-go/service/iam/iamiface"
 	"github.com/aws/aws-sdk-go/service/s3"
@@ -18,10 +18,10 @@ import (
 
 //go:generate counterfeiter -o fakes/fake_s3_client.go . Client
 type Client interface {
-	CreateBucket(provisionData provider.ProvisionData, deployEnv string) error
+	CreateBucket(provisionData provider.ProvisionData) error
 	DeleteBucket(name string) error
-	AddUserToBucket(username, bucketName, awsRegion string) (BucketCredentials, error)
-	RemoveUserFromBucket(username, bucketName string) error
+	AddUserToBucket(bindData provider.BindData) (BucketCredentials, error)
+	RemoveUserFromBucket(bindingID, bucketName string) error
 }
 
 type BucketCredentials struct {
@@ -29,31 +29,58 @@ type BucketCredentials struct {
 	AWSAccessKeyID     string `json:"aws_access_key_id"`
 	AWSSecretAccessKey string `json:"aws_secret_access_key"`
 	AWSRegion          string `json:"aws_region"`
+	DeployEnvironment  string `json:"deploy_env"`
+}
+
+type Config struct {
+	AWSRegion         string `json:"aws_region"`
+	ResourcePrefix    string `json:"resource_prefix"`
+	IAMUserPath       string `json:"iam_user_path"`
+	DeployEnvironment string `json:"deploy_env"`
+	Timeout           time.Duration
+}
+
+func NewS3ClientConfig(configJSON []byte) (*Config, error) {
+	config := &Config{}
+	err := json.Unmarshal(configJSON, &config)
+	if err != nil {
+		return nil, err
+	}
+
+	return config, nil
 }
 
 type S3Client struct {
-	bucketPrefix string
-	iamUserPath  string
-	Timeout      time.Duration
-	S3           s3iface.S3API
-	IAM          iamiface.IAMAPI
+	bucketPrefix      string
+	iamUserPath       string
+	awsRegion         string
+	deployEnvironment string
+	timeout           time.Duration
+	s3Client          s3iface.S3API
+	iamClient         iamiface.IAMAPI
+	logger            lager.Logger
 }
 
-func NewS3Client(bucketPrefix, iamUserPath, region string) *S3Client {
-	sess := session.Must(session.NewSession(&aws.Config{Region: aws.String(region)}))
-	s3Client := s3.New(sess)
-	iamClient := iam.New(sess)
+func NewS3Client(config *Config, s3Client s3iface.S3API, iamClient iamiface.IAMAPI, logger lager.Logger) *S3Client {
+	timeout := config.Timeout
+	if timeout == time.Duration(0) {
+		timeout = 30 * time.Second
+	}
+
 	return &S3Client{
-		bucketPrefix: bucketPrefix,
-		iamUserPath:  fmt.Sprintf("/%s/", strings.Trim(iamUserPath, "/")),
-		Timeout:      30 * time.Second,
-		S3:           s3Client,
-		IAM:          iamClient,
+		bucketPrefix:      config.ResourcePrefix,
+		iamUserPath:       fmt.Sprintf("/%s/", strings.Trim(config.IAMUserPath, "/")),
+		awsRegion:         config.AWSRegion,
+		deployEnvironment: config.DeployEnvironment,
+		timeout:           timeout,
+		s3Client:          s3Client,
+		iamClient:         iamClient,
+		logger:            logger,
 	}
 }
 
-func (s *S3Client) CreateBucket(provisionData provider.ProvisionData, deployEnvironment string) error {
-	_, err := s.S3.CreateBucket(&s3.CreateBucketInput{
+func (s *S3Client) CreateBucket(provisionData provider.ProvisionData) error {
+	_, err := s.s3Client.CreateBucket(&s3.CreateBucketInput{
 		Bucket: aws.String(s.buildBucketName(provisionData.InstanceID)),
 	})
 	if err != nil {
@@ -82,7 +109,7 @@ func (s *S3Client) CreateBucket(provisionData provider.ProvisionData, deployEnvi
 		},
 		{
 			Key:   aws.String("deploy_env"),
-			Value: aws.String(deployEnvironment),
+			Value: aws.String(s.deployEnvironment),
 		},
 	})
 	if err != nil {
@@ -99,23 +126,40 @@ func (s *S3Client) CreateBucket(provisionData provider.ProvisionData, deployEnvi
 }
 
 func (s *S3Client) DeleteBucket(name string) error {
-	_, err := s.S3.DeleteBucket(&s3.DeleteBucketInput{
+	_, err := s.s3Client.DeleteBucket(&s3.DeleteBucketInput{
 		Bucket: aws.String(s.buildBucketName(name)),
 	})
 	return err
 }
 
-func (s *S3Client) AddUserToBucket(username, bucketName, awsRegion string) (BucketCredentials, error) {
-	fullBucketName := s.buildBucketName(bucketName)
-	createUserOutput, err := s.IAM.CreateUser(&iam.CreateUserInput{
+func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredentials, error) {
+	fullBucketName := s.buildBucketName(bindData.InstanceID)
+	username := s.bucketPrefix + bindData.BindingID
+	userTags := []*iam.Tag{
+		{
+			Key:   aws.String("service_instance_guid"),
+			Value: aws.String(bindData.InstanceID),
+		},
+		{
+			Key:   aws.String("created_by"),
+			Value: aws.String("paas-s3-broker"),
+		},
+		{
+			Key:   aws.String("deploy_env"),
+			Value: aws.String(s.deployEnvironment),
+		},
+	}
+
+	createUserOutput, err := s.iamClient.CreateUser(&iam.CreateUserInput{
 		Path:     aws.String(s.iamUserPath),
 		UserName: aws.String(username),
+		Tags:     userTags,
 	})
 	if err != nil {
 		return BucketCredentials{}, err
 	}
 
-	createAccessKeyOutput, err := s.IAM.CreateAccessKey(&iam.CreateAccessKeyInput{
+	createAccessKeyOutput, err := s.iamClient.CreateAccessKey(&iam.CreateAccessKeyInput{
 		UserName: aws.String(username),
 	})
 	if err != nil {
@@ -123,7 +167,7 @@ func (s *S3Client) AddUserToBucket(username, bucketName, awsRegion string) (Buck
 		return BucketCredentials{}, err
 	}
 
-	getBucketPolicyOutput, err := s.S3.GetBucketPolicy(&s3.GetBucketPolicyInput{
+	getBucketPolicyOutput, err := s.s3Client.GetBucketPolicy(&s3.GetBucketPolicyInput{
 		Bucket: aws.String(fullBucketName),
 	})
 	currentBucketPolicy := ""
@@ -158,7 +202,7 @@ func (s *S3Client) AddUserToBucket(username, bucketName, awsRegion string) (Buck
 		BucketName:         fullBucketName,
 		AWSAccessKeyID:     *createAccessKeyOutput.AccessKey.AccessKeyId,
 		AWSSecretAccessKey: *createAccessKeyOutput.AccessKey.SecretAccessKey,
-		AWSRegion:          awsRegion,
+		AWSRegion:          s.awsRegion,
 	}, nil
 }
 
@@ -166,7 +210,7 @@ func (s *S3Client) putBucketPolicyWithTimeout(fullBucketName, updatedPolicyJSON 
 	var apiErr error
 	timeoutChannel := make(chan bool)
 	go func() {
-		time.Sleep(s.Timeout)
+		time.Sleep(s.timeout)
 		timeoutChannel <- true
 	}()
 	for {
@@ -174,7 +218,7 @@ func (s *S3Client) putBucketPolicyWithTimeout(fullBucketName, updatedPolicyJSON 
 		case <-timeoutChannel:
 			return apiErr
 		default:
-			_, apiErr = s.S3.PutBucketPolicy(&s3.PutBucketPolicyInput{
+			_, apiErr = s.s3Client.PutBucketPolicy(&s3.PutBucketPolicyInput{
 				Bucket: aws.String(fullBucketName),
 				Policy: aws.String(updatedPolicyJSON),
 			})
@@ -187,11 +231,12 @@ func (s *S3Client) putBucketPolicyWithTimeout(fullBucketName, updatedPolicyJSON 
 }
 
 func (s *S3Client) deleteUserWithoutError(username string) {
-	_ = s.deleteUser(username)
+	err := s.deleteUser(username)
+	s.logger.Error(fmt.Sprintf("Deleted User %s, and suppressed error", username), err)
 }
 
 func (s *S3Client) deleteUser(username string) error {
-	keys, err := s.IAM.ListAccessKeys(&iam.ListAccessKeysInput{
+	keys, err := s.iamClient.ListAccessKeys(&iam.ListAccessKeysInput{
 		UserName: aws.String(username),
 	})
 	if err != nil {
@@ -199,7 +244,7 @@ func (s *S3Client) deleteUser(username string) error {
 	}
 	if keys != nil {
 		for _, k := range keys.AccessKeyMetadata {
-			_, err := s.IAM.DeleteAccessKey(&iam.DeleteAccessKeyInput{
+			_, err := s.iamClient.DeleteAccessKey(&iam.DeleteAccessKeyInput{
 				UserName:    aws.String(username),
 				AccessKeyId: k.AccessKeyId,
 			})
@@ -208,7 +253,7 @@ func (s *S3Client) deleteUser(username string) error {
 			}
 		}
 	}
-	_, err = s.IAM.DeleteUser(&iam.DeleteUserInput{
+	_, err = s.iamClient.DeleteUser(&iam.DeleteUserInput{
 		UserName: aws.String(username),
 	})
 	return err
@@ -219,16 +264,12 @@ func (s *S3Client) tagBucket(instanceID string, tags []*s3.Tag) (output *s3.PutB
 		Bucket:  aws.String(s.buildBucketName(instanceID)),
 		Tagging: &s3.Tagging{TagSet: tags},
 	}
-	result, err := s.S3.PutBucketTagging(&createTagsInput)
+	result, err := s.s3Client.PutBucketTagging(&createTagsInput)
 	return result, err
 }
 
-func (s *S3Client) buildBucketArn(fullBucketName string) string {
-	return fmt.Sprintf("arn:aws:s3:::%s/*", fullBucketName)
-}
-
-func (s *S3Client) buildBareBucketArn(fullBucketName string) string {
-	return fmt.Sprintf("arn:aws:s3:::%s", fullBucketName)
+func (s *S3Client) buildBucketArns(fullBucketName string) (wildcardArn, bareArn string) {
+	return fmt.Sprintf("arn:aws:s3:::%s/*", fullBucketName), fmt.Sprintf("arn:aws:s3:::%s", fullBucketName)
 }
 
 func (s *S3Client) buildBucketName(bucketName string) string {
@@ -236,12 +277,10 @@ func (s *S3Client) buildBucketName(bucketName string) string {
 }
 
 func (s *S3Client) AddUserToBucketPolicy(userArn, fullBucketName, policyDocument string) (PolicyDocument, error) {
-	updatedPolicy := BucketPolicyTemplate
-	updatedPolicy.Statement[0].Resource = s.buildBucketArn(fullBucketName)
-	updatedPolicy.Statement[1].Resource = s.buildBareBucketArn(fullBucketName)
-
+	updatedPolicy := BucketPolicyTemplate()
 	if policyDocument == "" {
-		for policyStatementIndex, _ := range updatedPolicy.Statement {
+		updatedPolicy.Statement[0].Resource, updatedPolicy.Statement[1].Resource = s.buildBucketArns(fullBucketName)
+		for policyStatementIndex := range updatedPolicy.Statement {
 			updatedPolicy.Statement[policyStatementIndex].Principal = Principal{
 				AWS: userArn,
 			}
@@ -255,27 +294,33 @@ func (s *S3Client) AddUserToBucketPolicy(userArn, fullBucketName, policyDocument
 	}
 	for policyStatementIndex := range updatedPolicy.Statement {
 		principal := updatedPolicy.Statement[policyStatementIndex].Principal.AWS
+		var existingPrincipals []interface{}
 		switch p := principal.(type) {
 		case string:
-			updatedPolicy.Statement[policyStatementIndex].Principal.AWS = []string{p, userArn}
+			existingPrincipals = []interface{}{p}
 		case []interface{}:
-			principals := []string{}
-			for _, i := range p {
-				principals = append(principals, i.(string))
-			}
-			principals = append(
-				principals,
-				userArn,
-			)
-			updatedPolicy.Statement[policyStatementIndex].Principal.AWS = principals
+			existingPrincipals = p
 		}
+
+		var principals []string
+		for _, existingPrincipal := range existingPrincipals {
+			principals = append(principals, existingPrincipal.(string))
+		}
+		principals = append(
+			principals,
+			userArn,
+		)
+
+		updatedPolicy.Statement[policyStatementIndex].Principal.AWS = principals
 	}
 	return updatedPolicy, nil
 }
 
-func (s *S3Client) RemoveUserFromBucket(username, bucketName string) error {
+func (s *S3Client) RemoveUserFromBucket(bindingID, bucketName string) error {
+	username := s.bucketPrefix + bindingID
 	fullBucketName := s.buildBucketName(bucketName)
-	getBucketPolicyOutput, err := s.S3.GetBucketPolicy(&s3.GetBucketPolicyInput{
+
+	getBucketPolicyOutput, err := s.s3Client.GetBucketPolicy(&s3.GetBucketPolicyInput{
 		Bucket: aws.String(fullBucketName),
 	})
 	if err != nil {
@@ -293,8 +338,7 @@ func (s *S3Client) RemoveUserFromBucket(username, bucketName string) error {
 }
 
 func (s *S3Client) RemoveUserFromBucketPolicy(username, fullBucketName, currentBucketPolicy string) (PolicyDocument, error) {
-	updatedPolicy := BucketPolicyTemplate
-	updatedPolicy.Statement[0].Resource = s.buildBucketArn(fullBucketName)
+	var updatedPolicy PolicyDocument
 
 	err := json.Unmarshal([]byte(currentBucketPolicy), &updatedPolicy)
 	if err != nil {
@@ -302,21 +346,28 @@ func (s *S3Client) RemoveUserFromBucketPolicy(username, fullBucketName, currentB
 	}
 	for policyStatementIndex := range updatedPolicy.Statement {
 		principal := updatedPolicy.Statement[policyStatementIndex].Principal.AWS
+		var existingPrincipals []interface{}
 		switch p := principal.(type) {
 		case string:
-			updatedPolicy.Statement[policyStatementIndex].Principal.AWS = nil
+			existingPrincipals = []interface{}{p}
 		case []interface{}:
-			principals := []string{}
-			for _, i := range p {
-				if !s.arnIsForUser(i.(string), username) {
-					principals = append(principals, i.(string))
-				}
+			existingPrincipals = p
+		}
+
+		var principals []string
+		for _, existingPrincipal := range existingPrincipals {
+			if !s.arnIsForUser(existingPrincipal.(string), username) {
+				principals = append(principals, existingPrincipal.(string))
 			}
+		}
+		if len(principals) > 0 {
 			updatedPolicy.Statement[policyStatementIndex].Principal.AWS = principals
+		} else {
+			updatedPolicy.Statement[policyStatementIndex].Principal.AWS = nil
 		}
 	}
 	if updatedPolicy.Statement[0].Principal.AWS == nil && updatedPolicy.Statement[1].Principal.AWS == nil {
-		_, err = s.S3.DeleteBucketPolicy(&s3.DeleteBucketPolicyInput{
+		_, err = s.s3Client.DeleteBucketPolicy(&s3.DeleteBucketPolicyInput{
 			Bucket: aws.String(fullBucketName),
 		})
 		return updatedPolicy, err
@@ -353,23 +404,25 @@ type Principal struct {
 	AWS interface{} `json:"AWS,omitempty"`
 }
 
-var BucketPolicyTemplate = PolicyDocument{
-	Version: "2012-10-17",
-	Statement: []Statement{
-		{
-			Effect: "Allow",
-			Action: []string{
-				"s3:GetObject",
-				"s3:PutObject",
-				"s3:DeleteObject",
+func BucketPolicyTemplate() PolicyDocument {
+	return PolicyDocument{
+		Version: "2012-10-17",
+		Statement: []Statement{
+			{
+				Effect: "Allow",
+				Action: []string{
+					"s3:GetObject",
+					"s3:PutObject",
+					"s3:DeleteObject",
+				},
+			},
+			{
+				Effect: "Allow",
+				Action: []string{
+					"s3:GetBucketLocation",
+					"s3:ListBucket",
+				},
 			},
 		},
-		{
-			Effect: "Allow",
-			Action: []string{
-				"s3:GetBucketLocation",
-				"s3:ListBucket",
-			},
-		},
-	},
+	}
 }

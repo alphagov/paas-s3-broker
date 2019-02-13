@@ -3,7 +3,7 @@
   "basic_auth_password": "password",
   "log_level": "info",
   "aws_region": "us-east-1",
-  "bucket_prefix": "paas-s3-broker-",
+  "resource_prefix": "paas-s3-broker-",
   "iam_user_path": "/paas-s3-broker/",
   "deploy_env": "london",
   "catalog": {

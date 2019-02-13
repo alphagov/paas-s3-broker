@@ -2,6 +2,10 @@ package broker_test
 
 import (
 	"code.cloudfoundry.org/lager"
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/iam"
+	aws_s3 "github.com/aws/aws-sdk-go/service/s3"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 
@@ -46,7 +50,7 @@ var _ = Describe("Broker", func() {
 
 	It("should manage the lifecycle of an S3 bucket", func() {
 		By("initialising")
-		s3Provider, brokerTester := initialise()
+		s3ClientConfig, brokerTester := initialise()
 
 		By("Provisioning")
 		res := brokerTester.Provision(instanceID, brokertesting.RequestBody{
@@ -55,6 +59,12 @@ var _ = Describe("Broker", func() {
 		}, ASYNC_ALLOWED)
 		Expect(res.Code).To(Equal(http.StatusCreated))
 
+		defer func() {
+			By("Deprovisioning")
+			res = brokerTester.Deprovision(instanceID, serviceID, planID, ASYNC_ALLOWED)
+			Expect(res.Code).To(Equal(http.StatusOK))
+		}()
+
 		By("Binding an app")
 		res = brokerTester.Bind(instanceID, binding1ID, brokertesting.RequestBody{
 			ServiceID: serviceID,
@@ -62,9 +72,15 @@ var _ = Describe("Broker", func() {
 		}, ASYNC_ALLOWED)
 		Expect(res.Code).To(Equal(http.StatusCreated))
 
+		defer func() {
+			By("Unbinding the first app")
+			res = brokerTester.Unbind(instanceID, serviceID, planID, binding1ID, ASYNC_ALLOWED)
+			Expect(res.Code).To(Equal(http.StatusOK))
+		}()
+
 		By("Asserting the credentials returned work")
 		binding1Creds := extractCredentials(res)
-		helpers.AssertBucketAccess(binding1Creds, s3Provider.Config.BucketPrefix, instanceID, s3Provider.Config.AWSRegion)
+		helpers.AssertBucketAccess(binding1Creds, s3ClientConfig.ResourcePrefix, instanceID, s3ClientConfig.AWSRegion)
 
 		By("Binding another app")
 		res = brokerTester.Bind(instanceID, binding2ID, brokertesting.RequestBody{
@@ -73,35 +89,32 @@ var _ = Describe("Broker", func() {
 		}, ASYNC_ALLOWED)
 		Expect(res.Code).To(Equal(http.StatusCreated))
 
+		defer func() {
+			By("Unbinding the second app")
+			res = brokerTester.Unbind(instanceID, serviceID, planID, binding2ID, ASYNC_ALLOWED)
+			Expect(res.Code).To(Equal(http.StatusOK))
+		}()
+
 		By("Asserting the credentials returned work")
 		binding2Creds := extractCredentials(res)
-		helpers.AssertBucketAccess(binding2Creds, s3Provider.Config.BucketPrefix, instanceID, s3Provider.Config.AWSRegion)
+		helpers.AssertBucketAccess(binding2Creds, s3ClientConfig.ResourcePrefix, instanceID, s3ClientConfig.AWSRegion)
 
 		By("Asserting the first user's credentials still work")
-		helpers.AssertBucketAccess(binding1Creds, s3Provider.Config.BucketPrefix, instanceID, s3Provider.Config.AWSRegion)
-
-		By("Unbinding the first app")
-		res = brokerTester.Unbind(instanceID, serviceID, planID, binding1ID, ASYNC_ALLOWED)
-		Expect(res.Code).To(Equal(http.StatusOK))
+		helpers.AssertBucketAccess(binding1Creds, s3ClientConfig.ResourcePrefix, instanceID, s3ClientConfig.AWSRegion)
 
 		By("Asserting the second user's credentials still work")
-		helpers.AssertBucketAccess(binding2Creds, s3Provider.Config.BucketPrefix, instanceID, s3Provider.Config.AWSRegion)
+		helpers.AssertBucketAccess(binding2Creds, s3ClientConfig.ResourcePrefix, instanceID, s3ClientConfig.AWSRegion)
+	})
 
-		By("Unbinding the second app")
-		res = brokerTester.Unbind(instanceID, serviceID, planID, binding2ID, ASYNC_ALLOWED)
-		Expect(res.Code).To(Equal(http.StatusOK))
+	It("should return a 410 response when trying to delete a non-existent instanc", func() {
+		_, brokerTester := initialise()
 
-		By("Deprovisioning")
-		res = brokerTester.Deprovision(instanceID, serviceID, planID, ASYNC_ALLOWED)
-		Expect(res.Code).To(Equal(http.StatusOK))
-
-		By("Returning a 410 response when trying to delete a non-existent instance")
-		res = brokerTester.Deprovision(instanceID, serviceID, planID, ASYNC_ALLOWED)
+		res := brokerTester.Deprovision(instanceID, serviceID, planID, ASYNC_ALLOWED)
 		Expect(res.Code).To(Equal(http.StatusGone))
 	})
 })
 
-func initialise() (*provider.S3Provider, brokertesting.BrokerTester) {
+func initialise() (*s3.Config, brokertesting.BrokerTester) {
 	file, err := os.Open("../../fixtures/config.json")
 	Expect(err).ToNot(HaveOccurred())
 	defer file.Close()
@@ -109,16 +122,21 @@ func initialise() (*provider.S3Provider, brokertesting.BrokerTester) {
 	config, err := broker.NewConfig(file)
 	Expect(err).ToNot(HaveOccurred())
 
-	s3Provider, err := provider.NewS3Provider(config.Provider)
+	s3ClientConfig, err := s3.NewS3ClientConfig(config.Provider)
 	Expect(err).ToNot(HaveOccurred())
 
-	logger := lager.NewLogger("s3-service-broker")
+	logger := lager.NewLogger("s3-service-broker-test")
 	logger.RegisterSink(lager.NewWriterSink(os.Stdout, config.API.LagerLogLevel))
+
+	sess := session.Must(session.NewSession(&aws.Config{Region: aws.String(s3ClientConfig.AWSRegion)}))
+	s3Client := s3.NewS3Client(s3ClientConfig, aws_s3.New(sess), iam.New(sess), logger)
+
+	s3Provider := provider.NewS3Provider(s3Client)
 
 	serviceBroker := broker.New(config, s3Provider, logger)
 	brokerAPI := broker.NewAPI(serviceBroker, logger, config)
 
-	return s3Provider, brokertesting.New(brokerapi.BrokerCredentials{
+	return s3ClientConfig, brokertesting.New(brokerapi.BrokerCredentials{
 		Username: "username",
 		Password: "password",
 	}, brokerAPI)

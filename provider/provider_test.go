@@ -22,11 +22,7 @@ var _ = Describe("Provider", func() {
 
 	BeforeEach(func() {
 		fakeS3Client = &fakeClient.FakeClient{}
-
-		var err error
-		s3Provider, err = provider.NewS3Provider([]byte(`{}`))
-		Expect(err).NotTo(HaveOccurred())
-		s3Provider.Client = fakeS3Client
+		s3Provider = provider.NewS3Provider(fakeS3Client)
 	})
 
 	Describe("Provision", func() {
@@ -87,26 +83,24 @@ var _ = Describe("Provider", func() {
 		It("passes the correct parameters to the client", func() {
 			instanceID := "09E1993E-62E2-4040-ADF2-4D3EC741EFE6"
 			bindingID := "D26EA3FB-AA78-451C-9ED0-233935ED388F"
-			region := s3Provider.Config.AWSRegion
+			region := "eu-west-2"
 
 			bindData := provideriface.BindData{
 				InstanceID: instanceID,
 				BindingID:  bindingID,
 			}
 			returnedBucketCredentials := s3.BucketCredentials{
-				BucketName:         s3Provider.Config.BucketPrefix + "bucketName",
+				BucketName:         "test-paas-s3-broker-bucketName",
 				AWSAccessKeyID:     "aws-access-key-id",
 				AWSSecretAccessKey: "aws-secret-access-key",
-				AWSRegion:          s3Provider.Config.AWSRegion,
+				AWSRegion:          region,
 			}
 			fakeS3Client.AddUserToBucketReturns(returnedBucketCredentials, nil)
 
 			binding, err := s3Provider.Bind(context.Background(), bindData)
 			Expect(err).NotTo(HaveOccurred())
-			actualUsername, actualBucketName, actualRegionName := fakeS3Client.AddUserToBucketArgsForCall(0)
-			Expect(actualUsername).To(Equal(bindingID))
-			Expect(actualBucketName).To(Equal(instanceID))
-			Expect(actualRegionName).To(Equal(region))
+			actualBindData := fakeS3Client.AddUserToBucketArgsForCall(0)
+			Expect(actualBindData).To(Equal(bindData))
 
 			Expect(binding.Credentials).To(Equal(returnedBucketCredentials))
 		})

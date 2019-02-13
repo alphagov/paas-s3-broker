@@ -2,7 +2,6 @@ package provider
 
 import (
 	"context"
-	"encoding/json"
 	"errors"
 	"strings"
 
@@ -12,36 +11,19 @@ import (
 )
 
 type S3Provider struct {
-	Client s3.Client
-	Config *Config
+	client s3.Client
 }
 
-func NewS3Provider(configJSON []byte) (*S3Provider, error) {
-	config := &Config{}
-	err := json.Unmarshal(configJSON, &config)
-	if err != nil {
-		return nil, err
-	}
-
-	client := s3.NewS3Client(config.BucketPrefix, config.IAMUserPath, config.AWSRegion)
-
+func NewS3Provider(s3Client s3.Client) *S3Provider {
 	return &S3Provider{
-		Client: client,
-		Config: config,
-	}, nil
-}
-
-type Config struct {
-	AWSRegion         string `json:"aws_region"`
-	BucketPrefix      string `json:"bucket_prefix"`
-	IAMUserPath       string `json:"iam_user_path"`
-	DeployEnvironment string `json:"deploy_env"`
+		client: s3Client,
+	}
 }
 
 func (s *S3Provider) Provision(ctx context.Context, provisionData provideriface.ProvisionData) (
 	dashboardURL, operationData string, isAsync bool, err error) {
 
-	err = s.Client.CreateBucket(provisionData, s.Config.DeployEnvironment)
+	err = s.client.CreateBucket(provisionData)
 
 	return "", "", false, err
 }
@@ -49,7 +31,7 @@ func (s *S3Provider) Provision(ctx context.Context, provisionData provideriface.
 func (s *S3Provider) Deprovision(ctx context.Context, deprovisionData provideriface.DeprovisionData) (
 	operationData string, isAsync bool, err error) {
 
-	err = s.Client.DeleteBucket(deprovisionData.InstanceID)
+	err = s.client.DeleteBucket(deprovisionData.InstanceID)
 	if err != nil {
 		if strings.Contains(err.Error(), "NoSuchBucket: The specified bucket does not exist") {
 			return "", false, brokerapi.ErrInstanceDoesNotExist
@@ -61,7 +43,7 @@ func (s *S3Provider) Deprovision(ctx context.Context, deprovisionData providerif
 func (s *S3Provider) Bind(ctx context.Context, bindData provideriface.BindData) (
 	binding brokerapi.Binding, err error) {
 
-	bucketCredentials, err := s.Client.AddUserToBucket(bindData.BindingID, bindData.InstanceID, s.Config.AWSRegion)
+	bucketCredentials, err := s.client.AddUserToBucket(bindData)
 	if err != nil {
 		return brokerapi.Binding{}, err
 	}
@@ -75,7 +57,7 @@ func (s *S3Provider) Bind(ctx context.Context, bindData provideriface.BindData) 
 func (s *S3Provider) Unbind(ctx context.Context, unbindData provideriface.UnbindData) (
 	unbinding brokerapi.UnbindSpec, err error) {
 
-	err = s.Client.RemoveUserFromBucket(unbindData.BindingID, unbindData.InstanceID)
+	err = s.client.RemoveUserFromBucket(unbindData.BindingID, unbindData.InstanceID)
 	if err != nil {
 		return brokerapi.UnbindSpec{}, err
 	}

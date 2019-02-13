@@ -3,8 +3,8 @@ platform: linux
 image_resource:
   type: docker-image
   source:
-    repository: governmentpaas/cf-acceptance-tests
-    tag: 895cf6752c8ec64af05a3a735186b90acd3db65a
+    repository: golang
+    tag: 1.11.5-stretch
 inputs:
   - name: repo
 run:
@@ -13,7 +13,5 @@ run:
     - -e
     - -c
     - |
-      mkdir -p "${GOPATH}/src/github.com/alphagov/paas-s3-broker"
-      rsync -az repo/ "${GOPATH}/src/github.com/alphagov/paas-s3-broker/"
-      cd "${GOPATH}/src/github.com/alphagov/paas-s3-broker"
+      cd repo
       make test

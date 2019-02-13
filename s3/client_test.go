@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"time"
 
+	"code.cloudfoundry.org/lager"
+	"github.com/alphagov/paas-go/provider"
 	"github.com/alphagov/paas-s3-broker/s3"
 	fakeClient "github.com/alphagov/paas-s3-broker/s3/fakes"
 	"github.com/aws/aws-sdk-go/aws"
@@ -16,19 +18,30 @@ import (
 
 var _ = Describe("Client", func() {
 	var (
-		s3API    *fakeClient.FakeS3API
-		iamAPI   *fakeClient.FakeIAMAPI
-		s3Client s3.S3Client
+		s3API          *fakeClient.FakeS3API
+		iamAPI         *fakeClient.FakeIAMAPI
+		s3Client       *s3.S3Client
+		s3ClientConfig *s3.Config
+		logger         lager.Logger
 	)
 
 	BeforeEach(func() {
 		s3API = &fakeClient.FakeS3API{}
 		iamAPI = &fakeClient.FakeIAMAPI{}
-		s3Client = s3.S3Client{
-			Timeout: 2 * time.Second,
-			S3:      s3API,
-			IAM:     iamAPI,
+		logger = lager.NewLogger("s3-service-broker-test")
+		s3ClientConfig = &s3.Config{
+			AWSRegion:         "eu-west-2",
+			ResourcePrefix:    "test-bucket-prefix-",
+			IAMUserPath:       "/test-iam-path/",
+			DeployEnvironment: "test-env",
+			Timeout:           2 * time.Second,
 		}
+		s3Client = s3.NewS3Client(
+			s3ClientConfig,
+			s3API,
+			iamAPI,
+			logger,
+		)
 	})
 
 	Describe("AddUserToBucket", func() {
@@ -48,8 +61,11 @@ var _ = Describe("Client", func() {
 			s3API.GetBucketPolicyReturnsOnCall(0, &awsS3.GetBucketPolicyOutput{
 				Policy: aws.String(`{}`),
 			}, nil)
-
-			bucketCredentials, err := s3Client.AddUserToBucket("username", "bucketName", "region")
+			bindData := provider.BindData{
+				InstanceID: "test-instance-id",
+				BindingID:  "test-binding-id",
+			}
+			bucketCredentials, err := s3Client.AddUserToBucket(bindData)
 			Expect(err).NotTo(HaveOccurred())
 
 			By("creating a user")
@@ -66,10 +82,10 @@ var _ = Describe("Client", func() {
 
 			By("returning the bucket credentials")
 			Expect(bucketCredentials).To(Equal(s3.BucketCredentials{
-				BucketName:         "bucketName",
+				BucketName:         s3ClientConfig.ResourcePrefix + bindData.InstanceID,
 				AWSAccessKeyID:     "access-key-id",
 				AWSSecretAccessKey: "secret-access-key",
-				AWSRegion:          "region",
+				AWSRegion:          s3ClientConfig.AWSRegion,
 			}))
 		})
 
@@ -80,8 +96,11 @@ var _ = Describe("Client", func() {
 					User: &iam.User{},
 				}, nil)
 				iamAPI.CreateAccessKeyReturnsOnCall(0, &iam.CreateAccessKeyOutput{}, errors.New("some-error"))
-
-				_, err := s3Client.AddUserToBucket("username", "bucketName", "region")
+				bindData := provider.BindData{
+					InstanceID: "test-instance-id",
+					BindingID:  "test-binding-id",
+				}
+				_, err := s3Client.AddUserToBucket(bindData)
 				Expect(err).To(HaveOccurred())
 				Expect(iamAPI.DeleteUserCallCount()).To(Equal(1))
 			})
@@ -103,13 +122,17 @@ var _ = Describe("Client", func() {
 				}, nil)
 				s3API.GetBucketPolicyReturnsOnCall(0, &awsS3.GetBucketPolicyOutput{}, errors.New("NoSuchBucketPolicy: The bucket policy does not exist"))
 
-				bucketCredentials, err := s3Client.AddUserToBucket("username", "bucketName", "region")
+				bindData := provider.BindData{
+					InstanceID: "test-instance-id",
+					BindingID:  "test-binding-id",
+				}
+				bucketCredentials, err := s3Client.AddUserToBucket(bindData)
 				Expect(err).NotTo(HaveOccurred())
 				Expect(bucketCredentials).To(Equal(s3.BucketCredentials{
-					BucketName:         "bucketName",
+					BucketName:         s3ClientConfig.ResourcePrefix + bindData.InstanceID,
 					AWSAccessKeyID:     "access-key-id",
 					AWSSecretAccessKey: "secret-access-key",
-					AWSRegion:          "region",
+					AWSRegion:          s3ClientConfig.AWSRegion,
 				}))
 			})
 		})
@@ -134,7 +157,11 @@ var _ = Describe("Client", func() {
 				}, nil)
 				iamAPI.DeleteAccessKeyReturnsOnCall(0, nil, nil)
 
-				_, err := s3Client.AddUserToBucket("username", "bucketName", "region")
+				bindData := provider.BindData{
+					InstanceID: "test-instance-id",
+					BindingID:  "test-binding-id",
+				}
+				_, err := s3Client.AddUserToBucket(bindData)
 				Expect(err).To(HaveOccurred())
 				Expect(iamAPI.DeleteUserCallCount()).To(Equal(1))
 				Expect(iamAPI.DeleteAccessKeyCallCount()).To(Equal(1))
@@ -161,7 +188,11 @@ var _ = Describe("Client", func() {
 				}, nil)
 				iamAPI.DeleteAccessKeyReturnsOnCall(0, nil, nil)
 
-				_, err := s3Client.AddUserToBucket("username", "bucketName", "region")
+				bindData := provider.BindData{
+					InstanceID: "test-instance-id",
+					BindingID:  "test-binding-id",
+				}
+				_, err := s3Client.AddUserToBucket(bindData)
 				Expect(err).To(HaveOccurred())
 				Expect(iamAPI.DeleteUserCallCount()).To(Equal(1))
 				Expect(iamAPI.DeleteAccessKeyCallCount()).To(Equal(1))
@@ -170,7 +201,7 @@ var _ = Describe("Client", func() {
 
 		Describe("AddUserToBucketPolicy", func() {
 			It("adds the user to an empty policy", func() {
-				userArn := "arn:aws:iam::acount-number:user/s3-broker/some-user"
+				userArn := "arn:aws:iam::account-number:user/s3-broker/some-user"
 				updatedPolicy, err := s3Client.AddUserToBucketPolicy(
 					userArn,
 					"bucketName",
@@ -220,8 +251,8 @@ var _ = Describe("Client", func() {
 
 			Context("when adding users to an existing policy", func() {
 				It("converts the principal string into an array", func() {
-					newUserArn := "arn:aws:iam::acount-number:user/s3-broker/new-user"
-					originalUserArn := "arn:aws:iam::acount-number:user/s3-broker/original-user"
+					newUserArn := "arn:aws:iam::account-number:user/s3-broker/new-user"
+					originalUserArn := "arn:aws:iam::account-number:user/s3-broker/original-user"
 					updatedPolicy, err := s3Client.AddUserToBucketPolicy(
 						newUserArn,
 						"bucketName",
@@ -272,9 +303,9 @@ var _ = Describe("Client", func() {
 				})
 
 				It("appends to an existing principal array", func() {
-					newUserArn := "arn:aws:iam::acount-number:user/s3-broker/new-user"
-					originalUserArn1 := "arn:aws:iam::acount-number:user/s3-broker/original-user1"
-					originalUserArn2 := "arn:aws:iam::acount-number:user/s3-broker/original-user2"
+					newUserArn := "arn:aws:iam::account-number:user/s3-broker/new-user"
+					originalUserArn1 := "arn:aws:iam::account-number:user/s3-broker/original-user1"
+					originalUserArn2 := "arn:aws:iam::account-number:user/s3-broker/original-user2"
 					updatedPolicy, err := s3Client.AddUserToBucketPolicy(
 						newUserArn,
 						"bucketName",
@@ -338,7 +369,7 @@ var _ = Describe("Client", func() {
 	Describe("RemoveUserFromBucket", func() {
 		It("manages the user and bucket policy", func() {
 			// Set up fake API
-			userArn := "arn:aws:iam::acount-number:user/s3-broker/some-user"
+			userArn := "arn:aws:iam::account-number:user/s3-broker/" + s3ClientConfig.ResourcePrefix + "some-user"
 			s3API.GetBucketPolicyReturnsOnCall(0, &awsS3.GetBucketPolicyOutput{
 				Policy: aws.String(fmt.Sprintf(`
 					{
@@ -395,7 +426,7 @@ var _ = Describe("Client", func() {
 				errGettingPolicy := errors.New("error-getting-policy")
 				s3API.GetBucketPolicyReturnsOnCall(0, &awsS3.GetBucketPolicyOutput{}, errGettingPolicy)
 
-				err := s3Client.RemoveUserFromBucket("username", "bucketName")
+				err := s3Client.RemoveUserFromBucket("some-user", "bucketName")
 				Expect(err).To(MatchError(errGettingPolicy))
 			})
 		})
@@ -403,7 +434,7 @@ var _ = Describe("Client", func() {
 		Context("when deleting the user fails", func() {
 			It("returns an error", func() {
 				// Set up fake API
-				userArn := "arn:aws:iam::acount-number:user/s3-broker/some-user"
+				userArn := "arn:aws:iam::account-number:user/s3-broker/some-user"
 				s3API.GetBucketPolicyReturnsOnCall(0, &awsS3.GetBucketPolicyOutput{
 					Policy: aws.String(fmt.Sprintf(`
 					{
@@ -450,7 +481,7 @@ var _ = Describe("Client", func() {
 				// Set up fake API
 				s3API.DeleteBucketPolicyReturnsOnCall(0, &awsS3.DeleteBucketPolicyOutput{}, nil)
 
-				userArn := "arn:aws:iam::acount-number:user/s3-broker/some-user"
+				userArn := "arn:aws:iam::account-number:user/s3-broker/some-user"
 				_, _ = s3Client.RemoveUserFromBucketPolicy(
 					userArn,
 					"bucketName",
@@ -491,8 +522,8 @@ var _ = Describe("Client", func() {
 				s3API.PutBucketPolicyReturnsOnCall(0, &awsS3.PutBucketPolicyOutput{}, nil)
 
 				user1Name := "user1"
-				user1Arn := "arn:aws:iam::acount-number:user/s3-broker/user1"
-				user2Arn := "arn:aws:iam::acount-number:user/s3-broker/user2"
+				user1Arn := "arn:aws:iam::account-number:user/s3-broker/user1"
+				user2Arn := "arn:aws:iam::account-number:user/s3-broker/user2"
 				updatedPolicy, err := s3Client.RemoveUserFromBucketPolicy(
 					user1Name,
 					"bucketName",

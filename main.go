@@ -1,16 +1,23 @@
 package main
 
 import (
+	"encoding/json"
 	"flag"
 	"log"
 	"os"
 
-	"code.cloudfoundry.org/lager"
 	"fmt"
-	"github.com/alphagov/paas-go/broker"
-	"github.com/alphagov/paas-s3-broker/provider"
 	"net"
 	"net/http"
+
+	"code.cloudfoundry.org/lager"
+	"github.com/alphagov/paas-go/broker"
+	"github.com/alphagov/paas-s3-broker/provider"
+	"github.com/alphagov/paas-s3-broker/s3"
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/iam"
+	aws_s3 "github.com/aws/aws-sdk-go/service/s3"
 )
 
 var configFilePath string
@@ -30,13 +37,26 @@ func main() {
 		log.Fatalf("Error validating config file: %v\n", err)
 	}
 
-	s3Provider, err := provider.NewS3Provider(config.Provider)
+	err = json.Unmarshal(config.Provider, &config)
 	if err != nil {
-		log.Fatalf("Error creating S3 Provider: %v\n", err)
+		log.Fatalf("Error parsing configuration: %v\n", err)
+	}
+
+	s3ClientConfig, err := s3.NewS3ClientConfig(config.Provider)
+	if err != nil {
+		log.Fatalf("Error parsing configuration: %v\n", err)
 	}
 
 	logger := lager.NewLogger("s3-service-broker")
 	logger.RegisterSink(lager.NewWriterSink(os.Stdout, config.API.LagerLogLevel))
+
+	sess := session.Must(session.NewSession(&aws.Config{Region: aws.String(s3ClientConfig.AWSRegion)}))
+	s3Client := s3.NewS3Client(s3ClientConfig, aws_s3.New(sess), iam.New(sess))
+
+	s3Provider := provider.NewS3Provider(s3Client)
+	if err != nil {
+		log.Fatalf("Error creating S3 Provider: %v\n", err)
+	}
 
 	serviceBroker := broker.New(config, s3Provider, logger)
 	brokerAPI := broker.NewAPI(serviceBroker, logger, config)
