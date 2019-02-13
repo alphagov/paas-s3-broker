@@ -2,19 +2,17 @@
 package fakes
 
 import (
-	sync "sync"
+	"sync"
 
-	provider "github.com/alphagov/paas-go/provider"
-	s3 "github.com/alphagov/paas-s3-broker/s3"
+	"github.com/alphagov/paas-go/provider"
+	"github.com/alphagov/paas-s3-broker/s3"
 )
 
 type FakeClient struct {
-	AddUserToBucketStub        func(string, string, string) (s3.BucketCredentials, error)
+	AddUserToBucketStub        func(provider.BindData) (s3.BucketCredentials, error)
 	addUserToBucketMutex       sync.RWMutex
 	addUserToBucketArgsForCall []struct {
-		arg1 string
-		arg2 string
-		arg3 string
+		arg1 provider.BindData
 	}
 	addUserToBucketReturns struct {
 		result1 s3.BucketCredentials
@@ -24,11 +22,10 @@ type FakeClient struct {
 		result1 s3.BucketCredentials
 		result2 error
 	}
-	CreateBucketStub        func(provider.ProvisionData, string) error
+	CreateBucketStub        func(provider.ProvisionData) error
 	createBucketMutex       sync.RWMutex
 	createBucketArgsForCall []struct {
 		arg1 provider.ProvisionData
-		arg2 string
 	}
 	createBucketReturns struct {
 		result1 error
@@ -63,18 +60,16 @@ type FakeClient struct {
 	invocationsMutex sync.RWMutex
 }
 
-func (fake *FakeClient) AddUserToBucket(arg1 string, arg2 string, arg3 string) (s3.BucketCredentials, error) {
+func (fake *FakeClient) AddUserToBucket(arg1 provider.BindData) (s3.BucketCredentials, error) {
 	fake.addUserToBucketMutex.Lock()
 	ret, specificReturn := fake.addUserToBucketReturnsOnCall[len(fake.addUserToBucketArgsForCall)]
 	fake.addUserToBucketArgsForCall = append(fake.addUserToBucketArgsForCall, struct {
-		arg1 string
-		arg2 string
-		arg3 string
-	}{arg1, arg2, arg3})
-	fake.recordInvocation("AddUserToBucket", []interface{}{arg1, arg2, arg3})
+		arg1 provider.BindData
+	}{arg1})
+	fake.recordInvocation("AddUserToBucket", []interface{}{arg1})
 	fake.addUserToBucketMutex.Unlock()
 	if fake.AddUserToBucketStub != nil {
-		return fake.AddUserToBucketStub(arg1, arg2, arg3)
+		return fake.AddUserToBucketStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
@@ -89,17 +84,17 @@ func (fake *FakeClient) AddUserToBucketCallCount() int {
 	return len(fake.addUserToBucketArgsForCall)
 }
 
-func (fake *FakeClient) AddUserToBucketCalls(stub func(string, string, string) (s3.BucketCredentials, error)) {
+func (fake *FakeClient) AddUserToBucketCalls(stub func(provider.BindData) (s3.BucketCredentials, error)) {
 	fake.addUserToBucketMutex.Lock()
 	defer fake.addUserToBucketMutex.Unlock()
 	fake.AddUserToBucketStub = stub
 }
 
-func (fake *FakeClient) AddUserToBucketArgsForCall(i int) (string, string, string) {
+func (fake *FakeClient) AddUserToBucketArgsForCall(i int) provider.BindData {
 	fake.addUserToBucketMutex.RLock()
 	defer fake.addUserToBucketMutex.RUnlock()
 	argsForCall := fake.addUserToBucketArgsForCall[i]
-	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3
+	return argsForCall.arg1
 }
 
 func (fake *FakeClient) AddUserToBucketReturns(result1 s3.BucketCredentials, result2 error) {
@@ -128,17 +123,16 @@ func (fake *FakeClient) AddUserToBucketReturnsOnCall(i int, result1 s3.BucketCre
 	}{result1, result2}
 }
 
-func (fake *FakeClient) CreateBucket(arg1 provider.ProvisionData, arg2 string) error {
+func (fake *FakeClient) CreateBucket(arg1 provider.ProvisionData) error {
 	fake.createBucketMutex.Lock()
 	ret, specificReturn := fake.createBucketReturnsOnCall[len(fake.createBucketArgsForCall)]
 	fake.createBucketArgsForCall = append(fake.createBucketArgsForCall, struct {
 		arg1 provider.ProvisionData
-		arg2 string
-	}{arg1, arg2})
-	fake.recordInvocation("CreateBucket", []interface{}{arg1, arg2})
+	}{arg1})
+	fake.recordInvocation("CreateBucket", []interface{}{arg1})
 	fake.createBucketMutex.Unlock()
 	if fake.CreateBucketStub != nil {
-		return fake.CreateBucketStub(arg1, arg2)
+		return fake.CreateBucketStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
@@ -153,17 +147,17 @@ func (fake *FakeClient) CreateBucketCallCount() int {
 	return len(fake.createBucketArgsForCall)
 }
 
-func (fake *FakeClient) CreateBucketCalls(stub func(provider.ProvisionData, string) error) {
+func (fake *FakeClient) CreateBucketCalls(stub func(provider.ProvisionData) error) {
 	fake.createBucketMutex.Lock()
 	defer fake.createBucketMutex.Unlock()
 	fake.CreateBucketStub = stub
 }
 
-func (fake *FakeClient) CreateBucketArgsForCall(i int) (provider.ProvisionData, string) {
+func (fake *FakeClient) CreateBucketArgsForCall(i int) provider.ProvisionData {
 	fake.createBucketMutex.RLock()
 	defer fake.createBucketMutex.RUnlock()
 	argsForCall := fake.createBucketArgsForCall[i]
-	return argsForCall.arg1, argsForCall.arg2
+	return argsForCall.arg1
 }
 
 func (fake *FakeClient) CreateBucketReturns(result1 error) {
