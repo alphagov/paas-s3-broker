@@ -124,11 +124,11 @@ var _ = Describe("Provider", func() {
 				InstanceID: instanceID,
 				BindingID:  bindingID,
 			}
-			fakeS3Client.RemoveUserFromBucketReturns(nil)
+			fakeS3Client.RemoveUserFromBucketAndDeleteUserReturns(nil)
 
 			_, err := s3Provider.Unbind(context.Background(), unbindData)
 			Expect(err).NotTo(HaveOccurred())
-			actualUsername, actualBucketName := fakeS3Client.RemoveUserFromBucketArgsForCall(0)
+			actualUsername, actualBucketName := fakeS3Client.RemoveUserFromBucketAndDeleteUserArgsForCall(0)
 			Expect(actualUsername).To(Equal(bindingID))
 			Expect(actualBucketName).To(Equal(instanceID))
 		})
@@ -136,7 +136,7 @@ var _ = Describe("Provider", func() {
 		It("errors when adding the user errors", func() {
 			unbindData := provideriface.UnbindData{}
 			errRemovingUser := errors.New("error-removing-user")
-			fakeS3Client.RemoveUserFromBucketReturns(errRemovingUser)
+			fakeS3Client.RemoveUserFromBucketAndDeleteUserReturns(errRemovingUser)
 
 			_, err := s3Provider.Unbind(context.Background(), unbindData)
 			Expect(err).To(MatchError(errRemovingUser))

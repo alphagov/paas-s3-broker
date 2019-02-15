@@ -366,7 +366,7 @@ var _ = Describe("Client", func() {
 		})
 	})
 
-	Describe("RemoveUserFromBucket", func() {
+	Describe("RemoveUserFromBucketAndDeleteUser", func() {
 		It("manages the user and bucket policy", func() {
 			// Set up fake API
 			userArn := "arn:aws:iam::account-number:user/s3-broker/" + s3ClientConfig.ResourcePrefix + "some-user"
@@ -406,7 +406,7 @@ var _ = Describe("Client", func() {
 			}, nil)
 			iamAPI.DeleteAccessKeyReturnsOnCall(0, nil, nil)
 
-			err := s3Client.RemoveUserFromBucket("some-user", "bucketName")
+			err := s3Client.RemoveUserFromBucketAndDeleteUser("some-user", "bucketName")
 			Expect(err).NotTo(HaveOccurred())
 
 			By("getting the bucket policy")
@@ -426,7 +426,7 @@ var _ = Describe("Client", func() {
 				errGettingPolicy := errors.New("error-getting-policy")
 				s3API.GetBucketPolicyReturnsOnCall(0, &awsS3.GetBucketPolicyOutput{}, errGettingPolicy)
 
-				err := s3Client.RemoveUserFromBucket("some-user", "bucketName")
+				err := s3Client.RemoveUserFromBucketAndDeleteUser("some-user", "bucketName")
 				Expect(err).To(MatchError(errGettingPolicy))
 			})
 		})
@@ -471,7 +471,7 @@ var _ = Describe("Client", func() {
 				errDeletingUser := errors.New("error-deleting-user")
 				iamAPI.DeleteUserReturnsOnCall(0, &iam.DeleteUserOutput{}, errDeletingUser)
 
-				err := s3Client.RemoveUserFromBucket("some-user", "bucketName")
+				err := s3Client.RemoveUserFromBucketAndDeleteUser("some-user", "bucketName")
 				Expect(err).To(MatchError(errDeletingUser))
 			})
 		})

@@ -57,7 +57,7 @@ func (s *S3Provider) Bind(ctx context.Context, bindData provideriface.BindData) 
 func (s *S3Provider) Unbind(ctx context.Context, unbindData provideriface.UnbindData) (
 	unbinding brokerapi.UnbindSpec, err error) {
 
-	err = s.client.RemoveUserFromBucket(unbindData.BindingID, unbindData.InstanceID)
+	err = s.client.RemoveUserFromBucketAndDeleteUser(unbindData.BindingID, unbindData.InstanceID)
 	if err != nil {
 		return brokerapi.UnbindSpec{}, err
 	}

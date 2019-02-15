@@ -21,7 +21,7 @@ type Client interface {
 	CreateBucket(provisionData provider.ProvisionData) error
 	DeleteBucket(name string) error
 	AddUserToBucket(bindData provider.BindData) (BucketCredentials, error)
-	RemoveUserFromBucket(bindingID, bucketName string) error
+	RemoveUserFromBucketAndDeleteUser(bindingID, bucketName string) error
 }
 
 type BucketCredentials struct {
@@ -232,7 +232,9 @@ func (s *S3Client) putBucketPolicyWithTimeout(fullBucketName, updatedPolicyJSON 
 
 func (s *S3Client) deleteUserWithoutError(username string) {
 	err := s.deleteUser(username)
-	s.logger.Error(fmt.Sprintf("Deleted User %s, and suppressed error", username), err)
+	if err != nil {
+		s.logger.Error(fmt.Sprintf("Deleted User %s, and suppressed error", username), err)
+	}
 }
 
 func (s *S3Client) deleteUser(username string) error {
@@ -316,7 +318,7 @@ func (s *S3Client) AddUserToBucketPolicy(userArn, fullBucketName, policyDocument
 	return updatedPolicy, nil
 }
 
-func (s *S3Client) RemoveUserFromBucket(bindingID, bucketName string) error {
+func (s *S3Client) RemoveUserFromBucketAndDeleteUser(bindingID, bucketName string) error {
 	username := s.bucketPrefix + bindingID
 	fullBucketName := s.buildBucketName(bucketName)
 
