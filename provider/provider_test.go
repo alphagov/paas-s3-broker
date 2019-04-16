@@ -1,6 +1,7 @@
 package provider_test
 
 import (
+	"encoding/json"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 
@@ -88,6 +89,9 @@ var _ = Describe("Provider", func() {
 			bindData := provideriface.BindData{
 				InstanceID: instanceID,
 				BindingID:  bindingID,
+				Details: brokerapi.BindDetails{
+					RawParameters: json.RawMessage(`{"permissions":"read-only"}`),
+				},
 			}
 			returnedBucketCredentials := s3.BucketCredentials{
 				BucketName:         "test-paas-s3-broker-bucketName",

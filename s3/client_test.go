@@ -1,8 +1,11 @@
 package s3_test
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/alphagov/paas-s3-broker/s3/policy"
+	"github.com/pivotal-cf/brokerapi"
 	"time"
 
 	"code.cloudfoundry.org/lager"
@@ -59,7 +62,7 @@ var _ = Describe("Client", func() {
 				},
 			}, nil)
 			s3API.GetBucketPolicyReturnsOnCall(0, &awsS3.GetBucketPolicyOutput{
-				Policy: aws.String(`{}`),
+				Policy: aws.String(`{"Version": "2012-10-17", "Statement":[]}`),
 			}, nil)
 			bindData := provider.BindData{
 				InstanceID: "test-instance-id",
@@ -79,6 +82,104 @@ var _ = Describe("Client", func() {
 
 			By("putting the updated policy")
 			Expect(s3API.PutBucketPolicyCallCount()).To(Equal(1))
+
+			By("with the right permissions")
+			updatedPolicyInput := s3API.PutBucketPolicyArgsForCall(0)
+			updatedPolicyStr := updatedPolicyInput.Policy
+
+			updatedPolicy := policy.PolicyDocument{}
+			err = json.Unmarshal([]byte(*updatedPolicyStr), &updatedPolicy)
+			Expect(err).ToNot(HaveOccurred())
+			Expect(updatedPolicy.Statement).To(HaveLen(1))
+			Expect(updatedPolicy.Statement[0].Action).To(ContainElement("s3:PutObject"))
+			Expect(updatedPolicy.Statement[0].Action).To(ContainElement("s3:GetObject"))
+
+			By("returning the bucket credentials")
+			Expect(bucketCredentials).To(Equal(s3.BucketCredentials{
+				BucketName:         s3ClientConfig.ResourcePrefix + bindData.InstanceID,
+				AWSAccessKeyID:     "access-key-id",
+				AWSSecretAccessKey: "secret-access-key",
+				AWSRegion:          s3ClientConfig.AWSRegion,
+			}))
+		})
+
+		It("returns an error if the permissions requested aren't known", func() {
+			// Set up fake API
+			iamAPI.CreateUserReturnsOnCall(0, &iam.CreateUserOutput{
+				User: &iam.User{
+					Arn: aws.String("arn"),
+				},
+			}, nil)
+			iamAPI.CreateAccessKeyReturnsOnCall(0, &iam.CreateAccessKeyOutput{
+				AccessKey: &iam.AccessKey{
+					AccessKeyId:     aws.String("access-key-id"),
+					SecretAccessKey: aws.String("secret-access-key"),
+				},
+			}, nil)
+			s3API.GetBucketPolicyReturnsOnCall(0, &awsS3.GetBucketPolicyOutput{
+				Policy: aws.String(`{"Version": "2012-10-17", "Statement":[]}`),
+			}, nil)
+
+			bindData := provider.BindData{
+				InstanceID: "test-instance-id",
+				BindingID:  "test-binding-id",
+				Details: brokerapi.BindDetails{
+					RawParameters: json.RawMessage(`{"permissions": "read-write-banana"}`),
+				},
+			}
+
+			_, err := s3Client.AddUserToBucket(bindData)
+			Expect(err).To(HaveOccurred())
+		})
+
+		It("creates a policy with the requested permissions", func() {
+			// Set up fake API
+			iamAPI.CreateUserReturnsOnCall(0, &iam.CreateUserOutput{
+				User: &iam.User{
+					Arn: aws.String("arn"),
+				},
+			}, nil)
+			iamAPI.CreateAccessKeyReturnsOnCall(0, &iam.CreateAccessKeyOutput{
+				AccessKey: &iam.AccessKey{
+					AccessKeyId:     aws.String("access-key-id"),
+					SecretAccessKey: aws.String("secret-access-key"),
+				},
+			}, nil)
+			s3API.GetBucketPolicyReturnsOnCall(0, &awsS3.GetBucketPolicyOutput{
+				Policy: aws.String(`{"Version": "2012-10-17", "Statement":[]}`),
+			}, nil)
+			bindData := provider.BindData{
+				InstanceID: "test-instance-id",
+				BindingID:  "test-binding-id",
+				Details: brokerapi.BindDetails{
+					RawParameters: json.RawMessage(`{"permissions": "read-only"}`),
+				},
+			}
+			bucketCredentials, err := s3Client.AddUserToBucket(bindData)
+			Expect(err).NotTo(HaveOccurred())
+
+			By("creating a user")
+			Expect(iamAPI.CreateUserCallCount()).To(Equal(1))
+
+			By("creating access keys for the user")
+			Expect(iamAPI.CreateAccessKeyCallCount()).To(Equal(1))
+
+			By("getting the bucket policy")
+			Expect(s3API.GetBucketPolicyCallCount()).To(Equal(1))
+
+			By("putting the updated policy")
+			Expect(s3API.PutBucketPolicyCallCount()).To(Equal(1))
+
+			By("with the right permissions")
+			updatedPolicyInput := s3API.PutBucketPolicyArgsForCall(0)
+			updatedPolicyStr := updatedPolicyInput.Policy
+
+			updatedPolicy := policy.PolicyDocument{}
+			err = json.Unmarshal([]byte(*updatedPolicyStr), &updatedPolicy)
+			Expect(err).ToNot(HaveOccurred())
+			Expect(updatedPolicy.Statement).To(HaveLen(1))
+			Expect(updatedPolicy.Statement[0].Action).ToNot(ContainElement("s3:PutObject"))
+			Expect(updatedPolicy.Statement[0].Action).To(ContainElement("s3:GetObject"))
 
 			By("returning the bucket credentials")
 			Expect(bucketCredentials).To(Equal(s3.BucketCredentials{
@@ -198,172 +299,6 @@ var _ = Describe("Client", func() {
 				Expect(iamAPI.DeleteAccessKeyCallCount()).To(Equal(1))
 			})
 		})
-
-		Describe("AddUserToBucketPolicy", func() {
-			It("adds the user to an empty policy", func() {
-				userArn := "arn:aws:iam::account-number:user/s3-broker/some-user"
-				updatedPolicy, err := s3Client.AddUserToBucketPolicy(
-					userArn,
-					"bucketName",
-					"",
-				)
-				Expect(err).NotTo(HaveOccurred())
-
-				expectedPolicy := s3.PolicyDocument{
-					Version: "2012-10-17",
-					Statement: []s3.Statement{
-						{
-							Effect: "Allow",
-							Action: []string{
-								"s3:GetObject",
-								"s3:PutObject",
-								"s3:DeleteObject",
-							},
-							Resource: "arn:aws:s3:::bucketName/*",
-							Principal: s3.Principal{
-								AWS: userArn,
-							},
-						},
-						{
-							Effect: "Allow",
-							Action: []string{
-								"s3:GetBucketLocation",
-								"s3:ListBucket",
-							},
-							Resource: "arn:aws:s3:::bucketName",
-							Principal: s3.Principal{
-								AWS: userArn,
-							},
-						},
-					},
-				}
-				Expect(updatedPolicy).To(Equal(expectedPolicy))
-			})
-
-			It("errors if the policy can't be unmarshalled", func() {
-				_, err := s3Client.AddUserToBucketPolicy(
-					"userArn",
-					"bucketName",
-					"this is clearly not JSON",
-				)
-				Expect(err).To(HaveOccurred())
-			})
-
-			Context("when adding users to an existing policy", func() {
-				It("converts the principal string into an array", func() {
-					newUserArn := "arn:aws:iam::account-number:user/s3-broker/new-user"
-					originalUserArn := "arn:aws:iam::account-number:user/s3-broker/original-user"
-					updatedPolicy, err := s3Client.AddUserToBucketPolicy(
-						newUserArn,
-						"bucketName",
-						fmt.Sprintf(`
-						{
-							"Statement": [
-								{
-									"Action": [
-										"s3:GetObject",
-										"s3:PutObject",
-										"s3:DeleteObject"
-									],
-									"Effect": "Allow",
-									"Resource": "arn:aws:s3:::gds-paas-s3-broker-bucketName/*",
-									"Principal": {
-										"AWS": "%s"
-									}
-								},
-								{
-									"Action": [
-										"s3:GetBucketLocation",
-										"s3:ListBucket"
-									],
-									"Effect": "Allow",
-									"Resource": "arn:aws:s3:::gds-paas-s3-broker-bucketName",
-									"Principal": {
-										"AWS": "%s"
-									}
-								}
-							]
-						}
-					`, originalUserArn, originalUserArn),
-					)
-					Expect(err).NotTo(HaveOccurred())
-
-					firstPrincipal := updatedPolicy.Statement[0].Principal.AWS
-					firstConcretePrincipal := firstPrincipal.([]string)
-					secondPrincipal := updatedPolicy.Statement[1].Principal.AWS
-					secondConcretePrincipal := secondPrincipal.([]string)
-					Expect(firstConcretePrincipal).To(BeAssignableToTypeOf([]string{}))
-					Expect(len(firstConcretePrincipal)).To(Equal(2))
-					Expect(firstConcretePrincipal).To(ContainElement(newUserArn))
-					Expect(firstConcretePrincipal).To(ContainElement(originalUserArn))
-					Expect(secondConcretePrincipal).To(BeAssignableToTypeOf([]string{}))
-					Expect(len(secondConcretePrincipal)).To(Equal(2))
-					Expect(secondConcretePrincipal).To(ContainElement(newUserArn))
-					Expect(secondConcretePrincipal).To(ContainElement(originalUserArn))
-				})
-
-				It("appends to an existing principal array", func() {
-					newUserArn := "arn:aws:iam::account-number:user/s3-broker/new-user"
-					originalUserArn1 := "arn:aws:iam::account-number:user/s3-broker/original-user1"
-					originalUserArn2 := "arn:aws:iam::account-number:user/s3-broker/original-user2"
-					updatedPolicy, err := s3Client.AddUserToBucketPolicy(
-						newUserArn,
-						"bucketName",
-						fmt.Sprintf(`
-						{
-							"Statement": [
-								{
-									"Action": [
-										"s3:GetObject",
-										"s3:PutObject",
-										"s3:DeleteObject"
-									],
-									"Effect": "Allow",
-									"Resource": "arn:aws:s3:::gds-paas-s3-broker-bucketName/*",
-									"Principal": {
-										"AWS": [
-											"%s",
-											"%s"
-										]
-									}
-								},
-								{
-									"Action": [
-										"s3:GetBucketLocation",
-										"s3:ListBucket"
-									],
-									"Effect": "Allow",
-									"Resource": "arn:aws:s3:::gds-paas-s3-broker-bucketName",
-									"Principal": {
-										"AWS": [
-											"%s",
-											"%s"
-										]
-									}
-								}
-							]
-						}
-					`, originalUserArn1, originalUserArn2, originalUserArn1, originalUserArn2),
-					)
-					Expect(err).NotTo(HaveOccurred())
-
-					firstPrincipal := updatedPolicy.Statement[0].Principal.AWS
-					firstConcretePrincipal := firstPrincipal.([]string)
-					secondPrincipal := updatedPolicy.Statement[1].Principal.AWS
-					secondConcretePrincipal := secondPrincipal.([]string)
-					Expect(firstConcretePrincipal).To(BeAssignableToTypeOf([]string{}))
-					Expect(len(firstConcretePrincipal)).To(Equal(3))
-					Expect(firstConcretePrincipal).To(ContainElement(newUserArn))
-					Expect(firstConcretePrincipal).To(ContainElement(originalUserArn1))
-					Expect(firstConcretePrincipal).To(ContainElement(originalUserArn2))
-					Expect(secondConcretePrincipal).To(BeAssignableToTypeOf([]string{}))
-					Expect(len(secondConcretePrincipal)).To(Equal(3))
-					Expect(secondConcretePrincipal).To(ContainElement(newUserArn))
-					Expect(secondConcretePrincipal).To(ContainElement(originalUserArn1))
-					Expect(secondConcretePrincipal).To(ContainElement(originalUserArn2))
-				})
-			})
-		})
 	})
 
 	Describe("RemoveUserFromBucketAndDeleteUser", func() {
@@ -381,26 +316,18 @@ var _ = Describe("Client", func() {
 									"s3:DeleteObject"
 								],
 								"Effect": "Allow",
-								"Resource": "arn:aws:s3:::gds-paas-s3-broker-bucketName/*",
-								"Principal": {
-									"AWS": "%s"
-								}
-							},
-							{
-								"Action": [
-									"s3:GetBucketLocation",
-									"s3:ListBucket"
+								"Resource": [
+									"arn:aws:s3:::gds-paas-s3-broker-bucketName",
+									"arn:aws:s3:::gds-paas-s3-broker-bucketName/*"
 								],
-								"Effect": "Allow",
-								"Resource": "arn:aws:s3:::gds-paas-s3-broker-bucketName",
 								"Principal": {
 									"AWS": "%s"
 								}
 							}
 						]
-					}`, userArn, userArn)),
+					}`, userArn)),
 			}, nil)
-			s3API.DeleteBucketPolicyReturnsOnCall(0, nil, nil)
+			s3API.DeleteBucketPolicyReturnsOnCall(0, &awsS3.DeleteBucketPolicyOutput{}, nil)
 			iamAPI.ListAccessKeysReturnsOnCall(0, &iam.ListAccessKeysOutput{
 				AccessKeyMetadata: []*iam.AccessKeyMetadata{{AccessKeyId: aws.String("key")}},
 			}, nil)
@@ -412,12 +339,73 @@ var _ = Describe("Client", func() {
 			By("getting the bucket policy")
 			Expect(s3API.GetBucketPolicyCallCount()).To(Equal(1))
 
-			By("deleting the policy")
+			By("deleting the user and keys")
+			Expect(iamAPI.DeleteUserCallCount()).To(Equal(1))
+			Expect(iamAPI.DeleteAccessKeyCallCount()).To(Equal(1))
+
+			By("deleting the bucket policy")
 			Expect(s3API.DeleteBucketPolicyCallCount()).To(Equal(1))
+		})
+
+		It("updates the bucket policy when there are >0 statements left after unbinding", func() {
+			// Set up fake API
+			userArn := "arn:aws:iam::account-number:user/s3-broker/" + s3ClientConfig.ResourcePrefix + "some-user"
+			s3API.GetBucketPolicyReturnsOnCall(0, &awsS3.GetBucketPolicyOutput{
+				Policy: aws.String(fmt.Sprintf(`
+					{
+						"Statement": [
+							{
+								"Action": [
+									"s3:GetObject",
+									"s3:PutObject",
+									"s3:DeleteObject"
+								],
+								"Effect": "Allow",
+								"Resource": [
+									"arn:aws:s3:::gds-paas-s3-broker-bucketName",
+									"arn:aws:s3:::gds-paas-s3-broker-bucketName/*"
+								],
+								"Principal": {
+									"AWS": "%s"
+								}
+							},
+							{
+								"Action": [
+									"s3:GetObject",
+									"s3:PutObject",
+									"s3:DeleteObject"
+								],
+								"Effect": "Allow",
+								"Resource": [
+									"arn:aws:s3:::gds-paas-s3-broker-bucketName",
+									"arn:aws:s3:::gds-paas-s3-broker-bucketName/*"
+								],
+								"Principal": {
+									"AWS": "some-arn"
+								}
+							}
+						]
+					}`, userArn)),
+			}, nil)
+			s3API.PutBucketPolicyReturnsOnCall(0, &awsS3.PutBucketPolicyOutput{}, nil)
+			iamAPI.ListAccessKeysReturnsOnCall(0, &iam.ListAccessKeysOutput{
+				AccessKeyMetadata: []*iam.AccessKeyMetadata{{AccessKeyId: aws.String("key")}},
+			}, nil)
+			iamAPI.DeleteAccessKeyReturnsOnCall(0, nil, nil)
+
+			err := s3Client.RemoveUserFromBucketAndDeleteUser("some-user", "bucketName")
+			Expect(err).NotTo(HaveOccurred())
+
+			By("getting the bucket policy")
+			Expect(s3API.GetBucketPolicyCallCount()).To(Equal(1))
 
 			By("deleting the user and keys")
 			Expect(iamAPI.DeleteUserCallCount()).To(Equal(1))
 			Expect(iamAPI.DeleteAccessKeyCallCount()).To(Equal(1))
+
+			By("updating the bucket policy")
+			Expect(s3API.PutBucketPolicyCallCount()).To(Equal(1))
+			Expect(s3API.DeleteBucketPolicyCallCount()).To(Equal(0))
 		})
 
 		Context("when getting the bucket policy fails", func() {
@@ -434,7 +422,7 @@ var _ = Describe("Client", func() {
 		Context("when deleting the user fails", func() {
 			It("returns an error", func() {
 				// Set up fake API
-				userArn := "arn:aws:iam::account-number:user/s3-broker/some-user"
+				userArn := "arn:aws:iam::account-number:user/s3-broker/" + s3ClientConfig.ResourcePrefix + "some-user"
 				s3API.GetBucketPolicyReturnsOnCall(0, &awsS3.GetBucketPolicyOutput{
 					Policy: aws.String(fmt.Sprintf(`
 					{
@@ -446,136 +434,25 @@ var _ = Describe("Client", func() {
 									"s3:DeleteObject"
 								],
 								"Effect": "Allow",
-								"Resource": "arn:aws:s3:::gds-paas-s3-broker-bucketName/*",
-								"Principal": {
-									"AWS": "%s"
-								}
-							},
-							{
-								"Action": [
-									"s3:GetBucketLocation",
-									"s3:ListBucket"
+								"Resource": [
+									"arn:aws:s3:::gds-paas-s3-broker-bucketName",
+									"arn:aws:s3:::gds-paas-s3-broker-bucketName/*"
 								],
-								"Effect": "Allow",
-								"Resource": "arn:aws:s3:::gds-paas-s3-broker-bucketName",
 								"Principal": {
 									"AWS": "%s"
 								}
 							}
 						]
-					}`, userArn, userArn)),
+					}`, userArn)),
 				}, nil)
 
-				s3API.DeleteBucketPolicyReturns(&awsS3.DeleteBucketPolicyOutput{}, nil)
+				s3API.PutBucketPolicyReturns(&awsS3.PutBucketPolicyOutput{}, nil)
 
 				errDeletingUser := errors.New("error-deleting-user")
 				iamAPI.DeleteUserReturnsOnCall(0, &iam.DeleteUserOutput{}, errDeletingUser)
 
 				err := s3Client.RemoveUserFromBucketAndDeleteUser("some-user", "bucketName")
 				Expect(err).To(MatchError(errDeletingUser))
-			})
-		})
-
-		Describe("RemoveUserFromBucketPolicy", func() {
-			It("removes the policy if it only has a single principal", func() {
-				// Set up fake API
-				s3API.DeleteBucketPolicyReturnsOnCall(0, &awsS3.DeleteBucketPolicyOutput{}, nil)
-
-				userArn := "arn:aws:iam::account-number:user/s3-broker/some-user"
-				_, _ = s3Client.RemoveUserFromBucketPolicy(
-					userArn,
-					"bucketName",
-					fmt.Sprintf(`
-						{
-							"Statement": [
-								{
-									"Action": [
-										"s3:GetObject",
-										"s3:PutObject",
-										"s3:DeleteObject"
-									],
-									"Effect": "Allow",
-									"Resource": "arn:aws:s3:::gds-paas-s3-broker-bucketName/*",
-									"Principal": {
-										"AWS": "%s"
-									}
-								},
-								{
-									"Action": [
-										"s3:GetBucketLocation",
-										"s3:ListBucket"
-									],
-									"Effect": "Allow",
-									"Resource": "arn:aws:s3:::gds-paas-s3-broker-bucketName",
-									"Principal": {
-										"AWS": "%s"
-									}
-								}
-							]
-						}`, userArn, userArn),
-				)
-				Expect(s3API.DeleteBucketPolicyCallCount()).To(Equal(1))
-			})
-
-			It("remove the user from the list of principles, preserving any other users", func() {
-				// Set up fake API
-				s3API.PutBucketPolicyReturnsOnCall(0, &awsS3.PutBucketPolicyOutput{}, nil)
-
-				user1Name := "user1"
-				user1Arn := "arn:aws:iam::account-number:user/s3-broker/user1"
-				user2Arn := "arn:aws:iam::account-number:user/s3-broker/user2"
-				updatedPolicy, err := s3Client.RemoveUserFromBucketPolicy(
-					user1Name,
-					"bucketName",
-					fmt.Sprintf(`
-						{
-							"Statement": [
-								{
-									"Action": [
-										"s3:GetObject",
-										"s3:PutObject",
-										"s3:DeleteObject"
-									],
-									"Effect": "Allow",
-									"Resource": "arn:aws:s3:::gds-paas-s3-broker-bucketName/*",
-									"Principal": {
-										"AWS": [
-											"%s",
-											"%s"
-										]
-									}
-								},
-								{
-									"Action": [
-										"s3:GetBucketLocation",
-										"s3:ListBucket"
-									],
-									"Effect": "Allow",
-									"Resource": "arn:aws:s3:::gds-paas-s3-broker-bucketName",
-									"Principal": {
-										"AWS": [
-											"%s",
-											"%s"
-										]
-									}
-								}
-							]
-						}
-					`, user1Arn, user2Arn, user1Arn, user2Arn),
-				)
-				Expect(err).NotTo(HaveOccurred())
-				Expect(s3API.PutBucketPolicyCallCount()).To(Equal(1))
-
-				firstPrincipal := updatedPolicy.Statement[0].Principal.AWS
-				firstConcretePrincipal := firstPrincipal.([]string)
-				Expect(firstConcretePrincipal).To(BeAssignableToTypeOf([]string{}))
-				Expect(len(firstConcretePrincipal)).To(Equal(1))
-				Expect(firstConcretePrincipal).To(ContainElement(user2Arn))
-				secondPrincipal := updatedPolicy.Statement[0].Principal.AWS
-				secondConcretePrincipal := secondPrincipal.([]string)
-				Expect(secondConcretePrincipal).To(BeAssignableToTypeOf([]string{}))
-				Expect(len(secondConcretePrincipal)).To(Equal(1))
-				Expect(secondConcretePrincipal).To(ContainElement(user2Arn))
 			})
 		})
 	})

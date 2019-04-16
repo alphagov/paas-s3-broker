@@ -9,6 +9,7 @@ import (
 
 	"code.cloudfoundry.org/lager"
 	"github.com/alphagov/paas-go/provider"
+	"github.com/alphagov/paas-s3-broker/s3/policy"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/iam"
 	"github.com/aws/aws-sdk-go/service/iam/iamiface"
@@ -59,6 +60,10 @@ type S3Client struct {
 	s3Client          s3iface.S3API
 	iamClient         iamiface.IAMAPI
 	logger            lager.Logger
+}
+
+type BindParams struct {
+	Permissions string `json:"permissions"`
 }
 
 func NewS3Client(config *Config, s3Client s3iface.S3API, iamClient iamiface.IAMAPI, logger lager.Logger) *S3Client {
@@ -133,6 +138,21 @@ func (s *S3Client) DeleteBucket(name string) error {
 }
 
 func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredentials, error) {
+	bindParams := BindParams{
+		Permissions: policy.ReadWritePermissionName,
+	}
+
+	if bindData.Details.RawParameters != nil {
+		err := json.Unmarshal(bindData.Details.RawParameters, &bindParams)
+		if err != nil {
+			return BucketCredentials{}, err
+		}
+
+		if !validPermissionsRequested(bindParams) {
+			return BucketCredentials{}, fmt.Errorf("invalid permissions requested: %s", bindParams.Permissions)
+		}
+	}
+
 	fullBucketName := s.buildBucketName(bindData.InstanceID)
 	username := s.bucketPrefix + bindData.BindingID
 	userTags := []*iam.Tag{
@@ -180,7 +200,9 @@ func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredential
 		currentBucketPolicy = *getBucketPolicyOutput.Policy
 	}
 
-	updatedBucketPolicy, err := s.AddUserToBucketPolicy(*createUserOutput.User.Arn, fullBucketName, currentBucketPolicy)
+	stmt := policy.BuildStatement(fullBucketName, *createUserOutput.User, bindParams.Permissions)
+	updatedBucketPolicy, err := policy.BuildPolicy(currentBucketPolicy, stmt)
+
 	if err != nil {
 		s.deleteUserWithoutError(username)
 		return BucketCredentials{}, err
@@ -204,6 +226,16 @@ func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredential
 		AWSSecretAccessKey: *createAccessKeyOutput.AccessKey.SecretAccessKey,
 		AWSRegion:          s.awsRegion,
 	}, nil
+}
+
+func validPermissionsRequested(params BindParams) bool {
+	switch params.Permissions {
+	case policy.ReadWritePermissionName,
+		policy.ReadOnlyPermissionName:
+		return true
+	}
+
+	return false
 }
 
 func (s *S3Client) putBucketPolicyWithTimeout(fullBucketName, updatedPolicyJSON string) error {
@@ -278,46 +310,6 @@ func (s *S3Client) buildBucketName(bucketName string) string {
 	return fmt.Sprintf("%s%s", s.bucketPrefix, bucketName)
 }
 
-func (s *S3Client) AddUserToBucketPolicy(userArn, fullBucketName, policyDocument string) (PolicyDocument, error) {
-	updatedPolicy := BucketPolicyTemplate()
-	if policyDocument == "" {
-		updatedPolicy.Statement[0].Resource, updatedPolicy.Statement[1].Resource = s.buildBucketArns(fullBucketName)
-		for policyStatementIndex := range updatedPolicy.Statement {
-			updatedPolicy.Statement[policyStatementIndex].Principal = Principal{
-				AWS: userArn,
-			}
-		}
-		return updatedPolicy, nil
-	}
-
-	err := json.Unmarshal([]byte(policyDocument), &updatedPolicy)
-	if err != nil {
-		return updatedPolicy, err
-	}
-	for policyStatementIndex := range updatedPolicy.Statement {
-		principal := updatedPolicy.Statement[policyStatementIndex].Principal.AWS
-		var existingPrincipals []interface{}
-		switch p := principal.(type) {
-		case string:
-			existingPrincipals = []interface{}{p}
-		case []interface{}:
-			existingPrincipals = p
-		}
-
-		var principals []string
-		for _, existingPrincipal := range existingPrincipals {
-			principals = append(principals, existingPrincipal.(string))
-		}
-		principals = append(
-			principals,
-			userArn,
-		)
-
-		updatedPolicy.Statement[policyStatementIndex].Principal.AWS = principals
-	}
-	return updatedPolicy, nil
-}
-
 func (s *S3Client) RemoveUserFromBucketAndDeleteUser(bindingID, bucketName string) error {
 	username := s.bucketPrefix + bindingID
 	fullBucketName := s.buildBucketName(bucketName)
@@ -329,102 +321,27 @@ func (s *S3Client) RemoveUserFromBucketAndDeleteUser(bindingID, bucketName strin
 		return err
 	}
 
-	_, err = s.RemoveUserFromBucketPolicy(username, fullBucketName, *getBucketPolicyOutput.Policy)
+	updatedPolicy, err := policy.RemoveUserFromPolicy(*getBucketPolicyOutput.Policy, username)
 	if err != nil {
 		return err
 	}
 
 	err = s.deleteUser(username)
-
-	return err
-}
-
-func (s *S3Client) RemoveUserFromBucketPolicy(username, fullBucketName, currentBucketPolicy string) (PolicyDocument, error) {
-	var updatedPolicy PolicyDocument
-
-	err := json.Unmarshal([]byte(currentBucketPolicy), &updatedPolicy)
 	if err != nil {
-		return updatedPolicy, err
+		return err
 	}
-	for policyStatementIndex := range updatedPolicy.Statement {
-		principal := updatedPolicy.Statement[policyStatementIndex].Principal.AWS
-		var existingPrincipals []interface{}
-		switch p := principal.(type) {
-		case string:
-			existingPrincipals = []interface{}{p}
-		case []interface{}:
-			existingPrincipals = p
+
+	if len(updatedPolicy.Statement) > 0 {
+		updatedPolicyJSON, err := json.Marshal(updatedPolicy)
+		if err != nil {
+			return err
 		}
 
-		var principals []string
-		for _, existingPrincipal := range existingPrincipals {
-			if !s.arnIsForUser(existingPrincipal.(string), username) {
-				principals = append(principals, existingPrincipal.(string))
-			}
-		}
-		if len(principals) > 0 {
-			updatedPolicy.Statement[policyStatementIndex].Principal.AWS = principals
-		} else {
-			updatedPolicy.Statement[policyStatementIndex].Principal.AWS = nil
-		}
-	}
-	if updatedPolicy.Statement[0].Principal.AWS == nil && updatedPolicy.Statement[1].Principal.AWS == nil {
+		return s.putBucketPolicyWithTimeout(fullBucketName, string(updatedPolicyJSON))
+	} else {
 		_, err = s.s3Client.DeleteBucketPolicy(&s3.DeleteBucketPolicyInput{
 			Bucket: aws.String(fullBucketName),
 		})
-		return updatedPolicy, err
-	}
-	updatedPolicyJSON, err := json.Marshal(updatedPolicy)
-	if err != nil {
-		return updatedPolicy, err
-	}
-	err = s.putBucketPolicyWithTimeout(fullBucketName, string(updatedPolicyJSON))
-	if err != nil {
-		return updatedPolicy, err
-	}
-
-	return updatedPolicy, nil
-}
-
-func (s *S3Client) arnIsForUser(arn, username string) bool {
-	return strings.HasSuffix(arn, username)
-}
-
-type PolicyDocument struct {
-	Version   string      `json:"Version,omitempty"`
-	Statement []Statement `json:"Statement,omitempty"`
-}
-
-type Statement struct {
-	Effect    string    `json:"Effect,omitempty"`
-	Action    []string  `json:"Action,omitempty"`
-	Resource  string    `json:"Resource,omitempty"`
-	Principal Principal `json:"Principal,omitempty"`
-}
-
-type Principal struct {
-	AWS interface{} `json:"AWS,omitempty"`
-}
-
-func BucketPolicyTemplate() PolicyDocument {
-	return PolicyDocument{
-		Version: "2012-10-17",
-		Statement: []Statement{
-			{
-				Effect: "Allow",
-				Action: []string{
-					"s3:GetObject",
-					"s3:PutObject",
-					"s3:DeleteObject",
-				},
-			},
-			{
-				Effect: "Allow",
-				Action: []string{
-					"s3:GetBucketLocation",
-					"s3:ListBucket",
-				},
-			},
-		},
+		return err
 	}
 }
