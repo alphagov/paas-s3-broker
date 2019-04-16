@@ -22,19 +22,53 @@ import (
 	"net/http"
 )
 
+//go:generate counterfeiter -o fakes/auto_fake_service_broker.go -fake-name AutoFakeServiceBroker . ServiceBroker
+
+//Each method of the ServiceBroker interface maps to an individual endpoint of the Open Service Broker API.
+//
+//The specification is available here: https://github.com/openservicebrokerapi/servicebroker/blob/v2.14/spec.md
+//
+//The OpenAPI documentation is available here: http://petstore.swagger.io/?url=https://raw.githubusercontent.com/openservicebrokerapi/servicebroker/v2.14/openapi.yaml
 type ServiceBroker interface {
+	// Services gets the catalog of services offered by the service broker
+	//   GET /v2/catalog
 	Services(ctx context.Context) ([]Service, error)
 
+	
+	// Provision creates a new service instance
+	//   PUT /v2/service_instances/{instance_id}
 	Provision(ctx context.Context, instanceID string, details ProvisionDetails, asyncAllowed bool) (ProvisionedServiceSpec, error)
+
+	// Deprovision deletes an existing service instance
+	//  DELETE /v2/service_instances/{instance_id}
 	Deprovision(ctx context.Context, instanceID string, details DeprovisionDetails, asyncAllowed bool) (DeprovisionServiceSpec, error)
 
-	Bind(ctx context.Context, instanceID, bindingID string, details BindDetails, asyncAllowed bool) (Binding, error)
-	Unbind(ctx context.Context, instanceID, bindingID string, details UnbindDetails, asyncAllowed bool) (UnbindSpec, error)
-	GetBinding(ctx context.Context, instanceID, bindingID string) (GetBindingSpec, error)
+	// GetInstance fetches information about a service instance
+	//   GET /v2/service_instances/{instance_id}
+	GetInstance(ctx context.Context, instanceID string) (GetInstanceDetailsSpec, error)
 
+	// Update modifies an existing service instance
+	//  PATCH /v2/service_instances/{instance_id}
 	Update(ctx context.Context, instanceID string, details UpdateDetails, asyncAllowed bool) (UpdateServiceSpec, error)
 
+	// LastOperation fetches last operation state for a service instance
+	//   GET /v2/service_instances/{instance_id}/last_operation
 	LastOperation(ctx context.Context, instanceID string, details PollDetails) (LastOperation, error)
+
+	// Bind creates a new service binding
+	//   PUT /v2/service_instances/{instance_id}/service_bindings/{binding_id}
+	Bind(ctx context.Context, instanceID, bindingID string, details BindDetails, asyncAllowed bool) (Binding, error)
+
+	// Unbind deletes an existing service binding
+	//   DELETE /v2/service_instances/{instance_id}/service_bindings/{binding_id}
+	Unbind(ctx context.Context, instanceID, bindingID string, details UnbindDetails, asyncAllowed bool) (UnbindSpec, error)
+
+	// GetBinding fetches an existing service binding
+	//   GET /v2/service_instances/{instance_id}/service_bindings/{binding_id}
+	GetBinding(ctx context.Context, instanceID, bindingID string) (GetBindingSpec, error)
+
+	// LastBindingOperation fetches last operation state for a service binding
+	//   GET /v2/service_instances/{instance_id}/service_bindings/{binding_id}/last_operation
 	LastBindingOperation(ctx context.Context, instanceID, bindingID string, details PollDetails) (LastOperation, error)
 }
 
@@ -73,12 +107,20 @@ type ProvisionDetails struct {
 	SpaceGUID        string          `json:"space_guid"`
 	RawContext       json.RawMessage `json:"context,omitempty"`
 	RawParameters    json.RawMessage `json:"parameters,omitempty"`
+	MaintenanceInfo  MaintenanceInfo `json:"maintenance_info,omitempty"`
 }
 
 type ProvisionedServiceSpec struct {
 	IsAsync       bool
 	DashboardURL  string
 	OperationData string
+}
+
+type GetInstanceDetailsSpec struct {
+	ServiceID    string      `json:"service_id"`
+	PlanID       string      `json:"plan_id"`
+	DashboardURL string      `json:"dashboard_url"`
+	Parameters   interface{} `json:"parameters"`
 }
 
 type UnbindSpec struct {
@@ -109,6 +151,7 @@ type UnbindDetails struct {
 
 type UpdateServiceSpec struct {
 	IsAsync       bool
+	DashboardURL  string
 	OperationData string
 }
 
@@ -123,11 +166,12 @@ type DeprovisionDetails struct {
 }
 
 type UpdateDetails struct {
-	ServiceID      string          `json:"service_id"`
-	PlanID         string          `json:"plan_id"`
-	RawParameters  json.RawMessage `json:"parameters,omitempty"`
-	PreviousValues PreviousValues  `json:"previous_values"`
-	RawContext     json.RawMessage `json:"context,omitempty"`
+	ServiceID       string          `json:"service_id"`
+	PlanID          string          `json:"plan_id"`
+	RawParameters   json.RawMessage `json:"parameters,omitempty"`
+	PreviousValues  PreviousValues  `json:"previous_values"`
+	RawContext      json.RawMessage `json:"context,omitempty"`
+	MaintenanceInfo MaintenanceInfo `json:"maintenance_info,omitempty"`
 }
 
 type PreviousValues struct {
@@ -187,18 +231,21 @@ type SharedDevice struct {
 }
 
 const (
-	instanceExistsMsg           = "instance already exists"
-	instanceDoesntExistMsg      = "instance does not exist"
-	serviceLimitReachedMsg      = "instance limit for this service has been reached"
-	servicePlanQuotaExceededMsg = "The quota for this service plan has been exceeded. Please contact your Operator for help."
-	serviceQuotaExceededMsg     = "The quota for this service has been exceeded. Please contact your Operator for help."
-	bindingExistsMsg            = "binding already exists"
-	bindingDoesntExistMsg       = "binding does not exist"
-	bindingNotFoundMsg          = "binding cannot be fetched"
-	asyncRequiredMsg            = "This service plan requires client support for asynchronous service operations."
-	planChangeUnsupportedMsg    = "The requested plan migration cannot be performed"
-	rawInvalidParamsMsg         = "The format of the parameters is not valid JSON"
-	appGuidMissingMsg           = "app_guid is a required field but was not provided"
+	instanceExistsMsg             = "instance already exists"
+	instanceDoesntExistMsg        = "instance does not exist"
+	serviceLimitReachedMsg        = "instance limit for this service has been reached"
+	servicePlanQuotaExceededMsg   = "The quota for this service plan has been exceeded. Please contact your Operator for help."
+	serviceQuotaExceededMsg       = "The quota for this service has been exceeded. Please contact your Operator for help."
+	bindingExistsMsg              = "binding already exists"
+	bindingDoesntExistMsg         = "binding does not exist"
+	bindingNotFoundMsg            = "binding cannot be fetched"
+	asyncRequiredMsg              = "This service plan requires client support for asynchronous service operations."
+	planChangeUnsupportedMsg      = "The requested plan migration cannot be performed"
+	rawInvalidParamsMsg           = "The format of the parameters is not valid JSON"
+	appGuidMissingMsg             = "app_guid is a required field but was not provided"
+	concurrentInstanceAccessMsg   = "instance is being updated and cannot be retrieved"
+	maintenanceInfoConflictMsg    = "passed maintenance_info does not match the catalog maintenance_info"
+	maintenanceInfoNilConflictMsg = "maintenance_info was passed, but the broker catalog contains no maintenance_info"
 )
 
 var (
@@ -244,4 +291,16 @@ var (
 
 	ErrPlanQuotaExceeded    = errors.New(servicePlanQuotaExceededMsg)
 	ErrServiceQuotaExceeded = errors.New(serviceQuotaExceededMsg)
+
+	ErrConcurrentInstanceAccess = NewFailureResponseBuilder(
+		errors.New(concurrentInstanceAccessMsg), http.StatusUnprocessableEntity, concurrentAccessKey,
+	).WithErrorKey("ConcurrencyError")
+
+	ErrMaintenanceInfoConflict = NewFailureResponseBuilder(
+		errors.New(maintenanceInfoConflictMsg), http.StatusUnprocessableEntity, maintenanceInfoConflictKey,
+	).WithErrorKey("MaintenanceInfoConflict").Build()
+
+	ErrMaintenanceInfoNilConflict = NewFailureResponseBuilder(
+		errors.New(maintenanceInfoNilConflictMsg), http.StatusUnprocessableEntity, maintenanceInfoConflictKey,
+	).WithErrorKey("MaintenanceInfoConflict").Build()
 )

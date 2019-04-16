@@ -318,3 +318,7 @@ func (b *Broker) LastBindingOperation(
 ) (brokerapi.LastOperation, error) {
 	return brokerapi.LastOperation{}, errors.New("not implemented")
 }
+
+func (b *Broker) GetInstance(ctx context.Context, instanceID string) (brokerapi.GetInstanceDetailsSpec, error) {
+	return brokerapi.GetInstanceDetailsSpec{}, errors.New("not implemented")
+}

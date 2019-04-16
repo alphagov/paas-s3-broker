@@ -1,10 +1,10 @@
 # code.cloudfoundry.org/lager v2.0.0+incompatible
 code.cloudfoundry.org/lager
-# github.com/alphagov/paas-go v0.0.0-20181008075827-0065fc706364
+# github.com/alphagov/paas-go v0.0.0-20190416140308-247c09fff11c
 github.com/alphagov/paas-go/broker
 github.com/alphagov/paas-go/provider
 github.com/alphagov/paas-go/testing/broker
-# github.com/aws/aws-sdk-go v1.16.34
+# github.com/aws/aws-sdk-go v1.19.11
 github.com/aws/aws-sdk-go/aws
 github.com/aws/aws-sdk-go/aws/session
 github.com/aws/aws-sdk-go/service/iam
@@ -42,7 +42,7 @@ github.com/aws/aws-sdk-go/aws/ec2metadata
 github.com/aws/aws-sdk-go/private/protocol/query/queryutil
 github.com/aws/aws-sdk-go/private/protocol/xml/xmlutil
 github.com/aws/aws-sdk-go/internal/sdkuri
-# github.com/gorilla/mux v1.7.0
+# github.com/gorilla/mux v1.7.1
 github.com/gorilla/mux
 # github.com/hpcloud/tail v1.0.0
 github.com/hpcloud/tail
@@ -52,7 +52,7 @@ github.com/hpcloud/tail/watch
 github.com/hpcloud/tail/winfile
 # github.com/jmespath/go-jmespath v0.0.0-20180206201540-c2b33e8439af
 github.com/jmespath/go-jmespath
-# github.com/onsi/ginkgo v1.7.0
+# github.com/onsi/ginkgo v1.8.0
 github.com/onsi/ginkgo
 github.com/onsi/ginkgo/config
 github.com/onsi/ginkgo/internal/codelocation
@@ -71,7 +71,7 @@ github.com/onsi/ginkgo/internal/leafnodes
 github.com/onsi/ginkgo/internal/spec
 github.com/onsi/ginkgo/internal/specrunner
 github.com/onsi/ginkgo/reporters/stenographer/support/go-isatty
-# github.com/onsi/gomega v1.4.3
+# github.com/onsi/gomega v1.5.0
 github.com/onsi/gomega
 github.com/onsi/gomega/internal/assertion
 github.com/onsi/gomega/internal/asyncassertion
@@ -84,18 +84,19 @@ github.com/onsi/gomega/matchers/support/goraph/bipartitegraph
 github.com/onsi/gomega/matchers/support/goraph/edge
 github.com/onsi/gomega/matchers/support/goraph/node
 github.com/onsi/gomega/matchers/support/goraph/util
-# github.com/pivotal-cf/brokerapi v3.0.1+incompatible
+# github.com/pivotal-cf/brokerapi v4.2.4+incompatible
 github.com/pivotal-cf/brokerapi
 github.com/pivotal-cf/brokerapi/auth
+github.com/pivotal-cf/brokerapi/middlewares/originating_identity_header
 # github.com/pkg/errors v0.8.1
 github.com/pkg/errors
 # github.com/satori/go.uuid v1.2.0
 github.com/satori/go.uuid
-# golang.org/x/net v0.0.0-20190213061140-3a22650c66bd
+# golang.org/x/net v0.0.0-20190415214537-1da14a5a36f2
 golang.org/x/net/html/charset
 golang.org/x/net/html
 golang.org/x/net/html/atom
-# golang.org/x/sys v0.0.0-20190213121743-983097b1a8a3
+# golang.org/x/sys v0.0.0-20190416124237-ebb4019f01c9
 golang.org/x/sys/unix
 # golang.org/x/text v0.3.0
 golang.org/x/text/encoding
