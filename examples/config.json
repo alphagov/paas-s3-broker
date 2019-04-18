@@ -6,6 +6,7 @@
   "resource_prefix": "paas-s3-broker-",
   "iam_user_path": "/paas-s3-broker/",
   "deploy_env": "london",
+  "iam_ip_restriction_policy_arn": "something",
   "catalog": {
     "services": [
       {

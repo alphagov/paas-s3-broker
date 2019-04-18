@@ -34,11 +34,12 @@ type BucketCredentials struct {
 }
 
 type Config struct {
-	AWSRegion         string `json:"aws_region"`
-	ResourcePrefix    string `json:"resource_prefix"`
-	IAMUserPath       string `json:"iam_user_path"`
-	DeployEnvironment string `json:"deploy_env"`
-	Timeout           time.Duration
+	AWSRegion              string `json:"aws_region"`
+	ResourcePrefix         string `json:"resource_prefix"`
+	IAMUserPath            string `json:"iam_user_path"`
+	DeployEnvironment      string `json:"deploy_env"`
+	IpRestrictionPolicyARN string `json:"iam_ip_restriction_policy_arn"`
+	Timeout                time.Duration
 }
 
 func NewS3ClientConfig(configJSON []byte) (*Config, error) {
@@ -52,18 +53,20 @@ func NewS3ClientConfig(configJSON []byte) (*Config, error) {
 }
 
 type S3Client struct {
-	bucketPrefix      string
-	iamUserPath       string
-	awsRegion         string
-	deployEnvironment string
-	timeout           time.Duration
-	s3Client          s3iface.S3API
-	iamClient         iamiface.IAMAPI
-	logger            lager.Logger
+	bucketPrefix           string
+	iamUserPath            string
+	ipRestrictionPolicyArn string
+	awsRegion              string
+	deployEnvironment      string
+	timeout                time.Duration
+	s3Client               s3iface.S3API
+	iamClient              iamiface.IAMAPI
+	logger                 lager.Logger
 }
 
 type BindParams struct {
-	Permissions string `json:"permissions"`
+	Permissions         string `json:"permissions"`
+	AllowExternalAccess bool   `json:"allow_external_access"`
 }
 
 func NewS3Client(config *Config, s3Client s3iface.S3API, iamClient iamiface.IAMAPI, logger lager.Logger) *S3Client {
@@ -73,14 +76,15 @@ func NewS3Client(config *Config, s3Client s3iface.S3API, iamClient iamiface.IAMA
 	}
 
 	return &S3Client{
-		bucketPrefix:      config.ResourcePrefix,
-		iamUserPath:       fmt.Sprintf("/%s/", strings.Trim(config.IAMUserPath, "/")),
-		awsRegion:         config.AWSRegion,
-		deployEnvironment: config.DeployEnvironment,
-		timeout:           timeout,
-		s3Client:          s3Client,
-		iamClient:         iamClient,
-		logger:            logger,
+		bucketPrefix:           config.ResourcePrefix,
+		iamUserPath:            fmt.Sprintf("/%s/", strings.Trim(config.IAMUserPath, "/")),
+		ipRestrictionPolicyArn: config.IpRestrictionPolicyARN,
+		awsRegion:              config.AWSRegion,
+		deployEnvironment:      config.DeployEnvironment,
+		timeout:                timeout,
+		s3Client:               s3Client,
+		iamClient:              iamClient,
+		logger:                 logger,
 	}
 }
 
@@ -165,9 +169,11 @@ func (s *S3Client) DeleteBucket(name string) error {
 func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredentials, error) {
 	var permissions policy.Permissions = policy.ReadWritePermissions{}
 
+	bindParams := BindParams{
+		AllowExternalAccess: false,
+		Permissions: policy.ReadWritePermissionsName, // Required, as if another bind parameter is set, `ValidatePermissions` is called below.
+	}
 	if bindData.Details.RawParameters != nil {
-		bindParams := BindParams{}
-
 		err := json.Unmarshal(bindData.Details.RawParameters, &bindParams)
 		if err != nil {
 			return BucketCredentials{}, err
@@ -203,6 +209,17 @@ func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredential
 	})
 	if err != nil {
 		return BucketCredentials{}, err
+	}
+
+	if !bindParams.AllowExternalAccess {
+		_, err = s.iamClient.AttachUserPolicy(&iam.AttachUserPolicyInput{
+			PolicyArn: aws.String(s.ipRestrictionPolicyArn),
+			UserName:  aws.String(username),
+		})
+		if err != nil {
+			s.deleteUserWithoutError(username)
+			return BucketCredentials{}, err
+		}
 	}
 
 	createAccessKeyOutput, err := s.iamClient.CreateAccessKey(&iam.CreateAccessKeyInput{
@@ -290,6 +307,9 @@ func (s *S3Client) deleteUser(username string) error {
 	keys, err := s.iamClient.ListAccessKeys(&iam.ListAccessKeysInput{
 		UserName: aws.String(username),
 	})
+	policies, err := s.iamClient.ListAttachedUserPolicies(&iam.ListAttachedUserPoliciesInput{
+		UserName: aws.String(username),
+	})
 	if err != nil {
 		return err
 	}
@@ -298,6 +318,17 @@ func (s *S3Client) deleteUser(username string) error {
 			_, err := s.iamClient.DeleteAccessKey(&iam.DeleteAccessKeyInput{
 				UserName:    aws.String(username),
 				AccessKeyId: k.AccessKeyId,
+			})
+			if err != nil {
+				return err
+			}
+		}
+	}
+	if policies != nil {
+		for _, p := range policies.AttachedPolicies {
+			_, err := s.iamClient.DetachUserPolicy(&iam.DetachUserPolicyInput{
+				UserName:  aws.String(username),
+				PolicyArn: p.PolicyArn,
 			})
 			if err != nil {
 				return err

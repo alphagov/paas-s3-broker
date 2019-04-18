@@ -33,11 +33,12 @@ var _ = Describe("Client", func() {
 		iamAPI = &fakeClient.FakeIAMAPI{}
 		logger = lager.NewLogger("s3-service-broker-test")
 		s3ClientConfig = &s3.Config{
-			AWSRegion:         "eu-west-2",
-			ResourcePrefix:    "test-bucket-prefix-",
-			IAMUserPath:       "/test-iam-path/",
-			DeployEnvironment: "test-env",
-			Timeout:           2 * time.Second,
+			AWSRegion:              "eu-west-2",
+			ResourcePrefix:         "test-bucket-prefix-",
+			IAMUserPath:            "/test-iam-path/",
+			DeployEnvironment:      "test-env",
+			Timeout:                2 * time.Second,
+			IpRestrictionPolicyARN: "test-ip-restriction-policy-arn",
 		}
 		s3Client = s3.NewS3Client(
 			s3ClientConfig,
@@ -63,7 +64,7 @@ var _ = Describe("Client", func() {
 		})
 	})
 	Describe("AddUserToBucket", func() {
-		It("manages the user and bucket policy", func() {
+		BeforeEach(func() {
 			// Set up fake API
 			iamAPI.CreateUserReturnsOnCall(0, &iam.CreateUserOutput{
 				User: &iam.User{
@@ -79,6 +80,9 @@ var _ = Describe("Client", func() {
 			s3API.GetBucketPolicyReturnsOnCall(0, &awsS3.GetBucketPolicyOutput{
 				Policy: aws.String(`{"Version": "2012-10-17", "Statement":[]}`),
 			}, nil)
+
+		})
+		It("manages the user and bucket policy", func() {
 			bindData := provider.BindData{
 				InstanceID: "test-instance-id",
 				BindingID:  "test-binding-id",
@@ -119,22 +123,6 @@ var _ = Describe("Client", func() {
 		})
 
 		It("returns an error if the permissions requested aren't known", func() {
-			// Set up fake API
-			iamAPI.CreateUserReturnsOnCall(0, &iam.CreateUserOutput{
-				User: &iam.User{
-					Arn: aws.String("arn"),
-				},
-			}, nil)
-			iamAPI.CreateAccessKeyReturnsOnCall(0, &iam.CreateAccessKeyOutput{
-				AccessKey: &iam.AccessKey{
-					AccessKeyId:     aws.String("access-key-id"),
-					SecretAccessKey: aws.String("secret-access-key"),
-				},
-			}, nil)
-			s3API.GetBucketPolicyReturnsOnCall(0, &awsS3.GetBucketPolicyOutput{
-				Policy: aws.String(`{"Version": "2012-10-17", "Statement":[]}`),
-			}, nil)
-
 			bindData := provider.BindData{
 				InstanceID: "test-instance-id",
 				BindingID:  "test-binding-id",
@@ -148,21 +136,6 @@ var _ = Describe("Client", func() {
 		})
 
 		It("creates a policy with the requested permissions", func() {
-			// Set up fake API
-			iamAPI.CreateUserReturnsOnCall(0, &iam.CreateUserOutput{
-				User: &iam.User{
-					Arn: aws.String("arn"),
-				},
-			}, nil)
-			iamAPI.CreateAccessKeyReturnsOnCall(0, &iam.CreateAccessKeyOutput{
-				AccessKey: &iam.AccessKey{
-					AccessKeyId:     aws.String("access-key-id"),
-					SecretAccessKey: aws.String("secret-access-key"),
-				},
-			}, nil)
-			s3API.GetBucketPolicyReturnsOnCall(0, &awsS3.GetBucketPolicyOutput{
-				Policy: aws.String(`{"Version": "2012-10-17", "Statement":[]}`),
-			}, nil)
 			bindData := provider.BindData{
 				InstanceID: "test-instance-id",
 				BindingID:  "test-binding-id",
@@ -230,6 +203,72 @@ var _ = Describe("Client", func() {
 			}
 			_, err := s3Client.AddUserToBucket(bindData)
 			Expect(err).To(HaveOccurred())
+		})
+
+		Context("when failing to AttachUserPolicy", func() {
+			It("deletes the user", func() {
+				expectedError := errors.New("attaching user policy failed. lul.")
+				iamAPI.AttachUserPolicyReturnsOnCall(0, &iam.AttachUserPolicyOutput{}, expectedError)
+				bindData := provider.BindData{
+					InstanceID: "test-instance-id",
+					BindingID:  "test-binding-id",
+				}
+				_, err := s3Client.AddUserToBucket(bindData)
+				Expect(iamAPI.AttachUserPolicyCallCount()).To(Equal(1))
+				Expect(err).To(HaveOccurred())
+				Expect(err).To(Equal(expectedError))
+				Expect(iamAPI.DeleteUserCallCount()).To(Equal(1))
+			})
+		})
+
+		Context("when not allowing external access", func() {
+			Context("by omitting the parameter", func() {
+				It("attaches the IP-Restriction policy", func() {
+					bindData := provider.BindData{
+						BindingID: "test-instance-id",
+						Details: brokerapi.BindDetails{
+							RawParameters: nil,
+						},
+					}
+					s3Client.AddUserToBucket(bindData)
+					createUserInput := iamAPI.CreateUserArgsForCall(0)
+					Expect(iamAPI.AttachUserPolicyCallCount()).To(Equal(1))
+					attachPolicyArgs := iamAPI.AttachUserPolicyArgsForCall(0)
+
+					Expect(*attachPolicyArgs.PolicyArn).To(Equal(s3ClientConfig.IpRestrictionPolicyARN))
+					Expect(*attachPolicyArgs.UserName).To(Equal(*createUserInput.UserName))
+				})
+			})
+			Context("by setting the parameter to false", func() {
+				It("attaches the IP-Restriction policy", func() {
+					bindData := provider.BindData{
+						BindingID: "test-instance-id",
+						Details: brokerapi.BindDetails{
+							RawParameters: json.RawMessage(`{"allow_external_access": false}`),
+						},
+					}
+					s3Client.AddUserToBucket(bindData)
+					createUserInput := iamAPI.CreateUserArgsForCall(0)
+					Expect(iamAPI.AttachUserPolicyCallCount()).To(Equal(1))
+					attachPolicyArgs := iamAPI.AttachUserPolicyArgsForCall(0)
+
+					Expect(*attachPolicyArgs.PolicyArn).To(Equal(s3ClientConfig.IpRestrictionPolicyARN))
+					Expect(*attachPolicyArgs.UserName).To(Equal(*createUserInput.UserName))
+				})
+			})
+		})
+
+		Context("when allowing external access by setting the parameter to true", func() {
+			It("does not attach the IP-Restriction policy", func() {
+				bindData := provider.BindData{
+					BindingID: "test-instance-id",
+					Details: brokerapi.BindDetails{
+						RawParameters: json.RawMessage(`{"allow_external_access": true}`),
+					},
+				}
+				s3Client.AddUserToBucket(bindData)
+				Expect(iamAPI.AttachUserPolicyCallCount()).To(Equal(0))
+			})
 		})
 
 		Context("when creating an access key fails", func() {
