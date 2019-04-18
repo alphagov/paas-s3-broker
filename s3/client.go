@@ -33,11 +33,12 @@ type BucketCredentials struct {
 }
 
 type Config struct {
-	AWSRegion         string `json:"aws_region"`
-	ResourcePrefix    string `json:"resource_prefix"`
-	IAMUserPath       string `json:"iam_user_path"`
-	DeployEnvironment string `json:"deploy_env"`
-	Timeout           time.Duration
+	AWSRegion              string `json:"aws_region"`
+	ResourcePrefix         string `json:"resource_prefix"`
+	IAMUserPath            string `json:"iam_user_path"`
+	DeployEnvironment      string `json:"deploy_env"`
+	IpRestrictionPolicyARN string `json:"iam_ip_restriction_policy_arn"`
+	Timeout                time.Duration
 }
 
 func NewS3ClientConfig(configJSON []byte) (*Config, error) {
@@ -51,14 +52,15 @@ func NewS3ClientConfig(configJSON []byte) (*Config, error) {
 }
 
 type S3Client struct {
-	bucketPrefix      string
-	iamUserPath       string
-	awsRegion         string
-	deployEnvironment string
-	timeout           time.Duration
-	s3Client          s3iface.S3API
-	iamClient         iamiface.IAMAPI
-	logger            lager.Logger
+	bucketPrefix           string
+	iamUserPath            string
+	ipRestrictionPolicyArn string
+	awsRegion              string
+	deployEnvironment      string
+	timeout                time.Duration
+	s3Client               s3iface.S3API
+	iamClient              iamiface.IAMAPI
+	logger                 lager.Logger
 }
 
 func NewS3Client(config *Config, s3Client s3iface.S3API, iamClient iamiface.IAMAPI, logger lager.Logger) *S3Client {
@@ -68,14 +70,15 @@ func NewS3Client(config *Config, s3Client s3iface.S3API, iamClient iamiface.IAMA
 	}
 
 	return &S3Client{
-		bucketPrefix:      config.ResourcePrefix,
-		iamUserPath:       fmt.Sprintf("/%s/", strings.Trim(config.IAMUserPath, "/")),
-		awsRegion:         config.AWSRegion,
-		deployEnvironment: config.DeployEnvironment,
-		timeout:           timeout,
-		s3Client:          s3Client,
-		iamClient:         iamClient,
-		logger:            logger,
+		bucketPrefix:           config.ResourcePrefix,
+		iamUserPath:            fmt.Sprintf("/%s/", strings.Trim(config.IAMUserPath, "/")),
+		ipRestrictionPolicyArn: config.IpRestrictionPolicyARN,
+		awsRegion:              config.AWSRegion,
+		deployEnvironment:      config.DeployEnvironment,
+		timeout:                timeout,
+		s3Client:               s3Client,
+		iamClient:              iamClient,
+		logger:                 logger,
 	}
 }
 
@@ -133,6 +136,12 @@ func (s *S3Client) DeleteBucket(name string) error {
 }
 
 func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredentials, error) {
+	type extraBindParams struct {
+		allowExternalAccess bool `json:"allow_external_access"`
+	}
+	var bindParams extraBindParams
+	err := json.Unmarshal(bindData.Details.RawParameters, &bindParams)
+
 	fullBucketName := s.buildBucketName(bindData.InstanceID)
 	username := s.bucketPrefix + bindData.BindingID
 	userTags := []*iam.Tag{
@@ -157,6 +166,16 @@ func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredential
 	})
 	if err != nil {
 		return BucketCredentials{}, err
+	}
+
+	if !bindParams.allowExternalAccess {
+		_, err = s.iamClient.AttachUserPolicy(&iam.AttachUserPolicyInput{
+			PolicyArn: aws.String(s.ipRestrictionPolicyArn),
+			UserName:  aws.String(username),
+		})
+		if err != nil {
+			return BucketCredentials{}, err
+		}
 	}
 
 	createAccessKeyOutput, err := s.iamClient.CreateAccessKey(&iam.CreateAccessKeyInput{
