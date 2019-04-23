@@ -29,7 +29,6 @@ type BucketCredentials struct {
 	AWSAccessKeyID     string `json:"aws_access_key_id"`
 	AWSSecretAccessKey string `json:"aws_secret_access_key"`
 	AWSRegion          string `json:"aws_region"`
-	DeployEnvironment  string `json:"deploy_env"`
 }
 
 type Config struct {
@@ -67,6 +66,10 @@ type BindParams struct {
 	AllowExternalAccess bool `json:"allow_external_access"`
 }
 
+type ProvisionParams struct {
+	PublicBucket bool `json:"public_bucket"`
+}
+
 func NewS3Client(config *Config, s3Client s3iface.S3API, iamClient iamiface.IAMAPI, logger lager.Logger) *S3Client {
 	timeout := config.Timeout
 	if timeout == time.Duration(0) {
@@ -92,6 +95,48 @@ func (s *S3Client) CreateBucket(provisionData provider.ProvisionData) error {
 	})
 	if err != nil {
 		return err
+	}
+
+	_, err = s.s3Client.PutBucketEncryption(&s3.PutBucketEncryptionInput{
+		Bucket: aws.String(s.buildBucketName(provisionData.InstanceID)),
+		ServerSideEncryptionConfiguration: &s3.ServerSideEncryptionConfiguration{
+			Rules: []*s3.ServerSideEncryptionRule{
+				{
+					ApplyServerSideEncryptionByDefault: &s3.ServerSideEncryptionByDefault{
+						SSEAlgorithm: aws.String(s3.ServerSideEncryptionAes256),
+					},
+				},
+			},
+		},
+	})
+	if err != nil {
+		return err
+	}
+
+	provisionParams := ProvisionParams{
+		PublicBucket: false,
+	}
+	if provisionData.Details.RawParameters != nil {
+		err := json.Unmarshal(provisionData.Details.RawParameters, &provisionParams)
+		if err != nil {
+			return err
+		}
+	}
+
+	if !provisionParams.PublicBucket {
+		initialBucketPolicy, err := s.AddUserToBucketPolicy("*", s.buildBucketName(provisionData.InstanceID), "")
+		if err != nil {
+			return err
+		}
+		initialPolicyJSON, err := json.Marshal(initialBucketPolicy)
+		if err != nil {
+			return err
+		}
+
+		err = s.putBucketPolicyWithTimeout(s.buildBucketName(provisionData.InstanceID), string(initialPolicyJSON))
+		if err != nil {
+			return err
+		}
 	}
 	_, err = s.tagBucket(provisionData.InstanceID, []*s3.Tag{
 		{
