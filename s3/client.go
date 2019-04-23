@@ -111,6 +111,14 @@ func (s *S3Client) CreateBucket(provisionData provider.ProvisionData) error {
 			Key:   aws.String("deploy_env"),
 			Value: aws.String(s.deployEnvironment),
 		},
+		{
+			Key:   aws.String("tenant"),
+			Value: aws.String(provisionData.Details.OrganizationGUID),
+		},
+		{
+			Key:   aws.String("chargeable_entity"),
+			Value: aws.String(provisionData.InstanceID),
+		},
 	})
 	if err != nil {
 		deleteErr := s.DeleteBucket(provisionData.InstanceID)
