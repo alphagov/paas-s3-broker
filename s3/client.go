@@ -63,7 +63,6 @@ type S3Client struct {
 	logger                 lager.Logger
 }
 
-
 type BindParams struct {
 	AllowExternalAccess bool `json:"allow_external_access"`
 }
@@ -269,6 +268,9 @@ func (s *S3Client) deleteUser(username string) error {
 	keys, err := s.iamClient.ListAccessKeys(&iam.ListAccessKeysInput{
 		UserName: aws.String(username),
 	})
+	policies, err := s.iamClient.ListAttachedUserPolicies(&iam.ListAttachedUserPoliciesInput{
+		UserName: aws.String(username),
+	})
 	if err != nil {
 		return err
 	}
@@ -277,6 +279,17 @@ func (s *S3Client) deleteUser(username string) error {
 			_, err := s.iamClient.DeleteAccessKey(&iam.DeleteAccessKeyInput{
 				UserName:    aws.String(username),
 				AccessKeyId: k.AccessKeyId,
+			})
+			if err != nil {
+				return err
+			}
+		}
+	}
+	if policies != nil {
+		for _, p := range policies.AttachedPolicies {
+			_, err := s.iamClient.DetachUserPolicy(&iam.DetachUserPolicyInput{
+				UserName:  aws.String(username),
+				PolicyArn: p.PolicyArn,
 			})
 			if err != nil {
 				return err
