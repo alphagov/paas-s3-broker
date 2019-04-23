@@ -63,6 +63,11 @@ type S3Client struct {
 	logger                 lager.Logger
 }
 
+
+type BindParams struct {
+	AllowExternalAccess bool `json:"allow_external_access"`
+}
+
 func NewS3Client(config *Config, s3Client s3iface.S3API, iamClient iamiface.IAMAPI, logger lager.Logger) *S3Client {
 	timeout := config.Timeout
 	if timeout == time.Duration(0) {
@@ -136,12 +141,6 @@ func (s *S3Client) DeleteBucket(name string) error {
 }
 
 func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredentials, error) {
-	type extraBindParams struct {
-		allowExternalAccess bool `json:"allow_external_access"`
-	}
-	var bindParams extraBindParams
-	err := json.Unmarshal(bindData.Details.RawParameters, &bindParams)
-
 	fullBucketName := s.buildBucketName(bindData.InstanceID)
 	username := s.bucketPrefix + bindData.BindingID
 	userTags := []*iam.Tag{
@@ -168,7 +167,17 @@ func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredential
 		return BucketCredentials{}, err
 	}
 
-	if !bindParams.allowExternalAccess {
+	bindParams := BindParams{
+		AllowExternalAccess: false,
+	}
+	if bindData.Details.RawParameters != nil {
+		err := json.Unmarshal(bindData.Details.RawParameters, &bindParams)
+		if err != nil {
+			return BucketCredentials{}, err
+		}
+	}
+
+	if !bindParams.AllowExternalAccess {
 		_, err = s.iamClient.AttachUserPolicy(&iam.AttachUserPolicyInput{
 			PolicyArn: aws.String(s.ipRestrictionPolicyArn),
 			UserName:  aws.String(username),
