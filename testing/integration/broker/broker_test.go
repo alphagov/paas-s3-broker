@@ -78,14 +78,18 @@ var _ = Describe("Broker", func() {
 			Expect(res.Code).To(Equal(http.StatusOK))
 		}()
 
-		By("Asserting the credentials returned work")
-		binding1Creds := extractCredentials(res)
-		helpers.AssertBucketAccess(binding1Creds, s3ClientConfig.ResourcePrefix, instanceID, s3ClientConfig.AWSRegion)
+		By("Asserting the credentials returned work for both reading and writing")
+		readWriteBindingCreds := extractCredentials(res)
+		helpers.AssertBucketReadWriteAccess(readWriteBindingCreds, s3ClientConfig.ResourcePrefix, instanceID, s3ClientConfig.AWSRegion)
 
-		By("Binding another app")
+		By("Binding an app as a read-only user")
+		helpers.WriteTempFile(readWriteBindingCreds, s3ClientConfig.ResourcePrefix, instanceID, s3ClientConfig.AWSRegion)
 		res = brokerTester.Bind(instanceID, binding2ID, brokertesting.RequestBody{
 			ServiceID: serviceID,
 			PlanID:    planID,
+			Parameters: &brokertesting.ConfigurationValues{
+				"permissions": "read-only",
+			},
 		}, ASYNC_ALLOWED)
 		Expect(res.Code).To(Equal(http.StatusCreated))
 
@@ -95,15 +99,12 @@ var _ = Describe("Broker", func() {
 			Expect(res.Code).To(Equal(http.StatusOK))
 		}()
 
-		By("Asserting the credentials returned work")
-		binding2Creds := extractCredentials(res)
-		helpers.AssertBucketAccess(binding2Creds, s3ClientConfig.ResourcePrefix, instanceID, s3ClientConfig.AWSRegion)
+		By("Asserting that read-only credentials can read, but fail to write to a file")
+		readOnlyBindingCreds := extractCredentials(res)
+		helpers.AssertBucketReadOnlyAccess(readOnlyBindingCreds, s3ClientConfig.ResourcePrefix, instanceID, s3ClientConfig.AWSRegion)
 
-		By("Asserting the first user's credentials still work")
-		helpers.AssertBucketAccess(binding1Creds, s3ClientConfig.ResourcePrefix, instanceID, s3ClientConfig.AWSRegion)
-
-		By("Asserting the second user's credentials still work")
-		helpers.AssertBucketAccess(binding2Creds, s3ClientConfig.ResourcePrefix, instanceID, s3ClientConfig.AWSRegion)
+		By("Asserting the first user's credentials still work for reading and writing")
+		helpers.AssertBucketReadWriteAccess(readWriteBindingCreds, s3ClientConfig.ResourcePrefix, instanceID, s3ClientConfig.AWSRegion)
 	})
 
 	It("should return a 410 response when trying to delete a non-existent instanc", func() {

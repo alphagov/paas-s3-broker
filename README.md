@@ -57,12 +57,17 @@ Here is an example bucket policy the broker will apply:
   "Statement": [
     {
       "Action": [
-        "s3:DeleteObject",
-        "s3:GetObject",
-        "s3:PutObject"
+				"s3:GetBucketLocation",
+				"s3:ListBucket",
+				"s3:GetObject",
+				"s3:PutObject",
+				"s3:DeleteObject"
       ],
       "Effect": "Allow",
-      "Resource": "arn:aws:s3:::paas-s3-broker-instance-id/*",
+      "Resource": [
+      	"arn:aws:s3:::paas-s3-broker-instance-id",
+      	"arn:aws:s3:::paas-s3-broker-instance-id/*"
+      ],
       "Principal": {
         "AWS": "arn:aws:iam::<account-number>:user/paas-s3-broker/some-user-id"
       }

@@ -16,17 +16,17 @@ import (
 )
 
 const (
-	testFileKey = "test.txt"
+	testFileKey     = "test.txt"
+	testFileContent = "This is a test file"
 )
 
-func AssertBucketAccess(creds s3.BucketCredentials, bucketPrefix, bucketName, region string) {
+func AssertBucketReadWriteAccess(creds s3.BucketCredentials, bucketPrefix, bucketName, region string) {
 	sess := session.Must(session.NewSession(&aws.Config{
 		Region:      aws.String(region),
 		Credentials: credentials.NewStaticCredentials(creds.AWSAccessKeyID, creds.AWSSecretAccessKey, ""),
 	}))
 	s3Client := awsS3.New(sess)
 
-	testFileContent := "This is a test file"
 	bucketName = bucketPrefix + bucketName
 
 	Eventually(func() error {
@@ -43,6 +43,44 @@ func AssertBucketAccess(creds s3.BucketCredentials, bucketPrefix, bucketName, re
 
 	Eventually(func() error {
 		return deleteS3Object(s3Client, bucketName)
+	}, 10*time.Second).ShouldNot(HaveOccurred())
+}
+
+func AssertBucketReadOnlyAccess(creds s3.BucketCredentials, bucketPrefix, bucketName, region string) {
+	sess := session.Must(session.NewSession(&aws.Config{
+		Region:      aws.String(region),
+		Credentials: credentials.NewStaticCredentials(creds.AWSAccessKeyID, creds.AWSSecretAccessKey, ""),
+	}))
+	s3Client := awsS3.New(sess)
+
+	bucketName = bucketPrefix + bucketName
+
+	Eventually(func() error {
+		return checkS3ObjectContent(s3Client, testFileContent, bucketName)
+	}, 10*time.Second).ShouldNot(HaveOccurred())
+
+	Eventually(func() error {
+		_, err := s3Client.PutObject(&awsS3.PutObjectInput{
+			Bucket: aws.String(bucketName),
+			Key:    aws.String("failed_to_create"),
+			Body:   strings.NewReader(testFileContent),
+		})
+
+		return err
+	}, 10*time.Second).Should(HaveOccurred())
+}
+
+func WriteTempFile(creds s3.BucketCredentials, bucketPrefix, bucketName, region string) {
+	sess := session.Must(session.NewSession(&aws.Config{
+		Region:      aws.String(region),
+		Credentials: credentials.NewStaticCredentials(creds.AWSAccessKeyID, creds.AWSSecretAccessKey, ""),
+	}))
+
+	s3Client := awsS3.New(sess)
+	bucketName = bucketPrefix + bucketName
+
+	Eventually(func() error {
+		return createS3Object(s3Client, testFileContent, bucketName)
 	}, 10*time.Second).ShouldNot(HaveOccurred())
 }
 
