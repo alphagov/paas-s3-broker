@@ -13,7 +13,7 @@ var _ = Describe("StatementBuilder", func() {
 		actualStatement := policy.BuildStatement(
 			"some-instance-id",
 			iam.User{Arn: aws.String("some-arn")},
-			policy.ReadOnlyPermissionName)
+			policy.ReadOnlyPermissions{})
 
 		Expect(actualStatement.Effect).To(Equal("Allow"))
 		Expect(actualStatement.Principal.AWS).To(Equal("some-arn"))
@@ -31,7 +31,7 @@ var _ = Describe("StatementBuilder", func() {
 		actualStatement := policy.BuildStatement(
 			"some-instance-id",
 			iam.User{Arn: aws.String("some-arn")},
-			policy.ReadWritePermissionName)
+			policy.ReadWritePermissions{})
 
 		Expect(actualStatement.Effect).To(Equal("Allow"))
 		Expect(actualStatement.Principal.AWS).To(Equal("some-arn"))

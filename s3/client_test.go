@@ -190,6 +190,33 @@ var _ = Describe("Client", func() {
 			}))
 		})
 
+		It("does not create a policy with the bad permissions", func() {
+			// Set up fake API
+			iamAPI.CreateUserReturnsOnCall(0, &iam.CreateUserOutput{
+				User: &iam.User{
+					Arn: aws.String("arn"),
+				},
+			}, nil)
+			iamAPI.CreateAccessKeyReturnsOnCall(0, &iam.CreateAccessKeyOutput{
+				AccessKey: &iam.AccessKey{
+					AccessKeyId:     aws.String("access-key-id"),
+					SecretAccessKey: aws.String("secret-access-key"),
+				},
+			}, nil)
+			s3API.GetBucketPolicyReturnsOnCall(0, &awsS3.GetBucketPolicyOutput{
+				Policy: aws.String(`{"Version": "2012-10-17", "Statement":[]}`),
+			}, nil)
+			bindData := provider.BindData{
+				InstanceID: "test-instance-id",
+				BindingID:  "test-binding-id",
+				Details: brokerapi.BindDetails{
+					RawParameters: json.RawMessage(`{"permissions": "invalid-perms"}`),
+				},
+			}
+			_, err := s3Client.AddUserToBucket(bindData)
+			Expect(err).To(HaveOccurred())
+		})
+
 		Context("when creating an access key fails", func() {
 			It("deletes the user", func() {
 				// Set up fake API

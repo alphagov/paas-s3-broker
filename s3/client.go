@@ -138,18 +138,19 @@ func (s *S3Client) DeleteBucket(name string) error {
 }
 
 func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredentials, error) {
-	bindParams := BindParams{
-		Permissions: policy.ReadWritePermissionName,
-	}
+	var permissions policy.Permissions = policy.ReadWritePermissions{}
 
 	if bindData.Details.RawParameters != nil {
+		bindParams := BindParams{}
+
 		err := json.Unmarshal(bindData.Details.RawParameters, &bindParams)
 		if err != nil {
 			return BucketCredentials{}, err
 		}
 
-		if !validPermissionsRequested(bindParams) {
-			return BucketCredentials{}, fmt.Errorf("invalid permissions requested: %s", bindParams.Permissions)
+		permissions, err = policy.ValidatePermissions(bindParams.Permissions)
+		if err != nil {
+			return BucketCredentials{}, err
 		}
 	}
 
@@ -200,7 +201,8 @@ func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredential
 		currentBucketPolicy = *getBucketPolicyOutput.Policy
 	}
 
-	stmt := policy.BuildStatement(fullBucketName, *createUserOutput.User, bindParams.Permissions)
+	stmt := policy.BuildStatement(fullBucketName, *createUserOutput.User, permissions)
+
 	updatedBucketPolicy, err := policy.BuildPolicy(currentBucketPolicy, stmt)
 
 	if err != nil {
@@ -226,16 +228,6 @@ func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredential
 		AWSSecretAccessKey: *createAccessKeyOutput.AccessKey.SecretAccessKey,
 		AWSRegion:          s.awsRegion,
 	}, nil
-}
-
-func validPermissionsRequested(params BindParams) bool {
-	switch params.Permissions {
-	case policy.ReadWritePermissionName,
-		policy.ReadOnlyPermissionName:
-		return true
-	}
-
-	return false
 }
 
 func (s *S3Client) putBucketPolicyWithTimeout(fullBucketName, updatedPolicyJSON string) error {
