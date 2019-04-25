@@ -28,6 +28,7 @@ type Permissions interface {
 
 type NoPermissions struct{}
 type ReadOnlyPermissions struct{}
+type PublicBucketPermissions struct{}
 type ReadWritePermissions struct{}
 
 func (NoPermissions) Actions() []string {
@@ -38,6 +39,12 @@ func (ReadOnlyPermissions) Actions() []string {
 	return []string{
 		"s3:GetBucketLocation",
 		"s3:ListBucket",
+		"s3:GetObject",
+	}
+}
+
+func (PublicBucketPermissions) Actions() []string {
+	return []string{
 		"s3:GetObject",
 	}
 }

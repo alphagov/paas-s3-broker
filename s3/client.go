@@ -69,6 +69,10 @@ type BindParams struct {
 	AllowExternalAccess bool   `json:"allow_external_access"`
 }
 
+type ProvisionParams struct {
+	PublicBucket bool `json:"public_bucket"`
+}
+
 func NewS3Client(config *Config, s3Client s3iface.S3API, iamClient iamiface.IAMAPI, logger lager.Logger) *S3Client {
 	timeout := config.Timeout
 	if timeout == time.Duration(0) {
@@ -110,6 +114,33 @@ func (s *S3Client) CreateBucket(provisionData provider.ProvisionData) error {
 	})
 	if err != nil {
 		return err
+	}
+
+	provisionParams := ProvisionParams{
+		PublicBucket: false,
+	}
+	if provisionData.Details.RawParameters != nil {
+		err := json.Unmarshal(provisionData.Details.RawParameters, &provisionParams)
+		if err != nil {
+			return err
+		}
+	}
+	if provisionParams.PublicBucket {
+		var permissions policy.Permissions = policy.PublicBucketPermissions{}
+		stmt := policy.BuildStatement(s.buildBucketName(provisionData.InstanceID), iam.User{Arn: aws.String("*")}, permissions)
+		initialBucketPolicy, err := policy.BuildPolicy("", stmt)
+		if err != nil {
+			return err
+		}
+		initialPolicyJSON, err := json.Marshal(initialBucketPolicy)
+		if err != nil {
+			return err
+		}
+
+		err = s.putBucketPolicyWithTimeout(s.buildBucketName(provisionData.InstanceID), string(initialPolicyJSON))
+		if err != nil {
+			return err
+		}
 	}
 
 	_, err = s.tagBucket(provisionData.InstanceID, []*s3.Tag{
