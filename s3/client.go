@@ -93,16 +93,20 @@ func NewS3Client(config *Config, s3Client s3iface.S3API, iamClient iamiface.IAMA
 }
 
 func (s *S3Client) CreateBucket(provisionData provider.ProvisionData) error {
+	logger := s.logger.Session("create-bucket")
 	bucketName := s.buildBucketName(provisionData.InstanceID)
 
+	logger.Info("create-bucket", lager.Data{ "bucket": bucketName })
 	_, err := s.s3Client.CreateBucket(&s3.CreateBucketInput{
 		Bucket: aws.String(bucketName),
 	})
 
 	if err != nil {
+		logger.Error("create-bucket", err)
 		return err
 	}
 
+	logger.Info("put-bucket-encryption", lager.Data{ "bucket": bucketName, "sse-algorithm": s3.ServerSideEncryptionAes256})
 	_, err = s.s3Client.PutBucketEncryption(&s3.PutBucketEncryptionInput{
 		Bucket: aws.String(bucketName),
 		ServerSideEncryptionConfiguration: &s3.ServerSideEncryptionConfiguration{
@@ -116,6 +120,7 @@ func (s *S3Client) CreateBucket(provisionData provider.ProvisionData) error {
 		},
 	})
 	if err != nil {
+		logger.Error("put-bucket-encryption", err)
 		return err
 	}
 
@@ -129,6 +134,7 @@ func (s *S3Client) CreateBucket(provisionData provider.ProvisionData) error {
 		}
 	}
 	if provisionParams.PublicBucket {
+		logger.Info("make-bucket-public", lager.Data{"bucket": bucketName})
 		var permissions policy.Permissions = policy.PublicBucketPermissions{}
 		stmt := policy.BuildStatement(bucketName, iam.User{Arn: aws.String("*")}, permissions)
 		initialBucketPolicy, err := policy.BuildPolicy("", stmt)
@@ -142,11 +148,12 @@ func (s *S3Client) CreateBucket(provisionData provider.ProvisionData) error {
 
 		err = s.putBucketPolicyWithTimeout(s.buildBucketName(provisionData.InstanceID), string(initialPolicyJSON))
 		if err != nil {
+			logger.Error("make-bucket-public", err)
 			return err
 		}
 	}
 
-	_, err = s.tagBucket(provisionData.InstanceID, []*s3.Tag{
+	tags := []*s3.Tag{
 		{
 			Key:   aws.String("service_instance_guid"),
 			Value: aws.String(provisionData.InstanceID),
@@ -179,8 +186,12 @@ func (s *S3Client) CreateBucket(provisionData provider.ProvisionData) error {
 			Key:   aws.String("chargeable_entity"),
 			Value: aws.String(provisionData.InstanceID),
 		},
-	})
+	}
+	logger.Info("tag-bucket", lager.Data{"bucket": bucketName, "tags": tags})
+	_, err = s.tagBucket(provisionData.InstanceID, tags)
 	if err != nil {
+		logger.Error("tag-bucket", err)
+		logger.Info("delete-bucket", lager.Data{"bucket": bucketName})
 		deleteErr := s.DeleteBucket(provisionData.InstanceID)
 		if deleteErr != nil {
 			return fmt.Errorf(
@@ -194,6 +205,8 @@ func (s *S3Client) CreateBucket(provisionData provider.ProvisionData) error {
 }
 
 func (s *S3Client) DeleteBucket(name string) error {
+	logger := s.logger.Session("delete-bucket")
+	logger.Info("delete-bucket", lager.Data{"bucket": s.buildBucketName(name)})
 	_, err := s.s3Client.DeleteBucket(&s3.DeleteBucketInput{
 		Bucket: aws.String(s.buildBucketName(name)),
 	})
@@ -201,6 +214,7 @@ func (s *S3Client) DeleteBucket(name string) error {
 }
 
 func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredentials, error) {
+	logger := s.logger.Session("add-user-to-bucket")
 	var permissions policy.Permissions = policy.ReadWritePermissions{}
 
 	bindParams := BindParams{
@@ -208,13 +222,16 @@ func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredential
 		Permissions: policy.ReadWritePermissionsName, // Required, as if another bind parameter is set, `ValidatePermissions` is called below.
 	}
 	if bindData.Details.RawParameters != nil {
+		logger.Info("parse-raw-params")
 		err := json.Unmarshal(bindData.Details.RawParameters, &bindParams)
 		if err != nil {
+			logger.Error("parse-raw-params", err)
 			return BucketCredentials{}, err
 		}
 
 		permissions, err = policy.ValidatePermissions(bindParams.Permissions)
 		if err != nil {
+			logger.Error("invalid-permissions", err)
 			return BucketCredentials{}, err
 		}
 	}
@@ -236,40 +253,49 @@ func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredential
 		},
 	}
 
-	createUserOutput, err := s.iamClient.CreateUser(&iam.CreateUserInput{
+	user := &iam.CreateUserInput{
 		Path:     aws.String(s.iamUserPath),
 		UserName: aws.String(username),
 		Tags:     userTags,
-	})
+	}
+	logger.Info("create-user", lager.Data{"bucket": fullBucketName, "user": user})
+	createUserOutput, err := s.iamClient.CreateUser(user)
 	if err != nil {
+		logger.Error("create-user", err)
 		return BucketCredentials{}, err
 	}
 
 	if !bindParams.AllowExternalAccess {
+		logger.Info("allow-external-access", lager.Data{"bucket": fullBucketName})
 		_, err = s.iamClient.AttachUserPolicy(&iam.AttachUserPolicyInput{
 			PolicyArn: aws.String(s.ipRestrictionPolicyArn),
 			UserName:  aws.String(username),
 		})
 		if err != nil {
+			logger.Error("allow-external-access", err)
 			s.deleteUserWithoutError(username)
 			return BucketCredentials{}, err
 		}
 	}
 
+	logger.Info("create-access-key", lager.Data{"bucket": fullBucketName, "username": username})
 	createAccessKeyOutput, err := s.iamClient.CreateAccessKey(&iam.CreateAccessKeyInput{
 		UserName: aws.String(username),
 	})
 	if err != nil {
+		logger.Error("create-access-key", err)
 		s.deleteUserWithoutError(username)
 		return BucketCredentials{}, err
 	}
 
+	logger.Info("get-bucket-policy", lager.Data{"bucket": fullBucketName})
 	getBucketPolicyOutput, err := s.s3Client.GetBucketPolicy(&s3.GetBucketPolicyInput{
 		Bucket: aws.String(fullBucketName),
 	})
 	currentBucketPolicy := ""
 	if err != nil {
 		if !strings.Contains(err.Error(), "NoSuchBucketPolicy: The bucket policy does not exist") {
+			logger.Error("get-bucket-policy", err)
 			s.deleteUserWithoutError(username)
 			return BucketCredentials{}, err
 		}
@@ -279,8 +305,8 @@ func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredential
 
 	stmt := policy.BuildStatement(fullBucketName, *createUserOutput.User, permissions)
 
+	logger.Info("update-bucket-policy", lager.Data{"bucket": fullBucketName})
 	updatedBucketPolicy, err := policy.BuildPolicy(currentBucketPolicy, stmt)
-
 	if err != nil {
 		s.deleteUserWithoutError(username)
 		return BucketCredentials{}, err
@@ -288,12 +314,14 @@ func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredential
 
 	updatedPolicyJSON, err := json.Marshal(updatedBucketPolicy)
 	if err != nil {
+		logger.Error("update-bucket-policy", err)
 		s.deleteUserWithoutError(username)
 		return BucketCredentials{}, err
 	}
 
 	err = s.putBucketPolicyWithTimeout(fullBucketName, string(updatedPolicyJSON))
 	if err != nil {
+		logger.Error("update-bucket-policy", err)
 		s.deleteUserWithoutError(username)
 		return BucketCredentials{}, err
 	}
@@ -397,37 +425,51 @@ func (s *S3Client) buildBindingUsername(bindingID string) string {
 }
 
 func (s *S3Client) RemoveUserFromBucketAndDeleteUser(bindingID, bucketName string) error {
+	logger := s.logger.Session("remove-user-from-bucket")
 	username := s.buildBindingUsername(bindingID)
 	fullBucketName := s.buildBucketName(bucketName)
 
+	logger.Info("get-bucket-policy", lager.Data{"bucket": fullBucketName})
 	getBucketPolicyOutput, err := s.s3Client.GetBucketPolicy(&s3.GetBucketPolicyInput{
 		Bucket: aws.String(fullBucketName),
 	})
 	if err != nil {
+		logger.Error("get-bucket-policy", err)
 		return err
 	}
 
+	logger.Info("remove-user-from-policy", lager.Data{"bucket": fullBucketName, "username": username})
 	updatedPolicy, err := policy.RemoveUserFromPolicy(*getBucketPolicyOutput.Policy, username)
 	if err != nil {
+		logger.Error("remove-user-from-policy", err)
 		return err
 	}
 
+	logger.Info("delete-user", lager.Data{"username": username})
 	err = s.deleteUser(username)
 	if err != nil {
+		logger.Error("delete-user", err)
 		return err
 	}
 
+	logger.Info("policy-statements", lager.Data{"bucket": fullBucketName, "count": len(updatedPolicy.Statement)})
 	if len(updatedPolicy.Statement) > 0 {
+		logger.Info("update-policy", lager.Data{"bucket": fullBucketName})
 		updatedPolicyJSON, err := json.Marshal(updatedPolicy)
 		if err != nil {
+			logger.Error("update-policy", err)
 			return err
 		}
 
 		return s.putBucketPolicyWithTimeout(fullBucketName, string(updatedPolicyJSON))
 	} else {
+		logger.Info("delete-policy", lager.Data{"bucket": fullBucketName})
 		_, err = s.s3Client.DeleteBucketPolicy(&s3.DeleteBucketPolicyInput{
 			Bucket: aws.String(fullBucketName),
 		})
+		if err != nil {
+			logger.Error("delete-policy", err)
+		}
 		return err
 	}
 }
