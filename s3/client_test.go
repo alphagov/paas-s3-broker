@@ -46,7 +46,22 @@ var _ = Describe("Client", func() {
 			logger,
 		)
 	})
+	Describe("CreateBucket", func() {
+		It("enables encryption at rest", func() {
+			pd := provider.ProvisionData{}
+			s3Client.CreateBucket(pd)
 
+			Expect(s3API.CreateBucketCallCount()).To(Equal(1))
+			Expect(s3API.PutBucketEncryptionCallCount()).To(Equal(1))
+
+			encryptionCallParams := s3API.PutBucketEncryptionArgsForCall(0)
+			encryptionCfg := encryptionCallParams.ServerSideEncryptionConfiguration
+			Expect(len(encryptionCfg.Rules)).To(Equal(1))
+
+			encryptionRule := encryptionCfg.Rules[0]
+			Expect(encryptionRule.ApplyServerSideEncryptionByDefault).ToNot(BeNil())
+		})
+	})
 	Describe("AddUserToBucket", func() {
 		It("manages the user and bucket policy", func() {
 			// Set up fake API

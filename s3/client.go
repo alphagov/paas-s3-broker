@@ -91,6 +91,23 @@ func (s *S3Client) CreateBucket(provisionData provider.ProvisionData) error {
 	if err != nil {
 		return err
 	}
+
+	_, err = s.s3Client.PutBucketEncryption(&s3.PutBucketEncryptionInput{
+		Bucket: aws.String(s.buildBucketName(provisionData.InstanceID)),
+		ServerSideEncryptionConfiguration: &s3.ServerSideEncryptionConfiguration{
+			Rules: []*s3.ServerSideEncryptionRule{
+				{
+					ApplyServerSideEncryptionByDefault: &s3.ServerSideEncryptionByDefault{
+						SSEAlgorithm: aws.String(s3.ServerSideEncryptionAes256),
+					},
+				},
+			},
+		},
+	})
+	if err != nil {
+		return err
+	}
+
 	_, err = s.tagBucket(provisionData.InstanceID, []*s3.Tag{
 		{
 			Key:   aws.String("service_instance_guid"),
