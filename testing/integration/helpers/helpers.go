@@ -4,20 +4,23 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
+	"net/http"
 	"strings"
 	"time"
 
+	brokertesting "github.com/alphagov/paas-go/testing/broker"
 	"github.com/alphagov/paas-s3-broker/s3"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
 	awsS3 "github.com/aws/aws-sdk-go/service/s3"
+	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )
 
 const (
-	testFileKey     = "test.txt"
-	testFileContent = "This is a test file"
+	TestFileKey     = "test.txt"
+	TestFileContent = "This is a test file"
 )
 
 func AssertBucketReadWriteAccess(creds s3.BucketCredentials, bucketPrefix, bucketName, region string) {
@@ -30,11 +33,11 @@ func AssertBucketReadWriteAccess(creds s3.BucketCredentials, bucketPrefix, bucke
 	bucketName = bucketPrefix + bucketName
 
 	Eventually(func() error {
-		return createS3Object(s3Client, testFileContent, bucketName)
+		return createS3Object(s3Client, TestFileContent, bucketName)
 	}, 10*time.Second).ShouldNot(HaveOccurred())
 
 	Eventually(func() error {
-		return checkS3ObjectContent(s3Client, testFileContent, bucketName)
+		return checkS3ObjectContent(s3Client, TestFileContent, bucketName)
 	}, 10*time.Second).ShouldNot(HaveOccurred())
 
 	Eventually(func() error {
@@ -44,6 +47,25 @@ func AssertBucketReadWriteAccess(creds s3.BucketCredentials, bucketPrefix, bucke
 	Eventually(func() error {
 		return deleteS3Object(s3Client, bucketName)
 	}, 10*time.Second).ShouldNot(HaveOccurred())
+}
+
+func AssertNoBucketAccess(creds s3.BucketCredentials, bucketPrefix, bucketName, region string) {
+	sess := session.Must(session.NewSession(&aws.Config{
+		Region:      aws.String(region),
+		Credentials: credentials.NewStaticCredentials(creds.AWSAccessKeyID, creds.AWSSecretAccessKey, ""),
+	}))
+	s3Client := awsS3.New(sess)
+
+	bucketName = bucketPrefix + bucketName
+
+	Consistently(func() error {
+		return createS3Object(s3Client, TestFileContent, bucketName)
+	}, 5*time.Second, 500*time.Millisecond).Should(HaveOccurred())
+
+	Consistently(func() error {
+		return checkListS3Bucket(s3Client, bucketName)
+	}, 5*time.Second, 500*time.Millisecond).Should(HaveOccurred())
+
 }
 
 func AssertBucketReadOnlyAccess(creds s3.BucketCredentials, bucketPrefix, bucketName, region string) {
@@ -56,14 +78,14 @@ func AssertBucketReadOnlyAccess(creds s3.BucketCredentials, bucketPrefix, bucket
 	bucketName = bucketPrefix + bucketName
 
 	Eventually(func() error {
-		return checkS3ObjectContent(s3Client, testFileContent, bucketName)
+		return checkS3ObjectContent(s3Client, TestFileContent, bucketName)
 	}, 10*time.Second).ShouldNot(HaveOccurred())
 
 	Eventually(func() error {
 		_, err := s3Client.PutObject(&awsS3.PutObjectInput{
 			Bucket: aws.String(bucketName),
 			Key:    aws.String("failed_to_create"),
-			Body:   strings.NewReader(testFileContent),
+			Body:   strings.NewReader(TestFileContent),
 		})
 
 		return err
@@ -80,14 +102,45 @@ func WriteTempFile(creds s3.BucketCredentials, bucketPrefix, bucketName, region 
 	bucketName = bucketPrefix + bucketName
 
 	Eventually(func() error {
-		return createS3Object(s3Client, testFileContent, bucketName)
+		return createS3Object(s3Client, TestFileContent, bucketName)
 	}, 10*time.Second).ShouldNot(HaveOccurred())
+}
+
+func DeleteTempFile(creds s3.BucketCredentials, bucketPrefix, bucketName, region string) {
+	sess := session.Must(session.NewSession(&aws.Config{
+		Region:      aws.String(region),
+		Credentials: credentials.NewStaticCredentials(creds.AWSAccessKeyID, creds.AWSSecretAccessKey, ""),
+	}))
+
+	s3Client := awsS3.New(sess)
+	bucketName = bucketPrefix + bucketName
+
+	Eventually(func() error {
+		return deleteS3Object(s3Client, bucketName)
+	}, 10*time.Second).ShouldNot(HaveOccurred())
+}
+
+func DeprovisionService(brokerTester brokertesting.BrokerTester, instanceID, serviceID, planID string) {
+	By("Deprovisioning")
+	res := brokerTester.Deprovision(instanceID, serviceID, planID, true)
+	Expect(res.Code).To(Equal(http.StatusOK))
+}
+
+func Unbind(brokerTester brokertesting.BrokerTester, instanceID string, serviceID string, planID string, bindingID string) {
+	By(fmt.Sprintf("Deferred: Unbinding the %s binding", bindingID))
+
+	// We use eventually here because, in test scenarios,
+	// we can hit the get-bucket-policy endpoint before the
+	// bucket policy has become consistent after an update
+	Eventually(func() int {
+		return brokerTester.Unbind(instanceID, serviceID, planID, bindingID, true).Code
+	}, 10*time.Second).Should(Equal(http.StatusOK))
 }
 
 func createS3Object(s3Client *awsS3.S3, content string, bucketName string) error {
 	_, err := s3Client.PutObject(&awsS3.PutObjectInput{
 		Bucket: aws.String(bucketName),
-		Key:    aws.String(testFileKey),
+		Key:    aws.String(TestFileKey),
 		Body:   strings.NewReader(content),
 	})
 
@@ -97,7 +150,7 @@ func createS3Object(s3Client *awsS3.S3, content string, bucketName string) error
 func checkS3ObjectContent(s3Client *awsS3.S3, expectedContent string, bucketName string) error {
 	getObjectOutput, err := s3Client.GetObject(&awsS3.GetObjectInput{
 		Bucket: aws.String(bucketName),
-		Key:    aws.String(testFileKey),
+		Key:    aws.String(TestFileKey),
 	})
 	if err != nil {
 		return err
@@ -119,7 +172,7 @@ func checkS3ObjectContent(s3Client *awsS3.S3, expectedContent string, bucketName
 func deleteS3Object(s3Client *awsS3.S3, bucketName string) error {
 	_, err := s3Client.DeleteObject(&awsS3.DeleteObjectInput{
 		Bucket: aws.String(bucketName),
-		Key:    aws.String(testFileKey),
+		Key:    aws.String(TestFileKey),
 	})
 
 	return err

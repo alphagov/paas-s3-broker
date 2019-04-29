@@ -1,6 +1,7 @@
 package policy
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/iam"
@@ -8,9 +9,33 @@ import (
 
 type Statement struct {
 	Effect    string    `json:"Effect"`
-	Action    []string  `json:"Action"`
+	Action    Actions  `json:"Action"`
 	Resource  []string  `json:"Resource"`
 	Principal Principal `json:"Principal"`
+}
+
+// We alias Actions as []string here and
+// implement the UnmarshalJSON interface
+// because AWS IAM policies with a single
+// action are returned with a string,
+// instead of an array with a single element,
+// and Go's type system is no expressive enough
+// to support that.
+type Actions []string
+func (this *Actions) UnmarshalJSON(b []byte) error {
+	var actions []string
+	err := json.Unmarshal(b, &actions)
+	if err == nil {
+		*this = actions
+		return nil
+	}
+	var singleAction string
+	newerr := json.Unmarshal(b, &singleAction)
+	if newerr != nil {
+		return newerr
+	}
+	*this = Actions{singleAction}
+	return nil
 }
 
 type Principal struct {

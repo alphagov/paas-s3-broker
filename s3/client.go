@@ -93,15 +93,18 @@ func NewS3Client(config *Config, s3Client s3iface.S3API, iamClient iamiface.IAMA
 }
 
 func (s *S3Client) CreateBucket(provisionData provider.ProvisionData) error {
+	bucketName := s.buildBucketName(provisionData.InstanceID)
+
 	_, err := s.s3Client.CreateBucket(&s3.CreateBucketInput{
-		Bucket: aws.String(s.buildBucketName(provisionData.InstanceID)),
+		Bucket: aws.String(bucketName),
 	})
+
 	if err != nil {
 		return err
 	}
 
 	_, err = s.s3Client.PutBucketEncryption(&s3.PutBucketEncryptionInput{
-		Bucket: aws.String(s.buildBucketName(provisionData.InstanceID)),
+		Bucket: aws.String(bucketName),
 		ServerSideEncryptionConfiguration: &s3.ServerSideEncryptionConfiguration{
 			Rules: []*s3.ServerSideEncryptionRule{
 				{
@@ -127,7 +130,7 @@ func (s *S3Client) CreateBucket(provisionData provider.ProvisionData) error {
 	}
 	if provisionParams.PublicBucket {
 		var permissions policy.Permissions = policy.PublicBucketPermissions{}
-		stmt := policy.BuildStatement(s.buildBucketName(provisionData.InstanceID), iam.User{Arn: aws.String("*")}, permissions)
+		stmt := policy.BuildStatement(bucketName, iam.User{Arn: aws.String("*")}, permissions)
 		initialBucketPolicy, err := policy.BuildPolicy("", stmt)
 		if err != nil {
 			return err
@@ -217,7 +220,7 @@ func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredential
 	}
 
 	fullBucketName := s.buildBucketName(bindData.InstanceID)
-	username := s.bucketPrefix + bindData.BindingID
+	username := s.buildBindingUsername(bindData.BindingID)
 	userTags := []*iam.Tag{
 		{
 			Key:   aws.String("service_instance_guid"),
@@ -381,16 +384,20 @@ func (s *S3Client) tagBucket(instanceID string, tags []*s3.Tag) (output *s3.PutB
 	return result, err
 }
 
-func (s *S3Client) buildBucketArns(fullBucketName string) (wildcardArn, bareArn string) {
-	return fmt.Sprintf("arn:aws:s3:::%s/*", fullBucketName), fmt.Sprintf("arn:aws:s3:::%s", fullBucketName)
+func (s *S3Client) buildBucketArns(bucketName string) (wildcardArn, bareArn string) {
+	return fmt.Sprintf("arn:aws:s3:::%s/*", bucketName), fmt.Sprintf("arn:aws:s3:::%s", bucketName)
 }
 
-func (s *S3Client) buildBucketName(bucketName string) string {
-	return fmt.Sprintf("%s%s", s.bucketPrefix, bucketName)
+func (s *S3Client) buildBucketName(instanceID string) string {
+	return fmt.Sprintf("%s%s", s.bucketPrefix, instanceID)
+}
+
+func (s *S3Client) buildBindingUsername(bindingID string) string {
+	return fmt.Sprintf("%s%s", s.bucketPrefix, bindingID)
 }
 
 func (s *S3Client) RemoveUserFromBucketAndDeleteUser(bindingID, bucketName string) error {
-	username := s.bucketPrefix + bindingID
+	username := s.buildBindingUsername(bindingID)
 	fullBucketName := s.buildBucketName(bucketName)
 
 	getBucketPolicyOutput, err := s.s3Client.GetBucketPolicy(&s3.GetBucketPolicyInput{
