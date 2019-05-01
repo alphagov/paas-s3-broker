@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/csv"
 	"flag"
 	"fmt"
 	"log"
@@ -19,8 +20,10 @@ import (
 
 func main() {
 	var cfApiUrl, cfApiToken string
+	var useCsv bool
 	flag.StringVar(&cfApiUrl, "cf-api-url", "", "URL of Cloud Controller API")
 	flag.StringVar(&cfApiToken, "cf-api-token", "", "OAuth2 Token for the Cloud Controller API")
+	flag.BoolVar(&useCsv, "use-csv", false, "Whether to output as CSV")
 	flag.Parse()
 
 	cf, err := cfClient(cfApiUrl, cfApiToken)
@@ -49,7 +52,6 @@ func main() {
 		Start: aws.String(months[len(months)-1]),
 		End:   aws.String(firstDayOfNextMonth.Format("2006-01-02")),
 	}
-	fmt.Println(costExplorerTimePeriod)
 
 	// Get costs from AWS Cost Explorer
 	// Equivalent to getting all pages of:
@@ -97,9 +99,7 @@ func main() {
 		}
 	}
 
-	// Output the table
-	fmt.Printf("\nService instances with an empty NAME and ORG were found in AWS Cost Explorer but not in Cloud Foundry. Commonly this means they have been deleted.\n\n")
-
+	// Output
 	headers := []string{"SERVICE INSTANCE GUID", "NAME", "ORG"}
 	headers = append(headers, months...)
 
@@ -124,6 +124,24 @@ func main() {
 	}
 	sort.Slice(data, func(i, j int) bool { return data[i][0] < data[j][0] })
 
+	if useCsv {
+		w := csv.NewWriter(os.Stdout)
+		if err := w.Write(headers); err != nil {
+			log.Fatalln(err)
+		}
+		for _, row := range data {
+			if err := w.Write(row); err != nil {
+				log.Fatalln(err)
+			}
+		}
+		w.Flush()
+		if err := w.Error(); err != nil {
+			log.Fatal(err)
+		}
+		return
+	}
+
+	fmt.Printf("\nService instances with an empty NAME and ORG were found in AWS Cost Explorer but not in Cloud Foundry. Commonly this means they have been deleted.\n\n")
 	table := tablewriter.NewWriter(os.Stdout)
 	table.SetHeader(headers)
 	for _, r := range data {
