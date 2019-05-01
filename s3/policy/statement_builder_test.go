@@ -1,6 +1,7 @@
 package policy_test
 
 import (
+	"encoding/json"
 	"github.com/alphagov/paas-s3-broker/s3/policy"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/iam"
@@ -46,5 +47,30 @@ var _ = Describe("StatementBuilder", func() {
 			"s3:DeleteObject",
 		),
 		)
+	})
+})
+
+var _ = Describe("Statement JSON unmarshaling", func(){
+	It("can unmarshals a statement with a single action", func(){
+		bytes := []byte(`{"effect": "allow", "resource": [], "action": "foo"}`)
+		statement := policy.Statement{}
+
+		err := json.Unmarshal(bytes, &statement)
+
+		Expect(err).ToNot(HaveOccurred())
+		Expect(statement.Effect).To(Equal("allow"))
+		Expect(statement.Resource).To(BeEmpty())
+		Expect(statement.Action).To(HaveLen(1))
+	})
+
+
+	It("unmarshals an array of strings in to a slice of strings", func() {
+		bytes := []byte(`{"effect": "allow", "resource": [], "action": ["foo", "bar"]}`)
+		statement := policy.Statement{}
+
+		err := json.Unmarshal(bytes, &statement)
+		Expect(err).ToNot(HaveOccurred())
+		Expect(statement.Action).To(HaveLen(2))
+		Expect(statement.Action).To(ConsistOf("foo", "bar"))
 	})
 })

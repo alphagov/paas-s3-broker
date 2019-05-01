@@ -10,32 +10,63 @@ The IAM role for the broker must include at least the following policy:
 
 ```json
 {
+    "Version": "2012-10-17",
+    "Statement": [{
+            "Action": [
+                "s3:CreateBucket",
+                "s3:DeleteBucket",
+                "s3:PutBucketPolicy",
+                "s3:DeleteBucketPolicy",
+                "s3:GetBucketPolicy",
+                "s3:PutBucketTagging",
+                "s3:PutEncryptionConfiguration",
+                "s3:GetEncryptionConfiguration"
+            ],
+            "Effect": "Allow",
+            "Resource": "arn:aws:s3:::paas-s3-broker-*"
+        },
+        {
+            "Action": [
+                "iam:CreateUser",
+                "iam:DeleteUser",
+                "iam:*AccessKey*",
+                "iam:TagUser",
+                "iam:AttachUserPolicy",
+                "iam:DetachUserPolicy",
+                "iam:ListAttachedUserPolicies"
+            ],
+            "Effect": "Allow",
+            "Resource": [
+                "arn:aws:iam::*:user/paas-s3-broker/*"
+            ]
+        }
+    ]
+}
+```
+
+A policy must exist with at least these permissions (for IP restriction):
+
+```json
+{
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Action": [
-        "s3:CreateBucket",
-        "s3:DeleteBucket",
-        "s3:PutBucketPolicy",
-        "s3:DeleteBucketPolicy",
-        "s3:GetBucketPolicy"
-      ],
-      "Effect": "Allow",
-      "Resource": "arn:aws:s3:::paas-s3-broker-*"
-    },
-    {
-      "Action": [
-        "iam:CreateUser",
-        "iam:DeleteUser",
-        "iam:*AccessKey*"
-      ],
-      "Effect": "Allow",
-      "Resource": [
-        "arn:aws:iam::*:user/paas-s3-broker/*"
-      ]
+      "Effect": "Deny",
+      "Resource": "*",
+      "Action": "s3:*",
+      "Condition": {
+        "NotIpAddress": {
+          "aws:SourceIp": [
+          "ip.of.nat.gateway1/32",
+          "ip.of.nat.gateway2/32",
+          ...
+          ]
+        }
+      }
     }
   ]
 }
+
 ```
 
 ### Security
@@ -88,16 +119,16 @@ go run main.go -config examples/config.json
 
 The following options can be added to the configuration file:
 
-| Field                 | Default value | Type   | Values                                                                     |
-| --------------------- | ------------- | ------ | -------------------------------------------------------------------------- |
-| `basic_auth_username` | empty string  | string | any non-empty string                                                       |
-| `basic_auth_password` | empty string  | string | any non-empty string                                                       |
-| `port`                | 3000          | string | any free port                                                              |
-| `log_level`           | debug         | string | debug,info,error,fatal                                                     |
-| `aws_region`          | empty string  | string | any [AWS region](https://docs.aws.amazon.com/general/latest/gr/rande.html) |
-| `bucket_prefix`       | empty string  | string | any                                                                        |
-| `iam_user_path`       | empty string  | string | it should be in "/path/" format                                            |
-
+| Field                            | Default value | Type   | Values                                                                     |
+| -------------------------------- | ------------- | ------ | -------------------------------------------------------------------------- |
+| `basic_auth_username`            | empty string  | string | any non-empty string                                                       |
+| `basic_auth_password`            | empty string  | string | any non-empty string                                                       |
+| `port`                           | 3000          | string | any free port                                                              |
+| `log_level`                      | debug         | string | debug,info,error,fatal                                                     |
+| `aws_region`                     | empty string  | string | any [AWS region](https://docs.aws.amazon.com/general/latest/gr/rande.html) |
+| `bucket_prefix`                  | empty string  | string | any                                                                        |
+| `iam_user_path`                  | empty string  | string | it should be in "/path/" format                                            |
+| `iam_ip_restriction_policy_arn`  | empty string  | string | an AWS ARN of the IP restriction policy                                    |
 ## Testing
 
 Run unit tests with:
@@ -112,4 +143,4 @@ Run all tests, including integration tests, with:
 make test
 ```
 
-The integration tests will require you to have at least the IAM policy listed in the above [requirements](#requirements) section.
+The integration tests will require you to have at least the IAM permissions listed in the above [requirements](#requirements) section.

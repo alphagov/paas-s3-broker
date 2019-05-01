@@ -33,11 +33,12 @@ var _ = Describe("Client", func() {
 		iamAPI = &fakeClient.FakeIAMAPI{}
 		logger = lager.NewLogger("s3-service-broker-test")
 		s3ClientConfig = &s3.Config{
-			AWSRegion:         "eu-west-2",
-			ResourcePrefix:    "test-bucket-prefix-",
-			IAMUserPath:       "/test-iam-path/",
-			DeployEnvironment: "test-env",
-			Timeout:           2 * time.Second,
+			AWSRegion:              "eu-west-2",
+			ResourcePrefix:         "test-bucket-prefix-",
+			IAMUserPath:            "/test-iam-path/",
+			DeployEnvironment:      "test-env",
+			Timeout:                2 * time.Second,
+			IpRestrictionPolicyARN: "test-ip-restriction-policy-arn",
 		}
 		s3Client = s3.NewS3Client(
 			s3ClientConfig,
@@ -61,9 +62,96 @@ var _ = Describe("Client", func() {
 			encryptionRule := encryptionCfg.Rules[0]
 			Expect(encryptionRule.ApplyServerSideEncryptionByDefault).ToNot(BeNil())
 		})
+		It("creates a public bucket when specified", func() {
+			pd := provider.ProvisionData{
+				InstanceID: "test-instance-id",
+				Details: brokerapi.ProvisionDetails{
+					RawParameters: json.RawMessage(`{"public_bucket": true}`),
+				},
+			}
+			s3Client.CreateBucket(pd)
+
+			Expect(s3API.CreateBucketCallCount()).To(Equal(1))
+			Expect(s3API.PutBucketPolicyCallCount()).To(Equal(1))
+			policyInput := s3API.PutBucketPolicyArgsForCall(0)
+			policyDoc, err := getPolicyFromPolicyCall(policyInput)
+			Expect(err).NotTo(HaveOccurred())
+			Expect(policyDoc.Statement).To(HaveLen(1))
+			Expect(policyDoc.Statement[0].Action).To(ContainElement("s3:GetObject"))
+			Expect(policyDoc.Statement[0].Principal.AWS).To(Equal("*"))
+		})
+		It("creates a private bucket when specified", func() {
+			pd := provider.ProvisionData{
+				InstanceID: "test-instance-id",
+				Details: brokerapi.ProvisionDetails{
+					RawParameters: json.RawMessage(`{"public_bucket": false}`),
+				},
+			}
+			s3Client.CreateBucket(pd)
+
+			Expect(s3API.CreateBucketCallCount()).To(Equal(1))
+			Expect(s3API.PutBucketPolicyCallCount()).To(Equal(0))
+		})
+		It("creates a private bucket by default", func() {
+			pd := provider.ProvisionData{
+				InstanceID: "test-instance-id",
+				Details: brokerapi.ProvisionDetails{
+					RawParameters: nil,
+				},
+			}
+			s3Client.CreateBucket(pd)
+
+			Expect(s3API.CreateBucketCallCount()).To(Equal(1))
+			Expect(s3API.PutBucketPolicyCallCount()).To(Equal(0))
+		})
+		It("tags the bucket appropriately", func() {
+			pd := provider.ProvisionData{
+				InstanceID: "test-instance-id",
+				Details: brokerapi.ProvisionDetails{
+					RawParameters: nil,
+					OrganizationGUID: "test-org-guid",
+					SpaceGUID: "test-space-guid",
+				},
+				Plan:brokerapi.ServicePlan{
+					ID:              "test-plan-guid",
+				},
+			}
+			s3Client.CreateBucket(pd)
+
+			Expect(s3API.CreateBucketCallCount()).To(Equal(1))
+			taggingArgs := s3API.PutBucketTaggingArgsForCall(0)
+			Expect(len(taggingArgs.Tagging.TagSet)).To(Equal(8))
+			Expect(hasTag(taggingArgs.Tagging.TagSet, "service_instance_guid", pd.InstanceID)).To(BeTrue())
+			Expect(hasTag(taggingArgs.Tagging.TagSet, "org_guid", pd.Details.OrganizationGUID)).To(BeTrue())
+			Expect(hasTag(taggingArgs.Tagging.TagSet, "space_guid", pd.Details.SpaceGUID)).To(BeTrue())
+			Expect(hasTag(taggingArgs.Tagging.TagSet, "created_by", "paas-s3-broker")).To(BeTrue())
+			Expect(hasTag(taggingArgs.Tagging.TagSet, "plan_guid", pd.Plan.ID)).To(BeTrue())
+			Expect(hasTag(taggingArgs.Tagging.TagSet, "deploy_env", s3ClientConfig.DeployEnvironment)).To(BeTrue())
+			Expect(hasTag(taggingArgs.Tagging.TagSet, "tenant", pd.Details.OrganizationGUID)).To(BeTrue())
+			Expect(hasTag(taggingArgs.Tagging.TagSet, "chargeable_entity", pd.InstanceID)).To(BeTrue())
+		})
+		It("deletes the bucket if tagging fails", func() {
+			pd := provider.ProvisionData{
+				InstanceID: "test-instance-id",
+				Details: brokerapi.ProvisionDetails{
+					RawParameters:    nil,
+					OrganizationGUID: "test-org-guid",
+					SpaceGUID:        "test-space-guid",
+				},
+				Plan: brokerapi.ServicePlan{
+					ID: "test-plan-guid",
+				},
+			}
+			s3API.PutBucketTaggingReturns(nil, errors.New("lol"))
+			s3Client.CreateBucket(pd)
+
+			Expect(s3API.CreateBucketCallCount()).To(Equal(1))
+			Expect(s3API.PutBucketTaggingCallCount()).To(Equal(1))
+			Expect(s3API.DeleteBucketCallCount()).To(Equal(1))
+		})
 	})
 	Describe("AddUserToBucket", func() {
-		It("manages the user and bucket policy", func() {
+		BeforeEach(func() {
 			// Set up fake API
 			iamAPI.CreateUserReturnsOnCall(0, &iam.CreateUserOutput{
 				User: &iam.User{
@@ -79,6 +167,9 @@ var _ = Describe("Client", func() {
 			s3API.GetBucketPolicyReturnsOnCall(0, &awsS3.GetBucketPolicyOutput{
 				Policy: aws.String(`{"Version": "2012-10-17", "Statement":[]}`),
 			}, nil)
+
+		})
+		It("manages the user and bucket policy", func() {
 			bindData := provider.BindData{
 				InstanceID: "test-instance-id",
 				BindingID:  "test-binding-id",
@@ -119,22 +210,6 @@ var _ = Describe("Client", func() {
 		})
 
 		It("returns an error if the permissions requested aren't known", func() {
-			// Set up fake API
-			iamAPI.CreateUserReturnsOnCall(0, &iam.CreateUserOutput{
-				User: &iam.User{
-					Arn: aws.String("arn"),
-				},
-			}, nil)
-			iamAPI.CreateAccessKeyReturnsOnCall(0, &iam.CreateAccessKeyOutput{
-				AccessKey: &iam.AccessKey{
-					AccessKeyId:     aws.String("access-key-id"),
-					SecretAccessKey: aws.String("secret-access-key"),
-				},
-			}, nil)
-			s3API.GetBucketPolicyReturnsOnCall(0, &awsS3.GetBucketPolicyOutput{
-				Policy: aws.String(`{"Version": "2012-10-17", "Statement":[]}`),
-			}, nil)
-
 			bindData := provider.BindData{
 				InstanceID: "test-instance-id",
 				BindingID:  "test-binding-id",
@@ -148,21 +223,6 @@ var _ = Describe("Client", func() {
 		})
 
 		It("creates a policy with the requested permissions", func() {
-			// Set up fake API
-			iamAPI.CreateUserReturnsOnCall(0, &iam.CreateUserOutput{
-				User: &iam.User{
-					Arn: aws.String("arn"),
-				},
-			}, nil)
-			iamAPI.CreateAccessKeyReturnsOnCall(0, &iam.CreateAccessKeyOutput{
-				AccessKey: &iam.AccessKey{
-					AccessKeyId:     aws.String("access-key-id"),
-					SecretAccessKey: aws.String("secret-access-key"),
-				},
-			}, nil)
-			s3API.GetBucketPolicyReturnsOnCall(0, &awsS3.GetBucketPolicyOutput{
-				Policy: aws.String(`{"Version": "2012-10-17", "Statement":[]}`),
-			}, nil)
 			bindData := provider.BindData{
 				InstanceID: "test-instance-id",
 				BindingID:  "test-binding-id",
@@ -230,6 +290,72 @@ var _ = Describe("Client", func() {
 			}
 			_, err := s3Client.AddUserToBucket(bindData)
 			Expect(err).To(HaveOccurred())
+		})
+
+		Context("when failing to AttachUserPolicy", func() {
+			It("deletes the user", func() {
+				expectedError := errors.New("attaching user policy failed. lul.")
+				iamAPI.AttachUserPolicyReturnsOnCall(0, &iam.AttachUserPolicyOutput{}, expectedError)
+				bindData := provider.BindData{
+					InstanceID: "test-instance-id",
+					BindingID:  "test-binding-id",
+				}
+				_, err := s3Client.AddUserToBucket(bindData)
+				Expect(iamAPI.AttachUserPolicyCallCount()).To(Equal(1))
+				Expect(err).To(HaveOccurred())
+				Expect(err).To(Equal(expectedError))
+				Expect(iamAPI.DeleteUserCallCount()).To(Equal(1))
+			})
+		})
+
+		Context("when not allowing external access", func() {
+			Context("by omitting the parameter", func() {
+				It("attaches the IP-Restriction policy", func() {
+					bindData := provider.BindData{
+						BindingID: "test-instance-id",
+						Details: brokerapi.BindDetails{
+							RawParameters: nil,
+						},
+					}
+					s3Client.AddUserToBucket(bindData)
+					createUserInput := iamAPI.CreateUserArgsForCall(0)
+					Expect(iamAPI.AttachUserPolicyCallCount()).To(Equal(1))
+					attachPolicyArgs := iamAPI.AttachUserPolicyArgsForCall(0)
+
+					Expect(*attachPolicyArgs.PolicyArn).To(Equal(s3ClientConfig.IpRestrictionPolicyARN))
+					Expect(*attachPolicyArgs.UserName).To(Equal(*createUserInput.UserName))
+				})
+			})
+			Context("by setting the parameter to false", func() {
+				It("attaches the IP-Restriction policy", func() {
+					bindData := provider.BindData{
+						BindingID: "test-instance-id",
+						Details: brokerapi.BindDetails{
+							RawParameters: json.RawMessage(`{"allow_external_access": false}`),
+						},
+					}
+					s3Client.AddUserToBucket(bindData)
+					createUserInput := iamAPI.CreateUserArgsForCall(0)
+					Expect(iamAPI.AttachUserPolicyCallCount()).To(Equal(1))
+					attachPolicyArgs := iamAPI.AttachUserPolicyArgsForCall(0)
+
+					Expect(*attachPolicyArgs.PolicyArn).To(Equal(s3ClientConfig.IpRestrictionPolicyARN))
+					Expect(*attachPolicyArgs.UserName).To(Equal(*createUserInput.UserName))
+				})
+			})
+		})
+
+		Context("when allowing external access by setting the parameter to true", func() {
+			It("does not attach the IP-Restriction policy", func() {
+				bindData := provider.BindData{
+					BindingID: "test-instance-id",
+					Details: brokerapi.BindDetails{
+						RawParameters: json.RawMessage(`{"allow_external_access": true}`),
+					},
+				}
+				s3Client.AddUserToBucket(bindData)
+				Expect(iamAPI.AttachUserPolicyCallCount()).To(Equal(0))
+			})
 		})
 
 		Context("when creating an access key fails", func() {
@@ -499,3 +625,20 @@ var _ = Describe("Client", func() {
 		})
 	})
 })
+
+func getPolicyFromPolicyCall(input *awsS3.PutBucketPolicyInput) (policy.PolicyDocument, error) {
+	policyStr := input.Policy
+
+	policyDoc := policy.PolicyDocument{}
+	err := json.Unmarshal([]byte(*policyStr), &policyDoc)
+	return policyDoc, err
+}
+
+func hasTag(tags []*awsS3.Tag, key string, value string) bool {
+	for _, tag := range tags {
+		if *tag.Key == key && *tag.Value == value {
+			return true
+		}
+	}
+	return false
+}

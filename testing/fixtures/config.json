@@ -5,6 +5,7 @@
   "aws_region": "us-east-1",
   "resource_prefix": "test-paas-s3-broker-",
   "iam_user_path": "/test-paas-s3-broker/",
+  "iam_ip_restriction_policy_arn": "__SET_IN_TEST__",
   "deploy_env": "testdev",
   "catalog": {
     "services": [
