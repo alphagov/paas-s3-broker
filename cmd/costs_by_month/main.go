@@ -17,113 +17,6 @@ import (
 	"github.com/olekukonko/tablewriter"
 )
 
-func cfClient(apiUrl, token string) (*cfclient.Client, error) {
-	// Workaround an undocumented expectation of `go-cfclient`: it doesn't
-	// work if `bearer ` is still in the OAuth2 token
-	// https://github.com/cloudfoundry-community/go-cfclient/blob/0b4a58fd/client.go#L200
-	token = strings.TrimPrefix(token, "bearer ")
-	c := &cfclient.Config{
-		ApiAddress: apiUrl,
-		Token:      token,
-	}
-	return cfclient.NewClient(c)
-}
-
-func cfGetServiceInstancesByServiceLabel(cf *cfclient.Client, serviceLabel string) (map[string]cfclient.ServiceInstance, error) {
-	// Get the S3 service
-	v := url.Values{}
-	v.Set("q", fmt.Sprintf("label:%s", serviceLabel))
-	services, err := cf.ListServicesByQuery(v)
-	if err != nil {
-		return nil, err
-	}
-	if len(services) != 1 {
-		return nil, fmt.Errorf("expected one 'aws-s3-bucket' services: %#v", services)
-	}
-	service := services[0]
-
-	// Get every service plan for the S3 service
-	//log.Printf("fetching service plans of service '%s' '%s'\n", service.Label, service.Guid)
-	v = url.Values{}
-	v.Set("q", fmt.Sprintf("service_guid:%s", service.Guid))
-	servicePlans, err := cf.ListServicePlansByQuery(v)
-	if err != nil {
-		return nil, err
-	}
-
-	// Get the service instances for every S3 service plan
-	serviceInstancesSlice := []cfclient.ServiceInstance{}
-	for _, servicePlan := range servicePlans {
-		//log.Printf("fetching service instances of service plan '%s' '%s'\n", servicePlan.Name, servicePlan.Guid)
-		v = url.Values{}
-		v.Set("q", fmt.Sprintf("service_plan_guid:%s", servicePlan.Guid))
-		servicePlanInstances, err := cf.ListServiceInstancesByQuery(v)
-		if err != nil {
-			return nil, err
-		}
-		serviceInstancesSlice = append(serviceInstancesSlice, servicePlanInstances...)
-	}
-
-	serviceInstances := map[string]cfclient.ServiceInstance{}
-	for _, serviceInstance := range serviceInstancesSlice {
-		serviceInstances[serviceInstance.Guid] = serviceInstance
-	}
-	return serviceInstances, nil
-}
-
-func cfGetSpacesAndOrgsFromServiceInstances(cf *cfclient.Client, serviceInstances map[string]cfclient.ServiceInstance) (map[string]cfclient.Org, map[string]cfclient.Space, error) {
-	spaces := map[string]cfclient.Space{}
-	for _, serviceInstance := range serviceInstances {
-		spaceGuid := serviceInstance.SpaceGuid
-		if _, ok := spaces[spaceGuid]; ok {
-			continue
-		}
-		space, err := cf.GetSpaceByGuid(spaceGuid)
-		if err != nil {
-			return nil, nil, err
-		}
-		spaces[spaceGuid] = space
-	}
-
-	orgs := map[string]cfclient.Org{}
-	for _, space := range spaces {
-		orgGuid := space.OrganizationGuid
-		if _, ok := orgs[orgGuid]; ok {
-			continue
-		}
-		org, err := cf.GetOrgByGuid(orgGuid)
-		if err != nil {
-			return nil, nil, err
-		}
-		orgs[orgGuid] = org
-	}
-
-	return orgs, spaces, nil
-}
-
-func costexplorerCostAndUsageByTime(costExplorer *costexplorer.CostExplorer, costAndUsageInput costexplorer.GetCostAndUsageInput) ([]*costexplorer.ResultByTime, error) {
-	costAndUsageResultsByTime := []*costexplorer.ResultByTime{}
-	var nextPageToken *string
-	for {
-		costAndUsageInput.NextPageToken = nextPageToken
-
-		if err := costAndUsageInput.Validate(); err != nil {
-			return nil, err
-		}
-		req, costAndUsageOutput := costExplorer.GetCostAndUsageRequest(&costAndUsageInput)
-		if err := req.Send(); err != nil {
-			return nil, err
-		}
-		costAndUsageResultsByTime = append(costAndUsageResultsByTime, costAndUsageOutput.ResultsByTime...)
-
-		nextPageToken = costAndUsageOutput.NextPageToken
-		if nextPageToken == nil {
-			break
-		}
-	}
-	return costAndUsageResultsByTime, nil
-}
-
 func main() {
 	var cfApiUrl, cfApiToken string
 	flag.StringVar(&cfApiUrl, "cf-api-url", "", "URL of Cloud Controller API")
@@ -237,4 +130,111 @@ func main() {
 		table.Append(r)
 	}
 	table.Render()
+}
+
+func cfClient(apiUrl, token string) (*cfclient.Client, error) {
+	// Workaround an undocumented expectation of `go-cfclient`: it doesn't
+	// work if `bearer ` is still in the OAuth2 token
+	// https://github.com/cloudfoundry-community/go-cfclient/blob/0b4a58fd/client.go#L200
+	token = strings.TrimPrefix(token, "bearer ")
+	c := &cfclient.Config{
+		ApiAddress: apiUrl,
+		Token:      token,
+	}
+	return cfclient.NewClient(c)
+}
+
+func cfGetServiceInstancesByServiceLabel(cf *cfclient.Client, serviceLabel string) (map[string]cfclient.ServiceInstance, error) {
+	// Get the S3 service
+	v := url.Values{}
+	v.Set("q", fmt.Sprintf("label:%s", serviceLabel))
+	services, err := cf.ListServicesByQuery(v)
+	if err != nil {
+		return nil, err
+	}
+	if len(services) != 1 {
+		return nil, fmt.Errorf("expected one 'aws-s3-bucket' services: %#v", services)
+	}
+	service := services[0]
+
+	// Get every service plan for the S3 service
+	//log.Printf("fetching service plans of service '%s' '%s'\n", service.Label, service.Guid)
+	v = url.Values{}
+	v.Set("q", fmt.Sprintf("service_guid:%s", service.Guid))
+	servicePlans, err := cf.ListServicePlansByQuery(v)
+	if err != nil {
+		return nil, err
+	}
+
+	// Get the service instances for every S3 service plan
+	serviceInstancesSlice := []cfclient.ServiceInstance{}
+	for _, servicePlan := range servicePlans {
+		//log.Printf("fetching service instances of service plan '%s' '%s'\n", servicePlan.Name, servicePlan.Guid)
+		v = url.Values{}
+		v.Set("q", fmt.Sprintf("service_plan_guid:%s", servicePlan.Guid))
+		servicePlanInstances, err := cf.ListServiceInstancesByQuery(v)
+		if err != nil {
+			return nil, err
+		}
+		serviceInstancesSlice = append(serviceInstancesSlice, servicePlanInstances...)
+	}
+
+	serviceInstances := map[string]cfclient.ServiceInstance{}
+	for _, serviceInstance := range serviceInstancesSlice {
+		serviceInstances[serviceInstance.Guid] = serviceInstance
+	}
+	return serviceInstances, nil
+}
+
+func cfGetSpacesAndOrgsFromServiceInstances(cf *cfclient.Client, serviceInstances map[string]cfclient.ServiceInstance) (map[string]cfclient.Org, map[string]cfclient.Space, error) {
+	spaces := map[string]cfclient.Space{}
+	for _, serviceInstance := range serviceInstances {
+		spaceGuid := serviceInstance.SpaceGuid
+		if _, ok := spaces[spaceGuid]; ok {
+			continue
+		}
+		space, err := cf.GetSpaceByGuid(spaceGuid)
+		if err != nil {
+			return nil, nil, err
+		}
+		spaces[spaceGuid] = space
+	}
+
+	orgs := map[string]cfclient.Org{}
+	for _, space := range spaces {
+		orgGuid := space.OrganizationGuid
+		if _, ok := orgs[orgGuid]; ok {
+			continue
+		}
+		org, err := cf.GetOrgByGuid(orgGuid)
+		if err != nil {
+			return nil, nil, err
+		}
+		orgs[orgGuid] = org
+	}
+
+	return orgs, spaces, nil
+}
+
+func costexplorerCostAndUsageByTime(costExplorer *costexplorer.CostExplorer, costAndUsageInput costexplorer.GetCostAndUsageInput) ([]*costexplorer.ResultByTime, error) {
+	costAndUsageResultsByTime := []*costexplorer.ResultByTime{}
+	var nextPageToken *string
+	for {
+		costAndUsageInput.NextPageToken = nextPageToken
+
+		if err := costAndUsageInput.Validate(); err != nil {
+			return nil, err
+		}
+		req, costAndUsageOutput := costExplorer.GetCostAndUsageRequest(&costAndUsageInput)
+		if err := req.Send(); err != nil {
+			return nil, err
+		}
+		costAndUsageResultsByTime = append(costAndUsageResultsByTime, costAndUsageOutput.ResultsByTime...)
+
+		nextPageToken = costAndUsageOutput.NextPageToken
+		if nextPageToken == nil {
+			break
+		}
+	}
+	return costAndUsageResultsByTime, nil
 }
