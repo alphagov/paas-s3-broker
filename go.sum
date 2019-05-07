@@ -2,6 +2,8 @@ code.cloudfoundry.org/lager v2.0.0+incompatible h1:WZwDKDB2PLd/oL+USK4b4aEjUymIe
 code.cloudfoundry.org/lager v2.0.0+incompatible/go.mod h1:O2sS7gKP3HM2iemG+EnwvyNQK7pTSC6Foi4QiMp9sSk=
 github.com/alphagov/paas-service-broker-base v0.0.0-20190507110715-e2b3c834a5f0 h1:6PYtMUo6JyFIcD5HmdbfHHxSu94Eb8jOzhxO7Az9/Xc=
 github.com/alphagov/paas-service-broker-base v0.0.0-20190507110715-e2b3c834a5f0/go.mod h1:7SDBTApnpBADDlcu6equFjRYa8qMTm7/zg/uDFqoG2g=
+github.com/alphagov/paas-service-broker-base v0.1.0 h1:i+7oFuOE66q5vbuVcF8mVqHyc7Ru1tkjcWvqkHnMat8=
+github.com/alphagov/paas-service-broker-base v0.1.0/go.mod h1:7SDBTApnpBADDlcu6equFjRYa8qMTm7/zg/uDFqoG2g=
 github.com/aws/aws-sdk-go v1.19.11 h1:tqaTGER6Byw3QvsjGW0p018U2UOqaJPeJuzoaF7jjoQ=
 github.com/aws/aws-sdk-go v1.19.11/go.mod h1:KmX6BPdI08NWTb3/sm4ZGu5ShLoqVDhKgpiN924inxo=
 github.com/bmizerany/assert v0.0.0-20160611221934-b7ed37b82869 h1:DDGfHa7BWjL4YnC6+E63dPcxHo2sUxDIu8g3QgEJdRY=

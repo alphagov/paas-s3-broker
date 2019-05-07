@@ -1,6 +1,6 @@
 # code.cloudfoundry.org/lager v2.0.0+incompatible
 code.cloudfoundry.org/lager
-# github.com/alphagov/paas-service-broker-base v0.0.0-20190507110715-e2b3c834a5f0
+# github.com/alphagov/paas-service-broker-base v0.1.0
 github.com/alphagov/paas-service-broker-base/broker
 github.com/alphagov/paas-service-broker-base/provider
 github.com/alphagov/paas-service-broker-base/testing
