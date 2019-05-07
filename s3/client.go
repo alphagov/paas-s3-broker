@@ -8,8 +8,8 @@ import (
 	"strings"
 
 	"code.cloudfoundry.org/lager"
-	"github.com/alphagov/paas-go/provider"
 	"github.com/alphagov/paas-s3-broker/s3/policy"
+	"github.com/alphagov/paas-service-broker-base/provider"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/iam"
 	"github.com/aws/aws-sdk-go/service/iam/iamiface"
@@ -96,7 +96,7 @@ func (s *S3Client) CreateBucket(provisionData provider.ProvisionData) error {
 	logger := s.logger.Session("create-bucket")
 	bucketName := s.buildBucketName(provisionData.InstanceID)
 
-	logger.Info("create-bucket", lager.Data{ "bucket": bucketName })
+	logger.Info("create-bucket", lager.Data{"bucket": bucketName})
 	_, err := s.s3Client.CreateBucket(&s3.CreateBucketInput{
 		Bucket: aws.String(bucketName),
 	})
@@ -106,7 +106,7 @@ func (s *S3Client) CreateBucket(provisionData provider.ProvisionData) error {
 		return err
 	}
 
-	logger.Info("put-bucket-encryption", lager.Data{ "bucket": bucketName, "sse-algorithm": s3.ServerSideEncryptionAes256})
+	logger.Info("put-bucket-encryption", lager.Data{"bucket": bucketName, "sse-algorithm": s3.ServerSideEncryptionAes256})
 	_, err = s.s3Client.PutBucketEncryption(&s3.PutBucketEncryptionInput{
 		Bucket: aws.String(bucketName),
 		ServerSideEncryptionConfiguration: &s3.ServerSideEncryptionConfiguration{
@@ -219,7 +219,7 @@ func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredential
 
 	bindParams := BindParams{
 		AllowExternalAccess: false,
-		Permissions: policy.ReadWritePermissionsName, // Required, as if another bind parameter is set, `ValidatePermissions` is called below.
+		Permissions:         policy.ReadWritePermissionsName, // Required, as if another bind parameter is set, `ValidatePermissions` is called below.
 	}
 	if bindData.Details.RawParameters != nil {
 		logger.Info("parse-raw-params")

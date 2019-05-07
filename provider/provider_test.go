@@ -8,10 +8,10 @@ import (
 	"context"
 	"errors"
 
-	provideriface "github.com/alphagov/paas-go/provider"
 	"github.com/alphagov/paas-s3-broker/provider"
 	"github.com/alphagov/paas-s3-broker/s3"
 	fakeClient "github.com/alphagov/paas-s3-broker/s3/fakes"
+	provideriface "github.com/alphagov/paas-service-broker-base/provider"
 	"github.com/pivotal-cf/brokerapi"
 )
 

@@ -1,9 +1,9 @@
 # code.cloudfoundry.org/lager v2.0.0+incompatible
 code.cloudfoundry.org/lager
-# github.com/alphagov/paas-go v0.0.0-20190416140308-247c09fff11c
-github.com/alphagov/paas-go/broker
-github.com/alphagov/paas-go/provider
-github.com/alphagov/paas-go/testing/broker
+# github.com/alphagov/paas-service-broker-base v0.1.0
+github.com/alphagov/paas-service-broker-base/broker
+github.com/alphagov/paas-service-broker-base/provider
+github.com/alphagov/paas-service-broker-base/testing
 # github.com/aws/aws-sdk-go v1.19.11
 github.com/aws/aws-sdk-go/aws
 github.com/aws/aws-sdk-go/aws/session
@@ -84,21 +84,25 @@ github.com/onsi/gomega/matchers/support/goraph/bipartitegraph
 github.com/onsi/gomega/matchers/support/goraph/edge
 github.com/onsi/gomega/matchers/support/goraph/node
 github.com/onsi/gomega/matchers/support/goraph/util
-# github.com/pivotal-cf/brokerapi v4.2.4+incompatible
+# github.com/pivotal-cf/brokerapi v4.3.0+incompatible
 github.com/pivotal-cf/brokerapi
 github.com/pivotal-cf/brokerapi/auth
-github.com/pivotal-cf/brokerapi/middlewares/originating_identity_header
+github.com/pivotal-cf/brokerapi/domain
+github.com/pivotal-cf/brokerapi/domain/apiresponses
+github.com/pivotal-cf/brokerapi/handlers
+github.com/pivotal-cf/brokerapi/middlewares
+github.com/pivotal-cf/brokerapi/utils
 # github.com/pkg/errors v0.8.1
 github.com/pkg/errors
 # github.com/satori/go.uuid v1.2.0
 github.com/satori/go.uuid
-# golang.org/x/net v0.0.0-20190415214537-1da14a5a36f2
+# golang.org/x/net v0.0.0-20190501004415-9ce7a6920f09
 golang.org/x/net/html/charset
 golang.org/x/net/html
 golang.org/x/net/html/atom
-# golang.org/x/sys v0.0.0-20190416124237-ebb4019f01c9
+# golang.org/x/sys v0.0.0-20190502145724-3ef323f4f1fd
 golang.org/x/sys/unix
-# golang.org/x/text v0.3.0
+# golang.org/x/text v0.3.2
 golang.org/x/text/encoding
 golang.org/x/text/encoding/charmap
 golang.org/x/text/encoding/htmlindex
@@ -113,6 +117,8 @@ golang.org/x/text/encoding/unicode
 golang.org/x/text/language
 golang.org/x/text/internal/utf8internal
 golang.org/x/text/runes
+golang.org/x/text/internal/language
+golang.org/x/text/internal/language/compact
 golang.org/x/text/internal/tag
 # gopkg.in/fsnotify.v1 v1.4.7
 gopkg.in/fsnotify.v1

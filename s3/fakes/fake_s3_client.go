@@ -4,8 +4,8 @@ package fakes
 import (
 	"sync"
 
-	"github.com/alphagov/paas-go/provider"
 	"github.com/alphagov/paas-s3-broker/s3"
+	"github.com/alphagov/paas-service-broker-base/provider"
 )
 
 type FakeClient struct {

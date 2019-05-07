@@ -11,9 +11,9 @@ import (
 	"net/http"
 
 	"code.cloudfoundry.org/lager"
-	"github.com/alphagov/paas-go/broker"
 	"github.com/alphagov/paas-s3-broker/provider"
 	"github.com/alphagov/paas-s3-broker/s3"
+	"github.com/alphagov/paas-service-broker-base/broker"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/iam"
