@@ -16,11 +16,11 @@ import (
 
 	"net/http/httptest"
 
-	"github.com/alphagov/paas-go/broker"
-	brokertesting "github.com/alphagov/paas-go/testing/broker"
 	"github.com/alphagov/paas-s3-broker/provider"
 	"github.com/alphagov/paas-s3-broker/s3"
 	"github.com/alphagov/paas-s3-broker/testing/integration/helpers"
+	"github.com/alphagov/paas-service-broker-base/broker"
+	brokertesting "github.com/alphagov/paas-service-broker-base/testing"
 	"github.com/pivotal-cf/brokerapi"
 	uuid "github.com/satori/go.uuid"
 )

@@ -8,8 +8,8 @@ import (
 	"strings"
 	"time"
 
-	brokertesting "github.com/alphagov/paas-go/testing/broker"
 	"github.com/alphagov/paas-s3-broker/s3"
+	brokertesting "github.com/alphagov/paas-service-broker-base/testing"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"

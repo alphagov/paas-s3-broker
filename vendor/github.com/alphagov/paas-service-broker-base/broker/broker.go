@@ -6,7 +6,7 @@ import (
 
 	"code.cloudfoundry.org/lager"
 	"errors"
-	"github.com/alphagov/paas-go/provider"
+	"github.com/alphagov/paas-service-broker-base/provider"
 	"github.com/pivotal-cf/brokerapi"
 )
 

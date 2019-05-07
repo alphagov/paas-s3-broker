@@ -3,8 +3,8 @@ package broker_test
 import (
 	"bytes"
 	"fmt"
-	"github.com/alphagov/paas-go/broker"
 	"github.com/alphagov/paas-s3-broker/s3"
+	"github.com/alphagov/paas-service-broker-base/broker"
 	"github.com/aws/aws-sdk-go/service/iam/iamiface"
 	uuid "github.com/satori/go.uuid"
 	"io"
@@ -15,7 +15,6 @@ import (
 	"testing"
 	"text/template"
 
-
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/iam"
@@ -25,6 +24,7 @@ import (
 )
 
 var BrokerSuiteData SuiteData
+
 type SuiteData struct {
 	LocalhostIAMPolicyArn *string
 	EgressIPIAMPolicyARN  *string
@@ -100,9 +100,9 @@ func createEgressIPPolicy(iamClient *iam.IAM) *iam.CreatePolicyOutput {
 
 	uniqPolicyName := fmt.Sprintf("TestS3BrokerIpRestriction%s-%s", ip, uuid.NewV4())
 	createEgressIPIAMPolicyOutput, err := iamClient.CreatePolicy(&iam.CreatePolicyInput{
-		Description: aws.String("Integration Test S3 Broker IP restriction policy - restricted to egress ip only"),
+		Description:    aws.String("Integration Test S3 Broker IP restriction policy - restricted to egress ip only"),
 		PolicyDocument: policyString,
-		PolicyName: aws.String(uniqPolicyName),
+		PolicyName:     aws.String(uniqPolicyName),
 	})
 
 	Expect(err).ToNot(HaveOccurred())
@@ -117,7 +117,7 @@ func generatePolicy(ip string) (*string, error) {
 
 	buffer := bytes.Buffer{}
 	bufferWriter := io.Writer(&buffer)
-	err = t.Execute(bufferWriter, map[string]string{ "ip": ip })
+	err = t.Execute(bufferWriter, map[string]string{"ip": ip})
 
 	if err != nil {
 		return nil, err

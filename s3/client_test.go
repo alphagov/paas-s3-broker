@@ -9,9 +9,9 @@ import (
 	"time"
 
 	"code.cloudfoundry.org/lager"
-	"github.com/alphagov/paas-go/provider"
 	"github.com/alphagov/paas-s3-broker/s3"
 	fakeClient "github.com/alphagov/paas-s3-broker/s3/fakes"
+	"github.com/alphagov/paas-service-broker-base/provider"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/iam"
 	awsS3 "github.com/aws/aws-sdk-go/service/s3"
@@ -108,12 +108,12 @@ var _ = Describe("Client", func() {
 			pd := provider.ProvisionData{
 				InstanceID: "test-instance-id",
 				Details: brokerapi.ProvisionDetails{
-					RawParameters: nil,
+					RawParameters:    nil,
 					OrganizationGUID: "test-org-guid",
-					SpaceGUID: "test-space-guid",
+					SpaceGUID:        "test-space-guid",
 				},
-				Plan:brokerapi.ServicePlan{
-					ID:              "test-plan-guid",
+				Plan: brokerapi.ServicePlan{
+					ID: "test-plan-guid",
 				},
 			}
 			s3Client.CreateBucket(pd)
