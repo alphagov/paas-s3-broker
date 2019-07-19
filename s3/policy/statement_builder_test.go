@@ -23,6 +23,7 @@ var _ = Describe("StatementBuilder", func() {
 		Expect(actualStatement.Resource).To(ContainElement("arn:aws:s3:::some-instance-id/*"))
 		Expect(actualStatement.Action).To(ConsistOf(
 			"s3:GetObject",
+			"s3:GetObjectAcl",
 			"s3:GetBucketLocation",
 			"s3:ListBucket"),
 		)
@@ -43,7 +44,9 @@ var _ = Describe("StatementBuilder", func() {
 			"s3:GetBucketLocation",
 			"s3:ListBucket",
 			"s3:GetObject",
+			"s3:GetObjectAcl",
 			"s3:PutObject",
+			"s3:PutObjectAcl",
 			"s3:DeleteObject",
 		),
 		)

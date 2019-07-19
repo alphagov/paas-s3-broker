@@ -65,6 +65,7 @@ func (ReadOnlyPermissions) Actions() []string {
 		"s3:GetBucketLocation",
 		"s3:ListBucket",
 		"s3:GetObject",
+		"s3:GetObjectAcl",
 	}
 }
 
@@ -79,7 +80,9 @@ func (ReadWritePermissions) Actions() []string {
 		"s3:GetBucketLocation",
 		"s3:ListBucket",
 		"s3:GetObject",
+		"s3:GetObjectAcl",
 		"s3:PutObject",
+		"s3:PutObjectAcl",
 		"s3:DeleteObject",
 	}
 }

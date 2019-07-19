@@ -198,7 +198,9 @@ var _ = Describe("Client", func() {
 			Expect(err).ToNot(HaveOccurred())
 			Expect(updatedPolicy.Statement).To(HaveLen(1))
 			Expect(updatedPolicy.Statement[0].Action).To(ContainElement("s3:PutObject"))
+			Expect(updatedPolicy.Statement[0].Action).To(ContainElement("s3:PutObjectAcl"))
 			Expect(updatedPolicy.Statement[0].Action).To(ContainElement("s3:GetObject"))
+			Expect(updatedPolicy.Statement[0].Action).To(ContainElement("s3:GetObjectAcl"))
 
 			By("returning the bucket credentials")
 			Expect(bucketCredentials).To(Equal(s3.BucketCredentials{
@@ -254,7 +256,9 @@ var _ = Describe("Client", func() {
 			Expect(err).ToNot(HaveOccurred())
 			Expect(updatedPolicy.Statement).To(HaveLen(1))
 			Expect(updatedPolicy.Statement[0].Action).ToNot(ContainElement("s3:PutObject"))
+			Expect(updatedPolicy.Statement[0].Action).ToNot(ContainElement("s3:PutObjectAcl"))
 			Expect(updatedPolicy.Statement[0].Action).To(ContainElement("s3:GetObject"))
+			Expect(updatedPolicy.Statement[0].Action).To(ContainElement("s3:GetObjectAcl"))
 
 			By("returning the bucket credentials")
 			Expect(bucketCredentials).To(Equal(s3.BucketCredentials{
