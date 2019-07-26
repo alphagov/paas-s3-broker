@@ -9,7 +9,7 @@ import (
 
 type Statement struct {
 	Effect    string    `json:"Effect"`
-	Action    Actions  `json:"Action"`
+	Action    Actions   `json:"Action"`
 	Resource  []string  `json:"Resource"`
 	Principal Principal `json:"Principal"`
 }
@@ -22,6 +22,7 @@ type Statement struct {
 // and Go's type system is no expressive enough
 // to support that.
 type Actions []string
+
 func (this *Actions) UnmarshalJSON(b []byte) error {
 	var actions []string
 	err := json.Unmarshal(b, &actions)
@@ -65,6 +66,7 @@ func (ReadOnlyPermissions) Actions() []string {
 		"s3:GetBucketLocation",
 		"s3:ListBucket",
 		"s3:GetObject",
+		"s3:GetObjectAcl",
 	}
 }
 
@@ -79,7 +81,9 @@ func (ReadWritePermissions) Actions() []string {
 		"s3:GetBucketLocation",
 		"s3:ListBucket",
 		"s3:GetObject",
+		"s3:GetObjectAcl",
 		"s3:PutObject",
+		"s3:PutObjectAcl",
 		"s3:DeleteObject",
 	}
 }
