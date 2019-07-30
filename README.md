@@ -144,3 +144,7 @@ make test
 ```
 
 The integration tests will require you to have at least the IAM permissions listed in the above [requirements](#requirements) section.
+
+## `costs_by_month` utility
+
+In `cmd/costs_by_month/README.md` you can find instructions for calculating the cost of tenant S3 buckets over the last few months.
