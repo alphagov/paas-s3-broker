@@ -7,6 +7,10 @@
   "iam_user_path": "/test-paas-s3-broker/",
   "iam_ip_restriction_policy_arn": "__SET_IN_TEST__",
   "deploy_env": "testdev",
+  "locket_address": "__SET_IN_TEST__",
+  "locket_ca_cert_file": "__SET_IN_TEST__",
+  "locket_client_cert_file": "__SET_IN_TEST__",
+  "locket_client_key_file": "__SET_IN_TEST__",
   "catalog": {
     "services": [
       {

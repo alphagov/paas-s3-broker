@@ -10,4 +10,5 @@ test:
 generate:
 	counterfeiter -o s3/fakes/fake_s3_api.go vendor/github.com/aws/aws-sdk-go/service/s3/s3iface/ S3API
 	counterfeiter -o s3/fakes/fake_iam_api.go vendor/github.com/aws/aws-sdk-go/service/iam/iamiface/ IAMAPI
+	counterfeiter -o s3/fakes/fake_locket_client.go vendor/code.cloudfoundry.org/locket/models/ LocketClient
 	go generate ./...

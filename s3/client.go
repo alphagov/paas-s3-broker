@@ -1,6 +1,7 @@
 package s3
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -8,6 +9,7 @@ import (
 	"strings"
 
 	"code.cloudfoundry.org/lager"
+	locket "code.cloudfoundry.org/locket/models"
 	"github.com/alphagov/paas-s3-broker/s3/policy"
 	"github.com/alphagov/paas-service-broker-base/provider"
 	"github.com/aws/aws-sdk-go/aws"
@@ -40,6 +42,10 @@ type Config struct {
 	DeployEnvironment      string `json:"deploy_env"`
 	IpRestrictionPolicyARN string `json:"iam_ip_restriction_policy_arn"`
 	Timeout                time.Duration
+	LocketAddress          string `json:"locket_address"`
+	LocketCACertFile       string `json:"locket_ca_cert_file"`
+	LocketClientCertFile   string `json:"locket_client_cert_file"`
+	LocketClientKeyFile    string `json:"locket_client_key_file"`
 }
 
 func NewS3ClientConfig(configJSON []byte) (*Config, error) {
@@ -62,6 +68,8 @@ type S3Client struct {
 	s3Client               s3iface.S3API
 	iamClient              iamiface.IAMAPI
 	logger                 lager.Logger
+	locket                 locket.LocketClient
+	context                context.Context
 }
 
 type BindParams struct {
@@ -73,7 +81,14 @@ type ProvisionParams struct {
 	PublicBucket bool `json:"public_bucket"`
 }
 
-func NewS3Client(config *Config, s3Client s3iface.S3API, iamClient iamiface.IAMAPI, logger lager.Logger) *S3Client {
+func NewS3Client(
+	config *Config,
+	s3Client s3iface.S3API,
+	iamClient iamiface.IAMAPI,
+	logger lager.Logger,
+	locket locket.LocketClient,
+	ctx context.Context,
+) *S3Client {
 	timeout := config.Timeout
 	if timeout == time.Duration(0) {
 		timeout = 30 * time.Second
@@ -89,6 +104,8 @@ func NewS3Client(config *Config, s3Client s3iface.S3API, iamClient iamiface.IAMA
 		s3Client:               s3Client,
 		iamClient:              iamClient,
 		logger:                 logger,
+		locket:                 locket,
+		context:                ctx,
 	}
 }
 
@@ -96,8 +113,16 @@ func (s *S3Client) CreateBucket(provisionData provider.ProvisionData) error {
 	logger := s.logger.Session("create-bucket")
 	bucketName := s.buildBucketName(provisionData.InstanceID)
 
+	logger.Info("obtain-lock-on-bucket", lager.Data{"bucket": bucketName})
+	err := s.obtainBucketLock(bucketName, s.context)
+	if err != nil {
+		logger.Error("obtain-lock-on-bucket", err, lager.Data{"bucket": bucketName})
+		return err
+	}
+	defer s.releaseBucketLock(bucketName, s.context, logger)
+
 	logger.Info("create-bucket", lager.Data{"bucket": bucketName})
-	_, err := s.s3Client.CreateBucket(&s3.CreateBucketInput{
+	_, err = s.s3Client.CreateBucket(&s3.CreateBucketInput{
 		Bucket: aws.String(bucketName),
 	})
 
@@ -206,9 +231,19 @@ func (s *S3Client) CreateBucket(provisionData provider.ProvisionData) error {
 
 func (s *S3Client) DeleteBucket(name string) error {
 	logger := s.logger.Session("delete-bucket")
-	logger.Info("delete-bucket", lager.Data{"bucket": s.buildBucketName(name)})
-	_, err := s.s3Client.DeleteBucket(&s3.DeleteBucketInput{
-		Bucket: aws.String(s.buildBucketName(name)),
+	fullBucketName := s.buildBucketName(name)
+
+	logger.Info("obtain-lock-on-bucket", lager.Data{"bucket": fullBucketName})
+	err := s.obtainBucketLock(fullBucketName, s.context)
+	if err != nil {
+		logger.Error("obtain-lock-on-bucket", err, lager.Data{"bucket": fullBucketName})
+		return err
+	}
+	defer s.releaseBucketLock(fullBucketName, s.context, logger)
+
+	logger.Info("delete-bucket", lager.Data{"bucket": fullBucketName})
+	_, err = s.s3Client.DeleteBucket(&s3.DeleteBucketInput{
+		Bucket: aws.String(fullBucketName),
 	})
 	return err
 }
@@ -252,6 +287,14 @@ func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredential
 			Value: aws.String(s.deployEnvironment),
 		},
 	}
+
+	logger.Info("obtain-lock-on-bucket", lager.Data{"bucket": fullBucketName})
+	err := s.obtainBucketLock(fullBucketName, s.context)
+	if err != nil {
+		logger.Error("obtain-lock-on-bucket", err, lager.Data{"bucket": fullBucketName})
+		return BucketCredentials{}, err
+	}
+	defer s.releaseBucketLock(fullBucketName, s.context, logger)
 
 	user := &iam.CreateUserInput{
 		Path:     aws.String(s.iamUserPath),
@@ -424,10 +467,57 @@ func (s *S3Client) buildBindingUsername(bindingID string) string {
 	return fmt.Sprintf("%s%s", s.bucketPrefix, bindingID)
 }
 
+func (s *S3Client) obtainBucketLock(bucketName string, ctx context.Context) error {
+	lockKey := fmt.Sprintf("s3-broker/%s", bucketName)
+	lockOwner := fmt.Sprintf("s3-broker-%s", s.deployEnvironment)
+	_, err := s.locket.Lock(
+		ctx,
+		&locket.LockRequest{
+			Resource: &locket.Resource{
+				Key:      lockKey,
+				Owner:    lockOwner,
+				TypeCode: locket.LOCK,
+			},
+			TtlInSeconds: 30,
+		},
+	)
+	return err
+}
+
+func (s *S3Client) releaseBucketLock(bucketName string, ctx context.Context, logger lager.Logger) {
+	lockKey := fmt.Sprintf("s3-broker/%s", bucketName)
+	lockOwner := fmt.Sprintf("s3-broker-%s", s.deployEnvironment)
+
+	logger.Info("release-lock-on-bucket", lager.Data{"bucket": bucketName})
+
+	_, err := s.locket.Release(
+		ctx,
+		&locket.ReleaseRequest{
+			Resource: &locket.Resource{
+				Key:      lockKey,
+				Owner:    lockOwner,
+				TypeCode: locket.LOCK,
+			},
+		},
+	)
+
+	if err != nil {
+		logger.Error("release-lock-on-bucket", err, lager.Data{"bucket": bucketName})
+	}
+}
+
 func (s *S3Client) RemoveUserFromBucketAndDeleteUser(bindingID, bucketName string) error {
 	logger := s.logger.Session("remove-user-from-bucket")
 	username := s.buildBindingUsername(bindingID)
 	fullBucketName := s.buildBucketName(bucketName)
+
+	logger.Info("obtain-lock-on-bucket", lager.Data{"bucket": fullBucketName})
+	err := s.obtainBucketLock(fullBucketName, s.context)
+	if err != nil {
+		logger.Error("obtain-lock-on-bucket", err, lager.Data{"bucket": fullBucketName})
+		return err
+	}
+	defer s.releaseBucketLock(fullBucketName, s.context, logger)
 
 	logger.Info("get-bucket-policy", lager.Data{"bucket": fullBucketName})
 	getBucketPolicyOutput, err := s.s3Client.GetBucketPolicy(&s3.GetBucketPolicyInput{

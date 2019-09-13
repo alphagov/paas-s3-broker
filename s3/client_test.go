@@ -1,6 +1,7 @@
 package s3_test
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -26,12 +27,14 @@ var _ = Describe("Client", func() {
 		s3Client       *s3.S3Client
 		s3ClientConfig *s3.Config
 		logger         lager.Logger
+		locket         *fakeClient.FakeLocketClient
 	)
 
 	BeforeEach(func() {
 		s3API = &fakeClient.FakeS3API{}
 		iamAPI = &fakeClient.FakeIAMAPI{}
 		logger = lager.NewLogger("s3-service-broker-test")
+		locket = &fakeClient.FakeLocketClient{}
 		s3ClientConfig = &s3.Config{
 			AWSRegion:              "eu-west-2",
 			ResourcePrefix:         "test-bucket-prefix-",
@@ -45,6 +48,8 @@ var _ = Describe("Client", func() {
 			s3API,
 			iamAPI,
 			logger,
+			locket,
+			context.Background(),
 		)
 	})
 	Describe("CreateBucket", func() {
@@ -148,6 +153,20 @@ var _ = Describe("Client", func() {
 			Expect(s3API.CreateBucketCallCount()).To(Equal(1))
 			Expect(s3API.PutBucketTaggingCallCount()).To(Equal(1))
 			Expect(s3API.DeleteBucketCallCount()).To(Equal(1))
+		})
+		It("gets a lock on the bucket name and releases it once it's created", func() {
+			pd := provider.ProvisionData{
+				InstanceID: "fake-instance-id",
+			}
+			s3Client.CreateBucket(pd)
+
+			Expect(locket.LockCallCount()).To(Equal(1))
+			_, lockCallOne, _ := locket.LockArgsForCall(0)
+			Expect(lockCallOne.Resource.Key).To(ContainSubstring("fake-instance-id"))
+
+			Expect(locket.ReleaseCallCount()).To(Equal(1))
+			_, releaseReqOne, _ := locket.ReleaseArgsForCall(0)
+			Expect(releaseReqOne.Resource.Key).To(Equal(lockCallOne.Resource.Key))
 		})
 	})
 	Describe("AddUserToBucket", func() {
@@ -290,6 +309,23 @@ var _ = Describe("Client", func() {
 			}
 			_, err := s3Client.AddUserToBucket(bindData)
 			Expect(err).To(HaveOccurred())
+		})
+
+		It("gets a lock on the bucket and releases it at the end", func() {
+			bindData := provider.BindData{
+				InstanceID: "fake-instance-id",
+				BindingID:  "test-binding-id",
+			}
+			_, err := s3Client.AddUserToBucket(bindData)
+			Expect(err).NotTo(HaveOccurred())
+
+			Expect(locket.LockCallCount()).To(Equal(1))
+			_, lockCallOne, _ := locket.LockArgsForCall(0)
+			Expect(lockCallOne.Resource.Key).To(ContainSubstring("fake-instance-id"))
+
+			Expect(locket.ReleaseCallCount()).To(Equal(1))
+			_, releaseReqOne, _ := locket.ReleaseArgsForCall(0)
+			Expect(releaseReqOne.Resource.Key).To(Equal(lockCallOne.Resource.Key))
 		})
 
 		Context("when failing to AttachUserPolicy", func() {
@@ -574,6 +610,49 @@ var _ = Describe("Client", func() {
 			By("updating the bucket policy")
 			Expect(s3API.PutBucketPolicyCallCount()).To(Equal(1))
 			Expect(s3API.DeleteBucketPolicyCallCount()).To(Equal(0))
+		})
+
+		It("gets a lock on the bucket and releases it at the end", func() {
+			// Set up fake API
+			userArn := "arn:aws:iam::account-number:user/s3-broker/" + s3ClientConfig.ResourcePrefix + "some-user"
+			s3API.GetBucketPolicyReturnsOnCall(0, &awsS3.GetBucketPolicyOutput{
+				Policy: aws.String(fmt.Sprintf(`
+					{
+						"Statement": [
+							{
+								"Action": [
+									"s3:GetObject",
+									"s3:PutObject",
+									"s3:DeleteObject"
+								],
+								"Effect": "Allow",
+								"Resource": [
+									"arn:aws:s3:::gds-paas-s3-broker-bucketName",
+									"arn:aws:s3:::gds-paas-s3-broker-bucketName/*"
+								],
+								"Principal": {
+									"AWS": "%s"
+								}
+							}
+						]
+					}`, userArn)),
+			}, nil)
+			s3API.DeleteBucketPolicyReturnsOnCall(0, &awsS3.DeleteBucketPolicyOutput{}, nil)
+			iamAPI.ListAccessKeysReturnsOnCall(0, &iam.ListAccessKeysOutput{
+				AccessKeyMetadata: []*iam.AccessKeyMetadata{{AccessKeyId: aws.String("key")}},
+			}, nil)
+			iamAPI.DeleteAccessKeyReturnsOnCall(0, nil, nil)
+
+			err := s3Client.RemoveUserFromBucketAndDeleteUser("some-user", "fake-instance-id")
+			Expect(err).NotTo(HaveOccurred())
+
+			Expect(locket.LockCallCount()).To(Equal(1))
+			_, lockCallOne, _ := locket.LockArgsForCall(0)
+			Expect(lockCallOne.Resource.Key).To(ContainSubstring("fake-instance-id"))
+
+			Expect(locket.ReleaseCallCount()).To(Equal(1))
+			_, releaseReqOne, _ := locket.ReleaseArgsForCall(0)
+			Expect(releaseReqOne.Resource.Key).To(Equal(lockCallOne.Resource.Key))
 		})
 
 		Context("when getting the bucket policy fails", func() {

@@ -2,6 +2,7 @@ package broker_test
 
 import (
 	"code.cloudfoundry.org/lager"
+	"context"
 	"fmt"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -9,6 +10,8 @@ import (
 	aws_s3 "github.com/aws/aws-sdk-go/service/s3"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"path"
+	"path/filepath"
 
 	"encoding/json"
 	"net/http"
@@ -23,6 +26,8 @@ import (
 	brokertesting "github.com/alphagov/paas-service-broker-base/testing"
 	"github.com/pivotal-cf/brokerapi"
 	uuid "github.com/satori/go.uuid"
+
+	"code.cloudfoundry.org/locket"
 )
 
 const (
@@ -322,8 +327,18 @@ func initialise(IAMPolicyARN string) (*s3.Config, brokertesting.BrokerTester) {
 	logger := lager.NewLogger("s3-service-broker-test")
 	logger.RegisterSink(lager.NewWriterSink(GinkgoWriter, config.API.LagerLogLevel))
 
+	fixturePath, _ := filepath.Abs("../../fixtures/")
+
+	locketClient, err := locket.NewClientSkipCertVerify(logger, locket.ClientLocketConfig{
+		LocketAddress:        BrokerSuiteData.LocketServerListenAddress,
+		LocketCACertFile:     path.Join(fixturePath, "locket-server.cert.pem"),
+		LocketClientCertFile: path.Join(fixturePath, "locket-client.cert.pem"),
+		LocketClientKeyFile:  path.Join(fixturePath, "locket-client.key.pem"),
+	})
+	Expect(err).ToNot(HaveOccurred())
+
 	sess := session.Must(session.NewSession(&aws.Config{Region: aws.String(s3ClientConfig.AWSRegion)}))
-	s3Client := s3.NewS3Client(s3ClientConfig, aws_s3.New(sess), iam.New(sess), logger)
+	s3Client := s3.NewS3Client(s3ClientConfig, aws_s3.New(sess), iam.New(sess), logger, locketClient, context.Background())
 
 	s3Provider := provider.NewS3Provider(s3Client)
 
