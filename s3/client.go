@@ -510,10 +510,8 @@ func (s *S3Client) obtainBucketLock(
 			break
 		}
 
-		// Cannot compare to gprc error directly because of gprc & golang == operator
-		if !strings.Contains(err.Error(), "lock-collision") {
-			return lock, err
-		}
+		// We should check for an acceptable error here, but in practice there are
+		// many errors from grpc/locket/sqldb we should just try 15 times
 
 		time.Sleep(1 * time.Second)
 	}
