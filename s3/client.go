@@ -17,6 +17,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/iam/iamiface"
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/aws/aws-sdk-go/service/s3/s3iface"
+	uuid "github.com/satori/go.uuid"
 )
 
 //go:generate counterfeiter -o fakes/fake_s3_client.go . Client
@@ -46,6 +47,12 @@ type Config struct {
 	LocketCACertFile       string `json:"locket_ca_cert_file"`
 	LocketClientCertFile   string `json:"locket_client_cert_file"`
 	LocketClientKeyFile    string `json:"locket_client_key_file"`
+}
+
+type BucketLock struct {
+	Bucket string
+	Key    string
+	Owner  string
 }
 
 func NewS3ClientConfig(configJSON []byte) (*Config, error) {
@@ -113,13 +120,11 @@ func (s *S3Client) CreateBucket(provisionData provider.ProvisionData) error {
 	logger := s.logger.Session("create-bucket")
 	bucketName := s.buildBucketName(provisionData.InstanceID)
 
-	logger.Info("obtain-lock-on-bucket", lager.Data{"bucket": bucketName})
-	err := s.obtainBucketLock(bucketName, s.context)
+	lock, err := s.obtainBucketLock(bucketName, logger, s.context)
 	if err != nil {
-		logger.Error("obtain-lock-on-bucket", err, lager.Data{"bucket": bucketName})
 		return err
 	}
-	defer s.releaseBucketLock(bucketName, s.context, logger)
+	defer s.releaseBucketLock(lock, logger, s.context)
 
 	logger.Info("create-bucket", lager.Data{"bucket": bucketName})
 	_, err = s.s3Client.CreateBucket(&s3.CreateBucketInput{
@@ -234,12 +239,11 @@ func (s *S3Client) DeleteBucket(name string) error {
 	fullBucketName := s.buildBucketName(name)
 
 	logger.Info("obtain-lock-on-bucket", lager.Data{"bucket": fullBucketName})
-	err := s.obtainBucketLock(fullBucketName, s.context)
+	lock, err := s.obtainBucketLock(fullBucketName, logger, s.context)
 	if err != nil {
-		logger.Error("obtain-lock-on-bucket", err, lager.Data{"bucket": fullBucketName})
 		return err
 	}
-	defer s.releaseBucketLock(fullBucketName, s.context, logger)
+	defer s.releaseBucketLock(lock, logger, s.context)
 
 	logger.Info("delete-bucket", lager.Data{"bucket": fullBucketName})
 	_, err = s.s3Client.DeleteBucket(&s3.DeleteBucketInput{
@@ -289,12 +293,11 @@ func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredential
 	}
 
 	logger.Info("obtain-lock-on-bucket", lager.Data{"bucket": fullBucketName})
-	err := s.obtainBucketLock(fullBucketName, s.context)
+	lock, err := s.obtainBucketLock(fullBucketName, logger, s.context)
 	if err != nil {
-		logger.Error("obtain-lock-on-bucket", err, lager.Data{"bucket": fullBucketName})
 		return BucketCredentials{}, err
 	}
-	defer s.releaseBucketLock(fullBucketName, s.context, logger)
+	defer s.releaseBucketLock(lock, logger, s.context)
 
 	user := &iam.CreateUserInput{
 		Path:     aws.String(s.iamUserPath),
@@ -467,57 +470,86 @@ func (s *S3Client) buildBindingUsername(bindingID string) string {
 	return fmt.Sprintf("%s%s", s.bucketPrefix, bindingID)
 }
 
-func (s *S3Client) obtainBucketLock(bucketName string, ctx context.Context) error {
-	lockKey := fmt.Sprintf("s3-broker/%s", bucketName)
-	lockOwner := fmt.Sprintf("s3-broker-%s", s.deployEnvironment)
+func (s *S3Client) obtainBucketLock(
+	bucketName string,
+	logger lager.Logger,
+	ctx context.Context,
+) (BucketLock, error) {
+	// A Locket owner is the unique identifier of who currently owns this lock
+	// Therefore each operation on the broker should be a unique owner
+	// We generate a new UUID V4 for this
+
+	lock := BucketLock{
+		Bucket: bucketName,
+		Key:    fmt.Sprintf("s3-broker/%s", bucketName),
+		Owner:  fmt.Sprintf("s3-broker/%s", uuid.NewV4().String()),
+	}
+
+	lsession := logger.Session("obtain-lock-on-bucket", lager.Data{
+		"bucket": bucketName, "lock": lock,
+	})
+
+	lsession.Info("begin")
+
 	_, err := s.locket.Lock(
 		ctx,
 		&locket.LockRequest{
 			Resource: &locket.Resource{
-				Key:      lockKey,
-				Owner:    lockOwner,
+				Key:      lock.Key,
+				Owner:    lock.Owner,
 				TypeCode: locket.LOCK,
 			},
 			TtlInSeconds: 30,
 		},
 	)
-	return err
+
+	if err != nil {
+		lsession.Error("error", err)
+		return lock, err
+	}
+
+	lsession.Info("success")
+	return lock, nil
 }
 
-func (s *S3Client) releaseBucketLock(bucketName string, ctx context.Context, logger lager.Logger) {
-	lockKey := fmt.Sprintf("s3-broker/%s", bucketName)
-	lockOwner := fmt.Sprintf("s3-broker-%s", s.deployEnvironment)
+func (s *S3Client) releaseBucketLock(
+	lock BucketLock,
+	logger lager.Logger,
+	ctx context.Context,
+) {
+	lsession := logger.Session("release-lock-on-bucket", lager.Data{
+		"lock": lock,
+	})
 
-	logger.Info("release-lock-on-bucket", lager.Data{"bucket": bucketName})
+	lsession.Info("begin")
 
 	_, err := s.locket.Release(
 		ctx,
 		&locket.ReleaseRequest{
 			Resource: &locket.Resource{
-				Key:      lockKey,
-				Owner:    lockOwner,
+				Key:      lock.Key,
+				Owner:    lock.Owner,
 				TypeCode: locket.LOCK,
 			},
 		},
 	)
 
 	if err != nil {
-		logger.Error("release-lock-on-bucket", err, lager.Data{"bucket": bucketName})
+		lsession.Error("error", err)
 	}
 }
 
 func (s *S3Client) RemoveUserFromBucketAndDeleteUser(bindingID, bucketName string) error {
 	logger := s.logger.Session("remove-user-from-bucket")
+
 	username := s.buildBindingUsername(bindingID)
 	fullBucketName := s.buildBucketName(bucketName)
 
-	logger.Info("obtain-lock-on-bucket", lager.Data{"bucket": fullBucketName})
-	err := s.obtainBucketLock(fullBucketName, s.context)
+	lock, err := s.obtainBucketLock(fullBucketName, logger, s.context)
 	if err != nil {
-		logger.Error("obtain-lock-on-bucket", err, lager.Data{"bucket": fullBucketName})
 		return err
 	}
-	defer s.releaseBucketLock(fullBucketName, s.context, logger)
+	defer s.releaseBucketLock(lock, logger, s.context)
 
 	logger.Info("get-bucket-policy", lager.Data{"bucket": fullBucketName})
 	getBucketPolicyOutput, err := s.s3Client.GetBucketPolicy(&s3.GetBucketPolicyInput{
