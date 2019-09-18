@@ -200,7 +200,9 @@ var _ = Describe("Client", func() {
 
 			locket.LockReturns(nil, locketmodels.ErrLockCollision)
 
-			s3Client.CreateBucket(pd)
+			err := s3Client.CreateBucket(pd)
+
+			Expect(err).To(HaveOccurred())
 
 			Expect(locket.LockCallCount()).To(Equal(15))
 
