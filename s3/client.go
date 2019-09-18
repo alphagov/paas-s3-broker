@@ -510,7 +510,8 @@ func (s *S3Client) obtainBucketLock(
 			break
 		}
 
-		if err != locket.ErrLockCollision {
+		// Cannot compare to gprc error directly because of gprc & golang == operator
+		if !strings.Contains(err.Error(), "lock-collision") {
 			return lock, err
 		}
 
