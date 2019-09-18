@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"code.cloudfoundry.org/lager"
+	locketmodels "code.cloudfoundry.org/locket/models"
 	"github.com/alphagov/paas-s3-broker/s3"
 	fakeClient "github.com/alphagov/paas-s3-broker/s3/fakes"
 	"github.com/alphagov/paas-service-broker-base/provider"
@@ -167,6 +168,46 @@ var _ = Describe("Client", func() {
 			Expect(locket.ReleaseCallCount()).To(Equal(1))
 			_, releaseReqOne, _ := locket.ReleaseArgsForCall(0)
 			Expect(releaseReqOne.Resource.Key).To(Equal(lockCallOne.Resource.Key))
+		})
+
+		It("waits for a lock on the bucket name and releases it once it's created", func() {
+			pd := provider.ProvisionData{
+				InstanceID: "fake-instance-id",
+			}
+
+			locket.LockReturnsOnCall(0, nil, locketmodels.ErrLockCollision)
+			locket.LockReturnsOnCall(1, nil, nil)
+
+			s3Client.CreateBucket(pd)
+
+			Expect(locket.LockCallCount()).To(Equal(2))
+
+			_, lockCallOne, _ := locket.LockArgsForCall(0)
+			Expect(lockCallOne.Resource.Key).To(ContainSubstring("fake-instance-id"))
+
+			_, lockCallTwo, _ := locket.LockArgsForCall(1)
+			Expect(lockCallTwo.Resource.Key).To(ContainSubstring("fake-instance-id"))
+
+			Expect(locket.ReleaseCallCount()).To(Equal(1))
+			_, releaseReqOne, _ := locket.ReleaseArgsForCall(0)
+			Expect(releaseReqOne.Resource.Key).To(Equal(lockCallOne.Resource.Key))
+		})
+
+		It("fails after waiting for many locks", func() {
+			pd := provider.ProvisionData{
+				InstanceID: "fake-instance-id",
+			}
+
+			locket.LockReturns(nil, locketmodels.ErrLockCollision)
+
+			s3Client.CreateBucket(pd)
+
+			Expect(locket.LockCallCount()).To(Equal(15))
+
+			_, lockCallOne, _ := locket.LockArgsForCall(0)
+			Expect(lockCallOne.Resource.Key).To(ContainSubstring("fake-instance-id"))
+
+			Expect(locket.ReleaseCallCount()).To(Equal(0))
 		})
 	})
 	Describe("AddUserToBucket", func() {

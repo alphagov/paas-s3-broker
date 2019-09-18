@@ -7,6 +7,7 @@ require (
 	code.cloudfoundry.org/diego-logging-client v0.0.0-20190626151511-6278d4119f52 // indirect
 	code.cloudfoundry.org/go-diodes v0.0.0-20190809170250-f77fb823c7ee // indirect
 	code.cloudfoundry.org/go-loggregator v7.4.0+incompatible // indirect
+	code.cloudfoundry.org/inigo v0.0.0-20190917140431-b85e9648d5f1 // indirect
 	code.cloudfoundry.org/lager v2.0.0+incompatible
 	code.cloudfoundry.org/locket v0.0.0-20190829205917-ea854d859600
 	code.cloudfoundry.org/rfc5424 v0.0.0-20180905210152-236a6d29298a // indirect
