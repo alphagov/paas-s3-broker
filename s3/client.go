@@ -491,17 +491,31 @@ func (s *S3Client) obtainBucketLock(
 
 	lsession.Info("begin")
 
-	_, err := s.locket.Lock(
-		ctx,
-		&locket.LockRequest{
-			Resource: &locket.Resource{
-				Key:      lock.Key,
-				Owner:    lock.Owner,
-				TypeCode: locket.LOCK,
+	maxAttempts := 15
+	var err error
+	for attempts := 0; attempts < maxAttempts; attempts++ {
+		_, err = s.locket.Lock(
+			ctx,
+			&locket.LockRequest{
+				Resource: &locket.Resource{
+					Key:      lock.Key,
+					Owner:    lock.Owner,
+					TypeCode: locket.LOCK,
+				},
+				TtlInSeconds: 10,
 			},
-			TtlInSeconds: 30,
-		},
-	)
+		)
+
+		if err == nil {
+			break
+		}
+
+		if err != locket.ErrLockCollision {
+			return lock, err
+		}
+
+		time.Sleep(1 * time.Second)
+	}
 
 	if err != nil {
 		lsession.Error("error", err)
