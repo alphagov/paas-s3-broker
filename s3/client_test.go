@@ -10,7 +10,6 @@ import (
 	"time"
 
 	"code.cloudfoundry.org/lager"
-	locketmodels "code.cloudfoundry.org/locket/models"
 	"github.com/alphagov/paas-s3-broker/s3"
 	fakeClient "github.com/alphagov/paas-s3-broker/s3/fakes"
 	"github.com/alphagov/paas-service-broker-base/provider"
@@ -19,6 +18,8 @@ import (
 	awsS3 "github.com/aws/aws-sdk-go/service/s3"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
 )
 
 var _ = Describe("Client", func() {
@@ -175,7 +176,7 @@ var _ = Describe("Client", func() {
 				InstanceID: "fake-instance-id",
 			}
 
-			locket.LockReturnsOnCall(0, nil, locketmodels.ErrLockCollision)
+			locket.LockReturnsOnCall(0, nil, grpc.Errorf(codes.AlreadyExists, "lock-collision"))
 			locket.LockReturnsOnCall(1, nil, nil)
 
 			s3Client.CreateBucket(pd)
@@ -198,7 +199,7 @@ var _ = Describe("Client", func() {
 				InstanceID: "fake-instance-id",
 			}
 
-			locket.LockReturns(nil, locketmodels.ErrLockCollision)
+			locket.LockReturns(nil, grpc.Errorf(codes.AlreadyExists, "lock-collision"))
 
 			err := s3Client.CreateBucket(pd)
 
