@@ -136,6 +136,15 @@ func (s *S3Client) CreateBucket(provisionData provider.ProvisionData) error {
 		return err
 	}
 
+	err = s.s3Client.WaitUntilBucketExists(
+		&s3.HeadBucketInput{Bucket: aws.String(bucketName)},
+	)
+
+	if err != nil {
+		logger.Error("wait-until-bucket-exists", err)
+		return err
+	}
+
 	logger.Info("put-bucket-encryption", lager.Data{"bucket": bucketName, "sse-algorithm": s3.ServerSideEncryptionAes256})
 	_, err = s.s3Client.PutBucketEncryption(&s3.PutBucketEncryptionInput{
 		Bucket: aws.String(bucketName),
@@ -308,6 +317,15 @@ func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredential
 	createUserOutput, err := s.iamClient.CreateUser(user)
 	if err != nil {
 		logger.Error("create-user", err)
+		return BucketCredentials{}, err
+	}
+
+	err = s.iamClient.WaitUntilUserExists(&iam.GetUserInput{
+		UserName: aws.String(username),
+	})
+
+	if err != nil {
+		logger.Error("wait-for-user-exist", err)
 		return BucketCredentials{}, err
 	}
 
