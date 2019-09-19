@@ -63,7 +63,7 @@ var _ = BeforeSuite(func() {
 
 	fixturePath, _ := filepath.Abs("../../fixtures")
 
-	mockLocketServerSession := mockLocket.Run(fixturePath, "alwaysGrantLock")
+	mockLocketServerSession := mockLocket.Run(fixturePath, "keyBasedLock")
 	Eventually(mockLocketServerSession.Buffer).Should(gbytes.Say("grpc.grpc-server.started"))
 
 	BrokerSuiteData = SuiteData{

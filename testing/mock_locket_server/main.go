@@ -18,6 +18,7 @@ import (
 	"github.com/tedsuo/ifrit"
 	gcontext "golang.org/x/net/context"
 	"path"
+	"sync"
 )
 
 var (
@@ -40,7 +41,8 @@ func main() {
 
 	logger.Debug("LockingMode: " + lockingMode)
 	var handler = testHandler{
-		mode: lockingMode,
+		mode:          lockingMode,
+		keyBasedLocks: make(map[string]string, 0),
 	}
 	certificate, err := tls.LoadX509KeyPair(
 		path.Join(fixturesPath, "locket-server.cert.pem"),
@@ -63,6 +65,9 @@ func main() {
 type testHandler struct {
 	mode      string
 	lockCount int
+
+	kblMux        sync.Mutex
+	keyBasedLocks map[string]string
 }
 
 func (h *testHandler) Lock(ctx gcontext.Context, req *models.LockRequest) (*models.LockResponse, error) {
@@ -84,12 +89,42 @@ func (h *testHandler) Lock(ctx gcontext.Context, req *models.LockRequest) (*mode
 		} else {
 			return nil, models.ErrLockCollision
 		}
+	case "keyBasedLock":
+		h.kblMux.Lock()
+		defer h.kblMux.Unlock()
+
+		resource := req.Resource
+		currentOwner, present := h.keyBasedLocks[resource.Key]
+
+		if !present {
+			h.keyBasedLocks[resource.Key] = currentOwner
+			return &models.LockResponse{}, nil
+		}
+
+		if currentOwner == resource.Owner {
+			return &models.LockResponse{}, nil
+		}
+
+		return nil, models.ErrLockCollision
 	default:
 		return nil, errors.New(fmt.Sprintf("Unexpected mode %s", h.mode))
 	}
 }
+
 func (h *testHandler) Release(ctx gcontext.Context, req *models.ReleaseRequest) (*models.ReleaseResponse, error) {
-	return &models.ReleaseResponse{}, nil
+	switch h.mode {
+	case "keyBasedLock":
+		h.kblMux.Lock()
+		defer h.kblMux.Unlock()
+
+		resource := req.Resource
+
+		delete(h.keyBasedLocks, resource.Key)
+
+		return &models.ReleaseResponse{}, nil
+	default:
+		return &models.ReleaseResponse{}, nil
+	}
 }
 func (h *testHandler) Fetch(ctx gcontext.Context, req *models.FetchRequest) (*models.FetchResponse, error) {
 	return &models.FetchResponse{}, nil

@@ -12,6 +12,7 @@ import (
 	. "github.com/onsi/gomega"
 	"path"
 	"path/filepath"
+	"sync"
 
 	"encoding/json"
 	"net/http"
@@ -306,6 +307,88 @@ var _ = Describe("Broker", func() {
 
 			defer helpers.Unbind(brokerTester, instanceID, serviceID, planID, binding2ID)
 			helpers.AssertBucketReadWriteAccess(binding2Creds, s3ClientConfig.ResourcePrefix, instanceID, s3ClientConfig.AWSRegion)
+		})
+	})
+
+	Context("Parallel operation", func() {
+		It("manages public buckets correctly", func() {
+			By("initialising")
+			_, brokerTester := initialise(*BrokerSuiteData.LocalhostIAMPolicyArn)
+
+			By("provisioning a public bucket")
+			res := brokerTester.Provision(instanceID, brokertesting.RequestBody{
+				ServiceID:  serviceID,
+				PlanID:     planID,
+				Parameters: &brokertesting.ConfigurationValues{"public_bucket": true},
+			}, ASYNC_ALLOWED)
+			Expect(res.Code).To(Equal(http.StatusCreated))
+			defer helpers.DeprovisionService(brokerTester, instanceID, serviceID, planID)
+
+			By("binding in parallel")
+			var bind1Result *httptest.ResponseRecorder
+			var bind2Result *httptest.ResponseRecorder
+			bindSync := sync.WaitGroup{}
+			bindSync.Add(2)
+
+			go func() {
+				bind1Result = brokerTester.Bind(
+					instanceID, binding1ID, brokertesting.RequestBody{
+						ServiceID: serviceID,
+						PlanID:    planID,
+						Parameters: &brokertesting.ConfigurationValues{
+							"permissions": "read-write",
+							// We must allow external access with these credentials, because the tests do not run from a diego cell
+							"allow_external_access": true,
+						},
+					},
+					ASYNC_ALLOWED,
+				)
+				bindSync.Done()
+			}()
+
+			go func() {
+				bind2Result = brokerTester.Bind(
+					instanceID, binding2ID, brokertesting.RequestBody{
+						ServiceID: serviceID,
+						PlanID:    planID,
+						Parameters: &brokertesting.ConfigurationValues{
+							"permissions": "read-write",
+							// We must allow external access with these credentials, because the tests do not run from a diego cell
+							"allow_external_access": true,
+						},
+					},
+					ASYNC_ALLOWED,
+				)
+				bindSync.Done()
+			}()
+
+			bindSync.Wait()
+			Expect(bind1Result.Code).To(Equal(http.StatusCreated))
+			Expect(bind2Result.Code).To(Equal(http.StatusCreated))
+
+			By("unbinding in parallel")
+			var unbind1Result *httptest.ResponseRecorder
+			var unbind2Result *httptest.ResponseRecorder
+			unbindSync := sync.WaitGroup{}
+			unbindSync.Add(2)
+
+			go func() {
+				unbind1Result = brokerTester.Unbind(
+					instanceID, serviceID, planID, binding1ID, ASYNC_ALLOWED,
+				)
+				unbindSync.Done()
+			}()
+
+			go func() {
+				unbind2Result = brokerTester.Unbind(
+					instanceID, serviceID, planID, binding2ID, ASYNC_ALLOWED,
+				)
+				unbindSync.Done()
+			}()
+
+			unbindSync.Wait()
+			Expect(unbind1Result.Code).To(Equal(http.StatusOK))
+			Expect(unbind2Result.Code).To(Equal(http.StatusOK))
 		})
 	})
 })
