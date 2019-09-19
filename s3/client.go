@@ -13,11 +13,18 @@ import (
 	"github.com/alphagov/paas-s3-broker/s3/policy"
 	"github.com/alphagov/paas-service-broker-base/provider"
 	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/request"
 	"github.com/aws/aws-sdk-go/service/iam"
 	"github.com/aws/aws-sdk-go/service/iam/iamiface"
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/aws/aws-sdk-go/service/s3/s3iface"
 	uuid "github.com/satori/go.uuid"
+)
+
+const (
+	awsMaxWaitAttempts = 15
+	awsWaitDelay       = 3 * time.Second
+	locketMaxTTL       = 30
 )
 
 //go:generate counterfeiter -o fakes/fake_s3_client.go . Client
@@ -136,8 +143,12 @@ func (s *S3Client) CreateBucket(provisionData provider.ProvisionData) error {
 		return err
 	}
 
-	err = s.s3Client.WaitUntilBucketExists(
+	err = s.s3Client.WaitUntilBucketExistsWithContext(
+		s.context,
 		&s3.HeadBucketInput{Bucket: aws.String(bucketName)},
+
+		request.WithWaiterDelay(request.ConstantWaiterDelay(awsWaitDelay)),
+		request.WithWaiterMaxAttempts(awsMaxWaitAttempts),
 	)
 
 	if err != nil {
@@ -320,9 +331,13 @@ func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredential
 		return BucketCredentials{}, err
 	}
 
-	err = s.iamClient.WaitUntilUserExists(&iam.GetUserInput{
-		UserName: aws.String(username),
-	})
+	err = s.iamClient.WaitUntilUserExistsWithContext(
+		s.context,
+		&iam.GetUserInput{UserName: aws.String(username)},
+
+		request.WithWaiterDelay(request.ConstantWaiterDelay(awsWaitDelay)),
+		request.WithWaiterMaxAttempts(awsMaxWaitAttempts),
+	)
 
 	if err != nil {
 		logger.Error("wait-for-user-exist", err)
@@ -414,10 +429,12 @@ func (s *S3Client) putBucketPolicyWithTimeout(fullBucketName, updatedPolicyJSON 
 				Bucket: aws.String(fullBucketName),
 				Policy: aws.String(updatedPolicyJSON),
 			})
+
+			time.Sleep(2 * time.Second)
+
 			if apiErr == nil {
 				return apiErr
 			}
-			time.Sleep(2 * time.Second)
 		}
 	}
 }
@@ -509,9 +526,8 @@ func (s *S3Client) obtainBucketLock(
 
 	lsession.Info("begin")
 
-	maxAttempts := 15
 	var err error
-	for attempts := 0; attempts < maxAttempts; attempts++ {
+	for attempts := 0; attempts <= locketMaxTTL; attempts++ {
 		_, err = s.locket.Lock(
 			ctx,
 			&locket.LockRequest{
@@ -520,7 +536,7 @@ func (s *S3Client) obtainBucketLock(
 					Owner:    lock.Owner,
 					TypeCode: locket.LOCK,
 				},
-				TtlInSeconds: 10,
+				TtlInSeconds: int64(locketMaxTTL),
 			},
 		)
 

@@ -205,7 +205,7 @@ var _ = Describe("Client", func() {
 
 			Expect(err).To(HaveOccurred())
 
-			Expect(locket.LockCallCount()).To(Equal(15))
+			Expect(locket.LockCallCount()).To(Equal(31))
 
 			_, lockCallOne, _ := locket.LockArgsForCall(0)
 			Expect(lockCallOne.Resource.Key).To(ContainSubstring("fake-instance-id"))

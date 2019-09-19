@@ -3,6 +3,7 @@ package broker_test
 import (
 	"code.cloudfoundry.org/lager"
 	"context"
+	"encoding/json"
 	"fmt"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -10,13 +11,12 @@ import (
 	aws_s3 "github.com/aws/aws-sdk-go/service/s3"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"net/http"
+	"os"
 	"path"
 	"path/filepath"
 	"sync"
-
-	"encoding/json"
-	"net/http"
-	"os"
+	"time"
 
 	"net/http/httptest"
 
@@ -365,6 +365,9 @@ var _ = Describe("Broker", func() {
 			bindSync.Wait()
 			Expect(bind1Result.Code).To(Equal(http.StatusCreated))
 			Expect(bind2Result.Code).To(Equal(http.StatusCreated))
+
+			By("waiting between bind and unbind")
+			time.Sleep(10 * time.Second)
 
 			By("unbinding in parallel")
 			var unbind1Result *httptest.ResponseRecorder
