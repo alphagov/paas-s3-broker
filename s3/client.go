@@ -598,13 +598,6 @@ func (s *S3Client) RemoveUserFromBucketAndDeleteUser(bindingID, bucketName strin
 		return err
 	}
 
-	logger.Info("delete-user", lager.Data{"username": username})
-	err = s.deleteUser(username)
-	if err != nil {
-		logger.Error("delete-user", err)
-		return err
-	}
-
 	logger.Info("policy-statements", lager.Data{"bucket": fullBucketName, "count": len(updatedPolicy.Statement)})
 	if len(updatedPolicy.Statement) > 0 {
 		logger.Info("update-policy", lager.Data{"bucket": fullBucketName})
@@ -614,7 +607,11 @@ func (s *S3Client) RemoveUserFromBucketAndDeleteUser(bindingID, bucketName strin
 			return err
 		}
 
-		return s.putBucketPolicyWithTimeout(fullBucketName, string(updatedPolicyJSON))
+		err = s.putBucketPolicyWithTimeout(fullBucketName, string(updatedPolicyJSON))
+		if err != nil {
+			logger.Error("put-bucket-policy-with-timeout", err)
+			return err
+		}
 	} else {
 		logger.Info("delete-policy", lager.Data{"bucket": fullBucketName})
 		_, err = s.s3Client.DeleteBucketPolicy(&s3.DeleteBucketPolicyInput{
@@ -622,7 +619,16 @@ func (s *S3Client) RemoveUserFromBucketAndDeleteUser(bindingID, bucketName strin
 		})
 		if err != nil {
 			logger.Error("delete-policy", err)
+			return err
 		}
+	}
+
+	logger.Info("delete-user", lager.Data{"username": username})
+	err = s.deleteUser(username)
+	if err != nil {
+		logger.Error("delete-user", err)
 		return err
 	}
+
+	return nil
 }
