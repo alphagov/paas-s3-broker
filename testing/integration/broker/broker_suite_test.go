@@ -4,13 +4,17 @@ import (
 	"bytes"
 	"fmt"
 	"github.com/alphagov/paas-s3-broker/s3"
+	"github.com/alphagov/paas-s3-broker/testing/integration/helpers"
 	"github.com/alphagov/paas-service-broker-base/broker"
 	"github.com/aws/aws-sdk-go/service/iam/iamiface"
+	"github.com/onsi/gomega/gbytes"
+	"github.com/onsi/gomega/gexec"
 	uuid "github.com/satori/go.uuid"
 	"io"
 	"io/ioutil"
 	"net/http"
 	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 	"text/template"
@@ -26,9 +30,11 @@ import (
 var BrokerSuiteData SuiteData
 
 type SuiteData struct {
-	LocalhostIAMPolicyArn *string
-	EgressIPIAMPolicyARN  *string
-	AWSRegion             string
+	LocalhostIAMPolicyArn     *string
+	EgressIPIAMPolicyARN      *string
+	AWSRegion                 string
+	LocketServerListenAddress string
+	MockLocketServerSession   *gexec.Session
 }
 
 func TestBroker(t *testing.T) {
@@ -51,14 +57,27 @@ var _ = BeforeSuite(func() {
 	createLocalhostIAMPolicyOutput := createLocalhostPolicy(iamClient)
 	createEgressIPIAMPolicyOutput := createEgressIPPolicy(iamClient)
 
+	// Compile and start test Locket server
+	mockLocket := helpers.MockLocketServer{}
+	mockLocket.Build()
+
+	fixturePath, _ := filepath.Abs("../../fixtures")
+
+	mockLocketServerSession := mockLocket.Run(fixturePath, "keyBasedLock")
+	Eventually(mockLocketServerSession.Buffer).Should(gbytes.Say("grpc.grpc-server.started"))
+
 	BrokerSuiteData = SuiteData{
-		LocalhostIAMPolicyArn: createLocalhostIAMPolicyOutput.Policy.Arn,
-		EgressIPIAMPolicyARN:  createEgressIPIAMPolicyOutput.Policy.Arn,
-		AWSRegion:             s3ClientConfig.AWSRegion,
+		LocalhostIAMPolicyArn:     createLocalhostIAMPolicyOutput.Policy.Arn,
+		EgressIPIAMPolicyARN:      createEgressIPIAMPolicyOutput.Policy.Arn,
+		AWSRegion:                 s3ClientConfig.AWSRegion,
+		LocketServerListenAddress: mockLocket.ListenAddress,
+		MockLocketServerSession:   mockLocketServerSession,
 	}
 })
 
 var _ = AfterSuite(func() {
+	BrokerSuiteData.MockLocketServerSession.Kill()
+
 	sess := session.Must(session.NewSession(&aws.Config{Region: aws.String(BrokerSuiteData.AWSRegion)}))
 	iamClient := iam.New(sess)
 

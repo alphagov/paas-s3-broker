@@ -2,6 +2,8 @@ package broker_test
 
 import (
 	"code.cloudfoundry.org/lager"
+	"context"
+	"encoding/json"
 	"fmt"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -9,10 +11,12 @@ import (
 	aws_s3 "github.com/aws/aws-sdk-go/service/s3"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-
-	"encoding/json"
 	"net/http"
 	"os"
+	"path"
+	"path/filepath"
+	"sync"
+	"time"
 
 	"net/http/httptest"
 
@@ -23,6 +27,8 @@ import (
 	brokertesting "github.com/alphagov/paas-service-broker-base/testing"
 	"github.com/pivotal-cf/brokerapi"
 	uuid "github.com/satori/go.uuid"
+
+	"code.cloudfoundry.org/locket"
 )
 
 const (
@@ -303,6 +309,91 @@ var _ = Describe("Broker", func() {
 			helpers.AssertBucketReadWriteAccess(binding2Creds, s3ClientConfig.ResourcePrefix, instanceID, s3ClientConfig.AWSRegion)
 		})
 	})
+
+	Context("Parallel operation", func() {
+		It("manages public buckets correctly", func() {
+			By("initialising")
+			_, brokerTester := initialise(*BrokerSuiteData.LocalhostIAMPolicyArn)
+
+			By("provisioning a public bucket")
+			res := brokerTester.Provision(instanceID, brokertesting.RequestBody{
+				ServiceID:  serviceID,
+				PlanID:     planID,
+				Parameters: &brokertesting.ConfigurationValues{"public_bucket": true},
+			}, ASYNC_ALLOWED)
+			Expect(res.Code).To(Equal(http.StatusCreated))
+			defer helpers.DeprovisionService(brokerTester, instanceID, serviceID, planID)
+
+			By("binding in parallel")
+			var bind1Result *httptest.ResponseRecorder
+			var bind2Result *httptest.ResponseRecorder
+			bindSync := sync.WaitGroup{}
+			bindSync.Add(2)
+
+			go func() {
+				bind1Result = brokerTester.Bind(
+					instanceID, binding1ID, brokertesting.RequestBody{
+						ServiceID: serviceID,
+						PlanID:    planID,
+						Parameters: &brokertesting.ConfigurationValues{
+							"permissions": "read-write",
+							// We must allow external access with these credentials, because the tests do not run from a diego cell
+							"allow_external_access": true,
+						},
+					},
+					ASYNC_ALLOWED,
+				)
+				bindSync.Done()
+			}()
+
+			go func() {
+				bind2Result = brokerTester.Bind(
+					instanceID, binding2ID, brokertesting.RequestBody{
+						ServiceID: serviceID,
+						PlanID:    planID,
+						Parameters: &brokertesting.ConfigurationValues{
+							"permissions": "read-write",
+							// We must allow external access with these credentials, because the tests do not run from a diego cell
+							"allow_external_access": true,
+						},
+					},
+					ASYNC_ALLOWED,
+				)
+				bindSync.Done()
+			}()
+
+			bindSync.Wait()
+			Expect(bind1Result.Code).To(Equal(http.StatusCreated))
+			Expect(bind2Result.Code).To(Equal(http.StatusCreated))
+
+			By("waiting between bind and unbind")
+			time.Sleep(10 * time.Second)
+
+			By("unbinding in parallel")
+			var unbind1Result *httptest.ResponseRecorder
+			var unbind2Result *httptest.ResponseRecorder
+			unbindSync := sync.WaitGroup{}
+			unbindSync.Add(2)
+
+			go func() {
+				unbind1Result = brokerTester.Unbind(
+					instanceID, serviceID, planID, binding1ID, ASYNC_ALLOWED,
+				)
+				unbindSync.Done()
+			}()
+
+			go func() {
+				unbind2Result = brokerTester.Unbind(
+					instanceID, serviceID, planID, binding2ID, ASYNC_ALLOWED,
+				)
+				unbindSync.Done()
+			}()
+
+			unbindSync.Wait()
+			Expect(unbind1Result.Code).To(Equal(http.StatusOK))
+			Expect(unbind2Result.Code).To(Equal(http.StatusOK))
+		})
+	})
 })
 
 func initialise(IAMPolicyARN string) (*s3.Config, brokertesting.BrokerTester) {
@@ -322,8 +413,18 @@ func initialise(IAMPolicyARN string) (*s3.Config, brokertesting.BrokerTester) {
 	logger := lager.NewLogger("s3-service-broker-test")
 	logger.RegisterSink(lager.NewWriterSink(GinkgoWriter, config.API.LagerLogLevel))
 
+	fixturePath, _ := filepath.Abs("../../fixtures/")
+
+	locketClient, err := locket.NewClientSkipCertVerify(logger, locket.ClientLocketConfig{
+		LocketAddress:        BrokerSuiteData.LocketServerListenAddress,
+		LocketCACertFile:     path.Join(fixturePath, "locket-server.cert.pem"),
+		LocketClientCertFile: path.Join(fixturePath, "locket-client.cert.pem"),
+		LocketClientKeyFile:  path.Join(fixturePath, "locket-client.key.pem"),
+	})
+	Expect(err).ToNot(HaveOccurred())
+
 	sess := session.Must(session.NewSession(&aws.Config{Region: aws.String(s3ClientConfig.AWSRegion)}))
-	s3Client := s3.NewS3Client(s3ClientConfig, aws_s3.New(sess), iam.New(sess), logger)
+	s3Client := s3.NewS3Client(s3ClientConfig, aws_s3.New(sess), iam.New(sess), logger, locketClient, context.Background())
 
 	s3Provider := provider.NewS3Provider(s3Client)
 
