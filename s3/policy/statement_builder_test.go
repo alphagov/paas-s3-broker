@@ -24,6 +24,7 @@ var _ = Describe("StatementBuilder", func() {
 		Expect(actualStatement.Action).To(ConsistOf(
 			"s3:GetObject",
 			"s3:GetBucketLocation",
+			"s3:GetBucketCORS",
 			"s3:ListBucket"),
 		)
 	})
@@ -42,6 +43,8 @@ var _ = Describe("StatementBuilder", func() {
 		Expect(actualStatement.Action).To(ConsistOf(
 			"s3:GetBucketLocation",
 			"s3:ListBucket",
+			"s3:GetBucketCORS",
+			"s3:PutBucketCORS",
 			"s3:GetObject",
 			"s3:PutObject",
 			"s3:DeleteObject",

@@ -64,6 +64,7 @@ func (ReadOnlyPermissions) Actions() []string {
 	return []string{
 		"s3:GetBucketLocation",
 		"s3:ListBucket",
+		"s3:GetBucketCORS",
 		"s3:GetObject",
 	}
 }
@@ -78,6 +79,8 @@ func (ReadWritePermissions) Actions() []string {
 	return []string{
 		"s3:GetBucketLocation",
 		"s3:ListBucket",
+		"s3:GetBucketCORS",
+		"s3:PutBucketCORS",
 		"s3:GetObject",
 		"s3:PutObject",
 		"s3:DeleteObject",
