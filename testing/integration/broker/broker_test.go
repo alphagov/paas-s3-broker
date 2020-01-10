@@ -1,22 +1,22 @@
 package broker_test
 
 import (
-	"code.cloudfoundry.org/lager"
 	"context"
 	"encoding/json"
 	"fmt"
+	"net/http"
+	"os"
+	"path"
+	"sync"
+	"time"
+
+	"code.cloudfoundry.org/lager"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/iam"
 	aws_s3 "github.com/aws/aws-sdk-go/service/s3"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	"net/http"
-	"os"
-	"path"
-	"path/filepath"
-	"sync"
-	"time"
 
 	"net/http/httptest"
 
@@ -27,8 +27,6 @@ import (
 	brokertesting "github.com/alphagov/paas-service-broker-base/testing"
 	"github.com/pivotal-cf/brokerapi"
 	uuid "github.com/satori/go.uuid"
-
-	"code.cloudfoundry.org/locket"
 )
 
 const (
@@ -404,6 +402,12 @@ func initialise(IAMPolicyARN string) (*s3.Config, brokertesting.BrokerTester) {
 	config, err := broker.NewConfig(file)
 	Expect(err).ToNot(HaveOccurred())
 
+	config.API.Locket.SkipVerify = true
+	config.API.Locket.Address = mockLocket.ListenAddress
+	config.API.Locket.CACertFile = path.Join(locketFixtures.Filepath, "locket-server.cert.pem")
+	config.API.Locket.ClientCertFile = path.Join(locketFixtures.Filepath, "locket-client.cert.pem")
+	config.API.Locket.ClientKeyFile = path.Join(locketFixtures.Filepath, "locket-client.key.pem")
+
 	s3ClientConfig, err := s3.NewS3ClientConfig(config.Provider)
 	Expect(err).ToNot(HaveOccurred())
 
@@ -413,22 +417,13 @@ func initialise(IAMPolicyARN string) (*s3.Config, brokertesting.BrokerTester) {
 	logger := lager.NewLogger("s3-service-broker-test")
 	logger.RegisterSink(lager.NewWriterSink(GinkgoWriter, config.API.LagerLogLevel))
 
-	fixturePath, _ := filepath.Abs("../../fixtures/")
-
-	locketClient, err := locket.NewClientSkipCertVerify(logger, locket.ClientLocketConfig{
-		LocketAddress:        BrokerSuiteData.LocketServerListenAddress,
-		LocketCACertFile:     path.Join(fixturePath, "locket-server.cert.pem"),
-		LocketClientCertFile: path.Join(fixturePath, "locket-client.cert.pem"),
-		LocketClientKeyFile:  path.Join(fixturePath, "locket-client.key.pem"),
-	})
-	Expect(err).ToNot(HaveOccurred())
-
 	sess := session.Must(session.NewSession(&aws.Config{Region: aws.String(s3ClientConfig.AWSRegion)}))
-	s3Client := s3.NewS3Client(s3ClientConfig, aws_s3.New(sess), iam.New(sess), logger, locketClient, context.Background())
+	s3Client := s3.NewS3Client(s3ClientConfig, aws_s3.New(sess), iam.New(sess), logger, context.Background())
 
 	s3Provider := provider.NewS3Provider(s3Client)
 
-	serviceBroker := broker.New(config, s3Provider, logger)
+	serviceBroker, err := broker.New(config, s3Provider, logger)
+	Expect(err).ToNot(HaveOccurred())
 	brokerAPI := broker.NewAPI(serviceBroker, logger, config)
 
 	return s3ClientConfig, brokertesting.New(brokerapi.BrokerCredentials{
