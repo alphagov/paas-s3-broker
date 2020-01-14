@@ -4,7 +4,7 @@ image_resource:
   type: docker-image
   source:
     repository: golang
-    tag: 1.11.5-stretch
+    tag: 1.13-stretch
 inputs:
   - name: repo
 run:
