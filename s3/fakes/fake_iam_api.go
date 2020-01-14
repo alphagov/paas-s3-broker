@@ -2061,6 +2061,47 @@ type FakeIAMAPI struct {
 		result1 *iam.GenerateCredentialReportOutput
 		result2 error
 	}
+	GenerateOrganizationsAccessReportStub        func(*iam.GenerateOrganizationsAccessReportInput) (*iam.GenerateOrganizationsAccessReportOutput, error)
+	generateOrganizationsAccessReportMutex       sync.RWMutex
+	generateOrganizationsAccessReportArgsForCall []struct {
+		arg1 *iam.GenerateOrganizationsAccessReportInput
+	}
+	generateOrganizationsAccessReportReturns struct {
+		result1 *iam.GenerateOrganizationsAccessReportOutput
+		result2 error
+	}
+	generateOrganizationsAccessReportReturnsOnCall map[int]struct {
+		result1 *iam.GenerateOrganizationsAccessReportOutput
+		result2 error
+	}
+	GenerateOrganizationsAccessReportRequestStub        func(*iam.GenerateOrganizationsAccessReportInput) (*request.Request, *iam.GenerateOrganizationsAccessReportOutput)
+	generateOrganizationsAccessReportRequestMutex       sync.RWMutex
+	generateOrganizationsAccessReportRequestArgsForCall []struct {
+		arg1 *iam.GenerateOrganizationsAccessReportInput
+	}
+	generateOrganizationsAccessReportRequestReturns struct {
+		result1 *request.Request
+		result2 *iam.GenerateOrganizationsAccessReportOutput
+	}
+	generateOrganizationsAccessReportRequestReturnsOnCall map[int]struct {
+		result1 *request.Request
+		result2 *iam.GenerateOrganizationsAccessReportOutput
+	}
+	GenerateOrganizationsAccessReportWithContextStub        func(context.Context, *iam.GenerateOrganizationsAccessReportInput, ...request.Option) (*iam.GenerateOrganizationsAccessReportOutput, error)
+	generateOrganizationsAccessReportWithContextMutex       sync.RWMutex
+	generateOrganizationsAccessReportWithContextArgsForCall []struct {
+		arg1 context.Context
+		arg2 *iam.GenerateOrganizationsAccessReportInput
+		arg3 []request.Option
+	}
+	generateOrganizationsAccessReportWithContextReturns struct {
+		result1 *iam.GenerateOrganizationsAccessReportOutput
+		result2 error
+	}
+	generateOrganizationsAccessReportWithContextReturnsOnCall map[int]struct {
+		result1 *iam.GenerateOrganizationsAccessReportOutput
+		result2 error
+	}
 	GenerateServiceLastAccessedDetailsStub        func(*iam.GenerateServiceLastAccessedDetailsInput) (*iam.GenerateServiceLastAccessedDetailsOutput, error)
 	generateServiceLastAccessedDetailsMutex       sync.RWMutex
 	generateServiceLastAccessedDetailsArgsForCall []struct {
@@ -2644,6 +2685,47 @@ type FakeIAMAPI struct {
 	}
 	getOpenIDConnectProviderWithContextReturnsOnCall map[int]struct {
 		result1 *iam.GetOpenIDConnectProviderOutput
+		result2 error
+	}
+	GetOrganizationsAccessReportStub        func(*iam.GetOrganizationsAccessReportInput) (*iam.GetOrganizationsAccessReportOutput, error)
+	getOrganizationsAccessReportMutex       sync.RWMutex
+	getOrganizationsAccessReportArgsForCall []struct {
+		arg1 *iam.GetOrganizationsAccessReportInput
+	}
+	getOrganizationsAccessReportReturns struct {
+		result1 *iam.GetOrganizationsAccessReportOutput
+		result2 error
+	}
+	getOrganizationsAccessReportReturnsOnCall map[int]struct {
+		result1 *iam.GetOrganizationsAccessReportOutput
+		result2 error
+	}
+	GetOrganizationsAccessReportRequestStub        func(*iam.GetOrganizationsAccessReportInput) (*request.Request, *iam.GetOrganizationsAccessReportOutput)
+	getOrganizationsAccessReportRequestMutex       sync.RWMutex
+	getOrganizationsAccessReportRequestArgsForCall []struct {
+		arg1 *iam.GetOrganizationsAccessReportInput
+	}
+	getOrganizationsAccessReportRequestReturns struct {
+		result1 *request.Request
+		result2 *iam.GetOrganizationsAccessReportOutput
+	}
+	getOrganizationsAccessReportRequestReturnsOnCall map[int]struct {
+		result1 *request.Request
+		result2 *iam.GetOrganizationsAccessReportOutput
+	}
+	GetOrganizationsAccessReportWithContextStub        func(context.Context, *iam.GetOrganizationsAccessReportInput, ...request.Option) (*iam.GetOrganizationsAccessReportOutput, error)
+	getOrganizationsAccessReportWithContextMutex       sync.RWMutex
+	getOrganizationsAccessReportWithContextArgsForCall []struct {
+		arg1 context.Context
+		arg2 *iam.GetOrganizationsAccessReportInput
+		arg3 []request.Option
+	}
+	getOrganizationsAccessReportWithContextReturns struct {
+		result1 *iam.GetOrganizationsAccessReportOutput
+		result2 error
+	}
+	getOrganizationsAccessReportWithContextReturnsOnCall map[int]struct {
+		result1 *iam.GetOrganizationsAccessReportOutput
 		result2 error
 	}
 	GetPolicyStub        func(*iam.GetPolicyInput) (*iam.GetPolicyOutput, error)
@@ -5309,6 +5391,47 @@ type FakeIAMAPI struct {
 		result1 *iam.SetDefaultPolicyVersionOutput
 		result2 error
 	}
+	SetSecurityTokenServicePreferencesStub        func(*iam.SetSecurityTokenServicePreferencesInput) (*iam.SetSecurityTokenServicePreferencesOutput, error)
+	setSecurityTokenServicePreferencesMutex       sync.RWMutex
+	setSecurityTokenServicePreferencesArgsForCall []struct {
+		arg1 *iam.SetSecurityTokenServicePreferencesInput
+	}
+	setSecurityTokenServicePreferencesReturns struct {
+		result1 *iam.SetSecurityTokenServicePreferencesOutput
+		result2 error
+	}
+	setSecurityTokenServicePreferencesReturnsOnCall map[int]struct {
+		result1 *iam.SetSecurityTokenServicePreferencesOutput
+		result2 error
+	}
+	SetSecurityTokenServicePreferencesRequestStub        func(*iam.SetSecurityTokenServicePreferencesInput) (*request.Request, *iam.SetSecurityTokenServicePreferencesOutput)
+	setSecurityTokenServicePreferencesRequestMutex       sync.RWMutex
+	setSecurityTokenServicePreferencesRequestArgsForCall []struct {
+		arg1 *iam.SetSecurityTokenServicePreferencesInput
+	}
+	setSecurityTokenServicePreferencesRequestReturns struct {
+		result1 *request.Request
+		result2 *iam.SetSecurityTokenServicePreferencesOutput
+	}
+	setSecurityTokenServicePreferencesRequestReturnsOnCall map[int]struct {
+		result1 *request.Request
+		result2 *iam.SetSecurityTokenServicePreferencesOutput
+	}
+	SetSecurityTokenServicePreferencesWithContextStub        func(context.Context, *iam.SetSecurityTokenServicePreferencesInput, ...request.Option) (*iam.SetSecurityTokenServicePreferencesOutput, error)
+	setSecurityTokenServicePreferencesWithContextMutex       sync.RWMutex
+	setSecurityTokenServicePreferencesWithContextArgsForCall []struct {
+		arg1 context.Context
+		arg2 *iam.SetSecurityTokenServicePreferencesInput
+		arg3 []request.Option
+	}
+	setSecurityTokenServicePreferencesWithContextReturns struct {
+		result1 *iam.SetSecurityTokenServicePreferencesOutput
+		result2 error
+	}
+	setSecurityTokenServicePreferencesWithContextReturnsOnCall map[int]struct {
+		result1 *iam.SetSecurityTokenServicePreferencesOutput
+		result2 error
+	}
 	SimulateCustomPolicyStub        func(*iam.SimulateCustomPolicyInput) (*iam.SimulatePolicyResponse, error)
 	simulateCustomPolicyMutex       sync.RWMutex
 	simulateCustomPolicyArgsForCall []struct {
@@ -6326,6 +6449,54 @@ type FakeIAMAPI struct {
 		result1 error
 	}
 	waitUntilInstanceProfileExistsWithContextReturnsOnCall map[int]struct {
+		result1 error
+	}
+	WaitUntilPolicyExistsStub        func(*iam.GetPolicyInput) error
+	waitUntilPolicyExistsMutex       sync.RWMutex
+	waitUntilPolicyExistsArgsForCall []struct {
+		arg1 *iam.GetPolicyInput
+	}
+	waitUntilPolicyExistsReturns struct {
+		result1 error
+	}
+	waitUntilPolicyExistsReturnsOnCall map[int]struct {
+		result1 error
+	}
+	WaitUntilPolicyExistsWithContextStub        func(context.Context, *iam.GetPolicyInput, ...request.WaiterOption) error
+	waitUntilPolicyExistsWithContextMutex       sync.RWMutex
+	waitUntilPolicyExistsWithContextArgsForCall []struct {
+		arg1 context.Context
+		arg2 *iam.GetPolicyInput
+		arg3 []request.WaiterOption
+	}
+	waitUntilPolicyExistsWithContextReturns struct {
+		result1 error
+	}
+	waitUntilPolicyExistsWithContextReturnsOnCall map[int]struct {
+		result1 error
+	}
+	WaitUntilRoleExistsStub        func(*iam.GetRoleInput) error
+	waitUntilRoleExistsMutex       sync.RWMutex
+	waitUntilRoleExistsArgsForCall []struct {
+		arg1 *iam.GetRoleInput
+	}
+	waitUntilRoleExistsReturns struct {
+		result1 error
+	}
+	waitUntilRoleExistsReturnsOnCall map[int]struct {
+		result1 error
+	}
+	WaitUntilRoleExistsWithContextStub        func(context.Context, *iam.GetRoleInput, ...request.WaiterOption) error
+	waitUntilRoleExistsWithContextMutex       sync.RWMutex
+	waitUntilRoleExistsWithContextArgsForCall []struct {
+		arg1 context.Context
+		arg2 *iam.GetRoleInput
+		arg3 []request.WaiterOption
+	}
+	waitUntilRoleExistsWithContextReturns struct {
+		result1 error
+	}
+	waitUntilRoleExistsWithContextReturnsOnCall map[int]struct {
 		result1 error
 	}
 	WaitUntilUserExistsStub        func(*iam.GetUserInput) error
@@ -15906,6 +16077,197 @@ func (fake *FakeIAMAPI) GenerateCredentialReportWithContextReturnsOnCall(i int, 
 	}{result1, result2}
 }
 
+func (fake *FakeIAMAPI) GenerateOrganizationsAccessReport(arg1 *iam.GenerateOrganizationsAccessReportInput) (*iam.GenerateOrganizationsAccessReportOutput, error) {
+	fake.generateOrganizationsAccessReportMutex.Lock()
+	ret, specificReturn := fake.generateOrganizationsAccessReportReturnsOnCall[len(fake.generateOrganizationsAccessReportArgsForCall)]
+	fake.generateOrganizationsAccessReportArgsForCall = append(fake.generateOrganizationsAccessReportArgsForCall, struct {
+		arg1 *iam.GenerateOrganizationsAccessReportInput
+	}{arg1})
+	fake.recordInvocation("GenerateOrganizationsAccessReport", []interface{}{arg1})
+	fake.generateOrganizationsAccessReportMutex.Unlock()
+	if fake.GenerateOrganizationsAccessReportStub != nil {
+		return fake.GenerateOrganizationsAccessReportStub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	fakeReturns := fake.generateOrganizationsAccessReportReturns
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) GenerateOrganizationsAccessReportCallCount() int {
+	fake.generateOrganizationsAccessReportMutex.RLock()
+	defer fake.generateOrganizationsAccessReportMutex.RUnlock()
+	return len(fake.generateOrganizationsAccessReportArgsForCall)
+}
+
+func (fake *FakeIAMAPI) GenerateOrganizationsAccessReportCalls(stub func(*iam.GenerateOrganizationsAccessReportInput) (*iam.GenerateOrganizationsAccessReportOutput, error)) {
+	fake.generateOrganizationsAccessReportMutex.Lock()
+	defer fake.generateOrganizationsAccessReportMutex.Unlock()
+	fake.GenerateOrganizationsAccessReportStub = stub
+}
+
+func (fake *FakeIAMAPI) GenerateOrganizationsAccessReportArgsForCall(i int) *iam.GenerateOrganizationsAccessReportInput {
+	fake.generateOrganizationsAccessReportMutex.RLock()
+	defer fake.generateOrganizationsAccessReportMutex.RUnlock()
+	argsForCall := fake.generateOrganizationsAccessReportArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) GenerateOrganizationsAccessReportReturns(result1 *iam.GenerateOrganizationsAccessReportOutput, result2 error) {
+	fake.generateOrganizationsAccessReportMutex.Lock()
+	defer fake.generateOrganizationsAccessReportMutex.Unlock()
+	fake.GenerateOrganizationsAccessReportStub = nil
+	fake.generateOrganizationsAccessReportReturns = struct {
+		result1 *iam.GenerateOrganizationsAccessReportOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) GenerateOrganizationsAccessReportReturnsOnCall(i int, result1 *iam.GenerateOrganizationsAccessReportOutput, result2 error) {
+	fake.generateOrganizationsAccessReportMutex.Lock()
+	defer fake.generateOrganizationsAccessReportMutex.Unlock()
+	fake.GenerateOrganizationsAccessReportStub = nil
+	if fake.generateOrganizationsAccessReportReturnsOnCall == nil {
+		fake.generateOrganizationsAccessReportReturnsOnCall = make(map[int]struct {
+			result1 *iam.GenerateOrganizationsAccessReportOutput
+			result2 error
+		})
+	}
+	fake.generateOrganizationsAccessReportReturnsOnCall[i] = struct {
+		result1 *iam.GenerateOrganizationsAccessReportOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) GenerateOrganizationsAccessReportRequest(arg1 *iam.GenerateOrganizationsAccessReportInput) (*request.Request, *iam.GenerateOrganizationsAccessReportOutput) {
+	fake.generateOrganizationsAccessReportRequestMutex.Lock()
+	ret, specificReturn := fake.generateOrganizationsAccessReportRequestReturnsOnCall[len(fake.generateOrganizationsAccessReportRequestArgsForCall)]
+	fake.generateOrganizationsAccessReportRequestArgsForCall = append(fake.generateOrganizationsAccessReportRequestArgsForCall, struct {
+		arg1 *iam.GenerateOrganizationsAccessReportInput
+	}{arg1})
+	fake.recordInvocation("GenerateOrganizationsAccessReportRequest", []interface{}{arg1})
+	fake.generateOrganizationsAccessReportRequestMutex.Unlock()
+	if fake.GenerateOrganizationsAccessReportRequestStub != nil {
+		return fake.GenerateOrganizationsAccessReportRequestStub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	fakeReturns := fake.generateOrganizationsAccessReportRequestReturns
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) GenerateOrganizationsAccessReportRequestCallCount() int {
+	fake.generateOrganizationsAccessReportRequestMutex.RLock()
+	defer fake.generateOrganizationsAccessReportRequestMutex.RUnlock()
+	return len(fake.generateOrganizationsAccessReportRequestArgsForCall)
+}
+
+func (fake *FakeIAMAPI) GenerateOrganizationsAccessReportRequestCalls(stub func(*iam.GenerateOrganizationsAccessReportInput) (*request.Request, *iam.GenerateOrganizationsAccessReportOutput)) {
+	fake.generateOrganizationsAccessReportRequestMutex.Lock()
+	defer fake.generateOrganizationsAccessReportRequestMutex.Unlock()
+	fake.GenerateOrganizationsAccessReportRequestStub = stub
+}
+
+func (fake *FakeIAMAPI) GenerateOrganizationsAccessReportRequestArgsForCall(i int) *iam.GenerateOrganizationsAccessReportInput {
+	fake.generateOrganizationsAccessReportRequestMutex.RLock()
+	defer fake.generateOrganizationsAccessReportRequestMutex.RUnlock()
+	argsForCall := fake.generateOrganizationsAccessReportRequestArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) GenerateOrganizationsAccessReportRequestReturns(result1 *request.Request, result2 *iam.GenerateOrganizationsAccessReportOutput) {
+	fake.generateOrganizationsAccessReportRequestMutex.Lock()
+	defer fake.generateOrganizationsAccessReportRequestMutex.Unlock()
+	fake.GenerateOrganizationsAccessReportRequestStub = nil
+	fake.generateOrganizationsAccessReportRequestReturns = struct {
+		result1 *request.Request
+		result2 *iam.GenerateOrganizationsAccessReportOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) GenerateOrganizationsAccessReportRequestReturnsOnCall(i int, result1 *request.Request, result2 *iam.GenerateOrganizationsAccessReportOutput) {
+	fake.generateOrganizationsAccessReportRequestMutex.Lock()
+	defer fake.generateOrganizationsAccessReportRequestMutex.Unlock()
+	fake.GenerateOrganizationsAccessReportRequestStub = nil
+	if fake.generateOrganizationsAccessReportRequestReturnsOnCall == nil {
+		fake.generateOrganizationsAccessReportRequestReturnsOnCall = make(map[int]struct {
+			result1 *request.Request
+			result2 *iam.GenerateOrganizationsAccessReportOutput
+		})
+	}
+	fake.generateOrganizationsAccessReportRequestReturnsOnCall[i] = struct {
+		result1 *request.Request
+		result2 *iam.GenerateOrganizationsAccessReportOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) GenerateOrganizationsAccessReportWithContext(arg1 context.Context, arg2 *iam.GenerateOrganizationsAccessReportInput, arg3 ...request.Option) (*iam.GenerateOrganizationsAccessReportOutput, error) {
+	fake.generateOrganizationsAccessReportWithContextMutex.Lock()
+	ret, specificReturn := fake.generateOrganizationsAccessReportWithContextReturnsOnCall[len(fake.generateOrganizationsAccessReportWithContextArgsForCall)]
+	fake.generateOrganizationsAccessReportWithContextArgsForCall = append(fake.generateOrganizationsAccessReportWithContextArgsForCall, struct {
+		arg1 context.Context
+		arg2 *iam.GenerateOrganizationsAccessReportInput
+		arg3 []request.Option
+	}{arg1, arg2, arg3})
+	fake.recordInvocation("GenerateOrganizationsAccessReportWithContext", []interface{}{arg1, arg2, arg3})
+	fake.generateOrganizationsAccessReportWithContextMutex.Unlock()
+	if fake.GenerateOrganizationsAccessReportWithContextStub != nil {
+		return fake.GenerateOrganizationsAccessReportWithContextStub(arg1, arg2, arg3...)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	fakeReturns := fake.generateOrganizationsAccessReportWithContextReturns
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) GenerateOrganizationsAccessReportWithContextCallCount() int {
+	fake.generateOrganizationsAccessReportWithContextMutex.RLock()
+	defer fake.generateOrganizationsAccessReportWithContextMutex.RUnlock()
+	return len(fake.generateOrganizationsAccessReportWithContextArgsForCall)
+}
+
+func (fake *FakeIAMAPI) GenerateOrganizationsAccessReportWithContextCalls(stub func(context.Context, *iam.GenerateOrganizationsAccessReportInput, ...request.Option) (*iam.GenerateOrganizationsAccessReportOutput, error)) {
+	fake.generateOrganizationsAccessReportWithContextMutex.Lock()
+	defer fake.generateOrganizationsAccessReportWithContextMutex.Unlock()
+	fake.GenerateOrganizationsAccessReportWithContextStub = stub
+}
+
+func (fake *FakeIAMAPI) GenerateOrganizationsAccessReportWithContextArgsForCall(i int) (context.Context, *iam.GenerateOrganizationsAccessReportInput, []request.Option) {
+	fake.generateOrganizationsAccessReportWithContextMutex.RLock()
+	defer fake.generateOrganizationsAccessReportWithContextMutex.RUnlock()
+	argsForCall := fake.generateOrganizationsAccessReportWithContextArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3
+}
+
+func (fake *FakeIAMAPI) GenerateOrganizationsAccessReportWithContextReturns(result1 *iam.GenerateOrganizationsAccessReportOutput, result2 error) {
+	fake.generateOrganizationsAccessReportWithContextMutex.Lock()
+	defer fake.generateOrganizationsAccessReportWithContextMutex.Unlock()
+	fake.GenerateOrganizationsAccessReportWithContextStub = nil
+	fake.generateOrganizationsAccessReportWithContextReturns = struct {
+		result1 *iam.GenerateOrganizationsAccessReportOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) GenerateOrganizationsAccessReportWithContextReturnsOnCall(i int, result1 *iam.GenerateOrganizationsAccessReportOutput, result2 error) {
+	fake.generateOrganizationsAccessReportWithContextMutex.Lock()
+	defer fake.generateOrganizationsAccessReportWithContextMutex.Unlock()
+	fake.GenerateOrganizationsAccessReportWithContextStub = nil
+	if fake.generateOrganizationsAccessReportWithContextReturnsOnCall == nil {
+		fake.generateOrganizationsAccessReportWithContextReturnsOnCall = make(map[int]struct {
+			result1 *iam.GenerateOrganizationsAccessReportOutput
+			result2 error
+		})
+	}
+	fake.generateOrganizationsAccessReportWithContextReturnsOnCall[i] = struct {
+		result1 *iam.GenerateOrganizationsAccessReportOutput
+		result2 error
+	}{result1, result2}
+}
+
 func (fake *FakeIAMAPI) GenerateServiceLastAccessedDetails(arg1 *iam.GenerateServiceLastAccessedDetailsInput) (*iam.GenerateServiceLastAccessedDetailsOutput, error) {
 	fake.generateServiceLastAccessedDetailsMutex.Lock()
 	ret, specificReturn := fake.generateServiceLastAccessedDetailsReturnsOnCall[len(fake.generateServiceLastAccessedDetailsArgsForCall)]
@@ -18633,6 +18995,197 @@ func (fake *FakeIAMAPI) GetOpenIDConnectProviderWithContextReturnsOnCall(i int, 
 	}
 	fake.getOpenIDConnectProviderWithContextReturnsOnCall[i] = struct {
 		result1 *iam.GetOpenIDConnectProviderOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) GetOrganizationsAccessReport(arg1 *iam.GetOrganizationsAccessReportInput) (*iam.GetOrganizationsAccessReportOutput, error) {
+	fake.getOrganizationsAccessReportMutex.Lock()
+	ret, specificReturn := fake.getOrganizationsAccessReportReturnsOnCall[len(fake.getOrganizationsAccessReportArgsForCall)]
+	fake.getOrganizationsAccessReportArgsForCall = append(fake.getOrganizationsAccessReportArgsForCall, struct {
+		arg1 *iam.GetOrganizationsAccessReportInput
+	}{arg1})
+	fake.recordInvocation("GetOrganizationsAccessReport", []interface{}{arg1})
+	fake.getOrganizationsAccessReportMutex.Unlock()
+	if fake.GetOrganizationsAccessReportStub != nil {
+		return fake.GetOrganizationsAccessReportStub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	fakeReturns := fake.getOrganizationsAccessReportReturns
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) GetOrganizationsAccessReportCallCount() int {
+	fake.getOrganizationsAccessReportMutex.RLock()
+	defer fake.getOrganizationsAccessReportMutex.RUnlock()
+	return len(fake.getOrganizationsAccessReportArgsForCall)
+}
+
+func (fake *FakeIAMAPI) GetOrganizationsAccessReportCalls(stub func(*iam.GetOrganizationsAccessReportInput) (*iam.GetOrganizationsAccessReportOutput, error)) {
+	fake.getOrganizationsAccessReportMutex.Lock()
+	defer fake.getOrganizationsAccessReportMutex.Unlock()
+	fake.GetOrganizationsAccessReportStub = stub
+}
+
+func (fake *FakeIAMAPI) GetOrganizationsAccessReportArgsForCall(i int) *iam.GetOrganizationsAccessReportInput {
+	fake.getOrganizationsAccessReportMutex.RLock()
+	defer fake.getOrganizationsAccessReportMutex.RUnlock()
+	argsForCall := fake.getOrganizationsAccessReportArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) GetOrganizationsAccessReportReturns(result1 *iam.GetOrganizationsAccessReportOutput, result2 error) {
+	fake.getOrganizationsAccessReportMutex.Lock()
+	defer fake.getOrganizationsAccessReportMutex.Unlock()
+	fake.GetOrganizationsAccessReportStub = nil
+	fake.getOrganizationsAccessReportReturns = struct {
+		result1 *iam.GetOrganizationsAccessReportOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) GetOrganizationsAccessReportReturnsOnCall(i int, result1 *iam.GetOrganizationsAccessReportOutput, result2 error) {
+	fake.getOrganizationsAccessReportMutex.Lock()
+	defer fake.getOrganizationsAccessReportMutex.Unlock()
+	fake.GetOrganizationsAccessReportStub = nil
+	if fake.getOrganizationsAccessReportReturnsOnCall == nil {
+		fake.getOrganizationsAccessReportReturnsOnCall = make(map[int]struct {
+			result1 *iam.GetOrganizationsAccessReportOutput
+			result2 error
+		})
+	}
+	fake.getOrganizationsAccessReportReturnsOnCall[i] = struct {
+		result1 *iam.GetOrganizationsAccessReportOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) GetOrganizationsAccessReportRequest(arg1 *iam.GetOrganizationsAccessReportInput) (*request.Request, *iam.GetOrganizationsAccessReportOutput) {
+	fake.getOrganizationsAccessReportRequestMutex.Lock()
+	ret, specificReturn := fake.getOrganizationsAccessReportRequestReturnsOnCall[len(fake.getOrganizationsAccessReportRequestArgsForCall)]
+	fake.getOrganizationsAccessReportRequestArgsForCall = append(fake.getOrganizationsAccessReportRequestArgsForCall, struct {
+		arg1 *iam.GetOrganizationsAccessReportInput
+	}{arg1})
+	fake.recordInvocation("GetOrganizationsAccessReportRequest", []interface{}{arg1})
+	fake.getOrganizationsAccessReportRequestMutex.Unlock()
+	if fake.GetOrganizationsAccessReportRequestStub != nil {
+		return fake.GetOrganizationsAccessReportRequestStub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	fakeReturns := fake.getOrganizationsAccessReportRequestReturns
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) GetOrganizationsAccessReportRequestCallCount() int {
+	fake.getOrganizationsAccessReportRequestMutex.RLock()
+	defer fake.getOrganizationsAccessReportRequestMutex.RUnlock()
+	return len(fake.getOrganizationsAccessReportRequestArgsForCall)
+}
+
+func (fake *FakeIAMAPI) GetOrganizationsAccessReportRequestCalls(stub func(*iam.GetOrganizationsAccessReportInput) (*request.Request, *iam.GetOrganizationsAccessReportOutput)) {
+	fake.getOrganizationsAccessReportRequestMutex.Lock()
+	defer fake.getOrganizationsAccessReportRequestMutex.Unlock()
+	fake.GetOrganizationsAccessReportRequestStub = stub
+}
+
+func (fake *FakeIAMAPI) GetOrganizationsAccessReportRequestArgsForCall(i int) *iam.GetOrganizationsAccessReportInput {
+	fake.getOrganizationsAccessReportRequestMutex.RLock()
+	defer fake.getOrganizationsAccessReportRequestMutex.RUnlock()
+	argsForCall := fake.getOrganizationsAccessReportRequestArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) GetOrganizationsAccessReportRequestReturns(result1 *request.Request, result2 *iam.GetOrganizationsAccessReportOutput) {
+	fake.getOrganizationsAccessReportRequestMutex.Lock()
+	defer fake.getOrganizationsAccessReportRequestMutex.Unlock()
+	fake.GetOrganizationsAccessReportRequestStub = nil
+	fake.getOrganizationsAccessReportRequestReturns = struct {
+		result1 *request.Request
+		result2 *iam.GetOrganizationsAccessReportOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) GetOrganizationsAccessReportRequestReturnsOnCall(i int, result1 *request.Request, result2 *iam.GetOrganizationsAccessReportOutput) {
+	fake.getOrganizationsAccessReportRequestMutex.Lock()
+	defer fake.getOrganizationsAccessReportRequestMutex.Unlock()
+	fake.GetOrganizationsAccessReportRequestStub = nil
+	if fake.getOrganizationsAccessReportRequestReturnsOnCall == nil {
+		fake.getOrganizationsAccessReportRequestReturnsOnCall = make(map[int]struct {
+			result1 *request.Request
+			result2 *iam.GetOrganizationsAccessReportOutput
+		})
+	}
+	fake.getOrganizationsAccessReportRequestReturnsOnCall[i] = struct {
+		result1 *request.Request
+		result2 *iam.GetOrganizationsAccessReportOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) GetOrganizationsAccessReportWithContext(arg1 context.Context, arg2 *iam.GetOrganizationsAccessReportInput, arg3 ...request.Option) (*iam.GetOrganizationsAccessReportOutput, error) {
+	fake.getOrganizationsAccessReportWithContextMutex.Lock()
+	ret, specificReturn := fake.getOrganizationsAccessReportWithContextReturnsOnCall[len(fake.getOrganizationsAccessReportWithContextArgsForCall)]
+	fake.getOrganizationsAccessReportWithContextArgsForCall = append(fake.getOrganizationsAccessReportWithContextArgsForCall, struct {
+		arg1 context.Context
+		arg2 *iam.GetOrganizationsAccessReportInput
+		arg3 []request.Option
+	}{arg1, arg2, arg3})
+	fake.recordInvocation("GetOrganizationsAccessReportWithContext", []interface{}{arg1, arg2, arg3})
+	fake.getOrganizationsAccessReportWithContextMutex.Unlock()
+	if fake.GetOrganizationsAccessReportWithContextStub != nil {
+		return fake.GetOrganizationsAccessReportWithContextStub(arg1, arg2, arg3...)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	fakeReturns := fake.getOrganizationsAccessReportWithContextReturns
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) GetOrganizationsAccessReportWithContextCallCount() int {
+	fake.getOrganizationsAccessReportWithContextMutex.RLock()
+	defer fake.getOrganizationsAccessReportWithContextMutex.RUnlock()
+	return len(fake.getOrganizationsAccessReportWithContextArgsForCall)
+}
+
+func (fake *FakeIAMAPI) GetOrganizationsAccessReportWithContextCalls(stub func(context.Context, *iam.GetOrganizationsAccessReportInput, ...request.Option) (*iam.GetOrganizationsAccessReportOutput, error)) {
+	fake.getOrganizationsAccessReportWithContextMutex.Lock()
+	defer fake.getOrganizationsAccessReportWithContextMutex.Unlock()
+	fake.GetOrganizationsAccessReportWithContextStub = stub
+}
+
+func (fake *FakeIAMAPI) GetOrganizationsAccessReportWithContextArgsForCall(i int) (context.Context, *iam.GetOrganizationsAccessReportInput, []request.Option) {
+	fake.getOrganizationsAccessReportWithContextMutex.RLock()
+	defer fake.getOrganizationsAccessReportWithContextMutex.RUnlock()
+	argsForCall := fake.getOrganizationsAccessReportWithContextArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3
+}
+
+func (fake *FakeIAMAPI) GetOrganizationsAccessReportWithContextReturns(result1 *iam.GetOrganizationsAccessReportOutput, result2 error) {
+	fake.getOrganizationsAccessReportWithContextMutex.Lock()
+	defer fake.getOrganizationsAccessReportWithContextMutex.Unlock()
+	fake.GetOrganizationsAccessReportWithContextStub = nil
+	fake.getOrganizationsAccessReportWithContextReturns = struct {
+		result1 *iam.GetOrganizationsAccessReportOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) GetOrganizationsAccessReportWithContextReturnsOnCall(i int, result1 *iam.GetOrganizationsAccessReportOutput, result2 error) {
+	fake.getOrganizationsAccessReportWithContextMutex.Lock()
+	defer fake.getOrganizationsAccessReportWithContextMutex.Unlock()
+	fake.GetOrganizationsAccessReportWithContextStub = nil
+	if fake.getOrganizationsAccessReportWithContextReturnsOnCall == nil {
+		fake.getOrganizationsAccessReportWithContextReturnsOnCall = make(map[int]struct {
+			result1 *iam.GetOrganizationsAccessReportOutput
+			result2 error
+		})
+	}
+	fake.getOrganizationsAccessReportWithContextReturnsOnCall[i] = struct {
+		result1 *iam.GetOrganizationsAccessReportOutput
 		result2 error
 	}{result1, result2}
 }
@@ -31106,6 +31659,197 @@ func (fake *FakeIAMAPI) SetDefaultPolicyVersionWithContextReturnsOnCall(i int, r
 	}{result1, result2}
 }
 
+func (fake *FakeIAMAPI) SetSecurityTokenServicePreferences(arg1 *iam.SetSecurityTokenServicePreferencesInput) (*iam.SetSecurityTokenServicePreferencesOutput, error) {
+	fake.setSecurityTokenServicePreferencesMutex.Lock()
+	ret, specificReturn := fake.setSecurityTokenServicePreferencesReturnsOnCall[len(fake.setSecurityTokenServicePreferencesArgsForCall)]
+	fake.setSecurityTokenServicePreferencesArgsForCall = append(fake.setSecurityTokenServicePreferencesArgsForCall, struct {
+		arg1 *iam.SetSecurityTokenServicePreferencesInput
+	}{arg1})
+	fake.recordInvocation("SetSecurityTokenServicePreferences", []interface{}{arg1})
+	fake.setSecurityTokenServicePreferencesMutex.Unlock()
+	if fake.SetSecurityTokenServicePreferencesStub != nil {
+		return fake.SetSecurityTokenServicePreferencesStub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	fakeReturns := fake.setSecurityTokenServicePreferencesReturns
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) SetSecurityTokenServicePreferencesCallCount() int {
+	fake.setSecurityTokenServicePreferencesMutex.RLock()
+	defer fake.setSecurityTokenServicePreferencesMutex.RUnlock()
+	return len(fake.setSecurityTokenServicePreferencesArgsForCall)
+}
+
+func (fake *FakeIAMAPI) SetSecurityTokenServicePreferencesCalls(stub func(*iam.SetSecurityTokenServicePreferencesInput) (*iam.SetSecurityTokenServicePreferencesOutput, error)) {
+	fake.setSecurityTokenServicePreferencesMutex.Lock()
+	defer fake.setSecurityTokenServicePreferencesMutex.Unlock()
+	fake.SetSecurityTokenServicePreferencesStub = stub
+}
+
+func (fake *FakeIAMAPI) SetSecurityTokenServicePreferencesArgsForCall(i int) *iam.SetSecurityTokenServicePreferencesInput {
+	fake.setSecurityTokenServicePreferencesMutex.RLock()
+	defer fake.setSecurityTokenServicePreferencesMutex.RUnlock()
+	argsForCall := fake.setSecurityTokenServicePreferencesArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) SetSecurityTokenServicePreferencesReturns(result1 *iam.SetSecurityTokenServicePreferencesOutput, result2 error) {
+	fake.setSecurityTokenServicePreferencesMutex.Lock()
+	defer fake.setSecurityTokenServicePreferencesMutex.Unlock()
+	fake.SetSecurityTokenServicePreferencesStub = nil
+	fake.setSecurityTokenServicePreferencesReturns = struct {
+		result1 *iam.SetSecurityTokenServicePreferencesOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) SetSecurityTokenServicePreferencesReturnsOnCall(i int, result1 *iam.SetSecurityTokenServicePreferencesOutput, result2 error) {
+	fake.setSecurityTokenServicePreferencesMutex.Lock()
+	defer fake.setSecurityTokenServicePreferencesMutex.Unlock()
+	fake.SetSecurityTokenServicePreferencesStub = nil
+	if fake.setSecurityTokenServicePreferencesReturnsOnCall == nil {
+		fake.setSecurityTokenServicePreferencesReturnsOnCall = make(map[int]struct {
+			result1 *iam.SetSecurityTokenServicePreferencesOutput
+			result2 error
+		})
+	}
+	fake.setSecurityTokenServicePreferencesReturnsOnCall[i] = struct {
+		result1 *iam.SetSecurityTokenServicePreferencesOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) SetSecurityTokenServicePreferencesRequest(arg1 *iam.SetSecurityTokenServicePreferencesInput) (*request.Request, *iam.SetSecurityTokenServicePreferencesOutput) {
+	fake.setSecurityTokenServicePreferencesRequestMutex.Lock()
+	ret, specificReturn := fake.setSecurityTokenServicePreferencesRequestReturnsOnCall[len(fake.setSecurityTokenServicePreferencesRequestArgsForCall)]
+	fake.setSecurityTokenServicePreferencesRequestArgsForCall = append(fake.setSecurityTokenServicePreferencesRequestArgsForCall, struct {
+		arg1 *iam.SetSecurityTokenServicePreferencesInput
+	}{arg1})
+	fake.recordInvocation("SetSecurityTokenServicePreferencesRequest", []interface{}{arg1})
+	fake.setSecurityTokenServicePreferencesRequestMutex.Unlock()
+	if fake.SetSecurityTokenServicePreferencesRequestStub != nil {
+		return fake.SetSecurityTokenServicePreferencesRequestStub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	fakeReturns := fake.setSecurityTokenServicePreferencesRequestReturns
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) SetSecurityTokenServicePreferencesRequestCallCount() int {
+	fake.setSecurityTokenServicePreferencesRequestMutex.RLock()
+	defer fake.setSecurityTokenServicePreferencesRequestMutex.RUnlock()
+	return len(fake.setSecurityTokenServicePreferencesRequestArgsForCall)
+}
+
+func (fake *FakeIAMAPI) SetSecurityTokenServicePreferencesRequestCalls(stub func(*iam.SetSecurityTokenServicePreferencesInput) (*request.Request, *iam.SetSecurityTokenServicePreferencesOutput)) {
+	fake.setSecurityTokenServicePreferencesRequestMutex.Lock()
+	defer fake.setSecurityTokenServicePreferencesRequestMutex.Unlock()
+	fake.SetSecurityTokenServicePreferencesRequestStub = stub
+}
+
+func (fake *FakeIAMAPI) SetSecurityTokenServicePreferencesRequestArgsForCall(i int) *iam.SetSecurityTokenServicePreferencesInput {
+	fake.setSecurityTokenServicePreferencesRequestMutex.RLock()
+	defer fake.setSecurityTokenServicePreferencesRequestMutex.RUnlock()
+	argsForCall := fake.setSecurityTokenServicePreferencesRequestArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) SetSecurityTokenServicePreferencesRequestReturns(result1 *request.Request, result2 *iam.SetSecurityTokenServicePreferencesOutput) {
+	fake.setSecurityTokenServicePreferencesRequestMutex.Lock()
+	defer fake.setSecurityTokenServicePreferencesRequestMutex.Unlock()
+	fake.SetSecurityTokenServicePreferencesRequestStub = nil
+	fake.setSecurityTokenServicePreferencesRequestReturns = struct {
+		result1 *request.Request
+		result2 *iam.SetSecurityTokenServicePreferencesOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) SetSecurityTokenServicePreferencesRequestReturnsOnCall(i int, result1 *request.Request, result2 *iam.SetSecurityTokenServicePreferencesOutput) {
+	fake.setSecurityTokenServicePreferencesRequestMutex.Lock()
+	defer fake.setSecurityTokenServicePreferencesRequestMutex.Unlock()
+	fake.SetSecurityTokenServicePreferencesRequestStub = nil
+	if fake.setSecurityTokenServicePreferencesRequestReturnsOnCall == nil {
+		fake.setSecurityTokenServicePreferencesRequestReturnsOnCall = make(map[int]struct {
+			result1 *request.Request
+			result2 *iam.SetSecurityTokenServicePreferencesOutput
+		})
+	}
+	fake.setSecurityTokenServicePreferencesRequestReturnsOnCall[i] = struct {
+		result1 *request.Request
+		result2 *iam.SetSecurityTokenServicePreferencesOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) SetSecurityTokenServicePreferencesWithContext(arg1 context.Context, arg2 *iam.SetSecurityTokenServicePreferencesInput, arg3 ...request.Option) (*iam.SetSecurityTokenServicePreferencesOutput, error) {
+	fake.setSecurityTokenServicePreferencesWithContextMutex.Lock()
+	ret, specificReturn := fake.setSecurityTokenServicePreferencesWithContextReturnsOnCall[len(fake.setSecurityTokenServicePreferencesWithContextArgsForCall)]
+	fake.setSecurityTokenServicePreferencesWithContextArgsForCall = append(fake.setSecurityTokenServicePreferencesWithContextArgsForCall, struct {
+		arg1 context.Context
+		arg2 *iam.SetSecurityTokenServicePreferencesInput
+		arg3 []request.Option
+	}{arg1, arg2, arg3})
+	fake.recordInvocation("SetSecurityTokenServicePreferencesWithContext", []interface{}{arg1, arg2, arg3})
+	fake.setSecurityTokenServicePreferencesWithContextMutex.Unlock()
+	if fake.SetSecurityTokenServicePreferencesWithContextStub != nil {
+		return fake.SetSecurityTokenServicePreferencesWithContextStub(arg1, arg2, arg3...)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	fakeReturns := fake.setSecurityTokenServicePreferencesWithContextReturns
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) SetSecurityTokenServicePreferencesWithContextCallCount() int {
+	fake.setSecurityTokenServicePreferencesWithContextMutex.RLock()
+	defer fake.setSecurityTokenServicePreferencesWithContextMutex.RUnlock()
+	return len(fake.setSecurityTokenServicePreferencesWithContextArgsForCall)
+}
+
+func (fake *FakeIAMAPI) SetSecurityTokenServicePreferencesWithContextCalls(stub func(context.Context, *iam.SetSecurityTokenServicePreferencesInput, ...request.Option) (*iam.SetSecurityTokenServicePreferencesOutput, error)) {
+	fake.setSecurityTokenServicePreferencesWithContextMutex.Lock()
+	defer fake.setSecurityTokenServicePreferencesWithContextMutex.Unlock()
+	fake.SetSecurityTokenServicePreferencesWithContextStub = stub
+}
+
+func (fake *FakeIAMAPI) SetSecurityTokenServicePreferencesWithContextArgsForCall(i int) (context.Context, *iam.SetSecurityTokenServicePreferencesInput, []request.Option) {
+	fake.setSecurityTokenServicePreferencesWithContextMutex.RLock()
+	defer fake.setSecurityTokenServicePreferencesWithContextMutex.RUnlock()
+	argsForCall := fake.setSecurityTokenServicePreferencesWithContextArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3
+}
+
+func (fake *FakeIAMAPI) SetSecurityTokenServicePreferencesWithContextReturns(result1 *iam.SetSecurityTokenServicePreferencesOutput, result2 error) {
+	fake.setSecurityTokenServicePreferencesWithContextMutex.Lock()
+	defer fake.setSecurityTokenServicePreferencesWithContextMutex.Unlock()
+	fake.SetSecurityTokenServicePreferencesWithContextStub = nil
+	fake.setSecurityTokenServicePreferencesWithContextReturns = struct {
+		result1 *iam.SetSecurityTokenServicePreferencesOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) SetSecurityTokenServicePreferencesWithContextReturnsOnCall(i int, result1 *iam.SetSecurityTokenServicePreferencesOutput, result2 error) {
+	fake.setSecurityTokenServicePreferencesWithContextMutex.Lock()
+	defer fake.setSecurityTokenServicePreferencesWithContextMutex.Unlock()
+	fake.SetSecurityTokenServicePreferencesWithContextStub = nil
+	if fake.setSecurityTokenServicePreferencesWithContextReturnsOnCall == nil {
+		fake.setSecurityTokenServicePreferencesWithContextReturnsOnCall = make(map[int]struct {
+			result1 *iam.SetSecurityTokenServicePreferencesOutput
+			result2 error
+		})
+	}
+	fake.setSecurityTokenServicePreferencesWithContextReturnsOnCall[i] = struct {
+		result1 *iam.SetSecurityTokenServicePreferencesOutput
+		result2 error
+	}{result1, result2}
+}
+
 func (fake *FakeIAMAPI) SimulateCustomPolicy(arg1 *iam.SimulateCustomPolicyInput) (*iam.SimulatePolicyResponse, error) {
 	fake.simulateCustomPolicyMutex.Lock()
 	ret, specificReturn := fake.simulateCustomPolicyReturnsOnCall[len(fake.simulateCustomPolicyArgsForCall)]
@@ -35869,6 +36613,250 @@ func (fake *FakeIAMAPI) WaitUntilInstanceProfileExistsWithContextReturnsOnCall(i
 	}{result1}
 }
 
+func (fake *FakeIAMAPI) WaitUntilPolicyExists(arg1 *iam.GetPolicyInput) error {
+	fake.waitUntilPolicyExistsMutex.Lock()
+	ret, specificReturn := fake.waitUntilPolicyExistsReturnsOnCall[len(fake.waitUntilPolicyExistsArgsForCall)]
+	fake.waitUntilPolicyExistsArgsForCall = append(fake.waitUntilPolicyExistsArgsForCall, struct {
+		arg1 *iam.GetPolicyInput
+	}{arg1})
+	fake.recordInvocation("WaitUntilPolicyExists", []interface{}{arg1})
+	fake.waitUntilPolicyExistsMutex.Unlock()
+	if fake.WaitUntilPolicyExistsStub != nil {
+		return fake.WaitUntilPolicyExistsStub(arg1)
+	}
+	if specificReturn {
+		return ret.result1
+	}
+	fakeReturns := fake.waitUntilPolicyExistsReturns
+	return fakeReturns.result1
+}
+
+func (fake *FakeIAMAPI) WaitUntilPolicyExistsCallCount() int {
+	fake.waitUntilPolicyExistsMutex.RLock()
+	defer fake.waitUntilPolicyExistsMutex.RUnlock()
+	return len(fake.waitUntilPolicyExistsArgsForCall)
+}
+
+func (fake *FakeIAMAPI) WaitUntilPolicyExistsCalls(stub func(*iam.GetPolicyInput) error) {
+	fake.waitUntilPolicyExistsMutex.Lock()
+	defer fake.waitUntilPolicyExistsMutex.Unlock()
+	fake.WaitUntilPolicyExistsStub = stub
+}
+
+func (fake *FakeIAMAPI) WaitUntilPolicyExistsArgsForCall(i int) *iam.GetPolicyInput {
+	fake.waitUntilPolicyExistsMutex.RLock()
+	defer fake.waitUntilPolicyExistsMutex.RUnlock()
+	argsForCall := fake.waitUntilPolicyExistsArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) WaitUntilPolicyExistsReturns(result1 error) {
+	fake.waitUntilPolicyExistsMutex.Lock()
+	defer fake.waitUntilPolicyExistsMutex.Unlock()
+	fake.WaitUntilPolicyExistsStub = nil
+	fake.waitUntilPolicyExistsReturns = struct {
+		result1 error
+	}{result1}
+}
+
+func (fake *FakeIAMAPI) WaitUntilPolicyExistsReturnsOnCall(i int, result1 error) {
+	fake.waitUntilPolicyExistsMutex.Lock()
+	defer fake.waitUntilPolicyExistsMutex.Unlock()
+	fake.WaitUntilPolicyExistsStub = nil
+	if fake.waitUntilPolicyExistsReturnsOnCall == nil {
+		fake.waitUntilPolicyExistsReturnsOnCall = make(map[int]struct {
+			result1 error
+		})
+	}
+	fake.waitUntilPolicyExistsReturnsOnCall[i] = struct {
+		result1 error
+	}{result1}
+}
+
+func (fake *FakeIAMAPI) WaitUntilPolicyExistsWithContext(arg1 context.Context, arg2 *iam.GetPolicyInput, arg3 ...request.WaiterOption) error {
+	fake.waitUntilPolicyExistsWithContextMutex.Lock()
+	ret, specificReturn := fake.waitUntilPolicyExistsWithContextReturnsOnCall[len(fake.waitUntilPolicyExistsWithContextArgsForCall)]
+	fake.waitUntilPolicyExistsWithContextArgsForCall = append(fake.waitUntilPolicyExistsWithContextArgsForCall, struct {
+		arg1 context.Context
+		arg2 *iam.GetPolicyInput
+		arg3 []request.WaiterOption
+	}{arg1, arg2, arg3})
+	fake.recordInvocation("WaitUntilPolicyExistsWithContext", []interface{}{arg1, arg2, arg3})
+	fake.waitUntilPolicyExistsWithContextMutex.Unlock()
+	if fake.WaitUntilPolicyExistsWithContextStub != nil {
+		return fake.WaitUntilPolicyExistsWithContextStub(arg1, arg2, arg3...)
+	}
+	if specificReturn {
+		return ret.result1
+	}
+	fakeReturns := fake.waitUntilPolicyExistsWithContextReturns
+	return fakeReturns.result1
+}
+
+func (fake *FakeIAMAPI) WaitUntilPolicyExistsWithContextCallCount() int {
+	fake.waitUntilPolicyExistsWithContextMutex.RLock()
+	defer fake.waitUntilPolicyExistsWithContextMutex.RUnlock()
+	return len(fake.waitUntilPolicyExistsWithContextArgsForCall)
+}
+
+func (fake *FakeIAMAPI) WaitUntilPolicyExistsWithContextCalls(stub func(context.Context, *iam.GetPolicyInput, ...request.WaiterOption) error) {
+	fake.waitUntilPolicyExistsWithContextMutex.Lock()
+	defer fake.waitUntilPolicyExistsWithContextMutex.Unlock()
+	fake.WaitUntilPolicyExistsWithContextStub = stub
+}
+
+func (fake *FakeIAMAPI) WaitUntilPolicyExistsWithContextArgsForCall(i int) (context.Context, *iam.GetPolicyInput, []request.WaiterOption) {
+	fake.waitUntilPolicyExistsWithContextMutex.RLock()
+	defer fake.waitUntilPolicyExistsWithContextMutex.RUnlock()
+	argsForCall := fake.waitUntilPolicyExistsWithContextArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3
+}
+
+func (fake *FakeIAMAPI) WaitUntilPolicyExistsWithContextReturns(result1 error) {
+	fake.waitUntilPolicyExistsWithContextMutex.Lock()
+	defer fake.waitUntilPolicyExistsWithContextMutex.Unlock()
+	fake.WaitUntilPolicyExistsWithContextStub = nil
+	fake.waitUntilPolicyExistsWithContextReturns = struct {
+		result1 error
+	}{result1}
+}
+
+func (fake *FakeIAMAPI) WaitUntilPolicyExistsWithContextReturnsOnCall(i int, result1 error) {
+	fake.waitUntilPolicyExistsWithContextMutex.Lock()
+	defer fake.waitUntilPolicyExistsWithContextMutex.Unlock()
+	fake.WaitUntilPolicyExistsWithContextStub = nil
+	if fake.waitUntilPolicyExistsWithContextReturnsOnCall == nil {
+		fake.waitUntilPolicyExistsWithContextReturnsOnCall = make(map[int]struct {
+			result1 error
+		})
+	}
+	fake.waitUntilPolicyExistsWithContextReturnsOnCall[i] = struct {
+		result1 error
+	}{result1}
+}
+
+func (fake *FakeIAMAPI) WaitUntilRoleExists(arg1 *iam.GetRoleInput) error {
+	fake.waitUntilRoleExistsMutex.Lock()
+	ret, specificReturn := fake.waitUntilRoleExistsReturnsOnCall[len(fake.waitUntilRoleExistsArgsForCall)]
+	fake.waitUntilRoleExistsArgsForCall = append(fake.waitUntilRoleExistsArgsForCall, struct {
+		arg1 *iam.GetRoleInput
+	}{arg1})
+	fake.recordInvocation("WaitUntilRoleExists", []interface{}{arg1})
+	fake.waitUntilRoleExistsMutex.Unlock()
+	if fake.WaitUntilRoleExistsStub != nil {
+		return fake.WaitUntilRoleExistsStub(arg1)
+	}
+	if specificReturn {
+		return ret.result1
+	}
+	fakeReturns := fake.waitUntilRoleExistsReturns
+	return fakeReturns.result1
+}
+
+func (fake *FakeIAMAPI) WaitUntilRoleExistsCallCount() int {
+	fake.waitUntilRoleExistsMutex.RLock()
+	defer fake.waitUntilRoleExistsMutex.RUnlock()
+	return len(fake.waitUntilRoleExistsArgsForCall)
+}
+
+func (fake *FakeIAMAPI) WaitUntilRoleExistsCalls(stub func(*iam.GetRoleInput) error) {
+	fake.waitUntilRoleExistsMutex.Lock()
+	defer fake.waitUntilRoleExistsMutex.Unlock()
+	fake.WaitUntilRoleExistsStub = stub
+}
+
+func (fake *FakeIAMAPI) WaitUntilRoleExistsArgsForCall(i int) *iam.GetRoleInput {
+	fake.waitUntilRoleExistsMutex.RLock()
+	defer fake.waitUntilRoleExistsMutex.RUnlock()
+	argsForCall := fake.waitUntilRoleExistsArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) WaitUntilRoleExistsReturns(result1 error) {
+	fake.waitUntilRoleExistsMutex.Lock()
+	defer fake.waitUntilRoleExistsMutex.Unlock()
+	fake.WaitUntilRoleExistsStub = nil
+	fake.waitUntilRoleExistsReturns = struct {
+		result1 error
+	}{result1}
+}
+
+func (fake *FakeIAMAPI) WaitUntilRoleExistsReturnsOnCall(i int, result1 error) {
+	fake.waitUntilRoleExistsMutex.Lock()
+	defer fake.waitUntilRoleExistsMutex.Unlock()
+	fake.WaitUntilRoleExistsStub = nil
+	if fake.waitUntilRoleExistsReturnsOnCall == nil {
+		fake.waitUntilRoleExistsReturnsOnCall = make(map[int]struct {
+			result1 error
+		})
+	}
+	fake.waitUntilRoleExistsReturnsOnCall[i] = struct {
+		result1 error
+	}{result1}
+}
+
+func (fake *FakeIAMAPI) WaitUntilRoleExistsWithContext(arg1 context.Context, arg2 *iam.GetRoleInput, arg3 ...request.WaiterOption) error {
+	fake.waitUntilRoleExistsWithContextMutex.Lock()
+	ret, specificReturn := fake.waitUntilRoleExistsWithContextReturnsOnCall[len(fake.waitUntilRoleExistsWithContextArgsForCall)]
+	fake.waitUntilRoleExistsWithContextArgsForCall = append(fake.waitUntilRoleExistsWithContextArgsForCall, struct {
+		arg1 context.Context
+		arg2 *iam.GetRoleInput
+		arg3 []request.WaiterOption
+	}{arg1, arg2, arg3})
+	fake.recordInvocation("WaitUntilRoleExistsWithContext", []interface{}{arg1, arg2, arg3})
+	fake.waitUntilRoleExistsWithContextMutex.Unlock()
+	if fake.WaitUntilRoleExistsWithContextStub != nil {
+		return fake.WaitUntilRoleExistsWithContextStub(arg1, arg2, arg3...)
+	}
+	if specificReturn {
+		return ret.result1
+	}
+	fakeReturns := fake.waitUntilRoleExistsWithContextReturns
+	return fakeReturns.result1
+}
+
+func (fake *FakeIAMAPI) WaitUntilRoleExistsWithContextCallCount() int {
+	fake.waitUntilRoleExistsWithContextMutex.RLock()
+	defer fake.waitUntilRoleExistsWithContextMutex.RUnlock()
+	return len(fake.waitUntilRoleExistsWithContextArgsForCall)
+}
+
+func (fake *FakeIAMAPI) WaitUntilRoleExistsWithContextCalls(stub func(context.Context, *iam.GetRoleInput, ...request.WaiterOption) error) {
+	fake.waitUntilRoleExistsWithContextMutex.Lock()
+	defer fake.waitUntilRoleExistsWithContextMutex.Unlock()
+	fake.WaitUntilRoleExistsWithContextStub = stub
+}
+
+func (fake *FakeIAMAPI) WaitUntilRoleExistsWithContextArgsForCall(i int) (context.Context, *iam.GetRoleInput, []request.WaiterOption) {
+	fake.waitUntilRoleExistsWithContextMutex.RLock()
+	defer fake.waitUntilRoleExistsWithContextMutex.RUnlock()
+	argsForCall := fake.waitUntilRoleExistsWithContextArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3
+}
+
+func (fake *FakeIAMAPI) WaitUntilRoleExistsWithContextReturns(result1 error) {
+	fake.waitUntilRoleExistsWithContextMutex.Lock()
+	defer fake.waitUntilRoleExistsWithContextMutex.Unlock()
+	fake.WaitUntilRoleExistsWithContextStub = nil
+	fake.waitUntilRoleExistsWithContextReturns = struct {
+		result1 error
+	}{result1}
+}
+
+func (fake *FakeIAMAPI) WaitUntilRoleExistsWithContextReturnsOnCall(i int, result1 error) {
+	fake.waitUntilRoleExistsWithContextMutex.Lock()
+	defer fake.waitUntilRoleExistsWithContextMutex.Unlock()
+	fake.WaitUntilRoleExistsWithContextStub = nil
+	if fake.waitUntilRoleExistsWithContextReturnsOnCall == nil {
+		fake.waitUntilRoleExistsWithContextReturnsOnCall = make(map[int]struct {
+			result1 error
+		})
+	}
+	fake.waitUntilRoleExistsWithContextReturnsOnCall[i] = struct {
+		result1 error
+	}{result1}
+}
+
 func (fake *FakeIAMAPI) WaitUntilUserExists(arg1 *iam.GetUserInput) error {
 	fake.waitUntilUserExistsMutex.Lock()
 	ret, specificReturn := fake.waitUntilUserExistsReturnsOnCall[len(fake.waitUntilUserExistsArgsForCall)]
@@ -36294,6 +37282,12 @@ func (fake *FakeIAMAPI) Invocations() map[string][][]interface{} {
 	defer fake.generateCredentialReportRequestMutex.RUnlock()
 	fake.generateCredentialReportWithContextMutex.RLock()
 	defer fake.generateCredentialReportWithContextMutex.RUnlock()
+	fake.generateOrganizationsAccessReportMutex.RLock()
+	defer fake.generateOrganizationsAccessReportMutex.RUnlock()
+	fake.generateOrganizationsAccessReportRequestMutex.RLock()
+	defer fake.generateOrganizationsAccessReportRequestMutex.RUnlock()
+	fake.generateOrganizationsAccessReportWithContextMutex.RLock()
+	defer fake.generateOrganizationsAccessReportWithContextMutex.RUnlock()
 	fake.generateServiceLastAccessedDetailsMutex.RLock()
 	defer fake.generateServiceLastAccessedDetailsMutex.RUnlock()
 	fake.generateServiceLastAccessedDetailsRequestMutex.RLock()
@@ -36380,6 +37374,12 @@ func (fake *FakeIAMAPI) Invocations() map[string][][]interface{} {
 	defer fake.getOpenIDConnectProviderRequestMutex.RUnlock()
 	fake.getOpenIDConnectProviderWithContextMutex.RLock()
 	defer fake.getOpenIDConnectProviderWithContextMutex.RUnlock()
+	fake.getOrganizationsAccessReportMutex.RLock()
+	defer fake.getOrganizationsAccessReportMutex.RUnlock()
+	fake.getOrganizationsAccessReportRequestMutex.RLock()
+	defer fake.getOrganizationsAccessReportRequestMutex.RUnlock()
+	fake.getOrganizationsAccessReportWithContextMutex.RLock()
+	defer fake.getOrganizationsAccessReportWithContextMutex.RUnlock()
 	fake.getPolicyMutex.RLock()
 	defer fake.getPolicyMutex.RUnlock()
 	fake.getPolicyRequestMutex.RLock()
@@ -36774,6 +37774,12 @@ func (fake *FakeIAMAPI) Invocations() map[string][][]interface{} {
 	defer fake.setDefaultPolicyVersionRequestMutex.RUnlock()
 	fake.setDefaultPolicyVersionWithContextMutex.RLock()
 	defer fake.setDefaultPolicyVersionWithContextMutex.RUnlock()
+	fake.setSecurityTokenServicePreferencesMutex.RLock()
+	defer fake.setSecurityTokenServicePreferencesMutex.RUnlock()
+	fake.setSecurityTokenServicePreferencesRequestMutex.RLock()
+	defer fake.setSecurityTokenServicePreferencesRequestMutex.RUnlock()
+	fake.setSecurityTokenServicePreferencesWithContextMutex.RLock()
+	defer fake.setSecurityTokenServicePreferencesWithContextMutex.RUnlock()
 	fake.simulateCustomPolicyMutex.RLock()
 	defer fake.simulateCustomPolicyMutex.RUnlock()
 	fake.simulateCustomPolicyPagesMutex.RLock()
@@ -36924,6 +37930,14 @@ func (fake *FakeIAMAPI) Invocations() map[string][][]interface{} {
 	defer fake.waitUntilInstanceProfileExistsMutex.RUnlock()
 	fake.waitUntilInstanceProfileExistsWithContextMutex.RLock()
 	defer fake.waitUntilInstanceProfileExistsWithContextMutex.RUnlock()
+	fake.waitUntilPolicyExistsMutex.RLock()
+	defer fake.waitUntilPolicyExistsMutex.RUnlock()
+	fake.waitUntilPolicyExistsWithContextMutex.RLock()
+	defer fake.waitUntilPolicyExistsWithContextMutex.RUnlock()
+	fake.waitUntilRoleExistsMutex.RLock()
+	defer fake.waitUntilRoleExistsMutex.RUnlock()
+	fake.waitUntilRoleExistsWithContextMutex.RLock()
+	defer fake.waitUntilRoleExistsWithContextMutex.RUnlock()
 	fake.waitUntilUserExistsMutex.RLock()
 	defer fake.waitUntilUserExistsMutex.RUnlock()
 	fake.waitUntilUserExistsWithContextMutex.RLock()

@@ -9,7 +9,6 @@ import (
 	"strings"
 
 	"code.cloudfoundry.org/lager"
-	locket "code.cloudfoundry.org/locket/models"
 	"github.com/alphagov/paas-s3-broker/s3/policy"
 	"github.com/alphagov/paas-service-broker-base/provider"
 	"github.com/aws/aws-sdk-go/aws"
@@ -18,13 +17,11 @@ import (
 	"github.com/aws/aws-sdk-go/service/iam/iamiface"
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/aws/aws-sdk-go/service/s3/s3iface"
-	uuid "github.com/satori/go.uuid"
 )
 
 const (
 	awsMaxWaitAttempts = 15
 	awsWaitDelay       = 3 * time.Second
-	locketMaxTTL       = 30
 )
 
 //go:generate counterfeiter -o fakes/fake_s3_client.go . Client
@@ -50,16 +47,6 @@ type Config struct {
 	DeployEnvironment      string `json:"deploy_env"`
 	IpRestrictionPolicyARN string `json:"iam_ip_restriction_policy_arn"`
 	Timeout                time.Duration
-	LocketAddress          string `json:"locket_address"`
-	LocketCACertFile       string `json:"locket_ca_cert_file"`
-	LocketClientCertFile   string `json:"locket_client_cert_file"`
-	LocketClientKeyFile    string `json:"locket_client_key_file"`
-}
-
-type BucketLock struct {
-	Bucket string
-	Key    string
-	Owner  string
 }
 
 func NewS3ClientConfig(configJSON []byte) (*Config, error) {
@@ -82,7 +69,6 @@ type S3Client struct {
 	s3Client               s3iface.S3API
 	iamClient              iamiface.IAMAPI
 	logger                 lager.Logger
-	locket                 locket.LocketClient
 	context                context.Context
 }
 
@@ -100,7 +86,6 @@ func NewS3Client(
 	s3Client s3iface.S3API,
 	iamClient iamiface.IAMAPI,
 	logger lager.Logger,
-	locket locket.LocketClient,
 	ctx context.Context,
 ) *S3Client {
 	timeout := config.Timeout
@@ -118,7 +103,6 @@ func NewS3Client(
 		s3Client:               s3Client,
 		iamClient:              iamClient,
 		logger:                 logger,
-		locket:                 locket,
 		context:                ctx,
 	}
 }
@@ -127,14 +111,8 @@ func (s *S3Client) CreateBucket(provisionData provider.ProvisionData) error {
 	logger := s.logger.Session("create-bucket")
 	bucketName := s.buildBucketName(provisionData.InstanceID)
 
-	lock, err := s.obtainBucketLock(bucketName, logger, s.context)
-	if err != nil {
-		return err
-	}
-	defer s.releaseBucketLock(lock, logger, s.context)
-
 	logger.Info("create-bucket", lager.Data{"bucket": bucketName})
-	_, err = s.s3Client.CreateBucket(&s3.CreateBucketInput{
+	_, err := s.s3Client.CreateBucket(&s3.CreateBucketInput{
 		Bucket: aws.String(bucketName),
 	})
 
@@ -258,15 +236,8 @@ func (s *S3Client) DeleteBucket(name string) error {
 	logger := s.logger.Session("delete-bucket")
 	fullBucketName := s.buildBucketName(name)
 
-	logger.Info("obtain-lock-on-bucket", lager.Data{"bucket": fullBucketName})
-	lock, err := s.obtainBucketLock(fullBucketName, logger, s.context)
-	if err != nil {
-		return err
-	}
-	defer s.releaseBucketLock(lock, logger, s.context)
-
 	logger.Info("delete-bucket", lager.Data{"bucket": fullBucketName})
-	_, err = s.s3Client.DeleteBucket(&s3.DeleteBucketInput{
+	_, err := s.s3Client.DeleteBucket(&s3.DeleteBucketInput{
 		Bucket: aws.String(fullBucketName),
 	})
 	return err
@@ -311,13 +282,6 @@ func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredential
 			Value: aws.String(s.deployEnvironment),
 		},
 	}
-
-	logger.Info("obtain-lock-on-bucket", lager.Data{"bucket": fullBucketName})
-	lock, err := s.obtainBucketLock(fullBucketName, logger, s.context)
-	if err != nil {
-		return BucketCredentials{}, err
-	}
-	defer s.releaseBucketLock(lock, logger, s.context)
 
 	user := &iam.CreateUserInput{
 		Path:     aws.String(s.iamUserPath),
@@ -505,98 +469,11 @@ func (s *S3Client) buildBindingUsername(bindingID string) string {
 	return fmt.Sprintf("%s%s", s.bucketPrefix, bindingID)
 }
 
-func (s *S3Client) obtainBucketLock(
-	bucketName string,
-	logger lager.Logger,
-	ctx context.Context,
-) (BucketLock, error) {
-	// A Locket owner is the unique identifier of who currently owns this lock
-	// Therefore each operation on the broker should be a unique owner
-	// We generate a new UUID V4 for this
-
-	lock := BucketLock{
-		Bucket: bucketName,
-		Key:    fmt.Sprintf("s3-broker/%s", bucketName),
-		Owner:  fmt.Sprintf("s3-broker/%s", uuid.NewV4().String()),
-	}
-
-	lsession := logger.Session("obtain-lock-on-bucket", lager.Data{
-		"bucket": bucketName, "lock": lock,
-	})
-
-	lsession.Info("begin")
-
-	var err error
-	for attempts := 0; attempts <= locketMaxTTL; attempts++ {
-		_, err = s.locket.Lock(
-			ctx,
-			&locket.LockRequest{
-				Resource: &locket.Resource{
-					Key:      lock.Key,
-					Owner:    lock.Owner,
-					TypeCode: locket.LOCK,
-				},
-				TtlInSeconds: int64(locketMaxTTL),
-			},
-		)
-
-		if err == nil {
-			break
-		}
-
-		// We should check for an acceptable error here, but in practice there are
-		// many errors from grpc/locket/sqldb we should just try 15 times
-
-		time.Sleep(1 * time.Second)
-	}
-
-	if err != nil {
-		lsession.Error("error", err)
-		return lock, err
-	}
-
-	lsession.Info("success")
-	return lock, nil
-}
-
-func (s *S3Client) releaseBucketLock(
-	lock BucketLock,
-	logger lager.Logger,
-	ctx context.Context,
-) {
-	lsession := logger.Session("release-lock-on-bucket", lager.Data{
-		"lock": lock,
-	})
-
-	lsession.Info("begin")
-
-	_, err := s.locket.Release(
-		ctx,
-		&locket.ReleaseRequest{
-			Resource: &locket.Resource{
-				Key:      lock.Key,
-				Owner:    lock.Owner,
-				TypeCode: locket.LOCK,
-			},
-		},
-	)
-
-	if err != nil {
-		lsession.Error("error", err)
-	}
-}
-
 func (s *S3Client) RemoveUserFromBucketAndDeleteUser(bindingID, bucketName string) error {
 	logger := s.logger.Session("remove-user-from-bucket")
 
 	username := s.buildBindingUsername(bindingID)
 	fullBucketName := s.buildBucketName(bucketName)
-
-	lock, err := s.obtainBucketLock(fullBucketName, logger, s.context)
-	if err != nil {
-		return err
-	}
-	defer s.releaseBucketLock(lock, logger, s.context)
 
 	logger.Info("get-bucket-policy", lager.Data{"bucket": fullBucketName})
 	getBucketPolicyOutput, err := s.s3Client.GetBucketPolicy(&s3.GetBucketPolicyInput{

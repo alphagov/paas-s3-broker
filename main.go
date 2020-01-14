@@ -12,8 +12,6 @@ import (
 	"net/http"
 
 	"code.cloudfoundry.org/lager"
-	"code.cloudfoundry.org/locket"
-	locket_models "code.cloudfoundry.org/locket/models"
 	"github.com/alphagov/paas-s3-broker/provider"
 	"github.com/alphagov/paas-s3-broker/s3"
 	"github.com/alphagov/paas-service-broker-base/broker"
@@ -53,20 +51,19 @@ func main() {
 	logger := lager.NewLogger("s3-service-broker")
 	logger.RegisterSink(lager.NewWriterSink(os.Stdout, config.API.LagerLogLevel))
 
-	locket, err := createLocketClient(logger, *s3ClientConfig)
-	if err != nil {
-		log.Fatalf("Error creating Locket client: %v\n", err)
-	}
-
 	sess := session.Must(session.NewSession(&aws.Config{Region: aws.String(s3ClientConfig.AWSRegion)}))
-	s3Client := s3.NewS3Client(s3ClientConfig, aws_s3.New(sess), iam.New(sess), logger, locket, context.Background())
+	s3Client := s3.NewS3Client(s3ClientConfig, aws_s3.New(sess), iam.New(sess), logger, context.Background())
 
 	s3Provider := provider.NewS3Provider(s3Client)
 	if err != nil {
 		log.Fatalf("Error creating S3 Provider: %v\n", err)
 	}
 
-	serviceBroker := broker.New(config, s3Provider, logger)
+	serviceBroker, err := broker.New(config, s3Provider, logger)
+	if err != nil {
+		log.Fatalf("Error creating service broker: %s", err)
+	}
+
 	brokerAPI := broker.NewAPI(serviceBroker, logger, config)
 
 	listener, err := net.Listen("tcp", ":"+config.API.Port)
@@ -75,17 +72,4 @@ func main() {
 	}
 	fmt.Println("S3 Service Broker started on port " + config.API.Port + "...")
 	http.Serve(listener, brokerAPI)
-}
-
-func createLocketClient(logger lager.Logger, config s3.Config) (locket_models.LocketClient, error) {
-	loggerSess := logger.Session("locket-client")
-
-	locketConfig := locket.ClientLocketConfig{
-		LocketAddress:        config.LocketAddress,
-		LocketCACertFile:     config.LocketCACertFile,
-		LocketClientCertFile: config.LocketClientCertFile,
-		LocketClientKeyFile:  config.LocketClientKeyFile,
-	}
-
-	return locket.NewClient(loggerSess, locketConfig)
 }
