@@ -8,7 +8,7 @@ require (
 	github.com/olekukonko/tablewriter v0.0.4
 	github.com/onsi/ginkgo v1.8.0
 	github.com/onsi/gomega v1.5.0
-	github.com/pivotal-cf/brokerapi v4.3.0+incompatible
+	github.com/pivotal-cf/brokerapi v6.4.2+incompatible
 	github.com/satori/go.uuid v1.2.0
 )
 
