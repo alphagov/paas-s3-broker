@@ -89,6 +89,8 @@ github.com/golang/protobuf/ptypes/any
 github.com/golang/protobuf/ptypes/duration
 github.com/golang/protobuf/ptypes/struct
 github.com/golang/protobuf/ptypes/timestamp
+# github.com/google/uuid v1.1.1
+github.com/google/uuid
 # github.com/gorilla/mux v1.7.1
 github.com/gorilla/mux
 # github.com/hashicorp/consul/api v1.3.0
@@ -153,9 +155,11 @@ github.com/onsi/gomega/matchers/support/goraph/edge
 github.com/onsi/gomega/matchers/support/goraph/node
 github.com/onsi/gomega/matchers/support/goraph/util
 github.com/onsi/gomega/types
+# github.com/pborman/uuid v1.2.0
+github.com/pborman/uuid
 # github.com/phayes/freeport v0.0.0-20180830031419-95f893ade6f2
 github.com/phayes/freeport
-# github.com/pivotal-cf/brokerapi v4.3.0+incompatible
+# github.com/pivotal-cf/brokerapi v6.4.2+incompatible
 github.com/pivotal-cf/brokerapi
 github.com/pivotal-cf/brokerapi/auth
 github.com/pivotal-cf/brokerapi/domain
