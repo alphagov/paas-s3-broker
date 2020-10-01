@@ -387,7 +387,13 @@ func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredential
 					"secret_access_key": *createAccessKeyOutput.AccessKey.SecretAccessKey,
 					"bucket":            fullBucketName,
 					"region":            s.awsRegion,
-					"mount_options":     map[string]interface{}{},
+					"mount_options": map[string]interface{}{
+						"_netdev":     "",
+						"--file-mode": "0666",
+						"--dir-mode":  "0777",
+						"--uid":       "2000",
+						"--gid":       "2000",
+					},
 				},
 			},
 		})
