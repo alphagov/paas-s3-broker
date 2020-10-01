@@ -8,6 +8,7 @@ import (
 	"github.com/alphagov/paas-s3-broker/s3"
 	provideriface "github.com/alphagov/paas-service-broker-base/provider"
 	"github.com/pivotal-cf/brokerapi"
+	"github.com/pivotal-cf/brokerapi/domain"
 )
 
 type S3Provider struct {
@@ -41,27 +42,27 @@ func (s *S3Provider) Deprovision(ctx context.Context, deprovisionData providerif
 }
 
 func (s *S3Provider) Bind(ctx context.Context, bindData provideriface.BindData) (
-	binding brokerapi.Binding, err error) {
+	binding domain.Binding, err error) {
 
 	bucketCredentials, err := s.client.AddUserToBucket(bindData)
 	if err != nil {
-		return brokerapi.Binding{}, err
+		return domain.Binding{}, err
 	}
 
-	return brokerapi.Binding{
+	return domain.Binding{
 		IsAsync:     false,
 		Credentials: bucketCredentials,
 	}, nil
 }
 
 func (s *S3Provider) Unbind(ctx context.Context, unbindData provideriface.UnbindData) (
-	unbinding brokerapi.UnbindSpec, err error) {
+	unbinding domain.UnbindSpec, err error) {
 
 	err = s.client.RemoveUserFromBucketAndDeleteUser(unbindData.BindingID, unbindData.InstanceID)
 	if err != nil {
-		return brokerapi.UnbindSpec{}, err
+		return domain.UnbindSpec{}, err
 	}
-	return brokerapi.UnbindSpec{
+	return domain.UnbindSpec{
 		IsAsync: false,
 	}, nil
 }
@@ -74,6 +75,6 @@ func (s *S3Provider) Update(ctx context.Context, updateData provideriface.Update
 }
 
 func (s *S3Provider) LastOperation(ctx context.Context, lastOperationData provideriface.LastOperationData) (
-	state brokerapi.LastOperationState, description string, err error) {
-	return brokerapi.Succeeded, "Last operation polling not required. All operations are synchronous.", nil
+	state domain.LastOperationState, description string, err error) {
+	return domain.Succeeded, "Last operation polling not required. All operations are synchronous.", nil
 }
