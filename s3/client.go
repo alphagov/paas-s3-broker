@@ -17,6 +17,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/iam/iamiface"
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/aws/aws-sdk-go/service/s3/s3iface"
+	"github.com/pivotal-cf/brokerapi/domain"
 )
 
 const (
@@ -28,7 +29,7 @@ const (
 type Client interface {
 	CreateBucket(provisionData provider.ProvisionData) error
 	DeleteBucket(name string) error
-	AddUserToBucket(bindData provider.BindData) (BucketCredentials, error)
+	AddUserToBucket(bindData provider.BindData) (BucketCredentials, []domain.VolumeMount, error)
 	RemoveUserFromBucketAndDeleteUser(bindingID, bucketName string) error
 }
 
@@ -75,6 +76,7 @@ type S3Client struct {
 type BindParams struct {
 	Permissions         string `json:"permissions"`
 	AllowExternalAccess bool   `json:"allow_external_access"`
+	MountDir            string `json:"mount_dir"`
 }
 
 type ProvisionParams struct {
@@ -243,7 +245,7 @@ func (s *S3Client) DeleteBucket(name string) error {
 	return err
 }
 
-func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredentials, error) {
+func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredentials, []domain.VolumeMount, error) {
 	logger := s.logger.Session("add-user-to-bucket")
 	var permissions policy.Permissions = policy.ReadWritePermissions{}
 
@@ -256,13 +258,13 @@ func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredential
 		err := json.Unmarshal(bindData.Details.RawParameters, &bindParams)
 		if err != nil {
 			logger.Error("parse-raw-params", err)
-			return BucketCredentials{}, err
+			return BucketCredentials{}, nil, err
 		}
 
 		permissions, err = policy.ValidatePermissions(bindParams.Permissions)
 		if err != nil {
 			logger.Error("invalid-permissions", err)
-			return BucketCredentials{}, err
+			return BucketCredentials{}, nil, err
 		}
 	}
 
@@ -292,7 +294,7 @@ func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredential
 	createUserOutput, err := s.iamClient.CreateUser(user)
 	if err != nil {
 		logger.Error("create-user", err)
-		return BucketCredentials{}, err
+		return BucketCredentials{}, nil, err
 	}
 
 	err = s.iamClient.WaitUntilUserExistsWithContext(
@@ -305,7 +307,7 @@ func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredential
 
 	if err != nil {
 		logger.Error("wait-for-user-exist", err)
-		return BucketCredentials{}, err
+		return BucketCredentials{}, nil, err
 	}
 
 	if !bindParams.AllowExternalAccess {
@@ -317,7 +319,7 @@ func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredential
 		if err != nil {
 			logger.Error("allow-external-access", err)
 			s.deleteUserWithoutError(username)
-			return BucketCredentials{}, err
+			return BucketCredentials{}, nil, err
 		}
 	}
 
@@ -328,7 +330,7 @@ func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredential
 	if err != nil {
 		logger.Error("create-access-key", err)
 		s.deleteUserWithoutError(username)
-		return BucketCredentials{}, err
+		return BucketCredentials{}, nil, err
 	}
 
 	logger.Info("get-bucket-policy", lager.Data{"bucket": fullBucketName})
@@ -340,7 +342,7 @@ func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredential
 		if !strings.Contains(err.Error(), "NoSuchBucketPolicy: The bucket policy does not exist") {
 			logger.Error("get-bucket-policy", err)
 			s.deleteUserWithoutError(username)
-			return BucketCredentials{}, err
+			return BucketCredentials{}, nil, err
 		}
 	} else {
 		currentBucketPolicy = *getBucketPolicyOutput.Policy
@@ -352,21 +354,43 @@ func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredential
 	updatedBucketPolicy, err := policy.BuildPolicy(currentBucketPolicy, stmt)
 	if err != nil {
 		s.deleteUserWithoutError(username)
-		return BucketCredentials{}, err
+		return BucketCredentials{}, nil, err
 	}
 
 	updatedPolicyJSON, err := json.Marshal(updatedBucketPolicy)
 	if err != nil {
 		logger.Error("update-bucket-policy", err)
 		s.deleteUserWithoutError(username)
-		return BucketCredentials{}, err
+		return BucketCredentials{}, nil, err
 	}
 
 	err = s.putBucketPolicyWithTimeout(fullBucketName, string(updatedPolicyJSON))
 	if err != nil {
 		logger.Error("update-bucket-policy", err)
 		s.deleteUserWithoutError(username)
-		return BucketCredentials{}, err
+		return BucketCredentials{}, nil, err
+	}
+
+	// if a mount dir was specified then lets setup a volume mount config
+	volumeMounts := []domain.VolumeMount{}
+	if bindParams.MountDir != "" {
+		volumeMounts = append(volumeMounts, domain.VolumeMount{
+			Driver:       "s3driver",
+			ContainerDir: bindParams.MountDir,
+			Mode:         "rw",
+			DeviceType:   "shared",
+			Device: domain.SharedDevice{
+				VolumeId: bindData.InstanceID,
+				MountConfig: map[string]interface{}{
+					// "endpoint":          "https://my-s3-server.com", // optional
+					"access_key_id":     *createAccessKeyOutput.AccessKey.AccessKeyId,
+					"secret_access_key": *createAccessKeyOutput.AccessKey.SecretAccessKey,
+					"bucket":            fullBucketName,
+					"region":            s.awsRegion,
+					"mount_options":     map[string]interface{}{},
+				},
+			},
+		})
 	}
 
 	return BucketCredentials{
@@ -374,7 +398,7 @@ func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredential
 		AWSAccessKeyID:     *createAccessKeyOutput.AccessKey.AccessKeyId,
 		AWSSecretAccessKey: *createAccessKeyOutput.AccessKey.SecretAccessKey,
 		AWSRegion:          s.awsRegion,
-	}, nil
+	}, volumeMounts, nil
 }
 
 func (s *S3Client) putBucketPolicyWithTimeout(fullBucketName, updatedPolicyJSON string) error {

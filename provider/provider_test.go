@@ -2,6 +2,7 @@ package provider_test
 
 import (
 	"encoding/json"
+
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 
@@ -99,7 +100,7 @@ var _ = Describe("Provider", func() {
 				AWSSecretAccessKey: "aws-secret-access-key",
 				AWSRegion:          region,
 			}
-			fakeS3Client.AddUserToBucketReturns(returnedBucketCredentials, nil)
+			fakeS3Client.AddUserToBucketReturns(returnedBucketCredentials, nil, nil)
 
 			binding, err := s3Provider.Bind(context.Background(), bindData)
 			Expect(err).NotTo(HaveOccurred())
@@ -112,7 +113,7 @@ var _ = Describe("Provider", func() {
 		It("errors when adding the user errors", func() {
 			bindData := provideriface.BindData{}
 			errAddingUser := errors.New("error-adding-user")
-			fakeS3Client.AddUserToBucketReturns(s3.BucketCredentials{}, errAddingUser)
+			fakeS3Client.AddUserToBucketReturns(s3.BucketCredentials{}, nil, errAddingUser)
 
 			_, err := s3Provider.Bind(context.Background(), bindData)
 			Expect(err).To(MatchError(errAddingUser))

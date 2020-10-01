@@ -44,14 +44,15 @@ func (s *S3Provider) Deprovision(ctx context.Context, deprovisionData providerif
 func (s *S3Provider) Bind(ctx context.Context, bindData provideriface.BindData) (
 	binding domain.Binding, err error) {
 
-	bucketCredentials, err := s.client.AddUserToBucket(bindData)
+	bucketCredentials, volumeMounts, err := s.client.AddUserToBucket(bindData)
 	if err != nil {
 		return domain.Binding{}, err
 	}
 
 	return domain.Binding{
-		IsAsync:     false,
-		Credentials: bucketCredentials,
+		IsAsync:      false,
+		Credentials:  bucketCredentials,
+		VolumeMounts: volumeMounts,
 	}, nil
 }
 

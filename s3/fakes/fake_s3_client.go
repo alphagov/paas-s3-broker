@@ -6,21 +6,24 @@ import (
 
 	"github.com/alphagov/paas-s3-broker/s3"
 	"github.com/alphagov/paas-service-broker-base/provider"
+	"github.com/pivotal-cf/brokerapi/domain"
 )
 
 type FakeClient struct {
-	AddUserToBucketStub        func(provider.BindData) (s3.BucketCredentials, error)
+	AddUserToBucketStub        func(provider.BindData) (s3.BucketCredentials, []domain.VolumeMount, error)
 	addUserToBucketMutex       sync.RWMutex
 	addUserToBucketArgsForCall []struct {
 		arg1 provider.BindData
 	}
 	addUserToBucketReturns struct {
 		result1 s3.BucketCredentials
-		result2 error
+		result2 []domain.VolumeMount
+		result3 error
 	}
 	addUserToBucketReturnsOnCall map[int]struct {
 		result1 s3.BucketCredentials
-		result2 error
+		result2 []domain.VolumeMount
+		result3 error
 	}
 	CreateBucketStub        func(provider.ProvisionData) error
 	createBucketMutex       sync.RWMutex
@@ -60,7 +63,7 @@ type FakeClient struct {
 	invocationsMutex sync.RWMutex
 }
 
-func (fake *FakeClient) AddUserToBucket(arg1 provider.BindData) (s3.BucketCredentials, error) {
+func (fake *FakeClient) AddUserToBucket(arg1 provider.BindData) (s3.BucketCredentials, []domain.VolumeMount, error) {
 	fake.addUserToBucketMutex.Lock()
 	ret, specificReturn := fake.addUserToBucketReturnsOnCall[len(fake.addUserToBucketArgsForCall)]
 	fake.addUserToBucketArgsForCall = append(fake.addUserToBucketArgsForCall, struct {
@@ -72,10 +75,10 @@ func (fake *FakeClient) AddUserToBucket(arg1 provider.BindData) (s3.BucketCreden
 		return fake.AddUserToBucketStub(arg1)
 	}
 	if specificReturn {
-		return ret.result1, ret.result2
+		return ret.result1, ret.result2, ret.result3
 	}
 	fakeReturns := fake.addUserToBucketReturns
-	return fakeReturns.result1, fakeReturns.result2
+	return fakeReturns.result1, fakeReturns.result2, fakeReturns.result3
 }
 
 func (fake *FakeClient) AddUserToBucketCallCount() int {
@@ -84,7 +87,7 @@ func (fake *FakeClient) AddUserToBucketCallCount() int {
 	return len(fake.addUserToBucketArgsForCall)
 }
 
-func (fake *FakeClient) AddUserToBucketCalls(stub func(provider.BindData) (s3.BucketCredentials, error)) {
+func (fake *FakeClient) AddUserToBucketCalls(stub func(provider.BindData) (s3.BucketCredentials, []domain.VolumeMount, error)) {
 	fake.addUserToBucketMutex.Lock()
 	defer fake.addUserToBucketMutex.Unlock()
 	fake.AddUserToBucketStub = stub
@@ -97,30 +100,33 @@ func (fake *FakeClient) AddUserToBucketArgsForCall(i int) provider.BindData {
 	return argsForCall.arg1
 }
 
-func (fake *FakeClient) AddUserToBucketReturns(result1 s3.BucketCredentials, result2 error) {
+func (fake *FakeClient) AddUserToBucketReturns(result1 s3.BucketCredentials, result2 []domain.VolumeMount, result3 error) {
 	fake.addUserToBucketMutex.Lock()
 	defer fake.addUserToBucketMutex.Unlock()
 	fake.AddUserToBucketStub = nil
 	fake.addUserToBucketReturns = struct {
 		result1 s3.BucketCredentials
-		result2 error
-	}{result1, result2}
+		result2 []domain.VolumeMount
+		result3 error
+	}{result1, result2, result3}
 }
 
-func (fake *FakeClient) AddUserToBucketReturnsOnCall(i int, result1 s3.BucketCredentials, result2 error) {
+func (fake *FakeClient) AddUserToBucketReturnsOnCall(i int, result1 s3.BucketCredentials, result2 []domain.VolumeMount, result3 error) {
 	fake.addUserToBucketMutex.Lock()
 	defer fake.addUserToBucketMutex.Unlock()
 	fake.AddUserToBucketStub = nil
 	if fake.addUserToBucketReturnsOnCall == nil {
 		fake.addUserToBucketReturnsOnCall = make(map[int]struct {
 			result1 s3.BucketCredentials
-			result2 error
+			result2 []domain.VolumeMount
+			result3 error
 		})
 	}
 	fake.addUserToBucketReturnsOnCall[i] = struct {
 		result1 s3.BucketCredentials
-		result2 error
-	}{result1, result2}
+		result2 []domain.VolumeMount
+		result3 error
+	}{result1, result2, result3}
 }
 
 func (fake *FakeClient) CreateBucket(arg1 provider.ProvisionData) error {

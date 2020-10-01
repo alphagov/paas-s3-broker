@@ -9,6 +9,7 @@ import (
 
 	"github.com/alphagov/paas-s3-broker/s3/policy"
 	"github.com/pivotal-cf/brokerapi"
+	"github.com/pivotal-cf/brokerapi/domain"
 
 	"code.cloudfoundry.org/lager"
 	"github.com/alphagov/paas-s3-broker/s3"
@@ -177,7 +178,7 @@ var _ = Describe("Client", func() {
 				InstanceID: "test-instance-id",
 				BindingID:  "test-binding-id",
 			}
-			bucketCredentials, err := s3Client.AddUserToBucket(bindData)
+			bucketCredentials, _, err := s3Client.AddUserToBucket(bindData)
 			Expect(err).NotTo(HaveOccurred())
 
 			By("creating a user")
@@ -221,7 +222,7 @@ var _ = Describe("Client", func() {
 				},
 			}
 
-			_, err := s3Client.AddUserToBucket(bindData)
+			_, _, err := s3Client.AddUserToBucket(bindData)
 			Expect(err).To(HaveOccurred())
 		})
 
@@ -233,7 +234,7 @@ var _ = Describe("Client", func() {
 					RawParameters: json.RawMessage(`{"permissions": "read-only"}`),
 				},
 			}
-			bucketCredentials, err := s3Client.AddUserToBucket(bindData)
+			bucketCredentials, _, err := s3Client.AddUserToBucket(bindData)
 			Expect(err).NotTo(HaveOccurred())
 
 			By("creating a user")
@@ -291,7 +292,7 @@ var _ = Describe("Client", func() {
 					RawParameters: json.RawMessage(`{"permissions": "invalid-perms"}`),
 				},
 			}
-			_, err := s3Client.AddUserToBucket(bindData)
+			_, _, err := s3Client.AddUserToBucket(bindData)
 			Expect(err).To(HaveOccurred())
 		})
 
@@ -303,7 +304,7 @@ var _ = Describe("Client", func() {
 					InstanceID: "test-instance-id",
 					BindingID:  "test-binding-id",
 				}
-				_, err := s3Client.AddUserToBucket(bindData)
+				_, _, err := s3Client.AddUserToBucket(bindData)
 				Expect(iamAPI.AttachUserPolicyCallCount()).To(Equal(1))
 				Expect(err).To(HaveOccurred())
 				Expect(err).To(Equal(expectedError))
@@ -372,7 +373,7 @@ var _ = Describe("Client", func() {
 					InstanceID: "test-instance-id",
 					BindingID:  "test-binding-id",
 				}
-				_, err := s3Client.AddUserToBucket(bindData)
+				_, _, err := s3Client.AddUserToBucket(bindData)
 				Expect(err).To(HaveOccurred())
 				Expect(iamAPI.DeleteUserCallCount()).To(Equal(1))
 			})
@@ -398,7 +399,7 @@ var _ = Describe("Client", func() {
 					InstanceID: "test-instance-id",
 					BindingID:  "test-binding-id",
 				}
-				bucketCredentials, err := s3Client.AddUserToBucket(bindData)
+				bucketCredentials, _, err := s3Client.AddUserToBucket(bindData)
 				Expect(err).NotTo(HaveOccurred())
 				Expect(bucketCredentials).To(Equal(s3.BucketCredentials{
 					BucketName:         s3ClientConfig.ResourcePrefix + bindData.InstanceID,
@@ -433,7 +434,7 @@ var _ = Describe("Client", func() {
 					InstanceID: "test-instance-id",
 					BindingID:  "test-binding-id",
 				}
-				_, err := s3Client.AddUserToBucket(bindData)
+				_, _, err := s3Client.AddUserToBucket(bindData)
 				Expect(err).To(HaveOccurred())
 				Expect(iamAPI.DeleteUserCallCount()).To(Equal(1))
 				Expect(iamAPI.DeleteAccessKeyCallCount()).To(Equal(1))
@@ -464,10 +465,54 @@ var _ = Describe("Client", func() {
 					InstanceID: "test-instance-id",
 					BindingID:  "test-binding-id",
 				}
-				_, err := s3Client.AddUserToBucket(bindData)
+				_, _, err := s3Client.AddUserToBucket(bindData)
 				Expect(err).To(HaveOccurred())
 				Expect(iamAPI.DeleteUserCallCount()).To(Equal(1))
 				Expect(iamAPI.DeleteAccessKeyCallCount()).To(Equal(1))
+			})
+		})
+
+		Context("when a mount_dir is not specified", func() {
+			It("should not return any volume mount configs", func() {
+				bindData := provider.BindData{
+					InstanceID: "test-instance-id",
+					BindingID:  "test-binding-id",
+				}
+				_, volumeMounts, err := s3Client.AddUserToBucket(bindData)
+				Expect(err).ToNot(HaveOccurred())
+				Expect(volumeMounts).To(BeEmpty())
+			})
+		})
+
+		Context("when a mount_dir is specified", func() {
+			It("returns a valid volume_mount config for s3driver", func() {
+				bindData := provider.BindData{
+					InstanceID: "test-instance-id",
+					BindingID:  "test-binding-id",
+					Details: brokerapi.BindDetails{
+						RawParameters: json.RawMessage(`{"mount_dir": "/my/mnt/path"}`),
+					},
+				}
+				_, volumeMounts, err := s3Client.AddUserToBucket(bindData)
+				Expect(err).ToNot(HaveOccurred())
+				Expect(volumeMounts).To(Equal([]domain.VolumeMount{
+					{
+						Driver:       "s3driver",
+						ContainerDir: "/my/mnt/path",
+						Mode:         "rw",
+						DeviceType:   "shared",
+						Device: domain.SharedDevice{
+							VolumeId: "test-instance-id",
+							MountConfig: map[string]interface{}{
+								"access_key_id":     "access-key-id",
+								"secret_access_key": "secret-access-key",
+								"bucket":            "test-bucket-prefix-test-instance-id",
+								"region":            "eu-west-2",
+								"mount_options":     map[string]interface{}{},
+							},
+						},
+					},
+				}))
 			})
 		})
 	})
