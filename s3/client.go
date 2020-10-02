@@ -377,7 +377,7 @@ func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredential
 		volumeMounts = append(volumeMounts, domain.VolumeMount{
 			Driver:       "s3driver",
 			ContainerDir: bindParams.MountDir,
-			Mode:         "rw",
+			Mode:         mountMode(permissions),
 			DeviceType:   "shared",
 			Device: domain.SharedDevice{
 				VolumeId: bindData.InstanceID,
@@ -387,13 +387,7 @@ func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredential
 					"secret_access_key": *createAccessKeyOutput.AccessKey.SecretAccessKey,
 					"bucket":            fullBucketName,
 					"region":            s.awsRegion,
-					"mount_options": map[string]interface{}{
-						"_netdev":     "",
-						"--file-mode": "0666",
-						"--dir-mode":  "0777",
-						"--uid":       "2000",
-						"--gid":       "2000",
-					},
+					"mount_options":     map[string]interface{}{},
 				},
 			},
 		})
@@ -554,4 +548,13 @@ func (s *S3Client) RemoveUserFromBucketAndDeleteUser(bindingID, bucketName strin
 	}
 
 	return nil
+}
+
+func mountMode(perms policy.Permissions) string {
+	switch perms.(type) {
+	case policy.ReadOnlyPermissions:
+		return "ro"
+	default:
+		return "rw"
+	}
 }
