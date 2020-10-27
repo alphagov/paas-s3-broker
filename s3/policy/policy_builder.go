@@ -54,11 +54,11 @@ func RemoveUserFromPolicy(existingPolicy string, userArnSuffix string) (PolicyDo
 		}
 	}
 
-	if len(maintainedStatements) == len(policyDoc.Statement) {
-		return PolicyDocument{}, fmt.Errorf("could not find a policy statement for user %s", userArnSuffix)
-	}
-
+	statementsCount := len(policyDoc.Statement)
 	policyDoc.Statement = maintainedStatements
+	if len(maintainedStatements) == statementsCount {
+		return policyDoc, fmt.Errorf("could not find a policy statement for user %s", userArnSuffix)
+	}
 
 	return policyDoc, nil
 }
