@@ -552,7 +552,10 @@ var _ = Describe("Client", func() {
 									"arn:aws:s3:::gds-paas-s3-broker-bucketName/*"
 								],
 								"Principal": {
-									"AWS": "some-arn"
+									"AWS": [
+										"some-arn",
+										"some-other-arn"
+									]
 								}
 							}
 						]
