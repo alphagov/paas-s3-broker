@@ -488,7 +488,10 @@ func (s *S3Client) RemoveUserFromBucketAndDeleteUser(bindingID, bucketName strin
 	updatedPolicy, err := policy.RemoveUserFromPolicy(*getBucketPolicyOutput.Policy, username)
 	if err != nil {
 		logger.Error("remove-user-from-policy", err)
-		return err
+
+		if !strings.Contains(err.Error(), "could not find a policy statement for user") {
+			return err
+		}
 	}
 
 	logger.Info("policy-statements", lager.Data{"bucket": fullBucketName, "count": len(updatedPolicy.Statement)})
