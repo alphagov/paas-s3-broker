@@ -105,7 +105,7 @@ func createLocalhostPolicy(iamClient iamiface.IAMAPI) *iam.CreatePolicyOutput {
 	return createDefaultIAMPolicyOutput
 }
 func createEgressIPPolicy(iamClient *iam.IAM) *iam.CreatePolicyOutput {
-	resp, err := http.Get("https://canihazip.com/s")
+	resp, err := http.Get("https://wtfismyip.com/text")
 	Expect(err).ToNot(HaveOccurred())
 	Expect(resp.StatusCode).To(Equal(http.StatusOK))
 
