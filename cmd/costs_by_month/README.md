@@ -20,8 +20,8 @@ go build -o costs_by_month
    service instances exist;
 3. ```
    ./costs_by_month \
-     --cf-api-url https://api.cloud.service.gov.uk \
-     --cf-api-token "$(cf oauth-token)"
+     --cf-api-token "$(cf oauth-token)" \
+     --cf-api-url https://api.london.cloud.service.gov.uk
    ```
 
 That should output something like:

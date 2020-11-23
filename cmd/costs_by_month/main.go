@@ -26,6 +26,8 @@ func main() {
 	flag.BoolVar(&useCsv, "use-csv", false, "Whether to output as CSV")
 	flag.Parse()
 
+	// Trim off any trailing whitespace, in case user has specified cf-api-token as the last command-line argument.
+	cfApiToken = strings.TrimSpace(cfApiToken)
 	cf, err := cfClient(cfApiUrl, cfApiToken)
 	if err != nil {
 		log.Fatalln(err)
