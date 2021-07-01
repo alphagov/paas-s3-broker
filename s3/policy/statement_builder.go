@@ -9,7 +9,7 @@ import (
 
 type Statement struct {
 	Effect    string    `json:"Effect"`
-	Action    Actions  `json:"Action"`
+	Action    Actions   `json:"Action"`
 	Resource  []string  `json:"Resource"`
 	Principal Principal `json:"Principal"`
 }
@@ -22,6 +22,7 @@ type Statement struct {
 // and Go's type system is no expressive enough
 // to support that.
 type Actions []string
+
 func (this *Actions) UnmarshalJSON(b []byte) error {
 	var actions []string
 	err := json.Unmarshal(b, &actions)
@@ -56,6 +57,10 @@ type ReadOnlyPermissions struct{}
 type PublicBucketPermissions struct{}
 type ReadWritePermissions struct{}
 
+type CustomPermissions struct {
+	actions []string
+}
+
 func (NoPermissions) Actions() []string {
 	return []string{}
 }
@@ -87,6 +92,27 @@ func (ReadWritePermissions) Actions() []string {
 	}
 }
 
+func (customPerms CustomPermissions) Actions() []string {
+	return customPerms.actions
+}
+
+func allowedPermissions() []string {
+	return []string{
+		"s3:GetBucketLocation",
+		"s3:ListBucket",
+		"s3:ListBucketVersions",
+		"s3:GetBucketCORS",
+		"s3:PutBucketCORS",
+		"s3:GetObject",
+		"s3:GetObjectVersion",
+		"s3:PutObject",
+		"s3:DeleteObject",
+		"s3:DeleteObjectVersion",
+		"s3:GetObjectAcl",
+		"s3:PutObjectAcl",
+	}
+}
+
 func ValidatePermissions(permissionName string) (Permissions, error) {
 	if permissionName == ReadOnlyPermissionsName {
 		return ReadOnlyPermissions{}, nil
@@ -95,6 +121,22 @@ func ValidatePermissions(permissionName string) (Permissions, error) {
 	} else {
 		return NoPermissions{}, fmt.Errorf("unknown permission name %s", permissionName)
 	}
+}
+
+func ValidateActions(actions []string) (perms Permissions, err error) {
+	m := make(map[string]bool)
+	for _, item := range allowedPermissions() {
+		m[item] = true
+	}
+	for _, item := range actions {
+		if _, ok := m[item]; !ok {
+			return nil, fmt.Errorf("invalid action %s", item)
+		}
+	}
+	perms = CustomPermissions{
+		actions: actions,
+	}
+	return
 }
 
 func BuildStatement(bucketName string, iamUser iam.User, permissions Permissions) Statement {

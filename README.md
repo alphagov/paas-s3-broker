@@ -88,11 +88,13 @@ Here is an example bucket policy the broker will apply:
   "Statement": [
     {
       "Action": [
-				"s3:GetBucketLocation",
-				"s3:ListBucket",
-				"s3:GetObject",
-				"s3:PutObject",
-				"s3:DeleteObject"
+        "s3:GetBucketLocation",
+        "s3:ListBucket",
+        "s3:GetBucketCORS",
+        "s3:PutBucketCORS",
+        "s3:GetObject",
+        "s3:PutObject",
+        "s3:DeleteObject"
       ],
       "Effect": "Allow",
       "Resource": [
