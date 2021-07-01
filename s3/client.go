@@ -73,8 +73,9 @@ type S3Client struct {
 }
 
 type BindParams struct {
-	Permissions         string `json:"permissions"`
-	AllowExternalAccess bool   `json:"allow_external_access"`
+	Permissions         string   `json:"permissions"`
+	Actions             []string `json:"actions"`
+	AllowExternalAccess bool     `json:"allow_external_access"`
 }
 
 type ProvisionParams struct {
@@ -250,6 +251,7 @@ func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredential
 	bindParams := BindParams{
 		AllowExternalAccess: false,
 		Permissions:         policy.ReadWritePermissionsName, // Required, as if another bind parameter is set, `ValidatePermissions` is called below.
+		Actions:             nil,
 	}
 	if bindData.Details.RawParameters != nil {
 		logger.Info("parse-raw-params")
@@ -258,11 +260,18 @@ func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredential
 			logger.Error("parse-raw-params", err)
 			return BucketCredentials{}, err
 		}
-
-		permissions, err = policy.ValidatePermissions(bindParams.Permissions)
-		if err != nil {
-			logger.Error("invalid-permissions", err)
-			return BucketCredentials{}, err
+		if bindParams.Actions != nil {
+			permissions, err = policy.ValidateActions(bindParams.Actions)
+			if err != nil {
+				logger.Error("invalid-actions", err)
+				return BucketCredentials{}, err
+			}
+		} else {
+			permissions, err = policy.ValidatePermissions(bindParams.Permissions)
+			if err != nil {
+				logger.Error("invalid-permissions", err)
+				return BucketCredentials{}, err
+			}
 		}
 	}
 

@@ -225,7 +225,7 @@ var _ = Describe("Client", func() {
 			Expect(err).To(HaveOccurred())
 		})
 
-		It("creates a policy with the requested permissions", func() {
+		It("creates a policy with read-only permissions", func() {
 			bindData := provider.BindData{
 				InstanceID: "test-instance-id",
 				BindingID:  "test-binding-id",
@@ -268,6 +268,48 @@ var _ = Describe("Client", func() {
 			}))
 		})
 
+		It("creates a policy with read-write permissions", func() {
+			bindData := provider.BindData{
+				InstanceID: "test-instance-id",
+				BindingID:  "test-binding-id",
+				Details: brokerapi.BindDetails{
+					RawParameters: json.RawMessage(`{"permissions": "read-write"}`),
+				},
+			}
+			bucketCredentials, err := s3Client.AddUserToBucket(bindData)
+			Expect(err).NotTo(HaveOccurred())
+
+			By("creating a user")
+			Expect(iamAPI.CreateUserCallCount()).To(Equal(1))
+
+			By("creating access keys for the user")
+			Expect(iamAPI.CreateAccessKeyCallCount()).To(Equal(1))
+
+			By("getting the bucket policy")
+			Expect(s3API.GetBucketPolicyCallCount()).To(Equal(1))
+
+			By("putting the updated policy")
+			Expect(s3API.PutBucketPolicyCallCount()).To(Equal(1))
+
+			By("with the right permissions")
+			updatedPolicyInput := s3API.PutBucketPolicyArgsForCall(0)
+			updatedPolicyStr := updatedPolicyInput.Policy
+
+			updatedPolicy := policy.PolicyDocument{}
+			err = json.Unmarshal([]byte(*updatedPolicyStr), &updatedPolicy)
+			Expect(err).ToNot(HaveOccurred())
+			Expect(updatedPolicy.Statement).To(HaveLen(1))
+			Expect(updatedPolicy.Statement[0].Action).To(ContainElement("s3:PutObject"))
+
+			By("returning the bucket credentials")
+			Expect(bucketCredentials).To(Equal(s3.BucketCredentials{
+				BucketName:         s3ClientConfig.ResourcePrefix + bindData.InstanceID,
+				AWSAccessKeyID:     "access-key-id",
+				AWSSecretAccessKey: "secret-access-key",
+				AWSRegion:          s3ClientConfig.AWSRegion,
+			}))
+		})
+
 		It("does not create a policy with the bad permissions", func() {
 			// Set up fake API
 			iamAPI.CreateUserReturnsOnCall(0, &iam.CreateUserOutput{
@@ -292,6 +334,86 @@ var _ = Describe("Client", func() {
 				},
 			}
 			_, err := s3Client.AddUserToBucket(bindData)
+			Expect(err).To(HaveOccurred())
+		})
+
+		It("creates a policy with arbitrary permissions", func() {
+			bindData := provider.BindData{
+				InstanceID: "test-instance-id",
+				BindingID:  "test-binding-id",
+				Details: brokerapi.BindDetails{
+					RawParameters: json.RawMessage(`{"actions": ["s3:ListBucketVersions", "s3:DeleteObjectVersion"]}`),
+				},
+			}
+			bucketCredentials, err := s3Client.AddUserToBucket(bindData)
+			Expect(err).NotTo(HaveOccurred())
+
+			By("creating a user")
+			Expect(iamAPI.CreateUserCallCount()).To(Equal(1))
+
+			By("creating access keys for the user")
+			Expect(iamAPI.CreateAccessKeyCallCount()).To(Equal(1))
+
+			By("getting the bucket policy")
+			Expect(s3API.GetBucketPolicyCallCount()).To(Equal(1))
+
+			By("putting the updated policy")
+			Expect(s3API.PutBucketPolicyCallCount()).To(Equal(1))
+
+			By("with the right permissions")
+			updatedPolicyInput := s3API.PutBucketPolicyArgsForCall(0)
+			updatedPolicyStr := updatedPolicyInput.Policy
+
+			updatedPolicy := policy.PolicyDocument{}
+			err = json.Unmarshal([]byte(*updatedPolicyStr), &updatedPolicy)
+			Expect(err).ToNot(HaveOccurred())
+			Expect(updatedPolicy.Statement).To(HaveLen(1))
+			Expect(updatedPolicy.Statement[0].Action).To(ContainElement("s3:ListBucketVersions"))
+			Expect(updatedPolicy.Statement[0].Action).To(ContainElement("s3:DeleteObjectVersion"))
+
+			By("returning the bucket credentials")
+			Expect(bucketCredentials).To(Equal(s3.BucketCredentials{
+				BucketName:         s3ClientConfig.ResourcePrefix + bindData.InstanceID,
+				AWSAccessKeyID:     "access-key-id",
+				AWSSecretAccessKey: "secret-access-key",
+				AWSRegion:          s3ClientConfig.AWSRegion,
+			}))
+		})
+
+		It("does not create a policy with invalid arbitrary permissions", func() {
+			// Set up fake API
+			iamAPI.CreateUserReturnsOnCall(0, &iam.CreateUserOutput{
+				User: &iam.User{
+					Arn: aws.String("arn"),
+				},
+			}, nil)
+			iamAPI.CreateAccessKeyReturnsOnCall(0, &iam.CreateAccessKeyOutput{
+				AccessKey: &iam.AccessKey{
+					AccessKeyId:     aws.String("access-key-id"),
+					SecretAccessKey: aws.String("secret-access-key"),
+				},
+			}, nil)
+			s3API.GetBucketPolicyReturnsOnCall(0, &awsS3.GetBucketPolicyOutput{
+				Policy: aws.String(`{"Version": "2012-10-17", "Statement":[]}`),
+			}, nil)
+			bindData := provider.BindData{
+				InstanceID: "test-instance-id",
+				BindingID:  "test-binding-id",
+				Details: brokerapi.BindDetails{
+					RawParameters: json.RawMessage(`{"actions": ["s3:deleteThePaaS"]}`), // invalid action
+				},
+			}
+			_, err := s3Client.AddUserToBucket(bindData)
+			Expect(err).To(HaveOccurred())
+
+			bindData = provider.BindData{
+				InstanceID: "test-instance-id",
+				BindingID:  "test-binding-id",
+				Details: brokerapi.BindDetails{
+					RawParameters: json.RawMessage(`{"actions": "s3:deleteThePaaS"}`), // not provided as an array
+				},
+			}
+			_, err = s3Client.AddUserToBucket(bindData)
 			Expect(err).To(HaveOccurred())
 		})
 
