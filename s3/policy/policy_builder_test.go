@@ -2,7 +2,7 @@ package policy_test
 
 import (
 	"github.com/alphagov/paas-s3-broker/s3/policy"
-	. "github.com/onsi/ginkgo"
+	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 )
 

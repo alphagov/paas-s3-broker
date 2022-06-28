@@ -5,7 +5,7 @@ import (
 	"github.com/alphagov/paas-s3-broker/s3/policy"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/iam"
-	. "github.com/onsi/ginkgo"
+	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 )
 
@@ -53,8 +53,8 @@ var _ = Describe("StatementBuilder", func() {
 	})
 })
 
-var _ = Describe("Statement JSON unmarshaling", func(){
-	It("can unmarshals a statement with a single action", func(){
+var _ = Describe("Statement JSON unmarshaling", func() {
+	It("can unmarshals a statement with a single action", func() {
 		bytes := []byte(`{"effect": "allow", "resource": [], "action": "foo"}`)
 		statement := policy.Statement{}
 
@@ -65,7 +65,6 @@ var _ = Describe("Statement JSON unmarshaling", func(){
 		Expect(statement.Resource).To(BeEmpty())
 		Expect(statement.Action).To(HaveLen(1))
 	})
-
 
 	It("unmarshals an array of strings in to a slice of strings", func() {
 		bytes := []byte(`{"effect": "allow", "resource": [], "action": ["foo", "bar"]}`)
