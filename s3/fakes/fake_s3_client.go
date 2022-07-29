@@ -66,15 +66,16 @@ func (fake *FakeClient) AddUserToBucket(arg1 provider.BindData) (s3.BucketCreden
 	fake.addUserToBucketArgsForCall = append(fake.addUserToBucketArgsForCall, struct {
 		arg1 provider.BindData
 	}{arg1})
+	stub := fake.AddUserToBucketStub
+	fakeReturns := fake.addUserToBucketReturns
 	fake.recordInvocation("AddUserToBucket", []interface{}{arg1})
 	fake.addUserToBucketMutex.Unlock()
-	if fake.AddUserToBucketStub != nil {
-		return fake.AddUserToBucketStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.addUserToBucketReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -129,15 +130,16 @@ func (fake *FakeClient) CreateBucket(arg1 provider.ProvisionData) error {
 	fake.createBucketArgsForCall = append(fake.createBucketArgsForCall, struct {
 		arg1 provider.ProvisionData
 	}{arg1})
+	stub := fake.CreateBucketStub
+	fakeReturns := fake.createBucketReturns
 	fake.recordInvocation("CreateBucket", []interface{}{arg1})
 	fake.createBucketMutex.Unlock()
-	if fake.CreateBucketStub != nil {
-		return fake.CreateBucketStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.createBucketReturns
 	return fakeReturns.result1
 }
 
@@ -189,15 +191,16 @@ func (fake *FakeClient) DeleteBucket(arg1 string) error {
 	fake.deleteBucketArgsForCall = append(fake.deleteBucketArgsForCall, struct {
 		arg1 string
 	}{arg1})
+	stub := fake.DeleteBucketStub
+	fakeReturns := fake.deleteBucketReturns
 	fake.recordInvocation("DeleteBucket", []interface{}{arg1})
 	fake.deleteBucketMutex.Unlock()
-	if fake.DeleteBucketStub != nil {
-		return fake.DeleteBucketStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.deleteBucketReturns
 	return fakeReturns.result1
 }
 
@@ -250,15 +253,16 @@ func (fake *FakeClient) RemoveUserFromBucketAndDeleteUser(arg1 string, arg2 stri
 		arg1 string
 		arg2 string
 	}{arg1, arg2})
+	stub := fake.RemoveUserFromBucketAndDeleteUserStub
+	fakeReturns := fake.removeUserFromBucketAndDeleteUserReturns
 	fake.recordInvocation("RemoveUserFromBucketAndDeleteUser", []interface{}{arg1, arg2})
 	fake.removeUserFromBucketAndDeleteUserMutex.Unlock()
-	if fake.RemoveUserFromBucketAndDeleteUserStub != nil {
-		return fake.RemoveUserFromBucketAndDeleteUserStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.removeUserFromBucketAndDeleteUserReturns
 	return fakeReturns.result1
 }
 
