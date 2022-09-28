@@ -15,6 +15,7 @@ import (
 	fakeClient "github.com/alphagov/paas-s3-broker/s3/fakes"
 	"github.com/alphagov/paas-service-broker-base/provider"
 	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/awserr"
 	"github.com/aws/aws-sdk-go/service/iam"
 	awsS3 "github.com/aws/aws-sdk-go/service/s3"
 	. "github.com/onsi/ginkgo/v2"
@@ -299,6 +300,8 @@ var _ = Describe("Client", func() {
 			It("deletes the user", func() {
 				expectedError := errors.New("attaching user policy failed. lul.")
 				iamAPI.AttachUserPolicyReturnsOnCall(0, &iam.AttachUserPolicyOutput{}, expectedError)
+				iamAPI.ListAccessKeysReturnsOnCall(0, &iam.ListAccessKeysOutput{}, nil)
+				iamAPI.ListAttachedUserPoliciesReturnsOnCall(0, &iam.ListAttachedUserPoliciesOutput{}, nil)
 				bindData := provider.BindData{
 					InstanceID: "test-instance-id",
 					BindingID:  "test-binding-id",
@@ -368,6 +371,8 @@ var _ = Describe("Client", func() {
 					User: &iam.User{},
 				}, nil)
 				iamAPI.CreateAccessKeyReturnsOnCall(0, &iam.CreateAccessKeyOutput{}, errors.New("some-error"))
+				iamAPI.ListAccessKeysReturnsOnCall(0, &iam.ListAccessKeysOutput{}, nil)
+				iamAPI.ListAttachedUserPoliciesReturnsOnCall(0, &iam.ListAttachedUserPoliciesOutput{}, nil)
 				bindData := provider.BindData{
 					InstanceID: "test-instance-id",
 					BindingID:  "test-binding-id",
@@ -427,6 +432,14 @@ var _ = Describe("Client", func() {
 				iamAPI.ListAccessKeysReturnsOnCall(0, &iam.ListAccessKeysOutput{
 					AccessKeyMetadata: []*iam.AccessKeyMetadata{{AccessKeyId: aws.String("key")}},
 				}, nil)
+				iamAPI.ListAttachedUserPoliciesReturnsOnCall(0, &iam.ListAttachedUserPoliciesOutput{
+					AttachedPolicies: []*iam.AttachedPolicy{
+						&iam.AttachedPolicy{
+							PolicyArn: aws.String("foo"),
+							PolicyName: aws.String("bar"),
+						},
+					},
+				}, nil)
 				iamAPI.DeleteAccessKeyReturnsOnCall(0, nil, nil)
 
 				bindData := provider.BindData{
@@ -458,6 +471,7 @@ var _ = Describe("Client", func() {
 				iamAPI.ListAccessKeysReturnsOnCall(0, &iam.ListAccessKeysOutput{
 					AccessKeyMetadata: []*iam.AccessKeyMetadata{{AccessKeyId: aws.String("key")}},
 				}, nil)
+				iamAPI.ListAttachedUserPoliciesReturnsOnCall(0, &iam.ListAttachedUserPoliciesOutput{}, nil)
 				iamAPI.DeleteAccessKeyReturnsOnCall(0, nil, nil)
 
 				bindData := provider.BindData{
@@ -473,10 +487,10 @@ var _ = Describe("Client", func() {
 	})
 
 	Describe("RemoveUserFromBucketAndDeleteUser", func() {
-		It("manages the user and bucket policy", func() {
+		It("deletes user and bucket policy when it is the only statement in the policy", func() {
 			// Set up fake API
 			userArn := "arn:aws:iam::account-number:user/s3-broker/" + s3ClientConfig.ResourcePrefix + "some-user"
-			s3API.GetBucketPolicyReturnsOnCall(0, &awsS3.GetBucketPolicyOutput{
+			s3API.GetBucketPolicyReturns(&awsS3.GetBucketPolicyOutput{
 				Policy: aws.String(fmt.Sprintf(`
 					{
 						"Statement": [
@@ -498,30 +512,63 @@ var _ = Describe("Client", func() {
 						]
 					}`, userArn)),
 			}, nil)
-			s3API.DeleteBucketPolicyReturnsOnCall(0, &awsS3.DeleteBucketPolicyOutput{}, nil)
-			iamAPI.ListAccessKeysReturnsOnCall(0, &iam.ListAccessKeysOutput{
+			s3API.DeleteBucketPolicyReturns(&awsS3.DeleteBucketPolicyOutput{}, nil)
+			iamAPI.ListAccessKeysReturns(&iam.ListAccessKeysOutput{
 				AccessKeyMetadata: []*iam.AccessKeyMetadata{{AccessKeyId: aws.String("key")}},
 			}, nil)
-			iamAPI.DeleteAccessKeyReturnsOnCall(0, nil, nil)
+			iamAPI.ListAttachedUserPoliciesReturns(&iam.ListAttachedUserPoliciesOutput{}, nil)
+			iamAPI.DeleteAccessKeyReturns(nil, nil)
 
 			err := s3Client.RemoveUserFromBucketAndDeleteUser("some-user", "bucketName")
 			Expect(err).NotTo(HaveOccurred())
 
-			By("getting the bucket policy")
-			Expect(s3API.GetBucketPolicyCallCount()).To(Equal(1))
+			By("getting the bucket policy", func() {
+				Expect(s3API.GetBucketPolicyCallCount()).To(Equal(1))
+				Expect(s3API.GetBucketPolicyArgsForCall(0)).ToNot(BeNil())
+				Expect(s3API.GetBucketPolicyArgsForCall(0).Bucket).ToNot(BeNil())
+				Expect(s3API.GetBucketPolicyArgsForCall(0).Bucket).To(Equal(aws.String(s3ClientConfig.ResourcePrefix + "bucketName")))
+			})
 
-			By("deleting the user and keys")
-			Expect(iamAPI.DeleteUserCallCount()).To(Equal(1))
-			Expect(iamAPI.DeleteAccessKeyCallCount()).To(Equal(1))
+			By("deleting the bucket policy", func() {
+				Expect(s3API.DeleteBucketPolicyCallCount()).To(Equal(1))
+				Expect(s3API.DeleteBucketPolicyArgsForCall(0)).ToNot(BeNil())
+				Expect(s3API.DeleteBucketPolicyArgsForCall(0).Bucket).ToNot(BeNil())
+				Expect(s3API.DeleteBucketPolicyArgsForCall(0).Bucket).To(Equal(aws.String(s3ClientConfig.ResourcePrefix + "bucketName")))
+			})
 
-			By("deleting the bucket policy")
-			Expect(s3API.DeleteBucketPolicyCallCount()).To(Equal(1))
+			By("deleting user keys and policies", func() {
+				Expect(iamAPI.ListAccessKeysCallCount()).To(Equal(1))
+				Expect(iamAPI.ListAccessKeysArgsForCall(0)).ToNot(BeNil())
+				Expect(iamAPI.ListAccessKeysArgsForCall(0).UserName).ToNot(BeNil())
+				Expect(iamAPI.ListAccessKeysArgsForCall(0).UserName).To(Equal(aws.String(s3ClientConfig.ResourcePrefix + "some-user")))
+
+				Expect(iamAPI.ListAttachedUserPoliciesCallCount()).To(Equal(1))
+				Expect(iamAPI.ListAttachedUserPoliciesArgsForCall(0)).ToNot(BeNil())
+				Expect(iamAPI.ListAttachedUserPoliciesArgsForCall(0).UserName).ToNot(BeNil())
+				Expect(iamAPI.ListAttachedUserPoliciesArgsForCall(0).UserName).To(Equal(aws.String(s3ClientConfig.ResourcePrefix + "some-user")))
+
+				Expect(iamAPI.DeleteUserCallCount()).To(Equal(1))
+				Expect(iamAPI.DeleteUserArgsForCall(0)).ToNot(BeNil())
+				Expect(iamAPI.DeleteUserArgsForCall(0).UserName).ToNot(BeNil())
+				Expect(iamAPI.DeleteUserArgsForCall(0).UserName).To(Equal(aws.String(s3ClientConfig.ResourcePrefix + "some-user")))
+			})
+
+			By("deleting the user", func() {
+				Expect(iamAPI.DeleteAccessKeyCallCount()).To(Equal(1))
+				Expect(iamAPI.DeleteAccessKeyArgsForCall(0)).ToNot(BeNil())
+				Expect(iamAPI.DeleteAccessKeyArgsForCall(0).AccessKeyId).To(Equal(aws.String("key")))
+				Expect(iamAPI.DeleteAccessKeyArgsForCall(0).UserName).To(Equal(aws.String(s3ClientConfig.ResourcePrefix + "some-user")))
+			})
+
+			// all calls accounted for
+			Expect(s3API.Invocations()).To(HaveLen(2))
+			Expect(iamAPI.Invocations()).To(HaveLen(4))
 		})
 
-		It("updates the bucket policy when there are >0 statements left after unbinding", func() {
+		It("deletes the user and removes the associated statement from the bucket policy when it is not the only statement", func() {
 			// Set up fake API
 			userArn := "arn:aws:iam::account-number:user/s3-broker/" + s3ClientConfig.ResourcePrefix + "some-user"
-			s3API.GetBucketPolicyReturnsOnCall(0, &awsS3.GetBucketPolicyOutput{
+			s3API.GetBucketPolicyReturns(&awsS3.GetBucketPolicyOutput{
 				Policy: aws.String(fmt.Sprintf(`
 					{
 						"Statement": [
@@ -552,49 +599,125 @@ var _ = Describe("Client", func() {
 									"arn:aws:s3:::gds-paas-s3-broker-bucketName/*"
 								],
 								"Principal": {
-									"AWS": "some-arn"
+									"AWS": "some-other-arn"
 								}
 							}
 						]
 					}`, userArn)),
 			}, nil)
-			s3API.PutBucketPolicyReturnsOnCall(0, &awsS3.PutBucketPolicyOutput{}, nil)
-			iamAPI.ListAccessKeysReturnsOnCall(0, &iam.ListAccessKeysOutput{
+			s3API.PutBucketPolicyReturns(&awsS3.PutBucketPolicyOutput{}, nil)
+			iamAPI.ListAccessKeysReturns(&iam.ListAccessKeysOutput{
 				AccessKeyMetadata: []*iam.AccessKeyMetadata{{AccessKeyId: aws.String("key")}},
 			}, nil)
-			iamAPI.DeleteAccessKeyReturnsOnCall(0, nil, nil)
+			iamAPI.ListAttachedUserPoliciesReturns(&iam.ListAttachedUserPoliciesOutput{
+					AttachedPolicies: []*iam.AttachedPolicy{
+						&iam.AttachedPolicy{
+							PolicyArn: aws.String("foo"),
+							PolicyName: aws.String("bar"),
+						},
+					},
+				}, nil)
+			iamAPI.DeleteAccessKeyReturns(nil, nil)
 
 			err := s3Client.RemoveUserFromBucketAndDeleteUser("some-user", "bucketName")
 			Expect(err).NotTo(HaveOccurred())
 
-			By("getting the bucket policy")
-			Expect(s3API.GetBucketPolicyCallCount()).To(Equal(1))
+			By("getting the bucket policy", func() {
+				Expect(s3API.GetBucketPolicyCallCount()).To(Equal(1))
+				Expect(s3API.GetBucketPolicyArgsForCall(0)).ToNot(BeNil())
+				Expect(s3API.GetBucketPolicyArgsForCall(0).Bucket).ToNot(BeNil())
+				Expect(s3API.GetBucketPolicyArgsForCall(0).Bucket).To(Equal(aws.String(s3ClientConfig.ResourcePrefix + "bucketName")))
+			})
 
-			By("deleting the user and keys")
-			Expect(iamAPI.DeleteUserCallCount()).To(Equal(1))
-			Expect(iamAPI.DeleteAccessKeyCallCount()).To(Equal(1))
+			By("updating the bucket policy", func() {
+				Expect(s3API.PutBucketPolicyCallCount()).To(Equal(1))
+				Expect(s3API.PutBucketPolicyArgsForCall(0)).ToNot(BeNil())
+				Expect(s3API.PutBucketPolicyArgsForCall(0).Bucket).To(Equal(aws.String(s3ClientConfig.ResourcePrefix + "bucketName")))
+				Expect(s3API.PutBucketPolicyArgsForCall(0).Policy).ToNot(BeNil())
+				Expect(aws.StringValue(s3API.PutBucketPolicyArgsForCall(0).Policy)).To(MatchJSON(`
+					{
+						"Version": "",
+						"Statement": [
+							{
+								"Action": [
+									"s3:GetObject",
+									"s3:PutObject",
+									"s3:DeleteObject"
+								],
+								"Effect": "Allow",
+								"Resource": [
+									"arn:aws:s3:::gds-paas-s3-broker-bucketName",
+									"arn:aws:s3:::gds-paas-s3-broker-bucketName/*"
+								],
+								"Principal": {
+									"AWS": "some-other-arn"
+								}
+							}
+						]
+					}`))
+				Expect(s3API.DeleteBucketPolicyCallCount()).To(Equal(0))
+			})
 
-			By("updating the bucket policy")
-			Expect(s3API.PutBucketPolicyCallCount()).To(Equal(1))
-			Expect(s3API.DeleteBucketPolicyCallCount()).To(Equal(0))
+			By("deleting user keys and policies", func() {
+				Expect(iamAPI.ListAccessKeysCallCount()).To(Equal(1))
+				Expect(iamAPI.ListAccessKeysArgsForCall(0)).ToNot(BeNil())
+				Expect(iamAPI.ListAccessKeysArgsForCall(0).UserName).ToNot(BeNil())
+				Expect(iamAPI.ListAccessKeysArgsForCall(0).UserName).To(Equal(aws.String(s3ClientConfig.ResourcePrefix + "some-user")))
+
+				Expect(iamAPI.ListAttachedUserPoliciesCallCount()).To(Equal(1))
+				Expect(iamAPI.ListAttachedUserPoliciesArgsForCall(0)).ToNot(BeNil())
+				Expect(iamAPI.ListAttachedUserPoliciesArgsForCall(0).UserName).ToNot(BeNil())
+				Expect(iamAPI.ListAttachedUserPoliciesArgsForCall(0).UserName).To(Equal(aws.String(s3ClientConfig.ResourcePrefix + "some-user")))
+
+				Expect(iamAPI.DeleteAccessKeyCallCount()).To(Equal(1))
+				Expect(iamAPI.DeleteAccessKeyArgsForCall(0)).ToNot(BeNil())
+				Expect(iamAPI.DeleteAccessKeyArgsForCall(0).AccessKeyId).To(Equal(aws.String("key")))
+				Expect(iamAPI.DeleteAccessKeyArgsForCall(0).UserName).To(Equal(aws.String(s3ClientConfig.ResourcePrefix + "some-user")))
+
+				Expect(iamAPI.DetachUserPolicyCallCount()).To(Equal(1))
+				Expect(iamAPI.DetachUserPolicyArgsForCall(0)).ToNot(BeNil())
+				Expect(iamAPI.DetachUserPolicyArgsForCall(0).PolicyArn).To(Equal(aws.String("foo")))
+				Expect(iamAPI.DetachUserPolicyArgsForCall(0).UserName).To(Equal(aws.String(s3ClientConfig.ResourcePrefix + "some-user")))
+			})
+
+			By("deleting the user", func() {
+				Expect(iamAPI.DeleteUserCallCount()).To(Equal(1))
+				Expect(iamAPI.DeleteUserArgsForCall(0)).ToNot(BeNil())
+				Expect(iamAPI.DeleteUserArgsForCall(0).UserName).ToNot(BeNil())
+				Expect(iamAPI.DeleteUserArgsForCall(0).UserName).To(Equal(aws.String(s3ClientConfig.ResourcePrefix + "some-user")))
+			})
+
+			// all calls accounted for
+			Expect(s3API.Invocations()).To(HaveLen(2))
+			Expect(iamAPI.Invocations()).To(HaveLen(5))
 		})
 
-		Context("when getting the bucket policy fails", func() {
-			It("returns an error", func() {
+		Context("when getting the bucket policy fails for an unknown reason", func() {
+			It("passes through the unrecognized error", func() {
 				// Set up fake API
 				errGettingPolicy := errors.New("error-getting-policy")
-				s3API.GetBucketPolicyReturnsOnCall(0, &awsS3.GetBucketPolicyOutput{}, errGettingPolicy)
+				s3API.GetBucketPolicyReturns(&awsS3.GetBucketPolicyOutput{}, errGettingPolicy)
 
 				err := s3Client.RemoveUserFromBucketAndDeleteUser("some-user", "bucketName")
 				Expect(err).To(MatchError(errGettingPolicy))
+
+				By("attempting to get the bucket policy", func() {
+					Expect(s3API.GetBucketPolicyCallCount()).To(Equal(1))
+					Expect(s3API.GetBucketPolicyArgsForCall(0)).ToNot(BeNil())
+					Expect(s3API.GetBucketPolicyArgsForCall(0).Bucket).To(Equal(aws.String(s3ClientConfig.ResourcePrefix + "bucketName")))
+				})
+
+				// all calls accounted for
+				Expect(s3API.Invocations()).To(HaveLen(1))
+				Expect(iamAPI.Invocations()).To(HaveLen(0))
 			})
 		})
 
-		Context("when deleting the user fails", func() {
-			It("returns an error", func() {
+		Context("when deleting the user fails for an unknown reason", func() {
+			It("passes through the unrecognized error, having deleted the bucket policy", func() {
 				// Set up fake API
 				userArn := "arn:aws:iam::account-number:user/s3-broker/" + s3ClientConfig.ResourcePrefix + "some-user"
-				s3API.GetBucketPolicyReturnsOnCall(0, &awsS3.GetBucketPolicyOutput{
+				s3API.GetBucketPolicyReturns(&awsS3.GetBucketPolicyOutput{
 					Policy: aws.String(fmt.Sprintf(`
 					{
 						"Statement": [
@@ -617,13 +740,283 @@ var _ = Describe("Client", func() {
 					}`, userArn)),
 				}, nil)
 
-				s3API.PutBucketPolicyReturns(&awsS3.PutBucketPolicyOutput{}, nil)
+				s3API.DeleteBucketPolicyReturns(&awsS3.DeleteBucketPolicyOutput{}, nil)
 
 				errDeletingUser := errors.New("error-deleting-user")
-				iamAPI.DeleteUserReturnsOnCall(0, &iam.DeleteUserOutput{}, errDeletingUser)
+				iamAPI.ListAccessKeysReturns(&iam.ListAccessKeysOutput{}, nil)
+				iamAPI.ListAttachedUserPoliciesReturns(&iam.ListAttachedUserPoliciesOutput{}, nil)
+				iamAPI.DeleteUserReturns(&iam.DeleteUserOutput{}, errDeletingUser)
 
 				err := s3Client.RemoveUserFromBucketAndDeleteUser("some-user", "bucketName")
 				Expect(err).To(MatchError(errDeletingUser))
+
+				By("getting the bucket policy", func() {
+					Expect(s3API.GetBucketPolicyCallCount()).To(Equal(1))
+					Expect(s3API.GetBucketPolicyArgsForCall(0)).ToNot(BeNil())
+					Expect(s3API.GetBucketPolicyArgsForCall(0).Bucket).ToNot(BeNil())
+					Expect(s3API.GetBucketPolicyArgsForCall(0).Bucket).To(Equal(aws.String(s3ClientConfig.ResourcePrefix + "bucketName")))
+				})
+
+				By("deleting the bucket policy", func() {
+					Expect(s3API.DeleteBucketPolicyCallCount()).To(Equal(1))
+					Expect(s3API.DeleteBucketPolicyArgsForCall(0)).ToNot(BeNil())
+					Expect(s3API.DeleteBucketPolicyArgsForCall(0).Bucket).ToNot(BeNil())
+					Expect(s3API.DeleteBucketPolicyArgsForCall(0).Bucket).To(Equal(aws.String(s3ClientConfig.ResourcePrefix + "bucketName")))
+				})
+
+				By("checking for user keys and policies", func() {
+					Expect(iamAPI.ListAccessKeysCallCount()).To(Equal(1))
+					Expect(iamAPI.ListAccessKeysArgsForCall(0)).ToNot(BeNil())
+					Expect(iamAPI.ListAccessKeysArgsForCall(0).UserName).ToNot(BeNil())
+					Expect(iamAPI.ListAccessKeysArgsForCall(0).UserName).To(Equal(aws.String(s3ClientConfig.ResourcePrefix + "some-user")))
+
+					Expect(iamAPI.ListAttachedUserPoliciesCallCount()).To(Equal(1))
+					Expect(iamAPI.ListAttachedUserPoliciesArgsForCall(0)).ToNot(BeNil())
+					Expect(iamAPI.ListAttachedUserPoliciesArgsForCall(0).UserName).ToNot(BeNil())
+					Expect(iamAPI.ListAttachedUserPoliciesArgsForCall(0).UserName).To(Equal(aws.String(s3ClientConfig.ResourcePrefix + "some-user")))
+				})
+
+				By("attempting to delete the user", func() {
+					Expect(iamAPI.DeleteUserCallCount()).To(Equal(1))
+					Expect(iamAPI.DeleteUserArgsForCall(0)).ToNot(BeNil())
+					Expect(iamAPI.DeleteUserArgsForCall(0).UserName).ToNot(BeNil())
+					Expect(iamAPI.DeleteUserArgsForCall(0).UserName).To(Equal(aws.String(s3ClientConfig.ResourcePrefix + "some-user")))
+				})
+
+				// all calls accounted for
+				Expect(s3API.Invocations()).To(HaveLen(2))
+				Expect(iamAPI.Invocations()).To(HaveLen(3))
+			})
+		})
+
+		testUserDoesntExist := func(iamErrorCode string) {
+			Context(fmt.Sprintf("the expected bucket policy statement exists but the user doesn't (user %s)", iamErrorCode), func() {
+				It("deletes the bucket policy statement and returns no error", func() {
+					// Set up fake API
+					userArn := "arn:aws:iam::account-number:user/s3-broker/" + s3ClientConfig.ResourcePrefix + "some-user"
+					s3API.GetBucketPolicyReturns(&awsS3.GetBucketPolicyOutput{
+						Policy: aws.String(fmt.Sprintf(`
+						{
+							"Statement": [
+								{
+									"Action": [
+										"s3:GetObject",
+										"s3:PutObject",
+										"s3:DeleteObject"
+									],
+									"Effect": "Allow",
+									"Resource": [
+										"arn:aws:s3:::gds-paas-s3-broker-bucketName",
+										"arn:aws:s3:::gds-paas-s3-broker-bucketName/*"
+									],
+									"Principal": {
+										"AWS": "%s"
+									}
+								}
+							]
+						}`, userArn)),
+					}, nil)
+
+					s3API.DeleteBucketPolicyReturns(&awsS3.DeleteBucketPolicyOutput{}, nil)
+
+					iamAPI.ListAccessKeysReturns(nil, awserr.New(iamErrorCode, "full error message", nil))
+					iamAPI.ListAttachedUserPoliciesReturns(nil, awserr.New(iamErrorCode, "full error message", nil))
+					iamAPI.DeleteUserReturns(nil, awserr.New(iamErrorCode, "full error message", nil))
+
+					err := s3Client.RemoveUserFromBucketAndDeleteUser("some-user", "bucketName")
+					Expect(err).ToNot(HaveOccurred())
+
+					By("getting the bucket policy", func() {
+						Expect(s3API.GetBucketPolicyCallCount()).To(Equal(1))
+						Expect(s3API.GetBucketPolicyArgsForCall(0)).ToNot(BeNil())
+						Expect(s3API.GetBucketPolicyArgsForCall(0).Bucket).ToNot(BeNil())
+						Expect(s3API.GetBucketPolicyArgsForCall(0).Bucket).To(Equal(aws.String(s3ClientConfig.ResourcePrefix + "bucketName")))
+					})
+
+					By("deleting the bucket policy", func() {
+						Expect(s3API.DeleteBucketPolicyCallCount()).To(Equal(1))
+						Expect(s3API.DeleteBucketPolicyArgsForCall(0)).ToNot(BeNil())
+						Expect(s3API.DeleteBucketPolicyArgsForCall(0).Bucket).ToNot(BeNil())
+						Expect(s3API.DeleteBucketPolicyArgsForCall(0).Bucket).To(Equal(aws.String(s3ClientConfig.ResourcePrefix + "bucketName")))
+					})
+
+					By("checking for user keys and policies", func() {
+						Expect(iamAPI.ListAccessKeysCallCount()).To(Equal(1))
+						Expect(iamAPI.ListAccessKeysArgsForCall(0)).ToNot(BeNil())
+						Expect(iamAPI.ListAccessKeysArgsForCall(0).UserName).To(Equal(aws.String("test-bucket-prefix-some-user")))
+
+						Expect(iamAPI.ListAttachedUserPoliciesCallCount()).To(Equal(1))
+						Expect(iamAPI.ListAttachedUserPoliciesArgsForCall(0)).ToNot(BeNil())
+						Expect(iamAPI.ListAttachedUserPoliciesArgsForCall(0).UserName).To(Equal(aws.String("test-bucket-prefix-some-user")))
+					})
+
+					By("attempting to delete the user", func() {
+						Expect(iamAPI.DeleteUserCallCount()).To(Equal(1))
+						Expect(iamAPI.DeleteUserArgsForCall(0)).ToNot(BeNil())
+						Expect(iamAPI.DeleteUserArgsForCall(0).UserName).To(Equal(aws.String("test-bucket-prefix-some-user")))
+					})
+
+					// all calls accounted for
+					Expect(s3API.Invocations()).To(HaveLen(2))
+					Expect(iamAPI.Invocations()).To(HaveLen(3))
+				})
+			})
+		}
+		testUserDoesntExist(iam.ErrCodeNoSuchEntityException)
+		testUserDoesntExist("AccessDenied")
+
+		Context("when the expected user and policy statement don't exist", func() {
+			It("returns ErrNoSuchResources", func() {
+				// Set up fake API
+				s3API.GetBucketPolicyReturns(&awsS3.GetBucketPolicyOutput{
+					Policy: aws.String(`
+						{
+							"Statement": [
+								{
+									"Action": [
+										"s3:GetObject",
+										"s3:PutObject",
+										"s3:DeleteObject"
+									],
+									"Effect": "Allow",
+									"Resource": [
+										"arn:aws:s3:::gds-paas-s3-broker-bucketName",
+										"arn:aws:s3:::gds-paas-s3-broker-bucketName/*"
+									],
+									"Principal": {
+										"AWS": "some-other-arn"
+									}
+								}
+							]
+						}`),
+				}, nil)
+				iamAPI.ListAccessKeysReturns(nil, awserr.New(iam.ErrCodeNoSuchEntityException, "full error message", nil))
+				iamAPI.ListAttachedUserPoliciesReturns(nil, awserr.New(iam.ErrCodeNoSuchEntityException, "full error message", nil))
+				iamAPI.DeleteUserReturns(nil, awserr.New(iam.ErrCodeNoSuchEntityException, "full error message", nil))
+
+				err := s3Client.RemoveUserFromBucketAndDeleteUser("some-user", "bucketName")
+				Expect(err).To(MatchError(s3.ErrNoSuchResources))
+
+				By("getting the bucket policy", func() {
+					Expect(s3API.GetBucketPolicyCallCount()).To(Equal(1))
+					Expect(s3API.GetBucketPolicyArgsForCall(0)).ToNot(BeNil())
+					Expect(s3API.GetBucketPolicyArgsForCall(0).Bucket).To(Equal(aws.String(s3ClientConfig.ResourcePrefix + "bucketName")))
+				})
+
+				By("checking for user keys and policies", func() {
+					Expect(iamAPI.ListAccessKeysCallCount()).To(Equal(1))
+					Expect(iamAPI.ListAccessKeysArgsForCall(0)).ToNot(BeNil())
+					Expect(iamAPI.ListAccessKeysArgsForCall(0).UserName).To(Equal(aws.String("test-bucket-prefix-some-user")))
+
+					Expect(iamAPI.ListAttachedUserPoliciesCallCount()).To(Equal(1))
+					Expect(iamAPI.ListAttachedUserPoliciesArgsForCall(0)).ToNot(BeNil())
+					Expect(iamAPI.ListAttachedUserPoliciesArgsForCall(0).UserName).To(Equal(aws.String("test-bucket-prefix-some-user")))
+				})
+
+				By("attempting to delete the user", func() {
+					Expect(iamAPI.DeleteUserCallCount()).To(Equal(1))
+					Expect(iamAPI.DeleteUserArgsForCall(0)).ToNot(BeNil())
+					Expect(iamAPI.DeleteUserArgsForCall(0).UserName).To(Equal(aws.String("test-bucket-prefix-some-user")))
+				})
+
+				// all calls accounted for
+				Expect(s3API.Invocations()).To(HaveLen(1))
+				Expect(iamAPI.Invocations()).To(HaveLen(3))
+			})
+		})
+
+		testNothingExists := func(iamErrorCode string) {
+			Context(fmt.Sprintf("when the expected user and the bucket policy don't exist (user %s)", iamErrorCode), func() {
+				It("returns ErrNoSuchResources", func() {
+					// Set up fake API
+					s3API.GetBucketPolicyReturns(nil, awserr.New("NoSuchBucketPolicy", "full error message", nil))
+					iamAPI.ListAccessKeysReturns(nil, awserr.New(iamErrorCode, "full error message", nil))
+					iamAPI.ListAttachedUserPoliciesReturns(nil, awserr.New(iamErrorCode, "full error message", nil))
+					iamAPI.DeleteUserReturns(&iam.DeleteUserOutput{}, awserr.New(iamErrorCode, "full error message", nil))
+
+					err := s3Client.RemoveUserFromBucketAndDeleteUser("some-user", "bucketName")
+					Expect(err).To(MatchError(s3.ErrNoSuchResources))
+
+					By("attempting to get the bucket policy", func() {
+						Expect(s3API.GetBucketPolicyCallCount()).To(Equal(1))
+						Expect(s3API.GetBucketPolicyArgsForCall(0)).ToNot(BeNil())
+						Expect(s3API.GetBucketPolicyArgsForCall(0).Bucket).To(Equal(aws.String(s3ClientConfig.ResourcePrefix + "bucketName")))
+					})
+
+					By("checking for user keys and policies", func() {
+						Expect(iamAPI.ListAccessKeysCallCount()).To(Equal(1))
+						Expect(iamAPI.ListAccessKeysArgsForCall(0)).ToNot(BeNil())
+						Expect(iamAPI.ListAccessKeysArgsForCall(0).UserName).To(Equal(aws.String("test-bucket-prefix-some-user")))
+
+						Expect(iamAPI.ListAttachedUserPoliciesCallCount()).To(Equal(1))
+						Expect(iamAPI.ListAttachedUserPoliciesArgsForCall(0)).ToNot(BeNil())
+						Expect(iamAPI.ListAttachedUserPoliciesArgsForCall(0).UserName).To(Equal(aws.String("test-bucket-prefix-some-user")))
+					})
+
+					By("attempting to delete the user", func() {
+						Expect(iamAPI.DeleteUserCallCount()).To(Equal(1))
+						Expect(iamAPI.DeleteUserArgsForCall(0)).ToNot(BeNil())
+						Expect(iamAPI.DeleteUserArgsForCall(0).UserName).To(Equal(aws.String("test-bucket-prefix-some-user")))
+					})
+
+					// all calls accounted for
+					Expect(s3API.Invocations()).To(HaveLen(1))
+					Expect(iamAPI.Invocations()).To(HaveLen(3))
+				})
+			})
+		}
+		testNothingExists(iam.ErrCodeNoSuchEntityException)
+		testNothingExists("AccessDenied")
+
+		Context("when the bucket policy statement doesn't exist but the user does", func() {
+			It("still deletes the user and returns no error", func() {
+				// Set up fake API
+				s3API.GetBucketPolicyReturns(nil, awserr.New("NoSuchBucketPolicy", "full error message", nil))
+				iamAPI.ListAccessKeysReturns(&iam.ListAccessKeysOutput{}, nil)
+				iamAPI.ListAttachedUserPoliciesReturns(&iam.ListAttachedUserPoliciesOutput{
+						AttachedPolicies: []*iam.AttachedPolicy{
+							&iam.AttachedPolicy{
+								PolicyArn: aws.String("foo"),
+								PolicyName: aws.String("bar"),
+							},
+						},
+					}, nil)
+				iamAPI.DeleteAccessKeyReturns(nil, nil)
+
+				err := s3Client.RemoveUserFromBucketAndDeleteUser("some-user", "bucketName")
+				Expect(err).ToNot(HaveOccurred())
+
+				By("attempting to get the bucket policy", func() {
+					Expect(s3API.GetBucketPolicyCallCount()).To(Equal(1))
+					Expect(s3API.GetBucketPolicyArgsForCall(0)).ToNot(BeNil())
+					Expect(s3API.GetBucketPolicyArgsForCall(0).Bucket).To(Equal(aws.String(s3ClientConfig.ResourcePrefix + "bucketName")))
+				})
+
+				By("deleting user keys and policies", func() {
+					Expect(iamAPI.ListAccessKeysCallCount()).To(Equal(1))
+					Expect(iamAPI.ListAccessKeysArgsForCall(0)).ToNot(BeNil())
+					Expect(iamAPI.ListAccessKeysArgsForCall(0).UserName).To(Equal(aws.String("test-bucket-prefix-some-user")))
+
+					Expect(iamAPI.ListAttachedUserPoliciesCallCount()).To(Equal(1))
+					Expect(iamAPI.ListAttachedUserPoliciesArgsForCall(0)).ToNot(BeNil())
+					Expect(iamAPI.ListAttachedUserPoliciesArgsForCall(0).UserName).To(Equal(aws.String("test-bucket-prefix-some-user")))
+
+					Expect(iamAPI.DetachUserPolicyCallCount()).To(Equal(1))
+					Expect(iamAPI.DetachUserPolicyArgsForCall(0)).ToNot(BeNil())
+					Expect(iamAPI.DetachUserPolicyArgsForCall(0).PolicyArn).To(Equal(aws.String("foo")))
+					Expect(iamAPI.DetachUserPolicyArgsForCall(0).UserName).To(Equal(aws.String(s3ClientConfig.ResourcePrefix + "some-user")))
+				})
+
+				By("deleting the user", func() {
+					Expect(iamAPI.DeleteUserCallCount()).To(Equal(1))
+					Expect(iamAPI.DeleteUserArgsForCall(0)).ToNot(BeNil())
+					Expect(iamAPI.DeleteUserArgsForCall(0).UserName).ToNot(BeNil())
+					Expect(iamAPI.DeleteUserArgsForCall(0).UserName).To(Equal(aws.String(s3ClientConfig.ResourcePrefix + "some-user")))
+				})
+
+				// all calls accounted for
+				Expect(s3API.Invocations()).To(HaveLen(1))
+				Expect(iamAPI.Invocations()).To(HaveLen(4))
 			})
 		})
 	})

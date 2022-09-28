@@ -3,7 +3,6 @@ package provider
 import (
 	"context"
 	"errors"
-	"strings"
 
 	"github.com/alphagov/paas-s3-broker/s3"
 	provideriface "github.com/alphagov/paas-service-broker-base/provider"
@@ -32,10 +31,8 @@ func (s *S3Provider) Deprovision(ctx context.Context, deprovisionData providerif
 	operationData string, isAsync bool, err error) {
 
 	err = s.client.DeleteBucket(deprovisionData.InstanceID)
-	if err != nil {
-		if strings.Contains(err.Error(), "NoSuchBucket: The specified bucket does not exist") {
-			return "", false, brokerapi.ErrInstanceDoesNotExist
-		}
+	if err == s3.ErrNoSuchResources {
+		return "", false, brokerapi.ErrInstanceDoesNotExist
 	}
 	return "", false, err
 }
@@ -59,6 +56,9 @@ func (s *S3Provider) Unbind(ctx context.Context, unbindData provideriface.Unbind
 
 	err = s.client.RemoveUserFromBucketAndDeleteUser(unbindData.BindingID, unbindData.InstanceID)
 	if err != nil {
+		if err == s3.ErrNoSuchResources {
+			return brokerapi.UnbindSpec{}, brokerapi.ErrBindingDoesNotExist
+		}
 		return brokerapi.UnbindSpec{}, err
 	}
 	return brokerapi.UnbindSpec{
