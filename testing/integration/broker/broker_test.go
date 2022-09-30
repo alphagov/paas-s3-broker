@@ -111,6 +111,25 @@ var _ = Describe("Broker", func() {
 
 		By("Asserting the first user's credentials still work for reading and writing")
 		helpers.AssertBucketReadWriteAccess(readWriteBindingCreds, s3ClientConfig.ResourcePrefix, instanceID, s3ClientConfig.AWSRegion)
+
+		By("Unbinding the second app")
+		// previously deferred helpers.Unbind calls should pass immediately if binding is already gone
+		helpers.Unbind(brokerTester, instanceID, serviceID, planID, binding2ID)
+
+		By("Asserting the second user's credentials no longer work")
+		helpers.WriteTempFile(readWriteBindingCreds, s3ClientConfig.ResourcePrefix, instanceID, s3ClientConfig.AWSRegion)
+		helpers.AssertNoBucketAccess(readOnlyBindingCreds, s3ClientConfig.ResourcePrefix, instanceID, s3ClientConfig.AWSRegion)
+
+		By("Asserting that second user's credentials work as before")
+		helpers.AssertBucketReadWriteAccess(readWriteBindingCreds, s3ClientConfig.ResourcePrefix, instanceID, s3ClientConfig.AWSRegion)
+
+		By("Unbinding the first app")
+		// previously deferred helpers.Unbind calls should pass immediately if binding is already gone
+		helpers.Unbind(brokerTester, instanceID, serviceID, planID, binding1ID)
+
+		By("Asserting that neither credentials now work")
+		helpers.AssertNoBucketAccess(readWriteBindingCreds, s3ClientConfig.ResourcePrefix, instanceID, s3ClientConfig.AWSRegion)
+		helpers.AssertNoBucketAccess(readOnlyBindingCreds, s3ClientConfig.ResourcePrefix, instanceID, s3ClientConfig.AWSRegion)
 	})
 
 	It("manages public buckets correctly", func() {

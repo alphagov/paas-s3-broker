@@ -127,14 +127,19 @@ func DeprovisionService(brokerTester brokertesting.BrokerTester, instanceID, ser
 }
 
 func Unbind(brokerTester brokertesting.BrokerTester, instanceID string, serviceID string, planID string, bindingID string) {
-	By(fmt.Sprintf("Deferred: Unbinding the %s binding", bindingID))
+	By(fmt.Sprintf("Unbinding the %s binding", bindingID))
 
 	// We use eventually here because, in test scenarios,
 	// we can hit the get-bucket-policy endpoint before the
-	// bucket policy has become consistent after an update
+	// bucket policy has become consistent after an update.
+	// we only want to stop when the broker can't find any
+	// trace of the resources, which should result in a
+	// 410
 	Eventually(func() int {
-		return brokerTester.Unbind(instanceID, serviceID, planID, bindingID, true).Code
-	}, 10*time.Second).Should(Equal(http.StatusOK))
+		code := brokerTester.Unbind(instanceID, serviceID, planID, bindingID, true).Code
+		Expect(code).To(BeNumerically("<", 500))
+		return code
+	}, 10*time.Second).Should(Equal(http.StatusGone))
 }
 
 func createS3Object(s3Client *awsS3.S3, content string, bucketName string) error {
