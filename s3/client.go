@@ -3,6 +3,7 @@ package s3
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"time"
 
@@ -12,6 +13,7 @@ import (
 	"github.com/alphagov/paas-s3-broker/s3/policy"
 	"github.com/alphagov/paas-service-broker-base/provider"
 	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/awserr"
 	"github.com/aws/aws-sdk-go/aws/request"
 	"github.com/aws/aws-sdk-go/service/iam"
 	"github.com/aws/aws-sdk-go/service/iam/iamiface"
@@ -22,6 +24,10 @@ import (
 const (
 	awsMaxWaitAttempts = 15
 	awsWaitDelay       = 3 * time.Second
+)
+
+var (
+	ErrNoSuchResources  = errors.New("no such resources found")
 )
 
 //go:generate counterfeiter -o fakes/fake_s3_client.go . Client
@@ -240,6 +246,12 @@ func (s *S3Client) DeleteBucket(name string) error {
 	_, err := s.s3Client.DeleteBucket(&s3.DeleteBucketInput{
 		Bucket: aws.String(fullBucketName),
 	})
+	if err != nil {
+		logger.Error("delete-bucket", err)
+		if awsErr, ok := err.(awserr.Error); ok && awsErr.Code() == "NoSuchBucket" {
+			return ErrNoSuchResources
+		}
+	}
 	return err
 }
 
@@ -410,42 +422,89 @@ func (s *S3Client) deleteUserWithoutError(username string) {
 	}
 }
 
+func isIAMUserNotFound(err error) bool {
+	// if we only have path-restricted permissions on IAM users (as is
+	// the recommended configuration), a non-existent user will be
+	// indistinguishable from one we don't have permission to see because
+	// a non-existent user has no path to qualify us to be able to see it
+	awsErr, ok := err.(awserr.Error)
+	return (!ok) || (awsErr.Code() != iam.ErrCodeNoSuchEntityException && awsErr.Code() != "AccessDenied")
+}
+
 func (s *S3Client) deleteUser(username string) error {
-	keys, err := s.iamClient.ListAccessKeys(&iam.ListAccessKeysInput{
-		UserName: aws.String(username),
-	})
-	policies, err := s.iamClient.ListAttachedUserPolicies(&iam.ListAttachedUserPoliciesInput{
+	hadEffect := false
+
+	var (
+		keys []*iam.AccessKeyMetadata
+		policies []*iam.AttachedPolicy
+	)
+
+	keysOutput, err := s.iamClient.ListAccessKeys(&iam.ListAccessKeysInput{
 		UserName: aws.String(username),
 	})
 	if err != nil {
-		return err
-	}
-	if keys != nil {
-		for _, k := range keys.AccessKeyMetadata {
-			_, err := s.iamClient.DeleteAccessKey(&iam.DeleteAccessKeyInput{
-				UserName:    aws.String(username),
-				AccessKeyId: k.AccessKeyId,
-			})
-			if err != nil {
-				return err
-			}
+		s.logger.Error("list-access-keys", err)
+		if isIAMUserNotFound(err) {
+			return err
 		}
+	} else {
+		keys = keysOutput.AccessKeyMetadata
 	}
-	if policies != nil {
-		for _, p := range policies.AttachedPolicies {
-			_, err := s.iamClient.DetachUserPolicy(&iam.DetachUserPolicyInput{
-				UserName:  aws.String(username),
-				PolicyArn: p.PolicyArn,
-			})
-			if err != nil {
-				return err
-			}
+
+	policiesOutput, err := s.iamClient.ListAttachedUserPolicies(&iam.ListAttachedUserPoliciesInput{
+		UserName: aws.String(username),
+	})
+	if err != nil {
+		s.logger.Error("list-attached-user-policies", err)
+		if isIAMUserNotFound(err) {
+			return err
 		}
+	} else {
+		policies = policiesOutput.AttachedPolicies
 	}
+
+	for _, k := range keys {
+		_, err := s.iamClient.DeleteAccessKey(&iam.DeleteAccessKeyInput{
+			UserName:    aws.String(username),
+			AccessKeyId: k.AccessKeyId,
+		})
+		if err != nil {
+			s.logger.Error("delete-access-key", err)
+			return err
+		}
+
+		hadEffect = true
+	}
+	for _, p := range policies {
+		_, err := s.iamClient.DetachUserPolicy(&iam.DetachUserPolicyInput{
+			UserName:  aws.String(username),
+			PolicyArn: p.PolicyArn,
+		})
+		if err != nil {
+			s.logger.Error("detach-user-policy", err)
+			return err
+		}
+
+		hadEffect = true
+	}
+
 	_, err = s.iamClient.DeleteUser(&iam.DeleteUserInput{
 		UserName: aws.String(username),
 	})
-	return err
+	if err != nil {
+		s.logger.Error("delete-user", err)
+		if isIAMUserNotFound(err) {
+			return err
+		}
+	} else {
+		hadEffect = true
+	}
+
+	if !hadEffect {
+		return ErrNoSuchResources
+	}
+
+	return nil
 }
 
 func (s *S3Client) tagBucket(instanceID string, tags []*s3.Tag) (output *s3.PutBucketTaggingOutput, err error) {
@@ -472,6 +531,8 @@ func (s *S3Client) buildBindingUsername(bindingID string) string {
 func (s *S3Client) RemoveUserFromBucketAndDeleteUser(bindingID, bucketName string) error {
 	logger := s.logger.Session("remove-user-from-bucket")
 
+	hadEffect := false
+
 	username := s.buildBindingUsername(bindingID)
 	fullBucketName := s.buildBucketName(bucketName)
 
@@ -481,41 +542,62 @@ func (s *S3Client) RemoveUserFromBucketAndDeleteUser(bindingID, bucketName strin
 	})
 	if err != nil {
 		logger.Error("get-bucket-policy", err)
-		return err
-	}
-
-	logger.Info("remove-user-from-policy", lager.Data{"bucket": fullBucketName, "username": username})
-	updatedPolicy, err := policy.RemoveUserFromPolicy(*getBucketPolicyOutput.Policy, username)
-	if err != nil {
-		logger.Error("remove-user-from-policy", err)
-
-		if !strings.Contains(err.Error(), "could not find a policy statement for user") {
-			return err
-		}
-	}
-
-	logger.Info("policy-statements", lager.Data{"bucket": fullBucketName, "count": len(updatedPolicy.Statement)})
-	if len(updatedPolicy.Statement) > 0 {
-		logger.Info("update-policy", lager.Data{"bucket": fullBucketName})
-		updatedPolicyJSON, err := json.Marshal(updatedPolicy)
-		if err != nil {
-			logger.Error("update-policy", err)
-			return err
-		}
-
-		err = s.putBucketPolicyWithTimeout(fullBucketName, string(updatedPolicyJSON))
-		if err != nil {
-			logger.Error("put-bucket-policy-with-timeout", err)
+		if awsErr, ok := err.(awserr.Error); (!ok) || awsErr.Code() != "NoSuchBucketPolicy" {
 			return err
 		}
 	} else {
-		logger.Info("delete-policy", lager.Data{"bucket": fullBucketName})
-		_, err = s.s3Client.DeleteBucketPolicy(&s3.DeleteBucketPolicyInput{
-			Bucket: aws.String(fullBucketName),
-		})
+		logger.Info(
+			"remove-user-from-policy",
+			lager.Data{
+				"bucket": fullBucketName,
+				"username": username,
+			},
+		)
+		updatedPolicy, err := policy.RemoveUserFromPolicy(
+			*getBucketPolicyOutput.Policy,
+			username,
+		)
 		if err != nil {
-			logger.Error("delete-policy", err)
-			return err
+			logger.Error("remove-user-from-policy", err)
+
+			if !strings.Contains(err.Error(), "could not find a policy statement for user") {
+				return err
+			}
+		} else {
+			logger.Info(
+				"policy-statements",
+				lager.Data{
+					"bucket": fullBucketName,
+					"count": len(updatedPolicy.Statement),
+				},
+			)
+			if len(updatedPolicy.Statement) > 0 {
+				logger.Info("update-policy", lager.Data{"bucket": fullBucketName})
+				updatedPolicyJSON, err := json.Marshal(updatedPolicy)
+				if err != nil {
+					logger.Error("update-policy", err)
+					return err
+				}
+
+				err = s.putBucketPolicyWithTimeout(
+					fullBucketName,
+					string(updatedPolicyJSON),
+				)
+				if err != nil {
+					logger.Error("put-bucket-policy-with-timeout", err)
+					return err
+				}
+			} else {
+				logger.Info("delete-policy", lager.Data{"bucket": fullBucketName})
+				_, err = s.s3Client.DeleteBucketPolicy(&s3.DeleteBucketPolicyInput{
+					Bucket: aws.String(fullBucketName),
+				})
+				if err != nil {
+					logger.Error("delete-policy", err)
+					return err
+				}
+			}
+			hadEffect = true
 		}
 	}
 
@@ -523,7 +605,15 @@ func (s *S3Client) RemoveUserFromBucketAndDeleteUser(bindingID, bucketName strin
 	err = s.deleteUser(username)
 	if err != nil {
 		logger.Error("delete-user", err)
-		return err
+		if err != ErrNoSuchResources {
+			return err
+		}
+	} else {
+		hadEffect = true
+	}
+
+	if !hadEffect {
+		return ErrNoSuchResources
 	}
 
 	return nil

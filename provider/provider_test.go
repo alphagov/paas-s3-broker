@@ -63,7 +63,7 @@ var _ = Describe("Provider", func() {
 		})
 
 		It("returns a specific error if the bucket does not exist", func() {
-			fakeS3Client.DeleteBucketReturns(errors.New("NoSuchBucket: The specified bucket does not exist"))
+			fakeS3Client.DeleteBucketReturns(s3.ErrNoSuchResources)
 			_, _, err := s3Provider.Deprovision(context.Background(), provideriface.DeprovisionData{})
 			Expect(err).To(MatchError(brokerapi.ErrInstanceDoesNotExist))
 		})
@@ -137,13 +137,21 @@ var _ = Describe("Provider", func() {
 			Expect(actualBucketName).To(Equal(instanceID))
 		})
 
-		It("errors when adding the user errors", func() {
+		It("passes through the error when removing the user returns an unexpected error", func() {
 			unbindData := provideriface.UnbindData{}
 			errRemovingUser := errors.New("error-removing-user")
 			fakeS3Client.RemoveUserFromBucketAndDeleteUserReturns(errRemovingUser)
 
 			_, err := s3Provider.Unbind(context.Background(), unbindData)
 			Expect(err).To(MatchError(errRemovingUser))
+		})
+
+		It("returns ErrBindingDoesNotExist when removing the user returns ErrNoSuchResources", func() {
+			unbindData := provideriface.UnbindData{}
+			fakeS3Client.RemoveUserFromBucketAndDeleteUserReturns(s3.ErrNoSuchResources)
+
+			_, err := s3Provider.Unbind(context.Background(), unbindData)
+			Expect(err).To(MatchError(brokerapi.ErrBindingDoesNotExist))
 		})
 	})
 
