@@ -1,1 +1,4 @@
 /.idea
+
+# Temporary Build Files
+amd64/*

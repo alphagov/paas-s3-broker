@@ -148,3 +148,13 @@ The integration tests will require you to have at least the IAM permissions list
 ## `costs_by_month` utility
 
 In `cmd/costs_by_month/README.md` you can find instructions for calculating the cost of tenant S3 buckets over the last few months.
+
+## Patching an existing bosh environment
+
+If you want to patch an existing bosh environment you can run the following command:
+
+```
+make bosh_scp
+```
+
+This requires an existing bosh session to be established beforehand.
