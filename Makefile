@@ -1,6 +1,6 @@
 .PHONY: unit
 unit:
-	ginkgo $(COMMAND) -r --skip-package=testing/integration $(PACKAGE)
+	go run github.com/onsi/ginkgo/v2/ginkgo $(COMMAND) -r --skip-package=testing/integration $(PACKAGE)
 
 .PHONY: test
 test:
