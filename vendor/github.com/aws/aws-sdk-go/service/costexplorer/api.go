@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awsutil"
 	"github.com/aws/aws-sdk-go/aws/request"
+	"github.com/aws/aws-sdk-go/private/protocol"
 )
 
 const opCreateCostCategoryDefinition = "CreateCostCategoryDefinition"
@@ -54,12 +55,6 @@ func (c *CostExplorer) CreateCostCategoryDefinitionRequest(input *CreateCostCate
 
 // CreateCostCategoryDefinition API operation for AWS Cost Explorer Service.
 //
-//
-//  Cost Category is in preview release for AWS Billing and Cost Management
-//  and is subject to change. Your use of Cost Categories is subject to the
-//  Beta Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
-//  (Section 1.10).
-//
 // Creates a new Cost Category with the requested name and rules.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -69,12 +64,12 @@ func (c *CostExplorer) CreateCostCategoryDefinitionRequest(input *CreateCostCate
 // See the AWS API reference guide for AWS Cost Explorer Service's
 // API operation CreateCostCategoryDefinition for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceQuotaExceededException "ServiceQuotaExceededException"
+// Returned Error Types:
+//   * ServiceQuotaExceededException
 //   You've reached the limit on the number of resources you can create, or exceeded
 //   the size of an individual resources.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
+//   * LimitExceededException
 //   You made too many calls in a short period of time. Try again later.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CreateCostCategoryDefinition
@@ -143,12 +138,6 @@ func (c *CostExplorer) DeleteCostCategoryDefinitionRequest(input *DeleteCostCate
 
 // DeleteCostCategoryDefinition API operation for AWS Cost Explorer Service.
 //
-//
-//  Cost Category is in preview release for AWS Billing and Cost Management
-//  and is subject to change. Your use of Cost Categories is subject to the
-//  Beta Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
-//  (Section 1.10).
-//
 // Deletes a Cost Category. Expenses from this month going forward will no longer
 // be categorized with this Cost Category.
 //
@@ -159,11 +148,11 @@ func (c *CostExplorer) DeleteCostCategoryDefinitionRequest(input *DeleteCostCate
 // See the AWS API reference guide for AWS Cost Explorer Service's
 // API operation DeleteCostCategoryDefinition for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
+// Returned Error Types:
+//   * ResourceNotFoundException
 //   The specified ARN in the request doesn't exist.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
+//   * LimitExceededException
 //   You made too many calls in a short period of time. Try again later.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/DeleteCostCategoryDefinition
@@ -232,12 +221,6 @@ func (c *CostExplorer) DescribeCostCategoryDefinitionRequest(input *DescribeCost
 
 // DescribeCostCategoryDefinition API operation for AWS Cost Explorer Service.
 //
-//
-//  Cost Category is in preview release for AWS Billing and Cost Management
-//  and is subject to change. Your use of Cost Categories is subject to the
-//  Beta Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
-//  (Section 1.10).
-//
 // Returns the name, ARN, rules, definition, and effective dates of a Cost Category
 // that's defined in the account.
 //
@@ -253,11 +236,11 @@ func (c *CostExplorer) DescribeCostCategoryDefinitionRequest(input *DescribeCost
 // See the AWS API reference guide for AWS Cost Explorer Service's
 // API operation DescribeCostCategoryDefinition for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
+// Returned Error Types:
+//   * ResourceNotFoundException
 //   The specified ARN in the request doesn't exist.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
+//   * LimitExceededException
 //   You made too many calls in a short period of time. Try again later.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/DescribeCostCategoryDefinition
@@ -330,7 +313,7 @@ func (c *CostExplorer) GetCostAndUsageRequest(input *GetCostAndUsageInput) (req 
 // cost and usage-related metric, such as BlendedCosts or UsageQuantity, that
 // you want the request to return. You can also filter and group your data by
 // various dimensions, such as SERVICE or AZ, in a specific time range. For
-// a complete list of valid dimensions, see the GetDimensionValues (http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html)
+// a complete list of valid dimensions, see the GetDimensionValues (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html)
 // operation. Master accounts in an organization in AWS Organizations have access
 // to all member accounts.
 //
@@ -341,20 +324,20 @@ func (c *CostExplorer) GetCostAndUsageRequest(input *GetCostAndUsageInput) (req 
 // See the AWS API reference guide for AWS Cost Explorer Service's
 // API operation GetCostAndUsage for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
+// Returned Error Types:
+//   * LimitExceededException
 //   You made too many calls in a short period of time. Try again later.
 //
-//   * ErrCodeBillExpirationException "BillExpirationException"
+//   * BillExpirationException
 //   The requested report expired. Update the date interval and try again.
 //
-//   * ErrCodeDataUnavailableException "DataUnavailableException"
+//   * DataUnavailableException
 //   The requested data is unavailable.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
+//   * InvalidNextTokenException
 //   The pagination token is invalid. Try again without a pagination token.
 //
-//   * ErrCodeRequestChangedException "RequestChangedException"
+//   * RequestChangedException
 //   Your request parameters changed between pages. Try again with the old parameters
 //   or without a pagination token.
 //
@@ -428,7 +411,7 @@ func (c *CostExplorer) GetCostAndUsageWithResourcesRequest(input *GetCostAndUsag
 // specify which cost and usage-related metric, such as BlendedCosts or UsageQuantity,
 // that you want the request to return. You can also filter and group your data
 // by various dimensions, such as SERVICE or AZ, in a specific time range. For
-// a complete list of valid dimensions, see the GetDimensionValues (http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html)
+// a complete list of valid dimensions, see the GetDimensionValues (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html)
 // operation. Master accounts in an organization in AWS Organizations have access
 // to all member accounts. This API is currently available for the Amazon Elastic
 // Compute Cloud – Compute service only.
@@ -445,20 +428,20 @@ func (c *CostExplorer) GetCostAndUsageWithResourcesRequest(input *GetCostAndUsag
 // See the AWS API reference guide for AWS Cost Explorer Service's
 // API operation GetCostAndUsageWithResources for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeDataUnavailableException "DataUnavailableException"
+// Returned Error Types:
+//   * DataUnavailableException
 //   The requested data is unavailable.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
+//   * LimitExceededException
 //   You made too many calls in a short period of time. Try again later.
 //
-//   * ErrCodeBillExpirationException "BillExpirationException"
+//   * BillExpirationException
 //   The requested report expired. Update the date interval and try again.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
+//   * InvalidNextTokenException
 //   The pagination token is invalid. Try again without a pagination token.
 //
-//   * ErrCodeRequestChangedException "RequestChangedException"
+//   * RequestChangedException
 //   Your request parameters changed between pages. Try again with the old parameters
 //   or without a pagination token.
 //
@@ -538,11 +521,11 @@ func (c *CostExplorer) GetCostForecastRequest(input *GetCostForecastInput) (req 
 // See the AWS API reference guide for AWS Cost Explorer Service's
 // API operation GetCostForecast for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
+// Returned Error Types:
+//   * LimitExceededException
 //   You made too many calls in a short period of time. Try again later.
 //
-//   * ErrCodeDataUnavailableException "DataUnavailableException"
+//   * DataUnavailableException
 //   The requested data is unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetCostForecast
@@ -621,20 +604,20 @@ func (c *CostExplorer) GetDimensionValuesRequest(input *GetDimensionValuesInput)
 // See the AWS API reference guide for AWS Cost Explorer Service's
 // API operation GetDimensionValues for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
+// Returned Error Types:
+//   * LimitExceededException
 //   You made too many calls in a short period of time. Try again later.
 //
-//   * ErrCodeBillExpirationException "BillExpirationException"
+//   * BillExpirationException
 //   The requested report expired. Update the date interval and try again.
 //
-//   * ErrCodeDataUnavailableException "DataUnavailableException"
+//   * DataUnavailableException
 //   The requested data is unavailable.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
+//   * InvalidNextTokenException
 //   The pagination token is invalid. Try again without a pagination token.
 //
-//   * ErrCodeRequestChangedException "RequestChangedException"
+//   * RequestChangedException
 //   Your request parameters changed between pages. Try again with the old parameters
 //   or without a pagination token.
 //
@@ -708,8 +691,9 @@ func (c *CostExplorer) GetReservationCoverageRequest(input *GetReservationCovera
 // see how much of your Amazon Elastic Compute Cloud, Amazon ElastiCache, Amazon
 // Relational Database Service, or Amazon Redshift usage is covered by a reservation.
 // An organization's master account can see the coverage of the associated member
-// accounts. For any time period, you can filter data about reservation usage
-// by the following dimensions:
+// accounts. This supports dimensions, Cost Categories, and nested expressions.
+// For any time period, you can filter data about reservation usage by the following
+// dimensions:
 //
 //    * AZ
 //
@@ -744,14 +728,14 @@ func (c *CostExplorer) GetReservationCoverageRequest(input *GetReservationCovera
 // See the AWS API reference guide for AWS Cost Explorer Service's
 // API operation GetReservationCoverage for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
+// Returned Error Types:
+//   * LimitExceededException
 //   You made too many calls in a short period of time. Try again later.
 //
-//   * ErrCodeDataUnavailableException "DataUnavailableException"
+//   * DataUnavailableException
 //   The requested data is unavailable.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
+//   * InvalidNextTokenException
 //   The pagination token is invalid. Try again without a pagination token.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetReservationCoverage
@@ -846,14 +830,14 @@ func (c *CostExplorer) GetReservationPurchaseRecommendationRequest(input *GetRes
 // See the AWS API reference guide for AWS Cost Explorer Service's
 // API operation GetReservationPurchaseRecommendation for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
+// Returned Error Types:
+//   * LimitExceededException
 //   You made too many calls in a short period of time. Try again later.
 //
-//   * ErrCodeDataUnavailableException "DataUnavailableException"
+//   * DataUnavailableException
 //   The requested data is unavailable.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
+//   * InvalidNextTokenException
 //   The pagination token is invalid. Try again without a pagination token.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetReservationPurchaseRecommendation
@@ -934,14 +918,14 @@ func (c *CostExplorer) GetReservationUtilizationRequest(input *GetReservationUti
 // See the AWS API reference guide for AWS Cost Explorer Service's
 // API operation GetReservationUtilization for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
+// Returned Error Types:
+//   * LimitExceededException
 //   You made too many calls in a short period of time. Try again later.
 //
-//   * ErrCodeDataUnavailableException "DataUnavailableException"
+//   * DataUnavailableException
 //   The requested data is unavailable.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
+//   * InvalidNextTokenException
 //   The pagination token is invalid. Try again without a pagination token.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetReservationUtilization
@@ -1024,11 +1008,11 @@ func (c *CostExplorer) GetRightsizingRecommendationRequest(input *GetRightsizing
 // See the AWS API reference guide for AWS Cost Explorer Service's
 // API operation GetRightsizingRecommendation for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
+// Returned Error Types:
+//   * LimitExceededException
 //   You made too many calls in a short period of time. Try again later.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
+//   * InvalidNextTokenException
 //   The pagination token is invalid. Try again without a pagination token.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetRightsizingRecommendation
@@ -1105,9 +1089,9 @@ func (c *CostExplorer) GetSavingsPlansCoverageRequest(input *GetSavingsPlansCove
 //
 // Retrieves the Savings Plans covered for your account. This enables you to
 // see how much of your cost is covered by a Savings Plan. An organization’s
-// master account can see the coverage of the associated member accounts. For
-// any time period, you can filter data for Savings Plans usage with the following
-// dimensions:
+// master account can see the coverage of the associated member accounts. This
+// supports dimensions, Cost Categories, and nested expressions. For any time
+// period, you can filter data for Savings Plans usage with the following dimensions:
 //
 //    * LINKED_ACCOUNT
 //
@@ -1126,14 +1110,14 @@ func (c *CostExplorer) GetSavingsPlansCoverageRequest(input *GetSavingsPlansCove
 // See the AWS API reference guide for AWS Cost Explorer Service's
 // API operation GetSavingsPlansCoverage for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
+// Returned Error Types:
+//   * LimitExceededException
 //   You made too many calls in a short period of time. Try again later.
 //
-//   * ErrCodeDataUnavailableException "DataUnavailableException"
+//   * DataUnavailableException
 //   The requested data is unavailable.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
+//   * InvalidNextTokenException
 //   The pagination token is invalid. Try again without a pagination token.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetSavingsPlansCoverage
@@ -1264,11 +1248,11 @@ func (c *CostExplorer) GetSavingsPlansPurchaseRecommendationRequest(input *GetSa
 // See the AWS API reference guide for AWS Cost Explorer Service's
 // API operation GetSavingsPlansPurchaseRecommendation for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
+// Returned Error Types:
+//   * LimitExceededException
 //   You made too many calls in a short period of time. Try again later.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
+//   * InvalidNextTokenException
 //   The pagination token is invalid. Try again without a pagination token.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetSavingsPlansPurchaseRecommendation
@@ -1351,11 +1335,11 @@ func (c *CostExplorer) GetSavingsPlansUtilizationRequest(input *GetSavingsPlansU
 // See the AWS API reference guide for AWS Cost Explorer Service's
 // API operation GetSavingsPlansUtilization for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
+// Returned Error Types:
+//   * LimitExceededException
 //   You made too many calls in a short period of time. Try again later.
 //
-//   * ErrCodeDataUnavailableException "DataUnavailableException"
+//   * DataUnavailableException
 //   The requested data is unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetSavingsPlansUtilization
@@ -1447,14 +1431,14 @@ func (c *CostExplorer) GetSavingsPlansUtilizationDetailsRequest(input *GetSaving
 // See the AWS API reference guide for AWS Cost Explorer Service's
 // API operation GetSavingsPlansUtilizationDetails for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
+// Returned Error Types:
+//   * LimitExceededException
 //   You made too many calls in a short period of time. Try again later.
 //
-//   * ErrCodeDataUnavailableException "DataUnavailableException"
+//   * DataUnavailableException
 //   The requested data is unavailable.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
+//   * InvalidNextTokenException
 //   The pagination token is invalid. Try again without a pagination token.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetSavingsPlansUtilizationDetails
@@ -1585,20 +1569,20 @@ func (c *CostExplorer) GetTagsRequest(input *GetTagsInput) (req *request.Request
 // See the AWS API reference guide for AWS Cost Explorer Service's
 // API operation GetTags for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
+// Returned Error Types:
+//   * LimitExceededException
 //   You made too many calls in a short period of time. Try again later.
 //
-//   * ErrCodeBillExpirationException "BillExpirationException"
+//   * BillExpirationException
 //   The requested report expired. Update the date interval and try again.
 //
-//   * ErrCodeDataUnavailableException "DataUnavailableException"
+//   * DataUnavailableException
 //   The requested data is unavailable.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
+//   * InvalidNextTokenException
 //   The pagination token is invalid. Try again without a pagination token.
 //
-//   * ErrCodeRequestChangedException "RequestChangedException"
+//   * RequestChangedException
 //   Your request parameters changed between pages. Try again with the old parameters
 //   or without a pagination token.
 //
@@ -1678,14 +1662,14 @@ func (c *CostExplorer) GetUsageForecastRequest(input *GetUsageForecastInput) (re
 // See the AWS API reference guide for AWS Cost Explorer Service's
 // API operation GetUsageForecast for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
+// Returned Error Types:
+//   * LimitExceededException
 //   You made too many calls in a short period of time. Try again later.
 //
-//   * ErrCodeDataUnavailableException "DataUnavailableException"
+//   * DataUnavailableException
 //   The requested data is unavailable.
 //
-//   * ErrCodeUnresolvableUsageUnitException "UnresolvableUsageUnitException"
+//   * UnresolvableUsageUnitException
 //   Cost Explorer was unable to identify the usage unit. Provide UsageType/UsageTypeGroup
 //   filter selections that contain matching units, for example: hours.
 //
@@ -1742,6 +1726,12 @@ func (c *CostExplorer) ListCostCategoryDefinitionsRequest(input *ListCostCategor
 		Name:       opListCostCategoryDefinitions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -1755,18 +1745,13 @@ func (c *CostExplorer) ListCostCategoryDefinitionsRequest(input *ListCostCategor
 
 // ListCostCategoryDefinitions API operation for AWS Cost Explorer Service.
 //
-//
-//  Cost Category is in preview release for AWS Billing and Cost Management
-//  and is subject to change. Your use of Cost Categories is subject to the
-//  Beta Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
-//  (Section 1.10).
-//
-// Returns the name, ARN and effective dates of all Cost Categories defined
-// in the account. You have the option to use EffectiveOn to return a list of
-// Cost Categories that were active on a specific date. If there is no EffectiveOn
-// specified, you’ll see Cost Categories that are effective on the current
-// date. If Cost Category is still effective, EffectiveEnd is omitted in the
-// response.
+// Returns the name, ARN, NumberOfRules and effective dates of all Cost Categories
+// defined in the account. You have the option to use EffectiveOn to return
+// a list of Cost Categories that were active on a specific date. If there is
+// no EffectiveOn specified, you’ll see Cost Categories that are effective
+// on the current date. If Cost Category is still effective, EffectiveEnd is
+// omitted in the response. ListCostCategoryDefinitions supports pagination.
+// The request can have a MaxResults range up to 100.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1775,8 +1760,8 @@ func (c *CostExplorer) ListCostCategoryDefinitionsRequest(input *ListCostCategor
 // See the AWS API reference guide for AWS Cost Explorer Service's
 // API operation ListCostCategoryDefinitions for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
+// Returned Error Types:
+//   * LimitExceededException
 //   You made too many calls in a short period of time. Try again later.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ListCostCategoryDefinitions
@@ -1799,6 +1784,58 @@ func (c *CostExplorer) ListCostCategoryDefinitionsWithContext(ctx aws.Context, i
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
 	return out, req.Send()
+}
+
+// ListCostCategoryDefinitionsPages iterates over the pages of a ListCostCategoryDefinitions operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See ListCostCategoryDefinitions method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListCostCategoryDefinitions operation.
+//    pageNum := 0
+//    err := client.ListCostCategoryDefinitionsPages(params,
+//        func(page *costexplorer.ListCostCategoryDefinitionsOutput, lastPage bool) bool {
+//            pageNum++
+//            fmt.Println(page)
+//            return pageNum <= 3
+//        })
+//
+func (c *CostExplorer) ListCostCategoryDefinitionsPages(input *ListCostCategoryDefinitionsInput, fn func(*ListCostCategoryDefinitionsOutput, bool) bool) error {
+	return c.ListCostCategoryDefinitionsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// ListCostCategoryDefinitionsPagesWithContext same as ListCostCategoryDefinitionsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CostExplorer) ListCostCategoryDefinitionsPagesWithContext(ctx aws.Context, input *ListCostCategoryDefinitionsInput, fn func(*ListCostCategoryDefinitionsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *ListCostCategoryDefinitionsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.ListCostCategoryDefinitionsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*ListCostCategoryDefinitionsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
 }
 
 const opUpdateCostCategoryDefinition = "UpdateCostCategoryDefinition"
@@ -1845,12 +1882,6 @@ func (c *CostExplorer) UpdateCostCategoryDefinitionRequest(input *UpdateCostCate
 
 // UpdateCostCategoryDefinition API operation for AWS Cost Explorer Service.
 //
-//
-//  Cost Category is in preview release for AWS Billing and Cost Management
-//  and is subject to change. Your use of Cost Categories is subject to the
-//  Beta Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
-//  (Section 1.10).
-//
 // Updates an existing Cost Category. Changes made to the Cost Category rules
 // will be used to categorize the current month’s expenses and future expenses.
 // This won’t change categorization for the previous months.
@@ -1862,15 +1893,15 @@ func (c *CostExplorer) UpdateCostCategoryDefinitionRequest(input *UpdateCostCate
 // See the AWS API reference guide for AWS Cost Explorer Service's
 // API operation UpdateCostCategoryDefinition for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
+// Returned Error Types:
+//   * ResourceNotFoundException
 //   The specified ARN in the request doesn't exist.
 //
-//   * ErrCodeServiceQuotaExceededException "ServiceQuotaExceededException"
+//   * ServiceQuotaExceededException
 //   You've reached the limit on the number of resources you can create, or exceeded
 //   the size of an individual resources.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
+//   * LimitExceededException
 //   You made too many calls in a short period of time. Try again later.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/UpdateCostCategoryDefinition
@@ -1895,12 +1926,62 @@ func (c *CostExplorer) UpdateCostCategoryDefinitionWithContext(ctx aws.Context, 
 	return out, req.Send()
 }
 
-//
-//  Cost Category is in preview release for AWS Billing and Cost Management
-//  and is subject to change. Your use of Cost Categories is subject to the
-//  Beta Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
-//  (Section 1.10).
-//
+// The requested report expired. Update the date interval and try again.
+type BillExpirationException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation
+func (s BillExpirationException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BillExpirationException) GoString() string {
+	return s.String()
+}
+
+func newErrorBillExpirationException(v protocol.ResponseMetadata) error {
+	return &BillExpirationException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *BillExpirationException) Code() string {
+	return "BillExpirationException"
+}
+
+// Message returns the exception's message.
+func (s *BillExpirationException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *BillExpirationException) OrigErr() error {
+	return nil
+}
+
+func (s *BillExpirationException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *BillExpirationException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *BillExpirationException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // The structure of Cost Categories. This includes detailed metadata and the
 // set of rules for the CostCategory object.
 type CostCategory struct {
@@ -1983,12 +2064,6 @@ func (s *CostCategory) SetRules(v []*CostCategoryRule) *CostCategory {
 	return s
 }
 
-//
-//  Cost Category is in preview release for AWS Billing and Cost Management
-//  and is subject to change. Your use of Cost Categories is subject to the
-//  Beta Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
-//  (Section 1.10).
-//
 // A reference to a Cost Category containing only enough information to identify
 // the Cost Category.
 //
@@ -1997,7 +2072,7 @@ func (s *CostCategory) SetRules(v []*CostCategoryRule) *CostCategory {
 type CostCategoryReference struct {
 	_ struct{} `type:"structure"`
 
-	// The unique identifier for your Cost Category Reference.
+	// The unique identifier for your Cost Category.
 	CostCategoryArn *string `min:"20" type:"string"`
 
 	// The Cost Category's effective end date.
@@ -2008,6 +2083,9 @@ type CostCategoryReference struct {
 
 	// The unique name of the Cost Category.
 	Name *string `min:"1" type:"string"`
+
+	// The number of rules associated with a specific Cost Category.
+	NumberOfRules *int64 `type:"integer"`
 }
 
 // String returns the string representation
@@ -2044,23 +2122,31 @@ func (s *CostCategoryReference) SetName(v string) *CostCategoryReference {
 	return s
 }
 
-//
-//  Cost Category is in preview release for AWS Billing and Cost Management
-//  and is subject to change. Your use of Cost Categories is subject to the
-//  Beta Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
-//  (Section 1.10).
-//
+// SetNumberOfRules sets the NumberOfRules field's value.
+func (s *CostCategoryReference) SetNumberOfRules(v int64) *CostCategoryReference {
+	s.NumberOfRules = &v
+	return s
+}
+
 // Rules are processed in order. If there are multiple rules that match the
 // line item, then the first rule to match is used to determine that Cost Category
 // value.
 type CostCategoryRule struct {
 	_ struct{} `type:"structure"`
 
-	// An Expression (http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
+	// An Expression (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
 	// object used to categorize costs. This supports dimensions, Tags, and nested
-	// expressions. Currently the only dimensions supported is LINKED_ACCOUNT.
+	// expressions. Currently the only dimensions supported are LINKED_ACCOUNT,
+	// SERVICE_CODE, RECORD_TYPE, and LINKED_ACCOUNT_NAME.
 	//
-	// Root level OR is not supported. We recommend you create a separate rule instead.
+	// Root level OR is not supported. We recommend that you create a separate rule
+	// instead.
+	//
+	// RECORD_TYPE is a dimension used for Cost Explorer APIs, and is also supported
+	// for Cost Category expressions. This dimension uses different terms, depending
+	// on whether you're using the console or API/JSON editor. For a detailed comparison,
+	// see Term Comparisons (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-cost-categories.html#cost-categories-terms)
+	// in the AWS Billing and Cost Management User Guide.
 	//
 	// Rule is a required field
 	Rule *Expression `type:"structure" required:"true"`
@@ -2117,13 +2203,7 @@ func (s *CostCategoryRule) SetValue(v string) *CostCategoryRule {
 	return s
 }
 
-//
-//  Cost Category is in preview release for AWS Billing and Cost Management
-//  and is subject to change. Your use of Cost Categories is subject to the
-//  Beta Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
-//  (Section 1.10).
-//
-// The values that are available for Cost Categories.
+// The Cost Categories values used for filtering the costs.
 type CostCategoryValues struct {
 	_ struct{} `type:"structure"`
 
@@ -2254,11 +2334,11 @@ func (s *CoverageByTime) SetTotal(v *Coverage) *CoverageByTime {
 	return s
 }
 
-// How much it cost to run an instance.
+// How much it costs to run an instance.
 type CoverageCost struct {
 	_ struct{} `type:"structure"`
 
-	// How much an On-Demand instance cost.
+	// How much an On-Demand Instance costs.
 	OnDemandCost *string `type:"string"`
 }
 
@@ -2405,9 +2485,8 @@ type CreateCostCategoryDefinitionInput struct {
 	// RuleVersion is a required field
 	RuleVersion *string `type:"string" required:"true" enum:"CostCategoryRuleVersion"`
 
-	// Rules are processed in order. If there are multiple rules that match the
-	// line item, then the first rule to match is used to determine that Cost Category
-	// value.
+	// The Cost Category rules used to categorize costs. For more information, see
+	// CostCategoryRule (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html).
 	//
 	// Rules is a required field
 	Rules []*CostCategoryRule `min:"1" type:"list" required:"true"`
@@ -2614,6 +2693,62 @@ func (s *CurrentInstance) SetTotalRunningHoursInLookbackPeriod(v string) *Curren
 	return s
 }
 
+// The requested data is unavailable.
+type DataUnavailableException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation
+func (s DataUnavailableException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DataUnavailableException) GoString() string {
+	return s.String()
+}
+
+func newErrorDataUnavailableException(v protocol.ResponseMetadata) error {
+	return &DataUnavailableException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DataUnavailableException) Code() string {
+	return "DataUnavailableException"
+}
+
+// Message returns the exception's message.
+func (s *DataUnavailableException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DataUnavailableException) OrigErr() error {
+	return nil
+}
+
+func (s *DataUnavailableException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DataUnavailableException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DataUnavailableException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // The time period that you want the usage and costs for.
 type DateInterval struct {
 	_ struct{} `type:"structure"`
@@ -2801,12 +2936,6 @@ func (s *DescribeCostCategoryDefinitionInput) SetEffectiveOn(v string) *Describe
 type DescribeCostCategoryDefinitionOutput struct {
 	_ struct{} `type:"structure"`
 
-	//
-	//  Cost Category is in preview release for AWS Billing and Cost Management
-	//  and is subject to change. Your use of Cost Categories is subject to the
-	//  Beta Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
-	//  (Section 1.10).
-	//
 	// The structure of Cost Categories. This includes detailed metadata and the
 	// set of rules for the CostCategory object.
 	CostCategory *CostCategory `type:"structure"`
@@ -2837,12 +2966,13 @@ type DimensionValues struct {
 	// results. For example, AZ returns a list of Availability Zones.
 	Key *string `type:"string" enum:"Dimension"`
 
+	// The match options that you can use to filter your results. MatchOptions is
+	// only applicable for actions related to Cost Category. The default values
+	// for MatchOptions is EQUALS and CASE_SENSITIVE.
+	MatchOptions []*string `type:"list"`
+
 	// The metadata values that you can use to filter and group your results. You
 	// can use GetDimensionValues to find specific values.
-	//
-	// Valid values for the SERVICE dimension are Amazon Elastic Compute Cloud -
-	// Compute, Amazon Elasticsearch Service, Amazon ElastiCache, Amazon Redshift,
-	// and Amazon Relational Database Service.
 	Values []*string `type:"list"`
 }
 
@@ -2859,6 +2989,12 @@ func (s DimensionValues) GoString() string {
 // SetKey sets the Key field's value.
 func (s *DimensionValues) SetKey(v string) *DimensionValues {
 	s.Key = &v
+	return s
+}
+
+// SetMatchOptions sets the MatchOptions field's value.
+func (s *DimensionValues) SetMatchOptions(v []*string) *DimensionValues {
+	s.MatchOptions = v
 	return s
 }
 
@@ -3319,12 +3455,7 @@ type Expression struct {
 	// Return results that match both Dimension objects.
 	And []*Expression `type:"list"`
 
-	//  Cost Category is in preview release for AWS Billing and Cost Management
-	//  and is subject to change. Your use of Cost Categories is subject to the
-	//  Beta Service Participation terms of the AWS Service Terms (https://aws.amazon.com/service-terms/)
-	//  (Section 1.10).
-	//
-	// The specific CostCategory used for Expression.
+	// The filter based on CostCategory values.
 	CostCategories *CostCategoryValues `type:"structure"`
 
 	// The specific Dimension to use for Expression.
@@ -3473,7 +3604,7 @@ type GetCostAndUsageInput struct {
 	// Filters AWS costs by different dimensions. For example, you can specify SERVICE
 	// and LINKED_ACCOUNT and get the costs that are associated with that account's
 	// usage of that service. You can nest Expression objects to define any combination
-	// of dimension filters. For more information, see Expression (http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html).
+	// of dimension filters. For more information, see Expression (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html).
 	Filter *Expression `type:"structure"`
 
 	// Sets the AWS cost granularity to MONTHLY or DAILY, or HOURLY. If Granularity
@@ -3492,7 +3623,7 @@ type GetCostAndUsageInput struct {
 
 	// Which metrics are returned in the query. For more information about blended
 	// and unblended rates, see Why does the "blended" annotation appear on some
-	// line items in my bill? (https://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/).
+	// line items in my bill? (http://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/).
 	//
 	// Valid values are AmortizedCost, BlendedCost, NetAmortizedCost, NetUnblendedCost,
 	// NormalizedUsageAmount, UnblendedCost, and UsageQuantity.
@@ -3641,7 +3772,7 @@ type GetCostAndUsageWithResourcesInput struct {
 	// can specify SERVICE and LINKED_ACCOUNT and get the costs that are associated
 	// with that account's usage of that service. You can nest Expression objects
 	// to define any combination of dimension filters. For more information, see
-	// Expression (http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html).
+	// Expression (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html).
 	//
 	// The GetCostAndUsageWithResources operation requires that you either group
 	// by or filter by a ResourceId.
@@ -3658,7 +3789,7 @@ type GetCostAndUsageWithResourcesInput struct {
 
 	// Which metrics are returned in the query. For more information about blended
 	// and unblended rates, see Why does the "blended" annotation appear on some
-	// line items in my bill? (https://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/).
+	// line items in my bill? (http://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/).
 	//
 	// Valid values are AmortizedCost, BlendedCost, NetAmortizedCost, NetUnblendedCost,
 	// NormalizedUsageAmount, UnblendedCost, and UsageQuantity.
@@ -3819,7 +3950,7 @@ type GetCostForecastInput struct {
 
 	// Which metric Cost Explorer uses to create your forecast. For more information
 	// about blended and unblended rates, see Why does the "blended" annotation
-	// appear on some line items in my bill? (https://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/).
+	// appear on some line items in my bill? (http://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/).
 	//
 	// Valid values for a GetCostForecast call are the following:
 	//
@@ -4322,12 +4453,14 @@ type GetReservationCoverageInput struct {
 	//
 	//    * TENANCY
 	//
-	// GetReservationCoverage uses the same Expression (http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
+	// GetReservationCoverage uses the same Expression (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
 	// object as the other operations, but only AND is supported among each dimension.
 	// You can nest only one level deep. If there are multiple values for a dimension,
 	// they are OR'd together.
 	//
 	// If you don't provide a SERVICE filter, Cost Explorer defaults to EC2.
+	//
+	// Cost category is also supported.
 	Filter *Expression `type:"structure"`
 
 	// The granularity of the AWS cost data for the reservation. Valid values are
@@ -4503,12 +4636,10 @@ type GetReservationPurchaseRecommendationInput struct {
 	// The account ID that is associated with the recommendation.
 	AccountId *string `type:"string"`
 
-	// The account scope that you want recommendations for. PAYER means that AWS
-	// includes the master account and any member accounts when it calculates its
-	// recommendations. LINKED means that AWS includes only member accounts when
-	// it calculates its recommendations.
-	//
-	// Valid values are PAYER and LINKED.
+	// The account scope that you want your recommendations for. Amazon Web Services
+	// calculates recommendations including the payer account and linked accounts
+	// if the value is set to PAYER. If the value is LINKED, recommendations are
+	// calculated for individual linked accounts only.
 	AccountScope *string `type:"string" enum:"AccountScope"`
 
 	// The number of previous days that you want AWS to consider when it calculates
@@ -4685,7 +4816,7 @@ type GetReservationUtilizationInput struct {
 	//
 	//    * TENANCY
 	//
-	// GetReservationUtilization uses the same Expression (http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
+	// GetReservationUtilization uses the same Expression (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
 	// object as the other operations, but only AND is supported among each dimension,
 	// and nesting is supported up to only one level deep. If there are multiple
 	// values for a dimension, they are OR'd together.
@@ -4827,6 +4958,13 @@ func (s *GetReservationUtilizationOutput) SetUtilizationsByTime(v []*Utilization
 type GetRightsizingRecommendationInput struct {
 	_ struct{} `type:"structure"`
 
+	// Enables you to customize recommendations across two attributes. You can choose
+	// to view recommendations for instances within the same instance families or
+	// across different instance families. You can also choose to view your estimated
+	// savings associated with recommendations with consideration of existing Savings
+	// Plans or RI benefits, or niether.
+	Configuration *RightsizingRecommendationConfiguration `type:"structure"`
+
 	// Use Expression to filter by cost or by usage. There are two patterns:
 	//
 	//    * Simple dimension values - You can set the dimension name and values
@@ -4888,6 +5026,11 @@ func (s *GetRightsizingRecommendationInput) Validate() error {
 	if s.Service == nil {
 		invalidParams.Add(request.NewErrParamRequired("Service"))
 	}
+	if s.Configuration != nil {
+		if err := s.Configuration.Validate(); err != nil {
+			invalidParams.AddNested("Configuration", err.(request.ErrInvalidParams))
+		}
+	}
 	if s.Filter != nil {
 		if err := s.Filter.Validate(); err != nil {
 			invalidParams.AddNested("Filter", err.(request.ErrInvalidParams))
@@ -4898,6 +5041,12 @@ func (s *GetRightsizingRecommendationInput) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// SetConfiguration sets the Configuration field's value.
+func (s *GetRightsizingRecommendationInput) SetConfiguration(v *RightsizingRecommendationConfiguration) *GetRightsizingRecommendationInput {
+	s.Configuration = v
+	return s
 }
 
 // SetFilter sets the Filter field's value.
@@ -4927,6 +5076,13 @@ func (s *GetRightsizingRecommendationInput) SetService(v string) *GetRightsizing
 type GetRightsizingRecommendationOutput struct {
 	_ struct{} `type:"structure"`
 
+	// Enables you to customize recommendations across two attributes. You can choose
+	// to view recommendations for instances within the same instance families or
+	// across different instance families. You can also choose to view your estimated
+	// savings associated with recommendations with consideration of existing Savings
+	// Plans or RI benefits, or niether.
+	Configuration *RightsizingRecommendationConfiguration `type:"structure"`
+
 	// Information regarding this specific recommendation set.
 	Metadata *RightsizingRecommendationMetadata `type:"structure"`
 
@@ -4948,6 +5104,12 @@ func (s GetRightsizingRecommendationOutput) String() string {
 // GoString returns the string representation
 func (s GetRightsizingRecommendationOutput) GoString() string {
 	return s.String()
+}
+
+// SetConfiguration sets the Configuration field's value.
+func (s *GetRightsizingRecommendationOutput) SetConfiguration(v *RightsizingRecommendationConfiguration) *GetRightsizingRecommendationOutput {
+	s.Configuration = v
+	return s
 }
 
 // SetMetadata sets the Metadata field's value.
@@ -4988,9 +5150,11 @@ type GetSavingsPlansCoverageInput struct {
 	//
 	//    * INSTANCE_FAMILY
 	//
-	// GetSavingsPlansCoverage uses the same Expression (http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
+	// GetSavingsPlansCoverage uses the same Expression (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
 	// object as the other operations, but only AND is supported among each dimension.
 	// If there are multiple values for a dimension, they are OR'd together.
+	//
+	// Cost category is also supported.
 	Filter *Expression `type:"structure"`
 
 	// The granularity of the Amazon Web Services cost data for your Savings Plans.
@@ -5140,6 +5304,24 @@ func (s *GetSavingsPlansCoverageOutput) SetSavingsPlansCoverages(v []*SavingsPla
 type GetSavingsPlansPurchaseRecommendationInput struct {
 	_ struct{} `type:"structure"`
 
+	// The account scope that you want your recommendations for. Amazon Web Services
+	// calculates recommendations including the payer account and linked accounts
+	// if the value is set to PAYER. If the value is LINKED, recommendations are
+	// calculated for individual linked accounts only.
+	AccountScope *string `type:"string" enum:"AccountScope"`
+
+	// You can filter your recommendations by Account ID with the LINKED_ACCOUNT
+	// dimension. To filter your recommendations by Account ID, specify Key as LINKED_ACCOUNT
+	// and Value as the comma-separated Acount ID(s) for which you want to see Savings
+	// Plans purchase recommendations.
+	//
+	// For GetSavingsPlansPurchaseRecommendation, the Filter does not include CostCategories
+	// or Tags. It only includes Dimensions. With Dimensions, Key must be LINKED_ACCOUNT
+	// and Value can be a single Account ID or multiple comma-separated Account
+	// IDs for which you want to see Savings Plans Purchase Recommendations. AND
+	// and OR operators are not supported.
+	Filter *Expression `type:"structure"`
+
 	// The lookback period used to generate the recommendation.
 	//
 	// LookbackPeriodInDays is a required field
@@ -5195,11 +5377,28 @@ func (s *GetSavingsPlansPurchaseRecommendationInput) Validate() error {
 	if s.TermInYears == nil {
 		invalidParams.Add(request.NewErrParamRequired("TermInYears"))
 	}
+	if s.Filter != nil {
+		if err := s.Filter.Validate(); err != nil {
+			invalidParams.AddNested("Filter", err.(request.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	}
 	return nil
+}
+
+// SetAccountScope sets the AccountScope field's value.
+func (s *GetSavingsPlansPurchaseRecommendationInput) SetAccountScope(v string) *GetSavingsPlansPurchaseRecommendationInput {
+	s.AccountScope = &v
+	return s
+}
+
+// SetFilter sets the Filter field's value.
+func (s *GetSavingsPlansPurchaseRecommendationInput) SetFilter(v *Expression) *GetSavingsPlansPurchaseRecommendationInput {
+	s.Filter = v
+	return s
 }
 
 // SetLookbackPeriodInDays sets the LookbackPeriodInDays field's value.
@@ -5298,7 +5497,7 @@ type GetSavingsPlansUtilizationDetailsInput struct {
 	//
 	//    * INSTANCE_TYPE_FAMILY
 	//
-	// GetSavingsPlansUtilizationDetails uses the same Expression (http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
+	// GetSavingsPlansUtilizationDetails uses the same Expression (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
 	// object as the other operations, but only AND is supported among each dimension.
 	Filter *Expression `type:"structure"`
 
@@ -5454,7 +5653,7 @@ type GetSavingsPlansUtilizationInput struct {
 	//
 	//    * INSTANCE_TYPE_FAMILY
 	//
-	// GetSavingsPlansUtilization uses the same Expression (http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
+	// GetSavingsPlansUtilization uses the same Expression (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
 	// object as the other operations, but only AND is supported among each dimension.
 	Filter *Expression `type:"structure"`
 
@@ -5968,18 +6167,130 @@ func (s *InstanceDetails) SetRedshiftInstanceDetails(v *RedshiftInstanceDetails)
 	return s
 }
 
+// The pagination token is invalid. Try again without a pagination token.
+type InvalidNextTokenException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation
+func (s InvalidNextTokenException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s InvalidNextTokenException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidNextTokenException(v protocol.ResponseMetadata) error {
+	return &InvalidNextTokenException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidNextTokenException) Code() string {
+	return "InvalidNextTokenException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidNextTokenException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidNextTokenException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidNextTokenException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidNextTokenException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidNextTokenException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// You made too many calls in a short period of time. Try again later.
+type LimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation
+func (s LimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s LimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorLimitExceededException(v protocol.ResponseMetadata) error {
+	return &LimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *LimitExceededException) Code() string {
+	return "LimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *LimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *LimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *LimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *LimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *LimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 type ListCostCategoryDefinitionsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The date when the Cost Category was effective.
 	EffectiveOn *string `min:"20" type:"string"`
 
+	// The number of entries a paginated response contains.
+	MaxResults *int64 `min:"1" type:"integer"`
+
 	// The token to retrieve the next set of results. Amazon Web Services provides
 	// the token when the response from a previous call has more results than the
 	// maximum page size.
-	//
-	// You can use this information to retrieve the full Cost Category information
-	// using DescribeCostCategory.
 	NextToken *string `type:"string"`
 }
 
@@ -5999,6 +6310,9 @@ func (s *ListCostCategoryDefinitionsInput) Validate() error {
 	if s.EffectiveOn != nil && len(*s.EffectiveOn) < 20 {
 		invalidParams.Add(request.NewErrParamMinLen("EffectiveOn", 20))
 	}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6009,6 +6323,12 @@ func (s *ListCostCategoryDefinitionsInput) Validate() error {
 // SetEffectiveOn sets the EffectiveOn field's value.
 func (s *ListCostCategoryDefinitionsInput) SetEffectiveOn(v string) *ListCostCategoryDefinitionsInput {
 	s.EffectiveOn = &v
+	return s
+}
+
+// SetMaxResults sets the MaxResults field's value.
+func (s *ListCostCategoryDefinitionsInput) SetMaxResults(v int64) *ListCostCategoryDefinitionsInput {
+	s.MaxResults = &v
 	return s
 }
 
@@ -6267,6 +6587,63 @@ func (s *RedshiftInstanceDetails) SetRegion(v string) *RedshiftInstanceDetails {
 func (s *RedshiftInstanceDetails) SetSizeFlexEligible(v bool) *RedshiftInstanceDetails {
 	s.SizeFlexEligible = &v
 	return s
+}
+
+// Your request parameters changed between pages. Try again with the old parameters
+// or without a pagination token.
+type RequestChangedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation
+func (s RequestChangedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RequestChangedException) GoString() string {
+	return s.String()
+}
+
+func newErrorRequestChangedException(v protocol.ResponseMetadata) error {
+	return &RequestChangedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *RequestChangedException) Code() string {
+	return "RequestChangedException"
+}
+
+// Message returns the exception's message.
+func (s *RequestChangedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *RequestChangedException) OrigErr() error {
+	return nil
+}
+
+func (s *RequestChangedException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *RequestChangedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *RequestChangedException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // The aggregated numbers for your reservation usage.
@@ -6732,12 +7109,12 @@ func (s *ReservationPurchaseRecommendationDetail) SetUpfrontCost(v string) *Rese
 	return s
 }
 
-// Information about this specific recommendation, such as the time stamp for
+// Information about this specific recommendation, such as the timestamp for
 // when AWS made a specific recommendation.
 type ReservationPurchaseRecommendationMetadata struct {
 	_ struct{} `type:"structure"`
 
-	// The time stamp for when AWS made this recommendation.
+	// The timestamp for when AWS made this recommendation.
 	GenerationTimestamp *string `type:"string"`
 
 	// The ID for this specific recommendation.
@@ -6887,6 +7264,62 @@ func (s *ResourceDetails) SetEC2ResourceDetails(v *EC2ResourceDetails) *Resource
 	return s
 }
 
+// The specified ARN in the request doesn't exist.
+type ResourceNotFoundException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation
+func (s ResourceNotFoundException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ResourceNotFoundException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceNotFoundException(v protocol.ResponseMetadata) error {
+	return &ResourceNotFoundException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceNotFoundException) Code() string {
+	return "ResourceNotFoundException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceNotFoundException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceNotFoundException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceNotFoundException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceNotFoundException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Resource utilization of current resource.
 type ResourceUtilization struct {
 	_ struct{} `type:"structure"`
@@ -7019,6 +7452,65 @@ func (s *RightsizingRecommendation) SetRightsizingType(v string) *RightsizingRec
 // SetTerminateRecommendationDetail sets the TerminateRecommendationDetail field's value.
 func (s *RightsizingRecommendation) SetTerminateRecommendationDetail(v *TerminateRecommendationDetail) *RightsizingRecommendation {
 	s.TerminateRecommendationDetail = v
+	return s
+}
+
+// Enables you to customize recommendations across two attributes. You can choose
+// to view recommendations for instances within the same instance families or
+// across different instance families. You can also choose to view your estimated
+// savings associated with recommendations with consideration of existing Savings
+// Plans or RI benefits, or niether.
+type RightsizingRecommendationConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The option to consider RI or Savings Plans discount benefits in your savings
+	// calculation. The default value is TRUE.
+	//
+	// BenefitsConsidered is a required field
+	BenefitsConsidered *bool `type:"boolean" required:"true"`
+
+	// The option to see recommendations within the same instance family, or recommendations
+	// for instances across other families. The default value is SAME_INSTANCE_FAMILY.
+	//
+	// RecommendationTarget is a required field
+	RecommendationTarget *string `type:"string" required:"true" enum:"RecommendationTarget"`
+}
+
+// String returns the string representation
+func (s RightsizingRecommendationConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RightsizingRecommendationConfiguration) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RightsizingRecommendationConfiguration) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "RightsizingRecommendationConfiguration"}
+	if s.BenefitsConsidered == nil {
+		invalidParams.Add(request.NewErrParamRequired("BenefitsConsidered"))
+	}
+	if s.RecommendationTarget == nil {
+		invalidParams.Add(request.NewErrParamRequired("RecommendationTarget"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetBenefitsConsidered sets the BenefitsConsidered field's value.
+func (s *RightsizingRecommendationConfiguration) SetBenefitsConsidered(v bool) *RightsizingRecommendationConfiguration {
+	s.BenefitsConsidered = &v
+	return s
+}
+
+// SetRecommendationTarget sets the RecommendationTarget field's value.
+func (s *RightsizingRecommendationConfiguration) SetRecommendationTarget(v string) *RightsizingRecommendationConfiguration {
+	s.RecommendationTarget = &v
 	return s
 }
 
@@ -7212,7 +7704,7 @@ func (s *SavingsPlansCoverage) SetTimePeriod(v *DateInterval) *SavingsPlansCover
 type SavingsPlansCoverageData struct {
 	_ struct{} `type:"structure"`
 
-	// The percentage of your existing Savings Planscovered usage, divided by all
+	// The percentage of your existing Savings Plans covered usage, divided by all
 	// of your eligible Savings Plans usage in an account(or set of accounts).
 	CoveragePercentage *string `type:"string"`
 
@@ -7310,13 +7802,19 @@ func (s *SavingsPlansDetails) SetRegion(v string) *SavingsPlansDetails {
 type SavingsPlansPurchaseRecommendation struct {
 	_ struct{} `type:"structure"`
 
+	// The account scope that you want your recommendations for. Amazon Web Services
+	// calculates recommendations including the payer account and linked accounts
+	// if the value is set to PAYER. If the value is LINKED, recommendations are
+	// calculated for individual linked accounts only.
+	AccountScope *string `type:"string" enum:"AccountScope"`
+
 	// The lookback period in days, used to generate the recommendation.
 	LookbackPeriodInDays *string `type:"string" enum:"LookbackPeriodInDays"`
 
 	// The payment option used to generate the recommendation.
 	PaymentOption *string `type:"string" enum:"PaymentOption"`
 
-	// Details for the Savings Plans we recommend you to purchase to cover existing,
+	// Details for the Savings Plans we recommend that you purchase to cover existing
 	// Savings Plans eligible workloads.
 	SavingsPlansPurchaseRecommendationDetails []*SavingsPlansPurchaseRecommendationDetail `type:"list"`
 
@@ -7338,6 +7836,12 @@ func (s SavingsPlansPurchaseRecommendation) String() string {
 // GoString returns the string representation
 func (s SavingsPlansPurchaseRecommendation) GoString() string {
 	return s.String()
+}
+
+// SetAccountScope sets the AccountScope field's value.
+func (s *SavingsPlansPurchaseRecommendation) SetAccountScope(v string) *SavingsPlansPurchaseRecommendation {
+	s.AccountScope = &v
+	return s
 }
 
 // SetLookbackPeriodInDays sets the LookbackPeriodInDays field's value.
@@ -7971,6 +8475,63 @@ func (s *SavingsPlansUtilizationDetail) SetUtilization(v *SavingsPlansUtilizatio
 	return s
 }
 
+// You've reached the limit on the number of resources you can create, or exceeded
+// the size of an individual resources.
+type ServiceQuotaExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation
+func (s ServiceQuotaExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ServiceQuotaExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorServiceQuotaExceededException(v protocol.ResponseMetadata) error {
+	return &ServiceQuotaExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ServiceQuotaExceededException) Code() string {
+	return "ServiceQuotaExceededException"
+}
+
+// Message returns the exception's message.
+func (s *ServiceQuotaExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ServiceQuotaExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *ServiceQuotaExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ServiceQuotaExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ServiceQuotaExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Hardware specifications for the service that you want recommendations for.
 type ServiceSpecification struct {
 	_ struct{} `type:"structure"`
@@ -8003,6 +8564,11 @@ type TagValues struct {
 	// The key for the tag.
 	Key *string `type:"string"`
 
+	// The match options that you can use to filter your results. MatchOptions is
+	// only applicable for only applicable for actions related to Cost Category.
+	// The default values for MatchOptions is EQUALS and CASE_SENSITIVE.
+	MatchOptions []*string `type:"list"`
+
 	// The specific value of the tag.
 	Values []*string `type:"list"`
 }
@@ -8020,6 +8586,12 @@ func (s TagValues) GoString() string {
 // SetKey sets the Key field's value.
 func (s *TagValues) SetKey(v string) *TagValues {
 	s.Key = &v
+	return s
+}
+
+// SetMatchOptions sets the MatchOptions field's value.
+func (s *TagValues) SetMatchOptions(v []*string) *TagValues {
+	s.MatchOptions = v
 	return s
 }
 
@@ -8134,6 +8706,63 @@ func (s *TerminateRecommendationDetail) SetEstimatedMonthlySavings(v string) *Te
 	return s
 }
 
+// Cost Explorer was unable to identify the usage unit. Provide UsageType/UsageTypeGroup
+// filter selections that contain matching units, for example: hours.
+type UnresolvableUsageUnitException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation
+func (s UnresolvableUsageUnitException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UnresolvableUsageUnitException) GoString() string {
+	return s.String()
+}
+
+func newErrorUnresolvableUsageUnitException(v protocol.ResponseMetadata) error {
+	return &UnresolvableUsageUnitException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *UnresolvableUsageUnitException) Code() string {
+	return "UnresolvableUsageUnitException"
+}
+
+// Message returns the exception's message.
+func (s *UnresolvableUsageUnitException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *UnresolvableUsageUnitException) OrigErr() error {
+	return nil
+}
+
+func (s *UnresolvableUsageUnitException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *UnresolvableUsageUnitException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *UnresolvableUsageUnitException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 type UpdateCostCategoryDefinitionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -8147,9 +8776,8 @@ type UpdateCostCategoryDefinitionInput struct {
 	// RuleVersion is a required field
 	RuleVersion *string `type:"string" required:"true" enum:"CostCategoryRuleVersion"`
 
-	// Rules are processed in order. If there are multiple rules that match the
-	// line item, then the first rule to match is used to determine that Cost Category
-	// value.
+	// The Expression object used to categorize costs. For more information, see
+	// CostCategoryRule (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html).
 	//
 	// Rules is a required field
 	Rules []*CostCategoryRule `min:"1" type:"list" required:"true"`
@@ -8327,6 +8955,9 @@ const (
 	// DimensionLinkedAccount is a Dimension enum value
 	DimensionLinkedAccount = "LINKED_ACCOUNT"
 
+	// DimensionLinkedAccountName is a Dimension enum value
+	DimensionLinkedAccountName = "LINKED_ACCOUNT_NAME"
+
 	// DimensionOperation is a Dimension enum value
 	DimensionOperation = "OPERATION"
 
@@ -8338,6 +8969,9 @@ const (
 
 	// DimensionService is a Dimension enum value
 	DimensionService = "SERVICE"
+
+	// DimensionServiceCode is a Dimension enum value
+	DimensionServiceCode = "SERVICE_CODE"
 
 	// DimensionUsageType is a Dimension enum value
 	DimensionUsageType = "USAGE_TYPE"
@@ -8434,6 +9068,26 @@ const (
 )
 
 const (
+	// MatchOptionEquals is a MatchOption enum value
+	MatchOptionEquals = "EQUALS"
+
+	// MatchOptionStartsWith is a MatchOption enum value
+	MatchOptionStartsWith = "STARTS_WITH"
+
+	// MatchOptionEndsWith is a MatchOption enum value
+	MatchOptionEndsWith = "ENDS_WITH"
+
+	// MatchOptionContains is a MatchOption enum value
+	MatchOptionContains = "CONTAINS"
+
+	// MatchOptionCaseSensitive is a MatchOption enum value
+	MatchOptionCaseSensitive = "CASE_SENSITIVE"
+
+	// MatchOptionCaseInsensitive is a MatchOption enum value
+	MatchOptionCaseInsensitive = "CASE_INSENSITIVE"
+)
+
+const (
 	// MetricBlendedCost is a Metric enum value
 	MetricBlendedCost = "BLENDED_COST"
 
@@ -8482,6 +9136,14 @@ const (
 
 	// PaymentOptionHeavyUtilization is a PaymentOption enum value
 	PaymentOptionHeavyUtilization = "HEAVY_UTILIZATION"
+)
+
+const (
+	// RecommendationTargetSameInstanceFamily is a RecommendationTarget enum value
+	RecommendationTargetSameInstanceFamily = "SAME_INSTANCE_FAMILY"
+
+	// RecommendationTargetCrossInstanceFamily is a RecommendationTarget enum value
+	RecommendationTargetCrossInstanceFamily = "CROSS_INSTANCE_FAMILY"
 )
 
 const (
