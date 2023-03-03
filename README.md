@@ -16,6 +16,7 @@ The IAM role for the broker must include at least the following policy:
                 "s3:CreateBucket",
                 "s3:DeleteBucket",
                 "s3:PutBucketPolicy",
+                "s3:PutBucketPublicAccessBlock",
                 "s3:DeleteBucketPolicy",
                 "s3:GetBucketPolicy",
                 "s3:PutBucketTagging",
