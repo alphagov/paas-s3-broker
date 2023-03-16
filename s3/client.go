@@ -27,7 +27,7 @@ const (
 )
 
 var (
-	ErrNoSuchResources  = errors.New("no such resources found")
+	ErrNoSuchResources = errors.New("no such resources found")
 )
 
 //go:generate counterfeiter -o fakes/fake_s3_client.go . Client
@@ -140,6 +140,21 @@ func (s *S3Client) CreateBucket(provisionData provider.ProvisionData) error {
 		return err
 	}
 
+	logger.Info("put-public-access-block", lager.Data{"bucket": bucketName})
+	_, err = s.s3Client.PutPublicAccessBlock(&s3.PutPublicAccessBlockInput{
+		Bucket: aws.String(bucketName),
+		PublicAccessBlockConfiguration: &s3.PublicAccessBlockConfiguration{
+			BlockPublicAcls:       aws.Bool(true),
+			BlockPublicPolicy:     aws.Bool(true),
+			IgnorePublicAcls:      aws.Bool(true),
+			RestrictPublicBuckets: aws.Bool(true),
+		},
+	})
+	if err != nil {
+		logger.Error("put-public-access-block", err)
+		return err
+	}
+
 	logger.Info("put-bucket-encryption", lager.Data{"bucket": bucketName, "sse-algorithm": s3.ServerSideEncryptionAes256})
 	_, err = s.s3Client.PutBucketEncryption(&s3.PutBucketEncryptionInput{
 		Bucket: aws.String(bucketName),
@@ -168,6 +183,15 @@ func (s *S3Client) CreateBucket(provisionData provider.ProvisionData) error {
 		}
 	}
 	if provisionParams.PublicBucket {
+		logger.Info("delete-public-access-block", lager.Data{"bucket": bucketName})
+		_, err = s.s3Client.DeletePublicAccessBlock(&s3.DeletePublicAccessBlockInput{
+			Bucket: aws.String(bucketName),
+		})
+		if err != nil {
+			logger.Error("delete-public-access-block", err)
+			return err
+		}
+
 		logger.Info("make-bucket-public", lager.Data{"bucket": bucketName})
 		var permissions policy.Permissions = policy.PublicBucketPermissions{}
 		stmt := policy.BuildStatement(bucketName, iam.User{Arn: aws.String("*")}, permissions)
@@ -435,7 +459,7 @@ func (s *S3Client) deleteUser(username string) error {
 	hadEffect := false
 
 	var (
-		keys []*iam.AccessKeyMetadata
+		keys     []*iam.AccessKeyMetadata
 		policies []*iam.AttachedPolicy
 	)
 
@@ -549,7 +573,7 @@ func (s *S3Client) RemoveUserFromBucketAndDeleteUser(bindingID, bucketName strin
 		logger.Info(
 			"remove-user-from-policy",
 			lager.Data{
-				"bucket": fullBucketName,
+				"bucket":   fullBucketName,
 				"username": username,
 			},
 		)
@@ -568,7 +592,7 @@ func (s *S3Client) RemoveUserFromBucketAndDeleteUser(bindingID, bucketName strin
 				"policy-statements",
 				lager.Data{
 					"bucket": fullBucketName,
-					"count": len(updatedPolicy.Statement),
+					"count":  len(updatedPolicy.Statement),
 				},
 			)
 			if len(updatedPolicy.Statement) > 0 {

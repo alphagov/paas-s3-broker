@@ -66,6 +66,37 @@ var _ = Describe("Client", func() {
 			encryptionRule := encryptionCfg.Rules[0]
 			Expect(encryptionRule.ApplyServerSideEncryptionByDefault).ToNot(BeNil())
 		})
+		It("sets the s3 public access block by default", func() {
+			pd := provider.ProvisionData{
+				InstanceID: "test-instance-id",
+				Details: brokerapi.ProvisionDetails{
+					RawParameters: nil,
+				},
+			}
+			s3Client.CreateBucket(pd)
+			Expect(s3API.PutPublicAccessBlockCallCount()).To(Equal(1))
+		})
+		It("disables the s3 public access block when private", func() {
+			pd := provider.ProvisionData{
+				InstanceID: "test-instance-id",
+				Details: brokerapi.ProvisionDetails{
+					RawParameters: json.RawMessage(`{"public_bucket": false}`),
+				},
+			}
+			s3Client.CreateBucket(pd)
+			Expect(s3API.PutPublicAccessBlockCallCount()).To(Equal(1))
+		})
+		It("deletes the s3 public access block when public", func() {
+			pd := provider.ProvisionData{
+				InstanceID: "test-instance-id",
+				Details: brokerapi.ProvisionDetails{
+					RawParameters: json.RawMessage(`{"public_bucket": true}`),
+				},
+			}
+			s3Client.CreateBucket(pd)
+			Expect(s3API.PutPublicAccessBlockCallCount()).To(Equal(1))
+			Expect(s3API.DeletePublicAccessBlockCallCount()).To(Equal(1))
+		})
 		It("creates a public bucket when specified", func() {
 			pd := provider.ProvisionData{
 				InstanceID: "test-instance-id",
@@ -435,7 +466,7 @@ var _ = Describe("Client", func() {
 				iamAPI.ListAttachedUserPoliciesReturnsOnCall(0, &iam.ListAttachedUserPoliciesOutput{
 					AttachedPolicies: []*iam.AttachedPolicy{
 						&iam.AttachedPolicy{
-							PolicyArn: aws.String("foo"),
+							PolicyArn:  aws.String("foo"),
 							PolicyName: aws.String("bar"),
 						},
 					},
@@ -610,13 +641,13 @@ var _ = Describe("Client", func() {
 				AccessKeyMetadata: []*iam.AccessKeyMetadata{{AccessKeyId: aws.String("key")}},
 			}, nil)
 			iamAPI.ListAttachedUserPoliciesReturns(&iam.ListAttachedUserPoliciesOutput{
-					AttachedPolicies: []*iam.AttachedPolicy{
-						&iam.AttachedPolicy{
-							PolicyArn: aws.String("foo"),
-							PolicyName: aws.String("bar"),
-						},
+				AttachedPolicies: []*iam.AttachedPolicy{
+					&iam.AttachedPolicy{
+						PolicyArn:  aws.String("foo"),
+						PolicyName: aws.String("bar"),
 					},
-				}, nil)
+				},
+			}, nil)
 			iamAPI.DeleteAccessKeyReturns(nil, nil)
 
 			err := s3Client.RemoveUserFromBucketAndDeleteUser("some-user", "bucketName")
@@ -974,13 +1005,13 @@ var _ = Describe("Client", func() {
 				s3API.GetBucketPolicyReturns(nil, awserr.New("NoSuchBucketPolicy", "full error message", nil))
 				iamAPI.ListAccessKeysReturns(&iam.ListAccessKeysOutput{}, nil)
 				iamAPI.ListAttachedUserPoliciesReturns(&iam.ListAttachedUserPoliciesOutput{
-						AttachedPolicies: []*iam.AttachedPolicy{
-							&iam.AttachedPolicy{
-								PolicyArn: aws.String("foo"),
-								PolicyName: aws.String("bar"),
-							},
+					AttachedPolicies: []*iam.AttachedPolicy{
+						&iam.AttachedPolicy{
+							PolicyArn:  aws.String("foo"),
+							PolicyName: aws.String("bar"),
 						},
-					}, nil)
+					},
+				}, nil)
 				iamAPI.DeleteAccessKeyReturns(nil, nil)
 
 				err := s3Client.RemoveUserFromBucketAndDeleteUser("some-user", "bucketName")
