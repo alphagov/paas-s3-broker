@@ -30,7 +30,7 @@ var (
 	ErrNoSuchResources = errors.New("no such resources found")
 )
 
-//go:generate counterfeiter -o fakes/fake_s3_client.go . Client
+//go:generate go run github.com/maxbrunsfeld/counterfeiter/v6 -o fakes/fake_s3_client.go . Client
 type Client interface {
 	CreateBucket(provisionData provider.ProvisionData) error
 	DeleteBucket(name string) error
@@ -64,6 +64,9 @@ func NewS3ClientConfig(configJSON []byte) (*Config, error) {
 
 	return config, nil
 }
+
+//go:generate go run github.com/maxbrunsfeld/counterfeiter/v6 -o fakes/fake_s3_api.go github.com/aws/aws-sdk-go/service/s3/s3iface.S3API
+//go:generate go run github.com/maxbrunsfeld/counterfeiter/v6 -o fakes/fake_iam_api.go github.com/aws/aws-sdk-go/service/iam/iamiface.IAMAPI
 
 type S3Client struct {
 	bucketPrefix           string

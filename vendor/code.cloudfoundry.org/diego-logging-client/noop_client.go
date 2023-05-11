@@ -3,7 +3,7 @@ package diego_logging_client
 import (
 	"time"
 
-	loggregator "code.cloudfoundry.org/go-loggregator"
+	loggregator "code.cloudfoundry.org/go-loggregator/v8"
 )
 
 type noopIngressClient struct{}
@@ -36,6 +36,9 @@ func (*noopIngressClient) SendAppErrorLog(message, sourceType string, tags map[s
 	return nil
 }
 func (*noopIngressClient) SendAppMetrics(metrics ContainerMetric) error {
+	return nil
+}
+func (*noopIngressClient) SendAppLogRate(rate, rateLimit float64, tags map[string]string) error {
 	return nil
 }
 func (*noopIngressClient) SendSpikeMetrics(metrics SpikeMetric) error {

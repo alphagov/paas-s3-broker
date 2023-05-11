@@ -3823,6 +3823,47 @@ type FakeIAMAPI struct {
 		result1 *iam.ListGroupsOutput
 		result2 error
 	}
+	ListInstanceProfileTagsStub        func(*iam.ListInstanceProfileTagsInput) (*iam.ListInstanceProfileTagsOutput, error)
+	listInstanceProfileTagsMutex       sync.RWMutex
+	listInstanceProfileTagsArgsForCall []struct {
+		arg1 *iam.ListInstanceProfileTagsInput
+	}
+	listInstanceProfileTagsReturns struct {
+		result1 *iam.ListInstanceProfileTagsOutput
+		result2 error
+	}
+	listInstanceProfileTagsReturnsOnCall map[int]struct {
+		result1 *iam.ListInstanceProfileTagsOutput
+		result2 error
+	}
+	ListInstanceProfileTagsRequestStub        func(*iam.ListInstanceProfileTagsInput) (*request.Request, *iam.ListInstanceProfileTagsOutput)
+	listInstanceProfileTagsRequestMutex       sync.RWMutex
+	listInstanceProfileTagsRequestArgsForCall []struct {
+		arg1 *iam.ListInstanceProfileTagsInput
+	}
+	listInstanceProfileTagsRequestReturns struct {
+		result1 *request.Request
+		result2 *iam.ListInstanceProfileTagsOutput
+	}
+	listInstanceProfileTagsRequestReturnsOnCall map[int]struct {
+		result1 *request.Request
+		result2 *iam.ListInstanceProfileTagsOutput
+	}
+	ListInstanceProfileTagsWithContextStub        func(context.Context, *iam.ListInstanceProfileTagsInput, ...request.Option) (*iam.ListInstanceProfileTagsOutput, error)
+	listInstanceProfileTagsWithContextMutex       sync.RWMutex
+	listInstanceProfileTagsWithContextArgsForCall []struct {
+		arg1 context.Context
+		arg2 *iam.ListInstanceProfileTagsInput
+		arg3 []request.Option
+	}
+	listInstanceProfileTagsWithContextReturns struct {
+		result1 *iam.ListInstanceProfileTagsOutput
+		result2 error
+	}
+	listInstanceProfileTagsWithContextReturnsOnCall map[int]struct {
+		result1 *iam.ListInstanceProfileTagsOutput
+		result2 error
+	}
 	ListInstanceProfilesStub        func(*iam.ListInstanceProfilesInput) (*iam.ListInstanceProfilesOutput, error)
 	listInstanceProfilesMutex       sync.RWMutex
 	listInstanceProfilesArgsForCall []struct {
@@ -3957,6 +3998,47 @@ type FakeIAMAPI struct {
 		result1 *iam.ListInstanceProfilesOutput
 		result2 error
 	}
+	ListMFADeviceTagsStub        func(*iam.ListMFADeviceTagsInput) (*iam.ListMFADeviceTagsOutput, error)
+	listMFADeviceTagsMutex       sync.RWMutex
+	listMFADeviceTagsArgsForCall []struct {
+		arg1 *iam.ListMFADeviceTagsInput
+	}
+	listMFADeviceTagsReturns struct {
+		result1 *iam.ListMFADeviceTagsOutput
+		result2 error
+	}
+	listMFADeviceTagsReturnsOnCall map[int]struct {
+		result1 *iam.ListMFADeviceTagsOutput
+		result2 error
+	}
+	ListMFADeviceTagsRequestStub        func(*iam.ListMFADeviceTagsInput) (*request.Request, *iam.ListMFADeviceTagsOutput)
+	listMFADeviceTagsRequestMutex       sync.RWMutex
+	listMFADeviceTagsRequestArgsForCall []struct {
+		arg1 *iam.ListMFADeviceTagsInput
+	}
+	listMFADeviceTagsRequestReturns struct {
+		result1 *request.Request
+		result2 *iam.ListMFADeviceTagsOutput
+	}
+	listMFADeviceTagsRequestReturnsOnCall map[int]struct {
+		result1 *request.Request
+		result2 *iam.ListMFADeviceTagsOutput
+	}
+	ListMFADeviceTagsWithContextStub        func(context.Context, *iam.ListMFADeviceTagsInput, ...request.Option) (*iam.ListMFADeviceTagsOutput, error)
+	listMFADeviceTagsWithContextMutex       sync.RWMutex
+	listMFADeviceTagsWithContextArgsForCall []struct {
+		arg1 context.Context
+		arg2 *iam.ListMFADeviceTagsInput
+		arg3 []request.Option
+	}
+	listMFADeviceTagsWithContextReturns struct {
+		result1 *iam.ListMFADeviceTagsOutput
+		result2 error
+	}
+	listMFADeviceTagsWithContextReturnsOnCall map[int]struct {
+		result1 *iam.ListMFADeviceTagsOutput
+		result2 error
+	}
 	ListMFADevicesStub        func(*iam.ListMFADevicesInput) (*iam.ListMFADevicesOutput, error)
 	listMFADevicesMutex       sync.RWMutex
 	listMFADevicesArgsForCall []struct {
@@ -4022,6 +4104,47 @@ type FakeIAMAPI struct {
 	}
 	listMFADevicesWithContextReturnsOnCall map[int]struct {
 		result1 *iam.ListMFADevicesOutput
+		result2 error
+	}
+	ListOpenIDConnectProviderTagsStub        func(*iam.ListOpenIDConnectProviderTagsInput) (*iam.ListOpenIDConnectProviderTagsOutput, error)
+	listOpenIDConnectProviderTagsMutex       sync.RWMutex
+	listOpenIDConnectProviderTagsArgsForCall []struct {
+		arg1 *iam.ListOpenIDConnectProviderTagsInput
+	}
+	listOpenIDConnectProviderTagsReturns struct {
+		result1 *iam.ListOpenIDConnectProviderTagsOutput
+		result2 error
+	}
+	listOpenIDConnectProviderTagsReturnsOnCall map[int]struct {
+		result1 *iam.ListOpenIDConnectProviderTagsOutput
+		result2 error
+	}
+	ListOpenIDConnectProviderTagsRequestStub        func(*iam.ListOpenIDConnectProviderTagsInput) (*request.Request, *iam.ListOpenIDConnectProviderTagsOutput)
+	listOpenIDConnectProviderTagsRequestMutex       sync.RWMutex
+	listOpenIDConnectProviderTagsRequestArgsForCall []struct {
+		arg1 *iam.ListOpenIDConnectProviderTagsInput
+	}
+	listOpenIDConnectProviderTagsRequestReturns struct {
+		result1 *request.Request
+		result2 *iam.ListOpenIDConnectProviderTagsOutput
+	}
+	listOpenIDConnectProviderTagsRequestReturnsOnCall map[int]struct {
+		result1 *request.Request
+		result2 *iam.ListOpenIDConnectProviderTagsOutput
+	}
+	ListOpenIDConnectProviderTagsWithContextStub        func(context.Context, *iam.ListOpenIDConnectProviderTagsInput, ...request.Option) (*iam.ListOpenIDConnectProviderTagsOutput, error)
+	listOpenIDConnectProviderTagsWithContextMutex       sync.RWMutex
+	listOpenIDConnectProviderTagsWithContextArgsForCall []struct {
+		arg1 context.Context
+		arg2 *iam.ListOpenIDConnectProviderTagsInput
+		arg3 []request.Option
+	}
+	listOpenIDConnectProviderTagsWithContextReturns struct {
+		result1 *iam.ListOpenIDConnectProviderTagsOutput
+		result2 error
+	}
+	listOpenIDConnectProviderTagsWithContextReturnsOnCall map[int]struct {
+		result1 *iam.ListOpenIDConnectProviderTagsOutput
 		result2 error
 	}
 	ListOpenIDConnectProvidersStub        func(*iam.ListOpenIDConnectProvidersInput) (*iam.ListOpenIDConnectProvidersOutput, error)
@@ -4171,6 +4294,47 @@ type FakeIAMAPI struct {
 	}
 	listPoliciesWithContextReturnsOnCall map[int]struct {
 		result1 *iam.ListPoliciesOutput
+		result2 error
+	}
+	ListPolicyTagsStub        func(*iam.ListPolicyTagsInput) (*iam.ListPolicyTagsOutput, error)
+	listPolicyTagsMutex       sync.RWMutex
+	listPolicyTagsArgsForCall []struct {
+		arg1 *iam.ListPolicyTagsInput
+	}
+	listPolicyTagsReturns struct {
+		result1 *iam.ListPolicyTagsOutput
+		result2 error
+	}
+	listPolicyTagsReturnsOnCall map[int]struct {
+		result1 *iam.ListPolicyTagsOutput
+		result2 error
+	}
+	ListPolicyTagsRequestStub        func(*iam.ListPolicyTagsInput) (*request.Request, *iam.ListPolicyTagsOutput)
+	listPolicyTagsRequestMutex       sync.RWMutex
+	listPolicyTagsRequestArgsForCall []struct {
+		arg1 *iam.ListPolicyTagsInput
+	}
+	listPolicyTagsRequestReturns struct {
+		result1 *request.Request
+		result2 *iam.ListPolicyTagsOutput
+	}
+	listPolicyTagsRequestReturnsOnCall map[int]struct {
+		result1 *request.Request
+		result2 *iam.ListPolicyTagsOutput
+	}
+	ListPolicyTagsWithContextStub        func(context.Context, *iam.ListPolicyTagsInput, ...request.Option) (*iam.ListPolicyTagsOutput, error)
+	listPolicyTagsWithContextMutex       sync.RWMutex
+	listPolicyTagsWithContextArgsForCall []struct {
+		arg1 context.Context
+		arg2 *iam.ListPolicyTagsInput
+		arg3 []request.Option
+	}
+	listPolicyTagsWithContextReturns struct {
+		result1 *iam.ListPolicyTagsOutput
+		result2 error
+	}
+	listPolicyTagsWithContextReturnsOnCall map[int]struct {
+		result1 *iam.ListPolicyTagsOutput
 		result2 error
 	}
 	ListPolicyVersionsStub        func(*iam.ListPolicyVersionsInput) (*iam.ListPolicyVersionsOutput, error)
@@ -4415,6 +4579,47 @@ type FakeIAMAPI struct {
 		result1 *iam.ListRolesOutput
 		result2 error
 	}
+	ListSAMLProviderTagsStub        func(*iam.ListSAMLProviderTagsInput) (*iam.ListSAMLProviderTagsOutput, error)
+	listSAMLProviderTagsMutex       sync.RWMutex
+	listSAMLProviderTagsArgsForCall []struct {
+		arg1 *iam.ListSAMLProviderTagsInput
+	}
+	listSAMLProviderTagsReturns struct {
+		result1 *iam.ListSAMLProviderTagsOutput
+		result2 error
+	}
+	listSAMLProviderTagsReturnsOnCall map[int]struct {
+		result1 *iam.ListSAMLProviderTagsOutput
+		result2 error
+	}
+	ListSAMLProviderTagsRequestStub        func(*iam.ListSAMLProviderTagsInput) (*request.Request, *iam.ListSAMLProviderTagsOutput)
+	listSAMLProviderTagsRequestMutex       sync.RWMutex
+	listSAMLProviderTagsRequestArgsForCall []struct {
+		arg1 *iam.ListSAMLProviderTagsInput
+	}
+	listSAMLProviderTagsRequestReturns struct {
+		result1 *request.Request
+		result2 *iam.ListSAMLProviderTagsOutput
+	}
+	listSAMLProviderTagsRequestReturnsOnCall map[int]struct {
+		result1 *request.Request
+		result2 *iam.ListSAMLProviderTagsOutput
+	}
+	ListSAMLProviderTagsWithContextStub        func(context.Context, *iam.ListSAMLProviderTagsInput, ...request.Option) (*iam.ListSAMLProviderTagsOutput, error)
+	listSAMLProviderTagsWithContextMutex       sync.RWMutex
+	listSAMLProviderTagsWithContextArgsForCall []struct {
+		arg1 context.Context
+		arg2 *iam.ListSAMLProviderTagsInput
+		arg3 []request.Option
+	}
+	listSAMLProviderTagsWithContextReturns struct {
+		result1 *iam.ListSAMLProviderTagsOutput
+		result2 error
+	}
+	listSAMLProviderTagsWithContextReturnsOnCall map[int]struct {
+		result1 *iam.ListSAMLProviderTagsOutput
+		result2 error
+	}
 	ListSAMLProvidersStub        func(*iam.ListSAMLProvidersInput) (*iam.ListSAMLProvidersOutput, error)
 	listSAMLProvidersMutex       sync.RWMutex
 	listSAMLProvidersArgsForCall []struct {
@@ -4521,6 +4726,47 @@ type FakeIAMAPI struct {
 	}
 	listSSHPublicKeysWithContextReturnsOnCall map[int]struct {
 		result1 *iam.ListSSHPublicKeysOutput
+		result2 error
+	}
+	ListServerCertificateTagsStub        func(*iam.ListServerCertificateTagsInput) (*iam.ListServerCertificateTagsOutput, error)
+	listServerCertificateTagsMutex       sync.RWMutex
+	listServerCertificateTagsArgsForCall []struct {
+		arg1 *iam.ListServerCertificateTagsInput
+	}
+	listServerCertificateTagsReturns struct {
+		result1 *iam.ListServerCertificateTagsOutput
+		result2 error
+	}
+	listServerCertificateTagsReturnsOnCall map[int]struct {
+		result1 *iam.ListServerCertificateTagsOutput
+		result2 error
+	}
+	ListServerCertificateTagsRequestStub        func(*iam.ListServerCertificateTagsInput) (*request.Request, *iam.ListServerCertificateTagsOutput)
+	listServerCertificateTagsRequestMutex       sync.RWMutex
+	listServerCertificateTagsRequestArgsForCall []struct {
+		arg1 *iam.ListServerCertificateTagsInput
+	}
+	listServerCertificateTagsRequestReturns struct {
+		result1 *request.Request
+		result2 *iam.ListServerCertificateTagsOutput
+	}
+	listServerCertificateTagsRequestReturnsOnCall map[int]struct {
+		result1 *request.Request
+		result2 *iam.ListServerCertificateTagsOutput
+	}
+	ListServerCertificateTagsWithContextStub        func(context.Context, *iam.ListServerCertificateTagsInput, ...request.Option) (*iam.ListServerCertificateTagsOutput, error)
+	listServerCertificateTagsWithContextMutex       sync.RWMutex
+	listServerCertificateTagsWithContextArgsForCall []struct {
+		arg1 context.Context
+		arg2 *iam.ListServerCertificateTagsInput
+		arg3 []request.Option
+	}
+	listServerCertificateTagsWithContextReturns struct {
+		result1 *iam.ListServerCertificateTagsOutput
+		result2 error
+	}
+	listServerCertificateTagsWithContextReturnsOnCall map[int]struct {
+		result1 *iam.ListServerCertificateTagsOutput
 		result2 error
 	}
 	ListServerCertificatesStub        func(*iam.ListServerCertificatesInput) (*iam.ListServerCertificatesOutput, error)
@@ -4777,6 +5023,32 @@ type FakeIAMAPI struct {
 	listUserTagsReturnsOnCall map[int]struct {
 		result1 *iam.ListUserTagsOutput
 		result2 error
+	}
+	ListUserTagsPagesStub        func(*iam.ListUserTagsInput, func(*iam.ListUserTagsOutput, bool) bool) error
+	listUserTagsPagesMutex       sync.RWMutex
+	listUserTagsPagesArgsForCall []struct {
+		arg1 *iam.ListUserTagsInput
+		arg2 func(*iam.ListUserTagsOutput, bool) bool
+	}
+	listUserTagsPagesReturns struct {
+		result1 error
+	}
+	listUserTagsPagesReturnsOnCall map[int]struct {
+		result1 error
+	}
+	ListUserTagsPagesWithContextStub        func(context.Context, *iam.ListUserTagsInput, func(*iam.ListUserTagsOutput, bool) bool, ...request.Option) error
+	listUserTagsPagesWithContextMutex       sync.RWMutex
+	listUserTagsPagesWithContextArgsForCall []struct {
+		arg1 context.Context
+		arg2 *iam.ListUserTagsInput
+		arg3 func(*iam.ListUserTagsOutput, bool) bool
+		arg4 []request.Option
+	}
+	listUserTagsPagesWithContextReturns struct {
+		result1 error
+	}
+	listUserTagsPagesWithContextReturnsOnCall map[int]struct {
+		result1 error
 	}
 	ListUserTagsRequestStub        func(*iam.ListUserTagsInput) (*request.Request, *iam.ListUserTagsOutput)
 	listUserTagsRequestMutex       sync.RWMutex
@@ -5566,6 +5838,170 @@ type FakeIAMAPI struct {
 		result1 *iam.SimulatePolicyResponse
 		result2 error
 	}
+	TagInstanceProfileStub        func(*iam.TagInstanceProfileInput) (*iam.TagInstanceProfileOutput, error)
+	tagInstanceProfileMutex       sync.RWMutex
+	tagInstanceProfileArgsForCall []struct {
+		arg1 *iam.TagInstanceProfileInput
+	}
+	tagInstanceProfileReturns struct {
+		result1 *iam.TagInstanceProfileOutput
+		result2 error
+	}
+	tagInstanceProfileReturnsOnCall map[int]struct {
+		result1 *iam.TagInstanceProfileOutput
+		result2 error
+	}
+	TagInstanceProfileRequestStub        func(*iam.TagInstanceProfileInput) (*request.Request, *iam.TagInstanceProfileOutput)
+	tagInstanceProfileRequestMutex       sync.RWMutex
+	tagInstanceProfileRequestArgsForCall []struct {
+		arg1 *iam.TagInstanceProfileInput
+	}
+	tagInstanceProfileRequestReturns struct {
+		result1 *request.Request
+		result2 *iam.TagInstanceProfileOutput
+	}
+	tagInstanceProfileRequestReturnsOnCall map[int]struct {
+		result1 *request.Request
+		result2 *iam.TagInstanceProfileOutput
+	}
+	TagInstanceProfileWithContextStub        func(context.Context, *iam.TagInstanceProfileInput, ...request.Option) (*iam.TagInstanceProfileOutput, error)
+	tagInstanceProfileWithContextMutex       sync.RWMutex
+	tagInstanceProfileWithContextArgsForCall []struct {
+		arg1 context.Context
+		arg2 *iam.TagInstanceProfileInput
+		arg3 []request.Option
+	}
+	tagInstanceProfileWithContextReturns struct {
+		result1 *iam.TagInstanceProfileOutput
+		result2 error
+	}
+	tagInstanceProfileWithContextReturnsOnCall map[int]struct {
+		result1 *iam.TagInstanceProfileOutput
+		result2 error
+	}
+	TagMFADeviceStub        func(*iam.TagMFADeviceInput) (*iam.TagMFADeviceOutput, error)
+	tagMFADeviceMutex       sync.RWMutex
+	tagMFADeviceArgsForCall []struct {
+		arg1 *iam.TagMFADeviceInput
+	}
+	tagMFADeviceReturns struct {
+		result1 *iam.TagMFADeviceOutput
+		result2 error
+	}
+	tagMFADeviceReturnsOnCall map[int]struct {
+		result1 *iam.TagMFADeviceOutput
+		result2 error
+	}
+	TagMFADeviceRequestStub        func(*iam.TagMFADeviceInput) (*request.Request, *iam.TagMFADeviceOutput)
+	tagMFADeviceRequestMutex       sync.RWMutex
+	tagMFADeviceRequestArgsForCall []struct {
+		arg1 *iam.TagMFADeviceInput
+	}
+	tagMFADeviceRequestReturns struct {
+		result1 *request.Request
+		result2 *iam.TagMFADeviceOutput
+	}
+	tagMFADeviceRequestReturnsOnCall map[int]struct {
+		result1 *request.Request
+		result2 *iam.TagMFADeviceOutput
+	}
+	TagMFADeviceWithContextStub        func(context.Context, *iam.TagMFADeviceInput, ...request.Option) (*iam.TagMFADeviceOutput, error)
+	tagMFADeviceWithContextMutex       sync.RWMutex
+	tagMFADeviceWithContextArgsForCall []struct {
+		arg1 context.Context
+		arg2 *iam.TagMFADeviceInput
+		arg3 []request.Option
+	}
+	tagMFADeviceWithContextReturns struct {
+		result1 *iam.TagMFADeviceOutput
+		result2 error
+	}
+	tagMFADeviceWithContextReturnsOnCall map[int]struct {
+		result1 *iam.TagMFADeviceOutput
+		result2 error
+	}
+	TagOpenIDConnectProviderStub        func(*iam.TagOpenIDConnectProviderInput) (*iam.TagOpenIDConnectProviderOutput, error)
+	tagOpenIDConnectProviderMutex       sync.RWMutex
+	tagOpenIDConnectProviderArgsForCall []struct {
+		arg1 *iam.TagOpenIDConnectProviderInput
+	}
+	tagOpenIDConnectProviderReturns struct {
+		result1 *iam.TagOpenIDConnectProviderOutput
+		result2 error
+	}
+	tagOpenIDConnectProviderReturnsOnCall map[int]struct {
+		result1 *iam.TagOpenIDConnectProviderOutput
+		result2 error
+	}
+	TagOpenIDConnectProviderRequestStub        func(*iam.TagOpenIDConnectProviderInput) (*request.Request, *iam.TagOpenIDConnectProviderOutput)
+	tagOpenIDConnectProviderRequestMutex       sync.RWMutex
+	tagOpenIDConnectProviderRequestArgsForCall []struct {
+		arg1 *iam.TagOpenIDConnectProviderInput
+	}
+	tagOpenIDConnectProviderRequestReturns struct {
+		result1 *request.Request
+		result2 *iam.TagOpenIDConnectProviderOutput
+	}
+	tagOpenIDConnectProviderRequestReturnsOnCall map[int]struct {
+		result1 *request.Request
+		result2 *iam.TagOpenIDConnectProviderOutput
+	}
+	TagOpenIDConnectProviderWithContextStub        func(context.Context, *iam.TagOpenIDConnectProviderInput, ...request.Option) (*iam.TagOpenIDConnectProviderOutput, error)
+	tagOpenIDConnectProviderWithContextMutex       sync.RWMutex
+	tagOpenIDConnectProviderWithContextArgsForCall []struct {
+		arg1 context.Context
+		arg2 *iam.TagOpenIDConnectProviderInput
+		arg3 []request.Option
+	}
+	tagOpenIDConnectProviderWithContextReturns struct {
+		result1 *iam.TagOpenIDConnectProviderOutput
+		result2 error
+	}
+	tagOpenIDConnectProviderWithContextReturnsOnCall map[int]struct {
+		result1 *iam.TagOpenIDConnectProviderOutput
+		result2 error
+	}
+	TagPolicyStub        func(*iam.TagPolicyInput) (*iam.TagPolicyOutput, error)
+	tagPolicyMutex       sync.RWMutex
+	tagPolicyArgsForCall []struct {
+		arg1 *iam.TagPolicyInput
+	}
+	tagPolicyReturns struct {
+		result1 *iam.TagPolicyOutput
+		result2 error
+	}
+	tagPolicyReturnsOnCall map[int]struct {
+		result1 *iam.TagPolicyOutput
+		result2 error
+	}
+	TagPolicyRequestStub        func(*iam.TagPolicyInput) (*request.Request, *iam.TagPolicyOutput)
+	tagPolicyRequestMutex       sync.RWMutex
+	tagPolicyRequestArgsForCall []struct {
+		arg1 *iam.TagPolicyInput
+	}
+	tagPolicyRequestReturns struct {
+		result1 *request.Request
+		result2 *iam.TagPolicyOutput
+	}
+	tagPolicyRequestReturnsOnCall map[int]struct {
+		result1 *request.Request
+		result2 *iam.TagPolicyOutput
+	}
+	TagPolicyWithContextStub        func(context.Context, *iam.TagPolicyInput, ...request.Option) (*iam.TagPolicyOutput, error)
+	tagPolicyWithContextMutex       sync.RWMutex
+	tagPolicyWithContextArgsForCall []struct {
+		arg1 context.Context
+		arg2 *iam.TagPolicyInput
+		arg3 []request.Option
+	}
+	tagPolicyWithContextReturns struct {
+		result1 *iam.TagPolicyOutput
+		result2 error
+	}
+	tagPolicyWithContextReturnsOnCall map[int]struct {
+		result1 *iam.TagPolicyOutput
+		result2 error
+	}
 	TagRoleStub        func(*iam.TagRoleInput) (*iam.TagRoleOutput, error)
 	tagRoleMutex       sync.RWMutex
 	tagRoleArgsForCall []struct {
@@ -5605,6 +6041,88 @@ type FakeIAMAPI struct {
 	}
 	tagRoleWithContextReturnsOnCall map[int]struct {
 		result1 *iam.TagRoleOutput
+		result2 error
+	}
+	TagSAMLProviderStub        func(*iam.TagSAMLProviderInput) (*iam.TagSAMLProviderOutput, error)
+	tagSAMLProviderMutex       sync.RWMutex
+	tagSAMLProviderArgsForCall []struct {
+		arg1 *iam.TagSAMLProviderInput
+	}
+	tagSAMLProviderReturns struct {
+		result1 *iam.TagSAMLProviderOutput
+		result2 error
+	}
+	tagSAMLProviderReturnsOnCall map[int]struct {
+		result1 *iam.TagSAMLProviderOutput
+		result2 error
+	}
+	TagSAMLProviderRequestStub        func(*iam.TagSAMLProviderInput) (*request.Request, *iam.TagSAMLProviderOutput)
+	tagSAMLProviderRequestMutex       sync.RWMutex
+	tagSAMLProviderRequestArgsForCall []struct {
+		arg1 *iam.TagSAMLProviderInput
+	}
+	tagSAMLProviderRequestReturns struct {
+		result1 *request.Request
+		result2 *iam.TagSAMLProviderOutput
+	}
+	tagSAMLProviderRequestReturnsOnCall map[int]struct {
+		result1 *request.Request
+		result2 *iam.TagSAMLProviderOutput
+	}
+	TagSAMLProviderWithContextStub        func(context.Context, *iam.TagSAMLProviderInput, ...request.Option) (*iam.TagSAMLProviderOutput, error)
+	tagSAMLProviderWithContextMutex       sync.RWMutex
+	tagSAMLProviderWithContextArgsForCall []struct {
+		arg1 context.Context
+		arg2 *iam.TagSAMLProviderInput
+		arg3 []request.Option
+	}
+	tagSAMLProviderWithContextReturns struct {
+		result1 *iam.TagSAMLProviderOutput
+		result2 error
+	}
+	tagSAMLProviderWithContextReturnsOnCall map[int]struct {
+		result1 *iam.TagSAMLProviderOutput
+		result2 error
+	}
+	TagServerCertificateStub        func(*iam.TagServerCertificateInput) (*iam.TagServerCertificateOutput, error)
+	tagServerCertificateMutex       sync.RWMutex
+	tagServerCertificateArgsForCall []struct {
+		arg1 *iam.TagServerCertificateInput
+	}
+	tagServerCertificateReturns struct {
+		result1 *iam.TagServerCertificateOutput
+		result2 error
+	}
+	tagServerCertificateReturnsOnCall map[int]struct {
+		result1 *iam.TagServerCertificateOutput
+		result2 error
+	}
+	TagServerCertificateRequestStub        func(*iam.TagServerCertificateInput) (*request.Request, *iam.TagServerCertificateOutput)
+	tagServerCertificateRequestMutex       sync.RWMutex
+	tagServerCertificateRequestArgsForCall []struct {
+		arg1 *iam.TagServerCertificateInput
+	}
+	tagServerCertificateRequestReturns struct {
+		result1 *request.Request
+		result2 *iam.TagServerCertificateOutput
+	}
+	tagServerCertificateRequestReturnsOnCall map[int]struct {
+		result1 *request.Request
+		result2 *iam.TagServerCertificateOutput
+	}
+	TagServerCertificateWithContextStub        func(context.Context, *iam.TagServerCertificateInput, ...request.Option) (*iam.TagServerCertificateOutput, error)
+	tagServerCertificateWithContextMutex       sync.RWMutex
+	tagServerCertificateWithContextArgsForCall []struct {
+		arg1 context.Context
+		arg2 *iam.TagServerCertificateInput
+		arg3 []request.Option
+	}
+	tagServerCertificateWithContextReturns struct {
+		result1 *iam.TagServerCertificateOutput
+		result2 error
+	}
+	tagServerCertificateWithContextReturnsOnCall map[int]struct {
+		result1 *iam.TagServerCertificateOutput
 		result2 error
 	}
 	TagUserStub        func(*iam.TagUserInput) (*iam.TagUserOutput, error)
@@ -5648,6 +6166,170 @@ type FakeIAMAPI struct {
 		result1 *iam.TagUserOutput
 		result2 error
 	}
+	UntagInstanceProfileStub        func(*iam.UntagInstanceProfileInput) (*iam.UntagInstanceProfileOutput, error)
+	untagInstanceProfileMutex       sync.RWMutex
+	untagInstanceProfileArgsForCall []struct {
+		arg1 *iam.UntagInstanceProfileInput
+	}
+	untagInstanceProfileReturns struct {
+		result1 *iam.UntagInstanceProfileOutput
+		result2 error
+	}
+	untagInstanceProfileReturnsOnCall map[int]struct {
+		result1 *iam.UntagInstanceProfileOutput
+		result2 error
+	}
+	UntagInstanceProfileRequestStub        func(*iam.UntagInstanceProfileInput) (*request.Request, *iam.UntagInstanceProfileOutput)
+	untagInstanceProfileRequestMutex       sync.RWMutex
+	untagInstanceProfileRequestArgsForCall []struct {
+		arg1 *iam.UntagInstanceProfileInput
+	}
+	untagInstanceProfileRequestReturns struct {
+		result1 *request.Request
+		result2 *iam.UntagInstanceProfileOutput
+	}
+	untagInstanceProfileRequestReturnsOnCall map[int]struct {
+		result1 *request.Request
+		result2 *iam.UntagInstanceProfileOutput
+	}
+	UntagInstanceProfileWithContextStub        func(context.Context, *iam.UntagInstanceProfileInput, ...request.Option) (*iam.UntagInstanceProfileOutput, error)
+	untagInstanceProfileWithContextMutex       sync.RWMutex
+	untagInstanceProfileWithContextArgsForCall []struct {
+		arg1 context.Context
+		arg2 *iam.UntagInstanceProfileInput
+		arg3 []request.Option
+	}
+	untagInstanceProfileWithContextReturns struct {
+		result1 *iam.UntagInstanceProfileOutput
+		result2 error
+	}
+	untagInstanceProfileWithContextReturnsOnCall map[int]struct {
+		result1 *iam.UntagInstanceProfileOutput
+		result2 error
+	}
+	UntagMFADeviceStub        func(*iam.UntagMFADeviceInput) (*iam.UntagMFADeviceOutput, error)
+	untagMFADeviceMutex       sync.RWMutex
+	untagMFADeviceArgsForCall []struct {
+		arg1 *iam.UntagMFADeviceInput
+	}
+	untagMFADeviceReturns struct {
+		result1 *iam.UntagMFADeviceOutput
+		result2 error
+	}
+	untagMFADeviceReturnsOnCall map[int]struct {
+		result1 *iam.UntagMFADeviceOutput
+		result2 error
+	}
+	UntagMFADeviceRequestStub        func(*iam.UntagMFADeviceInput) (*request.Request, *iam.UntagMFADeviceOutput)
+	untagMFADeviceRequestMutex       sync.RWMutex
+	untagMFADeviceRequestArgsForCall []struct {
+		arg1 *iam.UntagMFADeviceInput
+	}
+	untagMFADeviceRequestReturns struct {
+		result1 *request.Request
+		result2 *iam.UntagMFADeviceOutput
+	}
+	untagMFADeviceRequestReturnsOnCall map[int]struct {
+		result1 *request.Request
+		result2 *iam.UntagMFADeviceOutput
+	}
+	UntagMFADeviceWithContextStub        func(context.Context, *iam.UntagMFADeviceInput, ...request.Option) (*iam.UntagMFADeviceOutput, error)
+	untagMFADeviceWithContextMutex       sync.RWMutex
+	untagMFADeviceWithContextArgsForCall []struct {
+		arg1 context.Context
+		arg2 *iam.UntagMFADeviceInput
+		arg3 []request.Option
+	}
+	untagMFADeviceWithContextReturns struct {
+		result1 *iam.UntagMFADeviceOutput
+		result2 error
+	}
+	untagMFADeviceWithContextReturnsOnCall map[int]struct {
+		result1 *iam.UntagMFADeviceOutput
+		result2 error
+	}
+	UntagOpenIDConnectProviderStub        func(*iam.UntagOpenIDConnectProviderInput) (*iam.UntagOpenIDConnectProviderOutput, error)
+	untagOpenIDConnectProviderMutex       sync.RWMutex
+	untagOpenIDConnectProviderArgsForCall []struct {
+		arg1 *iam.UntagOpenIDConnectProviderInput
+	}
+	untagOpenIDConnectProviderReturns struct {
+		result1 *iam.UntagOpenIDConnectProviderOutput
+		result2 error
+	}
+	untagOpenIDConnectProviderReturnsOnCall map[int]struct {
+		result1 *iam.UntagOpenIDConnectProviderOutput
+		result2 error
+	}
+	UntagOpenIDConnectProviderRequestStub        func(*iam.UntagOpenIDConnectProviderInput) (*request.Request, *iam.UntagOpenIDConnectProviderOutput)
+	untagOpenIDConnectProviderRequestMutex       sync.RWMutex
+	untagOpenIDConnectProviderRequestArgsForCall []struct {
+		arg1 *iam.UntagOpenIDConnectProviderInput
+	}
+	untagOpenIDConnectProviderRequestReturns struct {
+		result1 *request.Request
+		result2 *iam.UntagOpenIDConnectProviderOutput
+	}
+	untagOpenIDConnectProviderRequestReturnsOnCall map[int]struct {
+		result1 *request.Request
+		result2 *iam.UntagOpenIDConnectProviderOutput
+	}
+	UntagOpenIDConnectProviderWithContextStub        func(context.Context, *iam.UntagOpenIDConnectProviderInput, ...request.Option) (*iam.UntagOpenIDConnectProviderOutput, error)
+	untagOpenIDConnectProviderWithContextMutex       sync.RWMutex
+	untagOpenIDConnectProviderWithContextArgsForCall []struct {
+		arg1 context.Context
+		arg2 *iam.UntagOpenIDConnectProviderInput
+		arg3 []request.Option
+	}
+	untagOpenIDConnectProviderWithContextReturns struct {
+		result1 *iam.UntagOpenIDConnectProviderOutput
+		result2 error
+	}
+	untagOpenIDConnectProviderWithContextReturnsOnCall map[int]struct {
+		result1 *iam.UntagOpenIDConnectProviderOutput
+		result2 error
+	}
+	UntagPolicyStub        func(*iam.UntagPolicyInput) (*iam.UntagPolicyOutput, error)
+	untagPolicyMutex       sync.RWMutex
+	untagPolicyArgsForCall []struct {
+		arg1 *iam.UntagPolicyInput
+	}
+	untagPolicyReturns struct {
+		result1 *iam.UntagPolicyOutput
+		result2 error
+	}
+	untagPolicyReturnsOnCall map[int]struct {
+		result1 *iam.UntagPolicyOutput
+		result2 error
+	}
+	UntagPolicyRequestStub        func(*iam.UntagPolicyInput) (*request.Request, *iam.UntagPolicyOutput)
+	untagPolicyRequestMutex       sync.RWMutex
+	untagPolicyRequestArgsForCall []struct {
+		arg1 *iam.UntagPolicyInput
+	}
+	untagPolicyRequestReturns struct {
+		result1 *request.Request
+		result2 *iam.UntagPolicyOutput
+	}
+	untagPolicyRequestReturnsOnCall map[int]struct {
+		result1 *request.Request
+		result2 *iam.UntagPolicyOutput
+	}
+	UntagPolicyWithContextStub        func(context.Context, *iam.UntagPolicyInput, ...request.Option) (*iam.UntagPolicyOutput, error)
+	untagPolicyWithContextMutex       sync.RWMutex
+	untagPolicyWithContextArgsForCall []struct {
+		arg1 context.Context
+		arg2 *iam.UntagPolicyInput
+		arg3 []request.Option
+	}
+	untagPolicyWithContextReturns struct {
+		result1 *iam.UntagPolicyOutput
+		result2 error
+	}
+	untagPolicyWithContextReturnsOnCall map[int]struct {
+		result1 *iam.UntagPolicyOutput
+		result2 error
+	}
 	UntagRoleStub        func(*iam.UntagRoleInput) (*iam.UntagRoleOutput, error)
 	untagRoleMutex       sync.RWMutex
 	untagRoleArgsForCall []struct {
@@ -5687,6 +6369,88 @@ type FakeIAMAPI struct {
 	}
 	untagRoleWithContextReturnsOnCall map[int]struct {
 		result1 *iam.UntagRoleOutput
+		result2 error
+	}
+	UntagSAMLProviderStub        func(*iam.UntagSAMLProviderInput) (*iam.UntagSAMLProviderOutput, error)
+	untagSAMLProviderMutex       sync.RWMutex
+	untagSAMLProviderArgsForCall []struct {
+		arg1 *iam.UntagSAMLProviderInput
+	}
+	untagSAMLProviderReturns struct {
+		result1 *iam.UntagSAMLProviderOutput
+		result2 error
+	}
+	untagSAMLProviderReturnsOnCall map[int]struct {
+		result1 *iam.UntagSAMLProviderOutput
+		result2 error
+	}
+	UntagSAMLProviderRequestStub        func(*iam.UntagSAMLProviderInput) (*request.Request, *iam.UntagSAMLProviderOutput)
+	untagSAMLProviderRequestMutex       sync.RWMutex
+	untagSAMLProviderRequestArgsForCall []struct {
+		arg1 *iam.UntagSAMLProviderInput
+	}
+	untagSAMLProviderRequestReturns struct {
+		result1 *request.Request
+		result2 *iam.UntagSAMLProviderOutput
+	}
+	untagSAMLProviderRequestReturnsOnCall map[int]struct {
+		result1 *request.Request
+		result2 *iam.UntagSAMLProviderOutput
+	}
+	UntagSAMLProviderWithContextStub        func(context.Context, *iam.UntagSAMLProviderInput, ...request.Option) (*iam.UntagSAMLProviderOutput, error)
+	untagSAMLProviderWithContextMutex       sync.RWMutex
+	untagSAMLProviderWithContextArgsForCall []struct {
+		arg1 context.Context
+		arg2 *iam.UntagSAMLProviderInput
+		arg3 []request.Option
+	}
+	untagSAMLProviderWithContextReturns struct {
+		result1 *iam.UntagSAMLProviderOutput
+		result2 error
+	}
+	untagSAMLProviderWithContextReturnsOnCall map[int]struct {
+		result1 *iam.UntagSAMLProviderOutput
+		result2 error
+	}
+	UntagServerCertificateStub        func(*iam.UntagServerCertificateInput) (*iam.UntagServerCertificateOutput, error)
+	untagServerCertificateMutex       sync.RWMutex
+	untagServerCertificateArgsForCall []struct {
+		arg1 *iam.UntagServerCertificateInput
+	}
+	untagServerCertificateReturns struct {
+		result1 *iam.UntagServerCertificateOutput
+		result2 error
+	}
+	untagServerCertificateReturnsOnCall map[int]struct {
+		result1 *iam.UntagServerCertificateOutput
+		result2 error
+	}
+	UntagServerCertificateRequestStub        func(*iam.UntagServerCertificateInput) (*request.Request, *iam.UntagServerCertificateOutput)
+	untagServerCertificateRequestMutex       sync.RWMutex
+	untagServerCertificateRequestArgsForCall []struct {
+		arg1 *iam.UntagServerCertificateInput
+	}
+	untagServerCertificateRequestReturns struct {
+		result1 *request.Request
+		result2 *iam.UntagServerCertificateOutput
+	}
+	untagServerCertificateRequestReturnsOnCall map[int]struct {
+		result1 *request.Request
+		result2 *iam.UntagServerCertificateOutput
+	}
+	UntagServerCertificateWithContextStub        func(context.Context, *iam.UntagServerCertificateInput, ...request.Option) (*iam.UntagServerCertificateOutput, error)
+	untagServerCertificateWithContextMutex       sync.RWMutex
+	untagServerCertificateWithContextArgsForCall []struct {
+		arg1 context.Context
+		arg2 *iam.UntagServerCertificateInput
+		arg3 []request.Option
+	}
+	untagServerCertificateWithContextReturns struct {
+		result1 *iam.UntagServerCertificateOutput
+		result2 error
+	}
+	untagServerCertificateWithContextReturnsOnCall map[int]struct {
+		result1 *iam.UntagServerCertificateOutput
 		result2 error
 	}
 	UntagUserStub        func(*iam.UntagUserInput) (*iam.UntagUserOutput, error)
@@ -24597,6 +25361,200 @@ func (fake *FakeIAMAPI) ListGroupsWithContextReturnsOnCall(i int, result1 *iam.L
 	}{result1, result2}
 }
 
+func (fake *FakeIAMAPI) ListInstanceProfileTags(arg1 *iam.ListInstanceProfileTagsInput) (*iam.ListInstanceProfileTagsOutput, error) {
+	fake.listInstanceProfileTagsMutex.Lock()
+	ret, specificReturn := fake.listInstanceProfileTagsReturnsOnCall[len(fake.listInstanceProfileTagsArgsForCall)]
+	fake.listInstanceProfileTagsArgsForCall = append(fake.listInstanceProfileTagsArgsForCall, struct {
+		arg1 *iam.ListInstanceProfileTagsInput
+	}{arg1})
+	stub := fake.ListInstanceProfileTagsStub
+	fakeReturns := fake.listInstanceProfileTagsReturns
+	fake.recordInvocation("ListInstanceProfileTags", []interface{}{arg1})
+	fake.listInstanceProfileTagsMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) ListInstanceProfileTagsCallCount() int {
+	fake.listInstanceProfileTagsMutex.RLock()
+	defer fake.listInstanceProfileTagsMutex.RUnlock()
+	return len(fake.listInstanceProfileTagsArgsForCall)
+}
+
+func (fake *FakeIAMAPI) ListInstanceProfileTagsCalls(stub func(*iam.ListInstanceProfileTagsInput) (*iam.ListInstanceProfileTagsOutput, error)) {
+	fake.listInstanceProfileTagsMutex.Lock()
+	defer fake.listInstanceProfileTagsMutex.Unlock()
+	fake.ListInstanceProfileTagsStub = stub
+}
+
+func (fake *FakeIAMAPI) ListInstanceProfileTagsArgsForCall(i int) *iam.ListInstanceProfileTagsInput {
+	fake.listInstanceProfileTagsMutex.RLock()
+	defer fake.listInstanceProfileTagsMutex.RUnlock()
+	argsForCall := fake.listInstanceProfileTagsArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) ListInstanceProfileTagsReturns(result1 *iam.ListInstanceProfileTagsOutput, result2 error) {
+	fake.listInstanceProfileTagsMutex.Lock()
+	defer fake.listInstanceProfileTagsMutex.Unlock()
+	fake.ListInstanceProfileTagsStub = nil
+	fake.listInstanceProfileTagsReturns = struct {
+		result1 *iam.ListInstanceProfileTagsOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) ListInstanceProfileTagsReturnsOnCall(i int, result1 *iam.ListInstanceProfileTagsOutput, result2 error) {
+	fake.listInstanceProfileTagsMutex.Lock()
+	defer fake.listInstanceProfileTagsMutex.Unlock()
+	fake.ListInstanceProfileTagsStub = nil
+	if fake.listInstanceProfileTagsReturnsOnCall == nil {
+		fake.listInstanceProfileTagsReturnsOnCall = make(map[int]struct {
+			result1 *iam.ListInstanceProfileTagsOutput
+			result2 error
+		})
+	}
+	fake.listInstanceProfileTagsReturnsOnCall[i] = struct {
+		result1 *iam.ListInstanceProfileTagsOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) ListInstanceProfileTagsRequest(arg1 *iam.ListInstanceProfileTagsInput) (*request.Request, *iam.ListInstanceProfileTagsOutput) {
+	fake.listInstanceProfileTagsRequestMutex.Lock()
+	ret, specificReturn := fake.listInstanceProfileTagsRequestReturnsOnCall[len(fake.listInstanceProfileTagsRequestArgsForCall)]
+	fake.listInstanceProfileTagsRequestArgsForCall = append(fake.listInstanceProfileTagsRequestArgsForCall, struct {
+		arg1 *iam.ListInstanceProfileTagsInput
+	}{arg1})
+	stub := fake.ListInstanceProfileTagsRequestStub
+	fakeReturns := fake.listInstanceProfileTagsRequestReturns
+	fake.recordInvocation("ListInstanceProfileTagsRequest", []interface{}{arg1})
+	fake.listInstanceProfileTagsRequestMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) ListInstanceProfileTagsRequestCallCount() int {
+	fake.listInstanceProfileTagsRequestMutex.RLock()
+	defer fake.listInstanceProfileTagsRequestMutex.RUnlock()
+	return len(fake.listInstanceProfileTagsRequestArgsForCall)
+}
+
+func (fake *FakeIAMAPI) ListInstanceProfileTagsRequestCalls(stub func(*iam.ListInstanceProfileTagsInput) (*request.Request, *iam.ListInstanceProfileTagsOutput)) {
+	fake.listInstanceProfileTagsRequestMutex.Lock()
+	defer fake.listInstanceProfileTagsRequestMutex.Unlock()
+	fake.ListInstanceProfileTagsRequestStub = stub
+}
+
+func (fake *FakeIAMAPI) ListInstanceProfileTagsRequestArgsForCall(i int) *iam.ListInstanceProfileTagsInput {
+	fake.listInstanceProfileTagsRequestMutex.RLock()
+	defer fake.listInstanceProfileTagsRequestMutex.RUnlock()
+	argsForCall := fake.listInstanceProfileTagsRequestArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) ListInstanceProfileTagsRequestReturns(result1 *request.Request, result2 *iam.ListInstanceProfileTagsOutput) {
+	fake.listInstanceProfileTagsRequestMutex.Lock()
+	defer fake.listInstanceProfileTagsRequestMutex.Unlock()
+	fake.ListInstanceProfileTagsRequestStub = nil
+	fake.listInstanceProfileTagsRequestReturns = struct {
+		result1 *request.Request
+		result2 *iam.ListInstanceProfileTagsOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) ListInstanceProfileTagsRequestReturnsOnCall(i int, result1 *request.Request, result2 *iam.ListInstanceProfileTagsOutput) {
+	fake.listInstanceProfileTagsRequestMutex.Lock()
+	defer fake.listInstanceProfileTagsRequestMutex.Unlock()
+	fake.ListInstanceProfileTagsRequestStub = nil
+	if fake.listInstanceProfileTagsRequestReturnsOnCall == nil {
+		fake.listInstanceProfileTagsRequestReturnsOnCall = make(map[int]struct {
+			result1 *request.Request
+			result2 *iam.ListInstanceProfileTagsOutput
+		})
+	}
+	fake.listInstanceProfileTagsRequestReturnsOnCall[i] = struct {
+		result1 *request.Request
+		result2 *iam.ListInstanceProfileTagsOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) ListInstanceProfileTagsWithContext(arg1 context.Context, arg2 *iam.ListInstanceProfileTagsInput, arg3 ...request.Option) (*iam.ListInstanceProfileTagsOutput, error) {
+	fake.listInstanceProfileTagsWithContextMutex.Lock()
+	ret, specificReturn := fake.listInstanceProfileTagsWithContextReturnsOnCall[len(fake.listInstanceProfileTagsWithContextArgsForCall)]
+	fake.listInstanceProfileTagsWithContextArgsForCall = append(fake.listInstanceProfileTagsWithContextArgsForCall, struct {
+		arg1 context.Context
+		arg2 *iam.ListInstanceProfileTagsInput
+		arg3 []request.Option
+	}{arg1, arg2, arg3})
+	stub := fake.ListInstanceProfileTagsWithContextStub
+	fakeReturns := fake.listInstanceProfileTagsWithContextReturns
+	fake.recordInvocation("ListInstanceProfileTagsWithContext", []interface{}{arg1, arg2, arg3})
+	fake.listInstanceProfileTagsWithContextMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2, arg3...)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) ListInstanceProfileTagsWithContextCallCount() int {
+	fake.listInstanceProfileTagsWithContextMutex.RLock()
+	defer fake.listInstanceProfileTagsWithContextMutex.RUnlock()
+	return len(fake.listInstanceProfileTagsWithContextArgsForCall)
+}
+
+func (fake *FakeIAMAPI) ListInstanceProfileTagsWithContextCalls(stub func(context.Context, *iam.ListInstanceProfileTagsInput, ...request.Option) (*iam.ListInstanceProfileTagsOutput, error)) {
+	fake.listInstanceProfileTagsWithContextMutex.Lock()
+	defer fake.listInstanceProfileTagsWithContextMutex.Unlock()
+	fake.ListInstanceProfileTagsWithContextStub = stub
+}
+
+func (fake *FakeIAMAPI) ListInstanceProfileTagsWithContextArgsForCall(i int) (context.Context, *iam.ListInstanceProfileTagsInput, []request.Option) {
+	fake.listInstanceProfileTagsWithContextMutex.RLock()
+	defer fake.listInstanceProfileTagsWithContextMutex.RUnlock()
+	argsForCall := fake.listInstanceProfileTagsWithContextArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3
+}
+
+func (fake *FakeIAMAPI) ListInstanceProfileTagsWithContextReturns(result1 *iam.ListInstanceProfileTagsOutput, result2 error) {
+	fake.listInstanceProfileTagsWithContextMutex.Lock()
+	defer fake.listInstanceProfileTagsWithContextMutex.Unlock()
+	fake.ListInstanceProfileTagsWithContextStub = nil
+	fake.listInstanceProfileTagsWithContextReturns = struct {
+		result1 *iam.ListInstanceProfileTagsOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) ListInstanceProfileTagsWithContextReturnsOnCall(i int, result1 *iam.ListInstanceProfileTagsOutput, result2 error) {
+	fake.listInstanceProfileTagsWithContextMutex.Lock()
+	defer fake.listInstanceProfileTagsWithContextMutex.Unlock()
+	fake.ListInstanceProfileTagsWithContextStub = nil
+	if fake.listInstanceProfileTagsWithContextReturnsOnCall == nil {
+		fake.listInstanceProfileTagsWithContextReturnsOnCall = make(map[int]struct {
+			result1 *iam.ListInstanceProfileTagsOutput
+			result2 error
+		})
+	}
+	fake.listInstanceProfileTagsWithContextReturnsOnCall[i] = struct {
+		result1 *iam.ListInstanceProfileTagsOutput
+		result2 error
+	}{result1, result2}
+}
+
 func (fake *FakeIAMAPI) ListInstanceProfiles(arg1 *iam.ListInstanceProfilesInput) (*iam.ListInstanceProfilesOutput, error) {
 	fake.listInstanceProfilesMutex.Lock()
 	ret, specificReturn := fake.listInstanceProfilesReturnsOnCall[len(fake.listInstanceProfilesArgsForCall)]
@@ -25237,6 +26195,200 @@ func (fake *FakeIAMAPI) ListInstanceProfilesWithContextReturnsOnCall(i int, resu
 	}{result1, result2}
 }
 
+func (fake *FakeIAMAPI) ListMFADeviceTags(arg1 *iam.ListMFADeviceTagsInput) (*iam.ListMFADeviceTagsOutput, error) {
+	fake.listMFADeviceTagsMutex.Lock()
+	ret, specificReturn := fake.listMFADeviceTagsReturnsOnCall[len(fake.listMFADeviceTagsArgsForCall)]
+	fake.listMFADeviceTagsArgsForCall = append(fake.listMFADeviceTagsArgsForCall, struct {
+		arg1 *iam.ListMFADeviceTagsInput
+	}{arg1})
+	stub := fake.ListMFADeviceTagsStub
+	fakeReturns := fake.listMFADeviceTagsReturns
+	fake.recordInvocation("ListMFADeviceTags", []interface{}{arg1})
+	fake.listMFADeviceTagsMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) ListMFADeviceTagsCallCount() int {
+	fake.listMFADeviceTagsMutex.RLock()
+	defer fake.listMFADeviceTagsMutex.RUnlock()
+	return len(fake.listMFADeviceTagsArgsForCall)
+}
+
+func (fake *FakeIAMAPI) ListMFADeviceTagsCalls(stub func(*iam.ListMFADeviceTagsInput) (*iam.ListMFADeviceTagsOutput, error)) {
+	fake.listMFADeviceTagsMutex.Lock()
+	defer fake.listMFADeviceTagsMutex.Unlock()
+	fake.ListMFADeviceTagsStub = stub
+}
+
+func (fake *FakeIAMAPI) ListMFADeviceTagsArgsForCall(i int) *iam.ListMFADeviceTagsInput {
+	fake.listMFADeviceTagsMutex.RLock()
+	defer fake.listMFADeviceTagsMutex.RUnlock()
+	argsForCall := fake.listMFADeviceTagsArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) ListMFADeviceTagsReturns(result1 *iam.ListMFADeviceTagsOutput, result2 error) {
+	fake.listMFADeviceTagsMutex.Lock()
+	defer fake.listMFADeviceTagsMutex.Unlock()
+	fake.ListMFADeviceTagsStub = nil
+	fake.listMFADeviceTagsReturns = struct {
+		result1 *iam.ListMFADeviceTagsOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) ListMFADeviceTagsReturnsOnCall(i int, result1 *iam.ListMFADeviceTagsOutput, result2 error) {
+	fake.listMFADeviceTagsMutex.Lock()
+	defer fake.listMFADeviceTagsMutex.Unlock()
+	fake.ListMFADeviceTagsStub = nil
+	if fake.listMFADeviceTagsReturnsOnCall == nil {
+		fake.listMFADeviceTagsReturnsOnCall = make(map[int]struct {
+			result1 *iam.ListMFADeviceTagsOutput
+			result2 error
+		})
+	}
+	fake.listMFADeviceTagsReturnsOnCall[i] = struct {
+		result1 *iam.ListMFADeviceTagsOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) ListMFADeviceTagsRequest(arg1 *iam.ListMFADeviceTagsInput) (*request.Request, *iam.ListMFADeviceTagsOutput) {
+	fake.listMFADeviceTagsRequestMutex.Lock()
+	ret, specificReturn := fake.listMFADeviceTagsRequestReturnsOnCall[len(fake.listMFADeviceTagsRequestArgsForCall)]
+	fake.listMFADeviceTagsRequestArgsForCall = append(fake.listMFADeviceTagsRequestArgsForCall, struct {
+		arg1 *iam.ListMFADeviceTagsInput
+	}{arg1})
+	stub := fake.ListMFADeviceTagsRequestStub
+	fakeReturns := fake.listMFADeviceTagsRequestReturns
+	fake.recordInvocation("ListMFADeviceTagsRequest", []interface{}{arg1})
+	fake.listMFADeviceTagsRequestMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) ListMFADeviceTagsRequestCallCount() int {
+	fake.listMFADeviceTagsRequestMutex.RLock()
+	defer fake.listMFADeviceTagsRequestMutex.RUnlock()
+	return len(fake.listMFADeviceTagsRequestArgsForCall)
+}
+
+func (fake *FakeIAMAPI) ListMFADeviceTagsRequestCalls(stub func(*iam.ListMFADeviceTagsInput) (*request.Request, *iam.ListMFADeviceTagsOutput)) {
+	fake.listMFADeviceTagsRequestMutex.Lock()
+	defer fake.listMFADeviceTagsRequestMutex.Unlock()
+	fake.ListMFADeviceTagsRequestStub = stub
+}
+
+func (fake *FakeIAMAPI) ListMFADeviceTagsRequestArgsForCall(i int) *iam.ListMFADeviceTagsInput {
+	fake.listMFADeviceTagsRequestMutex.RLock()
+	defer fake.listMFADeviceTagsRequestMutex.RUnlock()
+	argsForCall := fake.listMFADeviceTagsRequestArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) ListMFADeviceTagsRequestReturns(result1 *request.Request, result2 *iam.ListMFADeviceTagsOutput) {
+	fake.listMFADeviceTagsRequestMutex.Lock()
+	defer fake.listMFADeviceTagsRequestMutex.Unlock()
+	fake.ListMFADeviceTagsRequestStub = nil
+	fake.listMFADeviceTagsRequestReturns = struct {
+		result1 *request.Request
+		result2 *iam.ListMFADeviceTagsOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) ListMFADeviceTagsRequestReturnsOnCall(i int, result1 *request.Request, result2 *iam.ListMFADeviceTagsOutput) {
+	fake.listMFADeviceTagsRequestMutex.Lock()
+	defer fake.listMFADeviceTagsRequestMutex.Unlock()
+	fake.ListMFADeviceTagsRequestStub = nil
+	if fake.listMFADeviceTagsRequestReturnsOnCall == nil {
+		fake.listMFADeviceTagsRequestReturnsOnCall = make(map[int]struct {
+			result1 *request.Request
+			result2 *iam.ListMFADeviceTagsOutput
+		})
+	}
+	fake.listMFADeviceTagsRequestReturnsOnCall[i] = struct {
+		result1 *request.Request
+		result2 *iam.ListMFADeviceTagsOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) ListMFADeviceTagsWithContext(arg1 context.Context, arg2 *iam.ListMFADeviceTagsInput, arg3 ...request.Option) (*iam.ListMFADeviceTagsOutput, error) {
+	fake.listMFADeviceTagsWithContextMutex.Lock()
+	ret, specificReturn := fake.listMFADeviceTagsWithContextReturnsOnCall[len(fake.listMFADeviceTagsWithContextArgsForCall)]
+	fake.listMFADeviceTagsWithContextArgsForCall = append(fake.listMFADeviceTagsWithContextArgsForCall, struct {
+		arg1 context.Context
+		arg2 *iam.ListMFADeviceTagsInput
+		arg3 []request.Option
+	}{arg1, arg2, arg3})
+	stub := fake.ListMFADeviceTagsWithContextStub
+	fakeReturns := fake.listMFADeviceTagsWithContextReturns
+	fake.recordInvocation("ListMFADeviceTagsWithContext", []interface{}{arg1, arg2, arg3})
+	fake.listMFADeviceTagsWithContextMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2, arg3...)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) ListMFADeviceTagsWithContextCallCount() int {
+	fake.listMFADeviceTagsWithContextMutex.RLock()
+	defer fake.listMFADeviceTagsWithContextMutex.RUnlock()
+	return len(fake.listMFADeviceTagsWithContextArgsForCall)
+}
+
+func (fake *FakeIAMAPI) ListMFADeviceTagsWithContextCalls(stub func(context.Context, *iam.ListMFADeviceTagsInput, ...request.Option) (*iam.ListMFADeviceTagsOutput, error)) {
+	fake.listMFADeviceTagsWithContextMutex.Lock()
+	defer fake.listMFADeviceTagsWithContextMutex.Unlock()
+	fake.ListMFADeviceTagsWithContextStub = stub
+}
+
+func (fake *FakeIAMAPI) ListMFADeviceTagsWithContextArgsForCall(i int) (context.Context, *iam.ListMFADeviceTagsInput, []request.Option) {
+	fake.listMFADeviceTagsWithContextMutex.RLock()
+	defer fake.listMFADeviceTagsWithContextMutex.RUnlock()
+	argsForCall := fake.listMFADeviceTagsWithContextArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3
+}
+
+func (fake *FakeIAMAPI) ListMFADeviceTagsWithContextReturns(result1 *iam.ListMFADeviceTagsOutput, result2 error) {
+	fake.listMFADeviceTagsWithContextMutex.Lock()
+	defer fake.listMFADeviceTagsWithContextMutex.Unlock()
+	fake.ListMFADeviceTagsWithContextStub = nil
+	fake.listMFADeviceTagsWithContextReturns = struct {
+		result1 *iam.ListMFADeviceTagsOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) ListMFADeviceTagsWithContextReturnsOnCall(i int, result1 *iam.ListMFADeviceTagsOutput, result2 error) {
+	fake.listMFADeviceTagsWithContextMutex.Lock()
+	defer fake.listMFADeviceTagsWithContextMutex.Unlock()
+	fake.ListMFADeviceTagsWithContextStub = nil
+	if fake.listMFADeviceTagsWithContextReturnsOnCall == nil {
+		fake.listMFADeviceTagsWithContextReturnsOnCall = make(map[int]struct {
+			result1 *iam.ListMFADeviceTagsOutput
+			result2 error
+		})
+	}
+	fake.listMFADeviceTagsWithContextReturnsOnCall[i] = struct {
+		result1 *iam.ListMFADeviceTagsOutput
+		result2 error
+	}{result1, result2}
+}
+
 func (fake *FakeIAMAPI) ListMFADevices(arg1 *iam.ListMFADevicesInput) (*iam.ListMFADevicesOutput, error) {
 	fake.listMFADevicesMutex.Lock()
 	ret, specificReturn := fake.listMFADevicesReturnsOnCall[len(fake.listMFADevicesArgsForCall)]
@@ -25553,6 +26705,200 @@ func (fake *FakeIAMAPI) ListMFADevicesWithContextReturnsOnCall(i int, result1 *i
 	}
 	fake.listMFADevicesWithContextReturnsOnCall[i] = struct {
 		result1 *iam.ListMFADevicesOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) ListOpenIDConnectProviderTags(arg1 *iam.ListOpenIDConnectProviderTagsInput) (*iam.ListOpenIDConnectProviderTagsOutput, error) {
+	fake.listOpenIDConnectProviderTagsMutex.Lock()
+	ret, specificReturn := fake.listOpenIDConnectProviderTagsReturnsOnCall[len(fake.listOpenIDConnectProviderTagsArgsForCall)]
+	fake.listOpenIDConnectProviderTagsArgsForCall = append(fake.listOpenIDConnectProviderTagsArgsForCall, struct {
+		arg1 *iam.ListOpenIDConnectProviderTagsInput
+	}{arg1})
+	stub := fake.ListOpenIDConnectProviderTagsStub
+	fakeReturns := fake.listOpenIDConnectProviderTagsReturns
+	fake.recordInvocation("ListOpenIDConnectProviderTags", []interface{}{arg1})
+	fake.listOpenIDConnectProviderTagsMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) ListOpenIDConnectProviderTagsCallCount() int {
+	fake.listOpenIDConnectProviderTagsMutex.RLock()
+	defer fake.listOpenIDConnectProviderTagsMutex.RUnlock()
+	return len(fake.listOpenIDConnectProviderTagsArgsForCall)
+}
+
+func (fake *FakeIAMAPI) ListOpenIDConnectProviderTagsCalls(stub func(*iam.ListOpenIDConnectProviderTagsInput) (*iam.ListOpenIDConnectProviderTagsOutput, error)) {
+	fake.listOpenIDConnectProviderTagsMutex.Lock()
+	defer fake.listOpenIDConnectProviderTagsMutex.Unlock()
+	fake.ListOpenIDConnectProviderTagsStub = stub
+}
+
+func (fake *FakeIAMAPI) ListOpenIDConnectProviderTagsArgsForCall(i int) *iam.ListOpenIDConnectProviderTagsInput {
+	fake.listOpenIDConnectProviderTagsMutex.RLock()
+	defer fake.listOpenIDConnectProviderTagsMutex.RUnlock()
+	argsForCall := fake.listOpenIDConnectProviderTagsArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) ListOpenIDConnectProviderTagsReturns(result1 *iam.ListOpenIDConnectProviderTagsOutput, result2 error) {
+	fake.listOpenIDConnectProviderTagsMutex.Lock()
+	defer fake.listOpenIDConnectProviderTagsMutex.Unlock()
+	fake.ListOpenIDConnectProviderTagsStub = nil
+	fake.listOpenIDConnectProviderTagsReturns = struct {
+		result1 *iam.ListOpenIDConnectProviderTagsOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) ListOpenIDConnectProviderTagsReturnsOnCall(i int, result1 *iam.ListOpenIDConnectProviderTagsOutput, result2 error) {
+	fake.listOpenIDConnectProviderTagsMutex.Lock()
+	defer fake.listOpenIDConnectProviderTagsMutex.Unlock()
+	fake.ListOpenIDConnectProviderTagsStub = nil
+	if fake.listOpenIDConnectProviderTagsReturnsOnCall == nil {
+		fake.listOpenIDConnectProviderTagsReturnsOnCall = make(map[int]struct {
+			result1 *iam.ListOpenIDConnectProviderTagsOutput
+			result2 error
+		})
+	}
+	fake.listOpenIDConnectProviderTagsReturnsOnCall[i] = struct {
+		result1 *iam.ListOpenIDConnectProviderTagsOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) ListOpenIDConnectProviderTagsRequest(arg1 *iam.ListOpenIDConnectProviderTagsInput) (*request.Request, *iam.ListOpenIDConnectProviderTagsOutput) {
+	fake.listOpenIDConnectProviderTagsRequestMutex.Lock()
+	ret, specificReturn := fake.listOpenIDConnectProviderTagsRequestReturnsOnCall[len(fake.listOpenIDConnectProviderTagsRequestArgsForCall)]
+	fake.listOpenIDConnectProviderTagsRequestArgsForCall = append(fake.listOpenIDConnectProviderTagsRequestArgsForCall, struct {
+		arg1 *iam.ListOpenIDConnectProviderTagsInput
+	}{arg1})
+	stub := fake.ListOpenIDConnectProviderTagsRequestStub
+	fakeReturns := fake.listOpenIDConnectProviderTagsRequestReturns
+	fake.recordInvocation("ListOpenIDConnectProviderTagsRequest", []interface{}{arg1})
+	fake.listOpenIDConnectProviderTagsRequestMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) ListOpenIDConnectProviderTagsRequestCallCount() int {
+	fake.listOpenIDConnectProviderTagsRequestMutex.RLock()
+	defer fake.listOpenIDConnectProviderTagsRequestMutex.RUnlock()
+	return len(fake.listOpenIDConnectProviderTagsRequestArgsForCall)
+}
+
+func (fake *FakeIAMAPI) ListOpenIDConnectProviderTagsRequestCalls(stub func(*iam.ListOpenIDConnectProviderTagsInput) (*request.Request, *iam.ListOpenIDConnectProviderTagsOutput)) {
+	fake.listOpenIDConnectProviderTagsRequestMutex.Lock()
+	defer fake.listOpenIDConnectProviderTagsRequestMutex.Unlock()
+	fake.ListOpenIDConnectProviderTagsRequestStub = stub
+}
+
+func (fake *FakeIAMAPI) ListOpenIDConnectProviderTagsRequestArgsForCall(i int) *iam.ListOpenIDConnectProviderTagsInput {
+	fake.listOpenIDConnectProviderTagsRequestMutex.RLock()
+	defer fake.listOpenIDConnectProviderTagsRequestMutex.RUnlock()
+	argsForCall := fake.listOpenIDConnectProviderTagsRequestArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) ListOpenIDConnectProviderTagsRequestReturns(result1 *request.Request, result2 *iam.ListOpenIDConnectProviderTagsOutput) {
+	fake.listOpenIDConnectProviderTagsRequestMutex.Lock()
+	defer fake.listOpenIDConnectProviderTagsRequestMutex.Unlock()
+	fake.ListOpenIDConnectProviderTagsRequestStub = nil
+	fake.listOpenIDConnectProviderTagsRequestReturns = struct {
+		result1 *request.Request
+		result2 *iam.ListOpenIDConnectProviderTagsOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) ListOpenIDConnectProviderTagsRequestReturnsOnCall(i int, result1 *request.Request, result2 *iam.ListOpenIDConnectProviderTagsOutput) {
+	fake.listOpenIDConnectProviderTagsRequestMutex.Lock()
+	defer fake.listOpenIDConnectProviderTagsRequestMutex.Unlock()
+	fake.ListOpenIDConnectProviderTagsRequestStub = nil
+	if fake.listOpenIDConnectProviderTagsRequestReturnsOnCall == nil {
+		fake.listOpenIDConnectProviderTagsRequestReturnsOnCall = make(map[int]struct {
+			result1 *request.Request
+			result2 *iam.ListOpenIDConnectProviderTagsOutput
+		})
+	}
+	fake.listOpenIDConnectProviderTagsRequestReturnsOnCall[i] = struct {
+		result1 *request.Request
+		result2 *iam.ListOpenIDConnectProviderTagsOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) ListOpenIDConnectProviderTagsWithContext(arg1 context.Context, arg2 *iam.ListOpenIDConnectProviderTagsInput, arg3 ...request.Option) (*iam.ListOpenIDConnectProviderTagsOutput, error) {
+	fake.listOpenIDConnectProviderTagsWithContextMutex.Lock()
+	ret, specificReturn := fake.listOpenIDConnectProviderTagsWithContextReturnsOnCall[len(fake.listOpenIDConnectProviderTagsWithContextArgsForCall)]
+	fake.listOpenIDConnectProviderTagsWithContextArgsForCall = append(fake.listOpenIDConnectProviderTagsWithContextArgsForCall, struct {
+		arg1 context.Context
+		arg2 *iam.ListOpenIDConnectProviderTagsInput
+		arg3 []request.Option
+	}{arg1, arg2, arg3})
+	stub := fake.ListOpenIDConnectProviderTagsWithContextStub
+	fakeReturns := fake.listOpenIDConnectProviderTagsWithContextReturns
+	fake.recordInvocation("ListOpenIDConnectProviderTagsWithContext", []interface{}{arg1, arg2, arg3})
+	fake.listOpenIDConnectProviderTagsWithContextMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2, arg3...)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) ListOpenIDConnectProviderTagsWithContextCallCount() int {
+	fake.listOpenIDConnectProviderTagsWithContextMutex.RLock()
+	defer fake.listOpenIDConnectProviderTagsWithContextMutex.RUnlock()
+	return len(fake.listOpenIDConnectProviderTagsWithContextArgsForCall)
+}
+
+func (fake *FakeIAMAPI) ListOpenIDConnectProviderTagsWithContextCalls(stub func(context.Context, *iam.ListOpenIDConnectProviderTagsInput, ...request.Option) (*iam.ListOpenIDConnectProviderTagsOutput, error)) {
+	fake.listOpenIDConnectProviderTagsWithContextMutex.Lock()
+	defer fake.listOpenIDConnectProviderTagsWithContextMutex.Unlock()
+	fake.ListOpenIDConnectProviderTagsWithContextStub = stub
+}
+
+func (fake *FakeIAMAPI) ListOpenIDConnectProviderTagsWithContextArgsForCall(i int) (context.Context, *iam.ListOpenIDConnectProviderTagsInput, []request.Option) {
+	fake.listOpenIDConnectProviderTagsWithContextMutex.RLock()
+	defer fake.listOpenIDConnectProviderTagsWithContextMutex.RUnlock()
+	argsForCall := fake.listOpenIDConnectProviderTagsWithContextArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3
+}
+
+func (fake *FakeIAMAPI) ListOpenIDConnectProviderTagsWithContextReturns(result1 *iam.ListOpenIDConnectProviderTagsOutput, result2 error) {
+	fake.listOpenIDConnectProviderTagsWithContextMutex.Lock()
+	defer fake.listOpenIDConnectProviderTagsWithContextMutex.Unlock()
+	fake.ListOpenIDConnectProviderTagsWithContextStub = nil
+	fake.listOpenIDConnectProviderTagsWithContextReturns = struct {
+		result1 *iam.ListOpenIDConnectProviderTagsOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) ListOpenIDConnectProviderTagsWithContextReturnsOnCall(i int, result1 *iam.ListOpenIDConnectProviderTagsOutput, result2 error) {
+	fake.listOpenIDConnectProviderTagsWithContextMutex.Lock()
+	defer fake.listOpenIDConnectProviderTagsWithContextMutex.Unlock()
+	fake.ListOpenIDConnectProviderTagsWithContextStub = nil
+	if fake.listOpenIDConnectProviderTagsWithContextReturnsOnCall == nil {
+		fake.listOpenIDConnectProviderTagsWithContextReturnsOnCall = make(map[int]struct {
+			result1 *iam.ListOpenIDConnectProviderTagsOutput
+			result2 error
+		})
+	}
+	fake.listOpenIDConnectProviderTagsWithContextReturnsOnCall[i] = struct {
+		result1 *iam.ListOpenIDConnectProviderTagsOutput
 		result2 error
 	}{result1, result2}
 }
@@ -26261,6 +27607,200 @@ func (fake *FakeIAMAPI) ListPoliciesWithContextReturnsOnCall(i int, result1 *iam
 	}
 	fake.listPoliciesWithContextReturnsOnCall[i] = struct {
 		result1 *iam.ListPoliciesOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) ListPolicyTags(arg1 *iam.ListPolicyTagsInput) (*iam.ListPolicyTagsOutput, error) {
+	fake.listPolicyTagsMutex.Lock()
+	ret, specificReturn := fake.listPolicyTagsReturnsOnCall[len(fake.listPolicyTagsArgsForCall)]
+	fake.listPolicyTagsArgsForCall = append(fake.listPolicyTagsArgsForCall, struct {
+		arg1 *iam.ListPolicyTagsInput
+	}{arg1})
+	stub := fake.ListPolicyTagsStub
+	fakeReturns := fake.listPolicyTagsReturns
+	fake.recordInvocation("ListPolicyTags", []interface{}{arg1})
+	fake.listPolicyTagsMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) ListPolicyTagsCallCount() int {
+	fake.listPolicyTagsMutex.RLock()
+	defer fake.listPolicyTagsMutex.RUnlock()
+	return len(fake.listPolicyTagsArgsForCall)
+}
+
+func (fake *FakeIAMAPI) ListPolicyTagsCalls(stub func(*iam.ListPolicyTagsInput) (*iam.ListPolicyTagsOutput, error)) {
+	fake.listPolicyTagsMutex.Lock()
+	defer fake.listPolicyTagsMutex.Unlock()
+	fake.ListPolicyTagsStub = stub
+}
+
+func (fake *FakeIAMAPI) ListPolicyTagsArgsForCall(i int) *iam.ListPolicyTagsInput {
+	fake.listPolicyTagsMutex.RLock()
+	defer fake.listPolicyTagsMutex.RUnlock()
+	argsForCall := fake.listPolicyTagsArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) ListPolicyTagsReturns(result1 *iam.ListPolicyTagsOutput, result2 error) {
+	fake.listPolicyTagsMutex.Lock()
+	defer fake.listPolicyTagsMutex.Unlock()
+	fake.ListPolicyTagsStub = nil
+	fake.listPolicyTagsReturns = struct {
+		result1 *iam.ListPolicyTagsOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) ListPolicyTagsReturnsOnCall(i int, result1 *iam.ListPolicyTagsOutput, result2 error) {
+	fake.listPolicyTagsMutex.Lock()
+	defer fake.listPolicyTagsMutex.Unlock()
+	fake.ListPolicyTagsStub = nil
+	if fake.listPolicyTagsReturnsOnCall == nil {
+		fake.listPolicyTagsReturnsOnCall = make(map[int]struct {
+			result1 *iam.ListPolicyTagsOutput
+			result2 error
+		})
+	}
+	fake.listPolicyTagsReturnsOnCall[i] = struct {
+		result1 *iam.ListPolicyTagsOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) ListPolicyTagsRequest(arg1 *iam.ListPolicyTagsInput) (*request.Request, *iam.ListPolicyTagsOutput) {
+	fake.listPolicyTagsRequestMutex.Lock()
+	ret, specificReturn := fake.listPolicyTagsRequestReturnsOnCall[len(fake.listPolicyTagsRequestArgsForCall)]
+	fake.listPolicyTagsRequestArgsForCall = append(fake.listPolicyTagsRequestArgsForCall, struct {
+		arg1 *iam.ListPolicyTagsInput
+	}{arg1})
+	stub := fake.ListPolicyTagsRequestStub
+	fakeReturns := fake.listPolicyTagsRequestReturns
+	fake.recordInvocation("ListPolicyTagsRequest", []interface{}{arg1})
+	fake.listPolicyTagsRequestMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) ListPolicyTagsRequestCallCount() int {
+	fake.listPolicyTagsRequestMutex.RLock()
+	defer fake.listPolicyTagsRequestMutex.RUnlock()
+	return len(fake.listPolicyTagsRequestArgsForCall)
+}
+
+func (fake *FakeIAMAPI) ListPolicyTagsRequestCalls(stub func(*iam.ListPolicyTagsInput) (*request.Request, *iam.ListPolicyTagsOutput)) {
+	fake.listPolicyTagsRequestMutex.Lock()
+	defer fake.listPolicyTagsRequestMutex.Unlock()
+	fake.ListPolicyTagsRequestStub = stub
+}
+
+func (fake *FakeIAMAPI) ListPolicyTagsRequestArgsForCall(i int) *iam.ListPolicyTagsInput {
+	fake.listPolicyTagsRequestMutex.RLock()
+	defer fake.listPolicyTagsRequestMutex.RUnlock()
+	argsForCall := fake.listPolicyTagsRequestArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) ListPolicyTagsRequestReturns(result1 *request.Request, result2 *iam.ListPolicyTagsOutput) {
+	fake.listPolicyTagsRequestMutex.Lock()
+	defer fake.listPolicyTagsRequestMutex.Unlock()
+	fake.ListPolicyTagsRequestStub = nil
+	fake.listPolicyTagsRequestReturns = struct {
+		result1 *request.Request
+		result2 *iam.ListPolicyTagsOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) ListPolicyTagsRequestReturnsOnCall(i int, result1 *request.Request, result2 *iam.ListPolicyTagsOutput) {
+	fake.listPolicyTagsRequestMutex.Lock()
+	defer fake.listPolicyTagsRequestMutex.Unlock()
+	fake.ListPolicyTagsRequestStub = nil
+	if fake.listPolicyTagsRequestReturnsOnCall == nil {
+		fake.listPolicyTagsRequestReturnsOnCall = make(map[int]struct {
+			result1 *request.Request
+			result2 *iam.ListPolicyTagsOutput
+		})
+	}
+	fake.listPolicyTagsRequestReturnsOnCall[i] = struct {
+		result1 *request.Request
+		result2 *iam.ListPolicyTagsOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) ListPolicyTagsWithContext(arg1 context.Context, arg2 *iam.ListPolicyTagsInput, arg3 ...request.Option) (*iam.ListPolicyTagsOutput, error) {
+	fake.listPolicyTagsWithContextMutex.Lock()
+	ret, specificReturn := fake.listPolicyTagsWithContextReturnsOnCall[len(fake.listPolicyTagsWithContextArgsForCall)]
+	fake.listPolicyTagsWithContextArgsForCall = append(fake.listPolicyTagsWithContextArgsForCall, struct {
+		arg1 context.Context
+		arg2 *iam.ListPolicyTagsInput
+		arg3 []request.Option
+	}{arg1, arg2, arg3})
+	stub := fake.ListPolicyTagsWithContextStub
+	fakeReturns := fake.listPolicyTagsWithContextReturns
+	fake.recordInvocation("ListPolicyTagsWithContext", []interface{}{arg1, arg2, arg3})
+	fake.listPolicyTagsWithContextMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2, arg3...)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) ListPolicyTagsWithContextCallCount() int {
+	fake.listPolicyTagsWithContextMutex.RLock()
+	defer fake.listPolicyTagsWithContextMutex.RUnlock()
+	return len(fake.listPolicyTagsWithContextArgsForCall)
+}
+
+func (fake *FakeIAMAPI) ListPolicyTagsWithContextCalls(stub func(context.Context, *iam.ListPolicyTagsInput, ...request.Option) (*iam.ListPolicyTagsOutput, error)) {
+	fake.listPolicyTagsWithContextMutex.Lock()
+	defer fake.listPolicyTagsWithContextMutex.Unlock()
+	fake.ListPolicyTagsWithContextStub = stub
+}
+
+func (fake *FakeIAMAPI) ListPolicyTagsWithContextArgsForCall(i int) (context.Context, *iam.ListPolicyTagsInput, []request.Option) {
+	fake.listPolicyTagsWithContextMutex.RLock()
+	defer fake.listPolicyTagsWithContextMutex.RUnlock()
+	argsForCall := fake.listPolicyTagsWithContextArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3
+}
+
+func (fake *FakeIAMAPI) ListPolicyTagsWithContextReturns(result1 *iam.ListPolicyTagsOutput, result2 error) {
+	fake.listPolicyTagsWithContextMutex.Lock()
+	defer fake.listPolicyTagsWithContextMutex.Unlock()
+	fake.ListPolicyTagsWithContextStub = nil
+	fake.listPolicyTagsWithContextReturns = struct {
+		result1 *iam.ListPolicyTagsOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) ListPolicyTagsWithContextReturnsOnCall(i int, result1 *iam.ListPolicyTagsOutput, result2 error) {
+	fake.listPolicyTagsWithContextMutex.Lock()
+	defer fake.listPolicyTagsWithContextMutex.Unlock()
+	fake.ListPolicyTagsWithContextStub = nil
+	if fake.listPolicyTagsWithContextReturnsOnCall == nil {
+		fake.listPolicyTagsWithContextReturnsOnCall = make(map[int]struct {
+			result1 *iam.ListPolicyTagsOutput
+			result2 error
+		})
+	}
+	fake.listPolicyTagsWithContextReturnsOnCall[i] = struct {
+		result1 *iam.ListPolicyTagsOutput
 		result2 error
 	}{result1, result2}
 }
@@ -27419,6 +28959,200 @@ func (fake *FakeIAMAPI) ListRolesWithContextReturnsOnCall(i int, result1 *iam.Li
 	}{result1, result2}
 }
 
+func (fake *FakeIAMAPI) ListSAMLProviderTags(arg1 *iam.ListSAMLProviderTagsInput) (*iam.ListSAMLProviderTagsOutput, error) {
+	fake.listSAMLProviderTagsMutex.Lock()
+	ret, specificReturn := fake.listSAMLProviderTagsReturnsOnCall[len(fake.listSAMLProviderTagsArgsForCall)]
+	fake.listSAMLProviderTagsArgsForCall = append(fake.listSAMLProviderTagsArgsForCall, struct {
+		arg1 *iam.ListSAMLProviderTagsInput
+	}{arg1})
+	stub := fake.ListSAMLProviderTagsStub
+	fakeReturns := fake.listSAMLProviderTagsReturns
+	fake.recordInvocation("ListSAMLProviderTags", []interface{}{arg1})
+	fake.listSAMLProviderTagsMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) ListSAMLProviderTagsCallCount() int {
+	fake.listSAMLProviderTagsMutex.RLock()
+	defer fake.listSAMLProviderTagsMutex.RUnlock()
+	return len(fake.listSAMLProviderTagsArgsForCall)
+}
+
+func (fake *FakeIAMAPI) ListSAMLProviderTagsCalls(stub func(*iam.ListSAMLProviderTagsInput) (*iam.ListSAMLProviderTagsOutput, error)) {
+	fake.listSAMLProviderTagsMutex.Lock()
+	defer fake.listSAMLProviderTagsMutex.Unlock()
+	fake.ListSAMLProviderTagsStub = stub
+}
+
+func (fake *FakeIAMAPI) ListSAMLProviderTagsArgsForCall(i int) *iam.ListSAMLProviderTagsInput {
+	fake.listSAMLProviderTagsMutex.RLock()
+	defer fake.listSAMLProviderTagsMutex.RUnlock()
+	argsForCall := fake.listSAMLProviderTagsArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) ListSAMLProviderTagsReturns(result1 *iam.ListSAMLProviderTagsOutput, result2 error) {
+	fake.listSAMLProviderTagsMutex.Lock()
+	defer fake.listSAMLProviderTagsMutex.Unlock()
+	fake.ListSAMLProviderTagsStub = nil
+	fake.listSAMLProviderTagsReturns = struct {
+		result1 *iam.ListSAMLProviderTagsOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) ListSAMLProviderTagsReturnsOnCall(i int, result1 *iam.ListSAMLProviderTagsOutput, result2 error) {
+	fake.listSAMLProviderTagsMutex.Lock()
+	defer fake.listSAMLProviderTagsMutex.Unlock()
+	fake.ListSAMLProviderTagsStub = nil
+	if fake.listSAMLProviderTagsReturnsOnCall == nil {
+		fake.listSAMLProviderTagsReturnsOnCall = make(map[int]struct {
+			result1 *iam.ListSAMLProviderTagsOutput
+			result2 error
+		})
+	}
+	fake.listSAMLProviderTagsReturnsOnCall[i] = struct {
+		result1 *iam.ListSAMLProviderTagsOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) ListSAMLProviderTagsRequest(arg1 *iam.ListSAMLProviderTagsInput) (*request.Request, *iam.ListSAMLProviderTagsOutput) {
+	fake.listSAMLProviderTagsRequestMutex.Lock()
+	ret, specificReturn := fake.listSAMLProviderTagsRequestReturnsOnCall[len(fake.listSAMLProviderTagsRequestArgsForCall)]
+	fake.listSAMLProviderTagsRequestArgsForCall = append(fake.listSAMLProviderTagsRequestArgsForCall, struct {
+		arg1 *iam.ListSAMLProviderTagsInput
+	}{arg1})
+	stub := fake.ListSAMLProviderTagsRequestStub
+	fakeReturns := fake.listSAMLProviderTagsRequestReturns
+	fake.recordInvocation("ListSAMLProviderTagsRequest", []interface{}{arg1})
+	fake.listSAMLProviderTagsRequestMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) ListSAMLProviderTagsRequestCallCount() int {
+	fake.listSAMLProviderTagsRequestMutex.RLock()
+	defer fake.listSAMLProviderTagsRequestMutex.RUnlock()
+	return len(fake.listSAMLProviderTagsRequestArgsForCall)
+}
+
+func (fake *FakeIAMAPI) ListSAMLProviderTagsRequestCalls(stub func(*iam.ListSAMLProviderTagsInput) (*request.Request, *iam.ListSAMLProviderTagsOutput)) {
+	fake.listSAMLProviderTagsRequestMutex.Lock()
+	defer fake.listSAMLProviderTagsRequestMutex.Unlock()
+	fake.ListSAMLProviderTagsRequestStub = stub
+}
+
+func (fake *FakeIAMAPI) ListSAMLProviderTagsRequestArgsForCall(i int) *iam.ListSAMLProviderTagsInput {
+	fake.listSAMLProviderTagsRequestMutex.RLock()
+	defer fake.listSAMLProviderTagsRequestMutex.RUnlock()
+	argsForCall := fake.listSAMLProviderTagsRequestArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) ListSAMLProviderTagsRequestReturns(result1 *request.Request, result2 *iam.ListSAMLProviderTagsOutput) {
+	fake.listSAMLProviderTagsRequestMutex.Lock()
+	defer fake.listSAMLProviderTagsRequestMutex.Unlock()
+	fake.ListSAMLProviderTagsRequestStub = nil
+	fake.listSAMLProviderTagsRequestReturns = struct {
+		result1 *request.Request
+		result2 *iam.ListSAMLProviderTagsOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) ListSAMLProviderTagsRequestReturnsOnCall(i int, result1 *request.Request, result2 *iam.ListSAMLProviderTagsOutput) {
+	fake.listSAMLProviderTagsRequestMutex.Lock()
+	defer fake.listSAMLProviderTagsRequestMutex.Unlock()
+	fake.ListSAMLProviderTagsRequestStub = nil
+	if fake.listSAMLProviderTagsRequestReturnsOnCall == nil {
+		fake.listSAMLProviderTagsRequestReturnsOnCall = make(map[int]struct {
+			result1 *request.Request
+			result2 *iam.ListSAMLProviderTagsOutput
+		})
+	}
+	fake.listSAMLProviderTagsRequestReturnsOnCall[i] = struct {
+		result1 *request.Request
+		result2 *iam.ListSAMLProviderTagsOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) ListSAMLProviderTagsWithContext(arg1 context.Context, arg2 *iam.ListSAMLProviderTagsInput, arg3 ...request.Option) (*iam.ListSAMLProviderTagsOutput, error) {
+	fake.listSAMLProviderTagsWithContextMutex.Lock()
+	ret, specificReturn := fake.listSAMLProviderTagsWithContextReturnsOnCall[len(fake.listSAMLProviderTagsWithContextArgsForCall)]
+	fake.listSAMLProviderTagsWithContextArgsForCall = append(fake.listSAMLProviderTagsWithContextArgsForCall, struct {
+		arg1 context.Context
+		arg2 *iam.ListSAMLProviderTagsInput
+		arg3 []request.Option
+	}{arg1, arg2, arg3})
+	stub := fake.ListSAMLProviderTagsWithContextStub
+	fakeReturns := fake.listSAMLProviderTagsWithContextReturns
+	fake.recordInvocation("ListSAMLProviderTagsWithContext", []interface{}{arg1, arg2, arg3})
+	fake.listSAMLProviderTagsWithContextMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2, arg3...)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) ListSAMLProviderTagsWithContextCallCount() int {
+	fake.listSAMLProviderTagsWithContextMutex.RLock()
+	defer fake.listSAMLProviderTagsWithContextMutex.RUnlock()
+	return len(fake.listSAMLProviderTagsWithContextArgsForCall)
+}
+
+func (fake *FakeIAMAPI) ListSAMLProviderTagsWithContextCalls(stub func(context.Context, *iam.ListSAMLProviderTagsInput, ...request.Option) (*iam.ListSAMLProviderTagsOutput, error)) {
+	fake.listSAMLProviderTagsWithContextMutex.Lock()
+	defer fake.listSAMLProviderTagsWithContextMutex.Unlock()
+	fake.ListSAMLProviderTagsWithContextStub = stub
+}
+
+func (fake *FakeIAMAPI) ListSAMLProviderTagsWithContextArgsForCall(i int) (context.Context, *iam.ListSAMLProviderTagsInput, []request.Option) {
+	fake.listSAMLProviderTagsWithContextMutex.RLock()
+	defer fake.listSAMLProviderTagsWithContextMutex.RUnlock()
+	argsForCall := fake.listSAMLProviderTagsWithContextArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3
+}
+
+func (fake *FakeIAMAPI) ListSAMLProviderTagsWithContextReturns(result1 *iam.ListSAMLProviderTagsOutput, result2 error) {
+	fake.listSAMLProviderTagsWithContextMutex.Lock()
+	defer fake.listSAMLProviderTagsWithContextMutex.Unlock()
+	fake.ListSAMLProviderTagsWithContextStub = nil
+	fake.listSAMLProviderTagsWithContextReturns = struct {
+		result1 *iam.ListSAMLProviderTagsOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) ListSAMLProviderTagsWithContextReturnsOnCall(i int, result1 *iam.ListSAMLProviderTagsOutput, result2 error) {
+	fake.listSAMLProviderTagsWithContextMutex.Lock()
+	defer fake.listSAMLProviderTagsWithContextMutex.Unlock()
+	fake.ListSAMLProviderTagsWithContextStub = nil
+	if fake.listSAMLProviderTagsWithContextReturnsOnCall == nil {
+		fake.listSAMLProviderTagsWithContextReturnsOnCall = make(map[int]struct {
+			result1 *iam.ListSAMLProviderTagsOutput
+			result2 error
+		})
+	}
+	fake.listSAMLProviderTagsWithContextReturnsOnCall[i] = struct {
+		result1 *iam.ListSAMLProviderTagsOutput
+		result2 error
+	}{result1, result2}
+}
+
 func (fake *FakeIAMAPI) ListSAMLProviders(arg1 *iam.ListSAMLProvidersInput) (*iam.ListSAMLProvidersOutput, error) {
 	fake.listSAMLProvidersMutex.Lock()
 	ret, specificReturn := fake.listSAMLProvidersReturnsOnCall[len(fake.listSAMLProvidersArgsForCall)]
@@ -27929,6 +29663,200 @@ func (fake *FakeIAMAPI) ListSSHPublicKeysWithContextReturnsOnCall(i int, result1
 	}
 	fake.listSSHPublicKeysWithContextReturnsOnCall[i] = struct {
 		result1 *iam.ListSSHPublicKeysOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) ListServerCertificateTags(arg1 *iam.ListServerCertificateTagsInput) (*iam.ListServerCertificateTagsOutput, error) {
+	fake.listServerCertificateTagsMutex.Lock()
+	ret, specificReturn := fake.listServerCertificateTagsReturnsOnCall[len(fake.listServerCertificateTagsArgsForCall)]
+	fake.listServerCertificateTagsArgsForCall = append(fake.listServerCertificateTagsArgsForCall, struct {
+		arg1 *iam.ListServerCertificateTagsInput
+	}{arg1})
+	stub := fake.ListServerCertificateTagsStub
+	fakeReturns := fake.listServerCertificateTagsReturns
+	fake.recordInvocation("ListServerCertificateTags", []interface{}{arg1})
+	fake.listServerCertificateTagsMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) ListServerCertificateTagsCallCount() int {
+	fake.listServerCertificateTagsMutex.RLock()
+	defer fake.listServerCertificateTagsMutex.RUnlock()
+	return len(fake.listServerCertificateTagsArgsForCall)
+}
+
+func (fake *FakeIAMAPI) ListServerCertificateTagsCalls(stub func(*iam.ListServerCertificateTagsInput) (*iam.ListServerCertificateTagsOutput, error)) {
+	fake.listServerCertificateTagsMutex.Lock()
+	defer fake.listServerCertificateTagsMutex.Unlock()
+	fake.ListServerCertificateTagsStub = stub
+}
+
+func (fake *FakeIAMAPI) ListServerCertificateTagsArgsForCall(i int) *iam.ListServerCertificateTagsInput {
+	fake.listServerCertificateTagsMutex.RLock()
+	defer fake.listServerCertificateTagsMutex.RUnlock()
+	argsForCall := fake.listServerCertificateTagsArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) ListServerCertificateTagsReturns(result1 *iam.ListServerCertificateTagsOutput, result2 error) {
+	fake.listServerCertificateTagsMutex.Lock()
+	defer fake.listServerCertificateTagsMutex.Unlock()
+	fake.ListServerCertificateTagsStub = nil
+	fake.listServerCertificateTagsReturns = struct {
+		result1 *iam.ListServerCertificateTagsOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) ListServerCertificateTagsReturnsOnCall(i int, result1 *iam.ListServerCertificateTagsOutput, result2 error) {
+	fake.listServerCertificateTagsMutex.Lock()
+	defer fake.listServerCertificateTagsMutex.Unlock()
+	fake.ListServerCertificateTagsStub = nil
+	if fake.listServerCertificateTagsReturnsOnCall == nil {
+		fake.listServerCertificateTagsReturnsOnCall = make(map[int]struct {
+			result1 *iam.ListServerCertificateTagsOutput
+			result2 error
+		})
+	}
+	fake.listServerCertificateTagsReturnsOnCall[i] = struct {
+		result1 *iam.ListServerCertificateTagsOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) ListServerCertificateTagsRequest(arg1 *iam.ListServerCertificateTagsInput) (*request.Request, *iam.ListServerCertificateTagsOutput) {
+	fake.listServerCertificateTagsRequestMutex.Lock()
+	ret, specificReturn := fake.listServerCertificateTagsRequestReturnsOnCall[len(fake.listServerCertificateTagsRequestArgsForCall)]
+	fake.listServerCertificateTagsRequestArgsForCall = append(fake.listServerCertificateTagsRequestArgsForCall, struct {
+		arg1 *iam.ListServerCertificateTagsInput
+	}{arg1})
+	stub := fake.ListServerCertificateTagsRequestStub
+	fakeReturns := fake.listServerCertificateTagsRequestReturns
+	fake.recordInvocation("ListServerCertificateTagsRequest", []interface{}{arg1})
+	fake.listServerCertificateTagsRequestMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) ListServerCertificateTagsRequestCallCount() int {
+	fake.listServerCertificateTagsRequestMutex.RLock()
+	defer fake.listServerCertificateTagsRequestMutex.RUnlock()
+	return len(fake.listServerCertificateTagsRequestArgsForCall)
+}
+
+func (fake *FakeIAMAPI) ListServerCertificateTagsRequestCalls(stub func(*iam.ListServerCertificateTagsInput) (*request.Request, *iam.ListServerCertificateTagsOutput)) {
+	fake.listServerCertificateTagsRequestMutex.Lock()
+	defer fake.listServerCertificateTagsRequestMutex.Unlock()
+	fake.ListServerCertificateTagsRequestStub = stub
+}
+
+func (fake *FakeIAMAPI) ListServerCertificateTagsRequestArgsForCall(i int) *iam.ListServerCertificateTagsInput {
+	fake.listServerCertificateTagsRequestMutex.RLock()
+	defer fake.listServerCertificateTagsRequestMutex.RUnlock()
+	argsForCall := fake.listServerCertificateTagsRequestArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) ListServerCertificateTagsRequestReturns(result1 *request.Request, result2 *iam.ListServerCertificateTagsOutput) {
+	fake.listServerCertificateTagsRequestMutex.Lock()
+	defer fake.listServerCertificateTagsRequestMutex.Unlock()
+	fake.ListServerCertificateTagsRequestStub = nil
+	fake.listServerCertificateTagsRequestReturns = struct {
+		result1 *request.Request
+		result2 *iam.ListServerCertificateTagsOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) ListServerCertificateTagsRequestReturnsOnCall(i int, result1 *request.Request, result2 *iam.ListServerCertificateTagsOutput) {
+	fake.listServerCertificateTagsRequestMutex.Lock()
+	defer fake.listServerCertificateTagsRequestMutex.Unlock()
+	fake.ListServerCertificateTagsRequestStub = nil
+	if fake.listServerCertificateTagsRequestReturnsOnCall == nil {
+		fake.listServerCertificateTagsRequestReturnsOnCall = make(map[int]struct {
+			result1 *request.Request
+			result2 *iam.ListServerCertificateTagsOutput
+		})
+	}
+	fake.listServerCertificateTagsRequestReturnsOnCall[i] = struct {
+		result1 *request.Request
+		result2 *iam.ListServerCertificateTagsOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) ListServerCertificateTagsWithContext(arg1 context.Context, arg2 *iam.ListServerCertificateTagsInput, arg3 ...request.Option) (*iam.ListServerCertificateTagsOutput, error) {
+	fake.listServerCertificateTagsWithContextMutex.Lock()
+	ret, specificReturn := fake.listServerCertificateTagsWithContextReturnsOnCall[len(fake.listServerCertificateTagsWithContextArgsForCall)]
+	fake.listServerCertificateTagsWithContextArgsForCall = append(fake.listServerCertificateTagsWithContextArgsForCall, struct {
+		arg1 context.Context
+		arg2 *iam.ListServerCertificateTagsInput
+		arg3 []request.Option
+	}{arg1, arg2, arg3})
+	stub := fake.ListServerCertificateTagsWithContextStub
+	fakeReturns := fake.listServerCertificateTagsWithContextReturns
+	fake.recordInvocation("ListServerCertificateTagsWithContext", []interface{}{arg1, arg2, arg3})
+	fake.listServerCertificateTagsWithContextMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2, arg3...)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) ListServerCertificateTagsWithContextCallCount() int {
+	fake.listServerCertificateTagsWithContextMutex.RLock()
+	defer fake.listServerCertificateTagsWithContextMutex.RUnlock()
+	return len(fake.listServerCertificateTagsWithContextArgsForCall)
+}
+
+func (fake *FakeIAMAPI) ListServerCertificateTagsWithContextCalls(stub func(context.Context, *iam.ListServerCertificateTagsInput, ...request.Option) (*iam.ListServerCertificateTagsOutput, error)) {
+	fake.listServerCertificateTagsWithContextMutex.Lock()
+	defer fake.listServerCertificateTagsWithContextMutex.Unlock()
+	fake.ListServerCertificateTagsWithContextStub = stub
+}
+
+func (fake *FakeIAMAPI) ListServerCertificateTagsWithContextArgsForCall(i int) (context.Context, *iam.ListServerCertificateTagsInput, []request.Option) {
+	fake.listServerCertificateTagsWithContextMutex.RLock()
+	defer fake.listServerCertificateTagsWithContextMutex.RUnlock()
+	argsForCall := fake.listServerCertificateTagsWithContextArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3
+}
+
+func (fake *FakeIAMAPI) ListServerCertificateTagsWithContextReturns(result1 *iam.ListServerCertificateTagsOutput, result2 error) {
+	fake.listServerCertificateTagsWithContextMutex.Lock()
+	defer fake.listServerCertificateTagsWithContextMutex.Unlock()
+	fake.ListServerCertificateTagsWithContextStub = nil
+	fake.listServerCertificateTagsWithContextReturns = struct {
+		result1 *iam.ListServerCertificateTagsOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) ListServerCertificateTagsWithContextReturnsOnCall(i int, result1 *iam.ListServerCertificateTagsOutput, result2 error) {
+	fake.listServerCertificateTagsWithContextMutex.Lock()
+	defer fake.listServerCertificateTagsWithContextMutex.Unlock()
+	fake.ListServerCertificateTagsWithContextStub = nil
+	if fake.listServerCertificateTagsWithContextReturnsOnCall == nil {
+		fake.listServerCertificateTagsWithContextReturnsOnCall = make(map[int]struct {
+			result1 *iam.ListServerCertificateTagsOutput
+			result2 error
+		})
+	}
+	fake.listServerCertificateTagsWithContextReturnsOnCall[i] = struct {
+		result1 *iam.ListServerCertificateTagsOutput
 		result2 error
 	}{result1, result2}
 }
@@ -29149,6 +31077,132 @@ func (fake *FakeIAMAPI) ListUserTagsReturnsOnCall(i int, result1 *iam.ListUserTa
 		result1 *iam.ListUserTagsOutput
 		result2 error
 	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) ListUserTagsPages(arg1 *iam.ListUserTagsInput, arg2 func(*iam.ListUserTagsOutput, bool) bool) error {
+	fake.listUserTagsPagesMutex.Lock()
+	ret, specificReturn := fake.listUserTagsPagesReturnsOnCall[len(fake.listUserTagsPagesArgsForCall)]
+	fake.listUserTagsPagesArgsForCall = append(fake.listUserTagsPagesArgsForCall, struct {
+		arg1 *iam.ListUserTagsInput
+		arg2 func(*iam.ListUserTagsOutput, bool) bool
+	}{arg1, arg2})
+	stub := fake.ListUserTagsPagesStub
+	fakeReturns := fake.listUserTagsPagesReturns
+	fake.recordInvocation("ListUserTagsPages", []interface{}{arg1, arg2})
+	fake.listUserTagsPagesMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2)
+	}
+	if specificReturn {
+		return ret.result1
+	}
+	return fakeReturns.result1
+}
+
+func (fake *FakeIAMAPI) ListUserTagsPagesCallCount() int {
+	fake.listUserTagsPagesMutex.RLock()
+	defer fake.listUserTagsPagesMutex.RUnlock()
+	return len(fake.listUserTagsPagesArgsForCall)
+}
+
+func (fake *FakeIAMAPI) ListUserTagsPagesCalls(stub func(*iam.ListUserTagsInput, func(*iam.ListUserTagsOutput, bool) bool) error) {
+	fake.listUserTagsPagesMutex.Lock()
+	defer fake.listUserTagsPagesMutex.Unlock()
+	fake.ListUserTagsPagesStub = stub
+}
+
+func (fake *FakeIAMAPI) ListUserTagsPagesArgsForCall(i int) (*iam.ListUserTagsInput, func(*iam.ListUserTagsOutput, bool) bool) {
+	fake.listUserTagsPagesMutex.RLock()
+	defer fake.listUserTagsPagesMutex.RUnlock()
+	argsForCall := fake.listUserTagsPagesArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2
+}
+
+func (fake *FakeIAMAPI) ListUserTagsPagesReturns(result1 error) {
+	fake.listUserTagsPagesMutex.Lock()
+	defer fake.listUserTagsPagesMutex.Unlock()
+	fake.ListUserTagsPagesStub = nil
+	fake.listUserTagsPagesReturns = struct {
+		result1 error
+	}{result1}
+}
+
+func (fake *FakeIAMAPI) ListUserTagsPagesReturnsOnCall(i int, result1 error) {
+	fake.listUserTagsPagesMutex.Lock()
+	defer fake.listUserTagsPagesMutex.Unlock()
+	fake.ListUserTagsPagesStub = nil
+	if fake.listUserTagsPagesReturnsOnCall == nil {
+		fake.listUserTagsPagesReturnsOnCall = make(map[int]struct {
+			result1 error
+		})
+	}
+	fake.listUserTagsPagesReturnsOnCall[i] = struct {
+		result1 error
+	}{result1}
+}
+
+func (fake *FakeIAMAPI) ListUserTagsPagesWithContext(arg1 context.Context, arg2 *iam.ListUserTagsInput, arg3 func(*iam.ListUserTagsOutput, bool) bool, arg4 ...request.Option) error {
+	fake.listUserTagsPagesWithContextMutex.Lock()
+	ret, specificReturn := fake.listUserTagsPagesWithContextReturnsOnCall[len(fake.listUserTagsPagesWithContextArgsForCall)]
+	fake.listUserTagsPagesWithContextArgsForCall = append(fake.listUserTagsPagesWithContextArgsForCall, struct {
+		arg1 context.Context
+		arg2 *iam.ListUserTagsInput
+		arg3 func(*iam.ListUserTagsOutput, bool) bool
+		arg4 []request.Option
+	}{arg1, arg2, arg3, arg4})
+	stub := fake.ListUserTagsPagesWithContextStub
+	fakeReturns := fake.listUserTagsPagesWithContextReturns
+	fake.recordInvocation("ListUserTagsPagesWithContext", []interface{}{arg1, arg2, arg3, arg4})
+	fake.listUserTagsPagesWithContextMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2, arg3, arg4...)
+	}
+	if specificReturn {
+		return ret.result1
+	}
+	return fakeReturns.result1
+}
+
+func (fake *FakeIAMAPI) ListUserTagsPagesWithContextCallCount() int {
+	fake.listUserTagsPagesWithContextMutex.RLock()
+	defer fake.listUserTagsPagesWithContextMutex.RUnlock()
+	return len(fake.listUserTagsPagesWithContextArgsForCall)
+}
+
+func (fake *FakeIAMAPI) ListUserTagsPagesWithContextCalls(stub func(context.Context, *iam.ListUserTagsInput, func(*iam.ListUserTagsOutput, bool) bool, ...request.Option) error) {
+	fake.listUserTagsPagesWithContextMutex.Lock()
+	defer fake.listUserTagsPagesWithContextMutex.Unlock()
+	fake.ListUserTagsPagesWithContextStub = stub
+}
+
+func (fake *FakeIAMAPI) ListUserTagsPagesWithContextArgsForCall(i int) (context.Context, *iam.ListUserTagsInput, func(*iam.ListUserTagsOutput, bool) bool, []request.Option) {
+	fake.listUserTagsPagesWithContextMutex.RLock()
+	defer fake.listUserTagsPagesWithContextMutex.RUnlock()
+	argsForCall := fake.listUserTagsPagesWithContextArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3, argsForCall.arg4
+}
+
+func (fake *FakeIAMAPI) ListUserTagsPagesWithContextReturns(result1 error) {
+	fake.listUserTagsPagesWithContextMutex.Lock()
+	defer fake.listUserTagsPagesWithContextMutex.Unlock()
+	fake.ListUserTagsPagesWithContextStub = nil
+	fake.listUserTagsPagesWithContextReturns = struct {
+		result1 error
+	}{result1}
+}
+
+func (fake *FakeIAMAPI) ListUserTagsPagesWithContextReturnsOnCall(i int, result1 error) {
+	fake.listUserTagsPagesWithContextMutex.Lock()
+	defer fake.listUserTagsPagesWithContextMutex.Unlock()
+	fake.ListUserTagsPagesWithContextStub = nil
+	if fake.listUserTagsPagesWithContextReturnsOnCall == nil {
+		fake.listUserTagsPagesWithContextReturnsOnCall = make(map[int]struct {
+			result1 error
+		})
+	}
+	fake.listUserTagsPagesWithContextReturnsOnCall[i] = struct {
+		result1 error
+	}{result1}
 }
 
 func (fake *FakeIAMAPI) ListUserTagsRequest(arg1 *iam.ListUserTagsInput) (*request.Request, *iam.ListUserTagsOutput) {
@@ -32889,6 +34943,782 @@ func (fake *FakeIAMAPI) SimulatePrincipalPolicyWithContextReturnsOnCall(i int, r
 	}{result1, result2}
 }
 
+func (fake *FakeIAMAPI) TagInstanceProfile(arg1 *iam.TagInstanceProfileInput) (*iam.TagInstanceProfileOutput, error) {
+	fake.tagInstanceProfileMutex.Lock()
+	ret, specificReturn := fake.tagInstanceProfileReturnsOnCall[len(fake.tagInstanceProfileArgsForCall)]
+	fake.tagInstanceProfileArgsForCall = append(fake.tagInstanceProfileArgsForCall, struct {
+		arg1 *iam.TagInstanceProfileInput
+	}{arg1})
+	stub := fake.TagInstanceProfileStub
+	fakeReturns := fake.tagInstanceProfileReturns
+	fake.recordInvocation("TagInstanceProfile", []interface{}{arg1})
+	fake.tagInstanceProfileMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) TagInstanceProfileCallCount() int {
+	fake.tagInstanceProfileMutex.RLock()
+	defer fake.tagInstanceProfileMutex.RUnlock()
+	return len(fake.tagInstanceProfileArgsForCall)
+}
+
+func (fake *FakeIAMAPI) TagInstanceProfileCalls(stub func(*iam.TagInstanceProfileInput) (*iam.TagInstanceProfileOutput, error)) {
+	fake.tagInstanceProfileMutex.Lock()
+	defer fake.tagInstanceProfileMutex.Unlock()
+	fake.TagInstanceProfileStub = stub
+}
+
+func (fake *FakeIAMAPI) TagInstanceProfileArgsForCall(i int) *iam.TagInstanceProfileInput {
+	fake.tagInstanceProfileMutex.RLock()
+	defer fake.tagInstanceProfileMutex.RUnlock()
+	argsForCall := fake.tagInstanceProfileArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) TagInstanceProfileReturns(result1 *iam.TagInstanceProfileOutput, result2 error) {
+	fake.tagInstanceProfileMutex.Lock()
+	defer fake.tagInstanceProfileMutex.Unlock()
+	fake.TagInstanceProfileStub = nil
+	fake.tagInstanceProfileReturns = struct {
+		result1 *iam.TagInstanceProfileOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) TagInstanceProfileReturnsOnCall(i int, result1 *iam.TagInstanceProfileOutput, result2 error) {
+	fake.tagInstanceProfileMutex.Lock()
+	defer fake.tagInstanceProfileMutex.Unlock()
+	fake.TagInstanceProfileStub = nil
+	if fake.tagInstanceProfileReturnsOnCall == nil {
+		fake.tagInstanceProfileReturnsOnCall = make(map[int]struct {
+			result1 *iam.TagInstanceProfileOutput
+			result2 error
+		})
+	}
+	fake.tagInstanceProfileReturnsOnCall[i] = struct {
+		result1 *iam.TagInstanceProfileOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) TagInstanceProfileRequest(arg1 *iam.TagInstanceProfileInput) (*request.Request, *iam.TagInstanceProfileOutput) {
+	fake.tagInstanceProfileRequestMutex.Lock()
+	ret, specificReturn := fake.tagInstanceProfileRequestReturnsOnCall[len(fake.tagInstanceProfileRequestArgsForCall)]
+	fake.tagInstanceProfileRequestArgsForCall = append(fake.tagInstanceProfileRequestArgsForCall, struct {
+		arg1 *iam.TagInstanceProfileInput
+	}{arg1})
+	stub := fake.TagInstanceProfileRequestStub
+	fakeReturns := fake.tagInstanceProfileRequestReturns
+	fake.recordInvocation("TagInstanceProfileRequest", []interface{}{arg1})
+	fake.tagInstanceProfileRequestMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) TagInstanceProfileRequestCallCount() int {
+	fake.tagInstanceProfileRequestMutex.RLock()
+	defer fake.tagInstanceProfileRequestMutex.RUnlock()
+	return len(fake.tagInstanceProfileRequestArgsForCall)
+}
+
+func (fake *FakeIAMAPI) TagInstanceProfileRequestCalls(stub func(*iam.TagInstanceProfileInput) (*request.Request, *iam.TagInstanceProfileOutput)) {
+	fake.tagInstanceProfileRequestMutex.Lock()
+	defer fake.tagInstanceProfileRequestMutex.Unlock()
+	fake.TagInstanceProfileRequestStub = stub
+}
+
+func (fake *FakeIAMAPI) TagInstanceProfileRequestArgsForCall(i int) *iam.TagInstanceProfileInput {
+	fake.tagInstanceProfileRequestMutex.RLock()
+	defer fake.tagInstanceProfileRequestMutex.RUnlock()
+	argsForCall := fake.tagInstanceProfileRequestArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) TagInstanceProfileRequestReturns(result1 *request.Request, result2 *iam.TagInstanceProfileOutput) {
+	fake.tagInstanceProfileRequestMutex.Lock()
+	defer fake.tagInstanceProfileRequestMutex.Unlock()
+	fake.TagInstanceProfileRequestStub = nil
+	fake.tagInstanceProfileRequestReturns = struct {
+		result1 *request.Request
+		result2 *iam.TagInstanceProfileOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) TagInstanceProfileRequestReturnsOnCall(i int, result1 *request.Request, result2 *iam.TagInstanceProfileOutput) {
+	fake.tagInstanceProfileRequestMutex.Lock()
+	defer fake.tagInstanceProfileRequestMutex.Unlock()
+	fake.TagInstanceProfileRequestStub = nil
+	if fake.tagInstanceProfileRequestReturnsOnCall == nil {
+		fake.tagInstanceProfileRequestReturnsOnCall = make(map[int]struct {
+			result1 *request.Request
+			result2 *iam.TagInstanceProfileOutput
+		})
+	}
+	fake.tagInstanceProfileRequestReturnsOnCall[i] = struct {
+		result1 *request.Request
+		result2 *iam.TagInstanceProfileOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) TagInstanceProfileWithContext(arg1 context.Context, arg2 *iam.TagInstanceProfileInput, arg3 ...request.Option) (*iam.TagInstanceProfileOutput, error) {
+	fake.tagInstanceProfileWithContextMutex.Lock()
+	ret, specificReturn := fake.tagInstanceProfileWithContextReturnsOnCall[len(fake.tagInstanceProfileWithContextArgsForCall)]
+	fake.tagInstanceProfileWithContextArgsForCall = append(fake.tagInstanceProfileWithContextArgsForCall, struct {
+		arg1 context.Context
+		arg2 *iam.TagInstanceProfileInput
+		arg3 []request.Option
+	}{arg1, arg2, arg3})
+	stub := fake.TagInstanceProfileWithContextStub
+	fakeReturns := fake.tagInstanceProfileWithContextReturns
+	fake.recordInvocation("TagInstanceProfileWithContext", []interface{}{arg1, arg2, arg3})
+	fake.tagInstanceProfileWithContextMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2, arg3...)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) TagInstanceProfileWithContextCallCount() int {
+	fake.tagInstanceProfileWithContextMutex.RLock()
+	defer fake.tagInstanceProfileWithContextMutex.RUnlock()
+	return len(fake.tagInstanceProfileWithContextArgsForCall)
+}
+
+func (fake *FakeIAMAPI) TagInstanceProfileWithContextCalls(stub func(context.Context, *iam.TagInstanceProfileInput, ...request.Option) (*iam.TagInstanceProfileOutput, error)) {
+	fake.tagInstanceProfileWithContextMutex.Lock()
+	defer fake.tagInstanceProfileWithContextMutex.Unlock()
+	fake.TagInstanceProfileWithContextStub = stub
+}
+
+func (fake *FakeIAMAPI) TagInstanceProfileWithContextArgsForCall(i int) (context.Context, *iam.TagInstanceProfileInput, []request.Option) {
+	fake.tagInstanceProfileWithContextMutex.RLock()
+	defer fake.tagInstanceProfileWithContextMutex.RUnlock()
+	argsForCall := fake.tagInstanceProfileWithContextArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3
+}
+
+func (fake *FakeIAMAPI) TagInstanceProfileWithContextReturns(result1 *iam.TagInstanceProfileOutput, result2 error) {
+	fake.tagInstanceProfileWithContextMutex.Lock()
+	defer fake.tagInstanceProfileWithContextMutex.Unlock()
+	fake.TagInstanceProfileWithContextStub = nil
+	fake.tagInstanceProfileWithContextReturns = struct {
+		result1 *iam.TagInstanceProfileOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) TagInstanceProfileWithContextReturnsOnCall(i int, result1 *iam.TagInstanceProfileOutput, result2 error) {
+	fake.tagInstanceProfileWithContextMutex.Lock()
+	defer fake.tagInstanceProfileWithContextMutex.Unlock()
+	fake.TagInstanceProfileWithContextStub = nil
+	if fake.tagInstanceProfileWithContextReturnsOnCall == nil {
+		fake.tagInstanceProfileWithContextReturnsOnCall = make(map[int]struct {
+			result1 *iam.TagInstanceProfileOutput
+			result2 error
+		})
+	}
+	fake.tagInstanceProfileWithContextReturnsOnCall[i] = struct {
+		result1 *iam.TagInstanceProfileOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) TagMFADevice(arg1 *iam.TagMFADeviceInput) (*iam.TagMFADeviceOutput, error) {
+	fake.tagMFADeviceMutex.Lock()
+	ret, specificReturn := fake.tagMFADeviceReturnsOnCall[len(fake.tagMFADeviceArgsForCall)]
+	fake.tagMFADeviceArgsForCall = append(fake.tagMFADeviceArgsForCall, struct {
+		arg1 *iam.TagMFADeviceInput
+	}{arg1})
+	stub := fake.TagMFADeviceStub
+	fakeReturns := fake.tagMFADeviceReturns
+	fake.recordInvocation("TagMFADevice", []interface{}{arg1})
+	fake.tagMFADeviceMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) TagMFADeviceCallCount() int {
+	fake.tagMFADeviceMutex.RLock()
+	defer fake.tagMFADeviceMutex.RUnlock()
+	return len(fake.tagMFADeviceArgsForCall)
+}
+
+func (fake *FakeIAMAPI) TagMFADeviceCalls(stub func(*iam.TagMFADeviceInput) (*iam.TagMFADeviceOutput, error)) {
+	fake.tagMFADeviceMutex.Lock()
+	defer fake.tagMFADeviceMutex.Unlock()
+	fake.TagMFADeviceStub = stub
+}
+
+func (fake *FakeIAMAPI) TagMFADeviceArgsForCall(i int) *iam.TagMFADeviceInput {
+	fake.tagMFADeviceMutex.RLock()
+	defer fake.tagMFADeviceMutex.RUnlock()
+	argsForCall := fake.tagMFADeviceArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) TagMFADeviceReturns(result1 *iam.TagMFADeviceOutput, result2 error) {
+	fake.tagMFADeviceMutex.Lock()
+	defer fake.tagMFADeviceMutex.Unlock()
+	fake.TagMFADeviceStub = nil
+	fake.tagMFADeviceReturns = struct {
+		result1 *iam.TagMFADeviceOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) TagMFADeviceReturnsOnCall(i int, result1 *iam.TagMFADeviceOutput, result2 error) {
+	fake.tagMFADeviceMutex.Lock()
+	defer fake.tagMFADeviceMutex.Unlock()
+	fake.TagMFADeviceStub = nil
+	if fake.tagMFADeviceReturnsOnCall == nil {
+		fake.tagMFADeviceReturnsOnCall = make(map[int]struct {
+			result1 *iam.TagMFADeviceOutput
+			result2 error
+		})
+	}
+	fake.tagMFADeviceReturnsOnCall[i] = struct {
+		result1 *iam.TagMFADeviceOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) TagMFADeviceRequest(arg1 *iam.TagMFADeviceInput) (*request.Request, *iam.TagMFADeviceOutput) {
+	fake.tagMFADeviceRequestMutex.Lock()
+	ret, specificReturn := fake.tagMFADeviceRequestReturnsOnCall[len(fake.tagMFADeviceRequestArgsForCall)]
+	fake.tagMFADeviceRequestArgsForCall = append(fake.tagMFADeviceRequestArgsForCall, struct {
+		arg1 *iam.TagMFADeviceInput
+	}{arg1})
+	stub := fake.TagMFADeviceRequestStub
+	fakeReturns := fake.tagMFADeviceRequestReturns
+	fake.recordInvocation("TagMFADeviceRequest", []interface{}{arg1})
+	fake.tagMFADeviceRequestMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) TagMFADeviceRequestCallCount() int {
+	fake.tagMFADeviceRequestMutex.RLock()
+	defer fake.tagMFADeviceRequestMutex.RUnlock()
+	return len(fake.tagMFADeviceRequestArgsForCall)
+}
+
+func (fake *FakeIAMAPI) TagMFADeviceRequestCalls(stub func(*iam.TagMFADeviceInput) (*request.Request, *iam.TagMFADeviceOutput)) {
+	fake.tagMFADeviceRequestMutex.Lock()
+	defer fake.tagMFADeviceRequestMutex.Unlock()
+	fake.TagMFADeviceRequestStub = stub
+}
+
+func (fake *FakeIAMAPI) TagMFADeviceRequestArgsForCall(i int) *iam.TagMFADeviceInput {
+	fake.tagMFADeviceRequestMutex.RLock()
+	defer fake.tagMFADeviceRequestMutex.RUnlock()
+	argsForCall := fake.tagMFADeviceRequestArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) TagMFADeviceRequestReturns(result1 *request.Request, result2 *iam.TagMFADeviceOutput) {
+	fake.tagMFADeviceRequestMutex.Lock()
+	defer fake.tagMFADeviceRequestMutex.Unlock()
+	fake.TagMFADeviceRequestStub = nil
+	fake.tagMFADeviceRequestReturns = struct {
+		result1 *request.Request
+		result2 *iam.TagMFADeviceOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) TagMFADeviceRequestReturnsOnCall(i int, result1 *request.Request, result2 *iam.TagMFADeviceOutput) {
+	fake.tagMFADeviceRequestMutex.Lock()
+	defer fake.tagMFADeviceRequestMutex.Unlock()
+	fake.TagMFADeviceRequestStub = nil
+	if fake.tagMFADeviceRequestReturnsOnCall == nil {
+		fake.tagMFADeviceRequestReturnsOnCall = make(map[int]struct {
+			result1 *request.Request
+			result2 *iam.TagMFADeviceOutput
+		})
+	}
+	fake.tagMFADeviceRequestReturnsOnCall[i] = struct {
+		result1 *request.Request
+		result2 *iam.TagMFADeviceOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) TagMFADeviceWithContext(arg1 context.Context, arg2 *iam.TagMFADeviceInput, arg3 ...request.Option) (*iam.TagMFADeviceOutput, error) {
+	fake.tagMFADeviceWithContextMutex.Lock()
+	ret, specificReturn := fake.tagMFADeviceWithContextReturnsOnCall[len(fake.tagMFADeviceWithContextArgsForCall)]
+	fake.tagMFADeviceWithContextArgsForCall = append(fake.tagMFADeviceWithContextArgsForCall, struct {
+		arg1 context.Context
+		arg2 *iam.TagMFADeviceInput
+		arg3 []request.Option
+	}{arg1, arg2, arg3})
+	stub := fake.TagMFADeviceWithContextStub
+	fakeReturns := fake.tagMFADeviceWithContextReturns
+	fake.recordInvocation("TagMFADeviceWithContext", []interface{}{arg1, arg2, arg3})
+	fake.tagMFADeviceWithContextMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2, arg3...)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) TagMFADeviceWithContextCallCount() int {
+	fake.tagMFADeviceWithContextMutex.RLock()
+	defer fake.tagMFADeviceWithContextMutex.RUnlock()
+	return len(fake.tagMFADeviceWithContextArgsForCall)
+}
+
+func (fake *FakeIAMAPI) TagMFADeviceWithContextCalls(stub func(context.Context, *iam.TagMFADeviceInput, ...request.Option) (*iam.TagMFADeviceOutput, error)) {
+	fake.tagMFADeviceWithContextMutex.Lock()
+	defer fake.tagMFADeviceWithContextMutex.Unlock()
+	fake.TagMFADeviceWithContextStub = stub
+}
+
+func (fake *FakeIAMAPI) TagMFADeviceWithContextArgsForCall(i int) (context.Context, *iam.TagMFADeviceInput, []request.Option) {
+	fake.tagMFADeviceWithContextMutex.RLock()
+	defer fake.tagMFADeviceWithContextMutex.RUnlock()
+	argsForCall := fake.tagMFADeviceWithContextArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3
+}
+
+func (fake *FakeIAMAPI) TagMFADeviceWithContextReturns(result1 *iam.TagMFADeviceOutput, result2 error) {
+	fake.tagMFADeviceWithContextMutex.Lock()
+	defer fake.tagMFADeviceWithContextMutex.Unlock()
+	fake.TagMFADeviceWithContextStub = nil
+	fake.tagMFADeviceWithContextReturns = struct {
+		result1 *iam.TagMFADeviceOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) TagMFADeviceWithContextReturnsOnCall(i int, result1 *iam.TagMFADeviceOutput, result2 error) {
+	fake.tagMFADeviceWithContextMutex.Lock()
+	defer fake.tagMFADeviceWithContextMutex.Unlock()
+	fake.TagMFADeviceWithContextStub = nil
+	if fake.tagMFADeviceWithContextReturnsOnCall == nil {
+		fake.tagMFADeviceWithContextReturnsOnCall = make(map[int]struct {
+			result1 *iam.TagMFADeviceOutput
+			result2 error
+		})
+	}
+	fake.tagMFADeviceWithContextReturnsOnCall[i] = struct {
+		result1 *iam.TagMFADeviceOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) TagOpenIDConnectProvider(arg1 *iam.TagOpenIDConnectProviderInput) (*iam.TagOpenIDConnectProviderOutput, error) {
+	fake.tagOpenIDConnectProviderMutex.Lock()
+	ret, specificReturn := fake.tagOpenIDConnectProviderReturnsOnCall[len(fake.tagOpenIDConnectProviderArgsForCall)]
+	fake.tagOpenIDConnectProviderArgsForCall = append(fake.tagOpenIDConnectProviderArgsForCall, struct {
+		arg1 *iam.TagOpenIDConnectProviderInput
+	}{arg1})
+	stub := fake.TagOpenIDConnectProviderStub
+	fakeReturns := fake.tagOpenIDConnectProviderReturns
+	fake.recordInvocation("TagOpenIDConnectProvider", []interface{}{arg1})
+	fake.tagOpenIDConnectProviderMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) TagOpenIDConnectProviderCallCount() int {
+	fake.tagOpenIDConnectProviderMutex.RLock()
+	defer fake.tagOpenIDConnectProviderMutex.RUnlock()
+	return len(fake.tagOpenIDConnectProviderArgsForCall)
+}
+
+func (fake *FakeIAMAPI) TagOpenIDConnectProviderCalls(stub func(*iam.TagOpenIDConnectProviderInput) (*iam.TagOpenIDConnectProviderOutput, error)) {
+	fake.tagOpenIDConnectProviderMutex.Lock()
+	defer fake.tagOpenIDConnectProviderMutex.Unlock()
+	fake.TagOpenIDConnectProviderStub = stub
+}
+
+func (fake *FakeIAMAPI) TagOpenIDConnectProviderArgsForCall(i int) *iam.TagOpenIDConnectProviderInput {
+	fake.tagOpenIDConnectProviderMutex.RLock()
+	defer fake.tagOpenIDConnectProviderMutex.RUnlock()
+	argsForCall := fake.tagOpenIDConnectProviderArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) TagOpenIDConnectProviderReturns(result1 *iam.TagOpenIDConnectProviderOutput, result2 error) {
+	fake.tagOpenIDConnectProviderMutex.Lock()
+	defer fake.tagOpenIDConnectProviderMutex.Unlock()
+	fake.TagOpenIDConnectProviderStub = nil
+	fake.tagOpenIDConnectProviderReturns = struct {
+		result1 *iam.TagOpenIDConnectProviderOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) TagOpenIDConnectProviderReturnsOnCall(i int, result1 *iam.TagOpenIDConnectProviderOutput, result2 error) {
+	fake.tagOpenIDConnectProviderMutex.Lock()
+	defer fake.tagOpenIDConnectProviderMutex.Unlock()
+	fake.TagOpenIDConnectProviderStub = nil
+	if fake.tagOpenIDConnectProviderReturnsOnCall == nil {
+		fake.tagOpenIDConnectProviderReturnsOnCall = make(map[int]struct {
+			result1 *iam.TagOpenIDConnectProviderOutput
+			result2 error
+		})
+	}
+	fake.tagOpenIDConnectProviderReturnsOnCall[i] = struct {
+		result1 *iam.TagOpenIDConnectProviderOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) TagOpenIDConnectProviderRequest(arg1 *iam.TagOpenIDConnectProviderInput) (*request.Request, *iam.TagOpenIDConnectProviderOutput) {
+	fake.tagOpenIDConnectProviderRequestMutex.Lock()
+	ret, specificReturn := fake.tagOpenIDConnectProviderRequestReturnsOnCall[len(fake.tagOpenIDConnectProviderRequestArgsForCall)]
+	fake.tagOpenIDConnectProviderRequestArgsForCall = append(fake.tagOpenIDConnectProviderRequestArgsForCall, struct {
+		arg1 *iam.TagOpenIDConnectProviderInput
+	}{arg1})
+	stub := fake.TagOpenIDConnectProviderRequestStub
+	fakeReturns := fake.tagOpenIDConnectProviderRequestReturns
+	fake.recordInvocation("TagOpenIDConnectProviderRequest", []interface{}{arg1})
+	fake.tagOpenIDConnectProviderRequestMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) TagOpenIDConnectProviderRequestCallCount() int {
+	fake.tagOpenIDConnectProviderRequestMutex.RLock()
+	defer fake.tagOpenIDConnectProviderRequestMutex.RUnlock()
+	return len(fake.tagOpenIDConnectProviderRequestArgsForCall)
+}
+
+func (fake *FakeIAMAPI) TagOpenIDConnectProviderRequestCalls(stub func(*iam.TagOpenIDConnectProviderInput) (*request.Request, *iam.TagOpenIDConnectProviderOutput)) {
+	fake.tagOpenIDConnectProviderRequestMutex.Lock()
+	defer fake.tagOpenIDConnectProviderRequestMutex.Unlock()
+	fake.TagOpenIDConnectProviderRequestStub = stub
+}
+
+func (fake *FakeIAMAPI) TagOpenIDConnectProviderRequestArgsForCall(i int) *iam.TagOpenIDConnectProviderInput {
+	fake.tagOpenIDConnectProviderRequestMutex.RLock()
+	defer fake.tagOpenIDConnectProviderRequestMutex.RUnlock()
+	argsForCall := fake.tagOpenIDConnectProviderRequestArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) TagOpenIDConnectProviderRequestReturns(result1 *request.Request, result2 *iam.TagOpenIDConnectProviderOutput) {
+	fake.tagOpenIDConnectProviderRequestMutex.Lock()
+	defer fake.tagOpenIDConnectProviderRequestMutex.Unlock()
+	fake.TagOpenIDConnectProviderRequestStub = nil
+	fake.tagOpenIDConnectProviderRequestReturns = struct {
+		result1 *request.Request
+		result2 *iam.TagOpenIDConnectProviderOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) TagOpenIDConnectProviderRequestReturnsOnCall(i int, result1 *request.Request, result2 *iam.TagOpenIDConnectProviderOutput) {
+	fake.tagOpenIDConnectProviderRequestMutex.Lock()
+	defer fake.tagOpenIDConnectProviderRequestMutex.Unlock()
+	fake.TagOpenIDConnectProviderRequestStub = nil
+	if fake.tagOpenIDConnectProviderRequestReturnsOnCall == nil {
+		fake.tagOpenIDConnectProviderRequestReturnsOnCall = make(map[int]struct {
+			result1 *request.Request
+			result2 *iam.TagOpenIDConnectProviderOutput
+		})
+	}
+	fake.tagOpenIDConnectProviderRequestReturnsOnCall[i] = struct {
+		result1 *request.Request
+		result2 *iam.TagOpenIDConnectProviderOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) TagOpenIDConnectProviderWithContext(arg1 context.Context, arg2 *iam.TagOpenIDConnectProviderInput, arg3 ...request.Option) (*iam.TagOpenIDConnectProviderOutput, error) {
+	fake.tagOpenIDConnectProviderWithContextMutex.Lock()
+	ret, specificReturn := fake.tagOpenIDConnectProviderWithContextReturnsOnCall[len(fake.tagOpenIDConnectProviderWithContextArgsForCall)]
+	fake.tagOpenIDConnectProviderWithContextArgsForCall = append(fake.tagOpenIDConnectProviderWithContextArgsForCall, struct {
+		arg1 context.Context
+		arg2 *iam.TagOpenIDConnectProviderInput
+		arg3 []request.Option
+	}{arg1, arg2, arg3})
+	stub := fake.TagOpenIDConnectProviderWithContextStub
+	fakeReturns := fake.tagOpenIDConnectProviderWithContextReturns
+	fake.recordInvocation("TagOpenIDConnectProviderWithContext", []interface{}{arg1, arg2, arg3})
+	fake.tagOpenIDConnectProviderWithContextMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2, arg3...)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) TagOpenIDConnectProviderWithContextCallCount() int {
+	fake.tagOpenIDConnectProviderWithContextMutex.RLock()
+	defer fake.tagOpenIDConnectProviderWithContextMutex.RUnlock()
+	return len(fake.tagOpenIDConnectProviderWithContextArgsForCall)
+}
+
+func (fake *FakeIAMAPI) TagOpenIDConnectProviderWithContextCalls(stub func(context.Context, *iam.TagOpenIDConnectProviderInput, ...request.Option) (*iam.TagOpenIDConnectProviderOutput, error)) {
+	fake.tagOpenIDConnectProviderWithContextMutex.Lock()
+	defer fake.tagOpenIDConnectProviderWithContextMutex.Unlock()
+	fake.TagOpenIDConnectProviderWithContextStub = stub
+}
+
+func (fake *FakeIAMAPI) TagOpenIDConnectProviderWithContextArgsForCall(i int) (context.Context, *iam.TagOpenIDConnectProviderInput, []request.Option) {
+	fake.tagOpenIDConnectProviderWithContextMutex.RLock()
+	defer fake.tagOpenIDConnectProviderWithContextMutex.RUnlock()
+	argsForCall := fake.tagOpenIDConnectProviderWithContextArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3
+}
+
+func (fake *FakeIAMAPI) TagOpenIDConnectProviderWithContextReturns(result1 *iam.TagOpenIDConnectProviderOutput, result2 error) {
+	fake.tagOpenIDConnectProviderWithContextMutex.Lock()
+	defer fake.tagOpenIDConnectProviderWithContextMutex.Unlock()
+	fake.TagOpenIDConnectProviderWithContextStub = nil
+	fake.tagOpenIDConnectProviderWithContextReturns = struct {
+		result1 *iam.TagOpenIDConnectProviderOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) TagOpenIDConnectProviderWithContextReturnsOnCall(i int, result1 *iam.TagOpenIDConnectProviderOutput, result2 error) {
+	fake.tagOpenIDConnectProviderWithContextMutex.Lock()
+	defer fake.tagOpenIDConnectProviderWithContextMutex.Unlock()
+	fake.TagOpenIDConnectProviderWithContextStub = nil
+	if fake.tagOpenIDConnectProviderWithContextReturnsOnCall == nil {
+		fake.tagOpenIDConnectProviderWithContextReturnsOnCall = make(map[int]struct {
+			result1 *iam.TagOpenIDConnectProviderOutput
+			result2 error
+		})
+	}
+	fake.tagOpenIDConnectProviderWithContextReturnsOnCall[i] = struct {
+		result1 *iam.TagOpenIDConnectProviderOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) TagPolicy(arg1 *iam.TagPolicyInput) (*iam.TagPolicyOutput, error) {
+	fake.tagPolicyMutex.Lock()
+	ret, specificReturn := fake.tagPolicyReturnsOnCall[len(fake.tagPolicyArgsForCall)]
+	fake.tagPolicyArgsForCall = append(fake.tagPolicyArgsForCall, struct {
+		arg1 *iam.TagPolicyInput
+	}{arg1})
+	stub := fake.TagPolicyStub
+	fakeReturns := fake.tagPolicyReturns
+	fake.recordInvocation("TagPolicy", []interface{}{arg1})
+	fake.tagPolicyMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) TagPolicyCallCount() int {
+	fake.tagPolicyMutex.RLock()
+	defer fake.tagPolicyMutex.RUnlock()
+	return len(fake.tagPolicyArgsForCall)
+}
+
+func (fake *FakeIAMAPI) TagPolicyCalls(stub func(*iam.TagPolicyInput) (*iam.TagPolicyOutput, error)) {
+	fake.tagPolicyMutex.Lock()
+	defer fake.tagPolicyMutex.Unlock()
+	fake.TagPolicyStub = stub
+}
+
+func (fake *FakeIAMAPI) TagPolicyArgsForCall(i int) *iam.TagPolicyInput {
+	fake.tagPolicyMutex.RLock()
+	defer fake.tagPolicyMutex.RUnlock()
+	argsForCall := fake.tagPolicyArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) TagPolicyReturns(result1 *iam.TagPolicyOutput, result2 error) {
+	fake.tagPolicyMutex.Lock()
+	defer fake.tagPolicyMutex.Unlock()
+	fake.TagPolicyStub = nil
+	fake.tagPolicyReturns = struct {
+		result1 *iam.TagPolicyOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) TagPolicyReturnsOnCall(i int, result1 *iam.TagPolicyOutput, result2 error) {
+	fake.tagPolicyMutex.Lock()
+	defer fake.tagPolicyMutex.Unlock()
+	fake.TagPolicyStub = nil
+	if fake.tagPolicyReturnsOnCall == nil {
+		fake.tagPolicyReturnsOnCall = make(map[int]struct {
+			result1 *iam.TagPolicyOutput
+			result2 error
+		})
+	}
+	fake.tagPolicyReturnsOnCall[i] = struct {
+		result1 *iam.TagPolicyOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) TagPolicyRequest(arg1 *iam.TagPolicyInput) (*request.Request, *iam.TagPolicyOutput) {
+	fake.tagPolicyRequestMutex.Lock()
+	ret, specificReturn := fake.tagPolicyRequestReturnsOnCall[len(fake.tagPolicyRequestArgsForCall)]
+	fake.tagPolicyRequestArgsForCall = append(fake.tagPolicyRequestArgsForCall, struct {
+		arg1 *iam.TagPolicyInput
+	}{arg1})
+	stub := fake.TagPolicyRequestStub
+	fakeReturns := fake.tagPolicyRequestReturns
+	fake.recordInvocation("TagPolicyRequest", []interface{}{arg1})
+	fake.tagPolicyRequestMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) TagPolicyRequestCallCount() int {
+	fake.tagPolicyRequestMutex.RLock()
+	defer fake.tagPolicyRequestMutex.RUnlock()
+	return len(fake.tagPolicyRequestArgsForCall)
+}
+
+func (fake *FakeIAMAPI) TagPolicyRequestCalls(stub func(*iam.TagPolicyInput) (*request.Request, *iam.TagPolicyOutput)) {
+	fake.tagPolicyRequestMutex.Lock()
+	defer fake.tagPolicyRequestMutex.Unlock()
+	fake.TagPolicyRequestStub = stub
+}
+
+func (fake *FakeIAMAPI) TagPolicyRequestArgsForCall(i int) *iam.TagPolicyInput {
+	fake.tagPolicyRequestMutex.RLock()
+	defer fake.tagPolicyRequestMutex.RUnlock()
+	argsForCall := fake.tagPolicyRequestArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) TagPolicyRequestReturns(result1 *request.Request, result2 *iam.TagPolicyOutput) {
+	fake.tagPolicyRequestMutex.Lock()
+	defer fake.tagPolicyRequestMutex.Unlock()
+	fake.TagPolicyRequestStub = nil
+	fake.tagPolicyRequestReturns = struct {
+		result1 *request.Request
+		result2 *iam.TagPolicyOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) TagPolicyRequestReturnsOnCall(i int, result1 *request.Request, result2 *iam.TagPolicyOutput) {
+	fake.tagPolicyRequestMutex.Lock()
+	defer fake.tagPolicyRequestMutex.Unlock()
+	fake.TagPolicyRequestStub = nil
+	if fake.tagPolicyRequestReturnsOnCall == nil {
+		fake.tagPolicyRequestReturnsOnCall = make(map[int]struct {
+			result1 *request.Request
+			result2 *iam.TagPolicyOutput
+		})
+	}
+	fake.tagPolicyRequestReturnsOnCall[i] = struct {
+		result1 *request.Request
+		result2 *iam.TagPolicyOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) TagPolicyWithContext(arg1 context.Context, arg2 *iam.TagPolicyInput, arg3 ...request.Option) (*iam.TagPolicyOutput, error) {
+	fake.tagPolicyWithContextMutex.Lock()
+	ret, specificReturn := fake.tagPolicyWithContextReturnsOnCall[len(fake.tagPolicyWithContextArgsForCall)]
+	fake.tagPolicyWithContextArgsForCall = append(fake.tagPolicyWithContextArgsForCall, struct {
+		arg1 context.Context
+		arg2 *iam.TagPolicyInput
+		arg3 []request.Option
+	}{arg1, arg2, arg3})
+	stub := fake.TagPolicyWithContextStub
+	fakeReturns := fake.tagPolicyWithContextReturns
+	fake.recordInvocation("TagPolicyWithContext", []interface{}{arg1, arg2, arg3})
+	fake.tagPolicyWithContextMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2, arg3...)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) TagPolicyWithContextCallCount() int {
+	fake.tagPolicyWithContextMutex.RLock()
+	defer fake.tagPolicyWithContextMutex.RUnlock()
+	return len(fake.tagPolicyWithContextArgsForCall)
+}
+
+func (fake *FakeIAMAPI) TagPolicyWithContextCalls(stub func(context.Context, *iam.TagPolicyInput, ...request.Option) (*iam.TagPolicyOutput, error)) {
+	fake.tagPolicyWithContextMutex.Lock()
+	defer fake.tagPolicyWithContextMutex.Unlock()
+	fake.TagPolicyWithContextStub = stub
+}
+
+func (fake *FakeIAMAPI) TagPolicyWithContextArgsForCall(i int) (context.Context, *iam.TagPolicyInput, []request.Option) {
+	fake.tagPolicyWithContextMutex.RLock()
+	defer fake.tagPolicyWithContextMutex.RUnlock()
+	argsForCall := fake.tagPolicyWithContextArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3
+}
+
+func (fake *FakeIAMAPI) TagPolicyWithContextReturns(result1 *iam.TagPolicyOutput, result2 error) {
+	fake.tagPolicyWithContextMutex.Lock()
+	defer fake.tagPolicyWithContextMutex.Unlock()
+	fake.TagPolicyWithContextStub = nil
+	fake.tagPolicyWithContextReturns = struct {
+		result1 *iam.TagPolicyOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) TagPolicyWithContextReturnsOnCall(i int, result1 *iam.TagPolicyOutput, result2 error) {
+	fake.tagPolicyWithContextMutex.Lock()
+	defer fake.tagPolicyWithContextMutex.Unlock()
+	fake.TagPolicyWithContextStub = nil
+	if fake.tagPolicyWithContextReturnsOnCall == nil {
+		fake.tagPolicyWithContextReturnsOnCall = make(map[int]struct {
+			result1 *iam.TagPolicyOutput
+			result2 error
+		})
+	}
+	fake.tagPolicyWithContextReturnsOnCall[i] = struct {
+		result1 *iam.TagPolicyOutput
+		result2 error
+	}{result1, result2}
+}
+
 func (fake *FakeIAMAPI) TagRole(arg1 *iam.TagRoleInput) (*iam.TagRoleOutput, error) {
 	fake.tagRoleMutex.Lock()
 	ret, specificReturn := fake.tagRoleReturnsOnCall[len(fake.tagRoleArgsForCall)]
@@ -33079,6 +35909,394 @@ func (fake *FakeIAMAPI) TagRoleWithContextReturnsOnCall(i int, result1 *iam.TagR
 	}
 	fake.tagRoleWithContextReturnsOnCall[i] = struct {
 		result1 *iam.TagRoleOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) TagSAMLProvider(arg1 *iam.TagSAMLProviderInput) (*iam.TagSAMLProviderOutput, error) {
+	fake.tagSAMLProviderMutex.Lock()
+	ret, specificReturn := fake.tagSAMLProviderReturnsOnCall[len(fake.tagSAMLProviderArgsForCall)]
+	fake.tagSAMLProviderArgsForCall = append(fake.tagSAMLProviderArgsForCall, struct {
+		arg1 *iam.TagSAMLProviderInput
+	}{arg1})
+	stub := fake.TagSAMLProviderStub
+	fakeReturns := fake.tagSAMLProviderReturns
+	fake.recordInvocation("TagSAMLProvider", []interface{}{arg1})
+	fake.tagSAMLProviderMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) TagSAMLProviderCallCount() int {
+	fake.tagSAMLProviderMutex.RLock()
+	defer fake.tagSAMLProviderMutex.RUnlock()
+	return len(fake.tagSAMLProviderArgsForCall)
+}
+
+func (fake *FakeIAMAPI) TagSAMLProviderCalls(stub func(*iam.TagSAMLProviderInput) (*iam.TagSAMLProviderOutput, error)) {
+	fake.tagSAMLProviderMutex.Lock()
+	defer fake.tagSAMLProviderMutex.Unlock()
+	fake.TagSAMLProviderStub = stub
+}
+
+func (fake *FakeIAMAPI) TagSAMLProviderArgsForCall(i int) *iam.TagSAMLProviderInput {
+	fake.tagSAMLProviderMutex.RLock()
+	defer fake.tagSAMLProviderMutex.RUnlock()
+	argsForCall := fake.tagSAMLProviderArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) TagSAMLProviderReturns(result1 *iam.TagSAMLProviderOutput, result2 error) {
+	fake.tagSAMLProviderMutex.Lock()
+	defer fake.tagSAMLProviderMutex.Unlock()
+	fake.TagSAMLProviderStub = nil
+	fake.tagSAMLProviderReturns = struct {
+		result1 *iam.TagSAMLProviderOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) TagSAMLProviderReturnsOnCall(i int, result1 *iam.TagSAMLProviderOutput, result2 error) {
+	fake.tagSAMLProviderMutex.Lock()
+	defer fake.tagSAMLProviderMutex.Unlock()
+	fake.TagSAMLProviderStub = nil
+	if fake.tagSAMLProviderReturnsOnCall == nil {
+		fake.tagSAMLProviderReturnsOnCall = make(map[int]struct {
+			result1 *iam.TagSAMLProviderOutput
+			result2 error
+		})
+	}
+	fake.tagSAMLProviderReturnsOnCall[i] = struct {
+		result1 *iam.TagSAMLProviderOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) TagSAMLProviderRequest(arg1 *iam.TagSAMLProviderInput) (*request.Request, *iam.TagSAMLProviderOutput) {
+	fake.tagSAMLProviderRequestMutex.Lock()
+	ret, specificReturn := fake.tagSAMLProviderRequestReturnsOnCall[len(fake.tagSAMLProviderRequestArgsForCall)]
+	fake.tagSAMLProviderRequestArgsForCall = append(fake.tagSAMLProviderRequestArgsForCall, struct {
+		arg1 *iam.TagSAMLProviderInput
+	}{arg1})
+	stub := fake.TagSAMLProviderRequestStub
+	fakeReturns := fake.tagSAMLProviderRequestReturns
+	fake.recordInvocation("TagSAMLProviderRequest", []interface{}{arg1})
+	fake.tagSAMLProviderRequestMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) TagSAMLProviderRequestCallCount() int {
+	fake.tagSAMLProviderRequestMutex.RLock()
+	defer fake.tagSAMLProviderRequestMutex.RUnlock()
+	return len(fake.tagSAMLProviderRequestArgsForCall)
+}
+
+func (fake *FakeIAMAPI) TagSAMLProviderRequestCalls(stub func(*iam.TagSAMLProviderInput) (*request.Request, *iam.TagSAMLProviderOutput)) {
+	fake.tagSAMLProviderRequestMutex.Lock()
+	defer fake.tagSAMLProviderRequestMutex.Unlock()
+	fake.TagSAMLProviderRequestStub = stub
+}
+
+func (fake *FakeIAMAPI) TagSAMLProviderRequestArgsForCall(i int) *iam.TagSAMLProviderInput {
+	fake.tagSAMLProviderRequestMutex.RLock()
+	defer fake.tagSAMLProviderRequestMutex.RUnlock()
+	argsForCall := fake.tagSAMLProviderRequestArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) TagSAMLProviderRequestReturns(result1 *request.Request, result2 *iam.TagSAMLProviderOutput) {
+	fake.tagSAMLProviderRequestMutex.Lock()
+	defer fake.tagSAMLProviderRequestMutex.Unlock()
+	fake.TagSAMLProviderRequestStub = nil
+	fake.tagSAMLProviderRequestReturns = struct {
+		result1 *request.Request
+		result2 *iam.TagSAMLProviderOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) TagSAMLProviderRequestReturnsOnCall(i int, result1 *request.Request, result2 *iam.TagSAMLProviderOutput) {
+	fake.tagSAMLProviderRequestMutex.Lock()
+	defer fake.tagSAMLProviderRequestMutex.Unlock()
+	fake.TagSAMLProviderRequestStub = nil
+	if fake.tagSAMLProviderRequestReturnsOnCall == nil {
+		fake.tagSAMLProviderRequestReturnsOnCall = make(map[int]struct {
+			result1 *request.Request
+			result2 *iam.TagSAMLProviderOutput
+		})
+	}
+	fake.tagSAMLProviderRequestReturnsOnCall[i] = struct {
+		result1 *request.Request
+		result2 *iam.TagSAMLProviderOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) TagSAMLProviderWithContext(arg1 context.Context, arg2 *iam.TagSAMLProviderInput, arg3 ...request.Option) (*iam.TagSAMLProviderOutput, error) {
+	fake.tagSAMLProviderWithContextMutex.Lock()
+	ret, specificReturn := fake.tagSAMLProviderWithContextReturnsOnCall[len(fake.tagSAMLProviderWithContextArgsForCall)]
+	fake.tagSAMLProviderWithContextArgsForCall = append(fake.tagSAMLProviderWithContextArgsForCall, struct {
+		arg1 context.Context
+		arg2 *iam.TagSAMLProviderInput
+		arg3 []request.Option
+	}{arg1, arg2, arg3})
+	stub := fake.TagSAMLProviderWithContextStub
+	fakeReturns := fake.tagSAMLProviderWithContextReturns
+	fake.recordInvocation("TagSAMLProviderWithContext", []interface{}{arg1, arg2, arg3})
+	fake.tagSAMLProviderWithContextMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2, arg3...)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) TagSAMLProviderWithContextCallCount() int {
+	fake.tagSAMLProviderWithContextMutex.RLock()
+	defer fake.tagSAMLProviderWithContextMutex.RUnlock()
+	return len(fake.tagSAMLProviderWithContextArgsForCall)
+}
+
+func (fake *FakeIAMAPI) TagSAMLProviderWithContextCalls(stub func(context.Context, *iam.TagSAMLProviderInput, ...request.Option) (*iam.TagSAMLProviderOutput, error)) {
+	fake.tagSAMLProviderWithContextMutex.Lock()
+	defer fake.tagSAMLProviderWithContextMutex.Unlock()
+	fake.TagSAMLProviderWithContextStub = stub
+}
+
+func (fake *FakeIAMAPI) TagSAMLProviderWithContextArgsForCall(i int) (context.Context, *iam.TagSAMLProviderInput, []request.Option) {
+	fake.tagSAMLProviderWithContextMutex.RLock()
+	defer fake.tagSAMLProviderWithContextMutex.RUnlock()
+	argsForCall := fake.tagSAMLProviderWithContextArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3
+}
+
+func (fake *FakeIAMAPI) TagSAMLProviderWithContextReturns(result1 *iam.TagSAMLProviderOutput, result2 error) {
+	fake.tagSAMLProviderWithContextMutex.Lock()
+	defer fake.tagSAMLProviderWithContextMutex.Unlock()
+	fake.TagSAMLProviderWithContextStub = nil
+	fake.tagSAMLProviderWithContextReturns = struct {
+		result1 *iam.TagSAMLProviderOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) TagSAMLProviderWithContextReturnsOnCall(i int, result1 *iam.TagSAMLProviderOutput, result2 error) {
+	fake.tagSAMLProviderWithContextMutex.Lock()
+	defer fake.tagSAMLProviderWithContextMutex.Unlock()
+	fake.TagSAMLProviderWithContextStub = nil
+	if fake.tagSAMLProviderWithContextReturnsOnCall == nil {
+		fake.tagSAMLProviderWithContextReturnsOnCall = make(map[int]struct {
+			result1 *iam.TagSAMLProviderOutput
+			result2 error
+		})
+	}
+	fake.tagSAMLProviderWithContextReturnsOnCall[i] = struct {
+		result1 *iam.TagSAMLProviderOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) TagServerCertificate(arg1 *iam.TagServerCertificateInput) (*iam.TagServerCertificateOutput, error) {
+	fake.tagServerCertificateMutex.Lock()
+	ret, specificReturn := fake.tagServerCertificateReturnsOnCall[len(fake.tagServerCertificateArgsForCall)]
+	fake.tagServerCertificateArgsForCall = append(fake.tagServerCertificateArgsForCall, struct {
+		arg1 *iam.TagServerCertificateInput
+	}{arg1})
+	stub := fake.TagServerCertificateStub
+	fakeReturns := fake.tagServerCertificateReturns
+	fake.recordInvocation("TagServerCertificate", []interface{}{arg1})
+	fake.tagServerCertificateMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) TagServerCertificateCallCount() int {
+	fake.tagServerCertificateMutex.RLock()
+	defer fake.tagServerCertificateMutex.RUnlock()
+	return len(fake.tagServerCertificateArgsForCall)
+}
+
+func (fake *FakeIAMAPI) TagServerCertificateCalls(stub func(*iam.TagServerCertificateInput) (*iam.TagServerCertificateOutput, error)) {
+	fake.tagServerCertificateMutex.Lock()
+	defer fake.tagServerCertificateMutex.Unlock()
+	fake.TagServerCertificateStub = stub
+}
+
+func (fake *FakeIAMAPI) TagServerCertificateArgsForCall(i int) *iam.TagServerCertificateInput {
+	fake.tagServerCertificateMutex.RLock()
+	defer fake.tagServerCertificateMutex.RUnlock()
+	argsForCall := fake.tagServerCertificateArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) TagServerCertificateReturns(result1 *iam.TagServerCertificateOutput, result2 error) {
+	fake.tagServerCertificateMutex.Lock()
+	defer fake.tagServerCertificateMutex.Unlock()
+	fake.TagServerCertificateStub = nil
+	fake.tagServerCertificateReturns = struct {
+		result1 *iam.TagServerCertificateOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) TagServerCertificateReturnsOnCall(i int, result1 *iam.TagServerCertificateOutput, result2 error) {
+	fake.tagServerCertificateMutex.Lock()
+	defer fake.tagServerCertificateMutex.Unlock()
+	fake.TagServerCertificateStub = nil
+	if fake.tagServerCertificateReturnsOnCall == nil {
+		fake.tagServerCertificateReturnsOnCall = make(map[int]struct {
+			result1 *iam.TagServerCertificateOutput
+			result2 error
+		})
+	}
+	fake.tagServerCertificateReturnsOnCall[i] = struct {
+		result1 *iam.TagServerCertificateOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) TagServerCertificateRequest(arg1 *iam.TagServerCertificateInput) (*request.Request, *iam.TagServerCertificateOutput) {
+	fake.tagServerCertificateRequestMutex.Lock()
+	ret, specificReturn := fake.tagServerCertificateRequestReturnsOnCall[len(fake.tagServerCertificateRequestArgsForCall)]
+	fake.tagServerCertificateRequestArgsForCall = append(fake.tagServerCertificateRequestArgsForCall, struct {
+		arg1 *iam.TagServerCertificateInput
+	}{arg1})
+	stub := fake.TagServerCertificateRequestStub
+	fakeReturns := fake.tagServerCertificateRequestReturns
+	fake.recordInvocation("TagServerCertificateRequest", []interface{}{arg1})
+	fake.tagServerCertificateRequestMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) TagServerCertificateRequestCallCount() int {
+	fake.tagServerCertificateRequestMutex.RLock()
+	defer fake.tagServerCertificateRequestMutex.RUnlock()
+	return len(fake.tagServerCertificateRequestArgsForCall)
+}
+
+func (fake *FakeIAMAPI) TagServerCertificateRequestCalls(stub func(*iam.TagServerCertificateInput) (*request.Request, *iam.TagServerCertificateOutput)) {
+	fake.tagServerCertificateRequestMutex.Lock()
+	defer fake.tagServerCertificateRequestMutex.Unlock()
+	fake.TagServerCertificateRequestStub = stub
+}
+
+func (fake *FakeIAMAPI) TagServerCertificateRequestArgsForCall(i int) *iam.TagServerCertificateInput {
+	fake.tagServerCertificateRequestMutex.RLock()
+	defer fake.tagServerCertificateRequestMutex.RUnlock()
+	argsForCall := fake.tagServerCertificateRequestArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) TagServerCertificateRequestReturns(result1 *request.Request, result2 *iam.TagServerCertificateOutput) {
+	fake.tagServerCertificateRequestMutex.Lock()
+	defer fake.tagServerCertificateRequestMutex.Unlock()
+	fake.TagServerCertificateRequestStub = nil
+	fake.tagServerCertificateRequestReturns = struct {
+		result1 *request.Request
+		result2 *iam.TagServerCertificateOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) TagServerCertificateRequestReturnsOnCall(i int, result1 *request.Request, result2 *iam.TagServerCertificateOutput) {
+	fake.tagServerCertificateRequestMutex.Lock()
+	defer fake.tagServerCertificateRequestMutex.Unlock()
+	fake.TagServerCertificateRequestStub = nil
+	if fake.tagServerCertificateRequestReturnsOnCall == nil {
+		fake.tagServerCertificateRequestReturnsOnCall = make(map[int]struct {
+			result1 *request.Request
+			result2 *iam.TagServerCertificateOutput
+		})
+	}
+	fake.tagServerCertificateRequestReturnsOnCall[i] = struct {
+		result1 *request.Request
+		result2 *iam.TagServerCertificateOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) TagServerCertificateWithContext(arg1 context.Context, arg2 *iam.TagServerCertificateInput, arg3 ...request.Option) (*iam.TagServerCertificateOutput, error) {
+	fake.tagServerCertificateWithContextMutex.Lock()
+	ret, specificReturn := fake.tagServerCertificateWithContextReturnsOnCall[len(fake.tagServerCertificateWithContextArgsForCall)]
+	fake.tagServerCertificateWithContextArgsForCall = append(fake.tagServerCertificateWithContextArgsForCall, struct {
+		arg1 context.Context
+		arg2 *iam.TagServerCertificateInput
+		arg3 []request.Option
+	}{arg1, arg2, arg3})
+	stub := fake.TagServerCertificateWithContextStub
+	fakeReturns := fake.tagServerCertificateWithContextReturns
+	fake.recordInvocation("TagServerCertificateWithContext", []interface{}{arg1, arg2, arg3})
+	fake.tagServerCertificateWithContextMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2, arg3...)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) TagServerCertificateWithContextCallCount() int {
+	fake.tagServerCertificateWithContextMutex.RLock()
+	defer fake.tagServerCertificateWithContextMutex.RUnlock()
+	return len(fake.tagServerCertificateWithContextArgsForCall)
+}
+
+func (fake *FakeIAMAPI) TagServerCertificateWithContextCalls(stub func(context.Context, *iam.TagServerCertificateInput, ...request.Option) (*iam.TagServerCertificateOutput, error)) {
+	fake.tagServerCertificateWithContextMutex.Lock()
+	defer fake.tagServerCertificateWithContextMutex.Unlock()
+	fake.TagServerCertificateWithContextStub = stub
+}
+
+func (fake *FakeIAMAPI) TagServerCertificateWithContextArgsForCall(i int) (context.Context, *iam.TagServerCertificateInput, []request.Option) {
+	fake.tagServerCertificateWithContextMutex.RLock()
+	defer fake.tagServerCertificateWithContextMutex.RUnlock()
+	argsForCall := fake.tagServerCertificateWithContextArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3
+}
+
+func (fake *FakeIAMAPI) TagServerCertificateWithContextReturns(result1 *iam.TagServerCertificateOutput, result2 error) {
+	fake.tagServerCertificateWithContextMutex.Lock()
+	defer fake.tagServerCertificateWithContextMutex.Unlock()
+	fake.TagServerCertificateWithContextStub = nil
+	fake.tagServerCertificateWithContextReturns = struct {
+		result1 *iam.TagServerCertificateOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) TagServerCertificateWithContextReturnsOnCall(i int, result1 *iam.TagServerCertificateOutput, result2 error) {
+	fake.tagServerCertificateWithContextMutex.Lock()
+	defer fake.tagServerCertificateWithContextMutex.Unlock()
+	fake.TagServerCertificateWithContextStub = nil
+	if fake.tagServerCertificateWithContextReturnsOnCall == nil {
+		fake.tagServerCertificateWithContextReturnsOnCall = make(map[int]struct {
+			result1 *iam.TagServerCertificateOutput
+			result2 error
+		})
+	}
+	fake.tagServerCertificateWithContextReturnsOnCall[i] = struct {
+		result1 *iam.TagServerCertificateOutput
 		result2 error
 	}{result1, result2}
 }
@@ -33277,6 +36495,782 @@ func (fake *FakeIAMAPI) TagUserWithContextReturnsOnCall(i int, result1 *iam.TagU
 	}{result1, result2}
 }
 
+func (fake *FakeIAMAPI) UntagInstanceProfile(arg1 *iam.UntagInstanceProfileInput) (*iam.UntagInstanceProfileOutput, error) {
+	fake.untagInstanceProfileMutex.Lock()
+	ret, specificReturn := fake.untagInstanceProfileReturnsOnCall[len(fake.untagInstanceProfileArgsForCall)]
+	fake.untagInstanceProfileArgsForCall = append(fake.untagInstanceProfileArgsForCall, struct {
+		arg1 *iam.UntagInstanceProfileInput
+	}{arg1})
+	stub := fake.UntagInstanceProfileStub
+	fakeReturns := fake.untagInstanceProfileReturns
+	fake.recordInvocation("UntagInstanceProfile", []interface{}{arg1})
+	fake.untagInstanceProfileMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) UntagInstanceProfileCallCount() int {
+	fake.untagInstanceProfileMutex.RLock()
+	defer fake.untagInstanceProfileMutex.RUnlock()
+	return len(fake.untagInstanceProfileArgsForCall)
+}
+
+func (fake *FakeIAMAPI) UntagInstanceProfileCalls(stub func(*iam.UntagInstanceProfileInput) (*iam.UntagInstanceProfileOutput, error)) {
+	fake.untagInstanceProfileMutex.Lock()
+	defer fake.untagInstanceProfileMutex.Unlock()
+	fake.UntagInstanceProfileStub = stub
+}
+
+func (fake *FakeIAMAPI) UntagInstanceProfileArgsForCall(i int) *iam.UntagInstanceProfileInput {
+	fake.untagInstanceProfileMutex.RLock()
+	defer fake.untagInstanceProfileMutex.RUnlock()
+	argsForCall := fake.untagInstanceProfileArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) UntagInstanceProfileReturns(result1 *iam.UntagInstanceProfileOutput, result2 error) {
+	fake.untagInstanceProfileMutex.Lock()
+	defer fake.untagInstanceProfileMutex.Unlock()
+	fake.UntagInstanceProfileStub = nil
+	fake.untagInstanceProfileReturns = struct {
+		result1 *iam.UntagInstanceProfileOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) UntagInstanceProfileReturnsOnCall(i int, result1 *iam.UntagInstanceProfileOutput, result2 error) {
+	fake.untagInstanceProfileMutex.Lock()
+	defer fake.untagInstanceProfileMutex.Unlock()
+	fake.UntagInstanceProfileStub = nil
+	if fake.untagInstanceProfileReturnsOnCall == nil {
+		fake.untagInstanceProfileReturnsOnCall = make(map[int]struct {
+			result1 *iam.UntagInstanceProfileOutput
+			result2 error
+		})
+	}
+	fake.untagInstanceProfileReturnsOnCall[i] = struct {
+		result1 *iam.UntagInstanceProfileOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) UntagInstanceProfileRequest(arg1 *iam.UntagInstanceProfileInput) (*request.Request, *iam.UntagInstanceProfileOutput) {
+	fake.untagInstanceProfileRequestMutex.Lock()
+	ret, specificReturn := fake.untagInstanceProfileRequestReturnsOnCall[len(fake.untagInstanceProfileRequestArgsForCall)]
+	fake.untagInstanceProfileRequestArgsForCall = append(fake.untagInstanceProfileRequestArgsForCall, struct {
+		arg1 *iam.UntagInstanceProfileInput
+	}{arg1})
+	stub := fake.UntagInstanceProfileRequestStub
+	fakeReturns := fake.untagInstanceProfileRequestReturns
+	fake.recordInvocation("UntagInstanceProfileRequest", []interface{}{arg1})
+	fake.untagInstanceProfileRequestMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) UntagInstanceProfileRequestCallCount() int {
+	fake.untagInstanceProfileRequestMutex.RLock()
+	defer fake.untagInstanceProfileRequestMutex.RUnlock()
+	return len(fake.untagInstanceProfileRequestArgsForCall)
+}
+
+func (fake *FakeIAMAPI) UntagInstanceProfileRequestCalls(stub func(*iam.UntagInstanceProfileInput) (*request.Request, *iam.UntagInstanceProfileOutput)) {
+	fake.untagInstanceProfileRequestMutex.Lock()
+	defer fake.untagInstanceProfileRequestMutex.Unlock()
+	fake.UntagInstanceProfileRequestStub = stub
+}
+
+func (fake *FakeIAMAPI) UntagInstanceProfileRequestArgsForCall(i int) *iam.UntagInstanceProfileInput {
+	fake.untagInstanceProfileRequestMutex.RLock()
+	defer fake.untagInstanceProfileRequestMutex.RUnlock()
+	argsForCall := fake.untagInstanceProfileRequestArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) UntagInstanceProfileRequestReturns(result1 *request.Request, result2 *iam.UntagInstanceProfileOutput) {
+	fake.untagInstanceProfileRequestMutex.Lock()
+	defer fake.untagInstanceProfileRequestMutex.Unlock()
+	fake.UntagInstanceProfileRequestStub = nil
+	fake.untagInstanceProfileRequestReturns = struct {
+		result1 *request.Request
+		result2 *iam.UntagInstanceProfileOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) UntagInstanceProfileRequestReturnsOnCall(i int, result1 *request.Request, result2 *iam.UntagInstanceProfileOutput) {
+	fake.untagInstanceProfileRequestMutex.Lock()
+	defer fake.untagInstanceProfileRequestMutex.Unlock()
+	fake.UntagInstanceProfileRequestStub = nil
+	if fake.untagInstanceProfileRequestReturnsOnCall == nil {
+		fake.untagInstanceProfileRequestReturnsOnCall = make(map[int]struct {
+			result1 *request.Request
+			result2 *iam.UntagInstanceProfileOutput
+		})
+	}
+	fake.untagInstanceProfileRequestReturnsOnCall[i] = struct {
+		result1 *request.Request
+		result2 *iam.UntagInstanceProfileOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) UntagInstanceProfileWithContext(arg1 context.Context, arg2 *iam.UntagInstanceProfileInput, arg3 ...request.Option) (*iam.UntagInstanceProfileOutput, error) {
+	fake.untagInstanceProfileWithContextMutex.Lock()
+	ret, specificReturn := fake.untagInstanceProfileWithContextReturnsOnCall[len(fake.untagInstanceProfileWithContextArgsForCall)]
+	fake.untagInstanceProfileWithContextArgsForCall = append(fake.untagInstanceProfileWithContextArgsForCall, struct {
+		arg1 context.Context
+		arg2 *iam.UntagInstanceProfileInput
+		arg3 []request.Option
+	}{arg1, arg2, arg3})
+	stub := fake.UntagInstanceProfileWithContextStub
+	fakeReturns := fake.untagInstanceProfileWithContextReturns
+	fake.recordInvocation("UntagInstanceProfileWithContext", []interface{}{arg1, arg2, arg3})
+	fake.untagInstanceProfileWithContextMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2, arg3...)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) UntagInstanceProfileWithContextCallCount() int {
+	fake.untagInstanceProfileWithContextMutex.RLock()
+	defer fake.untagInstanceProfileWithContextMutex.RUnlock()
+	return len(fake.untagInstanceProfileWithContextArgsForCall)
+}
+
+func (fake *FakeIAMAPI) UntagInstanceProfileWithContextCalls(stub func(context.Context, *iam.UntagInstanceProfileInput, ...request.Option) (*iam.UntagInstanceProfileOutput, error)) {
+	fake.untagInstanceProfileWithContextMutex.Lock()
+	defer fake.untagInstanceProfileWithContextMutex.Unlock()
+	fake.UntagInstanceProfileWithContextStub = stub
+}
+
+func (fake *FakeIAMAPI) UntagInstanceProfileWithContextArgsForCall(i int) (context.Context, *iam.UntagInstanceProfileInput, []request.Option) {
+	fake.untagInstanceProfileWithContextMutex.RLock()
+	defer fake.untagInstanceProfileWithContextMutex.RUnlock()
+	argsForCall := fake.untagInstanceProfileWithContextArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3
+}
+
+func (fake *FakeIAMAPI) UntagInstanceProfileWithContextReturns(result1 *iam.UntagInstanceProfileOutput, result2 error) {
+	fake.untagInstanceProfileWithContextMutex.Lock()
+	defer fake.untagInstanceProfileWithContextMutex.Unlock()
+	fake.UntagInstanceProfileWithContextStub = nil
+	fake.untagInstanceProfileWithContextReturns = struct {
+		result1 *iam.UntagInstanceProfileOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) UntagInstanceProfileWithContextReturnsOnCall(i int, result1 *iam.UntagInstanceProfileOutput, result2 error) {
+	fake.untagInstanceProfileWithContextMutex.Lock()
+	defer fake.untagInstanceProfileWithContextMutex.Unlock()
+	fake.UntagInstanceProfileWithContextStub = nil
+	if fake.untagInstanceProfileWithContextReturnsOnCall == nil {
+		fake.untagInstanceProfileWithContextReturnsOnCall = make(map[int]struct {
+			result1 *iam.UntagInstanceProfileOutput
+			result2 error
+		})
+	}
+	fake.untagInstanceProfileWithContextReturnsOnCall[i] = struct {
+		result1 *iam.UntagInstanceProfileOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) UntagMFADevice(arg1 *iam.UntagMFADeviceInput) (*iam.UntagMFADeviceOutput, error) {
+	fake.untagMFADeviceMutex.Lock()
+	ret, specificReturn := fake.untagMFADeviceReturnsOnCall[len(fake.untagMFADeviceArgsForCall)]
+	fake.untagMFADeviceArgsForCall = append(fake.untagMFADeviceArgsForCall, struct {
+		arg1 *iam.UntagMFADeviceInput
+	}{arg1})
+	stub := fake.UntagMFADeviceStub
+	fakeReturns := fake.untagMFADeviceReturns
+	fake.recordInvocation("UntagMFADevice", []interface{}{arg1})
+	fake.untagMFADeviceMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) UntagMFADeviceCallCount() int {
+	fake.untagMFADeviceMutex.RLock()
+	defer fake.untagMFADeviceMutex.RUnlock()
+	return len(fake.untagMFADeviceArgsForCall)
+}
+
+func (fake *FakeIAMAPI) UntagMFADeviceCalls(stub func(*iam.UntagMFADeviceInput) (*iam.UntagMFADeviceOutput, error)) {
+	fake.untagMFADeviceMutex.Lock()
+	defer fake.untagMFADeviceMutex.Unlock()
+	fake.UntagMFADeviceStub = stub
+}
+
+func (fake *FakeIAMAPI) UntagMFADeviceArgsForCall(i int) *iam.UntagMFADeviceInput {
+	fake.untagMFADeviceMutex.RLock()
+	defer fake.untagMFADeviceMutex.RUnlock()
+	argsForCall := fake.untagMFADeviceArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) UntagMFADeviceReturns(result1 *iam.UntagMFADeviceOutput, result2 error) {
+	fake.untagMFADeviceMutex.Lock()
+	defer fake.untagMFADeviceMutex.Unlock()
+	fake.UntagMFADeviceStub = nil
+	fake.untagMFADeviceReturns = struct {
+		result1 *iam.UntagMFADeviceOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) UntagMFADeviceReturnsOnCall(i int, result1 *iam.UntagMFADeviceOutput, result2 error) {
+	fake.untagMFADeviceMutex.Lock()
+	defer fake.untagMFADeviceMutex.Unlock()
+	fake.UntagMFADeviceStub = nil
+	if fake.untagMFADeviceReturnsOnCall == nil {
+		fake.untagMFADeviceReturnsOnCall = make(map[int]struct {
+			result1 *iam.UntagMFADeviceOutput
+			result2 error
+		})
+	}
+	fake.untagMFADeviceReturnsOnCall[i] = struct {
+		result1 *iam.UntagMFADeviceOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) UntagMFADeviceRequest(arg1 *iam.UntagMFADeviceInput) (*request.Request, *iam.UntagMFADeviceOutput) {
+	fake.untagMFADeviceRequestMutex.Lock()
+	ret, specificReturn := fake.untagMFADeviceRequestReturnsOnCall[len(fake.untagMFADeviceRequestArgsForCall)]
+	fake.untagMFADeviceRequestArgsForCall = append(fake.untagMFADeviceRequestArgsForCall, struct {
+		arg1 *iam.UntagMFADeviceInput
+	}{arg1})
+	stub := fake.UntagMFADeviceRequestStub
+	fakeReturns := fake.untagMFADeviceRequestReturns
+	fake.recordInvocation("UntagMFADeviceRequest", []interface{}{arg1})
+	fake.untagMFADeviceRequestMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) UntagMFADeviceRequestCallCount() int {
+	fake.untagMFADeviceRequestMutex.RLock()
+	defer fake.untagMFADeviceRequestMutex.RUnlock()
+	return len(fake.untagMFADeviceRequestArgsForCall)
+}
+
+func (fake *FakeIAMAPI) UntagMFADeviceRequestCalls(stub func(*iam.UntagMFADeviceInput) (*request.Request, *iam.UntagMFADeviceOutput)) {
+	fake.untagMFADeviceRequestMutex.Lock()
+	defer fake.untagMFADeviceRequestMutex.Unlock()
+	fake.UntagMFADeviceRequestStub = stub
+}
+
+func (fake *FakeIAMAPI) UntagMFADeviceRequestArgsForCall(i int) *iam.UntagMFADeviceInput {
+	fake.untagMFADeviceRequestMutex.RLock()
+	defer fake.untagMFADeviceRequestMutex.RUnlock()
+	argsForCall := fake.untagMFADeviceRequestArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) UntagMFADeviceRequestReturns(result1 *request.Request, result2 *iam.UntagMFADeviceOutput) {
+	fake.untagMFADeviceRequestMutex.Lock()
+	defer fake.untagMFADeviceRequestMutex.Unlock()
+	fake.UntagMFADeviceRequestStub = nil
+	fake.untagMFADeviceRequestReturns = struct {
+		result1 *request.Request
+		result2 *iam.UntagMFADeviceOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) UntagMFADeviceRequestReturnsOnCall(i int, result1 *request.Request, result2 *iam.UntagMFADeviceOutput) {
+	fake.untagMFADeviceRequestMutex.Lock()
+	defer fake.untagMFADeviceRequestMutex.Unlock()
+	fake.UntagMFADeviceRequestStub = nil
+	if fake.untagMFADeviceRequestReturnsOnCall == nil {
+		fake.untagMFADeviceRequestReturnsOnCall = make(map[int]struct {
+			result1 *request.Request
+			result2 *iam.UntagMFADeviceOutput
+		})
+	}
+	fake.untagMFADeviceRequestReturnsOnCall[i] = struct {
+		result1 *request.Request
+		result2 *iam.UntagMFADeviceOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) UntagMFADeviceWithContext(arg1 context.Context, arg2 *iam.UntagMFADeviceInput, arg3 ...request.Option) (*iam.UntagMFADeviceOutput, error) {
+	fake.untagMFADeviceWithContextMutex.Lock()
+	ret, specificReturn := fake.untagMFADeviceWithContextReturnsOnCall[len(fake.untagMFADeviceWithContextArgsForCall)]
+	fake.untagMFADeviceWithContextArgsForCall = append(fake.untagMFADeviceWithContextArgsForCall, struct {
+		arg1 context.Context
+		arg2 *iam.UntagMFADeviceInput
+		arg3 []request.Option
+	}{arg1, arg2, arg3})
+	stub := fake.UntagMFADeviceWithContextStub
+	fakeReturns := fake.untagMFADeviceWithContextReturns
+	fake.recordInvocation("UntagMFADeviceWithContext", []interface{}{arg1, arg2, arg3})
+	fake.untagMFADeviceWithContextMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2, arg3...)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) UntagMFADeviceWithContextCallCount() int {
+	fake.untagMFADeviceWithContextMutex.RLock()
+	defer fake.untagMFADeviceWithContextMutex.RUnlock()
+	return len(fake.untagMFADeviceWithContextArgsForCall)
+}
+
+func (fake *FakeIAMAPI) UntagMFADeviceWithContextCalls(stub func(context.Context, *iam.UntagMFADeviceInput, ...request.Option) (*iam.UntagMFADeviceOutput, error)) {
+	fake.untagMFADeviceWithContextMutex.Lock()
+	defer fake.untagMFADeviceWithContextMutex.Unlock()
+	fake.UntagMFADeviceWithContextStub = stub
+}
+
+func (fake *FakeIAMAPI) UntagMFADeviceWithContextArgsForCall(i int) (context.Context, *iam.UntagMFADeviceInput, []request.Option) {
+	fake.untagMFADeviceWithContextMutex.RLock()
+	defer fake.untagMFADeviceWithContextMutex.RUnlock()
+	argsForCall := fake.untagMFADeviceWithContextArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3
+}
+
+func (fake *FakeIAMAPI) UntagMFADeviceWithContextReturns(result1 *iam.UntagMFADeviceOutput, result2 error) {
+	fake.untagMFADeviceWithContextMutex.Lock()
+	defer fake.untagMFADeviceWithContextMutex.Unlock()
+	fake.UntagMFADeviceWithContextStub = nil
+	fake.untagMFADeviceWithContextReturns = struct {
+		result1 *iam.UntagMFADeviceOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) UntagMFADeviceWithContextReturnsOnCall(i int, result1 *iam.UntagMFADeviceOutput, result2 error) {
+	fake.untagMFADeviceWithContextMutex.Lock()
+	defer fake.untagMFADeviceWithContextMutex.Unlock()
+	fake.UntagMFADeviceWithContextStub = nil
+	if fake.untagMFADeviceWithContextReturnsOnCall == nil {
+		fake.untagMFADeviceWithContextReturnsOnCall = make(map[int]struct {
+			result1 *iam.UntagMFADeviceOutput
+			result2 error
+		})
+	}
+	fake.untagMFADeviceWithContextReturnsOnCall[i] = struct {
+		result1 *iam.UntagMFADeviceOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) UntagOpenIDConnectProvider(arg1 *iam.UntagOpenIDConnectProviderInput) (*iam.UntagOpenIDConnectProviderOutput, error) {
+	fake.untagOpenIDConnectProviderMutex.Lock()
+	ret, specificReturn := fake.untagOpenIDConnectProviderReturnsOnCall[len(fake.untagOpenIDConnectProviderArgsForCall)]
+	fake.untagOpenIDConnectProviderArgsForCall = append(fake.untagOpenIDConnectProviderArgsForCall, struct {
+		arg1 *iam.UntagOpenIDConnectProviderInput
+	}{arg1})
+	stub := fake.UntagOpenIDConnectProviderStub
+	fakeReturns := fake.untagOpenIDConnectProviderReturns
+	fake.recordInvocation("UntagOpenIDConnectProvider", []interface{}{arg1})
+	fake.untagOpenIDConnectProviderMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) UntagOpenIDConnectProviderCallCount() int {
+	fake.untagOpenIDConnectProviderMutex.RLock()
+	defer fake.untagOpenIDConnectProviderMutex.RUnlock()
+	return len(fake.untagOpenIDConnectProviderArgsForCall)
+}
+
+func (fake *FakeIAMAPI) UntagOpenIDConnectProviderCalls(stub func(*iam.UntagOpenIDConnectProviderInput) (*iam.UntagOpenIDConnectProviderOutput, error)) {
+	fake.untagOpenIDConnectProviderMutex.Lock()
+	defer fake.untagOpenIDConnectProviderMutex.Unlock()
+	fake.UntagOpenIDConnectProviderStub = stub
+}
+
+func (fake *FakeIAMAPI) UntagOpenIDConnectProviderArgsForCall(i int) *iam.UntagOpenIDConnectProviderInput {
+	fake.untagOpenIDConnectProviderMutex.RLock()
+	defer fake.untagOpenIDConnectProviderMutex.RUnlock()
+	argsForCall := fake.untagOpenIDConnectProviderArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) UntagOpenIDConnectProviderReturns(result1 *iam.UntagOpenIDConnectProviderOutput, result2 error) {
+	fake.untagOpenIDConnectProviderMutex.Lock()
+	defer fake.untagOpenIDConnectProviderMutex.Unlock()
+	fake.UntagOpenIDConnectProviderStub = nil
+	fake.untagOpenIDConnectProviderReturns = struct {
+		result1 *iam.UntagOpenIDConnectProviderOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) UntagOpenIDConnectProviderReturnsOnCall(i int, result1 *iam.UntagOpenIDConnectProviderOutput, result2 error) {
+	fake.untagOpenIDConnectProviderMutex.Lock()
+	defer fake.untagOpenIDConnectProviderMutex.Unlock()
+	fake.UntagOpenIDConnectProviderStub = nil
+	if fake.untagOpenIDConnectProviderReturnsOnCall == nil {
+		fake.untagOpenIDConnectProviderReturnsOnCall = make(map[int]struct {
+			result1 *iam.UntagOpenIDConnectProviderOutput
+			result2 error
+		})
+	}
+	fake.untagOpenIDConnectProviderReturnsOnCall[i] = struct {
+		result1 *iam.UntagOpenIDConnectProviderOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) UntagOpenIDConnectProviderRequest(arg1 *iam.UntagOpenIDConnectProviderInput) (*request.Request, *iam.UntagOpenIDConnectProviderOutput) {
+	fake.untagOpenIDConnectProviderRequestMutex.Lock()
+	ret, specificReturn := fake.untagOpenIDConnectProviderRequestReturnsOnCall[len(fake.untagOpenIDConnectProviderRequestArgsForCall)]
+	fake.untagOpenIDConnectProviderRequestArgsForCall = append(fake.untagOpenIDConnectProviderRequestArgsForCall, struct {
+		arg1 *iam.UntagOpenIDConnectProviderInput
+	}{arg1})
+	stub := fake.UntagOpenIDConnectProviderRequestStub
+	fakeReturns := fake.untagOpenIDConnectProviderRequestReturns
+	fake.recordInvocation("UntagOpenIDConnectProviderRequest", []interface{}{arg1})
+	fake.untagOpenIDConnectProviderRequestMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) UntagOpenIDConnectProviderRequestCallCount() int {
+	fake.untagOpenIDConnectProviderRequestMutex.RLock()
+	defer fake.untagOpenIDConnectProviderRequestMutex.RUnlock()
+	return len(fake.untagOpenIDConnectProviderRequestArgsForCall)
+}
+
+func (fake *FakeIAMAPI) UntagOpenIDConnectProviderRequestCalls(stub func(*iam.UntagOpenIDConnectProviderInput) (*request.Request, *iam.UntagOpenIDConnectProviderOutput)) {
+	fake.untagOpenIDConnectProviderRequestMutex.Lock()
+	defer fake.untagOpenIDConnectProviderRequestMutex.Unlock()
+	fake.UntagOpenIDConnectProviderRequestStub = stub
+}
+
+func (fake *FakeIAMAPI) UntagOpenIDConnectProviderRequestArgsForCall(i int) *iam.UntagOpenIDConnectProviderInput {
+	fake.untagOpenIDConnectProviderRequestMutex.RLock()
+	defer fake.untagOpenIDConnectProviderRequestMutex.RUnlock()
+	argsForCall := fake.untagOpenIDConnectProviderRequestArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) UntagOpenIDConnectProviderRequestReturns(result1 *request.Request, result2 *iam.UntagOpenIDConnectProviderOutput) {
+	fake.untagOpenIDConnectProviderRequestMutex.Lock()
+	defer fake.untagOpenIDConnectProviderRequestMutex.Unlock()
+	fake.UntagOpenIDConnectProviderRequestStub = nil
+	fake.untagOpenIDConnectProviderRequestReturns = struct {
+		result1 *request.Request
+		result2 *iam.UntagOpenIDConnectProviderOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) UntagOpenIDConnectProviderRequestReturnsOnCall(i int, result1 *request.Request, result2 *iam.UntagOpenIDConnectProviderOutput) {
+	fake.untagOpenIDConnectProviderRequestMutex.Lock()
+	defer fake.untagOpenIDConnectProviderRequestMutex.Unlock()
+	fake.UntagOpenIDConnectProviderRequestStub = nil
+	if fake.untagOpenIDConnectProviderRequestReturnsOnCall == nil {
+		fake.untagOpenIDConnectProviderRequestReturnsOnCall = make(map[int]struct {
+			result1 *request.Request
+			result2 *iam.UntagOpenIDConnectProviderOutput
+		})
+	}
+	fake.untagOpenIDConnectProviderRequestReturnsOnCall[i] = struct {
+		result1 *request.Request
+		result2 *iam.UntagOpenIDConnectProviderOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) UntagOpenIDConnectProviderWithContext(arg1 context.Context, arg2 *iam.UntagOpenIDConnectProviderInput, arg3 ...request.Option) (*iam.UntagOpenIDConnectProviderOutput, error) {
+	fake.untagOpenIDConnectProviderWithContextMutex.Lock()
+	ret, specificReturn := fake.untagOpenIDConnectProviderWithContextReturnsOnCall[len(fake.untagOpenIDConnectProviderWithContextArgsForCall)]
+	fake.untagOpenIDConnectProviderWithContextArgsForCall = append(fake.untagOpenIDConnectProviderWithContextArgsForCall, struct {
+		arg1 context.Context
+		arg2 *iam.UntagOpenIDConnectProviderInput
+		arg3 []request.Option
+	}{arg1, arg2, arg3})
+	stub := fake.UntagOpenIDConnectProviderWithContextStub
+	fakeReturns := fake.untagOpenIDConnectProviderWithContextReturns
+	fake.recordInvocation("UntagOpenIDConnectProviderWithContext", []interface{}{arg1, arg2, arg3})
+	fake.untagOpenIDConnectProviderWithContextMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2, arg3...)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) UntagOpenIDConnectProviderWithContextCallCount() int {
+	fake.untagOpenIDConnectProviderWithContextMutex.RLock()
+	defer fake.untagOpenIDConnectProviderWithContextMutex.RUnlock()
+	return len(fake.untagOpenIDConnectProviderWithContextArgsForCall)
+}
+
+func (fake *FakeIAMAPI) UntagOpenIDConnectProviderWithContextCalls(stub func(context.Context, *iam.UntagOpenIDConnectProviderInput, ...request.Option) (*iam.UntagOpenIDConnectProviderOutput, error)) {
+	fake.untagOpenIDConnectProviderWithContextMutex.Lock()
+	defer fake.untagOpenIDConnectProviderWithContextMutex.Unlock()
+	fake.UntagOpenIDConnectProviderWithContextStub = stub
+}
+
+func (fake *FakeIAMAPI) UntagOpenIDConnectProviderWithContextArgsForCall(i int) (context.Context, *iam.UntagOpenIDConnectProviderInput, []request.Option) {
+	fake.untagOpenIDConnectProviderWithContextMutex.RLock()
+	defer fake.untagOpenIDConnectProviderWithContextMutex.RUnlock()
+	argsForCall := fake.untagOpenIDConnectProviderWithContextArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3
+}
+
+func (fake *FakeIAMAPI) UntagOpenIDConnectProviderWithContextReturns(result1 *iam.UntagOpenIDConnectProviderOutput, result2 error) {
+	fake.untagOpenIDConnectProviderWithContextMutex.Lock()
+	defer fake.untagOpenIDConnectProviderWithContextMutex.Unlock()
+	fake.UntagOpenIDConnectProviderWithContextStub = nil
+	fake.untagOpenIDConnectProviderWithContextReturns = struct {
+		result1 *iam.UntagOpenIDConnectProviderOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) UntagOpenIDConnectProviderWithContextReturnsOnCall(i int, result1 *iam.UntagOpenIDConnectProviderOutput, result2 error) {
+	fake.untagOpenIDConnectProviderWithContextMutex.Lock()
+	defer fake.untagOpenIDConnectProviderWithContextMutex.Unlock()
+	fake.UntagOpenIDConnectProviderWithContextStub = nil
+	if fake.untagOpenIDConnectProviderWithContextReturnsOnCall == nil {
+		fake.untagOpenIDConnectProviderWithContextReturnsOnCall = make(map[int]struct {
+			result1 *iam.UntagOpenIDConnectProviderOutput
+			result2 error
+		})
+	}
+	fake.untagOpenIDConnectProviderWithContextReturnsOnCall[i] = struct {
+		result1 *iam.UntagOpenIDConnectProviderOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) UntagPolicy(arg1 *iam.UntagPolicyInput) (*iam.UntagPolicyOutput, error) {
+	fake.untagPolicyMutex.Lock()
+	ret, specificReturn := fake.untagPolicyReturnsOnCall[len(fake.untagPolicyArgsForCall)]
+	fake.untagPolicyArgsForCall = append(fake.untagPolicyArgsForCall, struct {
+		arg1 *iam.UntagPolicyInput
+	}{arg1})
+	stub := fake.UntagPolicyStub
+	fakeReturns := fake.untagPolicyReturns
+	fake.recordInvocation("UntagPolicy", []interface{}{arg1})
+	fake.untagPolicyMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) UntagPolicyCallCount() int {
+	fake.untagPolicyMutex.RLock()
+	defer fake.untagPolicyMutex.RUnlock()
+	return len(fake.untagPolicyArgsForCall)
+}
+
+func (fake *FakeIAMAPI) UntagPolicyCalls(stub func(*iam.UntagPolicyInput) (*iam.UntagPolicyOutput, error)) {
+	fake.untagPolicyMutex.Lock()
+	defer fake.untagPolicyMutex.Unlock()
+	fake.UntagPolicyStub = stub
+}
+
+func (fake *FakeIAMAPI) UntagPolicyArgsForCall(i int) *iam.UntagPolicyInput {
+	fake.untagPolicyMutex.RLock()
+	defer fake.untagPolicyMutex.RUnlock()
+	argsForCall := fake.untagPolicyArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) UntagPolicyReturns(result1 *iam.UntagPolicyOutput, result2 error) {
+	fake.untagPolicyMutex.Lock()
+	defer fake.untagPolicyMutex.Unlock()
+	fake.UntagPolicyStub = nil
+	fake.untagPolicyReturns = struct {
+		result1 *iam.UntagPolicyOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) UntagPolicyReturnsOnCall(i int, result1 *iam.UntagPolicyOutput, result2 error) {
+	fake.untagPolicyMutex.Lock()
+	defer fake.untagPolicyMutex.Unlock()
+	fake.UntagPolicyStub = nil
+	if fake.untagPolicyReturnsOnCall == nil {
+		fake.untagPolicyReturnsOnCall = make(map[int]struct {
+			result1 *iam.UntagPolicyOutput
+			result2 error
+		})
+	}
+	fake.untagPolicyReturnsOnCall[i] = struct {
+		result1 *iam.UntagPolicyOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) UntagPolicyRequest(arg1 *iam.UntagPolicyInput) (*request.Request, *iam.UntagPolicyOutput) {
+	fake.untagPolicyRequestMutex.Lock()
+	ret, specificReturn := fake.untagPolicyRequestReturnsOnCall[len(fake.untagPolicyRequestArgsForCall)]
+	fake.untagPolicyRequestArgsForCall = append(fake.untagPolicyRequestArgsForCall, struct {
+		arg1 *iam.UntagPolicyInput
+	}{arg1})
+	stub := fake.UntagPolicyRequestStub
+	fakeReturns := fake.untagPolicyRequestReturns
+	fake.recordInvocation("UntagPolicyRequest", []interface{}{arg1})
+	fake.untagPolicyRequestMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) UntagPolicyRequestCallCount() int {
+	fake.untagPolicyRequestMutex.RLock()
+	defer fake.untagPolicyRequestMutex.RUnlock()
+	return len(fake.untagPolicyRequestArgsForCall)
+}
+
+func (fake *FakeIAMAPI) UntagPolicyRequestCalls(stub func(*iam.UntagPolicyInput) (*request.Request, *iam.UntagPolicyOutput)) {
+	fake.untagPolicyRequestMutex.Lock()
+	defer fake.untagPolicyRequestMutex.Unlock()
+	fake.UntagPolicyRequestStub = stub
+}
+
+func (fake *FakeIAMAPI) UntagPolicyRequestArgsForCall(i int) *iam.UntagPolicyInput {
+	fake.untagPolicyRequestMutex.RLock()
+	defer fake.untagPolicyRequestMutex.RUnlock()
+	argsForCall := fake.untagPolicyRequestArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) UntagPolicyRequestReturns(result1 *request.Request, result2 *iam.UntagPolicyOutput) {
+	fake.untagPolicyRequestMutex.Lock()
+	defer fake.untagPolicyRequestMutex.Unlock()
+	fake.UntagPolicyRequestStub = nil
+	fake.untagPolicyRequestReturns = struct {
+		result1 *request.Request
+		result2 *iam.UntagPolicyOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) UntagPolicyRequestReturnsOnCall(i int, result1 *request.Request, result2 *iam.UntagPolicyOutput) {
+	fake.untagPolicyRequestMutex.Lock()
+	defer fake.untagPolicyRequestMutex.Unlock()
+	fake.UntagPolicyRequestStub = nil
+	if fake.untagPolicyRequestReturnsOnCall == nil {
+		fake.untagPolicyRequestReturnsOnCall = make(map[int]struct {
+			result1 *request.Request
+			result2 *iam.UntagPolicyOutput
+		})
+	}
+	fake.untagPolicyRequestReturnsOnCall[i] = struct {
+		result1 *request.Request
+		result2 *iam.UntagPolicyOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) UntagPolicyWithContext(arg1 context.Context, arg2 *iam.UntagPolicyInput, arg3 ...request.Option) (*iam.UntagPolicyOutput, error) {
+	fake.untagPolicyWithContextMutex.Lock()
+	ret, specificReturn := fake.untagPolicyWithContextReturnsOnCall[len(fake.untagPolicyWithContextArgsForCall)]
+	fake.untagPolicyWithContextArgsForCall = append(fake.untagPolicyWithContextArgsForCall, struct {
+		arg1 context.Context
+		arg2 *iam.UntagPolicyInput
+		arg3 []request.Option
+	}{arg1, arg2, arg3})
+	stub := fake.UntagPolicyWithContextStub
+	fakeReturns := fake.untagPolicyWithContextReturns
+	fake.recordInvocation("UntagPolicyWithContext", []interface{}{arg1, arg2, arg3})
+	fake.untagPolicyWithContextMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2, arg3...)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) UntagPolicyWithContextCallCount() int {
+	fake.untagPolicyWithContextMutex.RLock()
+	defer fake.untagPolicyWithContextMutex.RUnlock()
+	return len(fake.untagPolicyWithContextArgsForCall)
+}
+
+func (fake *FakeIAMAPI) UntagPolicyWithContextCalls(stub func(context.Context, *iam.UntagPolicyInput, ...request.Option) (*iam.UntagPolicyOutput, error)) {
+	fake.untagPolicyWithContextMutex.Lock()
+	defer fake.untagPolicyWithContextMutex.Unlock()
+	fake.UntagPolicyWithContextStub = stub
+}
+
+func (fake *FakeIAMAPI) UntagPolicyWithContextArgsForCall(i int) (context.Context, *iam.UntagPolicyInput, []request.Option) {
+	fake.untagPolicyWithContextMutex.RLock()
+	defer fake.untagPolicyWithContextMutex.RUnlock()
+	argsForCall := fake.untagPolicyWithContextArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3
+}
+
+func (fake *FakeIAMAPI) UntagPolicyWithContextReturns(result1 *iam.UntagPolicyOutput, result2 error) {
+	fake.untagPolicyWithContextMutex.Lock()
+	defer fake.untagPolicyWithContextMutex.Unlock()
+	fake.UntagPolicyWithContextStub = nil
+	fake.untagPolicyWithContextReturns = struct {
+		result1 *iam.UntagPolicyOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) UntagPolicyWithContextReturnsOnCall(i int, result1 *iam.UntagPolicyOutput, result2 error) {
+	fake.untagPolicyWithContextMutex.Lock()
+	defer fake.untagPolicyWithContextMutex.Unlock()
+	fake.UntagPolicyWithContextStub = nil
+	if fake.untagPolicyWithContextReturnsOnCall == nil {
+		fake.untagPolicyWithContextReturnsOnCall = make(map[int]struct {
+			result1 *iam.UntagPolicyOutput
+			result2 error
+		})
+	}
+	fake.untagPolicyWithContextReturnsOnCall[i] = struct {
+		result1 *iam.UntagPolicyOutput
+		result2 error
+	}{result1, result2}
+}
+
 func (fake *FakeIAMAPI) UntagRole(arg1 *iam.UntagRoleInput) (*iam.UntagRoleOutput, error) {
 	fake.untagRoleMutex.Lock()
 	ret, specificReturn := fake.untagRoleReturnsOnCall[len(fake.untagRoleArgsForCall)]
@@ -33467,6 +37461,394 @@ func (fake *FakeIAMAPI) UntagRoleWithContextReturnsOnCall(i int, result1 *iam.Un
 	}
 	fake.untagRoleWithContextReturnsOnCall[i] = struct {
 		result1 *iam.UntagRoleOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) UntagSAMLProvider(arg1 *iam.UntagSAMLProviderInput) (*iam.UntagSAMLProviderOutput, error) {
+	fake.untagSAMLProviderMutex.Lock()
+	ret, specificReturn := fake.untagSAMLProviderReturnsOnCall[len(fake.untagSAMLProviderArgsForCall)]
+	fake.untagSAMLProviderArgsForCall = append(fake.untagSAMLProviderArgsForCall, struct {
+		arg1 *iam.UntagSAMLProviderInput
+	}{arg1})
+	stub := fake.UntagSAMLProviderStub
+	fakeReturns := fake.untagSAMLProviderReturns
+	fake.recordInvocation("UntagSAMLProvider", []interface{}{arg1})
+	fake.untagSAMLProviderMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) UntagSAMLProviderCallCount() int {
+	fake.untagSAMLProviderMutex.RLock()
+	defer fake.untagSAMLProviderMutex.RUnlock()
+	return len(fake.untagSAMLProviderArgsForCall)
+}
+
+func (fake *FakeIAMAPI) UntagSAMLProviderCalls(stub func(*iam.UntagSAMLProviderInput) (*iam.UntagSAMLProviderOutput, error)) {
+	fake.untagSAMLProviderMutex.Lock()
+	defer fake.untagSAMLProviderMutex.Unlock()
+	fake.UntagSAMLProviderStub = stub
+}
+
+func (fake *FakeIAMAPI) UntagSAMLProviderArgsForCall(i int) *iam.UntagSAMLProviderInput {
+	fake.untagSAMLProviderMutex.RLock()
+	defer fake.untagSAMLProviderMutex.RUnlock()
+	argsForCall := fake.untagSAMLProviderArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) UntagSAMLProviderReturns(result1 *iam.UntagSAMLProviderOutput, result2 error) {
+	fake.untagSAMLProviderMutex.Lock()
+	defer fake.untagSAMLProviderMutex.Unlock()
+	fake.UntagSAMLProviderStub = nil
+	fake.untagSAMLProviderReturns = struct {
+		result1 *iam.UntagSAMLProviderOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) UntagSAMLProviderReturnsOnCall(i int, result1 *iam.UntagSAMLProviderOutput, result2 error) {
+	fake.untagSAMLProviderMutex.Lock()
+	defer fake.untagSAMLProviderMutex.Unlock()
+	fake.UntagSAMLProviderStub = nil
+	if fake.untagSAMLProviderReturnsOnCall == nil {
+		fake.untagSAMLProviderReturnsOnCall = make(map[int]struct {
+			result1 *iam.UntagSAMLProviderOutput
+			result2 error
+		})
+	}
+	fake.untagSAMLProviderReturnsOnCall[i] = struct {
+		result1 *iam.UntagSAMLProviderOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) UntagSAMLProviderRequest(arg1 *iam.UntagSAMLProviderInput) (*request.Request, *iam.UntagSAMLProviderOutput) {
+	fake.untagSAMLProviderRequestMutex.Lock()
+	ret, specificReturn := fake.untagSAMLProviderRequestReturnsOnCall[len(fake.untagSAMLProviderRequestArgsForCall)]
+	fake.untagSAMLProviderRequestArgsForCall = append(fake.untagSAMLProviderRequestArgsForCall, struct {
+		arg1 *iam.UntagSAMLProviderInput
+	}{arg1})
+	stub := fake.UntagSAMLProviderRequestStub
+	fakeReturns := fake.untagSAMLProviderRequestReturns
+	fake.recordInvocation("UntagSAMLProviderRequest", []interface{}{arg1})
+	fake.untagSAMLProviderRequestMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) UntagSAMLProviderRequestCallCount() int {
+	fake.untagSAMLProviderRequestMutex.RLock()
+	defer fake.untagSAMLProviderRequestMutex.RUnlock()
+	return len(fake.untagSAMLProviderRequestArgsForCall)
+}
+
+func (fake *FakeIAMAPI) UntagSAMLProviderRequestCalls(stub func(*iam.UntagSAMLProviderInput) (*request.Request, *iam.UntagSAMLProviderOutput)) {
+	fake.untagSAMLProviderRequestMutex.Lock()
+	defer fake.untagSAMLProviderRequestMutex.Unlock()
+	fake.UntagSAMLProviderRequestStub = stub
+}
+
+func (fake *FakeIAMAPI) UntagSAMLProviderRequestArgsForCall(i int) *iam.UntagSAMLProviderInput {
+	fake.untagSAMLProviderRequestMutex.RLock()
+	defer fake.untagSAMLProviderRequestMutex.RUnlock()
+	argsForCall := fake.untagSAMLProviderRequestArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) UntagSAMLProviderRequestReturns(result1 *request.Request, result2 *iam.UntagSAMLProviderOutput) {
+	fake.untagSAMLProviderRequestMutex.Lock()
+	defer fake.untagSAMLProviderRequestMutex.Unlock()
+	fake.UntagSAMLProviderRequestStub = nil
+	fake.untagSAMLProviderRequestReturns = struct {
+		result1 *request.Request
+		result2 *iam.UntagSAMLProviderOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) UntagSAMLProviderRequestReturnsOnCall(i int, result1 *request.Request, result2 *iam.UntagSAMLProviderOutput) {
+	fake.untagSAMLProviderRequestMutex.Lock()
+	defer fake.untagSAMLProviderRequestMutex.Unlock()
+	fake.UntagSAMLProviderRequestStub = nil
+	if fake.untagSAMLProviderRequestReturnsOnCall == nil {
+		fake.untagSAMLProviderRequestReturnsOnCall = make(map[int]struct {
+			result1 *request.Request
+			result2 *iam.UntagSAMLProviderOutput
+		})
+	}
+	fake.untagSAMLProviderRequestReturnsOnCall[i] = struct {
+		result1 *request.Request
+		result2 *iam.UntagSAMLProviderOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) UntagSAMLProviderWithContext(arg1 context.Context, arg2 *iam.UntagSAMLProviderInput, arg3 ...request.Option) (*iam.UntagSAMLProviderOutput, error) {
+	fake.untagSAMLProviderWithContextMutex.Lock()
+	ret, specificReturn := fake.untagSAMLProviderWithContextReturnsOnCall[len(fake.untagSAMLProviderWithContextArgsForCall)]
+	fake.untagSAMLProviderWithContextArgsForCall = append(fake.untagSAMLProviderWithContextArgsForCall, struct {
+		arg1 context.Context
+		arg2 *iam.UntagSAMLProviderInput
+		arg3 []request.Option
+	}{arg1, arg2, arg3})
+	stub := fake.UntagSAMLProviderWithContextStub
+	fakeReturns := fake.untagSAMLProviderWithContextReturns
+	fake.recordInvocation("UntagSAMLProviderWithContext", []interface{}{arg1, arg2, arg3})
+	fake.untagSAMLProviderWithContextMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2, arg3...)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) UntagSAMLProviderWithContextCallCount() int {
+	fake.untagSAMLProviderWithContextMutex.RLock()
+	defer fake.untagSAMLProviderWithContextMutex.RUnlock()
+	return len(fake.untagSAMLProviderWithContextArgsForCall)
+}
+
+func (fake *FakeIAMAPI) UntagSAMLProviderWithContextCalls(stub func(context.Context, *iam.UntagSAMLProviderInput, ...request.Option) (*iam.UntagSAMLProviderOutput, error)) {
+	fake.untagSAMLProviderWithContextMutex.Lock()
+	defer fake.untagSAMLProviderWithContextMutex.Unlock()
+	fake.UntagSAMLProviderWithContextStub = stub
+}
+
+func (fake *FakeIAMAPI) UntagSAMLProviderWithContextArgsForCall(i int) (context.Context, *iam.UntagSAMLProviderInput, []request.Option) {
+	fake.untagSAMLProviderWithContextMutex.RLock()
+	defer fake.untagSAMLProviderWithContextMutex.RUnlock()
+	argsForCall := fake.untagSAMLProviderWithContextArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3
+}
+
+func (fake *FakeIAMAPI) UntagSAMLProviderWithContextReturns(result1 *iam.UntagSAMLProviderOutput, result2 error) {
+	fake.untagSAMLProviderWithContextMutex.Lock()
+	defer fake.untagSAMLProviderWithContextMutex.Unlock()
+	fake.UntagSAMLProviderWithContextStub = nil
+	fake.untagSAMLProviderWithContextReturns = struct {
+		result1 *iam.UntagSAMLProviderOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) UntagSAMLProviderWithContextReturnsOnCall(i int, result1 *iam.UntagSAMLProviderOutput, result2 error) {
+	fake.untagSAMLProviderWithContextMutex.Lock()
+	defer fake.untagSAMLProviderWithContextMutex.Unlock()
+	fake.UntagSAMLProviderWithContextStub = nil
+	if fake.untagSAMLProviderWithContextReturnsOnCall == nil {
+		fake.untagSAMLProviderWithContextReturnsOnCall = make(map[int]struct {
+			result1 *iam.UntagSAMLProviderOutput
+			result2 error
+		})
+	}
+	fake.untagSAMLProviderWithContextReturnsOnCall[i] = struct {
+		result1 *iam.UntagSAMLProviderOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) UntagServerCertificate(arg1 *iam.UntagServerCertificateInput) (*iam.UntagServerCertificateOutput, error) {
+	fake.untagServerCertificateMutex.Lock()
+	ret, specificReturn := fake.untagServerCertificateReturnsOnCall[len(fake.untagServerCertificateArgsForCall)]
+	fake.untagServerCertificateArgsForCall = append(fake.untagServerCertificateArgsForCall, struct {
+		arg1 *iam.UntagServerCertificateInput
+	}{arg1})
+	stub := fake.UntagServerCertificateStub
+	fakeReturns := fake.untagServerCertificateReturns
+	fake.recordInvocation("UntagServerCertificate", []interface{}{arg1})
+	fake.untagServerCertificateMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) UntagServerCertificateCallCount() int {
+	fake.untagServerCertificateMutex.RLock()
+	defer fake.untagServerCertificateMutex.RUnlock()
+	return len(fake.untagServerCertificateArgsForCall)
+}
+
+func (fake *FakeIAMAPI) UntagServerCertificateCalls(stub func(*iam.UntagServerCertificateInput) (*iam.UntagServerCertificateOutput, error)) {
+	fake.untagServerCertificateMutex.Lock()
+	defer fake.untagServerCertificateMutex.Unlock()
+	fake.UntagServerCertificateStub = stub
+}
+
+func (fake *FakeIAMAPI) UntagServerCertificateArgsForCall(i int) *iam.UntagServerCertificateInput {
+	fake.untagServerCertificateMutex.RLock()
+	defer fake.untagServerCertificateMutex.RUnlock()
+	argsForCall := fake.untagServerCertificateArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) UntagServerCertificateReturns(result1 *iam.UntagServerCertificateOutput, result2 error) {
+	fake.untagServerCertificateMutex.Lock()
+	defer fake.untagServerCertificateMutex.Unlock()
+	fake.UntagServerCertificateStub = nil
+	fake.untagServerCertificateReturns = struct {
+		result1 *iam.UntagServerCertificateOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) UntagServerCertificateReturnsOnCall(i int, result1 *iam.UntagServerCertificateOutput, result2 error) {
+	fake.untagServerCertificateMutex.Lock()
+	defer fake.untagServerCertificateMutex.Unlock()
+	fake.UntagServerCertificateStub = nil
+	if fake.untagServerCertificateReturnsOnCall == nil {
+		fake.untagServerCertificateReturnsOnCall = make(map[int]struct {
+			result1 *iam.UntagServerCertificateOutput
+			result2 error
+		})
+	}
+	fake.untagServerCertificateReturnsOnCall[i] = struct {
+		result1 *iam.UntagServerCertificateOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) UntagServerCertificateRequest(arg1 *iam.UntagServerCertificateInput) (*request.Request, *iam.UntagServerCertificateOutput) {
+	fake.untagServerCertificateRequestMutex.Lock()
+	ret, specificReturn := fake.untagServerCertificateRequestReturnsOnCall[len(fake.untagServerCertificateRequestArgsForCall)]
+	fake.untagServerCertificateRequestArgsForCall = append(fake.untagServerCertificateRequestArgsForCall, struct {
+		arg1 *iam.UntagServerCertificateInput
+	}{arg1})
+	stub := fake.UntagServerCertificateRequestStub
+	fakeReturns := fake.untagServerCertificateRequestReturns
+	fake.recordInvocation("UntagServerCertificateRequest", []interface{}{arg1})
+	fake.untagServerCertificateRequestMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) UntagServerCertificateRequestCallCount() int {
+	fake.untagServerCertificateRequestMutex.RLock()
+	defer fake.untagServerCertificateRequestMutex.RUnlock()
+	return len(fake.untagServerCertificateRequestArgsForCall)
+}
+
+func (fake *FakeIAMAPI) UntagServerCertificateRequestCalls(stub func(*iam.UntagServerCertificateInput) (*request.Request, *iam.UntagServerCertificateOutput)) {
+	fake.untagServerCertificateRequestMutex.Lock()
+	defer fake.untagServerCertificateRequestMutex.Unlock()
+	fake.UntagServerCertificateRequestStub = stub
+}
+
+func (fake *FakeIAMAPI) UntagServerCertificateRequestArgsForCall(i int) *iam.UntagServerCertificateInput {
+	fake.untagServerCertificateRequestMutex.RLock()
+	defer fake.untagServerCertificateRequestMutex.RUnlock()
+	argsForCall := fake.untagServerCertificateRequestArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeIAMAPI) UntagServerCertificateRequestReturns(result1 *request.Request, result2 *iam.UntagServerCertificateOutput) {
+	fake.untagServerCertificateRequestMutex.Lock()
+	defer fake.untagServerCertificateRequestMutex.Unlock()
+	fake.UntagServerCertificateRequestStub = nil
+	fake.untagServerCertificateRequestReturns = struct {
+		result1 *request.Request
+		result2 *iam.UntagServerCertificateOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) UntagServerCertificateRequestReturnsOnCall(i int, result1 *request.Request, result2 *iam.UntagServerCertificateOutput) {
+	fake.untagServerCertificateRequestMutex.Lock()
+	defer fake.untagServerCertificateRequestMutex.Unlock()
+	fake.UntagServerCertificateRequestStub = nil
+	if fake.untagServerCertificateRequestReturnsOnCall == nil {
+		fake.untagServerCertificateRequestReturnsOnCall = make(map[int]struct {
+			result1 *request.Request
+			result2 *iam.UntagServerCertificateOutput
+		})
+	}
+	fake.untagServerCertificateRequestReturnsOnCall[i] = struct {
+		result1 *request.Request
+		result2 *iam.UntagServerCertificateOutput
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) UntagServerCertificateWithContext(arg1 context.Context, arg2 *iam.UntagServerCertificateInput, arg3 ...request.Option) (*iam.UntagServerCertificateOutput, error) {
+	fake.untagServerCertificateWithContextMutex.Lock()
+	ret, specificReturn := fake.untagServerCertificateWithContextReturnsOnCall[len(fake.untagServerCertificateWithContextArgsForCall)]
+	fake.untagServerCertificateWithContextArgsForCall = append(fake.untagServerCertificateWithContextArgsForCall, struct {
+		arg1 context.Context
+		arg2 *iam.UntagServerCertificateInput
+		arg3 []request.Option
+	}{arg1, arg2, arg3})
+	stub := fake.UntagServerCertificateWithContextStub
+	fakeReturns := fake.untagServerCertificateWithContextReturns
+	fake.recordInvocation("UntagServerCertificateWithContext", []interface{}{arg1, arg2, arg3})
+	fake.untagServerCertificateWithContextMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2, arg3...)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeIAMAPI) UntagServerCertificateWithContextCallCount() int {
+	fake.untagServerCertificateWithContextMutex.RLock()
+	defer fake.untagServerCertificateWithContextMutex.RUnlock()
+	return len(fake.untagServerCertificateWithContextArgsForCall)
+}
+
+func (fake *FakeIAMAPI) UntagServerCertificateWithContextCalls(stub func(context.Context, *iam.UntagServerCertificateInput, ...request.Option) (*iam.UntagServerCertificateOutput, error)) {
+	fake.untagServerCertificateWithContextMutex.Lock()
+	defer fake.untagServerCertificateWithContextMutex.Unlock()
+	fake.UntagServerCertificateWithContextStub = stub
+}
+
+func (fake *FakeIAMAPI) UntagServerCertificateWithContextArgsForCall(i int) (context.Context, *iam.UntagServerCertificateInput, []request.Option) {
+	fake.untagServerCertificateWithContextMutex.RLock()
+	defer fake.untagServerCertificateWithContextMutex.RUnlock()
+	argsForCall := fake.untagServerCertificateWithContextArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3
+}
+
+func (fake *FakeIAMAPI) UntagServerCertificateWithContextReturns(result1 *iam.UntagServerCertificateOutput, result2 error) {
+	fake.untagServerCertificateWithContextMutex.Lock()
+	defer fake.untagServerCertificateWithContextMutex.Unlock()
+	fake.UntagServerCertificateWithContextStub = nil
+	fake.untagServerCertificateWithContextReturns = struct {
+		result1 *iam.UntagServerCertificateOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeIAMAPI) UntagServerCertificateWithContextReturnsOnCall(i int, result1 *iam.UntagServerCertificateOutput, result2 error) {
+	fake.untagServerCertificateWithContextMutex.Lock()
+	defer fake.untagServerCertificateWithContextMutex.Unlock()
+	fake.UntagServerCertificateWithContextStub = nil
+	if fake.untagServerCertificateWithContextReturnsOnCall == nil {
+		fake.untagServerCertificateWithContextReturnsOnCall = make(map[int]struct {
+			result1 *iam.UntagServerCertificateOutput
+			result2 error
+		})
+	}
+	fake.untagServerCertificateWithContextReturnsOnCall[i] = struct {
+		result1 *iam.UntagServerCertificateOutput
 		result2 error
 	}{result1, result2}
 }
@@ -38022,6 +42404,12 @@ func (fake *FakeIAMAPI) Invocations() map[string][][]interface{} {
 	defer fake.listGroupsRequestMutex.RUnlock()
 	fake.listGroupsWithContextMutex.RLock()
 	defer fake.listGroupsWithContextMutex.RUnlock()
+	fake.listInstanceProfileTagsMutex.RLock()
+	defer fake.listInstanceProfileTagsMutex.RUnlock()
+	fake.listInstanceProfileTagsRequestMutex.RLock()
+	defer fake.listInstanceProfileTagsRequestMutex.RUnlock()
+	fake.listInstanceProfileTagsWithContextMutex.RLock()
+	defer fake.listInstanceProfileTagsWithContextMutex.RUnlock()
 	fake.listInstanceProfilesMutex.RLock()
 	defer fake.listInstanceProfilesMutex.RUnlock()
 	fake.listInstanceProfilesForRoleMutex.RLock()
@@ -38042,6 +42430,12 @@ func (fake *FakeIAMAPI) Invocations() map[string][][]interface{} {
 	defer fake.listInstanceProfilesRequestMutex.RUnlock()
 	fake.listInstanceProfilesWithContextMutex.RLock()
 	defer fake.listInstanceProfilesWithContextMutex.RUnlock()
+	fake.listMFADeviceTagsMutex.RLock()
+	defer fake.listMFADeviceTagsMutex.RUnlock()
+	fake.listMFADeviceTagsRequestMutex.RLock()
+	defer fake.listMFADeviceTagsRequestMutex.RUnlock()
+	fake.listMFADeviceTagsWithContextMutex.RLock()
+	defer fake.listMFADeviceTagsWithContextMutex.RUnlock()
 	fake.listMFADevicesMutex.RLock()
 	defer fake.listMFADevicesMutex.RUnlock()
 	fake.listMFADevicesPagesMutex.RLock()
@@ -38052,6 +42446,12 @@ func (fake *FakeIAMAPI) Invocations() map[string][][]interface{} {
 	defer fake.listMFADevicesRequestMutex.RUnlock()
 	fake.listMFADevicesWithContextMutex.RLock()
 	defer fake.listMFADevicesWithContextMutex.RUnlock()
+	fake.listOpenIDConnectProviderTagsMutex.RLock()
+	defer fake.listOpenIDConnectProviderTagsMutex.RUnlock()
+	fake.listOpenIDConnectProviderTagsRequestMutex.RLock()
+	defer fake.listOpenIDConnectProviderTagsRequestMutex.RUnlock()
+	fake.listOpenIDConnectProviderTagsWithContextMutex.RLock()
+	defer fake.listOpenIDConnectProviderTagsWithContextMutex.RUnlock()
 	fake.listOpenIDConnectProvidersMutex.RLock()
 	defer fake.listOpenIDConnectProvidersMutex.RUnlock()
 	fake.listOpenIDConnectProvidersRequestMutex.RLock()
@@ -38074,6 +42474,12 @@ func (fake *FakeIAMAPI) Invocations() map[string][][]interface{} {
 	defer fake.listPoliciesRequestMutex.RUnlock()
 	fake.listPoliciesWithContextMutex.RLock()
 	defer fake.listPoliciesWithContextMutex.RUnlock()
+	fake.listPolicyTagsMutex.RLock()
+	defer fake.listPolicyTagsMutex.RUnlock()
+	fake.listPolicyTagsRequestMutex.RLock()
+	defer fake.listPolicyTagsRequestMutex.RUnlock()
+	fake.listPolicyTagsWithContextMutex.RLock()
+	defer fake.listPolicyTagsWithContextMutex.RUnlock()
 	fake.listPolicyVersionsMutex.RLock()
 	defer fake.listPolicyVersionsMutex.RUnlock()
 	fake.listPolicyVersionsPagesMutex.RLock()
@@ -38110,6 +42516,12 @@ func (fake *FakeIAMAPI) Invocations() map[string][][]interface{} {
 	defer fake.listRolesRequestMutex.RUnlock()
 	fake.listRolesWithContextMutex.RLock()
 	defer fake.listRolesWithContextMutex.RUnlock()
+	fake.listSAMLProviderTagsMutex.RLock()
+	defer fake.listSAMLProviderTagsMutex.RUnlock()
+	fake.listSAMLProviderTagsRequestMutex.RLock()
+	defer fake.listSAMLProviderTagsRequestMutex.RUnlock()
+	fake.listSAMLProviderTagsWithContextMutex.RLock()
+	defer fake.listSAMLProviderTagsWithContextMutex.RUnlock()
 	fake.listSAMLProvidersMutex.RLock()
 	defer fake.listSAMLProvidersMutex.RUnlock()
 	fake.listSAMLProvidersRequestMutex.RLock()
@@ -38126,6 +42538,12 @@ func (fake *FakeIAMAPI) Invocations() map[string][][]interface{} {
 	defer fake.listSSHPublicKeysRequestMutex.RUnlock()
 	fake.listSSHPublicKeysWithContextMutex.RLock()
 	defer fake.listSSHPublicKeysWithContextMutex.RUnlock()
+	fake.listServerCertificateTagsMutex.RLock()
+	defer fake.listServerCertificateTagsMutex.RUnlock()
+	fake.listServerCertificateTagsRequestMutex.RLock()
+	defer fake.listServerCertificateTagsRequestMutex.RUnlock()
+	fake.listServerCertificateTagsWithContextMutex.RLock()
+	defer fake.listServerCertificateTagsWithContextMutex.RUnlock()
 	fake.listServerCertificatesMutex.RLock()
 	defer fake.listServerCertificatesMutex.RUnlock()
 	fake.listServerCertificatesPagesMutex.RLock()
@@ -38164,6 +42582,10 @@ func (fake *FakeIAMAPI) Invocations() map[string][][]interface{} {
 	defer fake.listUserPoliciesWithContextMutex.RUnlock()
 	fake.listUserTagsMutex.RLock()
 	defer fake.listUserTagsMutex.RUnlock()
+	fake.listUserTagsPagesMutex.RLock()
+	defer fake.listUserTagsPagesMutex.RUnlock()
+	fake.listUserTagsPagesWithContextMutex.RLock()
+	defer fake.listUserTagsPagesWithContextMutex.RUnlock()
 	fake.listUserTagsRequestMutex.RLock()
 	defer fake.listUserTagsRequestMutex.RUnlock()
 	fake.listUserTagsWithContextMutex.RLock()
@@ -38280,24 +42702,96 @@ func (fake *FakeIAMAPI) Invocations() map[string][][]interface{} {
 	defer fake.simulatePrincipalPolicyRequestMutex.RUnlock()
 	fake.simulatePrincipalPolicyWithContextMutex.RLock()
 	defer fake.simulatePrincipalPolicyWithContextMutex.RUnlock()
+	fake.tagInstanceProfileMutex.RLock()
+	defer fake.tagInstanceProfileMutex.RUnlock()
+	fake.tagInstanceProfileRequestMutex.RLock()
+	defer fake.tagInstanceProfileRequestMutex.RUnlock()
+	fake.tagInstanceProfileWithContextMutex.RLock()
+	defer fake.tagInstanceProfileWithContextMutex.RUnlock()
+	fake.tagMFADeviceMutex.RLock()
+	defer fake.tagMFADeviceMutex.RUnlock()
+	fake.tagMFADeviceRequestMutex.RLock()
+	defer fake.tagMFADeviceRequestMutex.RUnlock()
+	fake.tagMFADeviceWithContextMutex.RLock()
+	defer fake.tagMFADeviceWithContextMutex.RUnlock()
+	fake.tagOpenIDConnectProviderMutex.RLock()
+	defer fake.tagOpenIDConnectProviderMutex.RUnlock()
+	fake.tagOpenIDConnectProviderRequestMutex.RLock()
+	defer fake.tagOpenIDConnectProviderRequestMutex.RUnlock()
+	fake.tagOpenIDConnectProviderWithContextMutex.RLock()
+	defer fake.tagOpenIDConnectProviderWithContextMutex.RUnlock()
+	fake.tagPolicyMutex.RLock()
+	defer fake.tagPolicyMutex.RUnlock()
+	fake.tagPolicyRequestMutex.RLock()
+	defer fake.tagPolicyRequestMutex.RUnlock()
+	fake.tagPolicyWithContextMutex.RLock()
+	defer fake.tagPolicyWithContextMutex.RUnlock()
 	fake.tagRoleMutex.RLock()
 	defer fake.tagRoleMutex.RUnlock()
 	fake.tagRoleRequestMutex.RLock()
 	defer fake.tagRoleRequestMutex.RUnlock()
 	fake.tagRoleWithContextMutex.RLock()
 	defer fake.tagRoleWithContextMutex.RUnlock()
+	fake.tagSAMLProviderMutex.RLock()
+	defer fake.tagSAMLProviderMutex.RUnlock()
+	fake.tagSAMLProviderRequestMutex.RLock()
+	defer fake.tagSAMLProviderRequestMutex.RUnlock()
+	fake.tagSAMLProviderWithContextMutex.RLock()
+	defer fake.tagSAMLProviderWithContextMutex.RUnlock()
+	fake.tagServerCertificateMutex.RLock()
+	defer fake.tagServerCertificateMutex.RUnlock()
+	fake.tagServerCertificateRequestMutex.RLock()
+	defer fake.tagServerCertificateRequestMutex.RUnlock()
+	fake.tagServerCertificateWithContextMutex.RLock()
+	defer fake.tagServerCertificateWithContextMutex.RUnlock()
 	fake.tagUserMutex.RLock()
 	defer fake.tagUserMutex.RUnlock()
 	fake.tagUserRequestMutex.RLock()
 	defer fake.tagUserRequestMutex.RUnlock()
 	fake.tagUserWithContextMutex.RLock()
 	defer fake.tagUserWithContextMutex.RUnlock()
+	fake.untagInstanceProfileMutex.RLock()
+	defer fake.untagInstanceProfileMutex.RUnlock()
+	fake.untagInstanceProfileRequestMutex.RLock()
+	defer fake.untagInstanceProfileRequestMutex.RUnlock()
+	fake.untagInstanceProfileWithContextMutex.RLock()
+	defer fake.untagInstanceProfileWithContextMutex.RUnlock()
+	fake.untagMFADeviceMutex.RLock()
+	defer fake.untagMFADeviceMutex.RUnlock()
+	fake.untagMFADeviceRequestMutex.RLock()
+	defer fake.untagMFADeviceRequestMutex.RUnlock()
+	fake.untagMFADeviceWithContextMutex.RLock()
+	defer fake.untagMFADeviceWithContextMutex.RUnlock()
+	fake.untagOpenIDConnectProviderMutex.RLock()
+	defer fake.untagOpenIDConnectProviderMutex.RUnlock()
+	fake.untagOpenIDConnectProviderRequestMutex.RLock()
+	defer fake.untagOpenIDConnectProviderRequestMutex.RUnlock()
+	fake.untagOpenIDConnectProviderWithContextMutex.RLock()
+	defer fake.untagOpenIDConnectProviderWithContextMutex.RUnlock()
+	fake.untagPolicyMutex.RLock()
+	defer fake.untagPolicyMutex.RUnlock()
+	fake.untagPolicyRequestMutex.RLock()
+	defer fake.untagPolicyRequestMutex.RUnlock()
+	fake.untagPolicyWithContextMutex.RLock()
+	defer fake.untagPolicyWithContextMutex.RUnlock()
 	fake.untagRoleMutex.RLock()
 	defer fake.untagRoleMutex.RUnlock()
 	fake.untagRoleRequestMutex.RLock()
 	defer fake.untagRoleRequestMutex.RUnlock()
 	fake.untagRoleWithContextMutex.RLock()
 	defer fake.untagRoleWithContextMutex.RUnlock()
+	fake.untagSAMLProviderMutex.RLock()
+	defer fake.untagSAMLProviderMutex.RUnlock()
+	fake.untagSAMLProviderRequestMutex.RLock()
+	defer fake.untagSAMLProviderRequestMutex.RUnlock()
+	fake.untagSAMLProviderWithContextMutex.RLock()
+	defer fake.untagSAMLProviderWithContextMutex.RUnlock()
+	fake.untagServerCertificateMutex.RLock()
+	defer fake.untagServerCertificateMutex.RUnlock()
+	fake.untagServerCertificateRequestMutex.RLock()
+	defer fake.untagServerCertificateRequestMutex.RUnlock()
+	fake.untagServerCertificateWithContextMutex.RLock()
+	defer fake.untagServerCertificateWithContextMutex.RUnlock()
 	fake.untagUserMutex.RLock()
 	defer fake.untagUserMutex.RUnlock()
 	fake.untagUserRequestMutex.RLock()

@@ -352,6 +352,47 @@ type FakeS3API struct {
 		result1 *s3.DeleteBucketEncryptionOutput
 		result2 error
 	}
+	DeleteBucketIntelligentTieringConfigurationStub        func(*s3.DeleteBucketIntelligentTieringConfigurationInput) (*s3.DeleteBucketIntelligentTieringConfigurationOutput, error)
+	deleteBucketIntelligentTieringConfigurationMutex       sync.RWMutex
+	deleteBucketIntelligentTieringConfigurationArgsForCall []struct {
+		arg1 *s3.DeleteBucketIntelligentTieringConfigurationInput
+	}
+	deleteBucketIntelligentTieringConfigurationReturns struct {
+		result1 *s3.DeleteBucketIntelligentTieringConfigurationOutput
+		result2 error
+	}
+	deleteBucketIntelligentTieringConfigurationReturnsOnCall map[int]struct {
+		result1 *s3.DeleteBucketIntelligentTieringConfigurationOutput
+		result2 error
+	}
+	DeleteBucketIntelligentTieringConfigurationRequestStub        func(*s3.DeleteBucketIntelligentTieringConfigurationInput) (*request.Request, *s3.DeleteBucketIntelligentTieringConfigurationOutput)
+	deleteBucketIntelligentTieringConfigurationRequestMutex       sync.RWMutex
+	deleteBucketIntelligentTieringConfigurationRequestArgsForCall []struct {
+		arg1 *s3.DeleteBucketIntelligentTieringConfigurationInput
+	}
+	deleteBucketIntelligentTieringConfigurationRequestReturns struct {
+		result1 *request.Request
+		result2 *s3.DeleteBucketIntelligentTieringConfigurationOutput
+	}
+	deleteBucketIntelligentTieringConfigurationRequestReturnsOnCall map[int]struct {
+		result1 *request.Request
+		result2 *s3.DeleteBucketIntelligentTieringConfigurationOutput
+	}
+	DeleteBucketIntelligentTieringConfigurationWithContextStub        func(context.Context, *s3.DeleteBucketIntelligentTieringConfigurationInput, ...request.Option) (*s3.DeleteBucketIntelligentTieringConfigurationOutput, error)
+	deleteBucketIntelligentTieringConfigurationWithContextMutex       sync.RWMutex
+	deleteBucketIntelligentTieringConfigurationWithContextArgsForCall []struct {
+		arg1 context.Context
+		arg2 *s3.DeleteBucketIntelligentTieringConfigurationInput
+		arg3 []request.Option
+	}
+	deleteBucketIntelligentTieringConfigurationWithContextReturns struct {
+		result1 *s3.DeleteBucketIntelligentTieringConfigurationOutput
+		result2 error
+	}
+	deleteBucketIntelligentTieringConfigurationWithContextReturnsOnCall map[int]struct {
+		result1 *s3.DeleteBucketIntelligentTieringConfigurationOutput
+		result2 error
+	}
 	DeleteBucketInventoryConfigurationStub        func(*s3.DeleteBucketInventoryConfigurationInput) (*s3.DeleteBucketInventoryConfigurationOutput, error)
 	deleteBucketInventoryConfigurationMutex       sync.RWMutex
 	deleteBucketInventoryConfigurationArgsForCall []struct {
@@ -473,6 +514,47 @@ type FakeS3API struct {
 	}
 	deleteBucketMetricsConfigurationWithContextReturnsOnCall map[int]struct {
 		result1 *s3.DeleteBucketMetricsConfigurationOutput
+		result2 error
+	}
+	DeleteBucketOwnershipControlsStub        func(*s3.DeleteBucketOwnershipControlsInput) (*s3.DeleteBucketOwnershipControlsOutput, error)
+	deleteBucketOwnershipControlsMutex       sync.RWMutex
+	deleteBucketOwnershipControlsArgsForCall []struct {
+		arg1 *s3.DeleteBucketOwnershipControlsInput
+	}
+	deleteBucketOwnershipControlsReturns struct {
+		result1 *s3.DeleteBucketOwnershipControlsOutput
+		result2 error
+	}
+	deleteBucketOwnershipControlsReturnsOnCall map[int]struct {
+		result1 *s3.DeleteBucketOwnershipControlsOutput
+		result2 error
+	}
+	DeleteBucketOwnershipControlsRequestStub        func(*s3.DeleteBucketOwnershipControlsInput) (*request.Request, *s3.DeleteBucketOwnershipControlsOutput)
+	deleteBucketOwnershipControlsRequestMutex       sync.RWMutex
+	deleteBucketOwnershipControlsRequestArgsForCall []struct {
+		arg1 *s3.DeleteBucketOwnershipControlsInput
+	}
+	deleteBucketOwnershipControlsRequestReturns struct {
+		result1 *request.Request
+		result2 *s3.DeleteBucketOwnershipControlsOutput
+	}
+	deleteBucketOwnershipControlsRequestReturnsOnCall map[int]struct {
+		result1 *request.Request
+		result2 *s3.DeleteBucketOwnershipControlsOutput
+	}
+	DeleteBucketOwnershipControlsWithContextStub        func(context.Context, *s3.DeleteBucketOwnershipControlsInput, ...request.Option) (*s3.DeleteBucketOwnershipControlsOutput, error)
+	deleteBucketOwnershipControlsWithContextMutex       sync.RWMutex
+	deleteBucketOwnershipControlsWithContextArgsForCall []struct {
+		arg1 context.Context
+		arg2 *s3.DeleteBucketOwnershipControlsInput
+		arg3 []request.Option
+	}
+	deleteBucketOwnershipControlsWithContextReturns struct {
+		result1 *s3.DeleteBucketOwnershipControlsOutput
+		result2 error
+	}
+	deleteBucketOwnershipControlsWithContextReturnsOnCall map[int]struct {
+		result1 *s3.DeleteBucketOwnershipControlsOutput
 		result2 error
 	}
 	DeleteBucketPolicyStub        func(*s3.DeleteBucketPolicyInput) (*s3.DeleteBucketPolicyOutput, error)
@@ -1036,6 +1118,47 @@ type FakeS3API struct {
 		result1 *s3.GetBucketEncryptionOutput
 		result2 error
 	}
+	GetBucketIntelligentTieringConfigurationStub        func(*s3.GetBucketIntelligentTieringConfigurationInput) (*s3.GetBucketIntelligentTieringConfigurationOutput, error)
+	getBucketIntelligentTieringConfigurationMutex       sync.RWMutex
+	getBucketIntelligentTieringConfigurationArgsForCall []struct {
+		arg1 *s3.GetBucketIntelligentTieringConfigurationInput
+	}
+	getBucketIntelligentTieringConfigurationReturns struct {
+		result1 *s3.GetBucketIntelligentTieringConfigurationOutput
+		result2 error
+	}
+	getBucketIntelligentTieringConfigurationReturnsOnCall map[int]struct {
+		result1 *s3.GetBucketIntelligentTieringConfigurationOutput
+		result2 error
+	}
+	GetBucketIntelligentTieringConfigurationRequestStub        func(*s3.GetBucketIntelligentTieringConfigurationInput) (*request.Request, *s3.GetBucketIntelligentTieringConfigurationOutput)
+	getBucketIntelligentTieringConfigurationRequestMutex       sync.RWMutex
+	getBucketIntelligentTieringConfigurationRequestArgsForCall []struct {
+		arg1 *s3.GetBucketIntelligentTieringConfigurationInput
+	}
+	getBucketIntelligentTieringConfigurationRequestReturns struct {
+		result1 *request.Request
+		result2 *s3.GetBucketIntelligentTieringConfigurationOutput
+	}
+	getBucketIntelligentTieringConfigurationRequestReturnsOnCall map[int]struct {
+		result1 *request.Request
+		result2 *s3.GetBucketIntelligentTieringConfigurationOutput
+	}
+	GetBucketIntelligentTieringConfigurationWithContextStub        func(context.Context, *s3.GetBucketIntelligentTieringConfigurationInput, ...request.Option) (*s3.GetBucketIntelligentTieringConfigurationOutput, error)
+	getBucketIntelligentTieringConfigurationWithContextMutex       sync.RWMutex
+	getBucketIntelligentTieringConfigurationWithContextArgsForCall []struct {
+		arg1 context.Context
+		arg2 *s3.GetBucketIntelligentTieringConfigurationInput
+		arg3 []request.Option
+	}
+	getBucketIntelligentTieringConfigurationWithContextReturns struct {
+		result1 *s3.GetBucketIntelligentTieringConfigurationOutput
+		result2 error
+	}
+	getBucketIntelligentTieringConfigurationWithContextReturnsOnCall map[int]struct {
+		result1 *s3.GetBucketIntelligentTieringConfigurationOutput
+		result2 error
+	}
 	GetBucketInventoryConfigurationStub        func(*s3.GetBucketInventoryConfigurationInput) (*s3.GetBucketInventoryConfigurationOutput, error)
 	getBucketInventoryConfigurationMutex       sync.RWMutex
 	getBucketInventoryConfigurationArgsForCall []struct {
@@ -1362,6 +1485,47 @@ type FakeS3API struct {
 	}
 	getBucketNotificationWithContextReturnsOnCall map[int]struct {
 		result1 *s3.NotificationConfigurationDeprecated
+		result2 error
+	}
+	GetBucketOwnershipControlsStub        func(*s3.GetBucketOwnershipControlsInput) (*s3.GetBucketOwnershipControlsOutput, error)
+	getBucketOwnershipControlsMutex       sync.RWMutex
+	getBucketOwnershipControlsArgsForCall []struct {
+		arg1 *s3.GetBucketOwnershipControlsInput
+	}
+	getBucketOwnershipControlsReturns struct {
+		result1 *s3.GetBucketOwnershipControlsOutput
+		result2 error
+	}
+	getBucketOwnershipControlsReturnsOnCall map[int]struct {
+		result1 *s3.GetBucketOwnershipControlsOutput
+		result2 error
+	}
+	GetBucketOwnershipControlsRequestStub        func(*s3.GetBucketOwnershipControlsInput) (*request.Request, *s3.GetBucketOwnershipControlsOutput)
+	getBucketOwnershipControlsRequestMutex       sync.RWMutex
+	getBucketOwnershipControlsRequestArgsForCall []struct {
+		arg1 *s3.GetBucketOwnershipControlsInput
+	}
+	getBucketOwnershipControlsRequestReturns struct {
+		result1 *request.Request
+		result2 *s3.GetBucketOwnershipControlsOutput
+	}
+	getBucketOwnershipControlsRequestReturnsOnCall map[int]struct {
+		result1 *request.Request
+		result2 *s3.GetBucketOwnershipControlsOutput
+	}
+	GetBucketOwnershipControlsWithContextStub        func(context.Context, *s3.GetBucketOwnershipControlsInput, ...request.Option) (*s3.GetBucketOwnershipControlsOutput, error)
+	getBucketOwnershipControlsWithContextMutex       sync.RWMutex
+	getBucketOwnershipControlsWithContextArgsForCall []struct {
+		arg1 context.Context
+		arg2 *s3.GetBucketOwnershipControlsInput
+		arg3 []request.Option
+	}
+	getBucketOwnershipControlsWithContextReturns struct {
+		result1 *s3.GetBucketOwnershipControlsOutput
+		result2 error
+	}
+	getBucketOwnershipControlsWithContextReturnsOnCall map[int]struct {
+		result1 *s3.GetBucketOwnershipControlsOutput
 		result2 error
 	}
 	GetBucketPolicyStub        func(*s3.GetBucketPolicyInput) (*s3.GetBucketPolicyOutput, error)
@@ -1703,6 +1867,47 @@ type FakeS3API struct {
 	}
 	getObjectAclWithContextReturnsOnCall map[int]struct {
 		result1 *s3.GetObjectAclOutput
+		result2 error
+	}
+	GetObjectAttributesStub        func(*s3.GetObjectAttributesInput) (*s3.GetObjectAttributesOutput, error)
+	getObjectAttributesMutex       sync.RWMutex
+	getObjectAttributesArgsForCall []struct {
+		arg1 *s3.GetObjectAttributesInput
+	}
+	getObjectAttributesReturns struct {
+		result1 *s3.GetObjectAttributesOutput
+		result2 error
+	}
+	getObjectAttributesReturnsOnCall map[int]struct {
+		result1 *s3.GetObjectAttributesOutput
+		result2 error
+	}
+	GetObjectAttributesRequestStub        func(*s3.GetObjectAttributesInput) (*request.Request, *s3.GetObjectAttributesOutput)
+	getObjectAttributesRequestMutex       sync.RWMutex
+	getObjectAttributesRequestArgsForCall []struct {
+		arg1 *s3.GetObjectAttributesInput
+	}
+	getObjectAttributesRequestReturns struct {
+		result1 *request.Request
+		result2 *s3.GetObjectAttributesOutput
+	}
+	getObjectAttributesRequestReturnsOnCall map[int]struct {
+		result1 *request.Request
+		result2 *s3.GetObjectAttributesOutput
+	}
+	GetObjectAttributesWithContextStub        func(context.Context, *s3.GetObjectAttributesInput, ...request.Option) (*s3.GetObjectAttributesOutput, error)
+	getObjectAttributesWithContextMutex       sync.RWMutex
+	getObjectAttributesWithContextArgsForCall []struct {
+		arg1 context.Context
+		arg2 *s3.GetObjectAttributesInput
+		arg3 []request.Option
+	}
+	getObjectAttributesWithContextReturns struct {
+		result1 *s3.GetObjectAttributesOutput
+		result2 error
+	}
+	getObjectAttributesWithContextReturnsOnCall map[int]struct {
+		result1 *s3.GetObjectAttributesOutput
 		result2 error
 	}
 	GetObjectLegalHoldStub        func(*s3.GetObjectLegalHoldInput) (*s3.GetObjectLegalHoldOutput, error)
@@ -2100,6 +2305,47 @@ type FakeS3API struct {
 	}
 	listBucketAnalyticsConfigurationsWithContextReturnsOnCall map[int]struct {
 		result1 *s3.ListBucketAnalyticsConfigurationsOutput
+		result2 error
+	}
+	ListBucketIntelligentTieringConfigurationsStub        func(*s3.ListBucketIntelligentTieringConfigurationsInput) (*s3.ListBucketIntelligentTieringConfigurationsOutput, error)
+	listBucketIntelligentTieringConfigurationsMutex       sync.RWMutex
+	listBucketIntelligentTieringConfigurationsArgsForCall []struct {
+		arg1 *s3.ListBucketIntelligentTieringConfigurationsInput
+	}
+	listBucketIntelligentTieringConfigurationsReturns struct {
+		result1 *s3.ListBucketIntelligentTieringConfigurationsOutput
+		result2 error
+	}
+	listBucketIntelligentTieringConfigurationsReturnsOnCall map[int]struct {
+		result1 *s3.ListBucketIntelligentTieringConfigurationsOutput
+		result2 error
+	}
+	ListBucketIntelligentTieringConfigurationsRequestStub        func(*s3.ListBucketIntelligentTieringConfigurationsInput) (*request.Request, *s3.ListBucketIntelligentTieringConfigurationsOutput)
+	listBucketIntelligentTieringConfigurationsRequestMutex       sync.RWMutex
+	listBucketIntelligentTieringConfigurationsRequestArgsForCall []struct {
+		arg1 *s3.ListBucketIntelligentTieringConfigurationsInput
+	}
+	listBucketIntelligentTieringConfigurationsRequestReturns struct {
+		result1 *request.Request
+		result2 *s3.ListBucketIntelligentTieringConfigurationsOutput
+	}
+	listBucketIntelligentTieringConfigurationsRequestReturnsOnCall map[int]struct {
+		result1 *request.Request
+		result2 *s3.ListBucketIntelligentTieringConfigurationsOutput
+	}
+	ListBucketIntelligentTieringConfigurationsWithContextStub        func(context.Context, *s3.ListBucketIntelligentTieringConfigurationsInput, ...request.Option) (*s3.ListBucketIntelligentTieringConfigurationsOutput, error)
+	listBucketIntelligentTieringConfigurationsWithContextMutex       sync.RWMutex
+	listBucketIntelligentTieringConfigurationsWithContextArgsForCall []struct {
+		arg1 context.Context
+		arg2 *s3.ListBucketIntelligentTieringConfigurationsInput
+		arg3 []request.Option
+	}
+	listBucketIntelligentTieringConfigurationsWithContextReturns struct {
+		result1 *s3.ListBucketIntelligentTieringConfigurationsOutput
+		result2 error
+	}
+	listBucketIntelligentTieringConfigurationsWithContextReturnsOnCall map[int]struct {
+		result1 *s3.ListBucketIntelligentTieringConfigurationsOutput
 		result2 error
 	}
 	ListBucketInventoryConfigurationsStub        func(*s3.ListBucketInventoryConfigurationsInput) (*s3.ListBucketInventoryConfigurationsOutput, error)
@@ -2765,6 +3011,47 @@ type FakeS3API struct {
 		result1 *s3.PutBucketEncryptionOutput
 		result2 error
 	}
+	PutBucketIntelligentTieringConfigurationStub        func(*s3.PutBucketIntelligentTieringConfigurationInput) (*s3.PutBucketIntelligentTieringConfigurationOutput, error)
+	putBucketIntelligentTieringConfigurationMutex       sync.RWMutex
+	putBucketIntelligentTieringConfigurationArgsForCall []struct {
+		arg1 *s3.PutBucketIntelligentTieringConfigurationInput
+	}
+	putBucketIntelligentTieringConfigurationReturns struct {
+		result1 *s3.PutBucketIntelligentTieringConfigurationOutput
+		result2 error
+	}
+	putBucketIntelligentTieringConfigurationReturnsOnCall map[int]struct {
+		result1 *s3.PutBucketIntelligentTieringConfigurationOutput
+		result2 error
+	}
+	PutBucketIntelligentTieringConfigurationRequestStub        func(*s3.PutBucketIntelligentTieringConfigurationInput) (*request.Request, *s3.PutBucketIntelligentTieringConfigurationOutput)
+	putBucketIntelligentTieringConfigurationRequestMutex       sync.RWMutex
+	putBucketIntelligentTieringConfigurationRequestArgsForCall []struct {
+		arg1 *s3.PutBucketIntelligentTieringConfigurationInput
+	}
+	putBucketIntelligentTieringConfigurationRequestReturns struct {
+		result1 *request.Request
+		result2 *s3.PutBucketIntelligentTieringConfigurationOutput
+	}
+	putBucketIntelligentTieringConfigurationRequestReturnsOnCall map[int]struct {
+		result1 *request.Request
+		result2 *s3.PutBucketIntelligentTieringConfigurationOutput
+	}
+	PutBucketIntelligentTieringConfigurationWithContextStub        func(context.Context, *s3.PutBucketIntelligentTieringConfigurationInput, ...request.Option) (*s3.PutBucketIntelligentTieringConfigurationOutput, error)
+	putBucketIntelligentTieringConfigurationWithContextMutex       sync.RWMutex
+	putBucketIntelligentTieringConfigurationWithContextArgsForCall []struct {
+		arg1 context.Context
+		arg2 *s3.PutBucketIntelligentTieringConfigurationInput
+		arg3 []request.Option
+	}
+	putBucketIntelligentTieringConfigurationWithContextReturns struct {
+		result1 *s3.PutBucketIntelligentTieringConfigurationOutput
+		result2 error
+	}
+	putBucketIntelligentTieringConfigurationWithContextReturnsOnCall map[int]struct {
+		result1 *s3.PutBucketIntelligentTieringConfigurationOutput
+		result2 error
+	}
 	PutBucketInventoryConfigurationStub        func(*s3.PutBucketInventoryConfigurationInput) (*s3.PutBucketInventoryConfigurationOutput, error)
 	putBucketInventoryConfigurationMutex       sync.RWMutex
 	putBucketInventoryConfigurationArgsForCall []struct {
@@ -3050,6 +3337,47 @@ type FakeS3API struct {
 	}
 	putBucketNotificationWithContextReturnsOnCall map[int]struct {
 		result1 *s3.PutBucketNotificationOutput
+		result2 error
+	}
+	PutBucketOwnershipControlsStub        func(*s3.PutBucketOwnershipControlsInput) (*s3.PutBucketOwnershipControlsOutput, error)
+	putBucketOwnershipControlsMutex       sync.RWMutex
+	putBucketOwnershipControlsArgsForCall []struct {
+		arg1 *s3.PutBucketOwnershipControlsInput
+	}
+	putBucketOwnershipControlsReturns struct {
+		result1 *s3.PutBucketOwnershipControlsOutput
+		result2 error
+	}
+	putBucketOwnershipControlsReturnsOnCall map[int]struct {
+		result1 *s3.PutBucketOwnershipControlsOutput
+		result2 error
+	}
+	PutBucketOwnershipControlsRequestStub        func(*s3.PutBucketOwnershipControlsInput) (*request.Request, *s3.PutBucketOwnershipControlsOutput)
+	putBucketOwnershipControlsRequestMutex       sync.RWMutex
+	putBucketOwnershipControlsRequestArgsForCall []struct {
+		arg1 *s3.PutBucketOwnershipControlsInput
+	}
+	putBucketOwnershipControlsRequestReturns struct {
+		result1 *request.Request
+		result2 *s3.PutBucketOwnershipControlsOutput
+	}
+	putBucketOwnershipControlsRequestReturnsOnCall map[int]struct {
+		result1 *request.Request
+		result2 *s3.PutBucketOwnershipControlsOutput
+	}
+	PutBucketOwnershipControlsWithContextStub        func(context.Context, *s3.PutBucketOwnershipControlsInput, ...request.Option) (*s3.PutBucketOwnershipControlsOutput, error)
+	putBucketOwnershipControlsWithContextMutex       sync.RWMutex
+	putBucketOwnershipControlsWithContextArgsForCall []struct {
+		arg1 context.Context
+		arg2 *s3.PutBucketOwnershipControlsInput
+		arg3 []request.Option
+	}
+	putBucketOwnershipControlsWithContextReturns struct {
+		result1 *s3.PutBucketOwnershipControlsOutput
+		result2 error
+	}
+	putBucketOwnershipControlsWithContextReturnsOnCall map[int]struct {
+		result1 *s3.PutBucketOwnershipControlsOutput
 		result2 error
 	}
 	PutBucketPolicyStub        func(*s3.PutBucketPolicyInput) (*s3.PutBucketPolicyOutput, error)
@@ -3844,6 +4172,47 @@ type FakeS3API struct {
 	}
 	waitUntilObjectNotExistsWithContextReturnsOnCall map[int]struct {
 		result1 error
+	}
+	WriteGetObjectResponseStub        func(*s3.WriteGetObjectResponseInput) (*s3.WriteGetObjectResponseOutput, error)
+	writeGetObjectResponseMutex       sync.RWMutex
+	writeGetObjectResponseArgsForCall []struct {
+		arg1 *s3.WriteGetObjectResponseInput
+	}
+	writeGetObjectResponseReturns struct {
+		result1 *s3.WriteGetObjectResponseOutput
+		result2 error
+	}
+	writeGetObjectResponseReturnsOnCall map[int]struct {
+		result1 *s3.WriteGetObjectResponseOutput
+		result2 error
+	}
+	WriteGetObjectResponseRequestStub        func(*s3.WriteGetObjectResponseInput) (*request.Request, *s3.WriteGetObjectResponseOutput)
+	writeGetObjectResponseRequestMutex       sync.RWMutex
+	writeGetObjectResponseRequestArgsForCall []struct {
+		arg1 *s3.WriteGetObjectResponseInput
+	}
+	writeGetObjectResponseRequestReturns struct {
+		result1 *request.Request
+		result2 *s3.WriteGetObjectResponseOutput
+	}
+	writeGetObjectResponseRequestReturnsOnCall map[int]struct {
+		result1 *request.Request
+		result2 *s3.WriteGetObjectResponseOutput
+	}
+	WriteGetObjectResponseWithContextStub        func(context.Context, *s3.WriteGetObjectResponseInput, ...request.Option) (*s3.WriteGetObjectResponseOutput, error)
+	writeGetObjectResponseWithContextMutex       sync.RWMutex
+	writeGetObjectResponseWithContextArgsForCall []struct {
+		arg1 context.Context
+		arg2 *s3.WriteGetObjectResponseInput
+		arg3 []request.Option
+	}
+	writeGetObjectResponseWithContextReturns struct {
+		result1 *s3.WriteGetObjectResponseOutput
+		result2 error
+	}
+	writeGetObjectResponseWithContextReturnsOnCall map[int]struct {
+		result1 *s3.WriteGetObjectResponseOutput
+		result2 error
 	}
 	invocations      map[string][][]interface{}
 	invocationsMutex sync.RWMutex
@@ -5465,6 +5834,200 @@ func (fake *FakeS3API) DeleteBucketEncryptionWithContextReturnsOnCall(i int, res
 	}{result1, result2}
 }
 
+func (fake *FakeS3API) DeleteBucketIntelligentTieringConfiguration(arg1 *s3.DeleteBucketIntelligentTieringConfigurationInput) (*s3.DeleteBucketIntelligentTieringConfigurationOutput, error) {
+	fake.deleteBucketIntelligentTieringConfigurationMutex.Lock()
+	ret, specificReturn := fake.deleteBucketIntelligentTieringConfigurationReturnsOnCall[len(fake.deleteBucketIntelligentTieringConfigurationArgsForCall)]
+	fake.deleteBucketIntelligentTieringConfigurationArgsForCall = append(fake.deleteBucketIntelligentTieringConfigurationArgsForCall, struct {
+		arg1 *s3.DeleteBucketIntelligentTieringConfigurationInput
+	}{arg1})
+	stub := fake.DeleteBucketIntelligentTieringConfigurationStub
+	fakeReturns := fake.deleteBucketIntelligentTieringConfigurationReturns
+	fake.recordInvocation("DeleteBucketIntelligentTieringConfiguration", []interface{}{arg1})
+	fake.deleteBucketIntelligentTieringConfigurationMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeS3API) DeleteBucketIntelligentTieringConfigurationCallCount() int {
+	fake.deleteBucketIntelligentTieringConfigurationMutex.RLock()
+	defer fake.deleteBucketIntelligentTieringConfigurationMutex.RUnlock()
+	return len(fake.deleteBucketIntelligentTieringConfigurationArgsForCall)
+}
+
+func (fake *FakeS3API) DeleteBucketIntelligentTieringConfigurationCalls(stub func(*s3.DeleteBucketIntelligentTieringConfigurationInput) (*s3.DeleteBucketIntelligentTieringConfigurationOutput, error)) {
+	fake.deleteBucketIntelligentTieringConfigurationMutex.Lock()
+	defer fake.deleteBucketIntelligentTieringConfigurationMutex.Unlock()
+	fake.DeleteBucketIntelligentTieringConfigurationStub = stub
+}
+
+func (fake *FakeS3API) DeleteBucketIntelligentTieringConfigurationArgsForCall(i int) *s3.DeleteBucketIntelligentTieringConfigurationInput {
+	fake.deleteBucketIntelligentTieringConfigurationMutex.RLock()
+	defer fake.deleteBucketIntelligentTieringConfigurationMutex.RUnlock()
+	argsForCall := fake.deleteBucketIntelligentTieringConfigurationArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeS3API) DeleteBucketIntelligentTieringConfigurationReturns(result1 *s3.DeleteBucketIntelligentTieringConfigurationOutput, result2 error) {
+	fake.deleteBucketIntelligentTieringConfigurationMutex.Lock()
+	defer fake.deleteBucketIntelligentTieringConfigurationMutex.Unlock()
+	fake.DeleteBucketIntelligentTieringConfigurationStub = nil
+	fake.deleteBucketIntelligentTieringConfigurationReturns = struct {
+		result1 *s3.DeleteBucketIntelligentTieringConfigurationOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) DeleteBucketIntelligentTieringConfigurationReturnsOnCall(i int, result1 *s3.DeleteBucketIntelligentTieringConfigurationOutput, result2 error) {
+	fake.deleteBucketIntelligentTieringConfigurationMutex.Lock()
+	defer fake.deleteBucketIntelligentTieringConfigurationMutex.Unlock()
+	fake.DeleteBucketIntelligentTieringConfigurationStub = nil
+	if fake.deleteBucketIntelligentTieringConfigurationReturnsOnCall == nil {
+		fake.deleteBucketIntelligentTieringConfigurationReturnsOnCall = make(map[int]struct {
+			result1 *s3.DeleteBucketIntelligentTieringConfigurationOutput
+			result2 error
+		})
+	}
+	fake.deleteBucketIntelligentTieringConfigurationReturnsOnCall[i] = struct {
+		result1 *s3.DeleteBucketIntelligentTieringConfigurationOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) DeleteBucketIntelligentTieringConfigurationRequest(arg1 *s3.DeleteBucketIntelligentTieringConfigurationInput) (*request.Request, *s3.DeleteBucketIntelligentTieringConfigurationOutput) {
+	fake.deleteBucketIntelligentTieringConfigurationRequestMutex.Lock()
+	ret, specificReturn := fake.deleteBucketIntelligentTieringConfigurationRequestReturnsOnCall[len(fake.deleteBucketIntelligentTieringConfigurationRequestArgsForCall)]
+	fake.deleteBucketIntelligentTieringConfigurationRequestArgsForCall = append(fake.deleteBucketIntelligentTieringConfigurationRequestArgsForCall, struct {
+		arg1 *s3.DeleteBucketIntelligentTieringConfigurationInput
+	}{arg1})
+	stub := fake.DeleteBucketIntelligentTieringConfigurationRequestStub
+	fakeReturns := fake.deleteBucketIntelligentTieringConfigurationRequestReturns
+	fake.recordInvocation("DeleteBucketIntelligentTieringConfigurationRequest", []interface{}{arg1})
+	fake.deleteBucketIntelligentTieringConfigurationRequestMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeS3API) DeleteBucketIntelligentTieringConfigurationRequestCallCount() int {
+	fake.deleteBucketIntelligentTieringConfigurationRequestMutex.RLock()
+	defer fake.deleteBucketIntelligentTieringConfigurationRequestMutex.RUnlock()
+	return len(fake.deleteBucketIntelligentTieringConfigurationRequestArgsForCall)
+}
+
+func (fake *FakeS3API) DeleteBucketIntelligentTieringConfigurationRequestCalls(stub func(*s3.DeleteBucketIntelligentTieringConfigurationInput) (*request.Request, *s3.DeleteBucketIntelligentTieringConfigurationOutput)) {
+	fake.deleteBucketIntelligentTieringConfigurationRequestMutex.Lock()
+	defer fake.deleteBucketIntelligentTieringConfigurationRequestMutex.Unlock()
+	fake.DeleteBucketIntelligentTieringConfigurationRequestStub = stub
+}
+
+func (fake *FakeS3API) DeleteBucketIntelligentTieringConfigurationRequestArgsForCall(i int) *s3.DeleteBucketIntelligentTieringConfigurationInput {
+	fake.deleteBucketIntelligentTieringConfigurationRequestMutex.RLock()
+	defer fake.deleteBucketIntelligentTieringConfigurationRequestMutex.RUnlock()
+	argsForCall := fake.deleteBucketIntelligentTieringConfigurationRequestArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeS3API) DeleteBucketIntelligentTieringConfigurationRequestReturns(result1 *request.Request, result2 *s3.DeleteBucketIntelligentTieringConfigurationOutput) {
+	fake.deleteBucketIntelligentTieringConfigurationRequestMutex.Lock()
+	defer fake.deleteBucketIntelligentTieringConfigurationRequestMutex.Unlock()
+	fake.DeleteBucketIntelligentTieringConfigurationRequestStub = nil
+	fake.deleteBucketIntelligentTieringConfigurationRequestReturns = struct {
+		result1 *request.Request
+		result2 *s3.DeleteBucketIntelligentTieringConfigurationOutput
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) DeleteBucketIntelligentTieringConfigurationRequestReturnsOnCall(i int, result1 *request.Request, result2 *s3.DeleteBucketIntelligentTieringConfigurationOutput) {
+	fake.deleteBucketIntelligentTieringConfigurationRequestMutex.Lock()
+	defer fake.deleteBucketIntelligentTieringConfigurationRequestMutex.Unlock()
+	fake.DeleteBucketIntelligentTieringConfigurationRequestStub = nil
+	if fake.deleteBucketIntelligentTieringConfigurationRequestReturnsOnCall == nil {
+		fake.deleteBucketIntelligentTieringConfigurationRequestReturnsOnCall = make(map[int]struct {
+			result1 *request.Request
+			result2 *s3.DeleteBucketIntelligentTieringConfigurationOutput
+		})
+	}
+	fake.deleteBucketIntelligentTieringConfigurationRequestReturnsOnCall[i] = struct {
+		result1 *request.Request
+		result2 *s3.DeleteBucketIntelligentTieringConfigurationOutput
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) DeleteBucketIntelligentTieringConfigurationWithContext(arg1 context.Context, arg2 *s3.DeleteBucketIntelligentTieringConfigurationInput, arg3 ...request.Option) (*s3.DeleteBucketIntelligentTieringConfigurationOutput, error) {
+	fake.deleteBucketIntelligentTieringConfigurationWithContextMutex.Lock()
+	ret, specificReturn := fake.deleteBucketIntelligentTieringConfigurationWithContextReturnsOnCall[len(fake.deleteBucketIntelligentTieringConfigurationWithContextArgsForCall)]
+	fake.deleteBucketIntelligentTieringConfigurationWithContextArgsForCall = append(fake.deleteBucketIntelligentTieringConfigurationWithContextArgsForCall, struct {
+		arg1 context.Context
+		arg2 *s3.DeleteBucketIntelligentTieringConfigurationInput
+		arg3 []request.Option
+	}{arg1, arg2, arg3})
+	stub := fake.DeleteBucketIntelligentTieringConfigurationWithContextStub
+	fakeReturns := fake.deleteBucketIntelligentTieringConfigurationWithContextReturns
+	fake.recordInvocation("DeleteBucketIntelligentTieringConfigurationWithContext", []interface{}{arg1, arg2, arg3})
+	fake.deleteBucketIntelligentTieringConfigurationWithContextMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2, arg3...)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeS3API) DeleteBucketIntelligentTieringConfigurationWithContextCallCount() int {
+	fake.deleteBucketIntelligentTieringConfigurationWithContextMutex.RLock()
+	defer fake.deleteBucketIntelligentTieringConfigurationWithContextMutex.RUnlock()
+	return len(fake.deleteBucketIntelligentTieringConfigurationWithContextArgsForCall)
+}
+
+func (fake *FakeS3API) DeleteBucketIntelligentTieringConfigurationWithContextCalls(stub func(context.Context, *s3.DeleteBucketIntelligentTieringConfigurationInput, ...request.Option) (*s3.DeleteBucketIntelligentTieringConfigurationOutput, error)) {
+	fake.deleteBucketIntelligentTieringConfigurationWithContextMutex.Lock()
+	defer fake.deleteBucketIntelligentTieringConfigurationWithContextMutex.Unlock()
+	fake.DeleteBucketIntelligentTieringConfigurationWithContextStub = stub
+}
+
+func (fake *FakeS3API) DeleteBucketIntelligentTieringConfigurationWithContextArgsForCall(i int) (context.Context, *s3.DeleteBucketIntelligentTieringConfigurationInput, []request.Option) {
+	fake.deleteBucketIntelligentTieringConfigurationWithContextMutex.RLock()
+	defer fake.deleteBucketIntelligentTieringConfigurationWithContextMutex.RUnlock()
+	argsForCall := fake.deleteBucketIntelligentTieringConfigurationWithContextArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3
+}
+
+func (fake *FakeS3API) DeleteBucketIntelligentTieringConfigurationWithContextReturns(result1 *s3.DeleteBucketIntelligentTieringConfigurationOutput, result2 error) {
+	fake.deleteBucketIntelligentTieringConfigurationWithContextMutex.Lock()
+	defer fake.deleteBucketIntelligentTieringConfigurationWithContextMutex.Unlock()
+	fake.DeleteBucketIntelligentTieringConfigurationWithContextStub = nil
+	fake.deleteBucketIntelligentTieringConfigurationWithContextReturns = struct {
+		result1 *s3.DeleteBucketIntelligentTieringConfigurationOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) DeleteBucketIntelligentTieringConfigurationWithContextReturnsOnCall(i int, result1 *s3.DeleteBucketIntelligentTieringConfigurationOutput, result2 error) {
+	fake.deleteBucketIntelligentTieringConfigurationWithContextMutex.Lock()
+	defer fake.deleteBucketIntelligentTieringConfigurationWithContextMutex.Unlock()
+	fake.DeleteBucketIntelligentTieringConfigurationWithContextStub = nil
+	if fake.deleteBucketIntelligentTieringConfigurationWithContextReturnsOnCall == nil {
+		fake.deleteBucketIntelligentTieringConfigurationWithContextReturnsOnCall = make(map[int]struct {
+			result1 *s3.DeleteBucketIntelligentTieringConfigurationOutput
+			result2 error
+		})
+	}
+	fake.deleteBucketIntelligentTieringConfigurationWithContextReturnsOnCall[i] = struct {
+		result1 *s3.DeleteBucketIntelligentTieringConfigurationOutput
+		result2 error
+	}{result1, result2}
+}
+
 func (fake *FakeS3API) DeleteBucketInventoryConfiguration(arg1 *s3.DeleteBucketInventoryConfigurationInput) (*s3.DeleteBucketInventoryConfigurationOutput, error) {
 	fake.deleteBucketInventoryConfigurationMutex.Lock()
 	ret, specificReturn := fake.deleteBucketInventoryConfigurationReturnsOnCall[len(fake.deleteBucketInventoryConfigurationArgsForCall)]
@@ -6043,6 +6606,200 @@ func (fake *FakeS3API) DeleteBucketMetricsConfigurationWithContextReturnsOnCall(
 	}
 	fake.deleteBucketMetricsConfigurationWithContextReturnsOnCall[i] = struct {
 		result1 *s3.DeleteBucketMetricsConfigurationOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) DeleteBucketOwnershipControls(arg1 *s3.DeleteBucketOwnershipControlsInput) (*s3.DeleteBucketOwnershipControlsOutput, error) {
+	fake.deleteBucketOwnershipControlsMutex.Lock()
+	ret, specificReturn := fake.deleteBucketOwnershipControlsReturnsOnCall[len(fake.deleteBucketOwnershipControlsArgsForCall)]
+	fake.deleteBucketOwnershipControlsArgsForCall = append(fake.deleteBucketOwnershipControlsArgsForCall, struct {
+		arg1 *s3.DeleteBucketOwnershipControlsInput
+	}{arg1})
+	stub := fake.DeleteBucketOwnershipControlsStub
+	fakeReturns := fake.deleteBucketOwnershipControlsReturns
+	fake.recordInvocation("DeleteBucketOwnershipControls", []interface{}{arg1})
+	fake.deleteBucketOwnershipControlsMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeS3API) DeleteBucketOwnershipControlsCallCount() int {
+	fake.deleteBucketOwnershipControlsMutex.RLock()
+	defer fake.deleteBucketOwnershipControlsMutex.RUnlock()
+	return len(fake.deleteBucketOwnershipControlsArgsForCall)
+}
+
+func (fake *FakeS3API) DeleteBucketOwnershipControlsCalls(stub func(*s3.DeleteBucketOwnershipControlsInput) (*s3.DeleteBucketOwnershipControlsOutput, error)) {
+	fake.deleteBucketOwnershipControlsMutex.Lock()
+	defer fake.deleteBucketOwnershipControlsMutex.Unlock()
+	fake.DeleteBucketOwnershipControlsStub = stub
+}
+
+func (fake *FakeS3API) DeleteBucketOwnershipControlsArgsForCall(i int) *s3.DeleteBucketOwnershipControlsInput {
+	fake.deleteBucketOwnershipControlsMutex.RLock()
+	defer fake.deleteBucketOwnershipControlsMutex.RUnlock()
+	argsForCall := fake.deleteBucketOwnershipControlsArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeS3API) DeleteBucketOwnershipControlsReturns(result1 *s3.DeleteBucketOwnershipControlsOutput, result2 error) {
+	fake.deleteBucketOwnershipControlsMutex.Lock()
+	defer fake.deleteBucketOwnershipControlsMutex.Unlock()
+	fake.DeleteBucketOwnershipControlsStub = nil
+	fake.deleteBucketOwnershipControlsReturns = struct {
+		result1 *s3.DeleteBucketOwnershipControlsOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) DeleteBucketOwnershipControlsReturnsOnCall(i int, result1 *s3.DeleteBucketOwnershipControlsOutput, result2 error) {
+	fake.deleteBucketOwnershipControlsMutex.Lock()
+	defer fake.deleteBucketOwnershipControlsMutex.Unlock()
+	fake.DeleteBucketOwnershipControlsStub = nil
+	if fake.deleteBucketOwnershipControlsReturnsOnCall == nil {
+		fake.deleteBucketOwnershipControlsReturnsOnCall = make(map[int]struct {
+			result1 *s3.DeleteBucketOwnershipControlsOutput
+			result2 error
+		})
+	}
+	fake.deleteBucketOwnershipControlsReturnsOnCall[i] = struct {
+		result1 *s3.DeleteBucketOwnershipControlsOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) DeleteBucketOwnershipControlsRequest(arg1 *s3.DeleteBucketOwnershipControlsInput) (*request.Request, *s3.DeleteBucketOwnershipControlsOutput) {
+	fake.deleteBucketOwnershipControlsRequestMutex.Lock()
+	ret, specificReturn := fake.deleteBucketOwnershipControlsRequestReturnsOnCall[len(fake.deleteBucketOwnershipControlsRequestArgsForCall)]
+	fake.deleteBucketOwnershipControlsRequestArgsForCall = append(fake.deleteBucketOwnershipControlsRequestArgsForCall, struct {
+		arg1 *s3.DeleteBucketOwnershipControlsInput
+	}{arg1})
+	stub := fake.DeleteBucketOwnershipControlsRequestStub
+	fakeReturns := fake.deleteBucketOwnershipControlsRequestReturns
+	fake.recordInvocation("DeleteBucketOwnershipControlsRequest", []interface{}{arg1})
+	fake.deleteBucketOwnershipControlsRequestMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeS3API) DeleteBucketOwnershipControlsRequestCallCount() int {
+	fake.deleteBucketOwnershipControlsRequestMutex.RLock()
+	defer fake.deleteBucketOwnershipControlsRequestMutex.RUnlock()
+	return len(fake.deleteBucketOwnershipControlsRequestArgsForCall)
+}
+
+func (fake *FakeS3API) DeleteBucketOwnershipControlsRequestCalls(stub func(*s3.DeleteBucketOwnershipControlsInput) (*request.Request, *s3.DeleteBucketOwnershipControlsOutput)) {
+	fake.deleteBucketOwnershipControlsRequestMutex.Lock()
+	defer fake.deleteBucketOwnershipControlsRequestMutex.Unlock()
+	fake.DeleteBucketOwnershipControlsRequestStub = stub
+}
+
+func (fake *FakeS3API) DeleteBucketOwnershipControlsRequestArgsForCall(i int) *s3.DeleteBucketOwnershipControlsInput {
+	fake.deleteBucketOwnershipControlsRequestMutex.RLock()
+	defer fake.deleteBucketOwnershipControlsRequestMutex.RUnlock()
+	argsForCall := fake.deleteBucketOwnershipControlsRequestArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeS3API) DeleteBucketOwnershipControlsRequestReturns(result1 *request.Request, result2 *s3.DeleteBucketOwnershipControlsOutput) {
+	fake.deleteBucketOwnershipControlsRequestMutex.Lock()
+	defer fake.deleteBucketOwnershipControlsRequestMutex.Unlock()
+	fake.DeleteBucketOwnershipControlsRequestStub = nil
+	fake.deleteBucketOwnershipControlsRequestReturns = struct {
+		result1 *request.Request
+		result2 *s3.DeleteBucketOwnershipControlsOutput
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) DeleteBucketOwnershipControlsRequestReturnsOnCall(i int, result1 *request.Request, result2 *s3.DeleteBucketOwnershipControlsOutput) {
+	fake.deleteBucketOwnershipControlsRequestMutex.Lock()
+	defer fake.deleteBucketOwnershipControlsRequestMutex.Unlock()
+	fake.DeleteBucketOwnershipControlsRequestStub = nil
+	if fake.deleteBucketOwnershipControlsRequestReturnsOnCall == nil {
+		fake.deleteBucketOwnershipControlsRequestReturnsOnCall = make(map[int]struct {
+			result1 *request.Request
+			result2 *s3.DeleteBucketOwnershipControlsOutput
+		})
+	}
+	fake.deleteBucketOwnershipControlsRequestReturnsOnCall[i] = struct {
+		result1 *request.Request
+		result2 *s3.DeleteBucketOwnershipControlsOutput
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) DeleteBucketOwnershipControlsWithContext(arg1 context.Context, arg2 *s3.DeleteBucketOwnershipControlsInput, arg3 ...request.Option) (*s3.DeleteBucketOwnershipControlsOutput, error) {
+	fake.deleteBucketOwnershipControlsWithContextMutex.Lock()
+	ret, specificReturn := fake.deleteBucketOwnershipControlsWithContextReturnsOnCall[len(fake.deleteBucketOwnershipControlsWithContextArgsForCall)]
+	fake.deleteBucketOwnershipControlsWithContextArgsForCall = append(fake.deleteBucketOwnershipControlsWithContextArgsForCall, struct {
+		arg1 context.Context
+		arg2 *s3.DeleteBucketOwnershipControlsInput
+		arg3 []request.Option
+	}{arg1, arg2, arg3})
+	stub := fake.DeleteBucketOwnershipControlsWithContextStub
+	fakeReturns := fake.deleteBucketOwnershipControlsWithContextReturns
+	fake.recordInvocation("DeleteBucketOwnershipControlsWithContext", []interface{}{arg1, arg2, arg3})
+	fake.deleteBucketOwnershipControlsWithContextMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2, arg3...)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeS3API) DeleteBucketOwnershipControlsWithContextCallCount() int {
+	fake.deleteBucketOwnershipControlsWithContextMutex.RLock()
+	defer fake.deleteBucketOwnershipControlsWithContextMutex.RUnlock()
+	return len(fake.deleteBucketOwnershipControlsWithContextArgsForCall)
+}
+
+func (fake *FakeS3API) DeleteBucketOwnershipControlsWithContextCalls(stub func(context.Context, *s3.DeleteBucketOwnershipControlsInput, ...request.Option) (*s3.DeleteBucketOwnershipControlsOutput, error)) {
+	fake.deleteBucketOwnershipControlsWithContextMutex.Lock()
+	defer fake.deleteBucketOwnershipControlsWithContextMutex.Unlock()
+	fake.DeleteBucketOwnershipControlsWithContextStub = stub
+}
+
+func (fake *FakeS3API) DeleteBucketOwnershipControlsWithContextArgsForCall(i int) (context.Context, *s3.DeleteBucketOwnershipControlsInput, []request.Option) {
+	fake.deleteBucketOwnershipControlsWithContextMutex.RLock()
+	defer fake.deleteBucketOwnershipControlsWithContextMutex.RUnlock()
+	argsForCall := fake.deleteBucketOwnershipControlsWithContextArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3
+}
+
+func (fake *FakeS3API) DeleteBucketOwnershipControlsWithContextReturns(result1 *s3.DeleteBucketOwnershipControlsOutput, result2 error) {
+	fake.deleteBucketOwnershipControlsWithContextMutex.Lock()
+	defer fake.deleteBucketOwnershipControlsWithContextMutex.Unlock()
+	fake.DeleteBucketOwnershipControlsWithContextStub = nil
+	fake.deleteBucketOwnershipControlsWithContextReturns = struct {
+		result1 *s3.DeleteBucketOwnershipControlsOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) DeleteBucketOwnershipControlsWithContextReturnsOnCall(i int, result1 *s3.DeleteBucketOwnershipControlsOutput, result2 error) {
+	fake.deleteBucketOwnershipControlsWithContextMutex.Lock()
+	defer fake.deleteBucketOwnershipControlsWithContextMutex.Unlock()
+	fake.DeleteBucketOwnershipControlsWithContextStub = nil
+	if fake.deleteBucketOwnershipControlsWithContextReturnsOnCall == nil {
+		fake.deleteBucketOwnershipControlsWithContextReturnsOnCall = make(map[int]struct {
+			result1 *s3.DeleteBucketOwnershipControlsOutput
+			result2 error
+		})
+	}
+	fake.deleteBucketOwnershipControlsWithContextReturnsOnCall[i] = struct {
+		result1 *s3.DeleteBucketOwnershipControlsOutput
 		result2 error
 	}{result1, result2}
 }
@@ -8699,6 +9456,200 @@ func (fake *FakeS3API) GetBucketEncryptionWithContextReturnsOnCall(i int, result
 	}{result1, result2}
 }
 
+func (fake *FakeS3API) GetBucketIntelligentTieringConfiguration(arg1 *s3.GetBucketIntelligentTieringConfigurationInput) (*s3.GetBucketIntelligentTieringConfigurationOutput, error) {
+	fake.getBucketIntelligentTieringConfigurationMutex.Lock()
+	ret, specificReturn := fake.getBucketIntelligentTieringConfigurationReturnsOnCall[len(fake.getBucketIntelligentTieringConfigurationArgsForCall)]
+	fake.getBucketIntelligentTieringConfigurationArgsForCall = append(fake.getBucketIntelligentTieringConfigurationArgsForCall, struct {
+		arg1 *s3.GetBucketIntelligentTieringConfigurationInput
+	}{arg1})
+	stub := fake.GetBucketIntelligentTieringConfigurationStub
+	fakeReturns := fake.getBucketIntelligentTieringConfigurationReturns
+	fake.recordInvocation("GetBucketIntelligentTieringConfiguration", []interface{}{arg1})
+	fake.getBucketIntelligentTieringConfigurationMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeS3API) GetBucketIntelligentTieringConfigurationCallCount() int {
+	fake.getBucketIntelligentTieringConfigurationMutex.RLock()
+	defer fake.getBucketIntelligentTieringConfigurationMutex.RUnlock()
+	return len(fake.getBucketIntelligentTieringConfigurationArgsForCall)
+}
+
+func (fake *FakeS3API) GetBucketIntelligentTieringConfigurationCalls(stub func(*s3.GetBucketIntelligentTieringConfigurationInput) (*s3.GetBucketIntelligentTieringConfigurationOutput, error)) {
+	fake.getBucketIntelligentTieringConfigurationMutex.Lock()
+	defer fake.getBucketIntelligentTieringConfigurationMutex.Unlock()
+	fake.GetBucketIntelligentTieringConfigurationStub = stub
+}
+
+func (fake *FakeS3API) GetBucketIntelligentTieringConfigurationArgsForCall(i int) *s3.GetBucketIntelligentTieringConfigurationInput {
+	fake.getBucketIntelligentTieringConfigurationMutex.RLock()
+	defer fake.getBucketIntelligentTieringConfigurationMutex.RUnlock()
+	argsForCall := fake.getBucketIntelligentTieringConfigurationArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeS3API) GetBucketIntelligentTieringConfigurationReturns(result1 *s3.GetBucketIntelligentTieringConfigurationOutput, result2 error) {
+	fake.getBucketIntelligentTieringConfigurationMutex.Lock()
+	defer fake.getBucketIntelligentTieringConfigurationMutex.Unlock()
+	fake.GetBucketIntelligentTieringConfigurationStub = nil
+	fake.getBucketIntelligentTieringConfigurationReturns = struct {
+		result1 *s3.GetBucketIntelligentTieringConfigurationOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) GetBucketIntelligentTieringConfigurationReturnsOnCall(i int, result1 *s3.GetBucketIntelligentTieringConfigurationOutput, result2 error) {
+	fake.getBucketIntelligentTieringConfigurationMutex.Lock()
+	defer fake.getBucketIntelligentTieringConfigurationMutex.Unlock()
+	fake.GetBucketIntelligentTieringConfigurationStub = nil
+	if fake.getBucketIntelligentTieringConfigurationReturnsOnCall == nil {
+		fake.getBucketIntelligentTieringConfigurationReturnsOnCall = make(map[int]struct {
+			result1 *s3.GetBucketIntelligentTieringConfigurationOutput
+			result2 error
+		})
+	}
+	fake.getBucketIntelligentTieringConfigurationReturnsOnCall[i] = struct {
+		result1 *s3.GetBucketIntelligentTieringConfigurationOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) GetBucketIntelligentTieringConfigurationRequest(arg1 *s3.GetBucketIntelligentTieringConfigurationInput) (*request.Request, *s3.GetBucketIntelligentTieringConfigurationOutput) {
+	fake.getBucketIntelligentTieringConfigurationRequestMutex.Lock()
+	ret, specificReturn := fake.getBucketIntelligentTieringConfigurationRequestReturnsOnCall[len(fake.getBucketIntelligentTieringConfigurationRequestArgsForCall)]
+	fake.getBucketIntelligentTieringConfigurationRequestArgsForCall = append(fake.getBucketIntelligentTieringConfigurationRequestArgsForCall, struct {
+		arg1 *s3.GetBucketIntelligentTieringConfigurationInput
+	}{arg1})
+	stub := fake.GetBucketIntelligentTieringConfigurationRequestStub
+	fakeReturns := fake.getBucketIntelligentTieringConfigurationRequestReturns
+	fake.recordInvocation("GetBucketIntelligentTieringConfigurationRequest", []interface{}{arg1})
+	fake.getBucketIntelligentTieringConfigurationRequestMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeS3API) GetBucketIntelligentTieringConfigurationRequestCallCount() int {
+	fake.getBucketIntelligentTieringConfigurationRequestMutex.RLock()
+	defer fake.getBucketIntelligentTieringConfigurationRequestMutex.RUnlock()
+	return len(fake.getBucketIntelligentTieringConfigurationRequestArgsForCall)
+}
+
+func (fake *FakeS3API) GetBucketIntelligentTieringConfigurationRequestCalls(stub func(*s3.GetBucketIntelligentTieringConfigurationInput) (*request.Request, *s3.GetBucketIntelligentTieringConfigurationOutput)) {
+	fake.getBucketIntelligentTieringConfigurationRequestMutex.Lock()
+	defer fake.getBucketIntelligentTieringConfigurationRequestMutex.Unlock()
+	fake.GetBucketIntelligentTieringConfigurationRequestStub = stub
+}
+
+func (fake *FakeS3API) GetBucketIntelligentTieringConfigurationRequestArgsForCall(i int) *s3.GetBucketIntelligentTieringConfigurationInput {
+	fake.getBucketIntelligentTieringConfigurationRequestMutex.RLock()
+	defer fake.getBucketIntelligentTieringConfigurationRequestMutex.RUnlock()
+	argsForCall := fake.getBucketIntelligentTieringConfigurationRequestArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeS3API) GetBucketIntelligentTieringConfigurationRequestReturns(result1 *request.Request, result2 *s3.GetBucketIntelligentTieringConfigurationOutput) {
+	fake.getBucketIntelligentTieringConfigurationRequestMutex.Lock()
+	defer fake.getBucketIntelligentTieringConfigurationRequestMutex.Unlock()
+	fake.GetBucketIntelligentTieringConfigurationRequestStub = nil
+	fake.getBucketIntelligentTieringConfigurationRequestReturns = struct {
+		result1 *request.Request
+		result2 *s3.GetBucketIntelligentTieringConfigurationOutput
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) GetBucketIntelligentTieringConfigurationRequestReturnsOnCall(i int, result1 *request.Request, result2 *s3.GetBucketIntelligentTieringConfigurationOutput) {
+	fake.getBucketIntelligentTieringConfigurationRequestMutex.Lock()
+	defer fake.getBucketIntelligentTieringConfigurationRequestMutex.Unlock()
+	fake.GetBucketIntelligentTieringConfigurationRequestStub = nil
+	if fake.getBucketIntelligentTieringConfigurationRequestReturnsOnCall == nil {
+		fake.getBucketIntelligentTieringConfigurationRequestReturnsOnCall = make(map[int]struct {
+			result1 *request.Request
+			result2 *s3.GetBucketIntelligentTieringConfigurationOutput
+		})
+	}
+	fake.getBucketIntelligentTieringConfigurationRequestReturnsOnCall[i] = struct {
+		result1 *request.Request
+		result2 *s3.GetBucketIntelligentTieringConfigurationOutput
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) GetBucketIntelligentTieringConfigurationWithContext(arg1 context.Context, arg2 *s3.GetBucketIntelligentTieringConfigurationInput, arg3 ...request.Option) (*s3.GetBucketIntelligentTieringConfigurationOutput, error) {
+	fake.getBucketIntelligentTieringConfigurationWithContextMutex.Lock()
+	ret, specificReturn := fake.getBucketIntelligentTieringConfigurationWithContextReturnsOnCall[len(fake.getBucketIntelligentTieringConfigurationWithContextArgsForCall)]
+	fake.getBucketIntelligentTieringConfigurationWithContextArgsForCall = append(fake.getBucketIntelligentTieringConfigurationWithContextArgsForCall, struct {
+		arg1 context.Context
+		arg2 *s3.GetBucketIntelligentTieringConfigurationInput
+		arg3 []request.Option
+	}{arg1, arg2, arg3})
+	stub := fake.GetBucketIntelligentTieringConfigurationWithContextStub
+	fakeReturns := fake.getBucketIntelligentTieringConfigurationWithContextReturns
+	fake.recordInvocation("GetBucketIntelligentTieringConfigurationWithContext", []interface{}{arg1, arg2, arg3})
+	fake.getBucketIntelligentTieringConfigurationWithContextMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2, arg3...)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeS3API) GetBucketIntelligentTieringConfigurationWithContextCallCount() int {
+	fake.getBucketIntelligentTieringConfigurationWithContextMutex.RLock()
+	defer fake.getBucketIntelligentTieringConfigurationWithContextMutex.RUnlock()
+	return len(fake.getBucketIntelligentTieringConfigurationWithContextArgsForCall)
+}
+
+func (fake *FakeS3API) GetBucketIntelligentTieringConfigurationWithContextCalls(stub func(context.Context, *s3.GetBucketIntelligentTieringConfigurationInput, ...request.Option) (*s3.GetBucketIntelligentTieringConfigurationOutput, error)) {
+	fake.getBucketIntelligentTieringConfigurationWithContextMutex.Lock()
+	defer fake.getBucketIntelligentTieringConfigurationWithContextMutex.Unlock()
+	fake.GetBucketIntelligentTieringConfigurationWithContextStub = stub
+}
+
+func (fake *FakeS3API) GetBucketIntelligentTieringConfigurationWithContextArgsForCall(i int) (context.Context, *s3.GetBucketIntelligentTieringConfigurationInput, []request.Option) {
+	fake.getBucketIntelligentTieringConfigurationWithContextMutex.RLock()
+	defer fake.getBucketIntelligentTieringConfigurationWithContextMutex.RUnlock()
+	argsForCall := fake.getBucketIntelligentTieringConfigurationWithContextArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3
+}
+
+func (fake *FakeS3API) GetBucketIntelligentTieringConfigurationWithContextReturns(result1 *s3.GetBucketIntelligentTieringConfigurationOutput, result2 error) {
+	fake.getBucketIntelligentTieringConfigurationWithContextMutex.Lock()
+	defer fake.getBucketIntelligentTieringConfigurationWithContextMutex.Unlock()
+	fake.GetBucketIntelligentTieringConfigurationWithContextStub = nil
+	fake.getBucketIntelligentTieringConfigurationWithContextReturns = struct {
+		result1 *s3.GetBucketIntelligentTieringConfigurationOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) GetBucketIntelligentTieringConfigurationWithContextReturnsOnCall(i int, result1 *s3.GetBucketIntelligentTieringConfigurationOutput, result2 error) {
+	fake.getBucketIntelligentTieringConfigurationWithContextMutex.Lock()
+	defer fake.getBucketIntelligentTieringConfigurationWithContextMutex.Unlock()
+	fake.GetBucketIntelligentTieringConfigurationWithContextStub = nil
+	if fake.getBucketIntelligentTieringConfigurationWithContextReturnsOnCall == nil {
+		fake.getBucketIntelligentTieringConfigurationWithContextReturnsOnCall = make(map[int]struct {
+			result1 *s3.GetBucketIntelligentTieringConfigurationOutput
+			result2 error
+		})
+	}
+	fake.getBucketIntelligentTieringConfigurationWithContextReturnsOnCall[i] = struct {
+		result1 *s3.GetBucketIntelligentTieringConfigurationOutput
+		result2 error
+	}{result1, result2}
+}
+
 func (fake *FakeS3API) GetBucketInventoryConfiguration(arg1 *s3.GetBucketInventoryConfigurationInput) (*s3.GetBucketInventoryConfigurationOutput, error) {
 	fake.getBucketInventoryConfigurationMutex.Lock()
 	ret, specificReturn := fake.getBucketInventoryConfigurationReturnsOnCall[len(fake.getBucketInventoryConfigurationArgsForCall)]
@@ -10247,6 +11198,200 @@ func (fake *FakeS3API) GetBucketNotificationWithContextReturnsOnCall(i int, resu
 	}
 	fake.getBucketNotificationWithContextReturnsOnCall[i] = struct {
 		result1 *s3.NotificationConfigurationDeprecated
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) GetBucketOwnershipControls(arg1 *s3.GetBucketOwnershipControlsInput) (*s3.GetBucketOwnershipControlsOutput, error) {
+	fake.getBucketOwnershipControlsMutex.Lock()
+	ret, specificReturn := fake.getBucketOwnershipControlsReturnsOnCall[len(fake.getBucketOwnershipControlsArgsForCall)]
+	fake.getBucketOwnershipControlsArgsForCall = append(fake.getBucketOwnershipControlsArgsForCall, struct {
+		arg1 *s3.GetBucketOwnershipControlsInput
+	}{arg1})
+	stub := fake.GetBucketOwnershipControlsStub
+	fakeReturns := fake.getBucketOwnershipControlsReturns
+	fake.recordInvocation("GetBucketOwnershipControls", []interface{}{arg1})
+	fake.getBucketOwnershipControlsMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeS3API) GetBucketOwnershipControlsCallCount() int {
+	fake.getBucketOwnershipControlsMutex.RLock()
+	defer fake.getBucketOwnershipControlsMutex.RUnlock()
+	return len(fake.getBucketOwnershipControlsArgsForCall)
+}
+
+func (fake *FakeS3API) GetBucketOwnershipControlsCalls(stub func(*s3.GetBucketOwnershipControlsInput) (*s3.GetBucketOwnershipControlsOutput, error)) {
+	fake.getBucketOwnershipControlsMutex.Lock()
+	defer fake.getBucketOwnershipControlsMutex.Unlock()
+	fake.GetBucketOwnershipControlsStub = stub
+}
+
+func (fake *FakeS3API) GetBucketOwnershipControlsArgsForCall(i int) *s3.GetBucketOwnershipControlsInput {
+	fake.getBucketOwnershipControlsMutex.RLock()
+	defer fake.getBucketOwnershipControlsMutex.RUnlock()
+	argsForCall := fake.getBucketOwnershipControlsArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeS3API) GetBucketOwnershipControlsReturns(result1 *s3.GetBucketOwnershipControlsOutput, result2 error) {
+	fake.getBucketOwnershipControlsMutex.Lock()
+	defer fake.getBucketOwnershipControlsMutex.Unlock()
+	fake.GetBucketOwnershipControlsStub = nil
+	fake.getBucketOwnershipControlsReturns = struct {
+		result1 *s3.GetBucketOwnershipControlsOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) GetBucketOwnershipControlsReturnsOnCall(i int, result1 *s3.GetBucketOwnershipControlsOutput, result2 error) {
+	fake.getBucketOwnershipControlsMutex.Lock()
+	defer fake.getBucketOwnershipControlsMutex.Unlock()
+	fake.GetBucketOwnershipControlsStub = nil
+	if fake.getBucketOwnershipControlsReturnsOnCall == nil {
+		fake.getBucketOwnershipControlsReturnsOnCall = make(map[int]struct {
+			result1 *s3.GetBucketOwnershipControlsOutput
+			result2 error
+		})
+	}
+	fake.getBucketOwnershipControlsReturnsOnCall[i] = struct {
+		result1 *s3.GetBucketOwnershipControlsOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) GetBucketOwnershipControlsRequest(arg1 *s3.GetBucketOwnershipControlsInput) (*request.Request, *s3.GetBucketOwnershipControlsOutput) {
+	fake.getBucketOwnershipControlsRequestMutex.Lock()
+	ret, specificReturn := fake.getBucketOwnershipControlsRequestReturnsOnCall[len(fake.getBucketOwnershipControlsRequestArgsForCall)]
+	fake.getBucketOwnershipControlsRequestArgsForCall = append(fake.getBucketOwnershipControlsRequestArgsForCall, struct {
+		arg1 *s3.GetBucketOwnershipControlsInput
+	}{arg1})
+	stub := fake.GetBucketOwnershipControlsRequestStub
+	fakeReturns := fake.getBucketOwnershipControlsRequestReturns
+	fake.recordInvocation("GetBucketOwnershipControlsRequest", []interface{}{arg1})
+	fake.getBucketOwnershipControlsRequestMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeS3API) GetBucketOwnershipControlsRequestCallCount() int {
+	fake.getBucketOwnershipControlsRequestMutex.RLock()
+	defer fake.getBucketOwnershipControlsRequestMutex.RUnlock()
+	return len(fake.getBucketOwnershipControlsRequestArgsForCall)
+}
+
+func (fake *FakeS3API) GetBucketOwnershipControlsRequestCalls(stub func(*s3.GetBucketOwnershipControlsInput) (*request.Request, *s3.GetBucketOwnershipControlsOutput)) {
+	fake.getBucketOwnershipControlsRequestMutex.Lock()
+	defer fake.getBucketOwnershipControlsRequestMutex.Unlock()
+	fake.GetBucketOwnershipControlsRequestStub = stub
+}
+
+func (fake *FakeS3API) GetBucketOwnershipControlsRequestArgsForCall(i int) *s3.GetBucketOwnershipControlsInput {
+	fake.getBucketOwnershipControlsRequestMutex.RLock()
+	defer fake.getBucketOwnershipControlsRequestMutex.RUnlock()
+	argsForCall := fake.getBucketOwnershipControlsRequestArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeS3API) GetBucketOwnershipControlsRequestReturns(result1 *request.Request, result2 *s3.GetBucketOwnershipControlsOutput) {
+	fake.getBucketOwnershipControlsRequestMutex.Lock()
+	defer fake.getBucketOwnershipControlsRequestMutex.Unlock()
+	fake.GetBucketOwnershipControlsRequestStub = nil
+	fake.getBucketOwnershipControlsRequestReturns = struct {
+		result1 *request.Request
+		result2 *s3.GetBucketOwnershipControlsOutput
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) GetBucketOwnershipControlsRequestReturnsOnCall(i int, result1 *request.Request, result2 *s3.GetBucketOwnershipControlsOutput) {
+	fake.getBucketOwnershipControlsRequestMutex.Lock()
+	defer fake.getBucketOwnershipControlsRequestMutex.Unlock()
+	fake.GetBucketOwnershipControlsRequestStub = nil
+	if fake.getBucketOwnershipControlsRequestReturnsOnCall == nil {
+		fake.getBucketOwnershipControlsRequestReturnsOnCall = make(map[int]struct {
+			result1 *request.Request
+			result2 *s3.GetBucketOwnershipControlsOutput
+		})
+	}
+	fake.getBucketOwnershipControlsRequestReturnsOnCall[i] = struct {
+		result1 *request.Request
+		result2 *s3.GetBucketOwnershipControlsOutput
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) GetBucketOwnershipControlsWithContext(arg1 context.Context, arg2 *s3.GetBucketOwnershipControlsInput, arg3 ...request.Option) (*s3.GetBucketOwnershipControlsOutput, error) {
+	fake.getBucketOwnershipControlsWithContextMutex.Lock()
+	ret, specificReturn := fake.getBucketOwnershipControlsWithContextReturnsOnCall[len(fake.getBucketOwnershipControlsWithContextArgsForCall)]
+	fake.getBucketOwnershipControlsWithContextArgsForCall = append(fake.getBucketOwnershipControlsWithContextArgsForCall, struct {
+		arg1 context.Context
+		arg2 *s3.GetBucketOwnershipControlsInput
+		arg3 []request.Option
+	}{arg1, arg2, arg3})
+	stub := fake.GetBucketOwnershipControlsWithContextStub
+	fakeReturns := fake.getBucketOwnershipControlsWithContextReturns
+	fake.recordInvocation("GetBucketOwnershipControlsWithContext", []interface{}{arg1, arg2, arg3})
+	fake.getBucketOwnershipControlsWithContextMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2, arg3...)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeS3API) GetBucketOwnershipControlsWithContextCallCount() int {
+	fake.getBucketOwnershipControlsWithContextMutex.RLock()
+	defer fake.getBucketOwnershipControlsWithContextMutex.RUnlock()
+	return len(fake.getBucketOwnershipControlsWithContextArgsForCall)
+}
+
+func (fake *FakeS3API) GetBucketOwnershipControlsWithContextCalls(stub func(context.Context, *s3.GetBucketOwnershipControlsInput, ...request.Option) (*s3.GetBucketOwnershipControlsOutput, error)) {
+	fake.getBucketOwnershipControlsWithContextMutex.Lock()
+	defer fake.getBucketOwnershipControlsWithContextMutex.Unlock()
+	fake.GetBucketOwnershipControlsWithContextStub = stub
+}
+
+func (fake *FakeS3API) GetBucketOwnershipControlsWithContextArgsForCall(i int) (context.Context, *s3.GetBucketOwnershipControlsInput, []request.Option) {
+	fake.getBucketOwnershipControlsWithContextMutex.RLock()
+	defer fake.getBucketOwnershipControlsWithContextMutex.RUnlock()
+	argsForCall := fake.getBucketOwnershipControlsWithContextArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3
+}
+
+func (fake *FakeS3API) GetBucketOwnershipControlsWithContextReturns(result1 *s3.GetBucketOwnershipControlsOutput, result2 error) {
+	fake.getBucketOwnershipControlsWithContextMutex.Lock()
+	defer fake.getBucketOwnershipControlsWithContextMutex.Unlock()
+	fake.GetBucketOwnershipControlsWithContextStub = nil
+	fake.getBucketOwnershipControlsWithContextReturns = struct {
+		result1 *s3.GetBucketOwnershipControlsOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) GetBucketOwnershipControlsWithContextReturnsOnCall(i int, result1 *s3.GetBucketOwnershipControlsOutput, result2 error) {
+	fake.getBucketOwnershipControlsWithContextMutex.Lock()
+	defer fake.getBucketOwnershipControlsWithContextMutex.Unlock()
+	fake.GetBucketOwnershipControlsWithContextStub = nil
+	if fake.getBucketOwnershipControlsWithContextReturnsOnCall == nil {
+		fake.getBucketOwnershipControlsWithContextReturnsOnCall = make(map[int]struct {
+			result1 *s3.GetBucketOwnershipControlsOutput
+			result2 error
+		})
+	}
+	fake.getBucketOwnershipControlsWithContextReturnsOnCall[i] = struct {
+		result1 *s3.GetBucketOwnershipControlsOutput
 		result2 error
 	}{result1, result2}
 }
@@ -11863,6 +13008,200 @@ func (fake *FakeS3API) GetObjectAclWithContextReturnsOnCall(i int, result1 *s3.G
 	}
 	fake.getObjectAclWithContextReturnsOnCall[i] = struct {
 		result1 *s3.GetObjectAclOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) GetObjectAttributes(arg1 *s3.GetObjectAttributesInput) (*s3.GetObjectAttributesOutput, error) {
+	fake.getObjectAttributesMutex.Lock()
+	ret, specificReturn := fake.getObjectAttributesReturnsOnCall[len(fake.getObjectAttributesArgsForCall)]
+	fake.getObjectAttributesArgsForCall = append(fake.getObjectAttributesArgsForCall, struct {
+		arg1 *s3.GetObjectAttributesInput
+	}{arg1})
+	stub := fake.GetObjectAttributesStub
+	fakeReturns := fake.getObjectAttributesReturns
+	fake.recordInvocation("GetObjectAttributes", []interface{}{arg1})
+	fake.getObjectAttributesMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeS3API) GetObjectAttributesCallCount() int {
+	fake.getObjectAttributesMutex.RLock()
+	defer fake.getObjectAttributesMutex.RUnlock()
+	return len(fake.getObjectAttributesArgsForCall)
+}
+
+func (fake *FakeS3API) GetObjectAttributesCalls(stub func(*s3.GetObjectAttributesInput) (*s3.GetObjectAttributesOutput, error)) {
+	fake.getObjectAttributesMutex.Lock()
+	defer fake.getObjectAttributesMutex.Unlock()
+	fake.GetObjectAttributesStub = stub
+}
+
+func (fake *FakeS3API) GetObjectAttributesArgsForCall(i int) *s3.GetObjectAttributesInput {
+	fake.getObjectAttributesMutex.RLock()
+	defer fake.getObjectAttributesMutex.RUnlock()
+	argsForCall := fake.getObjectAttributesArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeS3API) GetObjectAttributesReturns(result1 *s3.GetObjectAttributesOutput, result2 error) {
+	fake.getObjectAttributesMutex.Lock()
+	defer fake.getObjectAttributesMutex.Unlock()
+	fake.GetObjectAttributesStub = nil
+	fake.getObjectAttributesReturns = struct {
+		result1 *s3.GetObjectAttributesOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) GetObjectAttributesReturnsOnCall(i int, result1 *s3.GetObjectAttributesOutput, result2 error) {
+	fake.getObjectAttributesMutex.Lock()
+	defer fake.getObjectAttributesMutex.Unlock()
+	fake.GetObjectAttributesStub = nil
+	if fake.getObjectAttributesReturnsOnCall == nil {
+		fake.getObjectAttributesReturnsOnCall = make(map[int]struct {
+			result1 *s3.GetObjectAttributesOutput
+			result2 error
+		})
+	}
+	fake.getObjectAttributesReturnsOnCall[i] = struct {
+		result1 *s3.GetObjectAttributesOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) GetObjectAttributesRequest(arg1 *s3.GetObjectAttributesInput) (*request.Request, *s3.GetObjectAttributesOutput) {
+	fake.getObjectAttributesRequestMutex.Lock()
+	ret, specificReturn := fake.getObjectAttributesRequestReturnsOnCall[len(fake.getObjectAttributesRequestArgsForCall)]
+	fake.getObjectAttributesRequestArgsForCall = append(fake.getObjectAttributesRequestArgsForCall, struct {
+		arg1 *s3.GetObjectAttributesInput
+	}{arg1})
+	stub := fake.GetObjectAttributesRequestStub
+	fakeReturns := fake.getObjectAttributesRequestReturns
+	fake.recordInvocation("GetObjectAttributesRequest", []interface{}{arg1})
+	fake.getObjectAttributesRequestMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeS3API) GetObjectAttributesRequestCallCount() int {
+	fake.getObjectAttributesRequestMutex.RLock()
+	defer fake.getObjectAttributesRequestMutex.RUnlock()
+	return len(fake.getObjectAttributesRequestArgsForCall)
+}
+
+func (fake *FakeS3API) GetObjectAttributesRequestCalls(stub func(*s3.GetObjectAttributesInput) (*request.Request, *s3.GetObjectAttributesOutput)) {
+	fake.getObjectAttributesRequestMutex.Lock()
+	defer fake.getObjectAttributesRequestMutex.Unlock()
+	fake.GetObjectAttributesRequestStub = stub
+}
+
+func (fake *FakeS3API) GetObjectAttributesRequestArgsForCall(i int) *s3.GetObjectAttributesInput {
+	fake.getObjectAttributesRequestMutex.RLock()
+	defer fake.getObjectAttributesRequestMutex.RUnlock()
+	argsForCall := fake.getObjectAttributesRequestArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeS3API) GetObjectAttributesRequestReturns(result1 *request.Request, result2 *s3.GetObjectAttributesOutput) {
+	fake.getObjectAttributesRequestMutex.Lock()
+	defer fake.getObjectAttributesRequestMutex.Unlock()
+	fake.GetObjectAttributesRequestStub = nil
+	fake.getObjectAttributesRequestReturns = struct {
+		result1 *request.Request
+		result2 *s3.GetObjectAttributesOutput
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) GetObjectAttributesRequestReturnsOnCall(i int, result1 *request.Request, result2 *s3.GetObjectAttributesOutput) {
+	fake.getObjectAttributesRequestMutex.Lock()
+	defer fake.getObjectAttributesRequestMutex.Unlock()
+	fake.GetObjectAttributesRequestStub = nil
+	if fake.getObjectAttributesRequestReturnsOnCall == nil {
+		fake.getObjectAttributesRequestReturnsOnCall = make(map[int]struct {
+			result1 *request.Request
+			result2 *s3.GetObjectAttributesOutput
+		})
+	}
+	fake.getObjectAttributesRequestReturnsOnCall[i] = struct {
+		result1 *request.Request
+		result2 *s3.GetObjectAttributesOutput
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) GetObjectAttributesWithContext(arg1 context.Context, arg2 *s3.GetObjectAttributesInput, arg3 ...request.Option) (*s3.GetObjectAttributesOutput, error) {
+	fake.getObjectAttributesWithContextMutex.Lock()
+	ret, specificReturn := fake.getObjectAttributesWithContextReturnsOnCall[len(fake.getObjectAttributesWithContextArgsForCall)]
+	fake.getObjectAttributesWithContextArgsForCall = append(fake.getObjectAttributesWithContextArgsForCall, struct {
+		arg1 context.Context
+		arg2 *s3.GetObjectAttributesInput
+		arg3 []request.Option
+	}{arg1, arg2, arg3})
+	stub := fake.GetObjectAttributesWithContextStub
+	fakeReturns := fake.getObjectAttributesWithContextReturns
+	fake.recordInvocation("GetObjectAttributesWithContext", []interface{}{arg1, arg2, arg3})
+	fake.getObjectAttributesWithContextMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2, arg3...)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeS3API) GetObjectAttributesWithContextCallCount() int {
+	fake.getObjectAttributesWithContextMutex.RLock()
+	defer fake.getObjectAttributesWithContextMutex.RUnlock()
+	return len(fake.getObjectAttributesWithContextArgsForCall)
+}
+
+func (fake *FakeS3API) GetObjectAttributesWithContextCalls(stub func(context.Context, *s3.GetObjectAttributesInput, ...request.Option) (*s3.GetObjectAttributesOutput, error)) {
+	fake.getObjectAttributesWithContextMutex.Lock()
+	defer fake.getObjectAttributesWithContextMutex.Unlock()
+	fake.GetObjectAttributesWithContextStub = stub
+}
+
+func (fake *FakeS3API) GetObjectAttributesWithContextArgsForCall(i int) (context.Context, *s3.GetObjectAttributesInput, []request.Option) {
+	fake.getObjectAttributesWithContextMutex.RLock()
+	defer fake.getObjectAttributesWithContextMutex.RUnlock()
+	argsForCall := fake.getObjectAttributesWithContextArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3
+}
+
+func (fake *FakeS3API) GetObjectAttributesWithContextReturns(result1 *s3.GetObjectAttributesOutput, result2 error) {
+	fake.getObjectAttributesWithContextMutex.Lock()
+	defer fake.getObjectAttributesWithContextMutex.Unlock()
+	fake.GetObjectAttributesWithContextStub = nil
+	fake.getObjectAttributesWithContextReturns = struct {
+		result1 *s3.GetObjectAttributesOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) GetObjectAttributesWithContextReturnsOnCall(i int, result1 *s3.GetObjectAttributesOutput, result2 error) {
+	fake.getObjectAttributesWithContextMutex.Lock()
+	defer fake.getObjectAttributesWithContextMutex.Unlock()
+	fake.GetObjectAttributesWithContextStub = nil
+	if fake.getObjectAttributesWithContextReturnsOnCall == nil {
+		fake.getObjectAttributesWithContextReturnsOnCall = make(map[int]struct {
+			result1 *s3.GetObjectAttributesOutput
+			result2 error
+		})
+	}
+	fake.getObjectAttributesWithContextReturnsOnCall[i] = struct {
+		result1 *s3.GetObjectAttributesOutput
 		result2 error
 	}{result1, result2}
 }
@@ -13739,6 +15078,200 @@ func (fake *FakeS3API) ListBucketAnalyticsConfigurationsWithContextReturnsOnCall
 	}
 	fake.listBucketAnalyticsConfigurationsWithContextReturnsOnCall[i] = struct {
 		result1 *s3.ListBucketAnalyticsConfigurationsOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) ListBucketIntelligentTieringConfigurations(arg1 *s3.ListBucketIntelligentTieringConfigurationsInput) (*s3.ListBucketIntelligentTieringConfigurationsOutput, error) {
+	fake.listBucketIntelligentTieringConfigurationsMutex.Lock()
+	ret, specificReturn := fake.listBucketIntelligentTieringConfigurationsReturnsOnCall[len(fake.listBucketIntelligentTieringConfigurationsArgsForCall)]
+	fake.listBucketIntelligentTieringConfigurationsArgsForCall = append(fake.listBucketIntelligentTieringConfigurationsArgsForCall, struct {
+		arg1 *s3.ListBucketIntelligentTieringConfigurationsInput
+	}{arg1})
+	stub := fake.ListBucketIntelligentTieringConfigurationsStub
+	fakeReturns := fake.listBucketIntelligentTieringConfigurationsReturns
+	fake.recordInvocation("ListBucketIntelligentTieringConfigurations", []interface{}{arg1})
+	fake.listBucketIntelligentTieringConfigurationsMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeS3API) ListBucketIntelligentTieringConfigurationsCallCount() int {
+	fake.listBucketIntelligentTieringConfigurationsMutex.RLock()
+	defer fake.listBucketIntelligentTieringConfigurationsMutex.RUnlock()
+	return len(fake.listBucketIntelligentTieringConfigurationsArgsForCall)
+}
+
+func (fake *FakeS3API) ListBucketIntelligentTieringConfigurationsCalls(stub func(*s3.ListBucketIntelligentTieringConfigurationsInput) (*s3.ListBucketIntelligentTieringConfigurationsOutput, error)) {
+	fake.listBucketIntelligentTieringConfigurationsMutex.Lock()
+	defer fake.listBucketIntelligentTieringConfigurationsMutex.Unlock()
+	fake.ListBucketIntelligentTieringConfigurationsStub = stub
+}
+
+func (fake *FakeS3API) ListBucketIntelligentTieringConfigurationsArgsForCall(i int) *s3.ListBucketIntelligentTieringConfigurationsInput {
+	fake.listBucketIntelligentTieringConfigurationsMutex.RLock()
+	defer fake.listBucketIntelligentTieringConfigurationsMutex.RUnlock()
+	argsForCall := fake.listBucketIntelligentTieringConfigurationsArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeS3API) ListBucketIntelligentTieringConfigurationsReturns(result1 *s3.ListBucketIntelligentTieringConfigurationsOutput, result2 error) {
+	fake.listBucketIntelligentTieringConfigurationsMutex.Lock()
+	defer fake.listBucketIntelligentTieringConfigurationsMutex.Unlock()
+	fake.ListBucketIntelligentTieringConfigurationsStub = nil
+	fake.listBucketIntelligentTieringConfigurationsReturns = struct {
+		result1 *s3.ListBucketIntelligentTieringConfigurationsOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) ListBucketIntelligentTieringConfigurationsReturnsOnCall(i int, result1 *s3.ListBucketIntelligentTieringConfigurationsOutput, result2 error) {
+	fake.listBucketIntelligentTieringConfigurationsMutex.Lock()
+	defer fake.listBucketIntelligentTieringConfigurationsMutex.Unlock()
+	fake.ListBucketIntelligentTieringConfigurationsStub = nil
+	if fake.listBucketIntelligentTieringConfigurationsReturnsOnCall == nil {
+		fake.listBucketIntelligentTieringConfigurationsReturnsOnCall = make(map[int]struct {
+			result1 *s3.ListBucketIntelligentTieringConfigurationsOutput
+			result2 error
+		})
+	}
+	fake.listBucketIntelligentTieringConfigurationsReturnsOnCall[i] = struct {
+		result1 *s3.ListBucketIntelligentTieringConfigurationsOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) ListBucketIntelligentTieringConfigurationsRequest(arg1 *s3.ListBucketIntelligentTieringConfigurationsInput) (*request.Request, *s3.ListBucketIntelligentTieringConfigurationsOutput) {
+	fake.listBucketIntelligentTieringConfigurationsRequestMutex.Lock()
+	ret, specificReturn := fake.listBucketIntelligentTieringConfigurationsRequestReturnsOnCall[len(fake.listBucketIntelligentTieringConfigurationsRequestArgsForCall)]
+	fake.listBucketIntelligentTieringConfigurationsRequestArgsForCall = append(fake.listBucketIntelligentTieringConfigurationsRequestArgsForCall, struct {
+		arg1 *s3.ListBucketIntelligentTieringConfigurationsInput
+	}{arg1})
+	stub := fake.ListBucketIntelligentTieringConfigurationsRequestStub
+	fakeReturns := fake.listBucketIntelligentTieringConfigurationsRequestReturns
+	fake.recordInvocation("ListBucketIntelligentTieringConfigurationsRequest", []interface{}{arg1})
+	fake.listBucketIntelligentTieringConfigurationsRequestMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeS3API) ListBucketIntelligentTieringConfigurationsRequestCallCount() int {
+	fake.listBucketIntelligentTieringConfigurationsRequestMutex.RLock()
+	defer fake.listBucketIntelligentTieringConfigurationsRequestMutex.RUnlock()
+	return len(fake.listBucketIntelligentTieringConfigurationsRequestArgsForCall)
+}
+
+func (fake *FakeS3API) ListBucketIntelligentTieringConfigurationsRequestCalls(stub func(*s3.ListBucketIntelligentTieringConfigurationsInput) (*request.Request, *s3.ListBucketIntelligentTieringConfigurationsOutput)) {
+	fake.listBucketIntelligentTieringConfigurationsRequestMutex.Lock()
+	defer fake.listBucketIntelligentTieringConfigurationsRequestMutex.Unlock()
+	fake.ListBucketIntelligentTieringConfigurationsRequestStub = stub
+}
+
+func (fake *FakeS3API) ListBucketIntelligentTieringConfigurationsRequestArgsForCall(i int) *s3.ListBucketIntelligentTieringConfigurationsInput {
+	fake.listBucketIntelligentTieringConfigurationsRequestMutex.RLock()
+	defer fake.listBucketIntelligentTieringConfigurationsRequestMutex.RUnlock()
+	argsForCall := fake.listBucketIntelligentTieringConfigurationsRequestArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeS3API) ListBucketIntelligentTieringConfigurationsRequestReturns(result1 *request.Request, result2 *s3.ListBucketIntelligentTieringConfigurationsOutput) {
+	fake.listBucketIntelligentTieringConfigurationsRequestMutex.Lock()
+	defer fake.listBucketIntelligentTieringConfigurationsRequestMutex.Unlock()
+	fake.ListBucketIntelligentTieringConfigurationsRequestStub = nil
+	fake.listBucketIntelligentTieringConfigurationsRequestReturns = struct {
+		result1 *request.Request
+		result2 *s3.ListBucketIntelligentTieringConfigurationsOutput
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) ListBucketIntelligentTieringConfigurationsRequestReturnsOnCall(i int, result1 *request.Request, result2 *s3.ListBucketIntelligentTieringConfigurationsOutput) {
+	fake.listBucketIntelligentTieringConfigurationsRequestMutex.Lock()
+	defer fake.listBucketIntelligentTieringConfigurationsRequestMutex.Unlock()
+	fake.ListBucketIntelligentTieringConfigurationsRequestStub = nil
+	if fake.listBucketIntelligentTieringConfigurationsRequestReturnsOnCall == nil {
+		fake.listBucketIntelligentTieringConfigurationsRequestReturnsOnCall = make(map[int]struct {
+			result1 *request.Request
+			result2 *s3.ListBucketIntelligentTieringConfigurationsOutput
+		})
+	}
+	fake.listBucketIntelligentTieringConfigurationsRequestReturnsOnCall[i] = struct {
+		result1 *request.Request
+		result2 *s3.ListBucketIntelligentTieringConfigurationsOutput
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) ListBucketIntelligentTieringConfigurationsWithContext(arg1 context.Context, arg2 *s3.ListBucketIntelligentTieringConfigurationsInput, arg3 ...request.Option) (*s3.ListBucketIntelligentTieringConfigurationsOutput, error) {
+	fake.listBucketIntelligentTieringConfigurationsWithContextMutex.Lock()
+	ret, specificReturn := fake.listBucketIntelligentTieringConfigurationsWithContextReturnsOnCall[len(fake.listBucketIntelligentTieringConfigurationsWithContextArgsForCall)]
+	fake.listBucketIntelligentTieringConfigurationsWithContextArgsForCall = append(fake.listBucketIntelligentTieringConfigurationsWithContextArgsForCall, struct {
+		arg1 context.Context
+		arg2 *s3.ListBucketIntelligentTieringConfigurationsInput
+		arg3 []request.Option
+	}{arg1, arg2, arg3})
+	stub := fake.ListBucketIntelligentTieringConfigurationsWithContextStub
+	fakeReturns := fake.listBucketIntelligentTieringConfigurationsWithContextReturns
+	fake.recordInvocation("ListBucketIntelligentTieringConfigurationsWithContext", []interface{}{arg1, arg2, arg3})
+	fake.listBucketIntelligentTieringConfigurationsWithContextMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2, arg3...)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeS3API) ListBucketIntelligentTieringConfigurationsWithContextCallCount() int {
+	fake.listBucketIntelligentTieringConfigurationsWithContextMutex.RLock()
+	defer fake.listBucketIntelligentTieringConfigurationsWithContextMutex.RUnlock()
+	return len(fake.listBucketIntelligentTieringConfigurationsWithContextArgsForCall)
+}
+
+func (fake *FakeS3API) ListBucketIntelligentTieringConfigurationsWithContextCalls(stub func(context.Context, *s3.ListBucketIntelligentTieringConfigurationsInput, ...request.Option) (*s3.ListBucketIntelligentTieringConfigurationsOutput, error)) {
+	fake.listBucketIntelligentTieringConfigurationsWithContextMutex.Lock()
+	defer fake.listBucketIntelligentTieringConfigurationsWithContextMutex.Unlock()
+	fake.ListBucketIntelligentTieringConfigurationsWithContextStub = stub
+}
+
+func (fake *FakeS3API) ListBucketIntelligentTieringConfigurationsWithContextArgsForCall(i int) (context.Context, *s3.ListBucketIntelligentTieringConfigurationsInput, []request.Option) {
+	fake.listBucketIntelligentTieringConfigurationsWithContextMutex.RLock()
+	defer fake.listBucketIntelligentTieringConfigurationsWithContextMutex.RUnlock()
+	argsForCall := fake.listBucketIntelligentTieringConfigurationsWithContextArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3
+}
+
+func (fake *FakeS3API) ListBucketIntelligentTieringConfigurationsWithContextReturns(result1 *s3.ListBucketIntelligentTieringConfigurationsOutput, result2 error) {
+	fake.listBucketIntelligentTieringConfigurationsWithContextMutex.Lock()
+	defer fake.listBucketIntelligentTieringConfigurationsWithContextMutex.Unlock()
+	fake.ListBucketIntelligentTieringConfigurationsWithContextStub = nil
+	fake.listBucketIntelligentTieringConfigurationsWithContextReturns = struct {
+		result1 *s3.ListBucketIntelligentTieringConfigurationsOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) ListBucketIntelligentTieringConfigurationsWithContextReturnsOnCall(i int, result1 *s3.ListBucketIntelligentTieringConfigurationsOutput, result2 error) {
+	fake.listBucketIntelligentTieringConfigurationsWithContextMutex.Lock()
+	defer fake.listBucketIntelligentTieringConfigurationsWithContextMutex.Unlock()
+	fake.ListBucketIntelligentTieringConfigurationsWithContextStub = nil
+	if fake.listBucketIntelligentTieringConfigurationsWithContextReturnsOnCall == nil {
+		fake.listBucketIntelligentTieringConfigurationsWithContextReturnsOnCall = make(map[int]struct {
+			result1 *s3.ListBucketIntelligentTieringConfigurationsOutput
+			result2 error
+		})
+	}
+	fake.listBucketIntelligentTieringConfigurationsWithContextReturnsOnCall[i] = struct {
+		result1 *s3.ListBucketIntelligentTieringConfigurationsOutput
 		result2 error
 	}{result1, result2}
 }
@@ -16895,6 +18428,200 @@ func (fake *FakeS3API) PutBucketEncryptionWithContextReturnsOnCall(i int, result
 	}{result1, result2}
 }
 
+func (fake *FakeS3API) PutBucketIntelligentTieringConfiguration(arg1 *s3.PutBucketIntelligentTieringConfigurationInput) (*s3.PutBucketIntelligentTieringConfigurationOutput, error) {
+	fake.putBucketIntelligentTieringConfigurationMutex.Lock()
+	ret, specificReturn := fake.putBucketIntelligentTieringConfigurationReturnsOnCall[len(fake.putBucketIntelligentTieringConfigurationArgsForCall)]
+	fake.putBucketIntelligentTieringConfigurationArgsForCall = append(fake.putBucketIntelligentTieringConfigurationArgsForCall, struct {
+		arg1 *s3.PutBucketIntelligentTieringConfigurationInput
+	}{arg1})
+	stub := fake.PutBucketIntelligentTieringConfigurationStub
+	fakeReturns := fake.putBucketIntelligentTieringConfigurationReturns
+	fake.recordInvocation("PutBucketIntelligentTieringConfiguration", []interface{}{arg1})
+	fake.putBucketIntelligentTieringConfigurationMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeS3API) PutBucketIntelligentTieringConfigurationCallCount() int {
+	fake.putBucketIntelligentTieringConfigurationMutex.RLock()
+	defer fake.putBucketIntelligentTieringConfigurationMutex.RUnlock()
+	return len(fake.putBucketIntelligentTieringConfigurationArgsForCall)
+}
+
+func (fake *FakeS3API) PutBucketIntelligentTieringConfigurationCalls(stub func(*s3.PutBucketIntelligentTieringConfigurationInput) (*s3.PutBucketIntelligentTieringConfigurationOutput, error)) {
+	fake.putBucketIntelligentTieringConfigurationMutex.Lock()
+	defer fake.putBucketIntelligentTieringConfigurationMutex.Unlock()
+	fake.PutBucketIntelligentTieringConfigurationStub = stub
+}
+
+func (fake *FakeS3API) PutBucketIntelligentTieringConfigurationArgsForCall(i int) *s3.PutBucketIntelligentTieringConfigurationInput {
+	fake.putBucketIntelligentTieringConfigurationMutex.RLock()
+	defer fake.putBucketIntelligentTieringConfigurationMutex.RUnlock()
+	argsForCall := fake.putBucketIntelligentTieringConfigurationArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeS3API) PutBucketIntelligentTieringConfigurationReturns(result1 *s3.PutBucketIntelligentTieringConfigurationOutput, result2 error) {
+	fake.putBucketIntelligentTieringConfigurationMutex.Lock()
+	defer fake.putBucketIntelligentTieringConfigurationMutex.Unlock()
+	fake.PutBucketIntelligentTieringConfigurationStub = nil
+	fake.putBucketIntelligentTieringConfigurationReturns = struct {
+		result1 *s3.PutBucketIntelligentTieringConfigurationOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) PutBucketIntelligentTieringConfigurationReturnsOnCall(i int, result1 *s3.PutBucketIntelligentTieringConfigurationOutput, result2 error) {
+	fake.putBucketIntelligentTieringConfigurationMutex.Lock()
+	defer fake.putBucketIntelligentTieringConfigurationMutex.Unlock()
+	fake.PutBucketIntelligentTieringConfigurationStub = nil
+	if fake.putBucketIntelligentTieringConfigurationReturnsOnCall == nil {
+		fake.putBucketIntelligentTieringConfigurationReturnsOnCall = make(map[int]struct {
+			result1 *s3.PutBucketIntelligentTieringConfigurationOutput
+			result2 error
+		})
+	}
+	fake.putBucketIntelligentTieringConfigurationReturnsOnCall[i] = struct {
+		result1 *s3.PutBucketIntelligentTieringConfigurationOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) PutBucketIntelligentTieringConfigurationRequest(arg1 *s3.PutBucketIntelligentTieringConfigurationInput) (*request.Request, *s3.PutBucketIntelligentTieringConfigurationOutput) {
+	fake.putBucketIntelligentTieringConfigurationRequestMutex.Lock()
+	ret, specificReturn := fake.putBucketIntelligentTieringConfigurationRequestReturnsOnCall[len(fake.putBucketIntelligentTieringConfigurationRequestArgsForCall)]
+	fake.putBucketIntelligentTieringConfigurationRequestArgsForCall = append(fake.putBucketIntelligentTieringConfigurationRequestArgsForCall, struct {
+		arg1 *s3.PutBucketIntelligentTieringConfigurationInput
+	}{arg1})
+	stub := fake.PutBucketIntelligentTieringConfigurationRequestStub
+	fakeReturns := fake.putBucketIntelligentTieringConfigurationRequestReturns
+	fake.recordInvocation("PutBucketIntelligentTieringConfigurationRequest", []interface{}{arg1})
+	fake.putBucketIntelligentTieringConfigurationRequestMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeS3API) PutBucketIntelligentTieringConfigurationRequestCallCount() int {
+	fake.putBucketIntelligentTieringConfigurationRequestMutex.RLock()
+	defer fake.putBucketIntelligentTieringConfigurationRequestMutex.RUnlock()
+	return len(fake.putBucketIntelligentTieringConfigurationRequestArgsForCall)
+}
+
+func (fake *FakeS3API) PutBucketIntelligentTieringConfigurationRequestCalls(stub func(*s3.PutBucketIntelligentTieringConfigurationInput) (*request.Request, *s3.PutBucketIntelligentTieringConfigurationOutput)) {
+	fake.putBucketIntelligentTieringConfigurationRequestMutex.Lock()
+	defer fake.putBucketIntelligentTieringConfigurationRequestMutex.Unlock()
+	fake.PutBucketIntelligentTieringConfigurationRequestStub = stub
+}
+
+func (fake *FakeS3API) PutBucketIntelligentTieringConfigurationRequestArgsForCall(i int) *s3.PutBucketIntelligentTieringConfigurationInput {
+	fake.putBucketIntelligentTieringConfigurationRequestMutex.RLock()
+	defer fake.putBucketIntelligentTieringConfigurationRequestMutex.RUnlock()
+	argsForCall := fake.putBucketIntelligentTieringConfigurationRequestArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeS3API) PutBucketIntelligentTieringConfigurationRequestReturns(result1 *request.Request, result2 *s3.PutBucketIntelligentTieringConfigurationOutput) {
+	fake.putBucketIntelligentTieringConfigurationRequestMutex.Lock()
+	defer fake.putBucketIntelligentTieringConfigurationRequestMutex.Unlock()
+	fake.PutBucketIntelligentTieringConfigurationRequestStub = nil
+	fake.putBucketIntelligentTieringConfigurationRequestReturns = struct {
+		result1 *request.Request
+		result2 *s3.PutBucketIntelligentTieringConfigurationOutput
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) PutBucketIntelligentTieringConfigurationRequestReturnsOnCall(i int, result1 *request.Request, result2 *s3.PutBucketIntelligentTieringConfigurationOutput) {
+	fake.putBucketIntelligentTieringConfigurationRequestMutex.Lock()
+	defer fake.putBucketIntelligentTieringConfigurationRequestMutex.Unlock()
+	fake.PutBucketIntelligentTieringConfigurationRequestStub = nil
+	if fake.putBucketIntelligentTieringConfigurationRequestReturnsOnCall == nil {
+		fake.putBucketIntelligentTieringConfigurationRequestReturnsOnCall = make(map[int]struct {
+			result1 *request.Request
+			result2 *s3.PutBucketIntelligentTieringConfigurationOutput
+		})
+	}
+	fake.putBucketIntelligentTieringConfigurationRequestReturnsOnCall[i] = struct {
+		result1 *request.Request
+		result2 *s3.PutBucketIntelligentTieringConfigurationOutput
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) PutBucketIntelligentTieringConfigurationWithContext(arg1 context.Context, arg2 *s3.PutBucketIntelligentTieringConfigurationInput, arg3 ...request.Option) (*s3.PutBucketIntelligentTieringConfigurationOutput, error) {
+	fake.putBucketIntelligentTieringConfigurationWithContextMutex.Lock()
+	ret, specificReturn := fake.putBucketIntelligentTieringConfigurationWithContextReturnsOnCall[len(fake.putBucketIntelligentTieringConfigurationWithContextArgsForCall)]
+	fake.putBucketIntelligentTieringConfigurationWithContextArgsForCall = append(fake.putBucketIntelligentTieringConfigurationWithContextArgsForCall, struct {
+		arg1 context.Context
+		arg2 *s3.PutBucketIntelligentTieringConfigurationInput
+		arg3 []request.Option
+	}{arg1, arg2, arg3})
+	stub := fake.PutBucketIntelligentTieringConfigurationWithContextStub
+	fakeReturns := fake.putBucketIntelligentTieringConfigurationWithContextReturns
+	fake.recordInvocation("PutBucketIntelligentTieringConfigurationWithContext", []interface{}{arg1, arg2, arg3})
+	fake.putBucketIntelligentTieringConfigurationWithContextMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2, arg3...)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeS3API) PutBucketIntelligentTieringConfigurationWithContextCallCount() int {
+	fake.putBucketIntelligentTieringConfigurationWithContextMutex.RLock()
+	defer fake.putBucketIntelligentTieringConfigurationWithContextMutex.RUnlock()
+	return len(fake.putBucketIntelligentTieringConfigurationWithContextArgsForCall)
+}
+
+func (fake *FakeS3API) PutBucketIntelligentTieringConfigurationWithContextCalls(stub func(context.Context, *s3.PutBucketIntelligentTieringConfigurationInput, ...request.Option) (*s3.PutBucketIntelligentTieringConfigurationOutput, error)) {
+	fake.putBucketIntelligentTieringConfigurationWithContextMutex.Lock()
+	defer fake.putBucketIntelligentTieringConfigurationWithContextMutex.Unlock()
+	fake.PutBucketIntelligentTieringConfigurationWithContextStub = stub
+}
+
+func (fake *FakeS3API) PutBucketIntelligentTieringConfigurationWithContextArgsForCall(i int) (context.Context, *s3.PutBucketIntelligentTieringConfigurationInput, []request.Option) {
+	fake.putBucketIntelligentTieringConfigurationWithContextMutex.RLock()
+	defer fake.putBucketIntelligentTieringConfigurationWithContextMutex.RUnlock()
+	argsForCall := fake.putBucketIntelligentTieringConfigurationWithContextArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3
+}
+
+func (fake *FakeS3API) PutBucketIntelligentTieringConfigurationWithContextReturns(result1 *s3.PutBucketIntelligentTieringConfigurationOutput, result2 error) {
+	fake.putBucketIntelligentTieringConfigurationWithContextMutex.Lock()
+	defer fake.putBucketIntelligentTieringConfigurationWithContextMutex.Unlock()
+	fake.PutBucketIntelligentTieringConfigurationWithContextStub = nil
+	fake.putBucketIntelligentTieringConfigurationWithContextReturns = struct {
+		result1 *s3.PutBucketIntelligentTieringConfigurationOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) PutBucketIntelligentTieringConfigurationWithContextReturnsOnCall(i int, result1 *s3.PutBucketIntelligentTieringConfigurationOutput, result2 error) {
+	fake.putBucketIntelligentTieringConfigurationWithContextMutex.Lock()
+	defer fake.putBucketIntelligentTieringConfigurationWithContextMutex.Unlock()
+	fake.PutBucketIntelligentTieringConfigurationWithContextStub = nil
+	if fake.putBucketIntelligentTieringConfigurationWithContextReturnsOnCall == nil {
+		fake.putBucketIntelligentTieringConfigurationWithContextReturnsOnCall = make(map[int]struct {
+			result1 *s3.PutBucketIntelligentTieringConfigurationOutput
+			result2 error
+		})
+	}
+	fake.putBucketIntelligentTieringConfigurationWithContextReturnsOnCall[i] = struct {
+		result1 *s3.PutBucketIntelligentTieringConfigurationOutput
+		result2 error
+	}{result1, result2}
+}
+
 func (fake *FakeS3API) PutBucketInventoryConfiguration(arg1 *s3.PutBucketInventoryConfigurationInput) (*s3.PutBucketInventoryConfigurationOutput, error) {
 	fake.putBucketInventoryConfigurationMutex.Lock()
 	ret, specificReturn := fake.putBucketInventoryConfigurationReturnsOnCall[len(fake.putBucketInventoryConfigurationArgsForCall)]
@@ -18249,6 +19976,200 @@ func (fake *FakeS3API) PutBucketNotificationWithContextReturnsOnCall(i int, resu
 	}
 	fake.putBucketNotificationWithContextReturnsOnCall[i] = struct {
 		result1 *s3.PutBucketNotificationOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) PutBucketOwnershipControls(arg1 *s3.PutBucketOwnershipControlsInput) (*s3.PutBucketOwnershipControlsOutput, error) {
+	fake.putBucketOwnershipControlsMutex.Lock()
+	ret, specificReturn := fake.putBucketOwnershipControlsReturnsOnCall[len(fake.putBucketOwnershipControlsArgsForCall)]
+	fake.putBucketOwnershipControlsArgsForCall = append(fake.putBucketOwnershipControlsArgsForCall, struct {
+		arg1 *s3.PutBucketOwnershipControlsInput
+	}{arg1})
+	stub := fake.PutBucketOwnershipControlsStub
+	fakeReturns := fake.putBucketOwnershipControlsReturns
+	fake.recordInvocation("PutBucketOwnershipControls", []interface{}{arg1})
+	fake.putBucketOwnershipControlsMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeS3API) PutBucketOwnershipControlsCallCount() int {
+	fake.putBucketOwnershipControlsMutex.RLock()
+	defer fake.putBucketOwnershipControlsMutex.RUnlock()
+	return len(fake.putBucketOwnershipControlsArgsForCall)
+}
+
+func (fake *FakeS3API) PutBucketOwnershipControlsCalls(stub func(*s3.PutBucketOwnershipControlsInput) (*s3.PutBucketOwnershipControlsOutput, error)) {
+	fake.putBucketOwnershipControlsMutex.Lock()
+	defer fake.putBucketOwnershipControlsMutex.Unlock()
+	fake.PutBucketOwnershipControlsStub = stub
+}
+
+func (fake *FakeS3API) PutBucketOwnershipControlsArgsForCall(i int) *s3.PutBucketOwnershipControlsInput {
+	fake.putBucketOwnershipControlsMutex.RLock()
+	defer fake.putBucketOwnershipControlsMutex.RUnlock()
+	argsForCall := fake.putBucketOwnershipControlsArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeS3API) PutBucketOwnershipControlsReturns(result1 *s3.PutBucketOwnershipControlsOutput, result2 error) {
+	fake.putBucketOwnershipControlsMutex.Lock()
+	defer fake.putBucketOwnershipControlsMutex.Unlock()
+	fake.PutBucketOwnershipControlsStub = nil
+	fake.putBucketOwnershipControlsReturns = struct {
+		result1 *s3.PutBucketOwnershipControlsOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) PutBucketOwnershipControlsReturnsOnCall(i int, result1 *s3.PutBucketOwnershipControlsOutput, result2 error) {
+	fake.putBucketOwnershipControlsMutex.Lock()
+	defer fake.putBucketOwnershipControlsMutex.Unlock()
+	fake.PutBucketOwnershipControlsStub = nil
+	if fake.putBucketOwnershipControlsReturnsOnCall == nil {
+		fake.putBucketOwnershipControlsReturnsOnCall = make(map[int]struct {
+			result1 *s3.PutBucketOwnershipControlsOutput
+			result2 error
+		})
+	}
+	fake.putBucketOwnershipControlsReturnsOnCall[i] = struct {
+		result1 *s3.PutBucketOwnershipControlsOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) PutBucketOwnershipControlsRequest(arg1 *s3.PutBucketOwnershipControlsInput) (*request.Request, *s3.PutBucketOwnershipControlsOutput) {
+	fake.putBucketOwnershipControlsRequestMutex.Lock()
+	ret, specificReturn := fake.putBucketOwnershipControlsRequestReturnsOnCall[len(fake.putBucketOwnershipControlsRequestArgsForCall)]
+	fake.putBucketOwnershipControlsRequestArgsForCall = append(fake.putBucketOwnershipControlsRequestArgsForCall, struct {
+		arg1 *s3.PutBucketOwnershipControlsInput
+	}{arg1})
+	stub := fake.PutBucketOwnershipControlsRequestStub
+	fakeReturns := fake.putBucketOwnershipControlsRequestReturns
+	fake.recordInvocation("PutBucketOwnershipControlsRequest", []interface{}{arg1})
+	fake.putBucketOwnershipControlsRequestMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeS3API) PutBucketOwnershipControlsRequestCallCount() int {
+	fake.putBucketOwnershipControlsRequestMutex.RLock()
+	defer fake.putBucketOwnershipControlsRequestMutex.RUnlock()
+	return len(fake.putBucketOwnershipControlsRequestArgsForCall)
+}
+
+func (fake *FakeS3API) PutBucketOwnershipControlsRequestCalls(stub func(*s3.PutBucketOwnershipControlsInput) (*request.Request, *s3.PutBucketOwnershipControlsOutput)) {
+	fake.putBucketOwnershipControlsRequestMutex.Lock()
+	defer fake.putBucketOwnershipControlsRequestMutex.Unlock()
+	fake.PutBucketOwnershipControlsRequestStub = stub
+}
+
+func (fake *FakeS3API) PutBucketOwnershipControlsRequestArgsForCall(i int) *s3.PutBucketOwnershipControlsInput {
+	fake.putBucketOwnershipControlsRequestMutex.RLock()
+	defer fake.putBucketOwnershipControlsRequestMutex.RUnlock()
+	argsForCall := fake.putBucketOwnershipControlsRequestArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeS3API) PutBucketOwnershipControlsRequestReturns(result1 *request.Request, result2 *s3.PutBucketOwnershipControlsOutput) {
+	fake.putBucketOwnershipControlsRequestMutex.Lock()
+	defer fake.putBucketOwnershipControlsRequestMutex.Unlock()
+	fake.PutBucketOwnershipControlsRequestStub = nil
+	fake.putBucketOwnershipControlsRequestReturns = struct {
+		result1 *request.Request
+		result2 *s3.PutBucketOwnershipControlsOutput
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) PutBucketOwnershipControlsRequestReturnsOnCall(i int, result1 *request.Request, result2 *s3.PutBucketOwnershipControlsOutput) {
+	fake.putBucketOwnershipControlsRequestMutex.Lock()
+	defer fake.putBucketOwnershipControlsRequestMutex.Unlock()
+	fake.PutBucketOwnershipControlsRequestStub = nil
+	if fake.putBucketOwnershipControlsRequestReturnsOnCall == nil {
+		fake.putBucketOwnershipControlsRequestReturnsOnCall = make(map[int]struct {
+			result1 *request.Request
+			result2 *s3.PutBucketOwnershipControlsOutput
+		})
+	}
+	fake.putBucketOwnershipControlsRequestReturnsOnCall[i] = struct {
+		result1 *request.Request
+		result2 *s3.PutBucketOwnershipControlsOutput
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) PutBucketOwnershipControlsWithContext(arg1 context.Context, arg2 *s3.PutBucketOwnershipControlsInput, arg3 ...request.Option) (*s3.PutBucketOwnershipControlsOutput, error) {
+	fake.putBucketOwnershipControlsWithContextMutex.Lock()
+	ret, specificReturn := fake.putBucketOwnershipControlsWithContextReturnsOnCall[len(fake.putBucketOwnershipControlsWithContextArgsForCall)]
+	fake.putBucketOwnershipControlsWithContextArgsForCall = append(fake.putBucketOwnershipControlsWithContextArgsForCall, struct {
+		arg1 context.Context
+		arg2 *s3.PutBucketOwnershipControlsInput
+		arg3 []request.Option
+	}{arg1, arg2, arg3})
+	stub := fake.PutBucketOwnershipControlsWithContextStub
+	fakeReturns := fake.putBucketOwnershipControlsWithContextReturns
+	fake.recordInvocation("PutBucketOwnershipControlsWithContext", []interface{}{arg1, arg2, arg3})
+	fake.putBucketOwnershipControlsWithContextMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2, arg3...)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeS3API) PutBucketOwnershipControlsWithContextCallCount() int {
+	fake.putBucketOwnershipControlsWithContextMutex.RLock()
+	defer fake.putBucketOwnershipControlsWithContextMutex.RUnlock()
+	return len(fake.putBucketOwnershipControlsWithContextArgsForCall)
+}
+
+func (fake *FakeS3API) PutBucketOwnershipControlsWithContextCalls(stub func(context.Context, *s3.PutBucketOwnershipControlsInput, ...request.Option) (*s3.PutBucketOwnershipControlsOutput, error)) {
+	fake.putBucketOwnershipControlsWithContextMutex.Lock()
+	defer fake.putBucketOwnershipControlsWithContextMutex.Unlock()
+	fake.PutBucketOwnershipControlsWithContextStub = stub
+}
+
+func (fake *FakeS3API) PutBucketOwnershipControlsWithContextArgsForCall(i int) (context.Context, *s3.PutBucketOwnershipControlsInput, []request.Option) {
+	fake.putBucketOwnershipControlsWithContextMutex.RLock()
+	defer fake.putBucketOwnershipControlsWithContextMutex.RUnlock()
+	argsForCall := fake.putBucketOwnershipControlsWithContextArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3
+}
+
+func (fake *FakeS3API) PutBucketOwnershipControlsWithContextReturns(result1 *s3.PutBucketOwnershipControlsOutput, result2 error) {
+	fake.putBucketOwnershipControlsWithContextMutex.Lock()
+	defer fake.putBucketOwnershipControlsWithContextMutex.Unlock()
+	fake.PutBucketOwnershipControlsWithContextStub = nil
+	fake.putBucketOwnershipControlsWithContextReturns = struct {
+		result1 *s3.PutBucketOwnershipControlsOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) PutBucketOwnershipControlsWithContextReturnsOnCall(i int, result1 *s3.PutBucketOwnershipControlsOutput, result2 error) {
+	fake.putBucketOwnershipControlsWithContextMutex.Lock()
+	defer fake.putBucketOwnershipControlsWithContextMutex.Unlock()
+	fake.PutBucketOwnershipControlsWithContextStub = nil
+	if fake.putBucketOwnershipControlsWithContextReturnsOnCall == nil {
+		fake.putBucketOwnershipControlsWithContextReturnsOnCall = make(map[int]struct {
+			result1 *s3.PutBucketOwnershipControlsOutput
+			result2 error
+		})
+	}
+	fake.putBucketOwnershipControlsWithContextReturnsOnCall[i] = struct {
+		result1 *s3.PutBucketOwnershipControlsOutput
 		result2 error
 	}{result1, result2}
 }
@@ -22047,6 +23968,200 @@ func (fake *FakeS3API) WaitUntilObjectNotExistsWithContextReturnsOnCall(i int, r
 	}{result1}
 }
 
+func (fake *FakeS3API) WriteGetObjectResponse(arg1 *s3.WriteGetObjectResponseInput) (*s3.WriteGetObjectResponseOutput, error) {
+	fake.writeGetObjectResponseMutex.Lock()
+	ret, specificReturn := fake.writeGetObjectResponseReturnsOnCall[len(fake.writeGetObjectResponseArgsForCall)]
+	fake.writeGetObjectResponseArgsForCall = append(fake.writeGetObjectResponseArgsForCall, struct {
+		arg1 *s3.WriteGetObjectResponseInput
+	}{arg1})
+	stub := fake.WriteGetObjectResponseStub
+	fakeReturns := fake.writeGetObjectResponseReturns
+	fake.recordInvocation("WriteGetObjectResponse", []interface{}{arg1})
+	fake.writeGetObjectResponseMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeS3API) WriteGetObjectResponseCallCount() int {
+	fake.writeGetObjectResponseMutex.RLock()
+	defer fake.writeGetObjectResponseMutex.RUnlock()
+	return len(fake.writeGetObjectResponseArgsForCall)
+}
+
+func (fake *FakeS3API) WriteGetObjectResponseCalls(stub func(*s3.WriteGetObjectResponseInput) (*s3.WriteGetObjectResponseOutput, error)) {
+	fake.writeGetObjectResponseMutex.Lock()
+	defer fake.writeGetObjectResponseMutex.Unlock()
+	fake.WriteGetObjectResponseStub = stub
+}
+
+func (fake *FakeS3API) WriteGetObjectResponseArgsForCall(i int) *s3.WriteGetObjectResponseInput {
+	fake.writeGetObjectResponseMutex.RLock()
+	defer fake.writeGetObjectResponseMutex.RUnlock()
+	argsForCall := fake.writeGetObjectResponseArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeS3API) WriteGetObjectResponseReturns(result1 *s3.WriteGetObjectResponseOutput, result2 error) {
+	fake.writeGetObjectResponseMutex.Lock()
+	defer fake.writeGetObjectResponseMutex.Unlock()
+	fake.WriteGetObjectResponseStub = nil
+	fake.writeGetObjectResponseReturns = struct {
+		result1 *s3.WriteGetObjectResponseOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) WriteGetObjectResponseReturnsOnCall(i int, result1 *s3.WriteGetObjectResponseOutput, result2 error) {
+	fake.writeGetObjectResponseMutex.Lock()
+	defer fake.writeGetObjectResponseMutex.Unlock()
+	fake.WriteGetObjectResponseStub = nil
+	if fake.writeGetObjectResponseReturnsOnCall == nil {
+		fake.writeGetObjectResponseReturnsOnCall = make(map[int]struct {
+			result1 *s3.WriteGetObjectResponseOutput
+			result2 error
+		})
+	}
+	fake.writeGetObjectResponseReturnsOnCall[i] = struct {
+		result1 *s3.WriteGetObjectResponseOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) WriteGetObjectResponseRequest(arg1 *s3.WriteGetObjectResponseInput) (*request.Request, *s3.WriteGetObjectResponseOutput) {
+	fake.writeGetObjectResponseRequestMutex.Lock()
+	ret, specificReturn := fake.writeGetObjectResponseRequestReturnsOnCall[len(fake.writeGetObjectResponseRequestArgsForCall)]
+	fake.writeGetObjectResponseRequestArgsForCall = append(fake.writeGetObjectResponseRequestArgsForCall, struct {
+		arg1 *s3.WriteGetObjectResponseInput
+	}{arg1})
+	stub := fake.WriteGetObjectResponseRequestStub
+	fakeReturns := fake.writeGetObjectResponseRequestReturns
+	fake.recordInvocation("WriteGetObjectResponseRequest", []interface{}{arg1})
+	fake.writeGetObjectResponseRequestMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeS3API) WriteGetObjectResponseRequestCallCount() int {
+	fake.writeGetObjectResponseRequestMutex.RLock()
+	defer fake.writeGetObjectResponseRequestMutex.RUnlock()
+	return len(fake.writeGetObjectResponseRequestArgsForCall)
+}
+
+func (fake *FakeS3API) WriteGetObjectResponseRequestCalls(stub func(*s3.WriteGetObjectResponseInput) (*request.Request, *s3.WriteGetObjectResponseOutput)) {
+	fake.writeGetObjectResponseRequestMutex.Lock()
+	defer fake.writeGetObjectResponseRequestMutex.Unlock()
+	fake.WriteGetObjectResponseRequestStub = stub
+}
+
+func (fake *FakeS3API) WriteGetObjectResponseRequestArgsForCall(i int) *s3.WriteGetObjectResponseInput {
+	fake.writeGetObjectResponseRequestMutex.RLock()
+	defer fake.writeGetObjectResponseRequestMutex.RUnlock()
+	argsForCall := fake.writeGetObjectResponseRequestArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *FakeS3API) WriteGetObjectResponseRequestReturns(result1 *request.Request, result2 *s3.WriteGetObjectResponseOutput) {
+	fake.writeGetObjectResponseRequestMutex.Lock()
+	defer fake.writeGetObjectResponseRequestMutex.Unlock()
+	fake.WriteGetObjectResponseRequestStub = nil
+	fake.writeGetObjectResponseRequestReturns = struct {
+		result1 *request.Request
+		result2 *s3.WriteGetObjectResponseOutput
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) WriteGetObjectResponseRequestReturnsOnCall(i int, result1 *request.Request, result2 *s3.WriteGetObjectResponseOutput) {
+	fake.writeGetObjectResponseRequestMutex.Lock()
+	defer fake.writeGetObjectResponseRequestMutex.Unlock()
+	fake.WriteGetObjectResponseRequestStub = nil
+	if fake.writeGetObjectResponseRequestReturnsOnCall == nil {
+		fake.writeGetObjectResponseRequestReturnsOnCall = make(map[int]struct {
+			result1 *request.Request
+			result2 *s3.WriteGetObjectResponseOutput
+		})
+	}
+	fake.writeGetObjectResponseRequestReturnsOnCall[i] = struct {
+		result1 *request.Request
+		result2 *s3.WriteGetObjectResponseOutput
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) WriteGetObjectResponseWithContext(arg1 context.Context, arg2 *s3.WriteGetObjectResponseInput, arg3 ...request.Option) (*s3.WriteGetObjectResponseOutput, error) {
+	fake.writeGetObjectResponseWithContextMutex.Lock()
+	ret, specificReturn := fake.writeGetObjectResponseWithContextReturnsOnCall[len(fake.writeGetObjectResponseWithContextArgsForCall)]
+	fake.writeGetObjectResponseWithContextArgsForCall = append(fake.writeGetObjectResponseWithContextArgsForCall, struct {
+		arg1 context.Context
+		arg2 *s3.WriteGetObjectResponseInput
+		arg3 []request.Option
+	}{arg1, arg2, arg3})
+	stub := fake.WriteGetObjectResponseWithContextStub
+	fakeReturns := fake.writeGetObjectResponseWithContextReturns
+	fake.recordInvocation("WriteGetObjectResponseWithContext", []interface{}{arg1, arg2, arg3})
+	fake.writeGetObjectResponseWithContextMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2, arg3...)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *FakeS3API) WriteGetObjectResponseWithContextCallCount() int {
+	fake.writeGetObjectResponseWithContextMutex.RLock()
+	defer fake.writeGetObjectResponseWithContextMutex.RUnlock()
+	return len(fake.writeGetObjectResponseWithContextArgsForCall)
+}
+
+func (fake *FakeS3API) WriteGetObjectResponseWithContextCalls(stub func(context.Context, *s3.WriteGetObjectResponseInput, ...request.Option) (*s3.WriteGetObjectResponseOutput, error)) {
+	fake.writeGetObjectResponseWithContextMutex.Lock()
+	defer fake.writeGetObjectResponseWithContextMutex.Unlock()
+	fake.WriteGetObjectResponseWithContextStub = stub
+}
+
+func (fake *FakeS3API) WriteGetObjectResponseWithContextArgsForCall(i int) (context.Context, *s3.WriteGetObjectResponseInput, []request.Option) {
+	fake.writeGetObjectResponseWithContextMutex.RLock()
+	defer fake.writeGetObjectResponseWithContextMutex.RUnlock()
+	argsForCall := fake.writeGetObjectResponseWithContextArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3
+}
+
+func (fake *FakeS3API) WriteGetObjectResponseWithContextReturns(result1 *s3.WriteGetObjectResponseOutput, result2 error) {
+	fake.writeGetObjectResponseWithContextMutex.Lock()
+	defer fake.writeGetObjectResponseWithContextMutex.Unlock()
+	fake.WriteGetObjectResponseWithContextStub = nil
+	fake.writeGetObjectResponseWithContextReturns = struct {
+		result1 *s3.WriteGetObjectResponseOutput
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *FakeS3API) WriteGetObjectResponseWithContextReturnsOnCall(i int, result1 *s3.WriteGetObjectResponseOutput, result2 error) {
+	fake.writeGetObjectResponseWithContextMutex.Lock()
+	defer fake.writeGetObjectResponseWithContextMutex.Unlock()
+	fake.WriteGetObjectResponseWithContextStub = nil
+	if fake.writeGetObjectResponseWithContextReturnsOnCall == nil {
+		fake.writeGetObjectResponseWithContextReturnsOnCall = make(map[int]struct {
+			result1 *s3.WriteGetObjectResponseOutput
+			result2 error
+		})
+	}
+	fake.writeGetObjectResponseWithContextReturnsOnCall[i] = struct {
+		result1 *s3.WriteGetObjectResponseOutput
+		result2 error
+	}{result1, result2}
+}
+
 func (fake *FakeS3API) Invocations() map[string][][]interface{} {
 	fake.invocationsMutex.RLock()
 	defer fake.invocationsMutex.RUnlock()
@@ -22100,6 +24215,12 @@ func (fake *FakeS3API) Invocations() map[string][][]interface{} {
 	defer fake.deleteBucketEncryptionRequestMutex.RUnlock()
 	fake.deleteBucketEncryptionWithContextMutex.RLock()
 	defer fake.deleteBucketEncryptionWithContextMutex.RUnlock()
+	fake.deleteBucketIntelligentTieringConfigurationMutex.RLock()
+	defer fake.deleteBucketIntelligentTieringConfigurationMutex.RUnlock()
+	fake.deleteBucketIntelligentTieringConfigurationRequestMutex.RLock()
+	defer fake.deleteBucketIntelligentTieringConfigurationRequestMutex.RUnlock()
+	fake.deleteBucketIntelligentTieringConfigurationWithContextMutex.RLock()
+	defer fake.deleteBucketIntelligentTieringConfigurationWithContextMutex.RUnlock()
 	fake.deleteBucketInventoryConfigurationMutex.RLock()
 	defer fake.deleteBucketInventoryConfigurationMutex.RUnlock()
 	fake.deleteBucketInventoryConfigurationRequestMutex.RLock()
@@ -22118,6 +24239,12 @@ func (fake *FakeS3API) Invocations() map[string][][]interface{} {
 	defer fake.deleteBucketMetricsConfigurationRequestMutex.RUnlock()
 	fake.deleteBucketMetricsConfigurationWithContextMutex.RLock()
 	defer fake.deleteBucketMetricsConfigurationWithContextMutex.RUnlock()
+	fake.deleteBucketOwnershipControlsMutex.RLock()
+	defer fake.deleteBucketOwnershipControlsMutex.RUnlock()
+	fake.deleteBucketOwnershipControlsRequestMutex.RLock()
+	defer fake.deleteBucketOwnershipControlsRequestMutex.RUnlock()
+	fake.deleteBucketOwnershipControlsWithContextMutex.RLock()
+	defer fake.deleteBucketOwnershipControlsWithContextMutex.RUnlock()
 	fake.deleteBucketPolicyMutex.RLock()
 	defer fake.deleteBucketPolicyMutex.RUnlock()
 	fake.deleteBucketPolicyRequestMutex.RLock()
@@ -22200,6 +24327,12 @@ func (fake *FakeS3API) Invocations() map[string][][]interface{} {
 	defer fake.getBucketEncryptionRequestMutex.RUnlock()
 	fake.getBucketEncryptionWithContextMutex.RLock()
 	defer fake.getBucketEncryptionWithContextMutex.RUnlock()
+	fake.getBucketIntelligentTieringConfigurationMutex.RLock()
+	defer fake.getBucketIntelligentTieringConfigurationMutex.RUnlock()
+	fake.getBucketIntelligentTieringConfigurationRequestMutex.RLock()
+	defer fake.getBucketIntelligentTieringConfigurationRequestMutex.RUnlock()
+	fake.getBucketIntelligentTieringConfigurationWithContextMutex.RLock()
+	defer fake.getBucketIntelligentTieringConfigurationWithContextMutex.RUnlock()
 	fake.getBucketInventoryConfigurationMutex.RLock()
 	defer fake.getBucketInventoryConfigurationMutex.RUnlock()
 	fake.getBucketInventoryConfigurationRequestMutex.RLock()
@@ -22248,6 +24381,12 @@ func (fake *FakeS3API) Invocations() map[string][][]interface{} {
 	defer fake.getBucketNotificationRequestMutex.RUnlock()
 	fake.getBucketNotificationWithContextMutex.RLock()
 	defer fake.getBucketNotificationWithContextMutex.RUnlock()
+	fake.getBucketOwnershipControlsMutex.RLock()
+	defer fake.getBucketOwnershipControlsMutex.RUnlock()
+	fake.getBucketOwnershipControlsRequestMutex.RLock()
+	defer fake.getBucketOwnershipControlsRequestMutex.RUnlock()
+	fake.getBucketOwnershipControlsWithContextMutex.RLock()
+	defer fake.getBucketOwnershipControlsWithContextMutex.RUnlock()
 	fake.getBucketPolicyMutex.RLock()
 	defer fake.getBucketPolicyMutex.RUnlock()
 	fake.getBucketPolicyRequestMutex.RLock()
@@ -22298,6 +24437,12 @@ func (fake *FakeS3API) Invocations() map[string][][]interface{} {
 	defer fake.getObjectAclRequestMutex.RUnlock()
 	fake.getObjectAclWithContextMutex.RLock()
 	defer fake.getObjectAclWithContextMutex.RUnlock()
+	fake.getObjectAttributesMutex.RLock()
+	defer fake.getObjectAttributesMutex.RUnlock()
+	fake.getObjectAttributesRequestMutex.RLock()
+	defer fake.getObjectAttributesRequestMutex.RUnlock()
+	fake.getObjectAttributesWithContextMutex.RLock()
+	defer fake.getObjectAttributesWithContextMutex.RUnlock()
 	fake.getObjectLegalHoldMutex.RLock()
 	defer fake.getObjectLegalHoldMutex.RUnlock()
 	fake.getObjectLegalHoldRequestMutex.RLock()
@@ -22356,6 +24501,12 @@ func (fake *FakeS3API) Invocations() map[string][][]interface{} {
 	defer fake.listBucketAnalyticsConfigurationsRequestMutex.RUnlock()
 	fake.listBucketAnalyticsConfigurationsWithContextMutex.RLock()
 	defer fake.listBucketAnalyticsConfigurationsWithContextMutex.RUnlock()
+	fake.listBucketIntelligentTieringConfigurationsMutex.RLock()
+	defer fake.listBucketIntelligentTieringConfigurationsMutex.RUnlock()
+	fake.listBucketIntelligentTieringConfigurationsRequestMutex.RLock()
+	defer fake.listBucketIntelligentTieringConfigurationsRequestMutex.RUnlock()
+	fake.listBucketIntelligentTieringConfigurationsWithContextMutex.RLock()
+	defer fake.listBucketIntelligentTieringConfigurationsWithContextMutex.RUnlock()
 	fake.listBucketInventoryConfigurationsMutex.RLock()
 	defer fake.listBucketInventoryConfigurationsMutex.RUnlock()
 	fake.listBucketInventoryConfigurationsRequestMutex.RLock()
@@ -22454,6 +24605,12 @@ func (fake *FakeS3API) Invocations() map[string][][]interface{} {
 	defer fake.putBucketEncryptionRequestMutex.RUnlock()
 	fake.putBucketEncryptionWithContextMutex.RLock()
 	defer fake.putBucketEncryptionWithContextMutex.RUnlock()
+	fake.putBucketIntelligentTieringConfigurationMutex.RLock()
+	defer fake.putBucketIntelligentTieringConfigurationMutex.RUnlock()
+	fake.putBucketIntelligentTieringConfigurationRequestMutex.RLock()
+	defer fake.putBucketIntelligentTieringConfigurationRequestMutex.RUnlock()
+	fake.putBucketIntelligentTieringConfigurationWithContextMutex.RLock()
+	defer fake.putBucketIntelligentTieringConfigurationWithContextMutex.RUnlock()
 	fake.putBucketInventoryConfigurationMutex.RLock()
 	defer fake.putBucketInventoryConfigurationMutex.RUnlock()
 	fake.putBucketInventoryConfigurationRequestMutex.RLock()
@@ -22496,6 +24653,12 @@ func (fake *FakeS3API) Invocations() map[string][][]interface{} {
 	defer fake.putBucketNotificationRequestMutex.RUnlock()
 	fake.putBucketNotificationWithContextMutex.RLock()
 	defer fake.putBucketNotificationWithContextMutex.RUnlock()
+	fake.putBucketOwnershipControlsMutex.RLock()
+	defer fake.putBucketOwnershipControlsMutex.RUnlock()
+	fake.putBucketOwnershipControlsRequestMutex.RLock()
+	defer fake.putBucketOwnershipControlsRequestMutex.RUnlock()
+	fake.putBucketOwnershipControlsWithContextMutex.RLock()
+	defer fake.putBucketOwnershipControlsWithContextMutex.RUnlock()
 	fake.putBucketPolicyMutex.RLock()
 	defer fake.putBucketPolicyMutex.RUnlock()
 	fake.putBucketPolicyRequestMutex.RLock()
@@ -22614,6 +24777,12 @@ func (fake *FakeS3API) Invocations() map[string][][]interface{} {
 	defer fake.waitUntilObjectNotExistsMutex.RUnlock()
 	fake.waitUntilObjectNotExistsWithContextMutex.RLock()
 	defer fake.waitUntilObjectNotExistsWithContextMutex.RUnlock()
+	fake.writeGetObjectResponseMutex.RLock()
+	defer fake.writeGetObjectResponseMutex.RUnlock()
+	fake.writeGetObjectResponseRequestMutex.RLock()
+	defer fake.writeGetObjectResponseRequestMutex.RUnlock()
+	fake.writeGetObjectResponseWithContextMutex.RLock()
+	defer fake.writeGetObjectResponseWithContextMutex.RUnlock()
 	copiedInvocations := map[string][][]interface{}{}
 	for key, value := range fake.invocations {
 		copiedInvocations[key] = value

@@ -13,7 +13,6 @@ import (
 	"path"
 	"syscall"
 
-	"errors"
 	"fmt"
 	"sync"
 
@@ -37,11 +36,6 @@ type MockLocket struct {
 func New(lockingMode string, fixturesPath string) (*MockLocket, error) {
 	logger := lager.NewLogger("grpc")
 	logger.RegisterSink(lager.NewWriterSink(os.Stdout, lager.DEBUG))
-
-	var handler = testHandler{
-		mode:          lockingMode,
-		keyBasedLocks: make(map[string]string, 0),
-	}
 
 	certificate, err := tls.LoadX509KeyPair(
 		path.Join(fixturesPath, "locket-server.cert.pem"),
@@ -69,14 +63,17 @@ func New(lockingMode string, fixturesPath string) (*MockLocket, error) {
 		ListenAddress: listenAddress,
 		Certificate:   certificate,
 		LockingMode:   lockingMode,
-		Handler:       handler,
+		Handler: testHandler{
+			mode:          lockingMode,
+			keyBasedLocks: map[string]string{},
+		},
 	}, nil
 }
 
-func (m *MockLocket) Start(logger lager.Logger, listenAddress string, certificate tls.Certificate, handler testHandler) {
+func (m *MockLocket) Start(logger lager.Logger, listenAddress string, certificate tls.Certificate) {
 	grpcServer := grpcserver.NewGRPCServer(logger, listenAddress, &tls.Config{
 		Certificates: []tls.Certificate{certificate},
-	}, &handler)
+	}, &m.Handler)
 	m.Process = ifrit.Invoke(grpcServer)
 	<-m.Process.Ready()
 }
@@ -130,7 +127,7 @@ func (h *testHandler) Lock(ctx gcontext.Context, req *models.LockRequest) (*mode
 
 		return nil, models.ErrLockCollision
 	default:
-		return nil, errors.New(fmt.Sprintf("Unexpected mode %s", h.mode))
+		return nil, fmt.Errorf("Unexpected mode %s", h.mode)
 	}
 }
 
