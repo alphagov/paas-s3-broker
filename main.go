@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"crypto/tls"
 	"encoding/json"
 	"flag"
 	"log"
@@ -66,10 +67,20 @@ func main() {
 
 	brokerAPI := broker.NewAPI(serviceBroker, logger, config)
 
-	listener, err := net.Listen("tcp", ":"+config.API.Port)
+	listenAddress := fmt.Sprintf("%s:%s", config.API.Host, config.API.Port)
+	listener, err := net.Listen("tcp", listenAddress)
 	if err != nil {
 		log.Fatalf("Error listening to port %s: %s", config.API.Port, err)
 	}
-	fmt.Println("S3 Service Broker started on port " + config.API.Port + "...")
+	if config.API.TLSEnabled() {
+		tlsConfig, err := config.API.TLS.Config()
+		if err != nil {
+			log.Fatalf("Error configuring TLS: %s", err)
+		}
+		listener = tls.NewListener(listener, tlsConfig)
+		fmt.Printf("S3 Service Broker started https://%s...\n", listenAddress)
+	} else {
+		fmt.Printf("S3 Service Broker started http://%s...\n", listenAddress)
+	}
 	http.Serve(listener, brokerAPI)
 }

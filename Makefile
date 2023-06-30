@@ -20,3 +20,7 @@ build_amd64:
 .PHONY: bosh_scp
 bosh_scp: build_amd64
 	./scripts/bosh-scp.sh
+
+.PHONY: run_broker_tls
+run_broker_tls:
+	./scripts/run-broker-tls.sh
