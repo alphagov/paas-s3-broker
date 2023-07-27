@@ -6533,16 +6533,15 @@ func (fake *FakeIAMAPI) AddClientIDToOpenIDConnectProvider(arg1 *iam.AddClientID
 	fake.addClientIDToOpenIDConnectProviderArgsForCall = append(fake.addClientIDToOpenIDConnectProviderArgsForCall, struct {
 		arg1 *iam.AddClientIDToOpenIDConnectProviderInput
 	}{arg1})
-	stub := fake.AddClientIDToOpenIDConnectProviderStub
-	fakeReturns := fake.addClientIDToOpenIDConnectProviderReturns
 	fake.recordInvocation("AddClientIDToOpenIDConnectProvider", []interface{}{arg1})
 	fake.addClientIDToOpenIDConnectProviderMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.AddClientIDToOpenIDConnectProviderStub != nil {
+		return fake.AddClientIDToOpenIDConnectProviderStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.addClientIDToOpenIDConnectProviderReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -6597,16 +6596,15 @@ func (fake *FakeIAMAPI) AddClientIDToOpenIDConnectProviderRequest(arg1 *iam.AddC
 	fake.addClientIDToOpenIDConnectProviderRequestArgsForCall = append(fake.addClientIDToOpenIDConnectProviderRequestArgsForCall, struct {
 		arg1 *iam.AddClientIDToOpenIDConnectProviderInput
 	}{arg1})
-	stub := fake.AddClientIDToOpenIDConnectProviderRequestStub
-	fakeReturns := fake.addClientIDToOpenIDConnectProviderRequestReturns
 	fake.recordInvocation("AddClientIDToOpenIDConnectProviderRequest", []interface{}{arg1})
 	fake.addClientIDToOpenIDConnectProviderRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.AddClientIDToOpenIDConnectProviderRequestStub != nil {
+		return fake.AddClientIDToOpenIDConnectProviderRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.addClientIDToOpenIDConnectProviderRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -6663,16 +6661,15 @@ func (fake *FakeIAMAPI) AddClientIDToOpenIDConnectProviderWithContext(arg1 conte
 		arg2 *iam.AddClientIDToOpenIDConnectProviderInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.AddClientIDToOpenIDConnectProviderWithContextStub
-	fakeReturns := fake.addClientIDToOpenIDConnectProviderWithContextReturns
 	fake.recordInvocation("AddClientIDToOpenIDConnectProviderWithContext", []interface{}{arg1, arg2, arg3})
 	fake.addClientIDToOpenIDConnectProviderWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.AddClientIDToOpenIDConnectProviderWithContextStub != nil {
+		return fake.AddClientIDToOpenIDConnectProviderWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.addClientIDToOpenIDConnectProviderWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -6727,16 +6724,15 @@ func (fake *FakeIAMAPI) AddRoleToInstanceProfile(arg1 *iam.AddRoleToInstanceProf
 	fake.addRoleToInstanceProfileArgsForCall = append(fake.addRoleToInstanceProfileArgsForCall, struct {
 		arg1 *iam.AddRoleToInstanceProfileInput
 	}{arg1})
-	stub := fake.AddRoleToInstanceProfileStub
-	fakeReturns := fake.addRoleToInstanceProfileReturns
 	fake.recordInvocation("AddRoleToInstanceProfile", []interface{}{arg1})
 	fake.addRoleToInstanceProfileMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.AddRoleToInstanceProfileStub != nil {
+		return fake.AddRoleToInstanceProfileStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.addRoleToInstanceProfileReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -6791,16 +6787,15 @@ func (fake *FakeIAMAPI) AddRoleToInstanceProfileRequest(arg1 *iam.AddRoleToInsta
 	fake.addRoleToInstanceProfileRequestArgsForCall = append(fake.addRoleToInstanceProfileRequestArgsForCall, struct {
 		arg1 *iam.AddRoleToInstanceProfileInput
 	}{arg1})
-	stub := fake.AddRoleToInstanceProfileRequestStub
-	fakeReturns := fake.addRoleToInstanceProfileRequestReturns
 	fake.recordInvocation("AddRoleToInstanceProfileRequest", []interface{}{arg1})
 	fake.addRoleToInstanceProfileRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.AddRoleToInstanceProfileRequestStub != nil {
+		return fake.AddRoleToInstanceProfileRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.addRoleToInstanceProfileRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -6857,16 +6852,15 @@ func (fake *FakeIAMAPI) AddRoleToInstanceProfileWithContext(arg1 context.Context
 		arg2 *iam.AddRoleToInstanceProfileInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.AddRoleToInstanceProfileWithContextStub
-	fakeReturns := fake.addRoleToInstanceProfileWithContextReturns
 	fake.recordInvocation("AddRoleToInstanceProfileWithContext", []interface{}{arg1, arg2, arg3})
 	fake.addRoleToInstanceProfileWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.AddRoleToInstanceProfileWithContextStub != nil {
+		return fake.AddRoleToInstanceProfileWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.addRoleToInstanceProfileWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -6921,16 +6915,15 @@ func (fake *FakeIAMAPI) AddUserToGroup(arg1 *iam.AddUserToGroupInput) (*iam.AddU
 	fake.addUserToGroupArgsForCall = append(fake.addUserToGroupArgsForCall, struct {
 		arg1 *iam.AddUserToGroupInput
 	}{arg1})
-	stub := fake.AddUserToGroupStub
-	fakeReturns := fake.addUserToGroupReturns
 	fake.recordInvocation("AddUserToGroup", []interface{}{arg1})
 	fake.addUserToGroupMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.AddUserToGroupStub != nil {
+		return fake.AddUserToGroupStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.addUserToGroupReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -6985,16 +6978,15 @@ func (fake *FakeIAMAPI) AddUserToGroupRequest(arg1 *iam.AddUserToGroupInput) (*r
 	fake.addUserToGroupRequestArgsForCall = append(fake.addUserToGroupRequestArgsForCall, struct {
 		arg1 *iam.AddUserToGroupInput
 	}{arg1})
-	stub := fake.AddUserToGroupRequestStub
-	fakeReturns := fake.addUserToGroupRequestReturns
 	fake.recordInvocation("AddUserToGroupRequest", []interface{}{arg1})
 	fake.addUserToGroupRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.AddUserToGroupRequestStub != nil {
+		return fake.AddUserToGroupRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.addUserToGroupRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -7051,16 +7043,15 @@ func (fake *FakeIAMAPI) AddUserToGroupWithContext(arg1 context.Context, arg2 *ia
 		arg2 *iam.AddUserToGroupInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.AddUserToGroupWithContextStub
-	fakeReturns := fake.addUserToGroupWithContextReturns
 	fake.recordInvocation("AddUserToGroupWithContext", []interface{}{arg1, arg2, arg3})
 	fake.addUserToGroupWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.AddUserToGroupWithContextStub != nil {
+		return fake.AddUserToGroupWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.addUserToGroupWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -7115,16 +7106,15 @@ func (fake *FakeIAMAPI) AttachGroupPolicy(arg1 *iam.AttachGroupPolicyInput) (*ia
 	fake.attachGroupPolicyArgsForCall = append(fake.attachGroupPolicyArgsForCall, struct {
 		arg1 *iam.AttachGroupPolicyInput
 	}{arg1})
-	stub := fake.AttachGroupPolicyStub
-	fakeReturns := fake.attachGroupPolicyReturns
 	fake.recordInvocation("AttachGroupPolicy", []interface{}{arg1})
 	fake.attachGroupPolicyMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.AttachGroupPolicyStub != nil {
+		return fake.AttachGroupPolicyStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.attachGroupPolicyReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -7179,16 +7169,15 @@ func (fake *FakeIAMAPI) AttachGroupPolicyRequest(arg1 *iam.AttachGroupPolicyInpu
 	fake.attachGroupPolicyRequestArgsForCall = append(fake.attachGroupPolicyRequestArgsForCall, struct {
 		arg1 *iam.AttachGroupPolicyInput
 	}{arg1})
-	stub := fake.AttachGroupPolicyRequestStub
-	fakeReturns := fake.attachGroupPolicyRequestReturns
 	fake.recordInvocation("AttachGroupPolicyRequest", []interface{}{arg1})
 	fake.attachGroupPolicyRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.AttachGroupPolicyRequestStub != nil {
+		return fake.AttachGroupPolicyRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.attachGroupPolicyRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -7245,16 +7234,15 @@ func (fake *FakeIAMAPI) AttachGroupPolicyWithContext(arg1 context.Context, arg2 
 		arg2 *iam.AttachGroupPolicyInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.AttachGroupPolicyWithContextStub
-	fakeReturns := fake.attachGroupPolicyWithContextReturns
 	fake.recordInvocation("AttachGroupPolicyWithContext", []interface{}{arg1, arg2, arg3})
 	fake.attachGroupPolicyWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.AttachGroupPolicyWithContextStub != nil {
+		return fake.AttachGroupPolicyWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.attachGroupPolicyWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -7309,16 +7297,15 @@ func (fake *FakeIAMAPI) AttachRolePolicy(arg1 *iam.AttachRolePolicyInput) (*iam.
 	fake.attachRolePolicyArgsForCall = append(fake.attachRolePolicyArgsForCall, struct {
 		arg1 *iam.AttachRolePolicyInput
 	}{arg1})
-	stub := fake.AttachRolePolicyStub
-	fakeReturns := fake.attachRolePolicyReturns
 	fake.recordInvocation("AttachRolePolicy", []interface{}{arg1})
 	fake.attachRolePolicyMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.AttachRolePolicyStub != nil {
+		return fake.AttachRolePolicyStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.attachRolePolicyReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -7373,16 +7360,15 @@ func (fake *FakeIAMAPI) AttachRolePolicyRequest(arg1 *iam.AttachRolePolicyInput)
 	fake.attachRolePolicyRequestArgsForCall = append(fake.attachRolePolicyRequestArgsForCall, struct {
 		arg1 *iam.AttachRolePolicyInput
 	}{arg1})
-	stub := fake.AttachRolePolicyRequestStub
-	fakeReturns := fake.attachRolePolicyRequestReturns
 	fake.recordInvocation("AttachRolePolicyRequest", []interface{}{arg1})
 	fake.attachRolePolicyRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.AttachRolePolicyRequestStub != nil {
+		return fake.AttachRolePolicyRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.attachRolePolicyRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -7439,16 +7425,15 @@ func (fake *FakeIAMAPI) AttachRolePolicyWithContext(arg1 context.Context, arg2 *
 		arg2 *iam.AttachRolePolicyInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.AttachRolePolicyWithContextStub
-	fakeReturns := fake.attachRolePolicyWithContextReturns
 	fake.recordInvocation("AttachRolePolicyWithContext", []interface{}{arg1, arg2, arg3})
 	fake.attachRolePolicyWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.AttachRolePolicyWithContextStub != nil {
+		return fake.AttachRolePolicyWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.attachRolePolicyWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -7503,16 +7488,15 @@ func (fake *FakeIAMAPI) AttachUserPolicy(arg1 *iam.AttachUserPolicyInput) (*iam.
 	fake.attachUserPolicyArgsForCall = append(fake.attachUserPolicyArgsForCall, struct {
 		arg1 *iam.AttachUserPolicyInput
 	}{arg1})
-	stub := fake.AttachUserPolicyStub
-	fakeReturns := fake.attachUserPolicyReturns
 	fake.recordInvocation("AttachUserPolicy", []interface{}{arg1})
 	fake.attachUserPolicyMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.AttachUserPolicyStub != nil {
+		return fake.AttachUserPolicyStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.attachUserPolicyReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -7567,16 +7551,15 @@ func (fake *FakeIAMAPI) AttachUserPolicyRequest(arg1 *iam.AttachUserPolicyInput)
 	fake.attachUserPolicyRequestArgsForCall = append(fake.attachUserPolicyRequestArgsForCall, struct {
 		arg1 *iam.AttachUserPolicyInput
 	}{arg1})
-	stub := fake.AttachUserPolicyRequestStub
-	fakeReturns := fake.attachUserPolicyRequestReturns
 	fake.recordInvocation("AttachUserPolicyRequest", []interface{}{arg1})
 	fake.attachUserPolicyRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.AttachUserPolicyRequestStub != nil {
+		return fake.AttachUserPolicyRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.attachUserPolicyRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -7633,16 +7616,15 @@ func (fake *FakeIAMAPI) AttachUserPolicyWithContext(arg1 context.Context, arg2 *
 		arg2 *iam.AttachUserPolicyInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.AttachUserPolicyWithContextStub
-	fakeReturns := fake.attachUserPolicyWithContextReturns
 	fake.recordInvocation("AttachUserPolicyWithContext", []interface{}{arg1, arg2, arg3})
 	fake.attachUserPolicyWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.AttachUserPolicyWithContextStub != nil {
+		return fake.AttachUserPolicyWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.attachUserPolicyWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -7697,16 +7679,15 @@ func (fake *FakeIAMAPI) ChangePassword(arg1 *iam.ChangePasswordInput) (*iam.Chan
 	fake.changePasswordArgsForCall = append(fake.changePasswordArgsForCall, struct {
 		arg1 *iam.ChangePasswordInput
 	}{arg1})
-	stub := fake.ChangePasswordStub
-	fakeReturns := fake.changePasswordReturns
 	fake.recordInvocation("ChangePassword", []interface{}{arg1})
 	fake.changePasswordMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ChangePasswordStub != nil {
+		return fake.ChangePasswordStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.changePasswordReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -7761,16 +7742,15 @@ func (fake *FakeIAMAPI) ChangePasswordRequest(arg1 *iam.ChangePasswordInput) (*r
 	fake.changePasswordRequestArgsForCall = append(fake.changePasswordRequestArgsForCall, struct {
 		arg1 *iam.ChangePasswordInput
 	}{arg1})
-	stub := fake.ChangePasswordRequestStub
-	fakeReturns := fake.changePasswordRequestReturns
 	fake.recordInvocation("ChangePasswordRequest", []interface{}{arg1})
 	fake.changePasswordRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ChangePasswordRequestStub != nil {
+		return fake.ChangePasswordRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.changePasswordRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -7827,16 +7807,15 @@ func (fake *FakeIAMAPI) ChangePasswordWithContext(arg1 context.Context, arg2 *ia
 		arg2 *iam.ChangePasswordInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.ChangePasswordWithContextStub
-	fakeReturns := fake.changePasswordWithContextReturns
 	fake.recordInvocation("ChangePasswordWithContext", []interface{}{arg1, arg2, arg3})
 	fake.changePasswordWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.ChangePasswordWithContextStub != nil {
+		return fake.ChangePasswordWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.changePasswordWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -7891,16 +7870,15 @@ func (fake *FakeIAMAPI) CreateAccessKey(arg1 *iam.CreateAccessKeyInput) (*iam.Cr
 	fake.createAccessKeyArgsForCall = append(fake.createAccessKeyArgsForCall, struct {
 		arg1 *iam.CreateAccessKeyInput
 	}{arg1})
-	stub := fake.CreateAccessKeyStub
-	fakeReturns := fake.createAccessKeyReturns
 	fake.recordInvocation("CreateAccessKey", []interface{}{arg1})
 	fake.createAccessKeyMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.CreateAccessKeyStub != nil {
+		return fake.CreateAccessKeyStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createAccessKeyReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -7955,16 +7933,15 @@ func (fake *FakeIAMAPI) CreateAccessKeyRequest(arg1 *iam.CreateAccessKeyInput) (
 	fake.createAccessKeyRequestArgsForCall = append(fake.createAccessKeyRequestArgsForCall, struct {
 		arg1 *iam.CreateAccessKeyInput
 	}{arg1})
-	stub := fake.CreateAccessKeyRequestStub
-	fakeReturns := fake.createAccessKeyRequestReturns
 	fake.recordInvocation("CreateAccessKeyRequest", []interface{}{arg1})
 	fake.createAccessKeyRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.CreateAccessKeyRequestStub != nil {
+		return fake.CreateAccessKeyRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createAccessKeyRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -8021,16 +7998,15 @@ func (fake *FakeIAMAPI) CreateAccessKeyWithContext(arg1 context.Context, arg2 *i
 		arg2 *iam.CreateAccessKeyInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.CreateAccessKeyWithContextStub
-	fakeReturns := fake.createAccessKeyWithContextReturns
 	fake.recordInvocation("CreateAccessKeyWithContext", []interface{}{arg1, arg2, arg3})
 	fake.createAccessKeyWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.CreateAccessKeyWithContextStub != nil {
+		return fake.CreateAccessKeyWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createAccessKeyWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -8085,16 +8061,15 @@ func (fake *FakeIAMAPI) CreateAccountAlias(arg1 *iam.CreateAccountAliasInput) (*
 	fake.createAccountAliasArgsForCall = append(fake.createAccountAliasArgsForCall, struct {
 		arg1 *iam.CreateAccountAliasInput
 	}{arg1})
-	stub := fake.CreateAccountAliasStub
-	fakeReturns := fake.createAccountAliasReturns
 	fake.recordInvocation("CreateAccountAlias", []interface{}{arg1})
 	fake.createAccountAliasMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.CreateAccountAliasStub != nil {
+		return fake.CreateAccountAliasStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createAccountAliasReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -8149,16 +8124,15 @@ func (fake *FakeIAMAPI) CreateAccountAliasRequest(arg1 *iam.CreateAccountAliasIn
 	fake.createAccountAliasRequestArgsForCall = append(fake.createAccountAliasRequestArgsForCall, struct {
 		arg1 *iam.CreateAccountAliasInput
 	}{arg1})
-	stub := fake.CreateAccountAliasRequestStub
-	fakeReturns := fake.createAccountAliasRequestReturns
 	fake.recordInvocation("CreateAccountAliasRequest", []interface{}{arg1})
 	fake.createAccountAliasRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.CreateAccountAliasRequestStub != nil {
+		return fake.CreateAccountAliasRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createAccountAliasRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -8215,16 +8189,15 @@ func (fake *FakeIAMAPI) CreateAccountAliasWithContext(arg1 context.Context, arg2
 		arg2 *iam.CreateAccountAliasInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.CreateAccountAliasWithContextStub
-	fakeReturns := fake.createAccountAliasWithContextReturns
 	fake.recordInvocation("CreateAccountAliasWithContext", []interface{}{arg1, arg2, arg3})
 	fake.createAccountAliasWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.CreateAccountAliasWithContextStub != nil {
+		return fake.CreateAccountAliasWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createAccountAliasWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -8279,16 +8252,15 @@ func (fake *FakeIAMAPI) CreateGroup(arg1 *iam.CreateGroupInput) (*iam.CreateGrou
 	fake.createGroupArgsForCall = append(fake.createGroupArgsForCall, struct {
 		arg1 *iam.CreateGroupInput
 	}{arg1})
-	stub := fake.CreateGroupStub
-	fakeReturns := fake.createGroupReturns
 	fake.recordInvocation("CreateGroup", []interface{}{arg1})
 	fake.createGroupMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.CreateGroupStub != nil {
+		return fake.CreateGroupStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createGroupReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -8343,16 +8315,15 @@ func (fake *FakeIAMAPI) CreateGroupRequest(arg1 *iam.CreateGroupInput) (*request
 	fake.createGroupRequestArgsForCall = append(fake.createGroupRequestArgsForCall, struct {
 		arg1 *iam.CreateGroupInput
 	}{arg1})
-	stub := fake.CreateGroupRequestStub
-	fakeReturns := fake.createGroupRequestReturns
 	fake.recordInvocation("CreateGroupRequest", []interface{}{arg1})
 	fake.createGroupRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.CreateGroupRequestStub != nil {
+		return fake.CreateGroupRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createGroupRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -8409,16 +8380,15 @@ func (fake *FakeIAMAPI) CreateGroupWithContext(arg1 context.Context, arg2 *iam.C
 		arg2 *iam.CreateGroupInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.CreateGroupWithContextStub
-	fakeReturns := fake.createGroupWithContextReturns
 	fake.recordInvocation("CreateGroupWithContext", []interface{}{arg1, arg2, arg3})
 	fake.createGroupWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.CreateGroupWithContextStub != nil {
+		return fake.CreateGroupWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createGroupWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -8473,16 +8443,15 @@ func (fake *FakeIAMAPI) CreateInstanceProfile(arg1 *iam.CreateInstanceProfileInp
 	fake.createInstanceProfileArgsForCall = append(fake.createInstanceProfileArgsForCall, struct {
 		arg1 *iam.CreateInstanceProfileInput
 	}{arg1})
-	stub := fake.CreateInstanceProfileStub
-	fakeReturns := fake.createInstanceProfileReturns
 	fake.recordInvocation("CreateInstanceProfile", []interface{}{arg1})
 	fake.createInstanceProfileMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.CreateInstanceProfileStub != nil {
+		return fake.CreateInstanceProfileStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createInstanceProfileReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -8537,16 +8506,15 @@ func (fake *FakeIAMAPI) CreateInstanceProfileRequest(arg1 *iam.CreateInstancePro
 	fake.createInstanceProfileRequestArgsForCall = append(fake.createInstanceProfileRequestArgsForCall, struct {
 		arg1 *iam.CreateInstanceProfileInput
 	}{arg1})
-	stub := fake.CreateInstanceProfileRequestStub
-	fakeReturns := fake.createInstanceProfileRequestReturns
 	fake.recordInvocation("CreateInstanceProfileRequest", []interface{}{arg1})
 	fake.createInstanceProfileRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.CreateInstanceProfileRequestStub != nil {
+		return fake.CreateInstanceProfileRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createInstanceProfileRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -8603,16 +8571,15 @@ func (fake *FakeIAMAPI) CreateInstanceProfileWithContext(arg1 context.Context, a
 		arg2 *iam.CreateInstanceProfileInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.CreateInstanceProfileWithContextStub
-	fakeReturns := fake.createInstanceProfileWithContextReturns
 	fake.recordInvocation("CreateInstanceProfileWithContext", []interface{}{arg1, arg2, arg3})
 	fake.createInstanceProfileWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.CreateInstanceProfileWithContextStub != nil {
+		return fake.CreateInstanceProfileWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createInstanceProfileWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -8667,16 +8634,15 @@ func (fake *FakeIAMAPI) CreateLoginProfile(arg1 *iam.CreateLoginProfileInput) (*
 	fake.createLoginProfileArgsForCall = append(fake.createLoginProfileArgsForCall, struct {
 		arg1 *iam.CreateLoginProfileInput
 	}{arg1})
-	stub := fake.CreateLoginProfileStub
-	fakeReturns := fake.createLoginProfileReturns
 	fake.recordInvocation("CreateLoginProfile", []interface{}{arg1})
 	fake.createLoginProfileMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.CreateLoginProfileStub != nil {
+		return fake.CreateLoginProfileStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createLoginProfileReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -8731,16 +8697,15 @@ func (fake *FakeIAMAPI) CreateLoginProfileRequest(arg1 *iam.CreateLoginProfileIn
 	fake.createLoginProfileRequestArgsForCall = append(fake.createLoginProfileRequestArgsForCall, struct {
 		arg1 *iam.CreateLoginProfileInput
 	}{arg1})
-	stub := fake.CreateLoginProfileRequestStub
-	fakeReturns := fake.createLoginProfileRequestReturns
 	fake.recordInvocation("CreateLoginProfileRequest", []interface{}{arg1})
 	fake.createLoginProfileRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.CreateLoginProfileRequestStub != nil {
+		return fake.CreateLoginProfileRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createLoginProfileRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -8797,16 +8762,15 @@ func (fake *FakeIAMAPI) CreateLoginProfileWithContext(arg1 context.Context, arg2
 		arg2 *iam.CreateLoginProfileInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.CreateLoginProfileWithContextStub
-	fakeReturns := fake.createLoginProfileWithContextReturns
 	fake.recordInvocation("CreateLoginProfileWithContext", []interface{}{arg1, arg2, arg3})
 	fake.createLoginProfileWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.CreateLoginProfileWithContextStub != nil {
+		return fake.CreateLoginProfileWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createLoginProfileWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -8861,16 +8825,15 @@ func (fake *FakeIAMAPI) CreateOpenIDConnectProvider(arg1 *iam.CreateOpenIDConnec
 	fake.createOpenIDConnectProviderArgsForCall = append(fake.createOpenIDConnectProviderArgsForCall, struct {
 		arg1 *iam.CreateOpenIDConnectProviderInput
 	}{arg1})
-	stub := fake.CreateOpenIDConnectProviderStub
-	fakeReturns := fake.createOpenIDConnectProviderReturns
 	fake.recordInvocation("CreateOpenIDConnectProvider", []interface{}{arg1})
 	fake.createOpenIDConnectProviderMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.CreateOpenIDConnectProviderStub != nil {
+		return fake.CreateOpenIDConnectProviderStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createOpenIDConnectProviderReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -8925,16 +8888,15 @@ func (fake *FakeIAMAPI) CreateOpenIDConnectProviderRequest(arg1 *iam.CreateOpenI
 	fake.createOpenIDConnectProviderRequestArgsForCall = append(fake.createOpenIDConnectProviderRequestArgsForCall, struct {
 		arg1 *iam.CreateOpenIDConnectProviderInput
 	}{arg1})
-	stub := fake.CreateOpenIDConnectProviderRequestStub
-	fakeReturns := fake.createOpenIDConnectProviderRequestReturns
 	fake.recordInvocation("CreateOpenIDConnectProviderRequest", []interface{}{arg1})
 	fake.createOpenIDConnectProviderRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.CreateOpenIDConnectProviderRequestStub != nil {
+		return fake.CreateOpenIDConnectProviderRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createOpenIDConnectProviderRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -8991,16 +8953,15 @@ func (fake *FakeIAMAPI) CreateOpenIDConnectProviderWithContext(arg1 context.Cont
 		arg2 *iam.CreateOpenIDConnectProviderInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.CreateOpenIDConnectProviderWithContextStub
-	fakeReturns := fake.createOpenIDConnectProviderWithContextReturns
 	fake.recordInvocation("CreateOpenIDConnectProviderWithContext", []interface{}{arg1, arg2, arg3})
 	fake.createOpenIDConnectProviderWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.CreateOpenIDConnectProviderWithContextStub != nil {
+		return fake.CreateOpenIDConnectProviderWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createOpenIDConnectProviderWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -9055,16 +9016,15 @@ func (fake *FakeIAMAPI) CreatePolicy(arg1 *iam.CreatePolicyInput) (*iam.CreatePo
 	fake.createPolicyArgsForCall = append(fake.createPolicyArgsForCall, struct {
 		arg1 *iam.CreatePolicyInput
 	}{arg1})
-	stub := fake.CreatePolicyStub
-	fakeReturns := fake.createPolicyReturns
 	fake.recordInvocation("CreatePolicy", []interface{}{arg1})
 	fake.createPolicyMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.CreatePolicyStub != nil {
+		return fake.CreatePolicyStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createPolicyReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -9119,16 +9079,15 @@ func (fake *FakeIAMAPI) CreatePolicyRequest(arg1 *iam.CreatePolicyInput) (*reque
 	fake.createPolicyRequestArgsForCall = append(fake.createPolicyRequestArgsForCall, struct {
 		arg1 *iam.CreatePolicyInput
 	}{arg1})
-	stub := fake.CreatePolicyRequestStub
-	fakeReturns := fake.createPolicyRequestReturns
 	fake.recordInvocation("CreatePolicyRequest", []interface{}{arg1})
 	fake.createPolicyRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.CreatePolicyRequestStub != nil {
+		return fake.CreatePolicyRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createPolicyRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -9183,16 +9142,15 @@ func (fake *FakeIAMAPI) CreatePolicyVersion(arg1 *iam.CreatePolicyVersionInput) 
 	fake.createPolicyVersionArgsForCall = append(fake.createPolicyVersionArgsForCall, struct {
 		arg1 *iam.CreatePolicyVersionInput
 	}{arg1})
-	stub := fake.CreatePolicyVersionStub
-	fakeReturns := fake.createPolicyVersionReturns
 	fake.recordInvocation("CreatePolicyVersion", []interface{}{arg1})
 	fake.createPolicyVersionMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.CreatePolicyVersionStub != nil {
+		return fake.CreatePolicyVersionStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createPolicyVersionReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -9247,16 +9205,15 @@ func (fake *FakeIAMAPI) CreatePolicyVersionRequest(arg1 *iam.CreatePolicyVersion
 	fake.createPolicyVersionRequestArgsForCall = append(fake.createPolicyVersionRequestArgsForCall, struct {
 		arg1 *iam.CreatePolicyVersionInput
 	}{arg1})
-	stub := fake.CreatePolicyVersionRequestStub
-	fakeReturns := fake.createPolicyVersionRequestReturns
 	fake.recordInvocation("CreatePolicyVersionRequest", []interface{}{arg1})
 	fake.createPolicyVersionRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.CreatePolicyVersionRequestStub != nil {
+		return fake.CreatePolicyVersionRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createPolicyVersionRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -9313,16 +9270,15 @@ func (fake *FakeIAMAPI) CreatePolicyVersionWithContext(arg1 context.Context, arg
 		arg2 *iam.CreatePolicyVersionInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.CreatePolicyVersionWithContextStub
-	fakeReturns := fake.createPolicyVersionWithContextReturns
 	fake.recordInvocation("CreatePolicyVersionWithContext", []interface{}{arg1, arg2, arg3})
 	fake.createPolicyVersionWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.CreatePolicyVersionWithContextStub != nil {
+		return fake.CreatePolicyVersionWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createPolicyVersionWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -9379,16 +9335,15 @@ func (fake *FakeIAMAPI) CreatePolicyWithContext(arg1 context.Context, arg2 *iam.
 		arg2 *iam.CreatePolicyInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.CreatePolicyWithContextStub
-	fakeReturns := fake.createPolicyWithContextReturns
 	fake.recordInvocation("CreatePolicyWithContext", []interface{}{arg1, arg2, arg3})
 	fake.createPolicyWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.CreatePolicyWithContextStub != nil {
+		return fake.CreatePolicyWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createPolicyWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -9443,16 +9398,15 @@ func (fake *FakeIAMAPI) CreateRole(arg1 *iam.CreateRoleInput) (*iam.CreateRoleOu
 	fake.createRoleArgsForCall = append(fake.createRoleArgsForCall, struct {
 		arg1 *iam.CreateRoleInput
 	}{arg1})
-	stub := fake.CreateRoleStub
-	fakeReturns := fake.createRoleReturns
 	fake.recordInvocation("CreateRole", []interface{}{arg1})
 	fake.createRoleMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.CreateRoleStub != nil {
+		return fake.CreateRoleStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createRoleReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -9507,16 +9461,15 @@ func (fake *FakeIAMAPI) CreateRoleRequest(arg1 *iam.CreateRoleInput) (*request.R
 	fake.createRoleRequestArgsForCall = append(fake.createRoleRequestArgsForCall, struct {
 		arg1 *iam.CreateRoleInput
 	}{arg1})
-	stub := fake.CreateRoleRequestStub
-	fakeReturns := fake.createRoleRequestReturns
 	fake.recordInvocation("CreateRoleRequest", []interface{}{arg1})
 	fake.createRoleRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.CreateRoleRequestStub != nil {
+		return fake.CreateRoleRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createRoleRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -9573,16 +9526,15 @@ func (fake *FakeIAMAPI) CreateRoleWithContext(arg1 context.Context, arg2 *iam.Cr
 		arg2 *iam.CreateRoleInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.CreateRoleWithContextStub
-	fakeReturns := fake.createRoleWithContextReturns
 	fake.recordInvocation("CreateRoleWithContext", []interface{}{arg1, arg2, arg3})
 	fake.createRoleWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.CreateRoleWithContextStub != nil {
+		return fake.CreateRoleWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createRoleWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -9637,16 +9589,15 @@ func (fake *FakeIAMAPI) CreateSAMLProvider(arg1 *iam.CreateSAMLProviderInput) (*
 	fake.createSAMLProviderArgsForCall = append(fake.createSAMLProviderArgsForCall, struct {
 		arg1 *iam.CreateSAMLProviderInput
 	}{arg1})
-	stub := fake.CreateSAMLProviderStub
-	fakeReturns := fake.createSAMLProviderReturns
 	fake.recordInvocation("CreateSAMLProvider", []interface{}{arg1})
 	fake.createSAMLProviderMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.CreateSAMLProviderStub != nil {
+		return fake.CreateSAMLProviderStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createSAMLProviderReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -9701,16 +9652,15 @@ func (fake *FakeIAMAPI) CreateSAMLProviderRequest(arg1 *iam.CreateSAMLProviderIn
 	fake.createSAMLProviderRequestArgsForCall = append(fake.createSAMLProviderRequestArgsForCall, struct {
 		arg1 *iam.CreateSAMLProviderInput
 	}{arg1})
-	stub := fake.CreateSAMLProviderRequestStub
-	fakeReturns := fake.createSAMLProviderRequestReturns
 	fake.recordInvocation("CreateSAMLProviderRequest", []interface{}{arg1})
 	fake.createSAMLProviderRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.CreateSAMLProviderRequestStub != nil {
+		return fake.CreateSAMLProviderRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createSAMLProviderRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -9767,16 +9717,15 @@ func (fake *FakeIAMAPI) CreateSAMLProviderWithContext(arg1 context.Context, arg2
 		arg2 *iam.CreateSAMLProviderInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.CreateSAMLProviderWithContextStub
-	fakeReturns := fake.createSAMLProviderWithContextReturns
 	fake.recordInvocation("CreateSAMLProviderWithContext", []interface{}{arg1, arg2, arg3})
 	fake.createSAMLProviderWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.CreateSAMLProviderWithContextStub != nil {
+		return fake.CreateSAMLProviderWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createSAMLProviderWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -9831,16 +9780,15 @@ func (fake *FakeIAMAPI) CreateServiceLinkedRole(arg1 *iam.CreateServiceLinkedRol
 	fake.createServiceLinkedRoleArgsForCall = append(fake.createServiceLinkedRoleArgsForCall, struct {
 		arg1 *iam.CreateServiceLinkedRoleInput
 	}{arg1})
-	stub := fake.CreateServiceLinkedRoleStub
-	fakeReturns := fake.createServiceLinkedRoleReturns
 	fake.recordInvocation("CreateServiceLinkedRole", []interface{}{arg1})
 	fake.createServiceLinkedRoleMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.CreateServiceLinkedRoleStub != nil {
+		return fake.CreateServiceLinkedRoleStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createServiceLinkedRoleReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -9895,16 +9843,15 @@ func (fake *FakeIAMAPI) CreateServiceLinkedRoleRequest(arg1 *iam.CreateServiceLi
 	fake.createServiceLinkedRoleRequestArgsForCall = append(fake.createServiceLinkedRoleRequestArgsForCall, struct {
 		arg1 *iam.CreateServiceLinkedRoleInput
 	}{arg1})
-	stub := fake.CreateServiceLinkedRoleRequestStub
-	fakeReturns := fake.createServiceLinkedRoleRequestReturns
 	fake.recordInvocation("CreateServiceLinkedRoleRequest", []interface{}{arg1})
 	fake.createServiceLinkedRoleRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.CreateServiceLinkedRoleRequestStub != nil {
+		return fake.CreateServiceLinkedRoleRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createServiceLinkedRoleRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -9961,16 +9908,15 @@ func (fake *FakeIAMAPI) CreateServiceLinkedRoleWithContext(arg1 context.Context,
 		arg2 *iam.CreateServiceLinkedRoleInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.CreateServiceLinkedRoleWithContextStub
-	fakeReturns := fake.createServiceLinkedRoleWithContextReturns
 	fake.recordInvocation("CreateServiceLinkedRoleWithContext", []interface{}{arg1, arg2, arg3})
 	fake.createServiceLinkedRoleWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.CreateServiceLinkedRoleWithContextStub != nil {
+		return fake.CreateServiceLinkedRoleWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createServiceLinkedRoleWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -10025,16 +9971,15 @@ func (fake *FakeIAMAPI) CreateServiceSpecificCredential(arg1 *iam.CreateServiceS
 	fake.createServiceSpecificCredentialArgsForCall = append(fake.createServiceSpecificCredentialArgsForCall, struct {
 		arg1 *iam.CreateServiceSpecificCredentialInput
 	}{arg1})
-	stub := fake.CreateServiceSpecificCredentialStub
-	fakeReturns := fake.createServiceSpecificCredentialReturns
 	fake.recordInvocation("CreateServiceSpecificCredential", []interface{}{arg1})
 	fake.createServiceSpecificCredentialMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.CreateServiceSpecificCredentialStub != nil {
+		return fake.CreateServiceSpecificCredentialStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createServiceSpecificCredentialReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -10089,16 +10034,15 @@ func (fake *FakeIAMAPI) CreateServiceSpecificCredentialRequest(arg1 *iam.CreateS
 	fake.createServiceSpecificCredentialRequestArgsForCall = append(fake.createServiceSpecificCredentialRequestArgsForCall, struct {
 		arg1 *iam.CreateServiceSpecificCredentialInput
 	}{arg1})
-	stub := fake.CreateServiceSpecificCredentialRequestStub
-	fakeReturns := fake.createServiceSpecificCredentialRequestReturns
 	fake.recordInvocation("CreateServiceSpecificCredentialRequest", []interface{}{arg1})
 	fake.createServiceSpecificCredentialRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.CreateServiceSpecificCredentialRequestStub != nil {
+		return fake.CreateServiceSpecificCredentialRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createServiceSpecificCredentialRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -10155,16 +10099,15 @@ func (fake *FakeIAMAPI) CreateServiceSpecificCredentialWithContext(arg1 context.
 		arg2 *iam.CreateServiceSpecificCredentialInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.CreateServiceSpecificCredentialWithContextStub
-	fakeReturns := fake.createServiceSpecificCredentialWithContextReturns
 	fake.recordInvocation("CreateServiceSpecificCredentialWithContext", []interface{}{arg1, arg2, arg3})
 	fake.createServiceSpecificCredentialWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.CreateServiceSpecificCredentialWithContextStub != nil {
+		return fake.CreateServiceSpecificCredentialWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createServiceSpecificCredentialWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -10219,16 +10162,15 @@ func (fake *FakeIAMAPI) CreateUser(arg1 *iam.CreateUserInput) (*iam.CreateUserOu
 	fake.createUserArgsForCall = append(fake.createUserArgsForCall, struct {
 		arg1 *iam.CreateUserInput
 	}{arg1})
-	stub := fake.CreateUserStub
-	fakeReturns := fake.createUserReturns
 	fake.recordInvocation("CreateUser", []interface{}{arg1})
 	fake.createUserMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.CreateUserStub != nil {
+		return fake.CreateUserStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createUserReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -10283,16 +10225,15 @@ func (fake *FakeIAMAPI) CreateUserRequest(arg1 *iam.CreateUserInput) (*request.R
 	fake.createUserRequestArgsForCall = append(fake.createUserRequestArgsForCall, struct {
 		arg1 *iam.CreateUserInput
 	}{arg1})
-	stub := fake.CreateUserRequestStub
-	fakeReturns := fake.createUserRequestReturns
 	fake.recordInvocation("CreateUserRequest", []interface{}{arg1})
 	fake.createUserRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.CreateUserRequestStub != nil {
+		return fake.CreateUserRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createUserRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -10349,16 +10290,15 @@ func (fake *FakeIAMAPI) CreateUserWithContext(arg1 context.Context, arg2 *iam.Cr
 		arg2 *iam.CreateUserInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.CreateUserWithContextStub
-	fakeReturns := fake.createUserWithContextReturns
 	fake.recordInvocation("CreateUserWithContext", []interface{}{arg1, arg2, arg3})
 	fake.createUserWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.CreateUserWithContextStub != nil {
+		return fake.CreateUserWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createUserWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -10413,16 +10353,15 @@ func (fake *FakeIAMAPI) CreateVirtualMFADevice(arg1 *iam.CreateVirtualMFADeviceI
 	fake.createVirtualMFADeviceArgsForCall = append(fake.createVirtualMFADeviceArgsForCall, struct {
 		arg1 *iam.CreateVirtualMFADeviceInput
 	}{arg1})
-	stub := fake.CreateVirtualMFADeviceStub
-	fakeReturns := fake.createVirtualMFADeviceReturns
 	fake.recordInvocation("CreateVirtualMFADevice", []interface{}{arg1})
 	fake.createVirtualMFADeviceMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.CreateVirtualMFADeviceStub != nil {
+		return fake.CreateVirtualMFADeviceStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createVirtualMFADeviceReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -10477,16 +10416,15 @@ func (fake *FakeIAMAPI) CreateVirtualMFADeviceRequest(arg1 *iam.CreateVirtualMFA
 	fake.createVirtualMFADeviceRequestArgsForCall = append(fake.createVirtualMFADeviceRequestArgsForCall, struct {
 		arg1 *iam.CreateVirtualMFADeviceInput
 	}{arg1})
-	stub := fake.CreateVirtualMFADeviceRequestStub
-	fakeReturns := fake.createVirtualMFADeviceRequestReturns
 	fake.recordInvocation("CreateVirtualMFADeviceRequest", []interface{}{arg1})
 	fake.createVirtualMFADeviceRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.CreateVirtualMFADeviceRequestStub != nil {
+		return fake.CreateVirtualMFADeviceRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createVirtualMFADeviceRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -10543,16 +10481,15 @@ func (fake *FakeIAMAPI) CreateVirtualMFADeviceWithContext(arg1 context.Context, 
 		arg2 *iam.CreateVirtualMFADeviceInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.CreateVirtualMFADeviceWithContextStub
-	fakeReturns := fake.createVirtualMFADeviceWithContextReturns
 	fake.recordInvocation("CreateVirtualMFADeviceWithContext", []interface{}{arg1, arg2, arg3})
 	fake.createVirtualMFADeviceWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.CreateVirtualMFADeviceWithContextStub != nil {
+		return fake.CreateVirtualMFADeviceWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.createVirtualMFADeviceWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -10607,16 +10544,15 @@ func (fake *FakeIAMAPI) DeactivateMFADevice(arg1 *iam.DeactivateMFADeviceInput) 
 	fake.deactivateMFADeviceArgsForCall = append(fake.deactivateMFADeviceArgsForCall, struct {
 		arg1 *iam.DeactivateMFADeviceInput
 	}{arg1})
-	stub := fake.DeactivateMFADeviceStub
-	fakeReturns := fake.deactivateMFADeviceReturns
 	fake.recordInvocation("DeactivateMFADevice", []interface{}{arg1})
 	fake.deactivateMFADeviceMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeactivateMFADeviceStub != nil {
+		return fake.DeactivateMFADeviceStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deactivateMFADeviceReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -10671,16 +10607,15 @@ func (fake *FakeIAMAPI) DeactivateMFADeviceRequest(arg1 *iam.DeactivateMFADevice
 	fake.deactivateMFADeviceRequestArgsForCall = append(fake.deactivateMFADeviceRequestArgsForCall, struct {
 		arg1 *iam.DeactivateMFADeviceInput
 	}{arg1})
-	stub := fake.DeactivateMFADeviceRequestStub
-	fakeReturns := fake.deactivateMFADeviceRequestReturns
 	fake.recordInvocation("DeactivateMFADeviceRequest", []interface{}{arg1})
 	fake.deactivateMFADeviceRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeactivateMFADeviceRequestStub != nil {
+		return fake.DeactivateMFADeviceRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deactivateMFADeviceRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -10737,16 +10672,15 @@ func (fake *FakeIAMAPI) DeactivateMFADeviceWithContext(arg1 context.Context, arg
 		arg2 *iam.DeactivateMFADeviceInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.DeactivateMFADeviceWithContextStub
-	fakeReturns := fake.deactivateMFADeviceWithContextReturns
 	fake.recordInvocation("DeactivateMFADeviceWithContext", []interface{}{arg1, arg2, arg3})
 	fake.deactivateMFADeviceWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.DeactivateMFADeviceWithContextStub != nil {
+		return fake.DeactivateMFADeviceWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deactivateMFADeviceWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -10801,16 +10735,15 @@ func (fake *FakeIAMAPI) DeleteAccessKey(arg1 *iam.DeleteAccessKeyInput) (*iam.De
 	fake.deleteAccessKeyArgsForCall = append(fake.deleteAccessKeyArgsForCall, struct {
 		arg1 *iam.DeleteAccessKeyInput
 	}{arg1})
-	stub := fake.DeleteAccessKeyStub
-	fakeReturns := fake.deleteAccessKeyReturns
 	fake.recordInvocation("DeleteAccessKey", []interface{}{arg1})
 	fake.deleteAccessKeyMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteAccessKeyStub != nil {
+		return fake.DeleteAccessKeyStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteAccessKeyReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -10865,16 +10798,15 @@ func (fake *FakeIAMAPI) DeleteAccessKeyRequest(arg1 *iam.DeleteAccessKeyInput) (
 	fake.deleteAccessKeyRequestArgsForCall = append(fake.deleteAccessKeyRequestArgsForCall, struct {
 		arg1 *iam.DeleteAccessKeyInput
 	}{arg1})
-	stub := fake.DeleteAccessKeyRequestStub
-	fakeReturns := fake.deleteAccessKeyRequestReturns
 	fake.recordInvocation("DeleteAccessKeyRequest", []interface{}{arg1})
 	fake.deleteAccessKeyRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteAccessKeyRequestStub != nil {
+		return fake.DeleteAccessKeyRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteAccessKeyRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -10931,16 +10863,15 @@ func (fake *FakeIAMAPI) DeleteAccessKeyWithContext(arg1 context.Context, arg2 *i
 		arg2 *iam.DeleteAccessKeyInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.DeleteAccessKeyWithContextStub
-	fakeReturns := fake.deleteAccessKeyWithContextReturns
 	fake.recordInvocation("DeleteAccessKeyWithContext", []interface{}{arg1, arg2, arg3})
 	fake.deleteAccessKeyWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.DeleteAccessKeyWithContextStub != nil {
+		return fake.DeleteAccessKeyWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteAccessKeyWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -10995,16 +10926,15 @@ func (fake *FakeIAMAPI) DeleteAccountAlias(arg1 *iam.DeleteAccountAliasInput) (*
 	fake.deleteAccountAliasArgsForCall = append(fake.deleteAccountAliasArgsForCall, struct {
 		arg1 *iam.DeleteAccountAliasInput
 	}{arg1})
-	stub := fake.DeleteAccountAliasStub
-	fakeReturns := fake.deleteAccountAliasReturns
 	fake.recordInvocation("DeleteAccountAlias", []interface{}{arg1})
 	fake.deleteAccountAliasMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteAccountAliasStub != nil {
+		return fake.DeleteAccountAliasStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteAccountAliasReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -11059,16 +10989,15 @@ func (fake *FakeIAMAPI) DeleteAccountAliasRequest(arg1 *iam.DeleteAccountAliasIn
 	fake.deleteAccountAliasRequestArgsForCall = append(fake.deleteAccountAliasRequestArgsForCall, struct {
 		arg1 *iam.DeleteAccountAliasInput
 	}{arg1})
-	stub := fake.DeleteAccountAliasRequestStub
-	fakeReturns := fake.deleteAccountAliasRequestReturns
 	fake.recordInvocation("DeleteAccountAliasRequest", []interface{}{arg1})
 	fake.deleteAccountAliasRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteAccountAliasRequestStub != nil {
+		return fake.DeleteAccountAliasRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteAccountAliasRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -11125,16 +11054,15 @@ func (fake *FakeIAMAPI) DeleteAccountAliasWithContext(arg1 context.Context, arg2
 		arg2 *iam.DeleteAccountAliasInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.DeleteAccountAliasWithContextStub
-	fakeReturns := fake.deleteAccountAliasWithContextReturns
 	fake.recordInvocation("DeleteAccountAliasWithContext", []interface{}{arg1, arg2, arg3})
 	fake.deleteAccountAliasWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.DeleteAccountAliasWithContextStub != nil {
+		return fake.DeleteAccountAliasWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteAccountAliasWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -11189,16 +11117,15 @@ func (fake *FakeIAMAPI) DeleteAccountPasswordPolicy(arg1 *iam.DeleteAccountPassw
 	fake.deleteAccountPasswordPolicyArgsForCall = append(fake.deleteAccountPasswordPolicyArgsForCall, struct {
 		arg1 *iam.DeleteAccountPasswordPolicyInput
 	}{arg1})
-	stub := fake.DeleteAccountPasswordPolicyStub
-	fakeReturns := fake.deleteAccountPasswordPolicyReturns
 	fake.recordInvocation("DeleteAccountPasswordPolicy", []interface{}{arg1})
 	fake.deleteAccountPasswordPolicyMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteAccountPasswordPolicyStub != nil {
+		return fake.DeleteAccountPasswordPolicyStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteAccountPasswordPolicyReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -11253,16 +11180,15 @@ func (fake *FakeIAMAPI) DeleteAccountPasswordPolicyRequest(arg1 *iam.DeleteAccou
 	fake.deleteAccountPasswordPolicyRequestArgsForCall = append(fake.deleteAccountPasswordPolicyRequestArgsForCall, struct {
 		arg1 *iam.DeleteAccountPasswordPolicyInput
 	}{arg1})
-	stub := fake.DeleteAccountPasswordPolicyRequestStub
-	fakeReturns := fake.deleteAccountPasswordPolicyRequestReturns
 	fake.recordInvocation("DeleteAccountPasswordPolicyRequest", []interface{}{arg1})
 	fake.deleteAccountPasswordPolicyRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteAccountPasswordPolicyRequestStub != nil {
+		return fake.DeleteAccountPasswordPolicyRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteAccountPasswordPolicyRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -11319,16 +11245,15 @@ func (fake *FakeIAMAPI) DeleteAccountPasswordPolicyWithContext(arg1 context.Cont
 		arg2 *iam.DeleteAccountPasswordPolicyInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.DeleteAccountPasswordPolicyWithContextStub
-	fakeReturns := fake.deleteAccountPasswordPolicyWithContextReturns
 	fake.recordInvocation("DeleteAccountPasswordPolicyWithContext", []interface{}{arg1, arg2, arg3})
 	fake.deleteAccountPasswordPolicyWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.DeleteAccountPasswordPolicyWithContextStub != nil {
+		return fake.DeleteAccountPasswordPolicyWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteAccountPasswordPolicyWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -11383,16 +11308,15 @@ func (fake *FakeIAMAPI) DeleteGroup(arg1 *iam.DeleteGroupInput) (*iam.DeleteGrou
 	fake.deleteGroupArgsForCall = append(fake.deleteGroupArgsForCall, struct {
 		arg1 *iam.DeleteGroupInput
 	}{arg1})
-	stub := fake.DeleteGroupStub
-	fakeReturns := fake.deleteGroupReturns
 	fake.recordInvocation("DeleteGroup", []interface{}{arg1})
 	fake.deleteGroupMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteGroupStub != nil {
+		return fake.DeleteGroupStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteGroupReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -11447,16 +11371,15 @@ func (fake *FakeIAMAPI) DeleteGroupPolicy(arg1 *iam.DeleteGroupPolicyInput) (*ia
 	fake.deleteGroupPolicyArgsForCall = append(fake.deleteGroupPolicyArgsForCall, struct {
 		arg1 *iam.DeleteGroupPolicyInput
 	}{arg1})
-	stub := fake.DeleteGroupPolicyStub
-	fakeReturns := fake.deleteGroupPolicyReturns
 	fake.recordInvocation("DeleteGroupPolicy", []interface{}{arg1})
 	fake.deleteGroupPolicyMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteGroupPolicyStub != nil {
+		return fake.DeleteGroupPolicyStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteGroupPolicyReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -11511,16 +11434,15 @@ func (fake *FakeIAMAPI) DeleteGroupPolicyRequest(arg1 *iam.DeleteGroupPolicyInpu
 	fake.deleteGroupPolicyRequestArgsForCall = append(fake.deleteGroupPolicyRequestArgsForCall, struct {
 		arg1 *iam.DeleteGroupPolicyInput
 	}{arg1})
-	stub := fake.DeleteGroupPolicyRequestStub
-	fakeReturns := fake.deleteGroupPolicyRequestReturns
 	fake.recordInvocation("DeleteGroupPolicyRequest", []interface{}{arg1})
 	fake.deleteGroupPolicyRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteGroupPolicyRequestStub != nil {
+		return fake.DeleteGroupPolicyRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteGroupPolicyRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -11577,16 +11499,15 @@ func (fake *FakeIAMAPI) DeleteGroupPolicyWithContext(arg1 context.Context, arg2 
 		arg2 *iam.DeleteGroupPolicyInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.DeleteGroupPolicyWithContextStub
-	fakeReturns := fake.deleteGroupPolicyWithContextReturns
 	fake.recordInvocation("DeleteGroupPolicyWithContext", []interface{}{arg1, arg2, arg3})
 	fake.deleteGroupPolicyWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.DeleteGroupPolicyWithContextStub != nil {
+		return fake.DeleteGroupPolicyWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteGroupPolicyWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -11641,16 +11562,15 @@ func (fake *FakeIAMAPI) DeleteGroupRequest(arg1 *iam.DeleteGroupInput) (*request
 	fake.deleteGroupRequestArgsForCall = append(fake.deleteGroupRequestArgsForCall, struct {
 		arg1 *iam.DeleteGroupInput
 	}{arg1})
-	stub := fake.DeleteGroupRequestStub
-	fakeReturns := fake.deleteGroupRequestReturns
 	fake.recordInvocation("DeleteGroupRequest", []interface{}{arg1})
 	fake.deleteGroupRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteGroupRequestStub != nil {
+		return fake.DeleteGroupRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteGroupRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -11707,16 +11627,15 @@ func (fake *FakeIAMAPI) DeleteGroupWithContext(arg1 context.Context, arg2 *iam.D
 		arg2 *iam.DeleteGroupInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.DeleteGroupWithContextStub
-	fakeReturns := fake.deleteGroupWithContextReturns
 	fake.recordInvocation("DeleteGroupWithContext", []interface{}{arg1, arg2, arg3})
 	fake.deleteGroupWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.DeleteGroupWithContextStub != nil {
+		return fake.DeleteGroupWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteGroupWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -11771,16 +11690,15 @@ func (fake *FakeIAMAPI) DeleteInstanceProfile(arg1 *iam.DeleteInstanceProfileInp
 	fake.deleteInstanceProfileArgsForCall = append(fake.deleteInstanceProfileArgsForCall, struct {
 		arg1 *iam.DeleteInstanceProfileInput
 	}{arg1})
-	stub := fake.DeleteInstanceProfileStub
-	fakeReturns := fake.deleteInstanceProfileReturns
 	fake.recordInvocation("DeleteInstanceProfile", []interface{}{arg1})
 	fake.deleteInstanceProfileMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteInstanceProfileStub != nil {
+		return fake.DeleteInstanceProfileStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteInstanceProfileReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -11835,16 +11753,15 @@ func (fake *FakeIAMAPI) DeleteInstanceProfileRequest(arg1 *iam.DeleteInstancePro
 	fake.deleteInstanceProfileRequestArgsForCall = append(fake.deleteInstanceProfileRequestArgsForCall, struct {
 		arg1 *iam.DeleteInstanceProfileInput
 	}{arg1})
-	stub := fake.DeleteInstanceProfileRequestStub
-	fakeReturns := fake.deleteInstanceProfileRequestReturns
 	fake.recordInvocation("DeleteInstanceProfileRequest", []interface{}{arg1})
 	fake.deleteInstanceProfileRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteInstanceProfileRequestStub != nil {
+		return fake.DeleteInstanceProfileRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteInstanceProfileRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -11901,16 +11818,15 @@ func (fake *FakeIAMAPI) DeleteInstanceProfileWithContext(arg1 context.Context, a
 		arg2 *iam.DeleteInstanceProfileInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.DeleteInstanceProfileWithContextStub
-	fakeReturns := fake.deleteInstanceProfileWithContextReturns
 	fake.recordInvocation("DeleteInstanceProfileWithContext", []interface{}{arg1, arg2, arg3})
 	fake.deleteInstanceProfileWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.DeleteInstanceProfileWithContextStub != nil {
+		return fake.DeleteInstanceProfileWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteInstanceProfileWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -11965,16 +11881,15 @@ func (fake *FakeIAMAPI) DeleteLoginProfile(arg1 *iam.DeleteLoginProfileInput) (*
 	fake.deleteLoginProfileArgsForCall = append(fake.deleteLoginProfileArgsForCall, struct {
 		arg1 *iam.DeleteLoginProfileInput
 	}{arg1})
-	stub := fake.DeleteLoginProfileStub
-	fakeReturns := fake.deleteLoginProfileReturns
 	fake.recordInvocation("DeleteLoginProfile", []interface{}{arg1})
 	fake.deleteLoginProfileMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteLoginProfileStub != nil {
+		return fake.DeleteLoginProfileStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteLoginProfileReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -12029,16 +11944,15 @@ func (fake *FakeIAMAPI) DeleteLoginProfileRequest(arg1 *iam.DeleteLoginProfileIn
 	fake.deleteLoginProfileRequestArgsForCall = append(fake.deleteLoginProfileRequestArgsForCall, struct {
 		arg1 *iam.DeleteLoginProfileInput
 	}{arg1})
-	stub := fake.DeleteLoginProfileRequestStub
-	fakeReturns := fake.deleteLoginProfileRequestReturns
 	fake.recordInvocation("DeleteLoginProfileRequest", []interface{}{arg1})
 	fake.deleteLoginProfileRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteLoginProfileRequestStub != nil {
+		return fake.DeleteLoginProfileRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteLoginProfileRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -12095,16 +12009,15 @@ func (fake *FakeIAMAPI) DeleteLoginProfileWithContext(arg1 context.Context, arg2
 		arg2 *iam.DeleteLoginProfileInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.DeleteLoginProfileWithContextStub
-	fakeReturns := fake.deleteLoginProfileWithContextReturns
 	fake.recordInvocation("DeleteLoginProfileWithContext", []interface{}{arg1, arg2, arg3})
 	fake.deleteLoginProfileWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.DeleteLoginProfileWithContextStub != nil {
+		return fake.DeleteLoginProfileWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteLoginProfileWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -12159,16 +12072,15 @@ func (fake *FakeIAMAPI) DeleteOpenIDConnectProvider(arg1 *iam.DeleteOpenIDConnec
 	fake.deleteOpenIDConnectProviderArgsForCall = append(fake.deleteOpenIDConnectProviderArgsForCall, struct {
 		arg1 *iam.DeleteOpenIDConnectProviderInput
 	}{arg1})
-	stub := fake.DeleteOpenIDConnectProviderStub
-	fakeReturns := fake.deleteOpenIDConnectProviderReturns
 	fake.recordInvocation("DeleteOpenIDConnectProvider", []interface{}{arg1})
 	fake.deleteOpenIDConnectProviderMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteOpenIDConnectProviderStub != nil {
+		return fake.DeleteOpenIDConnectProviderStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteOpenIDConnectProviderReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -12223,16 +12135,15 @@ func (fake *FakeIAMAPI) DeleteOpenIDConnectProviderRequest(arg1 *iam.DeleteOpenI
 	fake.deleteOpenIDConnectProviderRequestArgsForCall = append(fake.deleteOpenIDConnectProviderRequestArgsForCall, struct {
 		arg1 *iam.DeleteOpenIDConnectProviderInput
 	}{arg1})
-	stub := fake.DeleteOpenIDConnectProviderRequestStub
-	fakeReturns := fake.deleteOpenIDConnectProviderRequestReturns
 	fake.recordInvocation("DeleteOpenIDConnectProviderRequest", []interface{}{arg1})
 	fake.deleteOpenIDConnectProviderRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteOpenIDConnectProviderRequestStub != nil {
+		return fake.DeleteOpenIDConnectProviderRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteOpenIDConnectProviderRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -12289,16 +12200,15 @@ func (fake *FakeIAMAPI) DeleteOpenIDConnectProviderWithContext(arg1 context.Cont
 		arg2 *iam.DeleteOpenIDConnectProviderInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.DeleteOpenIDConnectProviderWithContextStub
-	fakeReturns := fake.deleteOpenIDConnectProviderWithContextReturns
 	fake.recordInvocation("DeleteOpenIDConnectProviderWithContext", []interface{}{arg1, arg2, arg3})
 	fake.deleteOpenIDConnectProviderWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.DeleteOpenIDConnectProviderWithContextStub != nil {
+		return fake.DeleteOpenIDConnectProviderWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteOpenIDConnectProviderWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -12353,16 +12263,15 @@ func (fake *FakeIAMAPI) DeletePolicy(arg1 *iam.DeletePolicyInput) (*iam.DeletePo
 	fake.deletePolicyArgsForCall = append(fake.deletePolicyArgsForCall, struct {
 		arg1 *iam.DeletePolicyInput
 	}{arg1})
-	stub := fake.DeletePolicyStub
-	fakeReturns := fake.deletePolicyReturns
 	fake.recordInvocation("DeletePolicy", []interface{}{arg1})
 	fake.deletePolicyMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeletePolicyStub != nil {
+		return fake.DeletePolicyStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deletePolicyReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -12417,16 +12326,15 @@ func (fake *FakeIAMAPI) DeletePolicyRequest(arg1 *iam.DeletePolicyInput) (*reque
 	fake.deletePolicyRequestArgsForCall = append(fake.deletePolicyRequestArgsForCall, struct {
 		arg1 *iam.DeletePolicyInput
 	}{arg1})
-	stub := fake.DeletePolicyRequestStub
-	fakeReturns := fake.deletePolicyRequestReturns
 	fake.recordInvocation("DeletePolicyRequest", []interface{}{arg1})
 	fake.deletePolicyRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeletePolicyRequestStub != nil {
+		return fake.DeletePolicyRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deletePolicyRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -12481,16 +12389,15 @@ func (fake *FakeIAMAPI) DeletePolicyVersion(arg1 *iam.DeletePolicyVersionInput) 
 	fake.deletePolicyVersionArgsForCall = append(fake.deletePolicyVersionArgsForCall, struct {
 		arg1 *iam.DeletePolicyVersionInput
 	}{arg1})
-	stub := fake.DeletePolicyVersionStub
-	fakeReturns := fake.deletePolicyVersionReturns
 	fake.recordInvocation("DeletePolicyVersion", []interface{}{arg1})
 	fake.deletePolicyVersionMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeletePolicyVersionStub != nil {
+		return fake.DeletePolicyVersionStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deletePolicyVersionReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -12545,16 +12452,15 @@ func (fake *FakeIAMAPI) DeletePolicyVersionRequest(arg1 *iam.DeletePolicyVersion
 	fake.deletePolicyVersionRequestArgsForCall = append(fake.deletePolicyVersionRequestArgsForCall, struct {
 		arg1 *iam.DeletePolicyVersionInput
 	}{arg1})
-	stub := fake.DeletePolicyVersionRequestStub
-	fakeReturns := fake.deletePolicyVersionRequestReturns
 	fake.recordInvocation("DeletePolicyVersionRequest", []interface{}{arg1})
 	fake.deletePolicyVersionRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeletePolicyVersionRequestStub != nil {
+		return fake.DeletePolicyVersionRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deletePolicyVersionRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -12611,16 +12517,15 @@ func (fake *FakeIAMAPI) DeletePolicyVersionWithContext(arg1 context.Context, arg
 		arg2 *iam.DeletePolicyVersionInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.DeletePolicyVersionWithContextStub
-	fakeReturns := fake.deletePolicyVersionWithContextReturns
 	fake.recordInvocation("DeletePolicyVersionWithContext", []interface{}{arg1, arg2, arg3})
 	fake.deletePolicyVersionWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.DeletePolicyVersionWithContextStub != nil {
+		return fake.DeletePolicyVersionWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deletePolicyVersionWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -12677,16 +12582,15 @@ func (fake *FakeIAMAPI) DeletePolicyWithContext(arg1 context.Context, arg2 *iam.
 		arg2 *iam.DeletePolicyInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.DeletePolicyWithContextStub
-	fakeReturns := fake.deletePolicyWithContextReturns
 	fake.recordInvocation("DeletePolicyWithContext", []interface{}{arg1, arg2, arg3})
 	fake.deletePolicyWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.DeletePolicyWithContextStub != nil {
+		return fake.DeletePolicyWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deletePolicyWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -12741,16 +12645,15 @@ func (fake *FakeIAMAPI) DeleteRole(arg1 *iam.DeleteRoleInput) (*iam.DeleteRoleOu
 	fake.deleteRoleArgsForCall = append(fake.deleteRoleArgsForCall, struct {
 		arg1 *iam.DeleteRoleInput
 	}{arg1})
-	stub := fake.DeleteRoleStub
-	fakeReturns := fake.deleteRoleReturns
 	fake.recordInvocation("DeleteRole", []interface{}{arg1})
 	fake.deleteRoleMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteRoleStub != nil {
+		return fake.DeleteRoleStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteRoleReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -12805,16 +12708,15 @@ func (fake *FakeIAMAPI) DeleteRolePermissionsBoundary(arg1 *iam.DeleteRolePermis
 	fake.deleteRolePermissionsBoundaryArgsForCall = append(fake.deleteRolePermissionsBoundaryArgsForCall, struct {
 		arg1 *iam.DeleteRolePermissionsBoundaryInput
 	}{arg1})
-	stub := fake.DeleteRolePermissionsBoundaryStub
-	fakeReturns := fake.deleteRolePermissionsBoundaryReturns
 	fake.recordInvocation("DeleteRolePermissionsBoundary", []interface{}{arg1})
 	fake.deleteRolePermissionsBoundaryMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteRolePermissionsBoundaryStub != nil {
+		return fake.DeleteRolePermissionsBoundaryStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteRolePermissionsBoundaryReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -12869,16 +12771,15 @@ func (fake *FakeIAMAPI) DeleteRolePermissionsBoundaryRequest(arg1 *iam.DeleteRol
 	fake.deleteRolePermissionsBoundaryRequestArgsForCall = append(fake.deleteRolePermissionsBoundaryRequestArgsForCall, struct {
 		arg1 *iam.DeleteRolePermissionsBoundaryInput
 	}{arg1})
-	stub := fake.DeleteRolePermissionsBoundaryRequestStub
-	fakeReturns := fake.deleteRolePermissionsBoundaryRequestReturns
 	fake.recordInvocation("DeleteRolePermissionsBoundaryRequest", []interface{}{arg1})
 	fake.deleteRolePermissionsBoundaryRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteRolePermissionsBoundaryRequestStub != nil {
+		return fake.DeleteRolePermissionsBoundaryRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteRolePermissionsBoundaryRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -12935,16 +12836,15 @@ func (fake *FakeIAMAPI) DeleteRolePermissionsBoundaryWithContext(arg1 context.Co
 		arg2 *iam.DeleteRolePermissionsBoundaryInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.DeleteRolePermissionsBoundaryWithContextStub
-	fakeReturns := fake.deleteRolePermissionsBoundaryWithContextReturns
 	fake.recordInvocation("DeleteRolePermissionsBoundaryWithContext", []interface{}{arg1, arg2, arg3})
 	fake.deleteRolePermissionsBoundaryWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.DeleteRolePermissionsBoundaryWithContextStub != nil {
+		return fake.DeleteRolePermissionsBoundaryWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteRolePermissionsBoundaryWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -12999,16 +12899,15 @@ func (fake *FakeIAMAPI) DeleteRolePolicy(arg1 *iam.DeleteRolePolicyInput) (*iam.
 	fake.deleteRolePolicyArgsForCall = append(fake.deleteRolePolicyArgsForCall, struct {
 		arg1 *iam.DeleteRolePolicyInput
 	}{arg1})
-	stub := fake.DeleteRolePolicyStub
-	fakeReturns := fake.deleteRolePolicyReturns
 	fake.recordInvocation("DeleteRolePolicy", []interface{}{arg1})
 	fake.deleteRolePolicyMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteRolePolicyStub != nil {
+		return fake.DeleteRolePolicyStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteRolePolicyReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -13063,16 +12962,15 @@ func (fake *FakeIAMAPI) DeleteRolePolicyRequest(arg1 *iam.DeleteRolePolicyInput)
 	fake.deleteRolePolicyRequestArgsForCall = append(fake.deleteRolePolicyRequestArgsForCall, struct {
 		arg1 *iam.DeleteRolePolicyInput
 	}{arg1})
-	stub := fake.DeleteRolePolicyRequestStub
-	fakeReturns := fake.deleteRolePolicyRequestReturns
 	fake.recordInvocation("DeleteRolePolicyRequest", []interface{}{arg1})
 	fake.deleteRolePolicyRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteRolePolicyRequestStub != nil {
+		return fake.DeleteRolePolicyRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteRolePolicyRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -13129,16 +13027,15 @@ func (fake *FakeIAMAPI) DeleteRolePolicyWithContext(arg1 context.Context, arg2 *
 		arg2 *iam.DeleteRolePolicyInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.DeleteRolePolicyWithContextStub
-	fakeReturns := fake.deleteRolePolicyWithContextReturns
 	fake.recordInvocation("DeleteRolePolicyWithContext", []interface{}{arg1, arg2, arg3})
 	fake.deleteRolePolicyWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.DeleteRolePolicyWithContextStub != nil {
+		return fake.DeleteRolePolicyWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteRolePolicyWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -13193,16 +13090,15 @@ func (fake *FakeIAMAPI) DeleteRoleRequest(arg1 *iam.DeleteRoleInput) (*request.R
 	fake.deleteRoleRequestArgsForCall = append(fake.deleteRoleRequestArgsForCall, struct {
 		arg1 *iam.DeleteRoleInput
 	}{arg1})
-	stub := fake.DeleteRoleRequestStub
-	fakeReturns := fake.deleteRoleRequestReturns
 	fake.recordInvocation("DeleteRoleRequest", []interface{}{arg1})
 	fake.deleteRoleRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteRoleRequestStub != nil {
+		return fake.DeleteRoleRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteRoleRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -13259,16 +13155,15 @@ func (fake *FakeIAMAPI) DeleteRoleWithContext(arg1 context.Context, arg2 *iam.De
 		arg2 *iam.DeleteRoleInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.DeleteRoleWithContextStub
-	fakeReturns := fake.deleteRoleWithContextReturns
 	fake.recordInvocation("DeleteRoleWithContext", []interface{}{arg1, arg2, arg3})
 	fake.deleteRoleWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.DeleteRoleWithContextStub != nil {
+		return fake.DeleteRoleWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteRoleWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -13323,16 +13218,15 @@ func (fake *FakeIAMAPI) DeleteSAMLProvider(arg1 *iam.DeleteSAMLProviderInput) (*
 	fake.deleteSAMLProviderArgsForCall = append(fake.deleteSAMLProviderArgsForCall, struct {
 		arg1 *iam.DeleteSAMLProviderInput
 	}{arg1})
-	stub := fake.DeleteSAMLProviderStub
-	fakeReturns := fake.deleteSAMLProviderReturns
 	fake.recordInvocation("DeleteSAMLProvider", []interface{}{arg1})
 	fake.deleteSAMLProviderMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteSAMLProviderStub != nil {
+		return fake.DeleteSAMLProviderStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteSAMLProviderReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -13387,16 +13281,15 @@ func (fake *FakeIAMAPI) DeleteSAMLProviderRequest(arg1 *iam.DeleteSAMLProviderIn
 	fake.deleteSAMLProviderRequestArgsForCall = append(fake.deleteSAMLProviderRequestArgsForCall, struct {
 		arg1 *iam.DeleteSAMLProviderInput
 	}{arg1})
-	stub := fake.DeleteSAMLProviderRequestStub
-	fakeReturns := fake.deleteSAMLProviderRequestReturns
 	fake.recordInvocation("DeleteSAMLProviderRequest", []interface{}{arg1})
 	fake.deleteSAMLProviderRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteSAMLProviderRequestStub != nil {
+		return fake.DeleteSAMLProviderRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteSAMLProviderRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -13453,16 +13346,15 @@ func (fake *FakeIAMAPI) DeleteSAMLProviderWithContext(arg1 context.Context, arg2
 		arg2 *iam.DeleteSAMLProviderInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.DeleteSAMLProviderWithContextStub
-	fakeReturns := fake.deleteSAMLProviderWithContextReturns
 	fake.recordInvocation("DeleteSAMLProviderWithContext", []interface{}{arg1, arg2, arg3})
 	fake.deleteSAMLProviderWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.DeleteSAMLProviderWithContextStub != nil {
+		return fake.DeleteSAMLProviderWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteSAMLProviderWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -13517,16 +13409,15 @@ func (fake *FakeIAMAPI) DeleteSSHPublicKey(arg1 *iam.DeleteSSHPublicKeyInput) (*
 	fake.deleteSSHPublicKeyArgsForCall = append(fake.deleteSSHPublicKeyArgsForCall, struct {
 		arg1 *iam.DeleteSSHPublicKeyInput
 	}{arg1})
-	stub := fake.DeleteSSHPublicKeyStub
-	fakeReturns := fake.deleteSSHPublicKeyReturns
 	fake.recordInvocation("DeleteSSHPublicKey", []interface{}{arg1})
 	fake.deleteSSHPublicKeyMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteSSHPublicKeyStub != nil {
+		return fake.DeleteSSHPublicKeyStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteSSHPublicKeyReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -13581,16 +13472,15 @@ func (fake *FakeIAMAPI) DeleteSSHPublicKeyRequest(arg1 *iam.DeleteSSHPublicKeyIn
 	fake.deleteSSHPublicKeyRequestArgsForCall = append(fake.deleteSSHPublicKeyRequestArgsForCall, struct {
 		arg1 *iam.DeleteSSHPublicKeyInput
 	}{arg1})
-	stub := fake.DeleteSSHPublicKeyRequestStub
-	fakeReturns := fake.deleteSSHPublicKeyRequestReturns
 	fake.recordInvocation("DeleteSSHPublicKeyRequest", []interface{}{arg1})
 	fake.deleteSSHPublicKeyRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteSSHPublicKeyRequestStub != nil {
+		return fake.DeleteSSHPublicKeyRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteSSHPublicKeyRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -13647,16 +13537,15 @@ func (fake *FakeIAMAPI) DeleteSSHPublicKeyWithContext(arg1 context.Context, arg2
 		arg2 *iam.DeleteSSHPublicKeyInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.DeleteSSHPublicKeyWithContextStub
-	fakeReturns := fake.deleteSSHPublicKeyWithContextReturns
 	fake.recordInvocation("DeleteSSHPublicKeyWithContext", []interface{}{arg1, arg2, arg3})
 	fake.deleteSSHPublicKeyWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.DeleteSSHPublicKeyWithContextStub != nil {
+		return fake.DeleteSSHPublicKeyWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteSSHPublicKeyWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -13711,16 +13600,15 @@ func (fake *FakeIAMAPI) DeleteServerCertificate(arg1 *iam.DeleteServerCertificat
 	fake.deleteServerCertificateArgsForCall = append(fake.deleteServerCertificateArgsForCall, struct {
 		arg1 *iam.DeleteServerCertificateInput
 	}{arg1})
-	stub := fake.DeleteServerCertificateStub
-	fakeReturns := fake.deleteServerCertificateReturns
 	fake.recordInvocation("DeleteServerCertificate", []interface{}{arg1})
 	fake.deleteServerCertificateMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteServerCertificateStub != nil {
+		return fake.DeleteServerCertificateStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteServerCertificateReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -13775,16 +13663,15 @@ func (fake *FakeIAMAPI) DeleteServerCertificateRequest(arg1 *iam.DeleteServerCer
 	fake.deleteServerCertificateRequestArgsForCall = append(fake.deleteServerCertificateRequestArgsForCall, struct {
 		arg1 *iam.DeleteServerCertificateInput
 	}{arg1})
-	stub := fake.DeleteServerCertificateRequestStub
-	fakeReturns := fake.deleteServerCertificateRequestReturns
 	fake.recordInvocation("DeleteServerCertificateRequest", []interface{}{arg1})
 	fake.deleteServerCertificateRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteServerCertificateRequestStub != nil {
+		return fake.DeleteServerCertificateRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteServerCertificateRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -13841,16 +13728,15 @@ func (fake *FakeIAMAPI) DeleteServerCertificateWithContext(arg1 context.Context,
 		arg2 *iam.DeleteServerCertificateInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.DeleteServerCertificateWithContextStub
-	fakeReturns := fake.deleteServerCertificateWithContextReturns
 	fake.recordInvocation("DeleteServerCertificateWithContext", []interface{}{arg1, arg2, arg3})
 	fake.deleteServerCertificateWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.DeleteServerCertificateWithContextStub != nil {
+		return fake.DeleteServerCertificateWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteServerCertificateWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -13905,16 +13791,15 @@ func (fake *FakeIAMAPI) DeleteServiceLinkedRole(arg1 *iam.DeleteServiceLinkedRol
 	fake.deleteServiceLinkedRoleArgsForCall = append(fake.deleteServiceLinkedRoleArgsForCall, struct {
 		arg1 *iam.DeleteServiceLinkedRoleInput
 	}{arg1})
-	stub := fake.DeleteServiceLinkedRoleStub
-	fakeReturns := fake.deleteServiceLinkedRoleReturns
 	fake.recordInvocation("DeleteServiceLinkedRole", []interface{}{arg1})
 	fake.deleteServiceLinkedRoleMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteServiceLinkedRoleStub != nil {
+		return fake.DeleteServiceLinkedRoleStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteServiceLinkedRoleReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -13969,16 +13854,15 @@ func (fake *FakeIAMAPI) DeleteServiceLinkedRoleRequest(arg1 *iam.DeleteServiceLi
 	fake.deleteServiceLinkedRoleRequestArgsForCall = append(fake.deleteServiceLinkedRoleRequestArgsForCall, struct {
 		arg1 *iam.DeleteServiceLinkedRoleInput
 	}{arg1})
-	stub := fake.DeleteServiceLinkedRoleRequestStub
-	fakeReturns := fake.deleteServiceLinkedRoleRequestReturns
 	fake.recordInvocation("DeleteServiceLinkedRoleRequest", []interface{}{arg1})
 	fake.deleteServiceLinkedRoleRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteServiceLinkedRoleRequestStub != nil {
+		return fake.DeleteServiceLinkedRoleRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteServiceLinkedRoleRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -14035,16 +13919,15 @@ func (fake *FakeIAMAPI) DeleteServiceLinkedRoleWithContext(arg1 context.Context,
 		arg2 *iam.DeleteServiceLinkedRoleInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.DeleteServiceLinkedRoleWithContextStub
-	fakeReturns := fake.deleteServiceLinkedRoleWithContextReturns
 	fake.recordInvocation("DeleteServiceLinkedRoleWithContext", []interface{}{arg1, arg2, arg3})
 	fake.deleteServiceLinkedRoleWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.DeleteServiceLinkedRoleWithContextStub != nil {
+		return fake.DeleteServiceLinkedRoleWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteServiceLinkedRoleWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -14099,16 +13982,15 @@ func (fake *FakeIAMAPI) DeleteServiceSpecificCredential(arg1 *iam.DeleteServiceS
 	fake.deleteServiceSpecificCredentialArgsForCall = append(fake.deleteServiceSpecificCredentialArgsForCall, struct {
 		arg1 *iam.DeleteServiceSpecificCredentialInput
 	}{arg1})
-	stub := fake.DeleteServiceSpecificCredentialStub
-	fakeReturns := fake.deleteServiceSpecificCredentialReturns
 	fake.recordInvocation("DeleteServiceSpecificCredential", []interface{}{arg1})
 	fake.deleteServiceSpecificCredentialMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteServiceSpecificCredentialStub != nil {
+		return fake.DeleteServiceSpecificCredentialStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteServiceSpecificCredentialReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -14163,16 +14045,15 @@ func (fake *FakeIAMAPI) DeleteServiceSpecificCredentialRequest(arg1 *iam.DeleteS
 	fake.deleteServiceSpecificCredentialRequestArgsForCall = append(fake.deleteServiceSpecificCredentialRequestArgsForCall, struct {
 		arg1 *iam.DeleteServiceSpecificCredentialInput
 	}{arg1})
-	stub := fake.DeleteServiceSpecificCredentialRequestStub
-	fakeReturns := fake.deleteServiceSpecificCredentialRequestReturns
 	fake.recordInvocation("DeleteServiceSpecificCredentialRequest", []interface{}{arg1})
 	fake.deleteServiceSpecificCredentialRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteServiceSpecificCredentialRequestStub != nil {
+		return fake.DeleteServiceSpecificCredentialRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteServiceSpecificCredentialRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -14229,16 +14110,15 @@ func (fake *FakeIAMAPI) DeleteServiceSpecificCredentialWithContext(arg1 context.
 		arg2 *iam.DeleteServiceSpecificCredentialInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.DeleteServiceSpecificCredentialWithContextStub
-	fakeReturns := fake.deleteServiceSpecificCredentialWithContextReturns
 	fake.recordInvocation("DeleteServiceSpecificCredentialWithContext", []interface{}{arg1, arg2, arg3})
 	fake.deleteServiceSpecificCredentialWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.DeleteServiceSpecificCredentialWithContextStub != nil {
+		return fake.DeleteServiceSpecificCredentialWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteServiceSpecificCredentialWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -14293,16 +14173,15 @@ func (fake *FakeIAMAPI) DeleteSigningCertificate(arg1 *iam.DeleteSigningCertific
 	fake.deleteSigningCertificateArgsForCall = append(fake.deleteSigningCertificateArgsForCall, struct {
 		arg1 *iam.DeleteSigningCertificateInput
 	}{arg1})
-	stub := fake.DeleteSigningCertificateStub
-	fakeReturns := fake.deleteSigningCertificateReturns
 	fake.recordInvocation("DeleteSigningCertificate", []interface{}{arg1})
 	fake.deleteSigningCertificateMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteSigningCertificateStub != nil {
+		return fake.DeleteSigningCertificateStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteSigningCertificateReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -14357,16 +14236,15 @@ func (fake *FakeIAMAPI) DeleteSigningCertificateRequest(arg1 *iam.DeleteSigningC
 	fake.deleteSigningCertificateRequestArgsForCall = append(fake.deleteSigningCertificateRequestArgsForCall, struct {
 		arg1 *iam.DeleteSigningCertificateInput
 	}{arg1})
-	stub := fake.DeleteSigningCertificateRequestStub
-	fakeReturns := fake.deleteSigningCertificateRequestReturns
 	fake.recordInvocation("DeleteSigningCertificateRequest", []interface{}{arg1})
 	fake.deleteSigningCertificateRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteSigningCertificateRequestStub != nil {
+		return fake.DeleteSigningCertificateRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteSigningCertificateRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -14423,16 +14301,15 @@ func (fake *FakeIAMAPI) DeleteSigningCertificateWithContext(arg1 context.Context
 		arg2 *iam.DeleteSigningCertificateInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.DeleteSigningCertificateWithContextStub
-	fakeReturns := fake.deleteSigningCertificateWithContextReturns
 	fake.recordInvocation("DeleteSigningCertificateWithContext", []interface{}{arg1, arg2, arg3})
 	fake.deleteSigningCertificateWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.DeleteSigningCertificateWithContextStub != nil {
+		return fake.DeleteSigningCertificateWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteSigningCertificateWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -14487,16 +14364,15 @@ func (fake *FakeIAMAPI) DeleteUser(arg1 *iam.DeleteUserInput) (*iam.DeleteUserOu
 	fake.deleteUserArgsForCall = append(fake.deleteUserArgsForCall, struct {
 		arg1 *iam.DeleteUserInput
 	}{arg1})
-	stub := fake.DeleteUserStub
-	fakeReturns := fake.deleteUserReturns
 	fake.recordInvocation("DeleteUser", []interface{}{arg1})
 	fake.deleteUserMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteUserStub != nil {
+		return fake.DeleteUserStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteUserReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -14551,16 +14427,15 @@ func (fake *FakeIAMAPI) DeleteUserPermissionsBoundary(arg1 *iam.DeleteUserPermis
 	fake.deleteUserPermissionsBoundaryArgsForCall = append(fake.deleteUserPermissionsBoundaryArgsForCall, struct {
 		arg1 *iam.DeleteUserPermissionsBoundaryInput
 	}{arg1})
-	stub := fake.DeleteUserPermissionsBoundaryStub
-	fakeReturns := fake.deleteUserPermissionsBoundaryReturns
 	fake.recordInvocation("DeleteUserPermissionsBoundary", []interface{}{arg1})
 	fake.deleteUserPermissionsBoundaryMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteUserPermissionsBoundaryStub != nil {
+		return fake.DeleteUserPermissionsBoundaryStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteUserPermissionsBoundaryReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -14615,16 +14490,15 @@ func (fake *FakeIAMAPI) DeleteUserPermissionsBoundaryRequest(arg1 *iam.DeleteUse
 	fake.deleteUserPermissionsBoundaryRequestArgsForCall = append(fake.deleteUserPermissionsBoundaryRequestArgsForCall, struct {
 		arg1 *iam.DeleteUserPermissionsBoundaryInput
 	}{arg1})
-	stub := fake.DeleteUserPermissionsBoundaryRequestStub
-	fakeReturns := fake.deleteUserPermissionsBoundaryRequestReturns
 	fake.recordInvocation("DeleteUserPermissionsBoundaryRequest", []interface{}{arg1})
 	fake.deleteUserPermissionsBoundaryRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteUserPermissionsBoundaryRequestStub != nil {
+		return fake.DeleteUserPermissionsBoundaryRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteUserPermissionsBoundaryRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -14681,16 +14555,15 @@ func (fake *FakeIAMAPI) DeleteUserPermissionsBoundaryWithContext(arg1 context.Co
 		arg2 *iam.DeleteUserPermissionsBoundaryInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.DeleteUserPermissionsBoundaryWithContextStub
-	fakeReturns := fake.deleteUserPermissionsBoundaryWithContextReturns
 	fake.recordInvocation("DeleteUserPermissionsBoundaryWithContext", []interface{}{arg1, arg2, arg3})
 	fake.deleteUserPermissionsBoundaryWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.DeleteUserPermissionsBoundaryWithContextStub != nil {
+		return fake.DeleteUserPermissionsBoundaryWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteUserPermissionsBoundaryWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -14745,16 +14618,15 @@ func (fake *FakeIAMAPI) DeleteUserPolicy(arg1 *iam.DeleteUserPolicyInput) (*iam.
 	fake.deleteUserPolicyArgsForCall = append(fake.deleteUserPolicyArgsForCall, struct {
 		arg1 *iam.DeleteUserPolicyInput
 	}{arg1})
-	stub := fake.DeleteUserPolicyStub
-	fakeReturns := fake.deleteUserPolicyReturns
 	fake.recordInvocation("DeleteUserPolicy", []interface{}{arg1})
 	fake.deleteUserPolicyMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteUserPolicyStub != nil {
+		return fake.DeleteUserPolicyStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteUserPolicyReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -14809,16 +14681,15 @@ func (fake *FakeIAMAPI) DeleteUserPolicyRequest(arg1 *iam.DeleteUserPolicyInput)
 	fake.deleteUserPolicyRequestArgsForCall = append(fake.deleteUserPolicyRequestArgsForCall, struct {
 		arg1 *iam.DeleteUserPolicyInput
 	}{arg1})
-	stub := fake.DeleteUserPolicyRequestStub
-	fakeReturns := fake.deleteUserPolicyRequestReturns
 	fake.recordInvocation("DeleteUserPolicyRequest", []interface{}{arg1})
 	fake.deleteUserPolicyRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteUserPolicyRequestStub != nil {
+		return fake.DeleteUserPolicyRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteUserPolicyRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -14875,16 +14746,15 @@ func (fake *FakeIAMAPI) DeleteUserPolicyWithContext(arg1 context.Context, arg2 *
 		arg2 *iam.DeleteUserPolicyInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.DeleteUserPolicyWithContextStub
-	fakeReturns := fake.deleteUserPolicyWithContextReturns
 	fake.recordInvocation("DeleteUserPolicyWithContext", []interface{}{arg1, arg2, arg3})
 	fake.deleteUserPolicyWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.DeleteUserPolicyWithContextStub != nil {
+		return fake.DeleteUserPolicyWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteUserPolicyWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -14939,16 +14809,15 @@ func (fake *FakeIAMAPI) DeleteUserRequest(arg1 *iam.DeleteUserInput) (*request.R
 	fake.deleteUserRequestArgsForCall = append(fake.deleteUserRequestArgsForCall, struct {
 		arg1 *iam.DeleteUserInput
 	}{arg1})
-	stub := fake.DeleteUserRequestStub
-	fakeReturns := fake.deleteUserRequestReturns
 	fake.recordInvocation("DeleteUserRequest", []interface{}{arg1})
 	fake.deleteUserRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteUserRequestStub != nil {
+		return fake.DeleteUserRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteUserRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -15005,16 +14874,15 @@ func (fake *FakeIAMAPI) DeleteUserWithContext(arg1 context.Context, arg2 *iam.De
 		arg2 *iam.DeleteUserInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.DeleteUserWithContextStub
-	fakeReturns := fake.deleteUserWithContextReturns
 	fake.recordInvocation("DeleteUserWithContext", []interface{}{arg1, arg2, arg3})
 	fake.deleteUserWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.DeleteUserWithContextStub != nil {
+		return fake.DeleteUserWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteUserWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -15069,16 +14937,15 @@ func (fake *FakeIAMAPI) DeleteVirtualMFADevice(arg1 *iam.DeleteVirtualMFADeviceI
 	fake.deleteVirtualMFADeviceArgsForCall = append(fake.deleteVirtualMFADeviceArgsForCall, struct {
 		arg1 *iam.DeleteVirtualMFADeviceInput
 	}{arg1})
-	stub := fake.DeleteVirtualMFADeviceStub
-	fakeReturns := fake.deleteVirtualMFADeviceReturns
 	fake.recordInvocation("DeleteVirtualMFADevice", []interface{}{arg1})
 	fake.deleteVirtualMFADeviceMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteVirtualMFADeviceStub != nil {
+		return fake.DeleteVirtualMFADeviceStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteVirtualMFADeviceReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -15133,16 +15000,15 @@ func (fake *FakeIAMAPI) DeleteVirtualMFADeviceRequest(arg1 *iam.DeleteVirtualMFA
 	fake.deleteVirtualMFADeviceRequestArgsForCall = append(fake.deleteVirtualMFADeviceRequestArgsForCall, struct {
 		arg1 *iam.DeleteVirtualMFADeviceInput
 	}{arg1})
-	stub := fake.DeleteVirtualMFADeviceRequestStub
-	fakeReturns := fake.deleteVirtualMFADeviceRequestReturns
 	fake.recordInvocation("DeleteVirtualMFADeviceRequest", []interface{}{arg1})
 	fake.deleteVirtualMFADeviceRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DeleteVirtualMFADeviceRequestStub != nil {
+		return fake.DeleteVirtualMFADeviceRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteVirtualMFADeviceRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -15199,16 +15065,15 @@ func (fake *FakeIAMAPI) DeleteVirtualMFADeviceWithContext(arg1 context.Context, 
 		arg2 *iam.DeleteVirtualMFADeviceInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.DeleteVirtualMFADeviceWithContextStub
-	fakeReturns := fake.deleteVirtualMFADeviceWithContextReturns
 	fake.recordInvocation("DeleteVirtualMFADeviceWithContext", []interface{}{arg1, arg2, arg3})
 	fake.deleteVirtualMFADeviceWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.DeleteVirtualMFADeviceWithContextStub != nil {
+		return fake.DeleteVirtualMFADeviceWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.deleteVirtualMFADeviceWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -15263,16 +15128,15 @@ func (fake *FakeIAMAPI) DetachGroupPolicy(arg1 *iam.DetachGroupPolicyInput) (*ia
 	fake.detachGroupPolicyArgsForCall = append(fake.detachGroupPolicyArgsForCall, struct {
 		arg1 *iam.DetachGroupPolicyInput
 	}{arg1})
-	stub := fake.DetachGroupPolicyStub
-	fakeReturns := fake.detachGroupPolicyReturns
 	fake.recordInvocation("DetachGroupPolicy", []interface{}{arg1})
 	fake.detachGroupPolicyMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DetachGroupPolicyStub != nil {
+		return fake.DetachGroupPolicyStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.detachGroupPolicyReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -15327,16 +15191,15 @@ func (fake *FakeIAMAPI) DetachGroupPolicyRequest(arg1 *iam.DetachGroupPolicyInpu
 	fake.detachGroupPolicyRequestArgsForCall = append(fake.detachGroupPolicyRequestArgsForCall, struct {
 		arg1 *iam.DetachGroupPolicyInput
 	}{arg1})
-	stub := fake.DetachGroupPolicyRequestStub
-	fakeReturns := fake.detachGroupPolicyRequestReturns
 	fake.recordInvocation("DetachGroupPolicyRequest", []interface{}{arg1})
 	fake.detachGroupPolicyRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DetachGroupPolicyRequestStub != nil {
+		return fake.DetachGroupPolicyRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.detachGroupPolicyRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -15393,16 +15256,15 @@ func (fake *FakeIAMAPI) DetachGroupPolicyWithContext(arg1 context.Context, arg2 
 		arg2 *iam.DetachGroupPolicyInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.DetachGroupPolicyWithContextStub
-	fakeReturns := fake.detachGroupPolicyWithContextReturns
 	fake.recordInvocation("DetachGroupPolicyWithContext", []interface{}{arg1, arg2, arg3})
 	fake.detachGroupPolicyWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.DetachGroupPolicyWithContextStub != nil {
+		return fake.DetachGroupPolicyWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.detachGroupPolicyWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -15457,16 +15319,15 @@ func (fake *FakeIAMAPI) DetachRolePolicy(arg1 *iam.DetachRolePolicyInput) (*iam.
 	fake.detachRolePolicyArgsForCall = append(fake.detachRolePolicyArgsForCall, struct {
 		arg1 *iam.DetachRolePolicyInput
 	}{arg1})
-	stub := fake.DetachRolePolicyStub
-	fakeReturns := fake.detachRolePolicyReturns
 	fake.recordInvocation("DetachRolePolicy", []interface{}{arg1})
 	fake.detachRolePolicyMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DetachRolePolicyStub != nil {
+		return fake.DetachRolePolicyStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.detachRolePolicyReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -15521,16 +15382,15 @@ func (fake *FakeIAMAPI) DetachRolePolicyRequest(arg1 *iam.DetachRolePolicyInput)
 	fake.detachRolePolicyRequestArgsForCall = append(fake.detachRolePolicyRequestArgsForCall, struct {
 		arg1 *iam.DetachRolePolicyInput
 	}{arg1})
-	stub := fake.DetachRolePolicyRequestStub
-	fakeReturns := fake.detachRolePolicyRequestReturns
 	fake.recordInvocation("DetachRolePolicyRequest", []interface{}{arg1})
 	fake.detachRolePolicyRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DetachRolePolicyRequestStub != nil {
+		return fake.DetachRolePolicyRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.detachRolePolicyRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -15587,16 +15447,15 @@ func (fake *FakeIAMAPI) DetachRolePolicyWithContext(arg1 context.Context, arg2 *
 		arg2 *iam.DetachRolePolicyInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.DetachRolePolicyWithContextStub
-	fakeReturns := fake.detachRolePolicyWithContextReturns
 	fake.recordInvocation("DetachRolePolicyWithContext", []interface{}{arg1, arg2, arg3})
 	fake.detachRolePolicyWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.DetachRolePolicyWithContextStub != nil {
+		return fake.DetachRolePolicyWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.detachRolePolicyWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -15651,16 +15510,15 @@ func (fake *FakeIAMAPI) DetachUserPolicy(arg1 *iam.DetachUserPolicyInput) (*iam.
 	fake.detachUserPolicyArgsForCall = append(fake.detachUserPolicyArgsForCall, struct {
 		arg1 *iam.DetachUserPolicyInput
 	}{arg1})
-	stub := fake.DetachUserPolicyStub
-	fakeReturns := fake.detachUserPolicyReturns
 	fake.recordInvocation("DetachUserPolicy", []interface{}{arg1})
 	fake.detachUserPolicyMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DetachUserPolicyStub != nil {
+		return fake.DetachUserPolicyStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.detachUserPolicyReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -15715,16 +15573,15 @@ func (fake *FakeIAMAPI) DetachUserPolicyRequest(arg1 *iam.DetachUserPolicyInput)
 	fake.detachUserPolicyRequestArgsForCall = append(fake.detachUserPolicyRequestArgsForCall, struct {
 		arg1 *iam.DetachUserPolicyInput
 	}{arg1})
-	stub := fake.DetachUserPolicyRequestStub
-	fakeReturns := fake.detachUserPolicyRequestReturns
 	fake.recordInvocation("DetachUserPolicyRequest", []interface{}{arg1})
 	fake.detachUserPolicyRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.DetachUserPolicyRequestStub != nil {
+		return fake.DetachUserPolicyRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.detachUserPolicyRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -15781,16 +15638,15 @@ func (fake *FakeIAMAPI) DetachUserPolicyWithContext(arg1 context.Context, arg2 *
 		arg2 *iam.DetachUserPolicyInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.DetachUserPolicyWithContextStub
-	fakeReturns := fake.detachUserPolicyWithContextReturns
 	fake.recordInvocation("DetachUserPolicyWithContext", []interface{}{arg1, arg2, arg3})
 	fake.detachUserPolicyWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.DetachUserPolicyWithContextStub != nil {
+		return fake.DetachUserPolicyWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.detachUserPolicyWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -15845,16 +15701,15 @@ func (fake *FakeIAMAPI) EnableMFADevice(arg1 *iam.EnableMFADeviceInput) (*iam.En
 	fake.enableMFADeviceArgsForCall = append(fake.enableMFADeviceArgsForCall, struct {
 		arg1 *iam.EnableMFADeviceInput
 	}{arg1})
-	stub := fake.EnableMFADeviceStub
-	fakeReturns := fake.enableMFADeviceReturns
 	fake.recordInvocation("EnableMFADevice", []interface{}{arg1})
 	fake.enableMFADeviceMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.EnableMFADeviceStub != nil {
+		return fake.EnableMFADeviceStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.enableMFADeviceReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -15909,16 +15764,15 @@ func (fake *FakeIAMAPI) EnableMFADeviceRequest(arg1 *iam.EnableMFADeviceInput) (
 	fake.enableMFADeviceRequestArgsForCall = append(fake.enableMFADeviceRequestArgsForCall, struct {
 		arg1 *iam.EnableMFADeviceInput
 	}{arg1})
-	stub := fake.EnableMFADeviceRequestStub
-	fakeReturns := fake.enableMFADeviceRequestReturns
 	fake.recordInvocation("EnableMFADeviceRequest", []interface{}{arg1})
 	fake.enableMFADeviceRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.EnableMFADeviceRequestStub != nil {
+		return fake.EnableMFADeviceRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.enableMFADeviceRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -15975,16 +15829,15 @@ func (fake *FakeIAMAPI) EnableMFADeviceWithContext(arg1 context.Context, arg2 *i
 		arg2 *iam.EnableMFADeviceInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.EnableMFADeviceWithContextStub
-	fakeReturns := fake.enableMFADeviceWithContextReturns
 	fake.recordInvocation("EnableMFADeviceWithContext", []interface{}{arg1, arg2, arg3})
 	fake.enableMFADeviceWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.EnableMFADeviceWithContextStub != nil {
+		return fake.EnableMFADeviceWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.enableMFADeviceWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -16039,16 +15892,15 @@ func (fake *FakeIAMAPI) GenerateCredentialReport(arg1 *iam.GenerateCredentialRep
 	fake.generateCredentialReportArgsForCall = append(fake.generateCredentialReportArgsForCall, struct {
 		arg1 *iam.GenerateCredentialReportInput
 	}{arg1})
-	stub := fake.GenerateCredentialReportStub
-	fakeReturns := fake.generateCredentialReportReturns
 	fake.recordInvocation("GenerateCredentialReport", []interface{}{arg1})
 	fake.generateCredentialReportMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GenerateCredentialReportStub != nil {
+		return fake.GenerateCredentialReportStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.generateCredentialReportReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -16103,16 +15955,15 @@ func (fake *FakeIAMAPI) GenerateCredentialReportRequest(arg1 *iam.GenerateCreden
 	fake.generateCredentialReportRequestArgsForCall = append(fake.generateCredentialReportRequestArgsForCall, struct {
 		arg1 *iam.GenerateCredentialReportInput
 	}{arg1})
-	stub := fake.GenerateCredentialReportRequestStub
-	fakeReturns := fake.generateCredentialReportRequestReturns
 	fake.recordInvocation("GenerateCredentialReportRequest", []interface{}{arg1})
 	fake.generateCredentialReportRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GenerateCredentialReportRequestStub != nil {
+		return fake.GenerateCredentialReportRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.generateCredentialReportRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -16169,16 +16020,15 @@ func (fake *FakeIAMAPI) GenerateCredentialReportWithContext(arg1 context.Context
 		arg2 *iam.GenerateCredentialReportInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.GenerateCredentialReportWithContextStub
-	fakeReturns := fake.generateCredentialReportWithContextReturns
 	fake.recordInvocation("GenerateCredentialReportWithContext", []interface{}{arg1, arg2, arg3})
 	fake.generateCredentialReportWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.GenerateCredentialReportWithContextStub != nil {
+		return fake.GenerateCredentialReportWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.generateCredentialReportWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -16233,16 +16083,15 @@ func (fake *FakeIAMAPI) GenerateOrganizationsAccessReport(arg1 *iam.GenerateOrga
 	fake.generateOrganizationsAccessReportArgsForCall = append(fake.generateOrganizationsAccessReportArgsForCall, struct {
 		arg1 *iam.GenerateOrganizationsAccessReportInput
 	}{arg1})
-	stub := fake.GenerateOrganizationsAccessReportStub
-	fakeReturns := fake.generateOrganizationsAccessReportReturns
 	fake.recordInvocation("GenerateOrganizationsAccessReport", []interface{}{arg1})
 	fake.generateOrganizationsAccessReportMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GenerateOrganizationsAccessReportStub != nil {
+		return fake.GenerateOrganizationsAccessReportStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.generateOrganizationsAccessReportReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -16297,16 +16146,15 @@ func (fake *FakeIAMAPI) GenerateOrganizationsAccessReportRequest(arg1 *iam.Gener
 	fake.generateOrganizationsAccessReportRequestArgsForCall = append(fake.generateOrganizationsAccessReportRequestArgsForCall, struct {
 		arg1 *iam.GenerateOrganizationsAccessReportInput
 	}{arg1})
-	stub := fake.GenerateOrganizationsAccessReportRequestStub
-	fakeReturns := fake.generateOrganizationsAccessReportRequestReturns
 	fake.recordInvocation("GenerateOrganizationsAccessReportRequest", []interface{}{arg1})
 	fake.generateOrganizationsAccessReportRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GenerateOrganizationsAccessReportRequestStub != nil {
+		return fake.GenerateOrganizationsAccessReportRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.generateOrganizationsAccessReportRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -16363,16 +16211,15 @@ func (fake *FakeIAMAPI) GenerateOrganizationsAccessReportWithContext(arg1 contex
 		arg2 *iam.GenerateOrganizationsAccessReportInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.GenerateOrganizationsAccessReportWithContextStub
-	fakeReturns := fake.generateOrganizationsAccessReportWithContextReturns
 	fake.recordInvocation("GenerateOrganizationsAccessReportWithContext", []interface{}{arg1, arg2, arg3})
 	fake.generateOrganizationsAccessReportWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.GenerateOrganizationsAccessReportWithContextStub != nil {
+		return fake.GenerateOrganizationsAccessReportWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.generateOrganizationsAccessReportWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -16427,16 +16274,15 @@ func (fake *FakeIAMAPI) GenerateServiceLastAccessedDetails(arg1 *iam.GenerateSer
 	fake.generateServiceLastAccessedDetailsArgsForCall = append(fake.generateServiceLastAccessedDetailsArgsForCall, struct {
 		arg1 *iam.GenerateServiceLastAccessedDetailsInput
 	}{arg1})
-	stub := fake.GenerateServiceLastAccessedDetailsStub
-	fakeReturns := fake.generateServiceLastAccessedDetailsReturns
 	fake.recordInvocation("GenerateServiceLastAccessedDetails", []interface{}{arg1})
 	fake.generateServiceLastAccessedDetailsMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GenerateServiceLastAccessedDetailsStub != nil {
+		return fake.GenerateServiceLastAccessedDetailsStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.generateServiceLastAccessedDetailsReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -16491,16 +16337,15 @@ func (fake *FakeIAMAPI) GenerateServiceLastAccessedDetailsRequest(arg1 *iam.Gene
 	fake.generateServiceLastAccessedDetailsRequestArgsForCall = append(fake.generateServiceLastAccessedDetailsRequestArgsForCall, struct {
 		arg1 *iam.GenerateServiceLastAccessedDetailsInput
 	}{arg1})
-	stub := fake.GenerateServiceLastAccessedDetailsRequestStub
-	fakeReturns := fake.generateServiceLastAccessedDetailsRequestReturns
 	fake.recordInvocation("GenerateServiceLastAccessedDetailsRequest", []interface{}{arg1})
 	fake.generateServiceLastAccessedDetailsRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GenerateServiceLastAccessedDetailsRequestStub != nil {
+		return fake.GenerateServiceLastAccessedDetailsRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.generateServiceLastAccessedDetailsRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -16557,16 +16402,15 @@ func (fake *FakeIAMAPI) GenerateServiceLastAccessedDetailsWithContext(arg1 conte
 		arg2 *iam.GenerateServiceLastAccessedDetailsInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.GenerateServiceLastAccessedDetailsWithContextStub
-	fakeReturns := fake.generateServiceLastAccessedDetailsWithContextReturns
 	fake.recordInvocation("GenerateServiceLastAccessedDetailsWithContext", []interface{}{arg1, arg2, arg3})
 	fake.generateServiceLastAccessedDetailsWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.GenerateServiceLastAccessedDetailsWithContextStub != nil {
+		return fake.GenerateServiceLastAccessedDetailsWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.generateServiceLastAccessedDetailsWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -16621,16 +16465,15 @@ func (fake *FakeIAMAPI) GetAccessKeyLastUsed(arg1 *iam.GetAccessKeyLastUsedInput
 	fake.getAccessKeyLastUsedArgsForCall = append(fake.getAccessKeyLastUsedArgsForCall, struct {
 		arg1 *iam.GetAccessKeyLastUsedInput
 	}{arg1})
-	stub := fake.GetAccessKeyLastUsedStub
-	fakeReturns := fake.getAccessKeyLastUsedReturns
 	fake.recordInvocation("GetAccessKeyLastUsed", []interface{}{arg1})
 	fake.getAccessKeyLastUsedMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetAccessKeyLastUsedStub != nil {
+		return fake.GetAccessKeyLastUsedStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getAccessKeyLastUsedReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -16685,16 +16528,15 @@ func (fake *FakeIAMAPI) GetAccessKeyLastUsedRequest(arg1 *iam.GetAccessKeyLastUs
 	fake.getAccessKeyLastUsedRequestArgsForCall = append(fake.getAccessKeyLastUsedRequestArgsForCall, struct {
 		arg1 *iam.GetAccessKeyLastUsedInput
 	}{arg1})
-	stub := fake.GetAccessKeyLastUsedRequestStub
-	fakeReturns := fake.getAccessKeyLastUsedRequestReturns
 	fake.recordInvocation("GetAccessKeyLastUsedRequest", []interface{}{arg1})
 	fake.getAccessKeyLastUsedRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetAccessKeyLastUsedRequestStub != nil {
+		return fake.GetAccessKeyLastUsedRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getAccessKeyLastUsedRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -16751,16 +16593,15 @@ func (fake *FakeIAMAPI) GetAccessKeyLastUsedWithContext(arg1 context.Context, ar
 		arg2 *iam.GetAccessKeyLastUsedInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.GetAccessKeyLastUsedWithContextStub
-	fakeReturns := fake.getAccessKeyLastUsedWithContextReturns
 	fake.recordInvocation("GetAccessKeyLastUsedWithContext", []interface{}{arg1, arg2, arg3})
 	fake.getAccessKeyLastUsedWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.GetAccessKeyLastUsedWithContextStub != nil {
+		return fake.GetAccessKeyLastUsedWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getAccessKeyLastUsedWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -16815,16 +16656,15 @@ func (fake *FakeIAMAPI) GetAccountAuthorizationDetails(arg1 *iam.GetAccountAutho
 	fake.getAccountAuthorizationDetailsArgsForCall = append(fake.getAccountAuthorizationDetailsArgsForCall, struct {
 		arg1 *iam.GetAccountAuthorizationDetailsInput
 	}{arg1})
-	stub := fake.GetAccountAuthorizationDetailsStub
-	fakeReturns := fake.getAccountAuthorizationDetailsReturns
 	fake.recordInvocation("GetAccountAuthorizationDetails", []interface{}{arg1})
 	fake.getAccountAuthorizationDetailsMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetAccountAuthorizationDetailsStub != nil {
+		return fake.GetAccountAuthorizationDetailsStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getAccountAuthorizationDetailsReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -16880,16 +16720,15 @@ func (fake *FakeIAMAPI) GetAccountAuthorizationDetailsPages(arg1 *iam.GetAccount
 		arg1 *iam.GetAccountAuthorizationDetailsInput
 		arg2 func(*iam.GetAccountAuthorizationDetailsOutput, bool) bool
 	}{arg1, arg2})
-	stub := fake.GetAccountAuthorizationDetailsPagesStub
-	fakeReturns := fake.getAccountAuthorizationDetailsPagesReturns
 	fake.recordInvocation("GetAccountAuthorizationDetailsPages", []interface{}{arg1, arg2})
 	fake.getAccountAuthorizationDetailsPagesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2)
+	if fake.GetAccountAuthorizationDetailsPagesStub != nil {
+		return fake.GetAccountAuthorizationDetailsPagesStub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.getAccountAuthorizationDetailsPagesReturns
 	return fakeReturns.result1
 }
 
@@ -16944,16 +16783,15 @@ func (fake *FakeIAMAPI) GetAccountAuthorizationDetailsPagesWithContext(arg1 cont
 		arg3 func(*iam.GetAccountAuthorizationDetailsOutput, bool) bool
 		arg4 []request.Option
 	}{arg1, arg2, arg3, arg4})
-	stub := fake.GetAccountAuthorizationDetailsPagesWithContextStub
-	fakeReturns := fake.getAccountAuthorizationDetailsPagesWithContextReturns
 	fake.recordInvocation("GetAccountAuthorizationDetailsPagesWithContext", []interface{}{arg1, arg2, arg3, arg4})
 	fake.getAccountAuthorizationDetailsPagesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3, arg4...)
+	if fake.GetAccountAuthorizationDetailsPagesWithContextStub != nil {
+		return fake.GetAccountAuthorizationDetailsPagesWithContextStub(arg1, arg2, arg3, arg4...)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.getAccountAuthorizationDetailsPagesWithContextReturns
 	return fakeReturns.result1
 }
 
@@ -17005,16 +16843,15 @@ func (fake *FakeIAMAPI) GetAccountAuthorizationDetailsRequest(arg1 *iam.GetAccou
 	fake.getAccountAuthorizationDetailsRequestArgsForCall = append(fake.getAccountAuthorizationDetailsRequestArgsForCall, struct {
 		arg1 *iam.GetAccountAuthorizationDetailsInput
 	}{arg1})
-	stub := fake.GetAccountAuthorizationDetailsRequestStub
-	fakeReturns := fake.getAccountAuthorizationDetailsRequestReturns
 	fake.recordInvocation("GetAccountAuthorizationDetailsRequest", []interface{}{arg1})
 	fake.getAccountAuthorizationDetailsRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetAccountAuthorizationDetailsRequestStub != nil {
+		return fake.GetAccountAuthorizationDetailsRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getAccountAuthorizationDetailsRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -17071,16 +16908,15 @@ func (fake *FakeIAMAPI) GetAccountAuthorizationDetailsWithContext(arg1 context.C
 		arg2 *iam.GetAccountAuthorizationDetailsInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.GetAccountAuthorizationDetailsWithContextStub
-	fakeReturns := fake.getAccountAuthorizationDetailsWithContextReturns
 	fake.recordInvocation("GetAccountAuthorizationDetailsWithContext", []interface{}{arg1, arg2, arg3})
 	fake.getAccountAuthorizationDetailsWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.GetAccountAuthorizationDetailsWithContextStub != nil {
+		return fake.GetAccountAuthorizationDetailsWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getAccountAuthorizationDetailsWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -17135,16 +16971,15 @@ func (fake *FakeIAMAPI) GetAccountPasswordPolicy(arg1 *iam.GetAccountPasswordPol
 	fake.getAccountPasswordPolicyArgsForCall = append(fake.getAccountPasswordPolicyArgsForCall, struct {
 		arg1 *iam.GetAccountPasswordPolicyInput
 	}{arg1})
-	stub := fake.GetAccountPasswordPolicyStub
-	fakeReturns := fake.getAccountPasswordPolicyReturns
 	fake.recordInvocation("GetAccountPasswordPolicy", []interface{}{arg1})
 	fake.getAccountPasswordPolicyMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetAccountPasswordPolicyStub != nil {
+		return fake.GetAccountPasswordPolicyStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getAccountPasswordPolicyReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -17199,16 +17034,15 @@ func (fake *FakeIAMAPI) GetAccountPasswordPolicyRequest(arg1 *iam.GetAccountPass
 	fake.getAccountPasswordPolicyRequestArgsForCall = append(fake.getAccountPasswordPolicyRequestArgsForCall, struct {
 		arg1 *iam.GetAccountPasswordPolicyInput
 	}{arg1})
-	stub := fake.GetAccountPasswordPolicyRequestStub
-	fakeReturns := fake.getAccountPasswordPolicyRequestReturns
 	fake.recordInvocation("GetAccountPasswordPolicyRequest", []interface{}{arg1})
 	fake.getAccountPasswordPolicyRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetAccountPasswordPolicyRequestStub != nil {
+		return fake.GetAccountPasswordPolicyRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getAccountPasswordPolicyRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -17265,16 +17099,15 @@ func (fake *FakeIAMAPI) GetAccountPasswordPolicyWithContext(arg1 context.Context
 		arg2 *iam.GetAccountPasswordPolicyInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.GetAccountPasswordPolicyWithContextStub
-	fakeReturns := fake.getAccountPasswordPolicyWithContextReturns
 	fake.recordInvocation("GetAccountPasswordPolicyWithContext", []interface{}{arg1, arg2, arg3})
 	fake.getAccountPasswordPolicyWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.GetAccountPasswordPolicyWithContextStub != nil {
+		return fake.GetAccountPasswordPolicyWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getAccountPasswordPolicyWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -17329,16 +17162,15 @@ func (fake *FakeIAMAPI) GetAccountSummary(arg1 *iam.GetAccountSummaryInput) (*ia
 	fake.getAccountSummaryArgsForCall = append(fake.getAccountSummaryArgsForCall, struct {
 		arg1 *iam.GetAccountSummaryInput
 	}{arg1})
-	stub := fake.GetAccountSummaryStub
-	fakeReturns := fake.getAccountSummaryReturns
 	fake.recordInvocation("GetAccountSummary", []interface{}{arg1})
 	fake.getAccountSummaryMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetAccountSummaryStub != nil {
+		return fake.GetAccountSummaryStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getAccountSummaryReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -17393,16 +17225,15 @@ func (fake *FakeIAMAPI) GetAccountSummaryRequest(arg1 *iam.GetAccountSummaryInpu
 	fake.getAccountSummaryRequestArgsForCall = append(fake.getAccountSummaryRequestArgsForCall, struct {
 		arg1 *iam.GetAccountSummaryInput
 	}{arg1})
-	stub := fake.GetAccountSummaryRequestStub
-	fakeReturns := fake.getAccountSummaryRequestReturns
 	fake.recordInvocation("GetAccountSummaryRequest", []interface{}{arg1})
 	fake.getAccountSummaryRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetAccountSummaryRequestStub != nil {
+		return fake.GetAccountSummaryRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getAccountSummaryRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -17459,16 +17290,15 @@ func (fake *FakeIAMAPI) GetAccountSummaryWithContext(arg1 context.Context, arg2 
 		arg2 *iam.GetAccountSummaryInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.GetAccountSummaryWithContextStub
-	fakeReturns := fake.getAccountSummaryWithContextReturns
 	fake.recordInvocation("GetAccountSummaryWithContext", []interface{}{arg1, arg2, arg3})
 	fake.getAccountSummaryWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.GetAccountSummaryWithContextStub != nil {
+		return fake.GetAccountSummaryWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getAccountSummaryWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -17523,16 +17353,15 @@ func (fake *FakeIAMAPI) GetContextKeysForCustomPolicy(arg1 *iam.GetContextKeysFo
 	fake.getContextKeysForCustomPolicyArgsForCall = append(fake.getContextKeysForCustomPolicyArgsForCall, struct {
 		arg1 *iam.GetContextKeysForCustomPolicyInput
 	}{arg1})
-	stub := fake.GetContextKeysForCustomPolicyStub
-	fakeReturns := fake.getContextKeysForCustomPolicyReturns
 	fake.recordInvocation("GetContextKeysForCustomPolicy", []interface{}{arg1})
 	fake.getContextKeysForCustomPolicyMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetContextKeysForCustomPolicyStub != nil {
+		return fake.GetContextKeysForCustomPolicyStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getContextKeysForCustomPolicyReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -17587,16 +17416,15 @@ func (fake *FakeIAMAPI) GetContextKeysForCustomPolicyRequest(arg1 *iam.GetContex
 	fake.getContextKeysForCustomPolicyRequestArgsForCall = append(fake.getContextKeysForCustomPolicyRequestArgsForCall, struct {
 		arg1 *iam.GetContextKeysForCustomPolicyInput
 	}{arg1})
-	stub := fake.GetContextKeysForCustomPolicyRequestStub
-	fakeReturns := fake.getContextKeysForCustomPolicyRequestReturns
 	fake.recordInvocation("GetContextKeysForCustomPolicyRequest", []interface{}{arg1})
 	fake.getContextKeysForCustomPolicyRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetContextKeysForCustomPolicyRequestStub != nil {
+		return fake.GetContextKeysForCustomPolicyRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getContextKeysForCustomPolicyRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -17653,16 +17481,15 @@ func (fake *FakeIAMAPI) GetContextKeysForCustomPolicyWithContext(arg1 context.Co
 		arg2 *iam.GetContextKeysForCustomPolicyInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.GetContextKeysForCustomPolicyWithContextStub
-	fakeReturns := fake.getContextKeysForCustomPolicyWithContextReturns
 	fake.recordInvocation("GetContextKeysForCustomPolicyWithContext", []interface{}{arg1, arg2, arg3})
 	fake.getContextKeysForCustomPolicyWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.GetContextKeysForCustomPolicyWithContextStub != nil {
+		return fake.GetContextKeysForCustomPolicyWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getContextKeysForCustomPolicyWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -17717,16 +17544,15 @@ func (fake *FakeIAMAPI) GetContextKeysForPrincipalPolicy(arg1 *iam.GetContextKey
 	fake.getContextKeysForPrincipalPolicyArgsForCall = append(fake.getContextKeysForPrincipalPolicyArgsForCall, struct {
 		arg1 *iam.GetContextKeysForPrincipalPolicyInput
 	}{arg1})
-	stub := fake.GetContextKeysForPrincipalPolicyStub
-	fakeReturns := fake.getContextKeysForPrincipalPolicyReturns
 	fake.recordInvocation("GetContextKeysForPrincipalPolicy", []interface{}{arg1})
 	fake.getContextKeysForPrincipalPolicyMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetContextKeysForPrincipalPolicyStub != nil {
+		return fake.GetContextKeysForPrincipalPolicyStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getContextKeysForPrincipalPolicyReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -17781,16 +17607,15 @@ func (fake *FakeIAMAPI) GetContextKeysForPrincipalPolicyRequest(arg1 *iam.GetCon
 	fake.getContextKeysForPrincipalPolicyRequestArgsForCall = append(fake.getContextKeysForPrincipalPolicyRequestArgsForCall, struct {
 		arg1 *iam.GetContextKeysForPrincipalPolicyInput
 	}{arg1})
-	stub := fake.GetContextKeysForPrincipalPolicyRequestStub
-	fakeReturns := fake.getContextKeysForPrincipalPolicyRequestReturns
 	fake.recordInvocation("GetContextKeysForPrincipalPolicyRequest", []interface{}{arg1})
 	fake.getContextKeysForPrincipalPolicyRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetContextKeysForPrincipalPolicyRequestStub != nil {
+		return fake.GetContextKeysForPrincipalPolicyRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getContextKeysForPrincipalPolicyRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -17847,16 +17672,15 @@ func (fake *FakeIAMAPI) GetContextKeysForPrincipalPolicyWithContext(arg1 context
 		arg2 *iam.GetContextKeysForPrincipalPolicyInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.GetContextKeysForPrincipalPolicyWithContextStub
-	fakeReturns := fake.getContextKeysForPrincipalPolicyWithContextReturns
 	fake.recordInvocation("GetContextKeysForPrincipalPolicyWithContext", []interface{}{arg1, arg2, arg3})
 	fake.getContextKeysForPrincipalPolicyWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.GetContextKeysForPrincipalPolicyWithContextStub != nil {
+		return fake.GetContextKeysForPrincipalPolicyWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getContextKeysForPrincipalPolicyWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -17911,16 +17735,15 @@ func (fake *FakeIAMAPI) GetCredentialReport(arg1 *iam.GetCredentialReportInput) 
 	fake.getCredentialReportArgsForCall = append(fake.getCredentialReportArgsForCall, struct {
 		arg1 *iam.GetCredentialReportInput
 	}{arg1})
-	stub := fake.GetCredentialReportStub
-	fakeReturns := fake.getCredentialReportReturns
 	fake.recordInvocation("GetCredentialReport", []interface{}{arg1})
 	fake.getCredentialReportMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetCredentialReportStub != nil {
+		return fake.GetCredentialReportStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getCredentialReportReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -17975,16 +17798,15 @@ func (fake *FakeIAMAPI) GetCredentialReportRequest(arg1 *iam.GetCredentialReport
 	fake.getCredentialReportRequestArgsForCall = append(fake.getCredentialReportRequestArgsForCall, struct {
 		arg1 *iam.GetCredentialReportInput
 	}{arg1})
-	stub := fake.GetCredentialReportRequestStub
-	fakeReturns := fake.getCredentialReportRequestReturns
 	fake.recordInvocation("GetCredentialReportRequest", []interface{}{arg1})
 	fake.getCredentialReportRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetCredentialReportRequestStub != nil {
+		return fake.GetCredentialReportRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getCredentialReportRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -18041,16 +17863,15 @@ func (fake *FakeIAMAPI) GetCredentialReportWithContext(arg1 context.Context, arg
 		arg2 *iam.GetCredentialReportInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.GetCredentialReportWithContextStub
-	fakeReturns := fake.getCredentialReportWithContextReturns
 	fake.recordInvocation("GetCredentialReportWithContext", []interface{}{arg1, arg2, arg3})
 	fake.getCredentialReportWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.GetCredentialReportWithContextStub != nil {
+		return fake.GetCredentialReportWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getCredentialReportWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -18105,16 +17926,15 @@ func (fake *FakeIAMAPI) GetGroup(arg1 *iam.GetGroupInput) (*iam.GetGroupOutput, 
 	fake.getGroupArgsForCall = append(fake.getGroupArgsForCall, struct {
 		arg1 *iam.GetGroupInput
 	}{arg1})
-	stub := fake.GetGroupStub
-	fakeReturns := fake.getGroupReturns
 	fake.recordInvocation("GetGroup", []interface{}{arg1})
 	fake.getGroupMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetGroupStub != nil {
+		return fake.GetGroupStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getGroupReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -18170,16 +17990,15 @@ func (fake *FakeIAMAPI) GetGroupPages(arg1 *iam.GetGroupInput, arg2 func(*iam.Ge
 		arg1 *iam.GetGroupInput
 		arg2 func(*iam.GetGroupOutput, bool) bool
 	}{arg1, arg2})
-	stub := fake.GetGroupPagesStub
-	fakeReturns := fake.getGroupPagesReturns
 	fake.recordInvocation("GetGroupPages", []interface{}{arg1, arg2})
 	fake.getGroupPagesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2)
+	if fake.GetGroupPagesStub != nil {
+		return fake.GetGroupPagesStub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.getGroupPagesReturns
 	return fakeReturns.result1
 }
 
@@ -18234,16 +18053,15 @@ func (fake *FakeIAMAPI) GetGroupPagesWithContext(arg1 context.Context, arg2 *iam
 		arg3 func(*iam.GetGroupOutput, bool) bool
 		arg4 []request.Option
 	}{arg1, arg2, arg3, arg4})
-	stub := fake.GetGroupPagesWithContextStub
-	fakeReturns := fake.getGroupPagesWithContextReturns
 	fake.recordInvocation("GetGroupPagesWithContext", []interface{}{arg1, arg2, arg3, arg4})
 	fake.getGroupPagesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3, arg4...)
+	if fake.GetGroupPagesWithContextStub != nil {
+		return fake.GetGroupPagesWithContextStub(arg1, arg2, arg3, arg4...)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.getGroupPagesWithContextReturns
 	return fakeReturns.result1
 }
 
@@ -18295,16 +18113,15 @@ func (fake *FakeIAMAPI) GetGroupPolicy(arg1 *iam.GetGroupPolicyInput) (*iam.GetG
 	fake.getGroupPolicyArgsForCall = append(fake.getGroupPolicyArgsForCall, struct {
 		arg1 *iam.GetGroupPolicyInput
 	}{arg1})
-	stub := fake.GetGroupPolicyStub
-	fakeReturns := fake.getGroupPolicyReturns
 	fake.recordInvocation("GetGroupPolicy", []interface{}{arg1})
 	fake.getGroupPolicyMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetGroupPolicyStub != nil {
+		return fake.GetGroupPolicyStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getGroupPolicyReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -18359,16 +18176,15 @@ func (fake *FakeIAMAPI) GetGroupPolicyRequest(arg1 *iam.GetGroupPolicyInput) (*r
 	fake.getGroupPolicyRequestArgsForCall = append(fake.getGroupPolicyRequestArgsForCall, struct {
 		arg1 *iam.GetGroupPolicyInput
 	}{arg1})
-	stub := fake.GetGroupPolicyRequestStub
-	fakeReturns := fake.getGroupPolicyRequestReturns
 	fake.recordInvocation("GetGroupPolicyRequest", []interface{}{arg1})
 	fake.getGroupPolicyRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetGroupPolicyRequestStub != nil {
+		return fake.GetGroupPolicyRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getGroupPolicyRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -18425,16 +18241,15 @@ func (fake *FakeIAMAPI) GetGroupPolicyWithContext(arg1 context.Context, arg2 *ia
 		arg2 *iam.GetGroupPolicyInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.GetGroupPolicyWithContextStub
-	fakeReturns := fake.getGroupPolicyWithContextReturns
 	fake.recordInvocation("GetGroupPolicyWithContext", []interface{}{arg1, arg2, arg3})
 	fake.getGroupPolicyWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.GetGroupPolicyWithContextStub != nil {
+		return fake.GetGroupPolicyWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getGroupPolicyWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -18489,16 +18304,15 @@ func (fake *FakeIAMAPI) GetGroupRequest(arg1 *iam.GetGroupInput) (*request.Reque
 	fake.getGroupRequestArgsForCall = append(fake.getGroupRequestArgsForCall, struct {
 		arg1 *iam.GetGroupInput
 	}{arg1})
-	stub := fake.GetGroupRequestStub
-	fakeReturns := fake.getGroupRequestReturns
 	fake.recordInvocation("GetGroupRequest", []interface{}{arg1})
 	fake.getGroupRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetGroupRequestStub != nil {
+		return fake.GetGroupRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getGroupRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -18555,16 +18369,15 @@ func (fake *FakeIAMAPI) GetGroupWithContext(arg1 context.Context, arg2 *iam.GetG
 		arg2 *iam.GetGroupInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.GetGroupWithContextStub
-	fakeReturns := fake.getGroupWithContextReturns
 	fake.recordInvocation("GetGroupWithContext", []interface{}{arg1, arg2, arg3})
 	fake.getGroupWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.GetGroupWithContextStub != nil {
+		return fake.GetGroupWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getGroupWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -18619,16 +18432,15 @@ func (fake *FakeIAMAPI) GetInstanceProfile(arg1 *iam.GetInstanceProfileInput) (*
 	fake.getInstanceProfileArgsForCall = append(fake.getInstanceProfileArgsForCall, struct {
 		arg1 *iam.GetInstanceProfileInput
 	}{arg1})
-	stub := fake.GetInstanceProfileStub
-	fakeReturns := fake.getInstanceProfileReturns
 	fake.recordInvocation("GetInstanceProfile", []interface{}{arg1})
 	fake.getInstanceProfileMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetInstanceProfileStub != nil {
+		return fake.GetInstanceProfileStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getInstanceProfileReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -18683,16 +18495,15 @@ func (fake *FakeIAMAPI) GetInstanceProfileRequest(arg1 *iam.GetInstanceProfileIn
 	fake.getInstanceProfileRequestArgsForCall = append(fake.getInstanceProfileRequestArgsForCall, struct {
 		arg1 *iam.GetInstanceProfileInput
 	}{arg1})
-	stub := fake.GetInstanceProfileRequestStub
-	fakeReturns := fake.getInstanceProfileRequestReturns
 	fake.recordInvocation("GetInstanceProfileRequest", []interface{}{arg1})
 	fake.getInstanceProfileRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetInstanceProfileRequestStub != nil {
+		return fake.GetInstanceProfileRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getInstanceProfileRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -18749,16 +18560,15 @@ func (fake *FakeIAMAPI) GetInstanceProfileWithContext(arg1 context.Context, arg2
 		arg2 *iam.GetInstanceProfileInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.GetInstanceProfileWithContextStub
-	fakeReturns := fake.getInstanceProfileWithContextReturns
 	fake.recordInvocation("GetInstanceProfileWithContext", []interface{}{arg1, arg2, arg3})
 	fake.getInstanceProfileWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.GetInstanceProfileWithContextStub != nil {
+		return fake.GetInstanceProfileWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getInstanceProfileWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -18813,16 +18623,15 @@ func (fake *FakeIAMAPI) GetLoginProfile(arg1 *iam.GetLoginProfileInput) (*iam.Ge
 	fake.getLoginProfileArgsForCall = append(fake.getLoginProfileArgsForCall, struct {
 		arg1 *iam.GetLoginProfileInput
 	}{arg1})
-	stub := fake.GetLoginProfileStub
-	fakeReturns := fake.getLoginProfileReturns
 	fake.recordInvocation("GetLoginProfile", []interface{}{arg1})
 	fake.getLoginProfileMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetLoginProfileStub != nil {
+		return fake.GetLoginProfileStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getLoginProfileReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -18877,16 +18686,15 @@ func (fake *FakeIAMAPI) GetLoginProfileRequest(arg1 *iam.GetLoginProfileInput) (
 	fake.getLoginProfileRequestArgsForCall = append(fake.getLoginProfileRequestArgsForCall, struct {
 		arg1 *iam.GetLoginProfileInput
 	}{arg1})
-	stub := fake.GetLoginProfileRequestStub
-	fakeReturns := fake.getLoginProfileRequestReturns
 	fake.recordInvocation("GetLoginProfileRequest", []interface{}{arg1})
 	fake.getLoginProfileRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetLoginProfileRequestStub != nil {
+		return fake.GetLoginProfileRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getLoginProfileRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -18943,16 +18751,15 @@ func (fake *FakeIAMAPI) GetLoginProfileWithContext(arg1 context.Context, arg2 *i
 		arg2 *iam.GetLoginProfileInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.GetLoginProfileWithContextStub
-	fakeReturns := fake.getLoginProfileWithContextReturns
 	fake.recordInvocation("GetLoginProfileWithContext", []interface{}{arg1, arg2, arg3})
 	fake.getLoginProfileWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.GetLoginProfileWithContextStub != nil {
+		return fake.GetLoginProfileWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getLoginProfileWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -19007,16 +18814,15 @@ func (fake *FakeIAMAPI) GetOpenIDConnectProvider(arg1 *iam.GetOpenIDConnectProvi
 	fake.getOpenIDConnectProviderArgsForCall = append(fake.getOpenIDConnectProviderArgsForCall, struct {
 		arg1 *iam.GetOpenIDConnectProviderInput
 	}{arg1})
-	stub := fake.GetOpenIDConnectProviderStub
-	fakeReturns := fake.getOpenIDConnectProviderReturns
 	fake.recordInvocation("GetOpenIDConnectProvider", []interface{}{arg1})
 	fake.getOpenIDConnectProviderMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetOpenIDConnectProviderStub != nil {
+		return fake.GetOpenIDConnectProviderStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getOpenIDConnectProviderReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -19071,16 +18877,15 @@ func (fake *FakeIAMAPI) GetOpenIDConnectProviderRequest(arg1 *iam.GetOpenIDConne
 	fake.getOpenIDConnectProviderRequestArgsForCall = append(fake.getOpenIDConnectProviderRequestArgsForCall, struct {
 		arg1 *iam.GetOpenIDConnectProviderInput
 	}{arg1})
-	stub := fake.GetOpenIDConnectProviderRequestStub
-	fakeReturns := fake.getOpenIDConnectProviderRequestReturns
 	fake.recordInvocation("GetOpenIDConnectProviderRequest", []interface{}{arg1})
 	fake.getOpenIDConnectProviderRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetOpenIDConnectProviderRequestStub != nil {
+		return fake.GetOpenIDConnectProviderRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getOpenIDConnectProviderRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -19137,16 +18942,15 @@ func (fake *FakeIAMAPI) GetOpenIDConnectProviderWithContext(arg1 context.Context
 		arg2 *iam.GetOpenIDConnectProviderInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.GetOpenIDConnectProviderWithContextStub
-	fakeReturns := fake.getOpenIDConnectProviderWithContextReturns
 	fake.recordInvocation("GetOpenIDConnectProviderWithContext", []interface{}{arg1, arg2, arg3})
 	fake.getOpenIDConnectProviderWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.GetOpenIDConnectProviderWithContextStub != nil {
+		return fake.GetOpenIDConnectProviderWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getOpenIDConnectProviderWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -19201,16 +19005,15 @@ func (fake *FakeIAMAPI) GetOrganizationsAccessReport(arg1 *iam.GetOrganizationsA
 	fake.getOrganizationsAccessReportArgsForCall = append(fake.getOrganizationsAccessReportArgsForCall, struct {
 		arg1 *iam.GetOrganizationsAccessReportInput
 	}{arg1})
-	stub := fake.GetOrganizationsAccessReportStub
-	fakeReturns := fake.getOrganizationsAccessReportReturns
 	fake.recordInvocation("GetOrganizationsAccessReport", []interface{}{arg1})
 	fake.getOrganizationsAccessReportMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetOrganizationsAccessReportStub != nil {
+		return fake.GetOrganizationsAccessReportStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getOrganizationsAccessReportReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -19265,16 +19068,15 @@ func (fake *FakeIAMAPI) GetOrganizationsAccessReportRequest(arg1 *iam.GetOrganiz
 	fake.getOrganizationsAccessReportRequestArgsForCall = append(fake.getOrganizationsAccessReportRequestArgsForCall, struct {
 		arg1 *iam.GetOrganizationsAccessReportInput
 	}{arg1})
-	stub := fake.GetOrganizationsAccessReportRequestStub
-	fakeReturns := fake.getOrganizationsAccessReportRequestReturns
 	fake.recordInvocation("GetOrganizationsAccessReportRequest", []interface{}{arg1})
 	fake.getOrganizationsAccessReportRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetOrganizationsAccessReportRequestStub != nil {
+		return fake.GetOrganizationsAccessReportRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getOrganizationsAccessReportRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -19331,16 +19133,15 @@ func (fake *FakeIAMAPI) GetOrganizationsAccessReportWithContext(arg1 context.Con
 		arg2 *iam.GetOrganizationsAccessReportInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.GetOrganizationsAccessReportWithContextStub
-	fakeReturns := fake.getOrganizationsAccessReportWithContextReturns
 	fake.recordInvocation("GetOrganizationsAccessReportWithContext", []interface{}{arg1, arg2, arg3})
 	fake.getOrganizationsAccessReportWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.GetOrganizationsAccessReportWithContextStub != nil {
+		return fake.GetOrganizationsAccessReportWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getOrganizationsAccessReportWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -19395,16 +19196,15 @@ func (fake *FakeIAMAPI) GetPolicy(arg1 *iam.GetPolicyInput) (*iam.GetPolicyOutpu
 	fake.getPolicyArgsForCall = append(fake.getPolicyArgsForCall, struct {
 		arg1 *iam.GetPolicyInput
 	}{arg1})
-	stub := fake.GetPolicyStub
-	fakeReturns := fake.getPolicyReturns
 	fake.recordInvocation("GetPolicy", []interface{}{arg1})
 	fake.getPolicyMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetPolicyStub != nil {
+		return fake.GetPolicyStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getPolicyReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -19459,16 +19259,15 @@ func (fake *FakeIAMAPI) GetPolicyRequest(arg1 *iam.GetPolicyInput) (*request.Req
 	fake.getPolicyRequestArgsForCall = append(fake.getPolicyRequestArgsForCall, struct {
 		arg1 *iam.GetPolicyInput
 	}{arg1})
-	stub := fake.GetPolicyRequestStub
-	fakeReturns := fake.getPolicyRequestReturns
 	fake.recordInvocation("GetPolicyRequest", []interface{}{arg1})
 	fake.getPolicyRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetPolicyRequestStub != nil {
+		return fake.GetPolicyRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getPolicyRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -19523,16 +19322,15 @@ func (fake *FakeIAMAPI) GetPolicyVersion(arg1 *iam.GetPolicyVersionInput) (*iam.
 	fake.getPolicyVersionArgsForCall = append(fake.getPolicyVersionArgsForCall, struct {
 		arg1 *iam.GetPolicyVersionInput
 	}{arg1})
-	stub := fake.GetPolicyVersionStub
-	fakeReturns := fake.getPolicyVersionReturns
 	fake.recordInvocation("GetPolicyVersion", []interface{}{arg1})
 	fake.getPolicyVersionMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetPolicyVersionStub != nil {
+		return fake.GetPolicyVersionStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getPolicyVersionReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -19587,16 +19385,15 @@ func (fake *FakeIAMAPI) GetPolicyVersionRequest(arg1 *iam.GetPolicyVersionInput)
 	fake.getPolicyVersionRequestArgsForCall = append(fake.getPolicyVersionRequestArgsForCall, struct {
 		arg1 *iam.GetPolicyVersionInput
 	}{arg1})
-	stub := fake.GetPolicyVersionRequestStub
-	fakeReturns := fake.getPolicyVersionRequestReturns
 	fake.recordInvocation("GetPolicyVersionRequest", []interface{}{arg1})
 	fake.getPolicyVersionRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetPolicyVersionRequestStub != nil {
+		return fake.GetPolicyVersionRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getPolicyVersionRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -19653,16 +19450,15 @@ func (fake *FakeIAMAPI) GetPolicyVersionWithContext(arg1 context.Context, arg2 *
 		arg2 *iam.GetPolicyVersionInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.GetPolicyVersionWithContextStub
-	fakeReturns := fake.getPolicyVersionWithContextReturns
 	fake.recordInvocation("GetPolicyVersionWithContext", []interface{}{arg1, arg2, arg3})
 	fake.getPolicyVersionWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.GetPolicyVersionWithContextStub != nil {
+		return fake.GetPolicyVersionWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getPolicyVersionWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -19719,16 +19515,15 @@ func (fake *FakeIAMAPI) GetPolicyWithContext(arg1 context.Context, arg2 *iam.Get
 		arg2 *iam.GetPolicyInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.GetPolicyWithContextStub
-	fakeReturns := fake.getPolicyWithContextReturns
 	fake.recordInvocation("GetPolicyWithContext", []interface{}{arg1, arg2, arg3})
 	fake.getPolicyWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.GetPolicyWithContextStub != nil {
+		return fake.GetPolicyWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getPolicyWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -19783,16 +19578,15 @@ func (fake *FakeIAMAPI) GetRole(arg1 *iam.GetRoleInput) (*iam.GetRoleOutput, err
 	fake.getRoleArgsForCall = append(fake.getRoleArgsForCall, struct {
 		arg1 *iam.GetRoleInput
 	}{arg1})
-	stub := fake.GetRoleStub
-	fakeReturns := fake.getRoleReturns
 	fake.recordInvocation("GetRole", []interface{}{arg1})
 	fake.getRoleMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetRoleStub != nil {
+		return fake.GetRoleStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getRoleReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -19847,16 +19641,15 @@ func (fake *FakeIAMAPI) GetRolePolicy(arg1 *iam.GetRolePolicyInput) (*iam.GetRol
 	fake.getRolePolicyArgsForCall = append(fake.getRolePolicyArgsForCall, struct {
 		arg1 *iam.GetRolePolicyInput
 	}{arg1})
-	stub := fake.GetRolePolicyStub
-	fakeReturns := fake.getRolePolicyReturns
 	fake.recordInvocation("GetRolePolicy", []interface{}{arg1})
 	fake.getRolePolicyMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetRolePolicyStub != nil {
+		return fake.GetRolePolicyStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getRolePolicyReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -19911,16 +19704,15 @@ func (fake *FakeIAMAPI) GetRolePolicyRequest(arg1 *iam.GetRolePolicyInput) (*req
 	fake.getRolePolicyRequestArgsForCall = append(fake.getRolePolicyRequestArgsForCall, struct {
 		arg1 *iam.GetRolePolicyInput
 	}{arg1})
-	stub := fake.GetRolePolicyRequestStub
-	fakeReturns := fake.getRolePolicyRequestReturns
 	fake.recordInvocation("GetRolePolicyRequest", []interface{}{arg1})
 	fake.getRolePolicyRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetRolePolicyRequestStub != nil {
+		return fake.GetRolePolicyRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getRolePolicyRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -19977,16 +19769,15 @@ func (fake *FakeIAMAPI) GetRolePolicyWithContext(arg1 context.Context, arg2 *iam
 		arg2 *iam.GetRolePolicyInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.GetRolePolicyWithContextStub
-	fakeReturns := fake.getRolePolicyWithContextReturns
 	fake.recordInvocation("GetRolePolicyWithContext", []interface{}{arg1, arg2, arg3})
 	fake.getRolePolicyWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.GetRolePolicyWithContextStub != nil {
+		return fake.GetRolePolicyWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getRolePolicyWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -20041,16 +19832,15 @@ func (fake *FakeIAMAPI) GetRoleRequest(arg1 *iam.GetRoleInput) (*request.Request
 	fake.getRoleRequestArgsForCall = append(fake.getRoleRequestArgsForCall, struct {
 		arg1 *iam.GetRoleInput
 	}{arg1})
-	stub := fake.GetRoleRequestStub
-	fakeReturns := fake.getRoleRequestReturns
 	fake.recordInvocation("GetRoleRequest", []interface{}{arg1})
 	fake.getRoleRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetRoleRequestStub != nil {
+		return fake.GetRoleRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getRoleRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -20107,16 +19897,15 @@ func (fake *FakeIAMAPI) GetRoleWithContext(arg1 context.Context, arg2 *iam.GetRo
 		arg2 *iam.GetRoleInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.GetRoleWithContextStub
-	fakeReturns := fake.getRoleWithContextReturns
 	fake.recordInvocation("GetRoleWithContext", []interface{}{arg1, arg2, arg3})
 	fake.getRoleWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.GetRoleWithContextStub != nil {
+		return fake.GetRoleWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getRoleWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -20171,16 +19960,15 @@ func (fake *FakeIAMAPI) GetSAMLProvider(arg1 *iam.GetSAMLProviderInput) (*iam.Ge
 	fake.getSAMLProviderArgsForCall = append(fake.getSAMLProviderArgsForCall, struct {
 		arg1 *iam.GetSAMLProviderInput
 	}{arg1})
-	stub := fake.GetSAMLProviderStub
-	fakeReturns := fake.getSAMLProviderReturns
 	fake.recordInvocation("GetSAMLProvider", []interface{}{arg1})
 	fake.getSAMLProviderMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetSAMLProviderStub != nil {
+		return fake.GetSAMLProviderStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getSAMLProviderReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -20235,16 +20023,15 @@ func (fake *FakeIAMAPI) GetSAMLProviderRequest(arg1 *iam.GetSAMLProviderInput) (
 	fake.getSAMLProviderRequestArgsForCall = append(fake.getSAMLProviderRequestArgsForCall, struct {
 		arg1 *iam.GetSAMLProviderInput
 	}{arg1})
-	stub := fake.GetSAMLProviderRequestStub
-	fakeReturns := fake.getSAMLProviderRequestReturns
 	fake.recordInvocation("GetSAMLProviderRequest", []interface{}{arg1})
 	fake.getSAMLProviderRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetSAMLProviderRequestStub != nil {
+		return fake.GetSAMLProviderRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getSAMLProviderRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -20301,16 +20088,15 @@ func (fake *FakeIAMAPI) GetSAMLProviderWithContext(arg1 context.Context, arg2 *i
 		arg2 *iam.GetSAMLProviderInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.GetSAMLProviderWithContextStub
-	fakeReturns := fake.getSAMLProviderWithContextReturns
 	fake.recordInvocation("GetSAMLProviderWithContext", []interface{}{arg1, arg2, arg3})
 	fake.getSAMLProviderWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.GetSAMLProviderWithContextStub != nil {
+		return fake.GetSAMLProviderWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getSAMLProviderWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -20365,16 +20151,15 @@ func (fake *FakeIAMAPI) GetSSHPublicKey(arg1 *iam.GetSSHPublicKeyInput) (*iam.Ge
 	fake.getSSHPublicKeyArgsForCall = append(fake.getSSHPublicKeyArgsForCall, struct {
 		arg1 *iam.GetSSHPublicKeyInput
 	}{arg1})
-	stub := fake.GetSSHPublicKeyStub
-	fakeReturns := fake.getSSHPublicKeyReturns
 	fake.recordInvocation("GetSSHPublicKey", []interface{}{arg1})
 	fake.getSSHPublicKeyMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetSSHPublicKeyStub != nil {
+		return fake.GetSSHPublicKeyStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getSSHPublicKeyReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -20429,16 +20214,15 @@ func (fake *FakeIAMAPI) GetSSHPublicKeyRequest(arg1 *iam.GetSSHPublicKeyInput) (
 	fake.getSSHPublicKeyRequestArgsForCall = append(fake.getSSHPublicKeyRequestArgsForCall, struct {
 		arg1 *iam.GetSSHPublicKeyInput
 	}{arg1})
-	stub := fake.GetSSHPublicKeyRequestStub
-	fakeReturns := fake.getSSHPublicKeyRequestReturns
 	fake.recordInvocation("GetSSHPublicKeyRequest", []interface{}{arg1})
 	fake.getSSHPublicKeyRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetSSHPublicKeyRequestStub != nil {
+		return fake.GetSSHPublicKeyRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getSSHPublicKeyRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -20495,16 +20279,15 @@ func (fake *FakeIAMAPI) GetSSHPublicKeyWithContext(arg1 context.Context, arg2 *i
 		arg2 *iam.GetSSHPublicKeyInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.GetSSHPublicKeyWithContextStub
-	fakeReturns := fake.getSSHPublicKeyWithContextReturns
 	fake.recordInvocation("GetSSHPublicKeyWithContext", []interface{}{arg1, arg2, arg3})
 	fake.getSSHPublicKeyWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.GetSSHPublicKeyWithContextStub != nil {
+		return fake.GetSSHPublicKeyWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getSSHPublicKeyWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -20559,16 +20342,15 @@ func (fake *FakeIAMAPI) GetServerCertificate(arg1 *iam.GetServerCertificateInput
 	fake.getServerCertificateArgsForCall = append(fake.getServerCertificateArgsForCall, struct {
 		arg1 *iam.GetServerCertificateInput
 	}{arg1})
-	stub := fake.GetServerCertificateStub
-	fakeReturns := fake.getServerCertificateReturns
 	fake.recordInvocation("GetServerCertificate", []interface{}{arg1})
 	fake.getServerCertificateMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetServerCertificateStub != nil {
+		return fake.GetServerCertificateStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getServerCertificateReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -20623,16 +20405,15 @@ func (fake *FakeIAMAPI) GetServerCertificateRequest(arg1 *iam.GetServerCertifica
 	fake.getServerCertificateRequestArgsForCall = append(fake.getServerCertificateRequestArgsForCall, struct {
 		arg1 *iam.GetServerCertificateInput
 	}{arg1})
-	stub := fake.GetServerCertificateRequestStub
-	fakeReturns := fake.getServerCertificateRequestReturns
 	fake.recordInvocation("GetServerCertificateRequest", []interface{}{arg1})
 	fake.getServerCertificateRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetServerCertificateRequestStub != nil {
+		return fake.GetServerCertificateRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getServerCertificateRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -20689,16 +20470,15 @@ func (fake *FakeIAMAPI) GetServerCertificateWithContext(arg1 context.Context, ar
 		arg2 *iam.GetServerCertificateInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.GetServerCertificateWithContextStub
-	fakeReturns := fake.getServerCertificateWithContextReturns
 	fake.recordInvocation("GetServerCertificateWithContext", []interface{}{arg1, arg2, arg3})
 	fake.getServerCertificateWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.GetServerCertificateWithContextStub != nil {
+		return fake.GetServerCertificateWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getServerCertificateWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -20753,16 +20533,15 @@ func (fake *FakeIAMAPI) GetServiceLastAccessedDetails(arg1 *iam.GetServiceLastAc
 	fake.getServiceLastAccessedDetailsArgsForCall = append(fake.getServiceLastAccessedDetailsArgsForCall, struct {
 		arg1 *iam.GetServiceLastAccessedDetailsInput
 	}{arg1})
-	stub := fake.GetServiceLastAccessedDetailsStub
-	fakeReturns := fake.getServiceLastAccessedDetailsReturns
 	fake.recordInvocation("GetServiceLastAccessedDetails", []interface{}{arg1})
 	fake.getServiceLastAccessedDetailsMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetServiceLastAccessedDetailsStub != nil {
+		return fake.GetServiceLastAccessedDetailsStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getServiceLastAccessedDetailsReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -20817,16 +20596,15 @@ func (fake *FakeIAMAPI) GetServiceLastAccessedDetailsRequest(arg1 *iam.GetServic
 	fake.getServiceLastAccessedDetailsRequestArgsForCall = append(fake.getServiceLastAccessedDetailsRequestArgsForCall, struct {
 		arg1 *iam.GetServiceLastAccessedDetailsInput
 	}{arg1})
-	stub := fake.GetServiceLastAccessedDetailsRequestStub
-	fakeReturns := fake.getServiceLastAccessedDetailsRequestReturns
 	fake.recordInvocation("GetServiceLastAccessedDetailsRequest", []interface{}{arg1})
 	fake.getServiceLastAccessedDetailsRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetServiceLastAccessedDetailsRequestStub != nil {
+		return fake.GetServiceLastAccessedDetailsRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getServiceLastAccessedDetailsRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -20883,16 +20661,15 @@ func (fake *FakeIAMAPI) GetServiceLastAccessedDetailsWithContext(arg1 context.Co
 		arg2 *iam.GetServiceLastAccessedDetailsInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.GetServiceLastAccessedDetailsWithContextStub
-	fakeReturns := fake.getServiceLastAccessedDetailsWithContextReturns
 	fake.recordInvocation("GetServiceLastAccessedDetailsWithContext", []interface{}{arg1, arg2, arg3})
 	fake.getServiceLastAccessedDetailsWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.GetServiceLastAccessedDetailsWithContextStub != nil {
+		return fake.GetServiceLastAccessedDetailsWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getServiceLastAccessedDetailsWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -20947,16 +20724,15 @@ func (fake *FakeIAMAPI) GetServiceLastAccessedDetailsWithEntities(arg1 *iam.GetS
 	fake.getServiceLastAccessedDetailsWithEntitiesArgsForCall = append(fake.getServiceLastAccessedDetailsWithEntitiesArgsForCall, struct {
 		arg1 *iam.GetServiceLastAccessedDetailsWithEntitiesInput
 	}{arg1})
-	stub := fake.GetServiceLastAccessedDetailsWithEntitiesStub
-	fakeReturns := fake.getServiceLastAccessedDetailsWithEntitiesReturns
 	fake.recordInvocation("GetServiceLastAccessedDetailsWithEntities", []interface{}{arg1})
 	fake.getServiceLastAccessedDetailsWithEntitiesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetServiceLastAccessedDetailsWithEntitiesStub != nil {
+		return fake.GetServiceLastAccessedDetailsWithEntitiesStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getServiceLastAccessedDetailsWithEntitiesReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -21011,16 +20787,15 @@ func (fake *FakeIAMAPI) GetServiceLastAccessedDetailsWithEntitiesRequest(arg1 *i
 	fake.getServiceLastAccessedDetailsWithEntitiesRequestArgsForCall = append(fake.getServiceLastAccessedDetailsWithEntitiesRequestArgsForCall, struct {
 		arg1 *iam.GetServiceLastAccessedDetailsWithEntitiesInput
 	}{arg1})
-	stub := fake.GetServiceLastAccessedDetailsWithEntitiesRequestStub
-	fakeReturns := fake.getServiceLastAccessedDetailsWithEntitiesRequestReturns
 	fake.recordInvocation("GetServiceLastAccessedDetailsWithEntitiesRequest", []interface{}{arg1})
 	fake.getServiceLastAccessedDetailsWithEntitiesRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetServiceLastAccessedDetailsWithEntitiesRequestStub != nil {
+		return fake.GetServiceLastAccessedDetailsWithEntitiesRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getServiceLastAccessedDetailsWithEntitiesRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -21077,16 +20852,15 @@ func (fake *FakeIAMAPI) GetServiceLastAccessedDetailsWithEntitiesWithContext(arg
 		arg2 *iam.GetServiceLastAccessedDetailsWithEntitiesInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.GetServiceLastAccessedDetailsWithEntitiesWithContextStub
-	fakeReturns := fake.getServiceLastAccessedDetailsWithEntitiesWithContextReturns
 	fake.recordInvocation("GetServiceLastAccessedDetailsWithEntitiesWithContext", []interface{}{arg1, arg2, arg3})
 	fake.getServiceLastAccessedDetailsWithEntitiesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.GetServiceLastAccessedDetailsWithEntitiesWithContextStub != nil {
+		return fake.GetServiceLastAccessedDetailsWithEntitiesWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getServiceLastAccessedDetailsWithEntitiesWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -21141,16 +20915,15 @@ func (fake *FakeIAMAPI) GetServiceLinkedRoleDeletionStatus(arg1 *iam.GetServiceL
 	fake.getServiceLinkedRoleDeletionStatusArgsForCall = append(fake.getServiceLinkedRoleDeletionStatusArgsForCall, struct {
 		arg1 *iam.GetServiceLinkedRoleDeletionStatusInput
 	}{arg1})
-	stub := fake.GetServiceLinkedRoleDeletionStatusStub
-	fakeReturns := fake.getServiceLinkedRoleDeletionStatusReturns
 	fake.recordInvocation("GetServiceLinkedRoleDeletionStatus", []interface{}{arg1})
 	fake.getServiceLinkedRoleDeletionStatusMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetServiceLinkedRoleDeletionStatusStub != nil {
+		return fake.GetServiceLinkedRoleDeletionStatusStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getServiceLinkedRoleDeletionStatusReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -21205,16 +20978,15 @@ func (fake *FakeIAMAPI) GetServiceLinkedRoleDeletionStatusRequest(arg1 *iam.GetS
 	fake.getServiceLinkedRoleDeletionStatusRequestArgsForCall = append(fake.getServiceLinkedRoleDeletionStatusRequestArgsForCall, struct {
 		arg1 *iam.GetServiceLinkedRoleDeletionStatusInput
 	}{arg1})
-	stub := fake.GetServiceLinkedRoleDeletionStatusRequestStub
-	fakeReturns := fake.getServiceLinkedRoleDeletionStatusRequestReturns
 	fake.recordInvocation("GetServiceLinkedRoleDeletionStatusRequest", []interface{}{arg1})
 	fake.getServiceLinkedRoleDeletionStatusRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetServiceLinkedRoleDeletionStatusRequestStub != nil {
+		return fake.GetServiceLinkedRoleDeletionStatusRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getServiceLinkedRoleDeletionStatusRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -21271,16 +21043,15 @@ func (fake *FakeIAMAPI) GetServiceLinkedRoleDeletionStatusWithContext(arg1 conte
 		arg2 *iam.GetServiceLinkedRoleDeletionStatusInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.GetServiceLinkedRoleDeletionStatusWithContextStub
-	fakeReturns := fake.getServiceLinkedRoleDeletionStatusWithContextReturns
 	fake.recordInvocation("GetServiceLinkedRoleDeletionStatusWithContext", []interface{}{arg1, arg2, arg3})
 	fake.getServiceLinkedRoleDeletionStatusWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.GetServiceLinkedRoleDeletionStatusWithContextStub != nil {
+		return fake.GetServiceLinkedRoleDeletionStatusWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getServiceLinkedRoleDeletionStatusWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -21335,16 +21106,15 @@ func (fake *FakeIAMAPI) GetUser(arg1 *iam.GetUserInput) (*iam.GetUserOutput, err
 	fake.getUserArgsForCall = append(fake.getUserArgsForCall, struct {
 		arg1 *iam.GetUserInput
 	}{arg1})
-	stub := fake.GetUserStub
-	fakeReturns := fake.getUserReturns
 	fake.recordInvocation("GetUser", []interface{}{arg1})
 	fake.getUserMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetUserStub != nil {
+		return fake.GetUserStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getUserReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -21399,16 +21169,15 @@ func (fake *FakeIAMAPI) GetUserPolicy(arg1 *iam.GetUserPolicyInput) (*iam.GetUse
 	fake.getUserPolicyArgsForCall = append(fake.getUserPolicyArgsForCall, struct {
 		arg1 *iam.GetUserPolicyInput
 	}{arg1})
-	stub := fake.GetUserPolicyStub
-	fakeReturns := fake.getUserPolicyReturns
 	fake.recordInvocation("GetUserPolicy", []interface{}{arg1})
 	fake.getUserPolicyMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetUserPolicyStub != nil {
+		return fake.GetUserPolicyStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getUserPolicyReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -21463,16 +21232,15 @@ func (fake *FakeIAMAPI) GetUserPolicyRequest(arg1 *iam.GetUserPolicyInput) (*req
 	fake.getUserPolicyRequestArgsForCall = append(fake.getUserPolicyRequestArgsForCall, struct {
 		arg1 *iam.GetUserPolicyInput
 	}{arg1})
-	stub := fake.GetUserPolicyRequestStub
-	fakeReturns := fake.getUserPolicyRequestReturns
 	fake.recordInvocation("GetUserPolicyRequest", []interface{}{arg1})
 	fake.getUserPolicyRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetUserPolicyRequestStub != nil {
+		return fake.GetUserPolicyRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getUserPolicyRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -21529,16 +21297,15 @@ func (fake *FakeIAMAPI) GetUserPolicyWithContext(arg1 context.Context, arg2 *iam
 		arg2 *iam.GetUserPolicyInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.GetUserPolicyWithContextStub
-	fakeReturns := fake.getUserPolicyWithContextReturns
 	fake.recordInvocation("GetUserPolicyWithContext", []interface{}{arg1, arg2, arg3})
 	fake.getUserPolicyWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.GetUserPolicyWithContextStub != nil {
+		return fake.GetUserPolicyWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getUserPolicyWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -21593,16 +21360,15 @@ func (fake *FakeIAMAPI) GetUserRequest(arg1 *iam.GetUserInput) (*request.Request
 	fake.getUserRequestArgsForCall = append(fake.getUserRequestArgsForCall, struct {
 		arg1 *iam.GetUserInput
 	}{arg1})
-	stub := fake.GetUserRequestStub
-	fakeReturns := fake.getUserRequestReturns
 	fake.recordInvocation("GetUserRequest", []interface{}{arg1})
 	fake.getUserRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.GetUserRequestStub != nil {
+		return fake.GetUserRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getUserRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -21659,16 +21425,15 @@ func (fake *FakeIAMAPI) GetUserWithContext(arg1 context.Context, arg2 *iam.GetUs
 		arg2 *iam.GetUserInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.GetUserWithContextStub
-	fakeReturns := fake.getUserWithContextReturns
 	fake.recordInvocation("GetUserWithContext", []interface{}{arg1, arg2, arg3})
 	fake.getUserWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.GetUserWithContextStub != nil {
+		return fake.GetUserWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.getUserWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -21723,16 +21488,15 @@ func (fake *FakeIAMAPI) ListAccessKeys(arg1 *iam.ListAccessKeysInput) (*iam.List
 	fake.listAccessKeysArgsForCall = append(fake.listAccessKeysArgsForCall, struct {
 		arg1 *iam.ListAccessKeysInput
 	}{arg1})
-	stub := fake.ListAccessKeysStub
-	fakeReturns := fake.listAccessKeysReturns
 	fake.recordInvocation("ListAccessKeys", []interface{}{arg1})
 	fake.listAccessKeysMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListAccessKeysStub != nil {
+		return fake.ListAccessKeysStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listAccessKeysReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -21788,16 +21552,15 @@ func (fake *FakeIAMAPI) ListAccessKeysPages(arg1 *iam.ListAccessKeysInput, arg2 
 		arg1 *iam.ListAccessKeysInput
 		arg2 func(*iam.ListAccessKeysOutput, bool) bool
 	}{arg1, arg2})
-	stub := fake.ListAccessKeysPagesStub
-	fakeReturns := fake.listAccessKeysPagesReturns
 	fake.recordInvocation("ListAccessKeysPages", []interface{}{arg1, arg2})
 	fake.listAccessKeysPagesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2)
+	if fake.ListAccessKeysPagesStub != nil {
+		return fake.ListAccessKeysPagesStub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listAccessKeysPagesReturns
 	return fakeReturns.result1
 }
 
@@ -21852,16 +21615,15 @@ func (fake *FakeIAMAPI) ListAccessKeysPagesWithContext(arg1 context.Context, arg
 		arg3 func(*iam.ListAccessKeysOutput, bool) bool
 		arg4 []request.Option
 	}{arg1, arg2, arg3, arg4})
-	stub := fake.ListAccessKeysPagesWithContextStub
-	fakeReturns := fake.listAccessKeysPagesWithContextReturns
 	fake.recordInvocation("ListAccessKeysPagesWithContext", []interface{}{arg1, arg2, arg3, arg4})
 	fake.listAccessKeysPagesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3, arg4...)
+	if fake.ListAccessKeysPagesWithContextStub != nil {
+		return fake.ListAccessKeysPagesWithContextStub(arg1, arg2, arg3, arg4...)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listAccessKeysPagesWithContextReturns
 	return fakeReturns.result1
 }
 
@@ -21913,16 +21675,15 @@ func (fake *FakeIAMAPI) ListAccessKeysRequest(arg1 *iam.ListAccessKeysInput) (*r
 	fake.listAccessKeysRequestArgsForCall = append(fake.listAccessKeysRequestArgsForCall, struct {
 		arg1 *iam.ListAccessKeysInput
 	}{arg1})
-	stub := fake.ListAccessKeysRequestStub
-	fakeReturns := fake.listAccessKeysRequestReturns
 	fake.recordInvocation("ListAccessKeysRequest", []interface{}{arg1})
 	fake.listAccessKeysRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListAccessKeysRequestStub != nil {
+		return fake.ListAccessKeysRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listAccessKeysRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -21979,16 +21740,15 @@ func (fake *FakeIAMAPI) ListAccessKeysWithContext(arg1 context.Context, arg2 *ia
 		arg2 *iam.ListAccessKeysInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.ListAccessKeysWithContextStub
-	fakeReturns := fake.listAccessKeysWithContextReturns
 	fake.recordInvocation("ListAccessKeysWithContext", []interface{}{arg1, arg2, arg3})
 	fake.listAccessKeysWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.ListAccessKeysWithContextStub != nil {
+		return fake.ListAccessKeysWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listAccessKeysWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -22043,16 +21803,15 @@ func (fake *FakeIAMAPI) ListAccountAliases(arg1 *iam.ListAccountAliasesInput) (*
 	fake.listAccountAliasesArgsForCall = append(fake.listAccountAliasesArgsForCall, struct {
 		arg1 *iam.ListAccountAliasesInput
 	}{arg1})
-	stub := fake.ListAccountAliasesStub
-	fakeReturns := fake.listAccountAliasesReturns
 	fake.recordInvocation("ListAccountAliases", []interface{}{arg1})
 	fake.listAccountAliasesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListAccountAliasesStub != nil {
+		return fake.ListAccountAliasesStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listAccountAliasesReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -22108,16 +21867,15 @@ func (fake *FakeIAMAPI) ListAccountAliasesPages(arg1 *iam.ListAccountAliasesInpu
 		arg1 *iam.ListAccountAliasesInput
 		arg2 func(*iam.ListAccountAliasesOutput, bool) bool
 	}{arg1, arg2})
-	stub := fake.ListAccountAliasesPagesStub
-	fakeReturns := fake.listAccountAliasesPagesReturns
 	fake.recordInvocation("ListAccountAliasesPages", []interface{}{arg1, arg2})
 	fake.listAccountAliasesPagesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2)
+	if fake.ListAccountAliasesPagesStub != nil {
+		return fake.ListAccountAliasesPagesStub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listAccountAliasesPagesReturns
 	return fakeReturns.result1
 }
 
@@ -22172,16 +21930,15 @@ func (fake *FakeIAMAPI) ListAccountAliasesPagesWithContext(arg1 context.Context,
 		arg3 func(*iam.ListAccountAliasesOutput, bool) bool
 		arg4 []request.Option
 	}{arg1, arg2, arg3, arg4})
-	stub := fake.ListAccountAliasesPagesWithContextStub
-	fakeReturns := fake.listAccountAliasesPagesWithContextReturns
 	fake.recordInvocation("ListAccountAliasesPagesWithContext", []interface{}{arg1, arg2, arg3, arg4})
 	fake.listAccountAliasesPagesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3, arg4...)
+	if fake.ListAccountAliasesPagesWithContextStub != nil {
+		return fake.ListAccountAliasesPagesWithContextStub(arg1, arg2, arg3, arg4...)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listAccountAliasesPagesWithContextReturns
 	return fakeReturns.result1
 }
 
@@ -22233,16 +21990,15 @@ func (fake *FakeIAMAPI) ListAccountAliasesRequest(arg1 *iam.ListAccountAliasesIn
 	fake.listAccountAliasesRequestArgsForCall = append(fake.listAccountAliasesRequestArgsForCall, struct {
 		arg1 *iam.ListAccountAliasesInput
 	}{arg1})
-	stub := fake.ListAccountAliasesRequestStub
-	fakeReturns := fake.listAccountAliasesRequestReturns
 	fake.recordInvocation("ListAccountAliasesRequest", []interface{}{arg1})
 	fake.listAccountAliasesRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListAccountAliasesRequestStub != nil {
+		return fake.ListAccountAliasesRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listAccountAliasesRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -22299,16 +22055,15 @@ func (fake *FakeIAMAPI) ListAccountAliasesWithContext(arg1 context.Context, arg2
 		arg2 *iam.ListAccountAliasesInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.ListAccountAliasesWithContextStub
-	fakeReturns := fake.listAccountAliasesWithContextReturns
 	fake.recordInvocation("ListAccountAliasesWithContext", []interface{}{arg1, arg2, arg3})
 	fake.listAccountAliasesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.ListAccountAliasesWithContextStub != nil {
+		return fake.ListAccountAliasesWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listAccountAliasesWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -22363,16 +22118,15 @@ func (fake *FakeIAMAPI) ListAttachedGroupPolicies(arg1 *iam.ListAttachedGroupPol
 	fake.listAttachedGroupPoliciesArgsForCall = append(fake.listAttachedGroupPoliciesArgsForCall, struct {
 		arg1 *iam.ListAttachedGroupPoliciesInput
 	}{arg1})
-	stub := fake.ListAttachedGroupPoliciesStub
-	fakeReturns := fake.listAttachedGroupPoliciesReturns
 	fake.recordInvocation("ListAttachedGroupPolicies", []interface{}{arg1})
 	fake.listAttachedGroupPoliciesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListAttachedGroupPoliciesStub != nil {
+		return fake.ListAttachedGroupPoliciesStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listAttachedGroupPoliciesReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -22428,16 +22182,15 @@ func (fake *FakeIAMAPI) ListAttachedGroupPoliciesPages(arg1 *iam.ListAttachedGro
 		arg1 *iam.ListAttachedGroupPoliciesInput
 		arg2 func(*iam.ListAttachedGroupPoliciesOutput, bool) bool
 	}{arg1, arg2})
-	stub := fake.ListAttachedGroupPoliciesPagesStub
-	fakeReturns := fake.listAttachedGroupPoliciesPagesReturns
 	fake.recordInvocation("ListAttachedGroupPoliciesPages", []interface{}{arg1, arg2})
 	fake.listAttachedGroupPoliciesPagesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2)
+	if fake.ListAttachedGroupPoliciesPagesStub != nil {
+		return fake.ListAttachedGroupPoliciesPagesStub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listAttachedGroupPoliciesPagesReturns
 	return fakeReturns.result1
 }
 
@@ -22492,16 +22245,15 @@ func (fake *FakeIAMAPI) ListAttachedGroupPoliciesPagesWithContext(arg1 context.C
 		arg3 func(*iam.ListAttachedGroupPoliciesOutput, bool) bool
 		arg4 []request.Option
 	}{arg1, arg2, arg3, arg4})
-	stub := fake.ListAttachedGroupPoliciesPagesWithContextStub
-	fakeReturns := fake.listAttachedGroupPoliciesPagesWithContextReturns
 	fake.recordInvocation("ListAttachedGroupPoliciesPagesWithContext", []interface{}{arg1, arg2, arg3, arg4})
 	fake.listAttachedGroupPoliciesPagesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3, arg4...)
+	if fake.ListAttachedGroupPoliciesPagesWithContextStub != nil {
+		return fake.ListAttachedGroupPoliciesPagesWithContextStub(arg1, arg2, arg3, arg4...)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listAttachedGroupPoliciesPagesWithContextReturns
 	return fakeReturns.result1
 }
 
@@ -22553,16 +22305,15 @@ func (fake *FakeIAMAPI) ListAttachedGroupPoliciesRequest(arg1 *iam.ListAttachedG
 	fake.listAttachedGroupPoliciesRequestArgsForCall = append(fake.listAttachedGroupPoliciesRequestArgsForCall, struct {
 		arg1 *iam.ListAttachedGroupPoliciesInput
 	}{arg1})
-	stub := fake.ListAttachedGroupPoliciesRequestStub
-	fakeReturns := fake.listAttachedGroupPoliciesRequestReturns
 	fake.recordInvocation("ListAttachedGroupPoliciesRequest", []interface{}{arg1})
 	fake.listAttachedGroupPoliciesRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListAttachedGroupPoliciesRequestStub != nil {
+		return fake.ListAttachedGroupPoliciesRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listAttachedGroupPoliciesRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -22619,16 +22370,15 @@ func (fake *FakeIAMAPI) ListAttachedGroupPoliciesWithContext(arg1 context.Contex
 		arg2 *iam.ListAttachedGroupPoliciesInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.ListAttachedGroupPoliciesWithContextStub
-	fakeReturns := fake.listAttachedGroupPoliciesWithContextReturns
 	fake.recordInvocation("ListAttachedGroupPoliciesWithContext", []interface{}{arg1, arg2, arg3})
 	fake.listAttachedGroupPoliciesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.ListAttachedGroupPoliciesWithContextStub != nil {
+		return fake.ListAttachedGroupPoliciesWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listAttachedGroupPoliciesWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -22683,16 +22433,15 @@ func (fake *FakeIAMAPI) ListAttachedRolePolicies(arg1 *iam.ListAttachedRolePolic
 	fake.listAttachedRolePoliciesArgsForCall = append(fake.listAttachedRolePoliciesArgsForCall, struct {
 		arg1 *iam.ListAttachedRolePoliciesInput
 	}{arg1})
-	stub := fake.ListAttachedRolePoliciesStub
-	fakeReturns := fake.listAttachedRolePoliciesReturns
 	fake.recordInvocation("ListAttachedRolePolicies", []interface{}{arg1})
 	fake.listAttachedRolePoliciesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListAttachedRolePoliciesStub != nil {
+		return fake.ListAttachedRolePoliciesStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listAttachedRolePoliciesReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -22748,16 +22497,15 @@ func (fake *FakeIAMAPI) ListAttachedRolePoliciesPages(arg1 *iam.ListAttachedRole
 		arg1 *iam.ListAttachedRolePoliciesInput
 		arg2 func(*iam.ListAttachedRolePoliciesOutput, bool) bool
 	}{arg1, arg2})
-	stub := fake.ListAttachedRolePoliciesPagesStub
-	fakeReturns := fake.listAttachedRolePoliciesPagesReturns
 	fake.recordInvocation("ListAttachedRolePoliciesPages", []interface{}{arg1, arg2})
 	fake.listAttachedRolePoliciesPagesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2)
+	if fake.ListAttachedRolePoliciesPagesStub != nil {
+		return fake.ListAttachedRolePoliciesPagesStub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listAttachedRolePoliciesPagesReturns
 	return fakeReturns.result1
 }
 
@@ -22812,16 +22560,15 @@ func (fake *FakeIAMAPI) ListAttachedRolePoliciesPagesWithContext(arg1 context.Co
 		arg3 func(*iam.ListAttachedRolePoliciesOutput, bool) bool
 		arg4 []request.Option
 	}{arg1, arg2, arg3, arg4})
-	stub := fake.ListAttachedRolePoliciesPagesWithContextStub
-	fakeReturns := fake.listAttachedRolePoliciesPagesWithContextReturns
 	fake.recordInvocation("ListAttachedRolePoliciesPagesWithContext", []interface{}{arg1, arg2, arg3, arg4})
 	fake.listAttachedRolePoliciesPagesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3, arg4...)
+	if fake.ListAttachedRolePoliciesPagesWithContextStub != nil {
+		return fake.ListAttachedRolePoliciesPagesWithContextStub(arg1, arg2, arg3, arg4...)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listAttachedRolePoliciesPagesWithContextReturns
 	return fakeReturns.result1
 }
 
@@ -22873,16 +22620,15 @@ func (fake *FakeIAMAPI) ListAttachedRolePoliciesRequest(arg1 *iam.ListAttachedRo
 	fake.listAttachedRolePoliciesRequestArgsForCall = append(fake.listAttachedRolePoliciesRequestArgsForCall, struct {
 		arg1 *iam.ListAttachedRolePoliciesInput
 	}{arg1})
-	stub := fake.ListAttachedRolePoliciesRequestStub
-	fakeReturns := fake.listAttachedRolePoliciesRequestReturns
 	fake.recordInvocation("ListAttachedRolePoliciesRequest", []interface{}{arg1})
 	fake.listAttachedRolePoliciesRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListAttachedRolePoliciesRequestStub != nil {
+		return fake.ListAttachedRolePoliciesRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listAttachedRolePoliciesRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -22939,16 +22685,15 @@ func (fake *FakeIAMAPI) ListAttachedRolePoliciesWithContext(arg1 context.Context
 		arg2 *iam.ListAttachedRolePoliciesInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.ListAttachedRolePoliciesWithContextStub
-	fakeReturns := fake.listAttachedRolePoliciesWithContextReturns
 	fake.recordInvocation("ListAttachedRolePoliciesWithContext", []interface{}{arg1, arg2, arg3})
 	fake.listAttachedRolePoliciesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.ListAttachedRolePoliciesWithContextStub != nil {
+		return fake.ListAttachedRolePoliciesWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listAttachedRolePoliciesWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -23003,16 +22748,15 @@ func (fake *FakeIAMAPI) ListAttachedUserPolicies(arg1 *iam.ListAttachedUserPolic
 	fake.listAttachedUserPoliciesArgsForCall = append(fake.listAttachedUserPoliciesArgsForCall, struct {
 		arg1 *iam.ListAttachedUserPoliciesInput
 	}{arg1})
-	stub := fake.ListAttachedUserPoliciesStub
-	fakeReturns := fake.listAttachedUserPoliciesReturns
 	fake.recordInvocation("ListAttachedUserPolicies", []interface{}{arg1})
 	fake.listAttachedUserPoliciesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListAttachedUserPoliciesStub != nil {
+		return fake.ListAttachedUserPoliciesStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listAttachedUserPoliciesReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -23068,16 +22812,15 @@ func (fake *FakeIAMAPI) ListAttachedUserPoliciesPages(arg1 *iam.ListAttachedUser
 		arg1 *iam.ListAttachedUserPoliciesInput
 		arg2 func(*iam.ListAttachedUserPoliciesOutput, bool) bool
 	}{arg1, arg2})
-	stub := fake.ListAttachedUserPoliciesPagesStub
-	fakeReturns := fake.listAttachedUserPoliciesPagesReturns
 	fake.recordInvocation("ListAttachedUserPoliciesPages", []interface{}{arg1, arg2})
 	fake.listAttachedUserPoliciesPagesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2)
+	if fake.ListAttachedUserPoliciesPagesStub != nil {
+		return fake.ListAttachedUserPoliciesPagesStub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listAttachedUserPoliciesPagesReturns
 	return fakeReturns.result1
 }
 
@@ -23132,16 +22875,15 @@ func (fake *FakeIAMAPI) ListAttachedUserPoliciesPagesWithContext(arg1 context.Co
 		arg3 func(*iam.ListAttachedUserPoliciesOutput, bool) bool
 		arg4 []request.Option
 	}{arg1, arg2, arg3, arg4})
-	stub := fake.ListAttachedUserPoliciesPagesWithContextStub
-	fakeReturns := fake.listAttachedUserPoliciesPagesWithContextReturns
 	fake.recordInvocation("ListAttachedUserPoliciesPagesWithContext", []interface{}{arg1, arg2, arg3, arg4})
 	fake.listAttachedUserPoliciesPagesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3, arg4...)
+	if fake.ListAttachedUserPoliciesPagesWithContextStub != nil {
+		return fake.ListAttachedUserPoliciesPagesWithContextStub(arg1, arg2, arg3, arg4...)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listAttachedUserPoliciesPagesWithContextReturns
 	return fakeReturns.result1
 }
 
@@ -23193,16 +22935,15 @@ func (fake *FakeIAMAPI) ListAttachedUserPoliciesRequest(arg1 *iam.ListAttachedUs
 	fake.listAttachedUserPoliciesRequestArgsForCall = append(fake.listAttachedUserPoliciesRequestArgsForCall, struct {
 		arg1 *iam.ListAttachedUserPoliciesInput
 	}{arg1})
-	stub := fake.ListAttachedUserPoliciesRequestStub
-	fakeReturns := fake.listAttachedUserPoliciesRequestReturns
 	fake.recordInvocation("ListAttachedUserPoliciesRequest", []interface{}{arg1})
 	fake.listAttachedUserPoliciesRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListAttachedUserPoliciesRequestStub != nil {
+		return fake.ListAttachedUserPoliciesRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listAttachedUserPoliciesRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -23259,16 +23000,15 @@ func (fake *FakeIAMAPI) ListAttachedUserPoliciesWithContext(arg1 context.Context
 		arg2 *iam.ListAttachedUserPoliciesInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.ListAttachedUserPoliciesWithContextStub
-	fakeReturns := fake.listAttachedUserPoliciesWithContextReturns
 	fake.recordInvocation("ListAttachedUserPoliciesWithContext", []interface{}{arg1, arg2, arg3})
 	fake.listAttachedUserPoliciesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.ListAttachedUserPoliciesWithContextStub != nil {
+		return fake.ListAttachedUserPoliciesWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listAttachedUserPoliciesWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -23323,16 +23063,15 @@ func (fake *FakeIAMAPI) ListEntitiesForPolicy(arg1 *iam.ListEntitiesForPolicyInp
 	fake.listEntitiesForPolicyArgsForCall = append(fake.listEntitiesForPolicyArgsForCall, struct {
 		arg1 *iam.ListEntitiesForPolicyInput
 	}{arg1})
-	stub := fake.ListEntitiesForPolicyStub
-	fakeReturns := fake.listEntitiesForPolicyReturns
 	fake.recordInvocation("ListEntitiesForPolicy", []interface{}{arg1})
 	fake.listEntitiesForPolicyMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListEntitiesForPolicyStub != nil {
+		return fake.ListEntitiesForPolicyStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listEntitiesForPolicyReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -23388,16 +23127,15 @@ func (fake *FakeIAMAPI) ListEntitiesForPolicyPages(arg1 *iam.ListEntitiesForPoli
 		arg1 *iam.ListEntitiesForPolicyInput
 		arg2 func(*iam.ListEntitiesForPolicyOutput, bool) bool
 	}{arg1, arg2})
-	stub := fake.ListEntitiesForPolicyPagesStub
-	fakeReturns := fake.listEntitiesForPolicyPagesReturns
 	fake.recordInvocation("ListEntitiesForPolicyPages", []interface{}{arg1, arg2})
 	fake.listEntitiesForPolicyPagesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2)
+	if fake.ListEntitiesForPolicyPagesStub != nil {
+		return fake.ListEntitiesForPolicyPagesStub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listEntitiesForPolicyPagesReturns
 	return fakeReturns.result1
 }
 
@@ -23452,16 +23190,15 @@ func (fake *FakeIAMAPI) ListEntitiesForPolicyPagesWithContext(arg1 context.Conte
 		arg3 func(*iam.ListEntitiesForPolicyOutput, bool) bool
 		arg4 []request.Option
 	}{arg1, arg2, arg3, arg4})
-	stub := fake.ListEntitiesForPolicyPagesWithContextStub
-	fakeReturns := fake.listEntitiesForPolicyPagesWithContextReturns
 	fake.recordInvocation("ListEntitiesForPolicyPagesWithContext", []interface{}{arg1, arg2, arg3, arg4})
 	fake.listEntitiesForPolicyPagesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3, arg4...)
+	if fake.ListEntitiesForPolicyPagesWithContextStub != nil {
+		return fake.ListEntitiesForPolicyPagesWithContextStub(arg1, arg2, arg3, arg4...)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listEntitiesForPolicyPagesWithContextReturns
 	return fakeReturns.result1
 }
 
@@ -23513,16 +23250,15 @@ func (fake *FakeIAMAPI) ListEntitiesForPolicyRequest(arg1 *iam.ListEntitiesForPo
 	fake.listEntitiesForPolicyRequestArgsForCall = append(fake.listEntitiesForPolicyRequestArgsForCall, struct {
 		arg1 *iam.ListEntitiesForPolicyInput
 	}{arg1})
-	stub := fake.ListEntitiesForPolicyRequestStub
-	fakeReturns := fake.listEntitiesForPolicyRequestReturns
 	fake.recordInvocation("ListEntitiesForPolicyRequest", []interface{}{arg1})
 	fake.listEntitiesForPolicyRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListEntitiesForPolicyRequestStub != nil {
+		return fake.ListEntitiesForPolicyRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listEntitiesForPolicyRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -23579,16 +23315,15 @@ func (fake *FakeIAMAPI) ListEntitiesForPolicyWithContext(arg1 context.Context, a
 		arg2 *iam.ListEntitiesForPolicyInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.ListEntitiesForPolicyWithContextStub
-	fakeReturns := fake.listEntitiesForPolicyWithContextReturns
 	fake.recordInvocation("ListEntitiesForPolicyWithContext", []interface{}{arg1, arg2, arg3})
 	fake.listEntitiesForPolicyWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.ListEntitiesForPolicyWithContextStub != nil {
+		return fake.ListEntitiesForPolicyWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listEntitiesForPolicyWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -23643,16 +23378,15 @@ func (fake *FakeIAMAPI) ListGroupPolicies(arg1 *iam.ListGroupPoliciesInput) (*ia
 	fake.listGroupPoliciesArgsForCall = append(fake.listGroupPoliciesArgsForCall, struct {
 		arg1 *iam.ListGroupPoliciesInput
 	}{arg1})
-	stub := fake.ListGroupPoliciesStub
-	fakeReturns := fake.listGroupPoliciesReturns
 	fake.recordInvocation("ListGroupPolicies", []interface{}{arg1})
 	fake.listGroupPoliciesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListGroupPoliciesStub != nil {
+		return fake.ListGroupPoliciesStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listGroupPoliciesReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -23708,16 +23442,15 @@ func (fake *FakeIAMAPI) ListGroupPoliciesPages(arg1 *iam.ListGroupPoliciesInput,
 		arg1 *iam.ListGroupPoliciesInput
 		arg2 func(*iam.ListGroupPoliciesOutput, bool) bool
 	}{arg1, arg2})
-	stub := fake.ListGroupPoliciesPagesStub
-	fakeReturns := fake.listGroupPoliciesPagesReturns
 	fake.recordInvocation("ListGroupPoliciesPages", []interface{}{arg1, arg2})
 	fake.listGroupPoliciesPagesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2)
+	if fake.ListGroupPoliciesPagesStub != nil {
+		return fake.ListGroupPoliciesPagesStub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listGroupPoliciesPagesReturns
 	return fakeReturns.result1
 }
 
@@ -23772,16 +23505,15 @@ func (fake *FakeIAMAPI) ListGroupPoliciesPagesWithContext(arg1 context.Context, 
 		arg3 func(*iam.ListGroupPoliciesOutput, bool) bool
 		arg4 []request.Option
 	}{arg1, arg2, arg3, arg4})
-	stub := fake.ListGroupPoliciesPagesWithContextStub
-	fakeReturns := fake.listGroupPoliciesPagesWithContextReturns
 	fake.recordInvocation("ListGroupPoliciesPagesWithContext", []interface{}{arg1, arg2, arg3, arg4})
 	fake.listGroupPoliciesPagesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3, arg4...)
+	if fake.ListGroupPoliciesPagesWithContextStub != nil {
+		return fake.ListGroupPoliciesPagesWithContextStub(arg1, arg2, arg3, arg4...)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listGroupPoliciesPagesWithContextReturns
 	return fakeReturns.result1
 }
 
@@ -23833,16 +23565,15 @@ func (fake *FakeIAMAPI) ListGroupPoliciesRequest(arg1 *iam.ListGroupPoliciesInpu
 	fake.listGroupPoliciesRequestArgsForCall = append(fake.listGroupPoliciesRequestArgsForCall, struct {
 		arg1 *iam.ListGroupPoliciesInput
 	}{arg1})
-	stub := fake.ListGroupPoliciesRequestStub
-	fakeReturns := fake.listGroupPoliciesRequestReturns
 	fake.recordInvocation("ListGroupPoliciesRequest", []interface{}{arg1})
 	fake.listGroupPoliciesRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListGroupPoliciesRequestStub != nil {
+		return fake.ListGroupPoliciesRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listGroupPoliciesRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -23899,16 +23630,15 @@ func (fake *FakeIAMAPI) ListGroupPoliciesWithContext(arg1 context.Context, arg2 
 		arg2 *iam.ListGroupPoliciesInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.ListGroupPoliciesWithContextStub
-	fakeReturns := fake.listGroupPoliciesWithContextReturns
 	fake.recordInvocation("ListGroupPoliciesWithContext", []interface{}{arg1, arg2, arg3})
 	fake.listGroupPoliciesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.ListGroupPoliciesWithContextStub != nil {
+		return fake.ListGroupPoliciesWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listGroupPoliciesWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -23963,16 +23693,15 @@ func (fake *FakeIAMAPI) ListGroups(arg1 *iam.ListGroupsInput) (*iam.ListGroupsOu
 	fake.listGroupsArgsForCall = append(fake.listGroupsArgsForCall, struct {
 		arg1 *iam.ListGroupsInput
 	}{arg1})
-	stub := fake.ListGroupsStub
-	fakeReturns := fake.listGroupsReturns
 	fake.recordInvocation("ListGroups", []interface{}{arg1})
 	fake.listGroupsMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListGroupsStub != nil {
+		return fake.ListGroupsStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listGroupsReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -24027,16 +23756,15 @@ func (fake *FakeIAMAPI) ListGroupsForUser(arg1 *iam.ListGroupsForUserInput) (*ia
 	fake.listGroupsForUserArgsForCall = append(fake.listGroupsForUserArgsForCall, struct {
 		arg1 *iam.ListGroupsForUserInput
 	}{arg1})
-	stub := fake.ListGroupsForUserStub
-	fakeReturns := fake.listGroupsForUserReturns
 	fake.recordInvocation("ListGroupsForUser", []interface{}{arg1})
 	fake.listGroupsForUserMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListGroupsForUserStub != nil {
+		return fake.ListGroupsForUserStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listGroupsForUserReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -24092,16 +23820,15 @@ func (fake *FakeIAMAPI) ListGroupsForUserPages(arg1 *iam.ListGroupsForUserInput,
 		arg1 *iam.ListGroupsForUserInput
 		arg2 func(*iam.ListGroupsForUserOutput, bool) bool
 	}{arg1, arg2})
-	stub := fake.ListGroupsForUserPagesStub
-	fakeReturns := fake.listGroupsForUserPagesReturns
 	fake.recordInvocation("ListGroupsForUserPages", []interface{}{arg1, arg2})
 	fake.listGroupsForUserPagesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2)
+	if fake.ListGroupsForUserPagesStub != nil {
+		return fake.ListGroupsForUserPagesStub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listGroupsForUserPagesReturns
 	return fakeReturns.result1
 }
 
@@ -24156,16 +23883,15 @@ func (fake *FakeIAMAPI) ListGroupsForUserPagesWithContext(arg1 context.Context, 
 		arg3 func(*iam.ListGroupsForUserOutput, bool) bool
 		arg4 []request.Option
 	}{arg1, arg2, arg3, arg4})
-	stub := fake.ListGroupsForUserPagesWithContextStub
-	fakeReturns := fake.listGroupsForUserPagesWithContextReturns
 	fake.recordInvocation("ListGroupsForUserPagesWithContext", []interface{}{arg1, arg2, arg3, arg4})
 	fake.listGroupsForUserPagesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3, arg4...)
+	if fake.ListGroupsForUserPagesWithContextStub != nil {
+		return fake.ListGroupsForUserPagesWithContextStub(arg1, arg2, arg3, arg4...)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listGroupsForUserPagesWithContextReturns
 	return fakeReturns.result1
 }
 
@@ -24217,16 +23943,15 @@ func (fake *FakeIAMAPI) ListGroupsForUserRequest(arg1 *iam.ListGroupsForUserInpu
 	fake.listGroupsForUserRequestArgsForCall = append(fake.listGroupsForUserRequestArgsForCall, struct {
 		arg1 *iam.ListGroupsForUserInput
 	}{arg1})
-	stub := fake.ListGroupsForUserRequestStub
-	fakeReturns := fake.listGroupsForUserRequestReturns
 	fake.recordInvocation("ListGroupsForUserRequest", []interface{}{arg1})
 	fake.listGroupsForUserRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListGroupsForUserRequestStub != nil {
+		return fake.ListGroupsForUserRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listGroupsForUserRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -24283,16 +24008,15 @@ func (fake *FakeIAMAPI) ListGroupsForUserWithContext(arg1 context.Context, arg2 
 		arg2 *iam.ListGroupsForUserInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.ListGroupsForUserWithContextStub
-	fakeReturns := fake.listGroupsForUserWithContextReturns
 	fake.recordInvocation("ListGroupsForUserWithContext", []interface{}{arg1, arg2, arg3})
 	fake.listGroupsForUserWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.ListGroupsForUserWithContextStub != nil {
+		return fake.ListGroupsForUserWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listGroupsForUserWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -24348,16 +24072,15 @@ func (fake *FakeIAMAPI) ListGroupsPages(arg1 *iam.ListGroupsInput, arg2 func(*ia
 		arg1 *iam.ListGroupsInput
 		arg2 func(*iam.ListGroupsOutput, bool) bool
 	}{arg1, arg2})
-	stub := fake.ListGroupsPagesStub
-	fakeReturns := fake.listGroupsPagesReturns
 	fake.recordInvocation("ListGroupsPages", []interface{}{arg1, arg2})
 	fake.listGroupsPagesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2)
+	if fake.ListGroupsPagesStub != nil {
+		return fake.ListGroupsPagesStub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listGroupsPagesReturns
 	return fakeReturns.result1
 }
 
@@ -24412,16 +24135,15 @@ func (fake *FakeIAMAPI) ListGroupsPagesWithContext(arg1 context.Context, arg2 *i
 		arg3 func(*iam.ListGroupsOutput, bool) bool
 		arg4 []request.Option
 	}{arg1, arg2, arg3, arg4})
-	stub := fake.ListGroupsPagesWithContextStub
-	fakeReturns := fake.listGroupsPagesWithContextReturns
 	fake.recordInvocation("ListGroupsPagesWithContext", []interface{}{arg1, arg2, arg3, arg4})
 	fake.listGroupsPagesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3, arg4...)
+	if fake.ListGroupsPagesWithContextStub != nil {
+		return fake.ListGroupsPagesWithContextStub(arg1, arg2, arg3, arg4...)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listGroupsPagesWithContextReturns
 	return fakeReturns.result1
 }
 
@@ -24473,16 +24195,15 @@ func (fake *FakeIAMAPI) ListGroupsRequest(arg1 *iam.ListGroupsInput) (*request.R
 	fake.listGroupsRequestArgsForCall = append(fake.listGroupsRequestArgsForCall, struct {
 		arg1 *iam.ListGroupsInput
 	}{arg1})
-	stub := fake.ListGroupsRequestStub
-	fakeReturns := fake.listGroupsRequestReturns
 	fake.recordInvocation("ListGroupsRequest", []interface{}{arg1})
 	fake.listGroupsRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListGroupsRequestStub != nil {
+		return fake.ListGroupsRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listGroupsRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -24539,16 +24260,15 @@ func (fake *FakeIAMAPI) ListGroupsWithContext(arg1 context.Context, arg2 *iam.Li
 		arg2 *iam.ListGroupsInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.ListGroupsWithContextStub
-	fakeReturns := fake.listGroupsWithContextReturns
 	fake.recordInvocation("ListGroupsWithContext", []interface{}{arg1, arg2, arg3})
 	fake.listGroupsWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.ListGroupsWithContextStub != nil {
+		return fake.ListGroupsWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listGroupsWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -24603,16 +24323,15 @@ func (fake *FakeIAMAPI) ListInstanceProfiles(arg1 *iam.ListInstanceProfilesInput
 	fake.listInstanceProfilesArgsForCall = append(fake.listInstanceProfilesArgsForCall, struct {
 		arg1 *iam.ListInstanceProfilesInput
 	}{arg1})
-	stub := fake.ListInstanceProfilesStub
-	fakeReturns := fake.listInstanceProfilesReturns
 	fake.recordInvocation("ListInstanceProfiles", []interface{}{arg1})
 	fake.listInstanceProfilesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListInstanceProfilesStub != nil {
+		return fake.ListInstanceProfilesStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listInstanceProfilesReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -24667,16 +24386,15 @@ func (fake *FakeIAMAPI) ListInstanceProfilesForRole(arg1 *iam.ListInstanceProfil
 	fake.listInstanceProfilesForRoleArgsForCall = append(fake.listInstanceProfilesForRoleArgsForCall, struct {
 		arg1 *iam.ListInstanceProfilesForRoleInput
 	}{arg1})
-	stub := fake.ListInstanceProfilesForRoleStub
-	fakeReturns := fake.listInstanceProfilesForRoleReturns
 	fake.recordInvocation("ListInstanceProfilesForRole", []interface{}{arg1})
 	fake.listInstanceProfilesForRoleMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListInstanceProfilesForRoleStub != nil {
+		return fake.ListInstanceProfilesForRoleStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listInstanceProfilesForRoleReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -24732,16 +24450,15 @@ func (fake *FakeIAMAPI) ListInstanceProfilesForRolePages(arg1 *iam.ListInstanceP
 		arg1 *iam.ListInstanceProfilesForRoleInput
 		arg2 func(*iam.ListInstanceProfilesForRoleOutput, bool) bool
 	}{arg1, arg2})
-	stub := fake.ListInstanceProfilesForRolePagesStub
-	fakeReturns := fake.listInstanceProfilesForRolePagesReturns
 	fake.recordInvocation("ListInstanceProfilesForRolePages", []interface{}{arg1, arg2})
 	fake.listInstanceProfilesForRolePagesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2)
+	if fake.ListInstanceProfilesForRolePagesStub != nil {
+		return fake.ListInstanceProfilesForRolePagesStub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listInstanceProfilesForRolePagesReturns
 	return fakeReturns.result1
 }
 
@@ -24796,16 +24513,15 @@ func (fake *FakeIAMAPI) ListInstanceProfilesForRolePagesWithContext(arg1 context
 		arg3 func(*iam.ListInstanceProfilesForRoleOutput, bool) bool
 		arg4 []request.Option
 	}{arg1, arg2, arg3, arg4})
-	stub := fake.ListInstanceProfilesForRolePagesWithContextStub
-	fakeReturns := fake.listInstanceProfilesForRolePagesWithContextReturns
 	fake.recordInvocation("ListInstanceProfilesForRolePagesWithContext", []interface{}{arg1, arg2, arg3, arg4})
 	fake.listInstanceProfilesForRolePagesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3, arg4...)
+	if fake.ListInstanceProfilesForRolePagesWithContextStub != nil {
+		return fake.ListInstanceProfilesForRolePagesWithContextStub(arg1, arg2, arg3, arg4...)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listInstanceProfilesForRolePagesWithContextReturns
 	return fakeReturns.result1
 }
 
@@ -24857,16 +24573,15 @@ func (fake *FakeIAMAPI) ListInstanceProfilesForRoleRequest(arg1 *iam.ListInstanc
 	fake.listInstanceProfilesForRoleRequestArgsForCall = append(fake.listInstanceProfilesForRoleRequestArgsForCall, struct {
 		arg1 *iam.ListInstanceProfilesForRoleInput
 	}{arg1})
-	stub := fake.ListInstanceProfilesForRoleRequestStub
-	fakeReturns := fake.listInstanceProfilesForRoleRequestReturns
 	fake.recordInvocation("ListInstanceProfilesForRoleRequest", []interface{}{arg1})
 	fake.listInstanceProfilesForRoleRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListInstanceProfilesForRoleRequestStub != nil {
+		return fake.ListInstanceProfilesForRoleRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listInstanceProfilesForRoleRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -24923,16 +24638,15 @@ func (fake *FakeIAMAPI) ListInstanceProfilesForRoleWithContext(arg1 context.Cont
 		arg2 *iam.ListInstanceProfilesForRoleInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.ListInstanceProfilesForRoleWithContextStub
-	fakeReturns := fake.listInstanceProfilesForRoleWithContextReturns
 	fake.recordInvocation("ListInstanceProfilesForRoleWithContext", []interface{}{arg1, arg2, arg3})
 	fake.listInstanceProfilesForRoleWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.ListInstanceProfilesForRoleWithContextStub != nil {
+		return fake.ListInstanceProfilesForRoleWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listInstanceProfilesForRoleWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -24988,16 +24702,15 @@ func (fake *FakeIAMAPI) ListInstanceProfilesPages(arg1 *iam.ListInstanceProfiles
 		arg1 *iam.ListInstanceProfilesInput
 		arg2 func(*iam.ListInstanceProfilesOutput, bool) bool
 	}{arg1, arg2})
-	stub := fake.ListInstanceProfilesPagesStub
-	fakeReturns := fake.listInstanceProfilesPagesReturns
 	fake.recordInvocation("ListInstanceProfilesPages", []interface{}{arg1, arg2})
 	fake.listInstanceProfilesPagesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2)
+	if fake.ListInstanceProfilesPagesStub != nil {
+		return fake.ListInstanceProfilesPagesStub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listInstanceProfilesPagesReturns
 	return fakeReturns.result1
 }
 
@@ -25052,16 +24765,15 @@ func (fake *FakeIAMAPI) ListInstanceProfilesPagesWithContext(arg1 context.Contex
 		arg3 func(*iam.ListInstanceProfilesOutput, bool) bool
 		arg4 []request.Option
 	}{arg1, arg2, arg3, arg4})
-	stub := fake.ListInstanceProfilesPagesWithContextStub
-	fakeReturns := fake.listInstanceProfilesPagesWithContextReturns
 	fake.recordInvocation("ListInstanceProfilesPagesWithContext", []interface{}{arg1, arg2, arg3, arg4})
 	fake.listInstanceProfilesPagesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3, arg4...)
+	if fake.ListInstanceProfilesPagesWithContextStub != nil {
+		return fake.ListInstanceProfilesPagesWithContextStub(arg1, arg2, arg3, arg4...)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listInstanceProfilesPagesWithContextReturns
 	return fakeReturns.result1
 }
 
@@ -25113,16 +24825,15 @@ func (fake *FakeIAMAPI) ListInstanceProfilesRequest(arg1 *iam.ListInstanceProfil
 	fake.listInstanceProfilesRequestArgsForCall = append(fake.listInstanceProfilesRequestArgsForCall, struct {
 		arg1 *iam.ListInstanceProfilesInput
 	}{arg1})
-	stub := fake.ListInstanceProfilesRequestStub
-	fakeReturns := fake.listInstanceProfilesRequestReturns
 	fake.recordInvocation("ListInstanceProfilesRequest", []interface{}{arg1})
 	fake.listInstanceProfilesRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListInstanceProfilesRequestStub != nil {
+		return fake.ListInstanceProfilesRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listInstanceProfilesRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -25179,16 +24890,15 @@ func (fake *FakeIAMAPI) ListInstanceProfilesWithContext(arg1 context.Context, ar
 		arg2 *iam.ListInstanceProfilesInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.ListInstanceProfilesWithContextStub
-	fakeReturns := fake.listInstanceProfilesWithContextReturns
 	fake.recordInvocation("ListInstanceProfilesWithContext", []interface{}{arg1, arg2, arg3})
 	fake.listInstanceProfilesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.ListInstanceProfilesWithContextStub != nil {
+		return fake.ListInstanceProfilesWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listInstanceProfilesWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -25243,16 +24953,15 @@ func (fake *FakeIAMAPI) ListMFADevices(arg1 *iam.ListMFADevicesInput) (*iam.List
 	fake.listMFADevicesArgsForCall = append(fake.listMFADevicesArgsForCall, struct {
 		arg1 *iam.ListMFADevicesInput
 	}{arg1})
-	stub := fake.ListMFADevicesStub
-	fakeReturns := fake.listMFADevicesReturns
 	fake.recordInvocation("ListMFADevices", []interface{}{arg1})
 	fake.listMFADevicesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListMFADevicesStub != nil {
+		return fake.ListMFADevicesStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listMFADevicesReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -25308,16 +25017,15 @@ func (fake *FakeIAMAPI) ListMFADevicesPages(arg1 *iam.ListMFADevicesInput, arg2 
 		arg1 *iam.ListMFADevicesInput
 		arg2 func(*iam.ListMFADevicesOutput, bool) bool
 	}{arg1, arg2})
-	stub := fake.ListMFADevicesPagesStub
-	fakeReturns := fake.listMFADevicesPagesReturns
 	fake.recordInvocation("ListMFADevicesPages", []interface{}{arg1, arg2})
 	fake.listMFADevicesPagesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2)
+	if fake.ListMFADevicesPagesStub != nil {
+		return fake.ListMFADevicesPagesStub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listMFADevicesPagesReturns
 	return fakeReturns.result1
 }
 
@@ -25372,16 +25080,15 @@ func (fake *FakeIAMAPI) ListMFADevicesPagesWithContext(arg1 context.Context, arg
 		arg3 func(*iam.ListMFADevicesOutput, bool) bool
 		arg4 []request.Option
 	}{arg1, arg2, arg3, arg4})
-	stub := fake.ListMFADevicesPagesWithContextStub
-	fakeReturns := fake.listMFADevicesPagesWithContextReturns
 	fake.recordInvocation("ListMFADevicesPagesWithContext", []interface{}{arg1, arg2, arg3, arg4})
 	fake.listMFADevicesPagesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3, arg4...)
+	if fake.ListMFADevicesPagesWithContextStub != nil {
+		return fake.ListMFADevicesPagesWithContextStub(arg1, arg2, arg3, arg4...)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listMFADevicesPagesWithContextReturns
 	return fakeReturns.result1
 }
 
@@ -25433,16 +25140,15 @@ func (fake *FakeIAMAPI) ListMFADevicesRequest(arg1 *iam.ListMFADevicesInput) (*r
 	fake.listMFADevicesRequestArgsForCall = append(fake.listMFADevicesRequestArgsForCall, struct {
 		arg1 *iam.ListMFADevicesInput
 	}{arg1})
-	stub := fake.ListMFADevicesRequestStub
-	fakeReturns := fake.listMFADevicesRequestReturns
 	fake.recordInvocation("ListMFADevicesRequest", []interface{}{arg1})
 	fake.listMFADevicesRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListMFADevicesRequestStub != nil {
+		return fake.ListMFADevicesRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listMFADevicesRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -25499,16 +25205,15 @@ func (fake *FakeIAMAPI) ListMFADevicesWithContext(arg1 context.Context, arg2 *ia
 		arg2 *iam.ListMFADevicesInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.ListMFADevicesWithContextStub
-	fakeReturns := fake.listMFADevicesWithContextReturns
 	fake.recordInvocation("ListMFADevicesWithContext", []interface{}{arg1, arg2, arg3})
 	fake.listMFADevicesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.ListMFADevicesWithContextStub != nil {
+		return fake.ListMFADevicesWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listMFADevicesWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -25563,16 +25268,15 @@ func (fake *FakeIAMAPI) ListOpenIDConnectProviders(arg1 *iam.ListOpenIDConnectPr
 	fake.listOpenIDConnectProvidersArgsForCall = append(fake.listOpenIDConnectProvidersArgsForCall, struct {
 		arg1 *iam.ListOpenIDConnectProvidersInput
 	}{arg1})
-	stub := fake.ListOpenIDConnectProvidersStub
-	fakeReturns := fake.listOpenIDConnectProvidersReturns
 	fake.recordInvocation("ListOpenIDConnectProviders", []interface{}{arg1})
 	fake.listOpenIDConnectProvidersMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListOpenIDConnectProvidersStub != nil {
+		return fake.ListOpenIDConnectProvidersStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listOpenIDConnectProvidersReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -25627,16 +25331,15 @@ func (fake *FakeIAMAPI) ListOpenIDConnectProvidersRequest(arg1 *iam.ListOpenIDCo
 	fake.listOpenIDConnectProvidersRequestArgsForCall = append(fake.listOpenIDConnectProvidersRequestArgsForCall, struct {
 		arg1 *iam.ListOpenIDConnectProvidersInput
 	}{arg1})
-	stub := fake.ListOpenIDConnectProvidersRequestStub
-	fakeReturns := fake.listOpenIDConnectProvidersRequestReturns
 	fake.recordInvocation("ListOpenIDConnectProvidersRequest", []interface{}{arg1})
 	fake.listOpenIDConnectProvidersRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListOpenIDConnectProvidersRequestStub != nil {
+		return fake.ListOpenIDConnectProvidersRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listOpenIDConnectProvidersRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -25693,16 +25396,15 @@ func (fake *FakeIAMAPI) ListOpenIDConnectProvidersWithContext(arg1 context.Conte
 		arg2 *iam.ListOpenIDConnectProvidersInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.ListOpenIDConnectProvidersWithContextStub
-	fakeReturns := fake.listOpenIDConnectProvidersWithContextReturns
 	fake.recordInvocation("ListOpenIDConnectProvidersWithContext", []interface{}{arg1, arg2, arg3})
 	fake.listOpenIDConnectProvidersWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.ListOpenIDConnectProvidersWithContextStub != nil {
+		return fake.ListOpenIDConnectProvidersWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listOpenIDConnectProvidersWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -25757,16 +25459,15 @@ func (fake *FakeIAMAPI) ListPolicies(arg1 *iam.ListPoliciesInput) (*iam.ListPoli
 	fake.listPoliciesArgsForCall = append(fake.listPoliciesArgsForCall, struct {
 		arg1 *iam.ListPoliciesInput
 	}{arg1})
-	stub := fake.ListPoliciesStub
-	fakeReturns := fake.listPoliciesReturns
 	fake.recordInvocation("ListPolicies", []interface{}{arg1})
 	fake.listPoliciesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListPoliciesStub != nil {
+		return fake.ListPoliciesStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listPoliciesReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -25821,16 +25522,15 @@ func (fake *FakeIAMAPI) ListPoliciesGrantingServiceAccess(arg1 *iam.ListPolicies
 	fake.listPoliciesGrantingServiceAccessArgsForCall = append(fake.listPoliciesGrantingServiceAccessArgsForCall, struct {
 		arg1 *iam.ListPoliciesGrantingServiceAccessInput
 	}{arg1})
-	stub := fake.ListPoliciesGrantingServiceAccessStub
-	fakeReturns := fake.listPoliciesGrantingServiceAccessReturns
 	fake.recordInvocation("ListPoliciesGrantingServiceAccess", []interface{}{arg1})
 	fake.listPoliciesGrantingServiceAccessMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListPoliciesGrantingServiceAccessStub != nil {
+		return fake.ListPoliciesGrantingServiceAccessStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listPoliciesGrantingServiceAccessReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -25885,16 +25585,15 @@ func (fake *FakeIAMAPI) ListPoliciesGrantingServiceAccessRequest(arg1 *iam.ListP
 	fake.listPoliciesGrantingServiceAccessRequestArgsForCall = append(fake.listPoliciesGrantingServiceAccessRequestArgsForCall, struct {
 		arg1 *iam.ListPoliciesGrantingServiceAccessInput
 	}{arg1})
-	stub := fake.ListPoliciesGrantingServiceAccessRequestStub
-	fakeReturns := fake.listPoliciesGrantingServiceAccessRequestReturns
 	fake.recordInvocation("ListPoliciesGrantingServiceAccessRequest", []interface{}{arg1})
 	fake.listPoliciesGrantingServiceAccessRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListPoliciesGrantingServiceAccessRequestStub != nil {
+		return fake.ListPoliciesGrantingServiceAccessRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listPoliciesGrantingServiceAccessRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -25951,16 +25650,15 @@ func (fake *FakeIAMAPI) ListPoliciesGrantingServiceAccessWithContext(arg1 contex
 		arg2 *iam.ListPoliciesGrantingServiceAccessInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.ListPoliciesGrantingServiceAccessWithContextStub
-	fakeReturns := fake.listPoliciesGrantingServiceAccessWithContextReturns
 	fake.recordInvocation("ListPoliciesGrantingServiceAccessWithContext", []interface{}{arg1, arg2, arg3})
 	fake.listPoliciesGrantingServiceAccessWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.ListPoliciesGrantingServiceAccessWithContextStub != nil {
+		return fake.ListPoliciesGrantingServiceAccessWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listPoliciesGrantingServiceAccessWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -26016,16 +25714,15 @@ func (fake *FakeIAMAPI) ListPoliciesPages(arg1 *iam.ListPoliciesInput, arg2 func
 		arg1 *iam.ListPoliciesInput
 		arg2 func(*iam.ListPoliciesOutput, bool) bool
 	}{arg1, arg2})
-	stub := fake.ListPoliciesPagesStub
-	fakeReturns := fake.listPoliciesPagesReturns
 	fake.recordInvocation("ListPoliciesPages", []interface{}{arg1, arg2})
 	fake.listPoliciesPagesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2)
+	if fake.ListPoliciesPagesStub != nil {
+		return fake.ListPoliciesPagesStub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listPoliciesPagesReturns
 	return fakeReturns.result1
 }
 
@@ -26080,16 +25777,15 @@ func (fake *FakeIAMAPI) ListPoliciesPagesWithContext(arg1 context.Context, arg2 
 		arg3 func(*iam.ListPoliciesOutput, bool) bool
 		arg4 []request.Option
 	}{arg1, arg2, arg3, arg4})
-	stub := fake.ListPoliciesPagesWithContextStub
-	fakeReturns := fake.listPoliciesPagesWithContextReturns
 	fake.recordInvocation("ListPoliciesPagesWithContext", []interface{}{arg1, arg2, arg3, arg4})
 	fake.listPoliciesPagesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3, arg4...)
+	if fake.ListPoliciesPagesWithContextStub != nil {
+		return fake.ListPoliciesPagesWithContextStub(arg1, arg2, arg3, arg4...)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listPoliciesPagesWithContextReturns
 	return fakeReturns.result1
 }
 
@@ -26141,16 +25837,15 @@ func (fake *FakeIAMAPI) ListPoliciesRequest(arg1 *iam.ListPoliciesInput) (*reque
 	fake.listPoliciesRequestArgsForCall = append(fake.listPoliciesRequestArgsForCall, struct {
 		arg1 *iam.ListPoliciesInput
 	}{arg1})
-	stub := fake.ListPoliciesRequestStub
-	fakeReturns := fake.listPoliciesRequestReturns
 	fake.recordInvocation("ListPoliciesRequest", []interface{}{arg1})
 	fake.listPoliciesRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListPoliciesRequestStub != nil {
+		return fake.ListPoliciesRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listPoliciesRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -26207,16 +25902,15 @@ func (fake *FakeIAMAPI) ListPoliciesWithContext(arg1 context.Context, arg2 *iam.
 		arg2 *iam.ListPoliciesInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.ListPoliciesWithContextStub
-	fakeReturns := fake.listPoliciesWithContextReturns
 	fake.recordInvocation("ListPoliciesWithContext", []interface{}{arg1, arg2, arg3})
 	fake.listPoliciesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.ListPoliciesWithContextStub != nil {
+		return fake.ListPoliciesWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listPoliciesWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -26271,16 +25965,15 @@ func (fake *FakeIAMAPI) ListPolicyVersions(arg1 *iam.ListPolicyVersionsInput) (*
 	fake.listPolicyVersionsArgsForCall = append(fake.listPolicyVersionsArgsForCall, struct {
 		arg1 *iam.ListPolicyVersionsInput
 	}{arg1})
-	stub := fake.ListPolicyVersionsStub
-	fakeReturns := fake.listPolicyVersionsReturns
 	fake.recordInvocation("ListPolicyVersions", []interface{}{arg1})
 	fake.listPolicyVersionsMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListPolicyVersionsStub != nil {
+		return fake.ListPolicyVersionsStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listPolicyVersionsReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -26336,16 +26029,15 @@ func (fake *FakeIAMAPI) ListPolicyVersionsPages(arg1 *iam.ListPolicyVersionsInpu
 		arg1 *iam.ListPolicyVersionsInput
 		arg2 func(*iam.ListPolicyVersionsOutput, bool) bool
 	}{arg1, arg2})
-	stub := fake.ListPolicyVersionsPagesStub
-	fakeReturns := fake.listPolicyVersionsPagesReturns
 	fake.recordInvocation("ListPolicyVersionsPages", []interface{}{arg1, arg2})
 	fake.listPolicyVersionsPagesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2)
+	if fake.ListPolicyVersionsPagesStub != nil {
+		return fake.ListPolicyVersionsPagesStub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listPolicyVersionsPagesReturns
 	return fakeReturns.result1
 }
 
@@ -26400,16 +26092,15 @@ func (fake *FakeIAMAPI) ListPolicyVersionsPagesWithContext(arg1 context.Context,
 		arg3 func(*iam.ListPolicyVersionsOutput, bool) bool
 		arg4 []request.Option
 	}{arg1, arg2, arg3, arg4})
-	stub := fake.ListPolicyVersionsPagesWithContextStub
-	fakeReturns := fake.listPolicyVersionsPagesWithContextReturns
 	fake.recordInvocation("ListPolicyVersionsPagesWithContext", []interface{}{arg1, arg2, arg3, arg4})
 	fake.listPolicyVersionsPagesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3, arg4...)
+	if fake.ListPolicyVersionsPagesWithContextStub != nil {
+		return fake.ListPolicyVersionsPagesWithContextStub(arg1, arg2, arg3, arg4...)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listPolicyVersionsPagesWithContextReturns
 	return fakeReturns.result1
 }
 
@@ -26461,16 +26152,15 @@ func (fake *FakeIAMAPI) ListPolicyVersionsRequest(arg1 *iam.ListPolicyVersionsIn
 	fake.listPolicyVersionsRequestArgsForCall = append(fake.listPolicyVersionsRequestArgsForCall, struct {
 		arg1 *iam.ListPolicyVersionsInput
 	}{arg1})
-	stub := fake.ListPolicyVersionsRequestStub
-	fakeReturns := fake.listPolicyVersionsRequestReturns
 	fake.recordInvocation("ListPolicyVersionsRequest", []interface{}{arg1})
 	fake.listPolicyVersionsRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListPolicyVersionsRequestStub != nil {
+		return fake.ListPolicyVersionsRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listPolicyVersionsRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -26527,16 +26217,15 @@ func (fake *FakeIAMAPI) ListPolicyVersionsWithContext(arg1 context.Context, arg2
 		arg2 *iam.ListPolicyVersionsInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.ListPolicyVersionsWithContextStub
-	fakeReturns := fake.listPolicyVersionsWithContextReturns
 	fake.recordInvocation("ListPolicyVersionsWithContext", []interface{}{arg1, arg2, arg3})
 	fake.listPolicyVersionsWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.ListPolicyVersionsWithContextStub != nil {
+		return fake.ListPolicyVersionsWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listPolicyVersionsWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -26591,16 +26280,15 @@ func (fake *FakeIAMAPI) ListRolePolicies(arg1 *iam.ListRolePoliciesInput) (*iam.
 	fake.listRolePoliciesArgsForCall = append(fake.listRolePoliciesArgsForCall, struct {
 		arg1 *iam.ListRolePoliciesInput
 	}{arg1})
-	stub := fake.ListRolePoliciesStub
-	fakeReturns := fake.listRolePoliciesReturns
 	fake.recordInvocation("ListRolePolicies", []interface{}{arg1})
 	fake.listRolePoliciesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListRolePoliciesStub != nil {
+		return fake.ListRolePoliciesStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listRolePoliciesReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -26656,16 +26344,15 @@ func (fake *FakeIAMAPI) ListRolePoliciesPages(arg1 *iam.ListRolePoliciesInput, a
 		arg1 *iam.ListRolePoliciesInput
 		arg2 func(*iam.ListRolePoliciesOutput, bool) bool
 	}{arg1, arg2})
-	stub := fake.ListRolePoliciesPagesStub
-	fakeReturns := fake.listRolePoliciesPagesReturns
 	fake.recordInvocation("ListRolePoliciesPages", []interface{}{arg1, arg2})
 	fake.listRolePoliciesPagesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2)
+	if fake.ListRolePoliciesPagesStub != nil {
+		return fake.ListRolePoliciesPagesStub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listRolePoliciesPagesReturns
 	return fakeReturns.result1
 }
 
@@ -26720,16 +26407,15 @@ func (fake *FakeIAMAPI) ListRolePoliciesPagesWithContext(arg1 context.Context, a
 		arg3 func(*iam.ListRolePoliciesOutput, bool) bool
 		arg4 []request.Option
 	}{arg1, arg2, arg3, arg4})
-	stub := fake.ListRolePoliciesPagesWithContextStub
-	fakeReturns := fake.listRolePoliciesPagesWithContextReturns
 	fake.recordInvocation("ListRolePoliciesPagesWithContext", []interface{}{arg1, arg2, arg3, arg4})
 	fake.listRolePoliciesPagesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3, arg4...)
+	if fake.ListRolePoliciesPagesWithContextStub != nil {
+		return fake.ListRolePoliciesPagesWithContextStub(arg1, arg2, arg3, arg4...)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listRolePoliciesPagesWithContextReturns
 	return fakeReturns.result1
 }
 
@@ -26781,16 +26467,15 @@ func (fake *FakeIAMAPI) ListRolePoliciesRequest(arg1 *iam.ListRolePoliciesInput)
 	fake.listRolePoliciesRequestArgsForCall = append(fake.listRolePoliciesRequestArgsForCall, struct {
 		arg1 *iam.ListRolePoliciesInput
 	}{arg1})
-	stub := fake.ListRolePoliciesRequestStub
-	fakeReturns := fake.listRolePoliciesRequestReturns
 	fake.recordInvocation("ListRolePoliciesRequest", []interface{}{arg1})
 	fake.listRolePoliciesRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListRolePoliciesRequestStub != nil {
+		return fake.ListRolePoliciesRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listRolePoliciesRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -26847,16 +26532,15 @@ func (fake *FakeIAMAPI) ListRolePoliciesWithContext(arg1 context.Context, arg2 *
 		arg2 *iam.ListRolePoliciesInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.ListRolePoliciesWithContextStub
-	fakeReturns := fake.listRolePoliciesWithContextReturns
 	fake.recordInvocation("ListRolePoliciesWithContext", []interface{}{arg1, arg2, arg3})
 	fake.listRolePoliciesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.ListRolePoliciesWithContextStub != nil {
+		return fake.ListRolePoliciesWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listRolePoliciesWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -26911,16 +26595,15 @@ func (fake *FakeIAMAPI) ListRoleTags(arg1 *iam.ListRoleTagsInput) (*iam.ListRole
 	fake.listRoleTagsArgsForCall = append(fake.listRoleTagsArgsForCall, struct {
 		arg1 *iam.ListRoleTagsInput
 	}{arg1})
-	stub := fake.ListRoleTagsStub
-	fakeReturns := fake.listRoleTagsReturns
 	fake.recordInvocation("ListRoleTags", []interface{}{arg1})
 	fake.listRoleTagsMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListRoleTagsStub != nil {
+		return fake.ListRoleTagsStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listRoleTagsReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -26975,16 +26658,15 @@ func (fake *FakeIAMAPI) ListRoleTagsRequest(arg1 *iam.ListRoleTagsInput) (*reque
 	fake.listRoleTagsRequestArgsForCall = append(fake.listRoleTagsRequestArgsForCall, struct {
 		arg1 *iam.ListRoleTagsInput
 	}{arg1})
-	stub := fake.ListRoleTagsRequestStub
-	fakeReturns := fake.listRoleTagsRequestReturns
 	fake.recordInvocation("ListRoleTagsRequest", []interface{}{arg1})
 	fake.listRoleTagsRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListRoleTagsRequestStub != nil {
+		return fake.ListRoleTagsRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listRoleTagsRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -27041,16 +26723,15 @@ func (fake *FakeIAMAPI) ListRoleTagsWithContext(arg1 context.Context, arg2 *iam.
 		arg2 *iam.ListRoleTagsInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.ListRoleTagsWithContextStub
-	fakeReturns := fake.listRoleTagsWithContextReturns
 	fake.recordInvocation("ListRoleTagsWithContext", []interface{}{arg1, arg2, arg3})
 	fake.listRoleTagsWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.ListRoleTagsWithContextStub != nil {
+		return fake.ListRoleTagsWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listRoleTagsWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -27105,16 +26786,15 @@ func (fake *FakeIAMAPI) ListRoles(arg1 *iam.ListRolesInput) (*iam.ListRolesOutpu
 	fake.listRolesArgsForCall = append(fake.listRolesArgsForCall, struct {
 		arg1 *iam.ListRolesInput
 	}{arg1})
-	stub := fake.ListRolesStub
-	fakeReturns := fake.listRolesReturns
 	fake.recordInvocation("ListRoles", []interface{}{arg1})
 	fake.listRolesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListRolesStub != nil {
+		return fake.ListRolesStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listRolesReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -27170,16 +26850,15 @@ func (fake *FakeIAMAPI) ListRolesPages(arg1 *iam.ListRolesInput, arg2 func(*iam.
 		arg1 *iam.ListRolesInput
 		arg2 func(*iam.ListRolesOutput, bool) bool
 	}{arg1, arg2})
-	stub := fake.ListRolesPagesStub
-	fakeReturns := fake.listRolesPagesReturns
 	fake.recordInvocation("ListRolesPages", []interface{}{arg1, arg2})
 	fake.listRolesPagesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2)
+	if fake.ListRolesPagesStub != nil {
+		return fake.ListRolesPagesStub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listRolesPagesReturns
 	return fakeReturns.result1
 }
 
@@ -27234,16 +26913,15 @@ func (fake *FakeIAMAPI) ListRolesPagesWithContext(arg1 context.Context, arg2 *ia
 		arg3 func(*iam.ListRolesOutput, bool) bool
 		arg4 []request.Option
 	}{arg1, arg2, arg3, arg4})
-	stub := fake.ListRolesPagesWithContextStub
-	fakeReturns := fake.listRolesPagesWithContextReturns
 	fake.recordInvocation("ListRolesPagesWithContext", []interface{}{arg1, arg2, arg3, arg4})
 	fake.listRolesPagesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3, arg4...)
+	if fake.ListRolesPagesWithContextStub != nil {
+		return fake.ListRolesPagesWithContextStub(arg1, arg2, arg3, arg4...)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listRolesPagesWithContextReturns
 	return fakeReturns.result1
 }
 
@@ -27295,16 +26973,15 @@ func (fake *FakeIAMAPI) ListRolesRequest(arg1 *iam.ListRolesInput) (*request.Req
 	fake.listRolesRequestArgsForCall = append(fake.listRolesRequestArgsForCall, struct {
 		arg1 *iam.ListRolesInput
 	}{arg1})
-	stub := fake.ListRolesRequestStub
-	fakeReturns := fake.listRolesRequestReturns
 	fake.recordInvocation("ListRolesRequest", []interface{}{arg1})
 	fake.listRolesRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListRolesRequestStub != nil {
+		return fake.ListRolesRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listRolesRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -27361,16 +27038,15 @@ func (fake *FakeIAMAPI) ListRolesWithContext(arg1 context.Context, arg2 *iam.Lis
 		arg2 *iam.ListRolesInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.ListRolesWithContextStub
-	fakeReturns := fake.listRolesWithContextReturns
 	fake.recordInvocation("ListRolesWithContext", []interface{}{arg1, arg2, arg3})
 	fake.listRolesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.ListRolesWithContextStub != nil {
+		return fake.ListRolesWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listRolesWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -27425,16 +27101,15 @@ func (fake *FakeIAMAPI) ListSAMLProviders(arg1 *iam.ListSAMLProvidersInput) (*ia
 	fake.listSAMLProvidersArgsForCall = append(fake.listSAMLProvidersArgsForCall, struct {
 		arg1 *iam.ListSAMLProvidersInput
 	}{arg1})
-	stub := fake.ListSAMLProvidersStub
-	fakeReturns := fake.listSAMLProvidersReturns
 	fake.recordInvocation("ListSAMLProviders", []interface{}{arg1})
 	fake.listSAMLProvidersMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListSAMLProvidersStub != nil {
+		return fake.ListSAMLProvidersStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listSAMLProvidersReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -27489,16 +27164,15 @@ func (fake *FakeIAMAPI) ListSAMLProvidersRequest(arg1 *iam.ListSAMLProvidersInpu
 	fake.listSAMLProvidersRequestArgsForCall = append(fake.listSAMLProvidersRequestArgsForCall, struct {
 		arg1 *iam.ListSAMLProvidersInput
 	}{arg1})
-	stub := fake.ListSAMLProvidersRequestStub
-	fakeReturns := fake.listSAMLProvidersRequestReturns
 	fake.recordInvocation("ListSAMLProvidersRequest", []interface{}{arg1})
 	fake.listSAMLProvidersRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListSAMLProvidersRequestStub != nil {
+		return fake.ListSAMLProvidersRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listSAMLProvidersRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -27555,16 +27229,15 @@ func (fake *FakeIAMAPI) ListSAMLProvidersWithContext(arg1 context.Context, arg2 
 		arg2 *iam.ListSAMLProvidersInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.ListSAMLProvidersWithContextStub
-	fakeReturns := fake.listSAMLProvidersWithContextReturns
 	fake.recordInvocation("ListSAMLProvidersWithContext", []interface{}{arg1, arg2, arg3})
 	fake.listSAMLProvidersWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.ListSAMLProvidersWithContextStub != nil {
+		return fake.ListSAMLProvidersWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listSAMLProvidersWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -27619,16 +27292,15 @@ func (fake *FakeIAMAPI) ListSSHPublicKeys(arg1 *iam.ListSSHPublicKeysInput) (*ia
 	fake.listSSHPublicKeysArgsForCall = append(fake.listSSHPublicKeysArgsForCall, struct {
 		arg1 *iam.ListSSHPublicKeysInput
 	}{arg1})
-	stub := fake.ListSSHPublicKeysStub
-	fakeReturns := fake.listSSHPublicKeysReturns
 	fake.recordInvocation("ListSSHPublicKeys", []interface{}{arg1})
 	fake.listSSHPublicKeysMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListSSHPublicKeysStub != nil {
+		return fake.ListSSHPublicKeysStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listSSHPublicKeysReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -27684,16 +27356,15 @@ func (fake *FakeIAMAPI) ListSSHPublicKeysPages(arg1 *iam.ListSSHPublicKeysInput,
 		arg1 *iam.ListSSHPublicKeysInput
 		arg2 func(*iam.ListSSHPublicKeysOutput, bool) bool
 	}{arg1, arg2})
-	stub := fake.ListSSHPublicKeysPagesStub
-	fakeReturns := fake.listSSHPublicKeysPagesReturns
 	fake.recordInvocation("ListSSHPublicKeysPages", []interface{}{arg1, arg2})
 	fake.listSSHPublicKeysPagesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2)
+	if fake.ListSSHPublicKeysPagesStub != nil {
+		return fake.ListSSHPublicKeysPagesStub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listSSHPublicKeysPagesReturns
 	return fakeReturns.result1
 }
 
@@ -27748,16 +27419,15 @@ func (fake *FakeIAMAPI) ListSSHPublicKeysPagesWithContext(arg1 context.Context, 
 		arg3 func(*iam.ListSSHPublicKeysOutput, bool) bool
 		arg4 []request.Option
 	}{arg1, arg2, arg3, arg4})
-	stub := fake.ListSSHPublicKeysPagesWithContextStub
-	fakeReturns := fake.listSSHPublicKeysPagesWithContextReturns
 	fake.recordInvocation("ListSSHPublicKeysPagesWithContext", []interface{}{arg1, arg2, arg3, arg4})
 	fake.listSSHPublicKeysPagesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3, arg4...)
+	if fake.ListSSHPublicKeysPagesWithContextStub != nil {
+		return fake.ListSSHPublicKeysPagesWithContextStub(arg1, arg2, arg3, arg4...)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listSSHPublicKeysPagesWithContextReturns
 	return fakeReturns.result1
 }
 
@@ -27809,16 +27479,15 @@ func (fake *FakeIAMAPI) ListSSHPublicKeysRequest(arg1 *iam.ListSSHPublicKeysInpu
 	fake.listSSHPublicKeysRequestArgsForCall = append(fake.listSSHPublicKeysRequestArgsForCall, struct {
 		arg1 *iam.ListSSHPublicKeysInput
 	}{arg1})
-	stub := fake.ListSSHPublicKeysRequestStub
-	fakeReturns := fake.listSSHPublicKeysRequestReturns
 	fake.recordInvocation("ListSSHPublicKeysRequest", []interface{}{arg1})
 	fake.listSSHPublicKeysRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListSSHPublicKeysRequestStub != nil {
+		return fake.ListSSHPublicKeysRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listSSHPublicKeysRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -27875,16 +27544,15 @@ func (fake *FakeIAMAPI) ListSSHPublicKeysWithContext(arg1 context.Context, arg2 
 		arg2 *iam.ListSSHPublicKeysInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.ListSSHPublicKeysWithContextStub
-	fakeReturns := fake.listSSHPublicKeysWithContextReturns
 	fake.recordInvocation("ListSSHPublicKeysWithContext", []interface{}{arg1, arg2, arg3})
 	fake.listSSHPublicKeysWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.ListSSHPublicKeysWithContextStub != nil {
+		return fake.ListSSHPublicKeysWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listSSHPublicKeysWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -27939,16 +27607,15 @@ func (fake *FakeIAMAPI) ListServerCertificates(arg1 *iam.ListServerCertificatesI
 	fake.listServerCertificatesArgsForCall = append(fake.listServerCertificatesArgsForCall, struct {
 		arg1 *iam.ListServerCertificatesInput
 	}{arg1})
-	stub := fake.ListServerCertificatesStub
-	fakeReturns := fake.listServerCertificatesReturns
 	fake.recordInvocation("ListServerCertificates", []interface{}{arg1})
 	fake.listServerCertificatesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListServerCertificatesStub != nil {
+		return fake.ListServerCertificatesStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listServerCertificatesReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -28004,16 +27671,15 @@ func (fake *FakeIAMAPI) ListServerCertificatesPages(arg1 *iam.ListServerCertific
 		arg1 *iam.ListServerCertificatesInput
 		arg2 func(*iam.ListServerCertificatesOutput, bool) bool
 	}{arg1, arg2})
-	stub := fake.ListServerCertificatesPagesStub
-	fakeReturns := fake.listServerCertificatesPagesReturns
 	fake.recordInvocation("ListServerCertificatesPages", []interface{}{arg1, arg2})
 	fake.listServerCertificatesPagesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2)
+	if fake.ListServerCertificatesPagesStub != nil {
+		return fake.ListServerCertificatesPagesStub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listServerCertificatesPagesReturns
 	return fakeReturns.result1
 }
 
@@ -28068,16 +27734,15 @@ func (fake *FakeIAMAPI) ListServerCertificatesPagesWithContext(arg1 context.Cont
 		arg3 func(*iam.ListServerCertificatesOutput, bool) bool
 		arg4 []request.Option
 	}{arg1, arg2, arg3, arg4})
-	stub := fake.ListServerCertificatesPagesWithContextStub
-	fakeReturns := fake.listServerCertificatesPagesWithContextReturns
 	fake.recordInvocation("ListServerCertificatesPagesWithContext", []interface{}{arg1, arg2, arg3, arg4})
 	fake.listServerCertificatesPagesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3, arg4...)
+	if fake.ListServerCertificatesPagesWithContextStub != nil {
+		return fake.ListServerCertificatesPagesWithContextStub(arg1, arg2, arg3, arg4...)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listServerCertificatesPagesWithContextReturns
 	return fakeReturns.result1
 }
 
@@ -28129,16 +27794,15 @@ func (fake *FakeIAMAPI) ListServerCertificatesRequest(arg1 *iam.ListServerCertif
 	fake.listServerCertificatesRequestArgsForCall = append(fake.listServerCertificatesRequestArgsForCall, struct {
 		arg1 *iam.ListServerCertificatesInput
 	}{arg1})
-	stub := fake.ListServerCertificatesRequestStub
-	fakeReturns := fake.listServerCertificatesRequestReturns
 	fake.recordInvocation("ListServerCertificatesRequest", []interface{}{arg1})
 	fake.listServerCertificatesRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListServerCertificatesRequestStub != nil {
+		return fake.ListServerCertificatesRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listServerCertificatesRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -28195,16 +27859,15 @@ func (fake *FakeIAMAPI) ListServerCertificatesWithContext(arg1 context.Context, 
 		arg2 *iam.ListServerCertificatesInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.ListServerCertificatesWithContextStub
-	fakeReturns := fake.listServerCertificatesWithContextReturns
 	fake.recordInvocation("ListServerCertificatesWithContext", []interface{}{arg1, arg2, arg3})
 	fake.listServerCertificatesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.ListServerCertificatesWithContextStub != nil {
+		return fake.ListServerCertificatesWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listServerCertificatesWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -28259,16 +27922,15 @@ func (fake *FakeIAMAPI) ListServiceSpecificCredentials(arg1 *iam.ListServiceSpec
 	fake.listServiceSpecificCredentialsArgsForCall = append(fake.listServiceSpecificCredentialsArgsForCall, struct {
 		arg1 *iam.ListServiceSpecificCredentialsInput
 	}{arg1})
-	stub := fake.ListServiceSpecificCredentialsStub
-	fakeReturns := fake.listServiceSpecificCredentialsReturns
 	fake.recordInvocation("ListServiceSpecificCredentials", []interface{}{arg1})
 	fake.listServiceSpecificCredentialsMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListServiceSpecificCredentialsStub != nil {
+		return fake.ListServiceSpecificCredentialsStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listServiceSpecificCredentialsReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -28323,16 +27985,15 @@ func (fake *FakeIAMAPI) ListServiceSpecificCredentialsRequest(arg1 *iam.ListServ
 	fake.listServiceSpecificCredentialsRequestArgsForCall = append(fake.listServiceSpecificCredentialsRequestArgsForCall, struct {
 		arg1 *iam.ListServiceSpecificCredentialsInput
 	}{arg1})
-	stub := fake.ListServiceSpecificCredentialsRequestStub
-	fakeReturns := fake.listServiceSpecificCredentialsRequestReturns
 	fake.recordInvocation("ListServiceSpecificCredentialsRequest", []interface{}{arg1})
 	fake.listServiceSpecificCredentialsRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListServiceSpecificCredentialsRequestStub != nil {
+		return fake.ListServiceSpecificCredentialsRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listServiceSpecificCredentialsRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -28389,16 +28050,15 @@ func (fake *FakeIAMAPI) ListServiceSpecificCredentialsWithContext(arg1 context.C
 		arg2 *iam.ListServiceSpecificCredentialsInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.ListServiceSpecificCredentialsWithContextStub
-	fakeReturns := fake.listServiceSpecificCredentialsWithContextReturns
 	fake.recordInvocation("ListServiceSpecificCredentialsWithContext", []interface{}{arg1, arg2, arg3})
 	fake.listServiceSpecificCredentialsWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.ListServiceSpecificCredentialsWithContextStub != nil {
+		return fake.ListServiceSpecificCredentialsWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listServiceSpecificCredentialsWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -28453,16 +28113,15 @@ func (fake *FakeIAMAPI) ListSigningCertificates(arg1 *iam.ListSigningCertificate
 	fake.listSigningCertificatesArgsForCall = append(fake.listSigningCertificatesArgsForCall, struct {
 		arg1 *iam.ListSigningCertificatesInput
 	}{arg1})
-	stub := fake.ListSigningCertificatesStub
-	fakeReturns := fake.listSigningCertificatesReturns
 	fake.recordInvocation("ListSigningCertificates", []interface{}{arg1})
 	fake.listSigningCertificatesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListSigningCertificatesStub != nil {
+		return fake.ListSigningCertificatesStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listSigningCertificatesReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -28518,16 +28177,15 @@ func (fake *FakeIAMAPI) ListSigningCertificatesPages(arg1 *iam.ListSigningCertif
 		arg1 *iam.ListSigningCertificatesInput
 		arg2 func(*iam.ListSigningCertificatesOutput, bool) bool
 	}{arg1, arg2})
-	stub := fake.ListSigningCertificatesPagesStub
-	fakeReturns := fake.listSigningCertificatesPagesReturns
 	fake.recordInvocation("ListSigningCertificatesPages", []interface{}{arg1, arg2})
 	fake.listSigningCertificatesPagesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2)
+	if fake.ListSigningCertificatesPagesStub != nil {
+		return fake.ListSigningCertificatesPagesStub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listSigningCertificatesPagesReturns
 	return fakeReturns.result1
 }
 
@@ -28582,16 +28240,15 @@ func (fake *FakeIAMAPI) ListSigningCertificatesPagesWithContext(arg1 context.Con
 		arg3 func(*iam.ListSigningCertificatesOutput, bool) bool
 		arg4 []request.Option
 	}{arg1, arg2, arg3, arg4})
-	stub := fake.ListSigningCertificatesPagesWithContextStub
-	fakeReturns := fake.listSigningCertificatesPagesWithContextReturns
 	fake.recordInvocation("ListSigningCertificatesPagesWithContext", []interface{}{arg1, arg2, arg3, arg4})
 	fake.listSigningCertificatesPagesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3, arg4...)
+	if fake.ListSigningCertificatesPagesWithContextStub != nil {
+		return fake.ListSigningCertificatesPagesWithContextStub(arg1, arg2, arg3, arg4...)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listSigningCertificatesPagesWithContextReturns
 	return fakeReturns.result1
 }
 
@@ -28643,16 +28300,15 @@ func (fake *FakeIAMAPI) ListSigningCertificatesRequest(arg1 *iam.ListSigningCert
 	fake.listSigningCertificatesRequestArgsForCall = append(fake.listSigningCertificatesRequestArgsForCall, struct {
 		arg1 *iam.ListSigningCertificatesInput
 	}{arg1})
-	stub := fake.ListSigningCertificatesRequestStub
-	fakeReturns := fake.listSigningCertificatesRequestReturns
 	fake.recordInvocation("ListSigningCertificatesRequest", []interface{}{arg1})
 	fake.listSigningCertificatesRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListSigningCertificatesRequestStub != nil {
+		return fake.ListSigningCertificatesRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listSigningCertificatesRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -28709,16 +28365,15 @@ func (fake *FakeIAMAPI) ListSigningCertificatesWithContext(arg1 context.Context,
 		arg2 *iam.ListSigningCertificatesInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.ListSigningCertificatesWithContextStub
-	fakeReturns := fake.listSigningCertificatesWithContextReturns
 	fake.recordInvocation("ListSigningCertificatesWithContext", []interface{}{arg1, arg2, arg3})
 	fake.listSigningCertificatesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.ListSigningCertificatesWithContextStub != nil {
+		return fake.ListSigningCertificatesWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listSigningCertificatesWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -28773,16 +28428,15 @@ func (fake *FakeIAMAPI) ListUserPolicies(arg1 *iam.ListUserPoliciesInput) (*iam.
 	fake.listUserPoliciesArgsForCall = append(fake.listUserPoliciesArgsForCall, struct {
 		arg1 *iam.ListUserPoliciesInput
 	}{arg1})
-	stub := fake.ListUserPoliciesStub
-	fakeReturns := fake.listUserPoliciesReturns
 	fake.recordInvocation("ListUserPolicies", []interface{}{arg1})
 	fake.listUserPoliciesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListUserPoliciesStub != nil {
+		return fake.ListUserPoliciesStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listUserPoliciesReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -28838,16 +28492,15 @@ func (fake *FakeIAMAPI) ListUserPoliciesPages(arg1 *iam.ListUserPoliciesInput, a
 		arg1 *iam.ListUserPoliciesInput
 		arg2 func(*iam.ListUserPoliciesOutput, bool) bool
 	}{arg1, arg2})
-	stub := fake.ListUserPoliciesPagesStub
-	fakeReturns := fake.listUserPoliciesPagesReturns
 	fake.recordInvocation("ListUserPoliciesPages", []interface{}{arg1, arg2})
 	fake.listUserPoliciesPagesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2)
+	if fake.ListUserPoliciesPagesStub != nil {
+		return fake.ListUserPoliciesPagesStub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listUserPoliciesPagesReturns
 	return fakeReturns.result1
 }
 
@@ -28902,16 +28555,15 @@ func (fake *FakeIAMAPI) ListUserPoliciesPagesWithContext(arg1 context.Context, a
 		arg3 func(*iam.ListUserPoliciesOutput, bool) bool
 		arg4 []request.Option
 	}{arg1, arg2, arg3, arg4})
-	stub := fake.ListUserPoliciesPagesWithContextStub
-	fakeReturns := fake.listUserPoliciesPagesWithContextReturns
 	fake.recordInvocation("ListUserPoliciesPagesWithContext", []interface{}{arg1, arg2, arg3, arg4})
 	fake.listUserPoliciesPagesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3, arg4...)
+	if fake.ListUserPoliciesPagesWithContextStub != nil {
+		return fake.ListUserPoliciesPagesWithContextStub(arg1, arg2, arg3, arg4...)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listUserPoliciesPagesWithContextReturns
 	return fakeReturns.result1
 }
 
@@ -28963,16 +28615,15 @@ func (fake *FakeIAMAPI) ListUserPoliciesRequest(arg1 *iam.ListUserPoliciesInput)
 	fake.listUserPoliciesRequestArgsForCall = append(fake.listUserPoliciesRequestArgsForCall, struct {
 		arg1 *iam.ListUserPoliciesInput
 	}{arg1})
-	stub := fake.ListUserPoliciesRequestStub
-	fakeReturns := fake.listUserPoliciesRequestReturns
 	fake.recordInvocation("ListUserPoliciesRequest", []interface{}{arg1})
 	fake.listUserPoliciesRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListUserPoliciesRequestStub != nil {
+		return fake.ListUserPoliciesRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listUserPoliciesRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -29029,16 +28680,15 @@ func (fake *FakeIAMAPI) ListUserPoliciesWithContext(arg1 context.Context, arg2 *
 		arg2 *iam.ListUserPoliciesInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.ListUserPoliciesWithContextStub
-	fakeReturns := fake.listUserPoliciesWithContextReturns
 	fake.recordInvocation("ListUserPoliciesWithContext", []interface{}{arg1, arg2, arg3})
 	fake.listUserPoliciesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.ListUserPoliciesWithContextStub != nil {
+		return fake.ListUserPoliciesWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listUserPoliciesWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -29093,16 +28743,15 @@ func (fake *FakeIAMAPI) ListUserTags(arg1 *iam.ListUserTagsInput) (*iam.ListUser
 	fake.listUserTagsArgsForCall = append(fake.listUserTagsArgsForCall, struct {
 		arg1 *iam.ListUserTagsInput
 	}{arg1})
-	stub := fake.ListUserTagsStub
-	fakeReturns := fake.listUserTagsReturns
 	fake.recordInvocation("ListUserTags", []interface{}{arg1})
 	fake.listUserTagsMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListUserTagsStub != nil {
+		return fake.ListUserTagsStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listUserTagsReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -29157,16 +28806,15 @@ func (fake *FakeIAMAPI) ListUserTagsRequest(arg1 *iam.ListUserTagsInput) (*reque
 	fake.listUserTagsRequestArgsForCall = append(fake.listUserTagsRequestArgsForCall, struct {
 		arg1 *iam.ListUserTagsInput
 	}{arg1})
-	stub := fake.ListUserTagsRequestStub
-	fakeReturns := fake.listUserTagsRequestReturns
 	fake.recordInvocation("ListUserTagsRequest", []interface{}{arg1})
 	fake.listUserTagsRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListUserTagsRequestStub != nil {
+		return fake.ListUserTagsRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listUserTagsRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -29223,16 +28871,15 @@ func (fake *FakeIAMAPI) ListUserTagsWithContext(arg1 context.Context, arg2 *iam.
 		arg2 *iam.ListUserTagsInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.ListUserTagsWithContextStub
-	fakeReturns := fake.listUserTagsWithContextReturns
 	fake.recordInvocation("ListUserTagsWithContext", []interface{}{arg1, arg2, arg3})
 	fake.listUserTagsWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.ListUserTagsWithContextStub != nil {
+		return fake.ListUserTagsWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listUserTagsWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -29287,16 +28934,15 @@ func (fake *FakeIAMAPI) ListUsers(arg1 *iam.ListUsersInput) (*iam.ListUsersOutpu
 	fake.listUsersArgsForCall = append(fake.listUsersArgsForCall, struct {
 		arg1 *iam.ListUsersInput
 	}{arg1})
-	stub := fake.ListUsersStub
-	fakeReturns := fake.listUsersReturns
 	fake.recordInvocation("ListUsers", []interface{}{arg1})
 	fake.listUsersMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListUsersStub != nil {
+		return fake.ListUsersStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listUsersReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -29352,16 +28998,15 @@ func (fake *FakeIAMAPI) ListUsersPages(arg1 *iam.ListUsersInput, arg2 func(*iam.
 		arg1 *iam.ListUsersInput
 		arg2 func(*iam.ListUsersOutput, bool) bool
 	}{arg1, arg2})
-	stub := fake.ListUsersPagesStub
-	fakeReturns := fake.listUsersPagesReturns
 	fake.recordInvocation("ListUsersPages", []interface{}{arg1, arg2})
 	fake.listUsersPagesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2)
+	if fake.ListUsersPagesStub != nil {
+		return fake.ListUsersPagesStub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listUsersPagesReturns
 	return fakeReturns.result1
 }
 
@@ -29416,16 +29061,15 @@ func (fake *FakeIAMAPI) ListUsersPagesWithContext(arg1 context.Context, arg2 *ia
 		arg3 func(*iam.ListUsersOutput, bool) bool
 		arg4 []request.Option
 	}{arg1, arg2, arg3, arg4})
-	stub := fake.ListUsersPagesWithContextStub
-	fakeReturns := fake.listUsersPagesWithContextReturns
 	fake.recordInvocation("ListUsersPagesWithContext", []interface{}{arg1, arg2, arg3, arg4})
 	fake.listUsersPagesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3, arg4...)
+	if fake.ListUsersPagesWithContextStub != nil {
+		return fake.ListUsersPagesWithContextStub(arg1, arg2, arg3, arg4...)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listUsersPagesWithContextReturns
 	return fakeReturns.result1
 }
 
@@ -29477,16 +29121,15 @@ func (fake *FakeIAMAPI) ListUsersRequest(arg1 *iam.ListUsersInput) (*request.Req
 	fake.listUsersRequestArgsForCall = append(fake.listUsersRequestArgsForCall, struct {
 		arg1 *iam.ListUsersInput
 	}{arg1})
-	stub := fake.ListUsersRequestStub
-	fakeReturns := fake.listUsersRequestReturns
 	fake.recordInvocation("ListUsersRequest", []interface{}{arg1})
 	fake.listUsersRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListUsersRequestStub != nil {
+		return fake.ListUsersRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listUsersRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -29543,16 +29186,15 @@ func (fake *FakeIAMAPI) ListUsersWithContext(arg1 context.Context, arg2 *iam.Lis
 		arg2 *iam.ListUsersInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.ListUsersWithContextStub
-	fakeReturns := fake.listUsersWithContextReturns
 	fake.recordInvocation("ListUsersWithContext", []interface{}{arg1, arg2, arg3})
 	fake.listUsersWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.ListUsersWithContextStub != nil {
+		return fake.ListUsersWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listUsersWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -29607,16 +29249,15 @@ func (fake *FakeIAMAPI) ListVirtualMFADevices(arg1 *iam.ListVirtualMFADevicesInp
 	fake.listVirtualMFADevicesArgsForCall = append(fake.listVirtualMFADevicesArgsForCall, struct {
 		arg1 *iam.ListVirtualMFADevicesInput
 	}{arg1})
-	stub := fake.ListVirtualMFADevicesStub
-	fakeReturns := fake.listVirtualMFADevicesReturns
 	fake.recordInvocation("ListVirtualMFADevices", []interface{}{arg1})
 	fake.listVirtualMFADevicesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListVirtualMFADevicesStub != nil {
+		return fake.ListVirtualMFADevicesStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listVirtualMFADevicesReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -29672,16 +29313,15 @@ func (fake *FakeIAMAPI) ListVirtualMFADevicesPages(arg1 *iam.ListVirtualMFADevic
 		arg1 *iam.ListVirtualMFADevicesInput
 		arg2 func(*iam.ListVirtualMFADevicesOutput, bool) bool
 	}{arg1, arg2})
-	stub := fake.ListVirtualMFADevicesPagesStub
-	fakeReturns := fake.listVirtualMFADevicesPagesReturns
 	fake.recordInvocation("ListVirtualMFADevicesPages", []interface{}{arg1, arg2})
 	fake.listVirtualMFADevicesPagesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2)
+	if fake.ListVirtualMFADevicesPagesStub != nil {
+		return fake.ListVirtualMFADevicesPagesStub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listVirtualMFADevicesPagesReturns
 	return fakeReturns.result1
 }
 
@@ -29736,16 +29376,15 @@ func (fake *FakeIAMAPI) ListVirtualMFADevicesPagesWithContext(arg1 context.Conte
 		arg3 func(*iam.ListVirtualMFADevicesOutput, bool) bool
 		arg4 []request.Option
 	}{arg1, arg2, arg3, arg4})
-	stub := fake.ListVirtualMFADevicesPagesWithContextStub
-	fakeReturns := fake.listVirtualMFADevicesPagesWithContextReturns
 	fake.recordInvocation("ListVirtualMFADevicesPagesWithContext", []interface{}{arg1, arg2, arg3, arg4})
 	fake.listVirtualMFADevicesPagesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3, arg4...)
+	if fake.ListVirtualMFADevicesPagesWithContextStub != nil {
+		return fake.ListVirtualMFADevicesPagesWithContextStub(arg1, arg2, arg3, arg4...)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.listVirtualMFADevicesPagesWithContextReturns
 	return fakeReturns.result1
 }
 
@@ -29797,16 +29436,15 @@ func (fake *FakeIAMAPI) ListVirtualMFADevicesRequest(arg1 *iam.ListVirtualMFADev
 	fake.listVirtualMFADevicesRequestArgsForCall = append(fake.listVirtualMFADevicesRequestArgsForCall, struct {
 		arg1 *iam.ListVirtualMFADevicesInput
 	}{arg1})
-	stub := fake.ListVirtualMFADevicesRequestStub
-	fakeReturns := fake.listVirtualMFADevicesRequestReturns
 	fake.recordInvocation("ListVirtualMFADevicesRequest", []interface{}{arg1})
 	fake.listVirtualMFADevicesRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ListVirtualMFADevicesRequestStub != nil {
+		return fake.ListVirtualMFADevicesRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listVirtualMFADevicesRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -29863,16 +29501,15 @@ func (fake *FakeIAMAPI) ListVirtualMFADevicesWithContext(arg1 context.Context, a
 		arg2 *iam.ListVirtualMFADevicesInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.ListVirtualMFADevicesWithContextStub
-	fakeReturns := fake.listVirtualMFADevicesWithContextReturns
 	fake.recordInvocation("ListVirtualMFADevicesWithContext", []interface{}{arg1, arg2, arg3})
 	fake.listVirtualMFADevicesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.ListVirtualMFADevicesWithContextStub != nil {
+		return fake.ListVirtualMFADevicesWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.listVirtualMFADevicesWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -29927,16 +29564,15 @@ func (fake *FakeIAMAPI) PutGroupPolicy(arg1 *iam.PutGroupPolicyInput) (*iam.PutG
 	fake.putGroupPolicyArgsForCall = append(fake.putGroupPolicyArgsForCall, struct {
 		arg1 *iam.PutGroupPolicyInput
 	}{arg1})
-	stub := fake.PutGroupPolicyStub
-	fakeReturns := fake.putGroupPolicyReturns
 	fake.recordInvocation("PutGroupPolicy", []interface{}{arg1})
 	fake.putGroupPolicyMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.PutGroupPolicyStub != nil {
+		return fake.PutGroupPolicyStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.putGroupPolicyReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -29991,16 +29627,15 @@ func (fake *FakeIAMAPI) PutGroupPolicyRequest(arg1 *iam.PutGroupPolicyInput) (*r
 	fake.putGroupPolicyRequestArgsForCall = append(fake.putGroupPolicyRequestArgsForCall, struct {
 		arg1 *iam.PutGroupPolicyInput
 	}{arg1})
-	stub := fake.PutGroupPolicyRequestStub
-	fakeReturns := fake.putGroupPolicyRequestReturns
 	fake.recordInvocation("PutGroupPolicyRequest", []interface{}{arg1})
 	fake.putGroupPolicyRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.PutGroupPolicyRequestStub != nil {
+		return fake.PutGroupPolicyRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.putGroupPolicyRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -30057,16 +29692,15 @@ func (fake *FakeIAMAPI) PutGroupPolicyWithContext(arg1 context.Context, arg2 *ia
 		arg2 *iam.PutGroupPolicyInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.PutGroupPolicyWithContextStub
-	fakeReturns := fake.putGroupPolicyWithContextReturns
 	fake.recordInvocation("PutGroupPolicyWithContext", []interface{}{arg1, arg2, arg3})
 	fake.putGroupPolicyWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.PutGroupPolicyWithContextStub != nil {
+		return fake.PutGroupPolicyWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.putGroupPolicyWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -30121,16 +29755,15 @@ func (fake *FakeIAMAPI) PutRolePermissionsBoundary(arg1 *iam.PutRolePermissionsB
 	fake.putRolePermissionsBoundaryArgsForCall = append(fake.putRolePermissionsBoundaryArgsForCall, struct {
 		arg1 *iam.PutRolePermissionsBoundaryInput
 	}{arg1})
-	stub := fake.PutRolePermissionsBoundaryStub
-	fakeReturns := fake.putRolePermissionsBoundaryReturns
 	fake.recordInvocation("PutRolePermissionsBoundary", []interface{}{arg1})
 	fake.putRolePermissionsBoundaryMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.PutRolePermissionsBoundaryStub != nil {
+		return fake.PutRolePermissionsBoundaryStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.putRolePermissionsBoundaryReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -30185,16 +29818,15 @@ func (fake *FakeIAMAPI) PutRolePermissionsBoundaryRequest(arg1 *iam.PutRolePermi
 	fake.putRolePermissionsBoundaryRequestArgsForCall = append(fake.putRolePermissionsBoundaryRequestArgsForCall, struct {
 		arg1 *iam.PutRolePermissionsBoundaryInput
 	}{arg1})
-	stub := fake.PutRolePermissionsBoundaryRequestStub
-	fakeReturns := fake.putRolePermissionsBoundaryRequestReturns
 	fake.recordInvocation("PutRolePermissionsBoundaryRequest", []interface{}{arg1})
 	fake.putRolePermissionsBoundaryRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.PutRolePermissionsBoundaryRequestStub != nil {
+		return fake.PutRolePermissionsBoundaryRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.putRolePermissionsBoundaryRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -30251,16 +29883,15 @@ func (fake *FakeIAMAPI) PutRolePermissionsBoundaryWithContext(arg1 context.Conte
 		arg2 *iam.PutRolePermissionsBoundaryInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.PutRolePermissionsBoundaryWithContextStub
-	fakeReturns := fake.putRolePermissionsBoundaryWithContextReturns
 	fake.recordInvocation("PutRolePermissionsBoundaryWithContext", []interface{}{arg1, arg2, arg3})
 	fake.putRolePermissionsBoundaryWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.PutRolePermissionsBoundaryWithContextStub != nil {
+		return fake.PutRolePermissionsBoundaryWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.putRolePermissionsBoundaryWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -30315,16 +29946,15 @@ func (fake *FakeIAMAPI) PutRolePolicy(arg1 *iam.PutRolePolicyInput) (*iam.PutRol
 	fake.putRolePolicyArgsForCall = append(fake.putRolePolicyArgsForCall, struct {
 		arg1 *iam.PutRolePolicyInput
 	}{arg1})
-	stub := fake.PutRolePolicyStub
-	fakeReturns := fake.putRolePolicyReturns
 	fake.recordInvocation("PutRolePolicy", []interface{}{arg1})
 	fake.putRolePolicyMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.PutRolePolicyStub != nil {
+		return fake.PutRolePolicyStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.putRolePolicyReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -30379,16 +30009,15 @@ func (fake *FakeIAMAPI) PutRolePolicyRequest(arg1 *iam.PutRolePolicyInput) (*req
 	fake.putRolePolicyRequestArgsForCall = append(fake.putRolePolicyRequestArgsForCall, struct {
 		arg1 *iam.PutRolePolicyInput
 	}{arg1})
-	stub := fake.PutRolePolicyRequestStub
-	fakeReturns := fake.putRolePolicyRequestReturns
 	fake.recordInvocation("PutRolePolicyRequest", []interface{}{arg1})
 	fake.putRolePolicyRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.PutRolePolicyRequestStub != nil {
+		return fake.PutRolePolicyRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.putRolePolicyRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -30445,16 +30074,15 @@ func (fake *FakeIAMAPI) PutRolePolicyWithContext(arg1 context.Context, arg2 *iam
 		arg2 *iam.PutRolePolicyInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.PutRolePolicyWithContextStub
-	fakeReturns := fake.putRolePolicyWithContextReturns
 	fake.recordInvocation("PutRolePolicyWithContext", []interface{}{arg1, arg2, arg3})
 	fake.putRolePolicyWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.PutRolePolicyWithContextStub != nil {
+		return fake.PutRolePolicyWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.putRolePolicyWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -30509,16 +30137,15 @@ func (fake *FakeIAMAPI) PutUserPermissionsBoundary(arg1 *iam.PutUserPermissionsB
 	fake.putUserPermissionsBoundaryArgsForCall = append(fake.putUserPermissionsBoundaryArgsForCall, struct {
 		arg1 *iam.PutUserPermissionsBoundaryInput
 	}{arg1})
-	stub := fake.PutUserPermissionsBoundaryStub
-	fakeReturns := fake.putUserPermissionsBoundaryReturns
 	fake.recordInvocation("PutUserPermissionsBoundary", []interface{}{arg1})
 	fake.putUserPermissionsBoundaryMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.PutUserPermissionsBoundaryStub != nil {
+		return fake.PutUserPermissionsBoundaryStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.putUserPermissionsBoundaryReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -30573,16 +30200,15 @@ func (fake *FakeIAMAPI) PutUserPermissionsBoundaryRequest(arg1 *iam.PutUserPermi
 	fake.putUserPermissionsBoundaryRequestArgsForCall = append(fake.putUserPermissionsBoundaryRequestArgsForCall, struct {
 		arg1 *iam.PutUserPermissionsBoundaryInput
 	}{arg1})
-	stub := fake.PutUserPermissionsBoundaryRequestStub
-	fakeReturns := fake.putUserPermissionsBoundaryRequestReturns
 	fake.recordInvocation("PutUserPermissionsBoundaryRequest", []interface{}{arg1})
 	fake.putUserPermissionsBoundaryRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.PutUserPermissionsBoundaryRequestStub != nil {
+		return fake.PutUserPermissionsBoundaryRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.putUserPermissionsBoundaryRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -30639,16 +30265,15 @@ func (fake *FakeIAMAPI) PutUserPermissionsBoundaryWithContext(arg1 context.Conte
 		arg2 *iam.PutUserPermissionsBoundaryInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.PutUserPermissionsBoundaryWithContextStub
-	fakeReturns := fake.putUserPermissionsBoundaryWithContextReturns
 	fake.recordInvocation("PutUserPermissionsBoundaryWithContext", []interface{}{arg1, arg2, arg3})
 	fake.putUserPermissionsBoundaryWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.PutUserPermissionsBoundaryWithContextStub != nil {
+		return fake.PutUserPermissionsBoundaryWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.putUserPermissionsBoundaryWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -30703,16 +30328,15 @@ func (fake *FakeIAMAPI) PutUserPolicy(arg1 *iam.PutUserPolicyInput) (*iam.PutUse
 	fake.putUserPolicyArgsForCall = append(fake.putUserPolicyArgsForCall, struct {
 		arg1 *iam.PutUserPolicyInput
 	}{arg1})
-	stub := fake.PutUserPolicyStub
-	fakeReturns := fake.putUserPolicyReturns
 	fake.recordInvocation("PutUserPolicy", []interface{}{arg1})
 	fake.putUserPolicyMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.PutUserPolicyStub != nil {
+		return fake.PutUserPolicyStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.putUserPolicyReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -30767,16 +30391,15 @@ func (fake *FakeIAMAPI) PutUserPolicyRequest(arg1 *iam.PutUserPolicyInput) (*req
 	fake.putUserPolicyRequestArgsForCall = append(fake.putUserPolicyRequestArgsForCall, struct {
 		arg1 *iam.PutUserPolicyInput
 	}{arg1})
-	stub := fake.PutUserPolicyRequestStub
-	fakeReturns := fake.putUserPolicyRequestReturns
 	fake.recordInvocation("PutUserPolicyRequest", []interface{}{arg1})
 	fake.putUserPolicyRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.PutUserPolicyRequestStub != nil {
+		return fake.PutUserPolicyRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.putUserPolicyRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -30833,16 +30456,15 @@ func (fake *FakeIAMAPI) PutUserPolicyWithContext(arg1 context.Context, arg2 *iam
 		arg2 *iam.PutUserPolicyInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.PutUserPolicyWithContextStub
-	fakeReturns := fake.putUserPolicyWithContextReturns
 	fake.recordInvocation("PutUserPolicyWithContext", []interface{}{arg1, arg2, arg3})
 	fake.putUserPolicyWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.PutUserPolicyWithContextStub != nil {
+		return fake.PutUserPolicyWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.putUserPolicyWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -30897,16 +30519,15 @@ func (fake *FakeIAMAPI) RemoveClientIDFromOpenIDConnectProvider(arg1 *iam.Remove
 	fake.removeClientIDFromOpenIDConnectProviderArgsForCall = append(fake.removeClientIDFromOpenIDConnectProviderArgsForCall, struct {
 		arg1 *iam.RemoveClientIDFromOpenIDConnectProviderInput
 	}{arg1})
-	stub := fake.RemoveClientIDFromOpenIDConnectProviderStub
-	fakeReturns := fake.removeClientIDFromOpenIDConnectProviderReturns
 	fake.recordInvocation("RemoveClientIDFromOpenIDConnectProvider", []interface{}{arg1})
 	fake.removeClientIDFromOpenIDConnectProviderMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.RemoveClientIDFromOpenIDConnectProviderStub != nil {
+		return fake.RemoveClientIDFromOpenIDConnectProviderStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.removeClientIDFromOpenIDConnectProviderReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -30961,16 +30582,15 @@ func (fake *FakeIAMAPI) RemoveClientIDFromOpenIDConnectProviderRequest(arg1 *iam
 	fake.removeClientIDFromOpenIDConnectProviderRequestArgsForCall = append(fake.removeClientIDFromOpenIDConnectProviderRequestArgsForCall, struct {
 		arg1 *iam.RemoveClientIDFromOpenIDConnectProviderInput
 	}{arg1})
-	stub := fake.RemoveClientIDFromOpenIDConnectProviderRequestStub
-	fakeReturns := fake.removeClientIDFromOpenIDConnectProviderRequestReturns
 	fake.recordInvocation("RemoveClientIDFromOpenIDConnectProviderRequest", []interface{}{arg1})
 	fake.removeClientIDFromOpenIDConnectProviderRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.RemoveClientIDFromOpenIDConnectProviderRequestStub != nil {
+		return fake.RemoveClientIDFromOpenIDConnectProviderRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.removeClientIDFromOpenIDConnectProviderRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -31027,16 +30647,15 @@ func (fake *FakeIAMAPI) RemoveClientIDFromOpenIDConnectProviderWithContext(arg1 
 		arg2 *iam.RemoveClientIDFromOpenIDConnectProviderInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.RemoveClientIDFromOpenIDConnectProviderWithContextStub
-	fakeReturns := fake.removeClientIDFromOpenIDConnectProviderWithContextReturns
 	fake.recordInvocation("RemoveClientIDFromOpenIDConnectProviderWithContext", []interface{}{arg1, arg2, arg3})
 	fake.removeClientIDFromOpenIDConnectProviderWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.RemoveClientIDFromOpenIDConnectProviderWithContextStub != nil {
+		return fake.RemoveClientIDFromOpenIDConnectProviderWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.removeClientIDFromOpenIDConnectProviderWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -31091,16 +30710,15 @@ func (fake *FakeIAMAPI) RemoveRoleFromInstanceProfile(arg1 *iam.RemoveRoleFromIn
 	fake.removeRoleFromInstanceProfileArgsForCall = append(fake.removeRoleFromInstanceProfileArgsForCall, struct {
 		arg1 *iam.RemoveRoleFromInstanceProfileInput
 	}{arg1})
-	stub := fake.RemoveRoleFromInstanceProfileStub
-	fakeReturns := fake.removeRoleFromInstanceProfileReturns
 	fake.recordInvocation("RemoveRoleFromInstanceProfile", []interface{}{arg1})
 	fake.removeRoleFromInstanceProfileMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.RemoveRoleFromInstanceProfileStub != nil {
+		return fake.RemoveRoleFromInstanceProfileStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.removeRoleFromInstanceProfileReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -31155,16 +30773,15 @@ func (fake *FakeIAMAPI) RemoveRoleFromInstanceProfileRequest(arg1 *iam.RemoveRol
 	fake.removeRoleFromInstanceProfileRequestArgsForCall = append(fake.removeRoleFromInstanceProfileRequestArgsForCall, struct {
 		arg1 *iam.RemoveRoleFromInstanceProfileInput
 	}{arg1})
-	stub := fake.RemoveRoleFromInstanceProfileRequestStub
-	fakeReturns := fake.removeRoleFromInstanceProfileRequestReturns
 	fake.recordInvocation("RemoveRoleFromInstanceProfileRequest", []interface{}{arg1})
 	fake.removeRoleFromInstanceProfileRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.RemoveRoleFromInstanceProfileRequestStub != nil {
+		return fake.RemoveRoleFromInstanceProfileRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.removeRoleFromInstanceProfileRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -31221,16 +30838,15 @@ func (fake *FakeIAMAPI) RemoveRoleFromInstanceProfileWithContext(arg1 context.Co
 		arg2 *iam.RemoveRoleFromInstanceProfileInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.RemoveRoleFromInstanceProfileWithContextStub
-	fakeReturns := fake.removeRoleFromInstanceProfileWithContextReturns
 	fake.recordInvocation("RemoveRoleFromInstanceProfileWithContext", []interface{}{arg1, arg2, arg3})
 	fake.removeRoleFromInstanceProfileWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.RemoveRoleFromInstanceProfileWithContextStub != nil {
+		return fake.RemoveRoleFromInstanceProfileWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.removeRoleFromInstanceProfileWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -31285,16 +30901,15 @@ func (fake *FakeIAMAPI) RemoveUserFromGroup(arg1 *iam.RemoveUserFromGroupInput) 
 	fake.removeUserFromGroupArgsForCall = append(fake.removeUserFromGroupArgsForCall, struct {
 		arg1 *iam.RemoveUserFromGroupInput
 	}{arg1})
-	stub := fake.RemoveUserFromGroupStub
-	fakeReturns := fake.removeUserFromGroupReturns
 	fake.recordInvocation("RemoveUserFromGroup", []interface{}{arg1})
 	fake.removeUserFromGroupMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.RemoveUserFromGroupStub != nil {
+		return fake.RemoveUserFromGroupStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.removeUserFromGroupReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -31349,16 +30964,15 @@ func (fake *FakeIAMAPI) RemoveUserFromGroupRequest(arg1 *iam.RemoveUserFromGroup
 	fake.removeUserFromGroupRequestArgsForCall = append(fake.removeUserFromGroupRequestArgsForCall, struct {
 		arg1 *iam.RemoveUserFromGroupInput
 	}{arg1})
-	stub := fake.RemoveUserFromGroupRequestStub
-	fakeReturns := fake.removeUserFromGroupRequestReturns
 	fake.recordInvocation("RemoveUserFromGroupRequest", []interface{}{arg1})
 	fake.removeUserFromGroupRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.RemoveUserFromGroupRequestStub != nil {
+		return fake.RemoveUserFromGroupRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.removeUserFromGroupRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -31415,16 +31029,15 @@ func (fake *FakeIAMAPI) RemoveUserFromGroupWithContext(arg1 context.Context, arg
 		arg2 *iam.RemoveUserFromGroupInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.RemoveUserFromGroupWithContextStub
-	fakeReturns := fake.removeUserFromGroupWithContextReturns
 	fake.recordInvocation("RemoveUserFromGroupWithContext", []interface{}{arg1, arg2, arg3})
 	fake.removeUserFromGroupWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.RemoveUserFromGroupWithContextStub != nil {
+		return fake.RemoveUserFromGroupWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.removeUserFromGroupWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -31479,16 +31092,15 @@ func (fake *FakeIAMAPI) ResetServiceSpecificCredential(arg1 *iam.ResetServiceSpe
 	fake.resetServiceSpecificCredentialArgsForCall = append(fake.resetServiceSpecificCredentialArgsForCall, struct {
 		arg1 *iam.ResetServiceSpecificCredentialInput
 	}{arg1})
-	stub := fake.ResetServiceSpecificCredentialStub
-	fakeReturns := fake.resetServiceSpecificCredentialReturns
 	fake.recordInvocation("ResetServiceSpecificCredential", []interface{}{arg1})
 	fake.resetServiceSpecificCredentialMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ResetServiceSpecificCredentialStub != nil {
+		return fake.ResetServiceSpecificCredentialStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.resetServiceSpecificCredentialReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -31543,16 +31155,15 @@ func (fake *FakeIAMAPI) ResetServiceSpecificCredentialRequest(arg1 *iam.ResetSer
 	fake.resetServiceSpecificCredentialRequestArgsForCall = append(fake.resetServiceSpecificCredentialRequestArgsForCall, struct {
 		arg1 *iam.ResetServiceSpecificCredentialInput
 	}{arg1})
-	stub := fake.ResetServiceSpecificCredentialRequestStub
-	fakeReturns := fake.resetServiceSpecificCredentialRequestReturns
 	fake.recordInvocation("ResetServiceSpecificCredentialRequest", []interface{}{arg1})
 	fake.resetServiceSpecificCredentialRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ResetServiceSpecificCredentialRequestStub != nil {
+		return fake.ResetServiceSpecificCredentialRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.resetServiceSpecificCredentialRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -31609,16 +31220,15 @@ func (fake *FakeIAMAPI) ResetServiceSpecificCredentialWithContext(arg1 context.C
 		arg2 *iam.ResetServiceSpecificCredentialInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.ResetServiceSpecificCredentialWithContextStub
-	fakeReturns := fake.resetServiceSpecificCredentialWithContextReturns
 	fake.recordInvocation("ResetServiceSpecificCredentialWithContext", []interface{}{arg1, arg2, arg3})
 	fake.resetServiceSpecificCredentialWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.ResetServiceSpecificCredentialWithContextStub != nil {
+		return fake.ResetServiceSpecificCredentialWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.resetServiceSpecificCredentialWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -31673,16 +31283,15 @@ func (fake *FakeIAMAPI) ResyncMFADevice(arg1 *iam.ResyncMFADeviceInput) (*iam.Re
 	fake.resyncMFADeviceArgsForCall = append(fake.resyncMFADeviceArgsForCall, struct {
 		arg1 *iam.ResyncMFADeviceInput
 	}{arg1})
-	stub := fake.ResyncMFADeviceStub
-	fakeReturns := fake.resyncMFADeviceReturns
 	fake.recordInvocation("ResyncMFADevice", []interface{}{arg1})
 	fake.resyncMFADeviceMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ResyncMFADeviceStub != nil {
+		return fake.ResyncMFADeviceStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.resyncMFADeviceReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -31737,16 +31346,15 @@ func (fake *FakeIAMAPI) ResyncMFADeviceRequest(arg1 *iam.ResyncMFADeviceInput) (
 	fake.resyncMFADeviceRequestArgsForCall = append(fake.resyncMFADeviceRequestArgsForCall, struct {
 		arg1 *iam.ResyncMFADeviceInput
 	}{arg1})
-	stub := fake.ResyncMFADeviceRequestStub
-	fakeReturns := fake.resyncMFADeviceRequestReturns
 	fake.recordInvocation("ResyncMFADeviceRequest", []interface{}{arg1})
 	fake.resyncMFADeviceRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.ResyncMFADeviceRequestStub != nil {
+		return fake.ResyncMFADeviceRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.resyncMFADeviceRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -31803,16 +31411,15 @@ func (fake *FakeIAMAPI) ResyncMFADeviceWithContext(arg1 context.Context, arg2 *i
 		arg2 *iam.ResyncMFADeviceInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.ResyncMFADeviceWithContextStub
-	fakeReturns := fake.resyncMFADeviceWithContextReturns
 	fake.recordInvocation("ResyncMFADeviceWithContext", []interface{}{arg1, arg2, arg3})
 	fake.resyncMFADeviceWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.ResyncMFADeviceWithContextStub != nil {
+		return fake.ResyncMFADeviceWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.resyncMFADeviceWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -31867,16 +31474,15 @@ func (fake *FakeIAMAPI) SetDefaultPolicyVersion(arg1 *iam.SetDefaultPolicyVersio
 	fake.setDefaultPolicyVersionArgsForCall = append(fake.setDefaultPolicyVersionArgsForCall, struct {
 		arg1 *iam.SetDefaultPolicyVersionInput
 	}{arg1})
-	stub := fake.SetDefaultPolicyVersionStub
-	fakeReturns := fake.setDefaultPolicyVersionReturns
 	fake.recordInvocation("SetDefaultPolicyVersion", []interface{}{arg1})
 	fake.setDefaultPolicyVersionMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.SetDefaultPolicyVersionStub != nil {
+		return fake.SetDefaultPolicyVersionStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.setDefaultPolicyVersionReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -31931,16 +31537,15 @@ func (fake *FakeIAMAPI) SetDefaultPolicyVersionRequest(arg1 *iam.SetDefaultPolic
 	fake.setDefaultPolicyVersionRequestArgsForCall = append(fake.setDefaultPolicyVersionRequestArgsForCall, struct {
 		arg1 *iam.SetDefaultPolicyVersionInput
 	}{arg1})
-	stub := fake.SetDefaultPolicyVersionRequestStub
-	fakeReturns := fake.setDefaultPolicyVersionRequestReturns
 	fake.recordInvocation("SetDefaultPolicyVersionRequest", []interface{}{arg1})
 	fake.setDefaultPolicyVersionRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.SetDefaultPolicyVersionRequestStub != nil {
+		return fake.SetDefaultPolicyVersionRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.setDefaultPolicyVersionRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -31997,16 +31602,15 @@ func (fake *FakeIAMAPI) SetDefaultPolicyVersionWithContext(arg1 context.Context,
 		arg2 *iam.SetDefaultPolicyVersionInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.SetDefaultPolicyVersionWithContextStub
-	fakeReturns := fake.setDefaultPolicyVersionWithContextReturns
 	fake.recordInvocation("SetDefaultPolicyVersionWithContext", []interface{}{arg1, arg2, arg3})
 	fake.setDefaultPolicyVersionWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.SetDefaultPolicyVersionWithContextStub != nil {
+		return fake.SetDefaultPolicyVersionWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.setDefaultPolicyVersionWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -32061,16 +31665,15 @@ func (fake *FakeIAMAPI) SetSecurityTokenServicePreferences(arg1 *iam.SetSecurity
 	fake.setSecurityTokenServicePreferencesArgsForCall = append(fake.setSecurityTokenServicePreferencesArgsForCall, struct {
 		arg1 *iam.SetSecurityTokenServicePreferencesInput
 	}{arg1})
-	stub := fake.SetSecurityTokenServicePreferencesStub
-	fakeReturns := fake.setSecurityTokenServicePreferencesReturns
 	fake.recordInvocation("SetSecurityTokenServicePreferences", []interface{}{arg1})
 	fake.setSecurityTokenServicePreferencesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.SetSecurityTokenServicePreferencesStub != nil {
+		return fake.SetSecurityTokenServicePreferencesStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.setSecurityTokenServicePreferencesReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -32125,16 +31728,15 @@ func (fake *FakeIAMAPI) SetSecurityTokenServicePreferencesRequest(arg1 *iam.SetS
 	fake.setSecurityTokenServicePreferencesRequestArgsForCall = append(fake.setSecurityTokenServicePreferencesRequestArgsForCall, struct {
 		arg1 *iam.SetSecurityTokenServicePreferencesInput
 	}{arg1})
-	stub := fake.SetSecurityTokenServicePreferencesRequestStub
-	fakeReturns := fake.setSecurityTokenServicePreferencesRequestReturns
 	fake.recordInvocation("SetSecurityTokenServicePreferencesRequest", []interface{}{arg1})
 	fake.setSecurityTokenServicePreferencesRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.SetSecurityTokenServicePreferencesRequestStub != nil {
+		return fake.SetSecurityTokenServicePreferencesRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.setSecurityTokenServicePreferencesRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -32191,16 +31793,15 @@ func (fake *FakeIAMAPI) SetSecurityTokenServicePreferencesWithContext(arg1 conte
 		arg2 *iam.SetSecurityTokenServicePreferencesInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.SetSecurityTokenServicePreferencesWithContextStub
-	fakeReturns := fake.setSecurityTokenServicePreferencesWithContextReturns
 	fake.recordInvocation("SetSecurityTokenServicePreferencesWithContext", []interface{}{arg1, arg2, arg3})
 	fake.setSecurityTokenServicePreferencesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.SetSecurityTokenServicePreferencesWithContextStub != nil {
+		return fake.SetSecurityTokenServicePreferencesWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.setSecurityTokenServicePreferencesWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -32255,16 +31856,15 @@ func (fake *FakeIAMAPI) SimulateCustomPolicy(arg1 *iam.SimulateCustomPolicyInput
 	fake.simulateCustomPolicyArgsForCall = append(fake.simulateCustomPolicyArgsForCall, struct {
 		arg1 *iam.SimulateCustomPolicyInput
 	}{arg1})
-	stub := fake.SimulateCustomPolicyStub
-	fakeReturns := fake.simulateCustomPolicyReturns
 	fake.recordInvocation("SimulateCustomPolicy", []interface{}{arg1})
 	fake.simulateCustomPolicyMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.SimulateCustomPolicyStub != nil {
+		return fake.SimulateCustomPolicyStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.simulateCustomPolicyReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -32320,16 +31920,15 @@ func (fake *FakeIAMAPI) SimulateCustomPolicyPages(arg1 *iam.SimulateCustomPolicy
 		arg1 *iam.SimulateCustomPolicyInput
 		arg2 func(*iam.SimulatePolicyResponse, bool) bool
 	}{arg1, arg2})
-	stub := fake.SimulateCustomPolicyPagesStub
-	fakeReturns := fake.simulateCustomPolicyPagesReturns
 	fake.recordInvocation("SimulateCustomPolicyPages", []interface{}{arg1, arg2})
 	fake.simulateCustomPolicyPagesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2)
+	if fake.SimulateCustomPolicyPagesStub != nil {
+		return fake.SimulateCustomPolicyPagesStub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.simulateCustomPolicyPagesReturns
 	return fakeReturns.result1
 }
 
@@ -32384,16 +31983,15 @@ func (fake *FakeIAMAPI) SimulateCustomPolicyPagesWithContext(arg1 context.Contex
 		arg3 func(*iam.SimulatePolicyResponse, bool) bool
 		arg4 []request.Option
 	}{arg1, arg2, arg3, arg4})
-	stub := fake.SimulateCustomPolicyPagesWithContextStub
-	fakeReturns := fake.simulateCustomPolicyPagesWithContextReturns
 	fake.recordInvocation("SimulateCustomPolicyPagesWithContext", []interface{}{arg1, arg2, arg3, arg4})
 	fake.simulateCustomPolicyPagesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3, arg4...)
+	if fake.SimulateCustomPolicyPagesWithContextStub != nil {
+		return fake.SimulateCustomPolicyPagesWithContextStub(arg1, arg2, arg3, arg4...)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.simulateCustomPolicyPagesWithContextReturns
 	return fakeReturns.result1
 }
 
@@ -32445,16 +32043,15 @@ func (fake *FakeIAMAPI) SimulateCustomPolicyRequest(arg1 *iam.SimulateCustomPoli
 	fake.simulateCustomPolicyRequestArgsForCall = append(fake.simulateCustomPolicyRequestArgsForCall, struct {
 		arg1 *iam.SimulateCustomPolicyInput
 	}{arg1})
-	stub := fake.SimulateCustomPolicyRequestStub
-	fakeReturns := fake.simulateCustomPolicyRequestReturns
 	fake.recordInvocation("SimulateCustomPolicyRequest", []interface{}{arg1})
 	fake.simulateCustomPolicyRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.SimulateCustomPolicyRequestStub != nil {
+		return fake.SimulateCustomPolicyRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.simulateCustomPolicyRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -32511,16 +32108,15 @@ func (fake *FakeIAMAPI) SimulateCustomPolicyWithContext(arg1 context.Context, ar
 		arg2 *iam.SimulateCustomPolicyInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.SimulateCustomPolicyWithContextStub
-	fakeReturns := fake.simulateCustomPolicyWithContextReturns
 	fake.recordInvocation("SimulateCustomPolicyWithContext", []interface{}{arg1, arg2, arg3})
 	fake.simulateCustomPolicyWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.SimulateCustomPolicyWithContextStub != nil {
+		return fake.SimulateCustomPolicyWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.simulateCustomPolicyWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -32575,16 +32171,15 @@ func (fake *FakeIAMAPI) SimulatePrincipalPolicy(arg1 *iam.SimulatePrincipalPolic
 	fake.simulatePrincipalPolicyArgsForCall = append(fake.simulatePrincipalPolicyArgsForCall, struct {
 		arg1 *iam.SimulatePrincipalPolicyInput
 	}{arg1})
-	stub := fake.SimulatePrincipalPolicyStub
-	fakeReturns := fake.simulatePrincipalPolicyReturns
 	fake.recordInvocation("SimulatePrincipalPolicy", []interface{}{arg1})
 	fake.simulatePrincipalPolicyMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.SimulatePrincipalPolicyStub != nil {
+		return fake.SimulatePrincipalPolicyStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.simulatePrincipalPolicyReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -32640,16 +32235,15 @@ func (fake *FakeIAMAPI) SimulatePrincipalPolicyPages(arg1 *iam.SimulatePrincipal
 		arg1 *iam.SimulatePrincipalPolicyInput
 		arg2 func(*iam.SimulatePolicyResponse, bool) bool
 	}{arg1, arg2})
-	stub := fake.SimulatePrincipalPolicyPagesStub
-	fakeReturns := fake.simulatePrincipalPolicyPagesReturns
 	fake.recordInvocation("SimulatePrincipalPolicyPages", []interface{}{arg1, arg2})
 	fake.simulatePrincipalPolicyPagesMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2)
+	if fake.SimulatePrincipalPolicyPagesStub != nil {
+		return fake.SimulatePrincipalPolicyPagesStub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.simulatePrincipalPolicyPagesReturns
 	return fakeReturns.result1
 }
 
@@ -32704,16 +32298,15 @@ func (fake *FakeIAMAPI) SimulatePrincipalPolicyPagesWithContext(arg1 context.Con
 		arg3 func(*iam.SimulatePolicyResponse, bool) bool
 		arg4 []request.Option
 	}{arg1, arg2, arg3, arg4})
-	stub := fake.SimulatePrincipalPolicyPagesWithContextStub
-	fakeReturns := fake.simulatePrincipalPolicyPagesWithContextReturns
 	fake.recordInvocation("SimulatePrincipalPolicyPagesWithContext", []interface{}{arg1, arg2, arg3, arg4})
 	fake.simulatePrincipalPolicyPagesWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3, arg4...)
+	if fake.SimulatePrincipalPolicyPagesWithContextStub != nil {
+		return fake.SimulatePrincipalPolicyPagesWithContextStub(arg1, arg2, arg3, arg4...)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.simulatePrincipalPolicyPagesWithContextReturns
 	return fakeReturns.result1
 }
 
@@ -32765,16 +32358,15 @@ func (fake *FakeIAMAPI) SimulatePrincipalPolicyRequest(arg1 *iam.SimulatePrincip
 	fake.simulatePrincipalPolicyRequestArgsForCall = append(fake.simulatePrincipalPolicyRequestArgsForCall, struct {
 		arg1 *iam.SimulatePrincipalPolicyInput
 	}{arg1})
-	stub := fake.SimulatePrincipalPolicyRequestStub
-	fakeReturns := fake.simulatePrincipalPolicyRequestReturns
 	fake.recordInvocation("SimulatePrincipalPolicyRequest", []interface{}{arg1})
 	fake.simulatePrincipalPolicyRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.SimulatePrincipalPolicyRequestStub != nil {
+		return fake.SimulatePrincipalPolicyRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.simulatePrincipalPolicyRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -32831,16 +32423,15 @@ func (fake *FakeIAMAPI) SimulatePrincipalPolicyWithContext(arg1 context.Context,
 		arg2 *iam.SimulatePrincipalPolicyInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.SimulatePrincipalPolicyWithContextStub
-	fakeReturns := fake.simulatePrincipalPolicyWithContextReturns
 	fake.recordInvocation("SimulatePrincipalPolicyWithContext", []interface{}{arg1, arg2, arg3})
 	fake.simulatePrincipalPolicyWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.SimulatePrincipalPolicyWithContextStub != nil {
+		return fake.SimulatePrincipalPolicyWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.simulatePrincipalPolicyWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -32895,16 +32486,15 @@ func (fake *FakeIAMAPI) TagRole(arg1 *iam.TagRoleInput) (*iam.TagRoleOutput, err
 	fake.tagRoleArgsForCall = append(fake.tagRoleArgsForCall, struct {
 		arg1 *iam.TagRoleInput
 	}{arg1})
-	stub := fake.TagRoleStub
-	fakeReturns := fake.tagRoleReturns
 	fake.recordInvocation("TagRole", []interface{}{arg1})
 	fake.tagRoleMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.TagRoleStub != nil {
+		return fake.TagRoleStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.tagRoleReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -32959,16 +32549,15 @@ func (fake *FakeIAMAPI) TagRoleRequest(arg1 *iam.TagRoleInput) (*request.Request
 	fake.tagRoleRequestArgsForCall = append(fake.tagRoleRequestArgsForCall, struct {
 		arg1 *iam.TagRoleInput
 	}{arg1})
-	stub := fake.TagRoleRequestStub
-	fakeReturns := fake.tagRoleRequestReturns
 	fake.recordInvocation("TagRoleRequest", []interface{}{arg1})
 	fake.tagRoleRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.TagRoleRequestStub != nil {
+		return fake.TagRoleRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.tagRoleRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -33025,16 +32614,15 @@ func (fake *FakeIAMAPI) TagRoleWithContext(arg1 context.Context, arg2 *iam.TagRo
 		arg2 *iam.TagRoleInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.TagRoleWithContextStub
-	fakeReturns := fake.tagRoleWithContextReturns
 	fake.recordInvocation("TagRoleWithContext", []interface{}{arg1, arg2, arg3})
 	fake.tagRoleWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.TagRoleWithContextStub != nil {
+		return fake.TagRoleWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.tagRoleWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -33089,16 +32677,15 @@ func (fake *FakeIAMAPI) TagUser(arg1 *iam.TagUserInput) (*iam.TagUserOutput, err
 	fake.tagUserArgsForCall = append(fake.tagUserArgsForCall, struct {
 		arg1 *iam.TagUserInput
 	}{arg1})
-	stub := fake.TagUserStub
-	fakeReturns := fake.tagUserReturns
 	fake.recordInvocation("TagUser", []interface{}{arg1})
 	fake.tagUserMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.TagUserStub != nil {
+		return fake.TagUserStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.tagUserReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -33153,16 +32740,15 @@ func (fake *FakeIAMAPI) TagUserRequest(arg1 *iam.TagUserInput) (*request.Request
 	fake.tagUserRequestArgsForCall = append(fake.tagUserRequestArgsForCall, struct {
 		arg1 *iam.TagUserInput
 	}{arg1})
-	stub := fake.TagUserRequestStub
-	fakeReturns := fake.tagUserRequestReturns
 	fake.recordInvocation("TagUserRequest", []interface{}{arg1})
 	fake.tagUserRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.TagUserRequestStub != nil {
+		return fake.TagUserRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.tagUserRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -33219,16 +32805,15 @@ func (fake *FakeIAMAPI) TagUserWithContext(arg1 context.Context, arg2 *iam.TagUs
 		arg2 *iam.TagUserInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.TagUserWithContextStub
-	fakeReturns := fake.tagUserWithContextReturns
 	fake.recordInvocation("TagUserWithContext", []interface{}{arg1, arg2, arg3})
 	fake.tagUserWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.TagUserWithContextStub != nil {
+		return fake.TagUserWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.tagUserWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -33283,16 +32868,15 @@ func (fake *FakeIAMAPI) UntagRole(arg1 *iam.UntagRoleInput) (*iam.UntagRoleOutpu
 	fake.untagRoleArgsForCall = append(fake.untagRoleArgsForCall, struct {
 		arg1 *iam.UntagRoleInput
 	}{arg1})
-	stub := fake.UntagRoleStub
-	fakeReturns := fake.untagRoleReturns
 	fake.recordInvocation("UntagRole", []interface{}{arg1})
 	fake.untagRoleMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UntagRoleStub != nil {
+		return fake.UntagRoleStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.untagRoleReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -33347,16 +32931,15 @@ func (fake *FakeIAMAPI) UntagRoleRequest(arg1 *iam.UntagRoleInput) (*request.Req
 	fake.untagRoleRequestArgsForCall = append(fake.untagRoleRequestArgsForCall, struct {
 		arg1 *iam.UntagRoleInput
 	}{arg1})
-	stub := fake.UntagRoleRequestStub
-	fakeReturns := fake.untagRoleRequestReturns
 	fake.recordInvocation("UntagRoleRequest", []interface{}{arg1})
 	fake.untagRoleRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UntagRoleRequestStub != nil {
+		return fake.UntagRoleRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.untagRoleRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -33413,16 +32996,15 @@ func (fake *FakeIAMAPI) UntagRoleWithContext(arg1 context.Context, arg2 *iam.Unt
 		arg2 *iam.UntagRoleInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.UntagRoleWithContextStub
-	fakeReturns := fake.untagRoleWithContextReturns
 	fake.recordInvocation("UntagRoleWithContext", []interface{}{arg1, arg2, arg3})
 	fake.untagRoleWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.UntagRoleWithContextStub != nil {
+		return fake.UntagRoleWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.untagRoleWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -33477,16 +33059,15 @@ func (fake *FakeIAMAPI) UntagUser(arg1 *iam.UntagUserInput) (*iam.UntagUserOutpu
 	fake.untagUserArgsForCall = append(fake.untagUserArgsForCall, struct {
 		arg1 *iam.UntagUserInput
 	}{arg1})
-	stub := fake.UntagUserStub
-	fakeReturns := fake.untagUserReturns
 	fake.recordInvocation("UntagUser", []interface{}{arg1})
 	fake.untagUserMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UntagUserStub != nil {
+		return fake.UntagUserStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.untagUserReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -33541,16 +33122,15 @@ func (fake *FakeIAMAPI) UntagUserRequest(arg1 *iam.UntagUserInput) (*request.Req
 	fake.untagUserRequestArgsForCall = append(fake.untagUserRequestArgsForCall, struct {
 		arg1 *iam.UntagUserInput
 	}{arg1})
-	stub := fake.UntagUserRequestStub
-	fakeReturns := fake.untagUserRequestReturns
 	fake.recordInvocation("UntagUserRequest", []interface{}{arg1})
 	fake.untagUserRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UntagUserRequestStub != nil {
+		return fake.UntagUserRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.untagUserRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -33607,16 +33187,15 @@ func (fake *FakeIAMAPI) UntagUserWithContext(arg1 context.Context, arg2 *iam.Unt
 		arg2 *iam.UntagUserInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.UntagUserWithContextStub
-	fakeReturns := fake.untagUserWithContextReturns
 	fake.recordInvocation("UntagUserWithContext", []interface{}{arg1, arg2, arg3})
 	fake.untagUserWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.UntagUserWithContextStub != nil {
+		return fake.UntagUserWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.untagUserWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -33671,16 +33250,15 @@ func (fake *FakeIAMAPI) UpdateAccessKey(arg1 *iam.UpdateAccessKeyInput) (*iam.Up
 	fake.updateAccessKeyArgsForCall = append(fake.updateAccessKeyArgsForCall, struct {
 		arg1 *iam.UpdateAccessKeyInput
 	}{arg1})
-	stub := fake.UpdateAccessKeyStub
-	fakeReturns := fake.updateAccessKeyReturns
 	fake.recordInvocation("UpdateAccessKey", []interface{}{arg1})
 	fake.updateAccessKeyMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UpdateAccessKeyStub != nil {
+		return fake.UpdateAccessKeyStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateAccessKeyReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -33735,16 +33313,15 @@ func (fake *FakeIAMAPI) UpdateAccessKeyRequest(arg1 *iam.UpdateAccessKeyInput) (
 	fake.updateAccessKeyRequestArgsForCall = append(fake.updateAccessKeyRequestArgsForCall, struct {
 		arg1 *iam.UpdateAccessKeyInput
 	}{arg1})
-	stub := fake.UpdateAccessKeyRequestStub
-	fakeReturns := fake.updateAccessKeyRequestReturns
 	fake.recordInvocation("UpdateAccessKeyRequest", []interface{}{arg1})
 	fake.updateAccessKeyRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UpdateAccessKeyRequestStub != nil {
+		return fake.UpdateAccessKeyRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateAccessKeyRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -33801,16 +33378,15 @@ func (fake *FakeIAMAPI) UpdateAccessKeyWithContext(arg1 context.Context, arg2 *i
 		arg2 *iam.UpdateAccessKeyInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.UpdateAccessKeyWithContextStub
-	fakeReturns := fake.updateAccessKeyWithContextReturns
 	fake.recordInvocation("UpdateAccessKeyWithContext", []interface{}{arg1, arg2, arg3})
 	fake.updateAccessKeyWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.UpdateAccessKeyWithContextStub != nil {
+		return fake.UpdateAccessKeyWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateAccessKeyWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -33865,16 +33441,15 @@ func (fake *FakeIAMAPI) UpdateAccountPasswordPolicy(arg1 *iam.UpdateAccountPassw
 	fake.updateAccountPasswordPolicyArgsForCall = append(fake.updateAccountPasswordPolicyArgsForCall, struct {
 		arg1 *iam.UpdateAccountPasswordPolicyInput
 	}{arg1})
-	stub := fake.UpdateAccountPasswordPolicyStub
-	fakeReturns := fake.updateAccountPasswordPolicyReturns
 	fake.recordInvocation("UpdateAccountPasswordPolicy", []interface{}{arg1})
 	fake.updateAccountPasswordPolicyMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UpdateAccountPasswordPolicyStub != nil {
+		return fake.UpdateAccountPasswordPolicyStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateAccountPasswordPolicyReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -33929,16 +33504,15 @@ func (fake *FakeIAMAPI) UpdateAccountPasswordPolicyRequest(arg1 *iam.UpdateAccou
 	fake.updateAccountPasswordPolicyRequestArgsForCall = append(fake.updateAccountPasswordPolicyRequestArgsForCall, struct {
 		arg1 *iam.UpdateAccountPasswordPolicyInput
 	}{arg1})
-	stub := fake.UpdateAccountPasswordPolicyRequestStub
-	fakeReturns := fake.updateAccountPasswordPolicyRequestReturns
 	fake.recordInvocation("UpdateAccountPasswordPolicyRequest", []interface{}{arg1})
 	fake.updateAccountPasswordPolicyRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UpdateAccountPasswordPolicyRequestStub != nil {
+		return fake.UpdateAccountPasswordPolicyRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateAccountPasswordPolicyRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -33995,16 +33569,15 @@ func (fake *FakeIAMAPI) UpdateAccountPasswordPolicyWithContext(arg1 context.Cont
 		arg2 *iam.UpdateAccountPasswordPolicyInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.UpdateAccountPasswordPolicyWithContextStub
-	fakeReturns := fake.updateAccountPasswordPolicyWithContextReturns
 	fake.recordInvocation("UpdateAccountPasswordPolicyWithContext", []interface{}{arg1, arg2, arg3})
 	fake.updateAccountPasswordPolicyWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.UpdateAccountPasswordPolicyWithContextStub != nil {
+		return fake.UpdateAccountPasswordPolicyWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateAccountPasswordPolicyWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -34059,16 +33632,15 @@ func (fake *FakeIAMAPI) UpdateAssumeRolePolicy(arg1 *iam.UpdateAssumeRolePolicyI
 	fake.updateAssumeRolePolicyArgsForCall = append(fake.updateAssumeRolePolicyArgsForCall, struct {
 		arg1 *iam.UpdateAssumeRolePolicyInput
 	}{arg1})
-	stub := fake.UpdateAssumeRolePolicyStub
-	fakeReturns := fake.updateAssumeRolePolicyReturns
 	fake.recordInvocation("UpdateAssumeRolePolicy", []interface{}{arg1})
 	fake.updateAssumeRolePolicyMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UpdateAssumeRolePolicyStub != nil {
+		return fake.UpdateAssumeRolePolicyStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateAssumeRolePolicyReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -34123,16 +33695,15 @@ func (fake *FakeIAMAPI) UpdateAssumeRolePolicyRequest(arg1 *iam.UpdateAssumeRole
 	fake.updateAssumeRolePolicyRequestArgsForCall = append(fake.updateAssumeRolePolicyRequestArgsForCall, struct {
 		arg1 *iam.UpdateAssumeRolePolicyInput
 	}{arg1})
-	stub := fake.UpdateAssumeRolePolicyRequestStub
-	fakeReturns := fake.updateAssumeRolePolicyRequestReturns
 	fake.recordInvocation("UpdateAssumeRolePolicyRequest", []interface{}{arg1})
 	fake.updateAssumeRolePolicyRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UpdateAssumeRolePolicyRequestStub != nil {
+		return fake.UpdateAssumeRolePolicyRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateAssumeRolePolicyRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -34189,16 +33760,15 @@ func (fake *FakeIAMAPI) UpdateAssumeRolePolicyWithContext(arg1 context.Context, 
 		arg2 *iam.UpdateAssumeRolePolicyInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.UpdateAssumeRolePolicyWithContextStub
-	fakeReturns := fake.updateAssumeRolePolicyWithContextReturns
 	fake.recordInvocation("UpdateAssumeRolePolicyWithContext", []interface{}{arg1, arg2, arg3})
 	fake.updateAssumeRolePolicyWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.UpdateAssumeRolePolicyWithContextStub != nil {
+		return fake.UpdateAssumeRolePolicyWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateAssumeRolePolicyWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -34253,16 +33823,15 @@ func (fake *FakeIAMAPI) UpdateGroup(arg1 *iam.UpdateGroupInput) (*iam.UpdateGrou
 	fake.updateGroupArgsForCall = append(fake.updateGroupArgsForCall, struct {
 		arg1 *iam.UpdateGroupInput
 	}{arg1})
-	stub := fake.UpdateGroupStub
-	fakeReturns := fake.updateGroupReturns
 	fake.recordInvocation("UpdateGroup", []interface{}{arg1})
 	fake.updateGroupMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UpdateGroupStub != nil {
+		return fake.UpdateGroupStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateGroupReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -34317,16 +33886,15 @@ func (fake *FakeIAMAPI) UpdateGroupRequest(arg1 *iam.UpdateGroupInput) (*request
 	fake.updateGroupRequestArgsForCall = append(fake.updateGroupRequestArgsForCall, struct {
 		arg1 *iam.UpdateGroupInput
 	}{arg1})
-	stub := fake.UpdateGroupRequestStub
-	fakeReturns := fake.updateGroupRequestReturns
 	fake.recordInvocation("UpdateGroupRequest", []interface{}{arg1})
 	fake.updateGroupRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UpdateGroupRequestStub != nil {
+		return fake.UpdateGroupRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateGroupRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -34383,16 +33951,15 @@ func (fake *FakeIAMAPI) UpdateGroupWithContext(arg1 context.Context, arg2 *iam.U
 		arg2 *iam.UpdateGroupInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.UpdateGroupWithContextStub
-	fakeReturns := fake.updateGroupWithContextReturns
 	fake.recordInvocation("UpdateGroupWithContext", []interface{}{arg1, arg2, arg3})
 	fake.updateGroupWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.UpdateGroupWithContextStub != nil {
+		return fake.UpdateGroupWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateGroupWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -34447,16 +34014,15 @@ func (fake *FakeIAMAPI) UpdateLoginProfile(arg1 *iam.UpdateLoginProfileInput) (*
 	fake.updateLoginProfileArgsForCall = append(fake.updateLoginProfileArgsForCall, struct {
 		arg1 *iam.UpdateLoginProfileInput
 	}{arg1})
-	stub := fake.UpdateLoginProfileStub
-	fakeReturns := fake.updateLoginProfileReturns
 	fake.recordInvocation("UpdateLoginProfile", []interface{}{arg1})
 	fake.updateLoginProfileMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UpdateLoginProfileStub != nil {
+		return fake.UpdateLoginProfileStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateLoginProfileReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -34511,16 +34077,15 @@ func (fake *FakeIAMAPI) UpdateLoginProfileRequest(arg1 *iam.UpdateLoginProfileIn
 	fake.updateLoginProfileRequestArgsForCall = append(fake.updateLoginProfileRequestArgsForCall, struct {
 		arg1 *iam.UpdateLoginProfileInput
 	}{arg1})
-	stub := fake.UpdateLoginProfileRequestStub
-	fakeReturns := fake.updateLoginProfileRequestReturns
 	fake.recordInvocation("UpdateLoginProfileRequest", []interface{}{arg1})
 	fake.updateLoginProfileRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UpdateLoginProfileRequestStub != nil {
+		return fake.UpdateLoginProfileRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateLoginProfileRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -34577,16 +34142,15 @@ func (fake *FakeIAMAPI) UpdateLoginProfileWithContext(arg1 context.Context, arg2
 		arg2 *iam.UpdateLoginProfileInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.UpdateLoginProfileWithContextStub
-	fakeReturns := fake.updateLoginProfileWithContextReturns
 	fake.recordInvocation("UpdateLoginProfileWithContext", []interface{}{arg1, arg2, arg3})
 	fake.updateLoginProfileWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.UpdateLoginProfileWithContextStub != nil {
+		return fake.UpdateLoginProfileWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateLoginProfileWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -34641,16 +34205,15 @@ func (fake *FakeIAMAPI) UpdateOpenIDConnectProviderThumbprint(arg1 *iam.UpdateOp
 	fake.updateOpenIDConnectProviderThumbprintArgsForCall = append(fake.updateOpenIDConnectProviderThumbprintArgsForCall, struct {
 		arg1 *iam.UpdateOpenIDConnectProviderThumbprintInput
 	}{arg1})
-	stub := fake.UpdateOpenIDConnectProviderThumbprintStub
-	fakeReturns := fake.updateOpenIDConnectProviderThumbprintReturns
 	fake.recordInvocation("UpdateOpenIDConnectProviderThumbprint", []interface{}{arg1})
 	fake.updateOpenIDConnectProviderThumbprintMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UpdateOpenIDConnectProviderThumbprintStub != nil {
+		return fake.UpdateOpenIDConnectProviderThumbprintStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateOpenIDConnectProviderThumbprintReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -34705,16 +34268,15 @@ func (fake *FakeIAMAPI) UpdateOpenIDConnectProviderThumbprintRequest(arg1 *iam.U
 	fake.updateOpenIDConnectProviderThumbprintRequestArgsForCall = append(fake.updateOpenIDConnectProviderThumbprintRequestArgsForCall, struct {
 		arg1 *iam.UpdateOpenIDConnectProviderThumbprintInput
 	}{arg1})
-	stub := fake.UpdateOpenIDConnectProviderThumbprintRequestStub
-	fakeReturns := fake.updateOpenIDConnectProviderThumbprintRequestReturns
 	fake.recordInvocation("UpdateOpenIDConnectProviderThumbprintRequest", []interface{}{arg1})
 	fake.updateOpenIDConnectProviderThumbprintRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UpdateOpenIDConnectProviderThumbprintRequestStub != nil {
+		return fake.UpdateOpenIDConnectProviderThumbprintRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateOpenIDConnectProviderThumbprintRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -34771,16 +34333,15 @@ func (fake *FakeIAMAPI) UpdateOpenIDConnectProviderThumbprintWithContext(arg1 co
 		arg2 *iam.UpdateOpenIDConnectProviderThumbprintInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.UpdateOpenIDConnectProviderThumbprintWithContextStub
-	fakeReturns := fake.updateOpenIDConnectProviderThumbprintWithContextReturns
 	fake.recordInvocation("UpdateOpenIDConnectProviderThumbprintWithContext", []interface{}{arg1, arg2, arg3})
 	fake.updateOpenIDConnectProviderThumbprintWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.UpdateOpenIDConnectProviderThumbprintWithContextStub != nil {
+		return fake.UpdateOpenIDConnectProviderThumbprintWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateOpenIDConnectProviderThumbprintWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -34835,16 +34396,15 @@ func (fake *FakeIAMAPI) UpdateRole(arg1 *iam.UpdateRoleInput) (*iam.UpdateRoleOu
 	fake.updateRoleArgsForCall = append(fake.updateRoleArgsForCall, struct {
 		arg1 *iam.UpdateRoleInput
 	}{arg1})
-	stub := fake.UpdateRoleStub
-	fakeReturns := fake.updateRoleReturns
 	fake.recordInvocation("UpdateRole", []interface{}{arg1})
 	fake.updateRoleMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UpdateRoleStub != nil {
+		return fake.UpdateRoleStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateRoleReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -34899,16 +34459,15 @@ func (fake *FakeIAMAPI) UpdateRoleDescription(arg1 *iam.UpdateRoleDescriptionInp
 	fake.updateRoleDescriptionArgsForCall = append(fake.updateRoleDescriptionArgsForCall, struct {
 		arg1 *iam.UpdateRoleDescriptionInput
 	}{arg1})
-	stub := fake.UpdateRoleDescriptionStub
-	fakeReturns := fake.updateRoleDescriptionReturns
 	fake.recordInvocation("UpdateRoleDescription", []interface{}{arg1})
 	fake.updateRoleDescriptionMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UpdateRoleDescriptionStub != nil {
+		return fake.UpdateRoleDescriptionStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateRoleDescriptionReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -34963,16 +34522,15 @@ func (fake *FakeIAMAPI) UpdateRoleDescriptionRequest(arg1 *iam.UpdateRoleDescrip
 	fake.updateRoleDescriptionRequestArgsForCall = append(fake.updateRoleDescriptionRequestArgsForCall, struct {
 		arg1 *iam.UpdateRoleDescriptionInput
 	}{arg1})
-	stub := fake.UpdateRoleDescriptionRequestStub
-	fakeReturns := fake.updateRoleDescriptionRequestReturns
 	fake.recordInvocation("UpdateRoleDescriptionRequest", []interface{}{arg1})
 	fake.updateRoleDescriptionRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UpdateRoleDescriptionRequestStub != nil {
+		return fake.UpdateRoleDescriptionRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateRoleDescriptionRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -35029,16 +34587,15 @@ func (fake *FakeIAMAPI) UpdateRoleDescriptionWithContext(arg1 context.Context, a
 		arg2 *iam.UpdateRoleDescriptionInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.UpdateRoleDescriptionWithContextStub
-	fakeReturns := fake.updateRoleDescriptionWithContextReturns
 	fake.recordInvocation("UpdateRoleDescriptionWithContext", []interface{}{arg1, arg2, arg3})
 	fake.updateRoleDescriptionWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.UpdateRoleDescriptionWithContextStub != nil {
+		return fake.UpdateRoleDescriptionWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateRoleDescriptionWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -35093,16 +34650,15 @@ func (fake *FakeIAMAPI) UpdateRoleRequest(arg1 *iam.UpdateRoleInput) (*request.R
 	fake.updateRoleRequestArgsForCall = append(fake.updateRoleRequestArgsForCall, struct {
 		arg1 *iam.UpdateRoleInput
 	}{arg1})
-	stub := fake.UpdateRoleRequestStub
-	fakeReturns := fake.updateRoleRequestReturns
 	fake.recordInvocation("UpdateRoleRequest", []interface{}{arg1})
 	fake.updateRoleRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UpdateRoleRequestStub != nil {
+		return fake.UpdateRoleRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateRoleRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -35159,16 +34715,15 @@ func (fake *FakeIAMAPI) UpdateRoleWithContext(arg1 context.Context, arg2 *iam.Up
 		arg2 *iam.UpdateRoleInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.UpdateRoleWithContextStub
-	fakeReturns := fake.updateRoleWithContextReturns
 	fake.recordInvocation("UpdateRoleWithContext", []interface{}{arg1, arg2, arg3})
 	fake.updateRoleWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.UpdateRoleWithContextStub != nil {
+		return fake.UpdateRoleWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateRoleWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -35223,16 +34778,15 @@ func (fake *FakeIAMAPI) UpdateSAMLProvider(arg1 *iam.UpdateSAMLProviderInput) (*
 	fake.updateSAMLProviderArgsForCall = append(fake.updateSAMLProviderArgsForCall, struct {
 		arg1 *iam.UpdateSAMLProviderInput
 	}{arg1})
-	stub := fake.UpdateSAMLProviderStub
-	fakeReturns := fake.updateSAMLProviderReturns
 	fake.recordInvocation("UpdateSAMLProvider", []interface{}{arg1})
 	fake.updateSAMLProviderMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UpdateSAMLProviderStub != nil {
+		return fake.UpdateSAMLProviderStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateSAMLProviderReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -35287,16 +34841,15 @@ func (fake *FakeIAMAPI) UpdateSAMLProviderRequest(arg1 *iam.UpdateSAMLProviderIn
 	fake.updateSAMLProviderRequestArgsForCall = append(fake.updateSAMLProviderRequestArgsForCall, struct {
 		arg1 *iam.UpdateSAMLProviderInput
 	}{arg1})
-	stub := fake.UpdateSAMLProviderRequestStub
-	fakeReturns := fake.updateSAMLProviderRequestReturns
 	fake.recordInvocation("UpdateSAMLProviderRequest", []interface{}{arg1})
 	fake.updateSAMLProviderRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UpdateSAMLProviderRequestStub != nil {
+		return fake.UpdateSAMLProviderRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateSAMLProviderRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -35353,16 +34906,15 @@ func (fake *FakeIAMAPI) UpdateSAMLProviderWithContext(arg1 context.Context, arg2
 		arg2 *iam.UpdateSAMLProviderInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.UpdateSAMLProviderWithContextStub
-	fakeReturns := fake.updateSAMLProviderWithContextReturns
 	fake.recordInvocation("UpdateSAMLProviderWithContext", []interface{}{arg1, arg2, arg3})
 	fake.updateSAMLProviderWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.UpdateSAMLProviderWithContextStub != nil {
+		return fake.UpdateSAMLProviderWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateSAMLProviderWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -35417,16 +34969,15 @@ func (fake *FakeIAMAPI) UpdateSSHPublicKey(arg1 *iam.UpdateSSHPublicKeyInput) (*
 	fake.updateSSHPublicKeyArgsForCall = append(fake.updateSSHPublicKeyArgsForCall, struct {
 		arg1 *iam.UpdateSSHPublicKeyInput
 	}{arg1})
-	stub := fake.UpdateSSHPublicKeyStub
-	fakeReturns := fake.updateSSHPublicKeyReturns
 	fake.recordInvocation("UpdateSSHPublicKey", []interface{}{arg1})
 	fake.updateSSHPublicKeyMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UpdateSSHPublicKeyStub != nil {
+		return fake.UpdateSSHPublicKeyStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateSSHPublicKeyReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -35481,16 +35032,15 @@ func (fake *FakeIAMAPI) UpdateSSHPublicKeyRequest(arg1 *iam.UpdateSSHPublicKeyIn
 	fake.updateSSHPublicKeyRequestArgsForCall = append(fake.updateSSHPublicKeyRequestArgsForCall, struct {
 		arg1 *iam.UpdateSSHPublicKeyInput
 	}{arg1})
-	stub := fake.UpdateSSHPublicKeyRequestStub
-	fakeReturns := fake.updateSSHPublicKeyRequestReturns
 	fake.recordInvocation("UpdateSSHPublicKeyRequest", []interface{}{arg1})
 	fake.updateSSHPublicKeyRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UpdateSSHPublicKeyRequestStub != nil {
+		return fake.UpdateSSHPublicKeyRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateSSHPublicKeyRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -35547,16 +35097,15 @@ func (fake *FakeIAMAPI) UpdateSSHPublicKeyWithContext(arg1 context.Context, arg2
 		arg2 *iam.UpdateSSHPublicKeyInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.UpdateSSHPublicKeyWithContextStub
-	fakeReturns := fake.updateSSHPublicKeyWithContextReturns
 	fake.recordInvocation("UpdateSSHPublicKeyWithContext", []interface{}{arg1, arg2, arg3})
 	fake.updateSSHPublicKeyWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.UpdateSSHPublicKeyWithContextStub != nil {
+		return fake.UpdateSSHPublicKeyWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateSSHPublicKeyWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -35611,16 +35160,15 @@ func (fake *FakeIAMAPI) UpdateServerCertificate(arg1 *iam.UpdateServerCertificat
 	fake.updateServerCertificateArgsForCall = append(fake.updateServerCertificateArgsForCall, struct {
 		arg1 *iam.UpdateServerCertificateInput
 	}{arg1})
-	stub := fake.UpdateServerCertificateStub
-	fakeReturns := fake.updateServerCertificateReturns
 	fake.recordInvocation("UpdateServerCertificate", []interface{}{arg1})
 	fake.updateServerCertificateMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UpdateServerCertificateStub != nil {
+		return fake.UpdateServerCertificateStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateServerCertificateReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -35675,16 +35223,15 @@ func (fake *FakeIAMAPI) UpdateServerCertificateRequest(arg1 *iam.UpdateServerCer
 	fake.updateServerCertificateRequestArgsForCall = append(fake.updateServerCertificateRequestArgsForCall, struct {
 		arg1 *iam.UpdateServerCertificateInput
 	}{arg1})
-	stub := fake.UpdateServerCertificateRequestStub
-	fakeReturns := fake.updateServerCertificateRequestReturns
 	fake.recordInvocation("UpdateServerCertificateRequest", []interface{}{arg1})
 	fake.updateServerCertificateRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UpdateServerCertificateRequestStub != nil {
+		return fake.UpdateServerCertificateRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateServerCertificateRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -35741,16 +35288,15 @@ func (fake *FakeIAMAPI) UpdateServerCertificateWithContext(arg1 context.Context,
 		arg2 *iam.UpdateServerCertificateInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.UpdateServerCertificateWithContextStub
-	fakeReturns := fake.updateServerCertificateWithContextReturns
 	fake.recordInvocation("UpdateServerCertificateWithContext", []interface{}{arg1, arg2, arg3})
 	fake.updateServerCertificateWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.UpdateServerCertificateWithContextStub != nil {
+		return fake.UpdateServerCertificateWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateServerCertificateWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -35805,16 +35351,15 @@ func (fake *FakeIAMAPI) UpdateServiceSpecificCredential(arg1 *iam.UpdateServiceS
 	fake.updateServiceSpecificCredentialArgsForCall = append(fake.updateServiceSpecificCredentialArgsForCall, struct {
 		arg1 *iam.UpdateServiceSpecificCredentialInput
 	}{arg1})
-	stub := fake.UpdateServiceSpecificCredentialStub
-	fakeReturns := fake.updateServiceSpecificCredentialReturns
 	fake.recordInvocation("UpdateServiceSpecificCredential", []interface{}{arg1})
 	fake.updateServiceSpecificCredentialMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UpdateServiceSpecificCredentialStub != nil {
+		return fake.UpdateServiceSpecificCredentialStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateServiceSpecificCredentialReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -35869,16 +35414,15 @@ func (fake *FakeIAMAPI) UpdateServiceSpecificCredentialRequest(arg1 *iam.UpdateS
 	fake.updateServiceSpecificCredentialRequestArgsForCall = append(fake.updateServiceSpecificCredentialRequestArgsForCall, struct {
 		arg1 *iam.UpdateServiceSpecificCredentialInput
 	}{arg1})
-	stub := fake.UpdateServiceSpecificCredentialRequestStub
-	fakeReturns := fake.updateServiceSpecificCredentialRequestReturns
 	fake.recordInvocation("UpdateServiceSpecificCredentialRequest", []interface{}{arg1})
 	fake.updateServiceSpecificCredentialRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UpdateServiceSpecificCredentialRequestStub != nil {
+		return fake.UpdateServiceSpecificCredentialRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateServiceSpecificCredentialRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -35935,16 +35479,15 @@ func (fake *FakeIAMAPI) UpdateServiceSpecificCredentialWithContext(arg1 context.
 		arg2 *iam.UpdateServiceSpecificCredentialInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.UpdateServiceSpecificCredentialWithContextStub
-	fakeReturns := fake.updateServiceSpecificCredentialWithContextReturns
 	fake.recordInvocation("UpdateServiceSpecificCredentialWithContext", []interface{}{arg1, arg2, arg3})
 	fake.updateServiceSpecificCredentialWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.UpdateServiceSpecificCredentialWithContextStub != nil {
+		return fake.UpdateServiceSpecificCredentialWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateServiceSpecificCredentialWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -35999,16 +35542,15 @@ func (fake *FakeIAMAPI) UpdateSigningCertificate(arg1 *iam.UpdateSigningCertific
 	fake.updateSigningCertificateArgsForCall = append(fake.updateSigningCertificateArgsForCall, struct {
 		arg1 *iam.UpdateSigningCertificateInput
 	}{arg1})
-	stub := fake.UpdateSigningCertificateStub
-	fakeReturns := fake.updateSigningCertificateReturns
 	fake.recordInvocation("UpdateSigningCertificate", []interface{}{arg1})
 	fake.updateSigningCertificateMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UpdateSigningCertificateStub != nil {
+		return fake.UpdateSigningCertificateStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateSigningCertificateReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -36063,16 +35605,15 @@ func (fake *FakeIAMAPI) UpdateSigningCertificateRequest(arg1 *iam.UpdateSigningC
 	fake.updateSigningCertificateRequestArgsForCall = append(fake.updateSigningCertificateRequestArgsForCall, struct {
 		arg1 *iam.UpdateSigningCertificateInput
 	}{arg1})
-	stub := fake.UpdateSigningCertificateRequestStub
-	fakeReturns := fake.updateSigningCertificateRequestReturns
 	fake.recordInvocation("UpdateSigningCertificateRequest", []interface{}{arg1})
 	fake.updateSigningCertificateRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UpdateSigningCertificateRequestStub != nil {
+		return fake.UpdateSigningCertificateRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateSigningCertificateRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -36129,16 +35670,15 @@ func (fake *FakeIAMAPI) UpdateSigningCertificateWithContext(arg1 context.Context
 		arg2 *iam.UpdateSigningCertificateInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.UpdateSigningCertificateWithContextStub
-	fakeReturns := fake.updateSigningCertificateWithContextReturns
 	fake.recordInvocation("UpdateSigningCertificateWithContext", []interface{}{arg1, arg2, arg3})
 	fake.updateSigningCertificateWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.UpdateSigningCertificateWithContextStub != nil {
+		return fake.UpdateSigningCertificateWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateSigningCertificateWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -36193,16 +35733,15 @@ func (fake *FakeIAMAPI) UpdateUser(arg1 *iam.UpdateUserInput) (*iam.UpdateUserOu
 	fake.updateUserArgsForCall = append(fake.updateUserArgsForCall, struct {
 		arg1 *iam.UpdateUserInput
 	}{arg1})
-	stub := fake.UpdateUserStub
-	fakeReturns := fake.updateUserReturns
 	fake.recordInvocation("UpdateUser", []interface{}{arg1})
 	fake.updateUserMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UpdateUserStub != nil {
+		return fake.UpdateUserStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateUserReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -36257,16 +35796,15 @@ func (fake *FakeIAMAPI) UpdateUserRequest(arg1 *iam.UpdateUserInput) (*request.R
 	fake.updateUserRequestArgsForCall = append(fake.updateUserRequestArgsForCall, struct {
 		arg1 *iam.UpdateUserInput
 	}{arg1})
-	stub := fake.UpdateUserRequestStub
-	fakeReturns := fake.updateUserRequestReturns
 	fake.recordInvocation("UpdateUserRequest", []interface{}{arg1})
 	fake.updateUserRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UpdateUserRequestStub != nil {
+		return fake.UpdateUserRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateUserRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -36323,16 +35861,15 @@ func (fake *FakeIAMAPI) UpdateUserWithContext(arg1 context.Context, arg2 *iam.Up
 		arg2 *iam.UpdateUserInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.UpdateUserWithContextStub
-	fakeReturns := fake.updateUserWithContextReturns
 	fake.recordInvocation("UpdateUserWithContext", []interface{}{arg1, arg2, arg3})
 	fake.updateUserWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.UpdateUserWithContextStub != nil {
+		return fake.UpdateUserWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.updateUserWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -36387,16 +35924,15 @@ func (fake *FakeIAMAPI) UploadSSHPublicKey(arg1 *iam.UploadSSHPublicKeyInput) (*
 	fake.uploadSSHPublicKeyArgsForCall = append(fake.uploadSSHPublicKeyArgsForCall, struct {
 		arg1 *iam.UploadSSHPublicKeyInput
 	}{arg1})
-	stub := fake.UploadSSHPublicKeyStub
-	fakeReturns := fake.uploadSSHPublicKeyReturns
 	fake.recordInvocation("UploadSSHPublicKey", []interface{}{arg1})
 	fake.uploadSSHPublicKeyMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UploadSSHPublicKeyStub != nil {
+		return fake.UploadSSHPublicKeyStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.uploadSSHPublicKeyReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -36451,16 +35987,15 @@ func (fake *FakeIAMAPI) UploadSSHPublicKeyRequest(arg1 *iam.UploadSSHPublicKeyIn
 	fake.uploadSSHPublicKeyRequestArgsForCall = append(fake.uploadSSHPublicKeyRequestArgsForCall, struct {
 		arg1 *iam.UploadSSHPublicKeyInput
 	}{arg1})
-	stub := fake.UploadSSHPublicKeyRequestStub
-	fakeReturns := fake.uploadSSHPublicKeyRequestReturns
 	fake.recordInvocation("UploadSSHPublicKeyRequest", []interface{}{arg1})
 	fake.uploadSSHPublicKeyRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UploadSSHPublicKeyRequestStub != nil {
+		return fake.UploadSSHPublicKeyRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.uploadSSHPublicKeyRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -36517,16 +36052,15 @@ func (fake *FakeIAMAPI) UploadSSHPublicKeyWithContext(arg1 context.Context, arg2
 		arg2 *iam.UploadSSHPublicKeyInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.UploadSSHPublicKeyWithContextStub
-	fakeReturns := fake.uploadSSHPublicKeyWithContextReturns
 	fake.recordInvocation("UploadSSHPublicKeyWithContext", []interface{}{arg1, arg2, arg3})
 	fake.uploadSSHPublicKeyWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.UploadSSHPublicKeyWithContextStub != nil {
+		return fake.UploadSSHPublicKeyWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.uploadSSHPublicKeyWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -36581,16 +36115,15 @@ func (fake *FakeIAMAPI) UploadServerCertificate(arg1 *iam.UploadServerCertificat
 	fake.uploadServerCertificateArgsForCall = append(fake.uploadServerCertificateArgsForCall, struct {
 		arg1 *iam.UploadServerCertificateInput
 	}{arg1})
-	stub := fake.UploadServerCertificateStub
-	fakeReturns := fake.uploadServerCertificateReturns
 	fake.recordInvocation("UploadServerCertificate", []interface{}{arg1})
 	fake.uploadServerCertificateMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UploadServerCertificateStub != nil {
+		return fake.UploadServerCertificateStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.uploadServerCertificateReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -36645,16 +36178,15 @@ func (fake *FakeIAMAPI) UploadServerCertificateRequest(arg1 *iam.UploadServerCer
 	fake.uploadServerCertificateRequestArgsForCall = append(fake.uploadServerCertificateRequestArgsForCall, struct {
 		arg1 *iam.UploadServerCertificateInput
 	}{arg1})
-	stub := fake.UploadServerCertificateRequestStub
-	fakeReturns := fake.uploadServerCertificateRequestReturns
 	fake.recordInvocation("UploadServerCertificateRequest", []interface{}{arg1})
 	fake.uploadServerCertificateRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UploadServerCertificateRequestStub != nil {
+		return fake.UploadServerCertificateRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.uploadServerCertificateRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -36711,16 +36243,15 @@ func (fake *FakeIAMAPI) UploadServerCertificateWithContext(arg1 context.Context,
 		arg2 *iam.UploadServerCertificateInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.UploadServerCertificateWithContextStub
-	fakeReturns := fake.uploadServerCertificateWithContextReturns
 	fake.recordInvocation("UploadServerCertificateWithContext", []interface{}{arg1, arg2, arg3})
 	fake.uploadServerCertificateWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.UploadServerCertificateWithContextStub != nil {
+		return fake.UploadServerCertificateWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.uploadServerCertificateWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -36775,16 +36306,15 @@ func (fake *FakeIAMAPI) UploadSigningCertificate(arg1 *iam.UploadSigningCertific
 	fake.uploadSigningCertificateArgsForCall = append(fake.uploadSigningCertificateArgsForCall, struct {
 		arg1 *iam.UploadSigningCertificateInput
 	}{arg1})
-	stub := fake.UploadSigningCertificateStub
-	fakeReturns := fake.uploadSigningCertificateReturns
 	fake.recordInvocation("UploadSigningCertificate", []interface{}{arg1})
 	fake.uploadSigningCertificateMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UploadSigningCertificateStub != nil {
+		return fake.UploadSigningCertificateStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.uploadSigningCertificateReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -36839,16 +36369,15 @@ func (fake *FakeIAMAPI) UploadSigningCertificateRequest(arg1 *iam.UploadSigningC
 	fake.uploadSigningCertificateRequestArgsForCall = append(fake.uploadSigningCertificateRequestArgsForCall, struct {
 		arg1 *iam.UploadSigningCertificateInput
 	}{arg1})
-	stub := fake.UploadSigningCertificateRequestStub
-	fakeReturns := fake.uploadSigningCertificateRequestReturns
 	fake.recordInvocation("UploadSigningCertificateRequest", []interface{}{arg1})
 	fake.uploadSigningCertificateRequestMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.UploadSigningCertificateRequestStub != nil {
+		return fake.UploadSigningCertificateRequestStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.uploadSigningCertificateRequestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -36905,16 +36434,15 @@ func (fake *FakeIAMAPI) UploadSigningCertificateWithContext(arg1 context.Context
 		arg2 *iam.UploadSigningCertificateInput
 		arg3 []request.Option
 	}{arg1, arg2, arg3})
-	stub := fake.UploadSigningCertificateWithContextStub
-	fakeReturns := fake.uploadSigningCertificateWithContextReturns
 	fake.recordInvocation("UploadSigningCertificateWithContext", []interface{}{arg1, arg2, arg3})
 	fake.uploadSigningCertificateWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.UploadSigningCertificateWithContextStub != nil {
+		return fake.UploadSigningCertificateWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+	fakeReturns := fake.uploadSigningCertificateWithContextReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -36969,16 +36497,15 @@ func (fake *FakeIAMAPI) WaitUntilInstanceProfileExists(arg1 *iam.GetInstanceProf
 	fake.waitUntilInstanceProfileExistsArgsForCall = append(fake.waitUntilInstanceProfileExistsArgsForCall, struct {
 		arg1 *iam.GetInstanceProfileInput
 	}{arg1})
-	stub := fake.WaitUntilInstanceProfileExistsStub
-	fakeReturns := fake.waitUntilInstanceProfileExistsReturns
 	fake.recordInvocation("WaitUntilInstanceProfileExists", []interface{}{arg1})
 	fake.waitUntilInstanceProfileExistsMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.WaitUntilInstanceProfileExistsStub != nil {
+		return fake.WaitUntilInstanceProfileExistsStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.waitUntilInstanceProfileExistsReturns
 	return fakeReturns.result1
 }
 
@@ -37032,16 +36559,15 @@ func (fake *FakeIAMAPI) WaitUntilInstanceProfileExistsWithContext(arg1 context.C
 		arg2 *iam.GetInstanceProfileInput
 		arg3 []request.WaiterOption
 	}{arg1, arg2, arg3})
-	stub := fake.WaitUntilInstanceProfileExistsWithContextStub
-	fakeReturns := fake.waitUntilInstanceProfileExistsWithContextReturns
 	fake.recordInvocation("WaitUntilInstanceProfileExistsWithContext", []interface{}{arg1, arg2, arg3})
 	fake.waitUntilInstanceProfileExistsWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.WaitUntilInstanceProfileExistsWithContextStub != nil {
+		return fake.WaitUntilInstanceProfileExistsWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.waitUntilInstanceProfileExistsWithContextReturns
 	return fakeReturns.result1
 }
 
@@ -37093,16 +36619,15 @@ func (fake *FakeIAMAPI) WaitUntilPolicyExists(arg1 *iam.GetPolicyInput) error {
 	fake.waitUntilPolicyExistsArgsForCall = append(fake.waitUntilPolicyExistsArgsForCall, struct {
 		arg1 *iam.GetPolicyInput
 	}{arg1})
-	stub := fake.WaitUntilPolicyExistsStub
-	fakeReturns := fake.waitUntilPolicyExistsReturns
 	fake.recordInvocation("WaitUntilPolicyExists", []interface{}{arg1})
 	fake.waitUntilPolicyExistsMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.WaitUntilPolicyExistsStub != nil {
+		return fake.WaitUntilPolicyExistsStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.waitUntilPolicyExistsReturns
 	return fakeReturns.result1
 }
 
@@ -37156,16 +36681,15 @@ func (fake *FakeIAMAPI) WaitUntilPolicyExistsWithContext(arg1 context.Context, a
 		arg2 *iam.GetPolicyInput
 		arg3 []request.WaiterOption
 	}{arg1, arg2, arg3})
-	stub := fake.WaitUntilPolicyExistsWithContextStub
-	fakeReturns := fake.waitUntilPolicyExistsWithContextReturns
 	fake.recordInvocation("WaitUntilPolicyExistsWithContext", []interface{}{arg1, arg2, arg3})
 	fake.waitUntilPolicyExistsWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.WaitUntilPolicyExistsWithContextStub != nil {
+		return fake.WaitUntilPolicyExistsWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.waitUntilPolicyExistsWithContextReturns
 	return fakeReturns.result1
 }
 
@@ -37217,16 +36741,15 @@ func (fake *FakeIAMAPI) WaitUntilRoleExists(arg1 *iam.GetRoleInput) error {
 	fake.waitUntilRoleExistsArgsForCall = append(fake.waitUntilRoleExistsArgsForCall, struct {
 		arg1 *iam.GetRoleInput
 	}{arg1})
-	stub := fake.WaitUntilRoleExistsStub
-	fakeReturns := fake.waitUntilRoleExistsReturns
 	fake.recordInvocation("WaitUntilRoleExists", []interface{}{arg1})
 	fake.waitUntilRoleExistsMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.WaitUntilRoleExistsStub != nil {
+		return fake.WaitUntilRoleExistsStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.waitUntilRoleExistsReturns
 	return fakeReturns.result1
 }
 
@@ -37280,16 +36803,15 @@ func (fake *FakeIAMAPI) WaitUntilRoleExistsWithContext(arg1 context.Context, arg
 		arg2 *iam.GetRoleInput
 		arg3 []request.WaiterOption
 	}{arg1, arg2, arg3})
-	stub := fake.WaitUntilRoleExistsWithContextStub
-	fakeReturns := fake.waitUntilRoleExistsWithContextReturns
 	fake.recordInvocation("WaitUntilRoleExistsWithContext", []interface{}{arg1, arg2, arg3})
 	fake.waitUntilRoleExistsWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.WaitUntilRoleExistsWithContextStub != nil {
+		return fake.WaitUntilRoleExistsWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.waitUntilRoleExistsWithContextReturns
 	return fakeReturns.result1
 }
 
@@ -37341,16 +36863,15 @@ func (fake *FakeIAMAPI) WaitUntilUserExists(arg1 *iam.GetUserInput) error {
 	fake.waitUntilUserExistsArgsForCall = append(fake.waitUntilUserExistsArgsForCall, struct {
 		arg1 *iam.GetUserInput
 	}{arg1})
-	stub := fake.WaitUntilUserExistsStub
-	fakeReturns := fake.waitUntilUserExistsReturns
 	fake.recordInvocation("WaitUntilUserExists", []interface{}{arg1})
 	fake.waitUntilUserExistsMutex.Unlock()
-	if stub != nil {
-		return stub(arg1)
+	if fake.WaitUntilUserExistsStub != nil {
+		return fake.WaitUntilUserExistsStub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.waitUntilUserExistsReturns
 	return fakeReturns.result1
 }
 
@@ -37404,16 +36925,15 @@ func (fake *FakeIAMAPI) WaitUntilUserExistsWithContext(arg1 context.Context, arg
 		arg2 *iam.GetUserInput
 		arg3 []request.WaiterOption
 	}{arg1, arg2, arg3})
-	stub := fake.WaitUntilUserExistsWithContextStub
-	fakeReturns := fake.waitUntilUserExistsWithContextReturns
 	fake.recordInvocation("WaitUntilUserExistsWithContext", []interface{}{arg1, arg2, arg3})
 	fake.waitUntilUserExistsWithContextMutex.Unlock()
-	if stub != nil {
-		return stub(arg1, arg2, arg3...)
+	if fake.WaitUntilUserExistsWithContextStub != nil {
+		return fake.WaitUntilUserExistsWithContextStub(arg1, arg2, arg3...)
 	}
 	if specificReturn {
 		return ret.result1
 	}
+	fakeReturns := fake.waitUntilUserExistsWithContextReturns
 	return fakeReturns.result1
 }
 
