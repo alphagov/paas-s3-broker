@@ -8,8 +8,8 @@ test:
 
 .PHONY: generate
 generate:
-	counterfeiter -o s3/fakes/fake_s3_api.go vendor/github.com/aws/aws-sdk-go/service/s3/s3iface/ S3API
-	counterfeiter -o s3/fakes/fake_iam_api.go vendor/github.com/aws/aws-sdk-go/service/iam/iamiface/ IAMAPI
+	go run github.com/maxbrunsfeld/counterfeiter/v6 -o s3/fakes/fake_s3_api.go vendor/github.com/aws/aws-sdk-go/service/s3/s3iface/ S3API
+	go run github.com/maxbrunsfeld/counterfeiter/v6 -o s3/fakes/fake_iam_api.go vendor/github.com/aws/aws-sdk-go/service/iam/iamiface/ IAMAPI
 	go generate ./...
 
 .PHONY: build_amd64
@@ -20,3 +20,7 @@ build_amd64:
 .PHONY: bosh_scp
 bosh_scp: build_amd64
 	./scripts/bosh-scp.sh
+
+.PHONY: run_broker_tls
+run_broker_tls:
+	./scripts/run-broker-tls.sh

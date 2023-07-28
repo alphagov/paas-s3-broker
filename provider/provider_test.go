@@ -2,6 +2,7 @@ package provider_test
 
 import (
 	"encoding/json"
+
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 
@@ -12,7 +13,8 @@ import (
 	"github.com/alphagov/paas-s3-broker/s3"
 	fakeClient "github.com/alphagov/paas-s3-broker/s3/fakes"
 	provideriface "github.com/alphagov/paas-service-broker-base/provider"
-	"github.com/pivotal-cf/brokerapi"
+	"github.com/pivotal-cf/brokerapi/domain"
+	"github.com/pivotal-cf/brokerapi/domain/apiresponses"
 )
 
 var _ = Describe("Provider", func() {
@@ -33,7 +35,7 @@ var _ = Describe("Provider", func() {
 			}
 			fakeS3Client.CreateBucketReturns(nil)
 
-			_, _, _, err := s3Provider.Provision(context.Background(), provisionData)
+			_, err := s3Provider.Provision(context.Background(), provisionData)
 			Expect(err).NotTo(HaveOccurred())
 			Expect(fakeS3Client.CreateBucketArgsForCall(0)).To(Equal(provisionData))
 		})
@@ -45,7 +47,7 @@ var _ = Describe("Provider", func() {
 			errProvisioning := errors.New("error provisioning")
 			fakeS3Client.CreateBucketReturns(errProvisioning)
 
-			_, _, _, err := s3Provider.Provision(context.Background(), provisionData)
+			_, err := s3Provider.Provision(context.Background(), provisionData)
 			Expect(err).To(MatchError(errProvisioning))
 		})
 	})
@@ -57,15 +59,15 @@ var _ = Describe("Provider", func() {
 			}
 			fakeS3Client.DeleteBucketReturns(nil)
 
-			_, _, err := s3Provider.Deprovision(context.Background(), deprovisionData)
+			_, err := s3Provider.Deprovision(context.Background(), deprovisionData)
 			Expect(err).NotTo(HaveOccurred())
 			Expect(fakeS3Client.DeleteBucketArgsForCall(0)).To(Equal(deprovisionData.InstanceID))
 		})
 
 		It("returns a specific error if the bucket does not exist", func() {
 			fakeS3Client.DeleteBucketReturns(s3.ErrNoSuchResources)
-			_, _, err := s3Provider.Deprovision(context.Background(), provideriface.DeprovisionData{})
-			Expect(err).To(MatchError(brokerapi.ErrInstanceDoesNotExist))
+			_, err := s3Provider.Deprovision(context.Background(), provideriface.DeprovisionData{})
+			Expect(err).To(MatchError(apiresponses.ErrInstanceDoesNotExist))
 		})
 
 		It("errors if the client errors", func() {
@@ -75,7 +77,7 @@ var _ = Describe("Provider", func() {
 			errDeprovisioning := errors.New("error deprovisioning")
 			fakeS3Client.DeleteBucketReturns(errDeprovisioning)
 
-			_, _, err := s3Provider.Deprovision(context.Background(), deprovisionData)
+			_, err := s3Provider.Deprovision(context.Background(), deprovisionData)
 			Expect(err).To(MatchError(errDeprovisioning))
 		})
 	})
@@ -89,7 +91,7 @@ var _ = Describe("Provider", func() {
 			bindData := provideriface.BindData{
 				InstanceID: instanceID,
 				BindingID:  bindingID,
-				Details: brokerapi.BindDetails{
+				Details: domain.BindDetails{
 					RawParameters: json.RawMessage(`{"permissions":"read-only"}`),
 				},
 			}
@@ -151,7 +153,7 @@ var _ = Describe("Provider", func() {
 			fakeS3Client.RemoveUserFromBucketAndDeleteUserReturns(s3.ErrNoSuchResources)
 
 			_, err := s3Provider.Unbind(context.Background(), unbindData)
-			Expect(err).To(MatchError(brokerapi.ErrBindingDoesNotExist))
+			Expect(err).To(MatchError(apiresponses.ErrBindingDoesNotExist))
 		})
 	})
 
@@ -161,17 +163,17 @@ var _ = Describe("Provider", func() {
 				InstanceID: "09E1993E-62E2-4040-ADF2-4D3EC741EFE6",
 			}
 
-			_, _, err := s3Provider.Update(context.Background(), updateData)
+			_, err := s3Provider.Update(context.Background(), updateData)
 			Expect(err).To(MatchError(provider.ErrUpdateNotSupported))
 		})
 	})
 
 	Describe("LastOperation", func() {
 		It("returns success unconditionally", func() {
-			state, description, err := s3Provider.LastOperation(context.Background(), provideriface.LastOperationData{})
+			state, err := s3Provider.LastOperation(context.Background(), provideriface.LastOperationData{})
 			Expect(err).NotTo(HaveOccurred())
-			Expect(description).To(Equal("Last operation polling not required. All operations are synchronous."))
-			Expect(state).To(Equal(brokerapi.Succeeded))
+			Expect(state.Description).To(Equal("Last operation polling not required. All operations are synchronous."))
+			Expect(state.State).To(Equal(domain.Succeeded))
 		})
 	})
 })

@@ -6,7 +6,8 @@ import (
 
 	"github.com/alphagov/paas-s3-broker/s3"
 	provideriface "github.com/alphagov/paas-service-broker-base/provider"
-	"github.com/pivotal-cf/brokerapi"
+	"github.com/pivotal-cf/brokerapi/domain"
+	"github.com/pivotal-cf/brokerapi/domain/apiresponses"
 )
 
 type S3Provider struct {
@@ -20,48 +21,49 @@ func NewS3Provider(s3Client s3.Client) *S3Provider {
 }
 
 func (s *S3Provider) Provision(ctx context.Context, provisionData provideriface.ProvisionData) (
-	dashboardURL, operationData string, isAsync bool, err error) {
+	res *domain.ProvisionedServiceSpec, err error) {
 
 	err = s.client.CreateBucket(provisionData)
-
-	return "", "", false, err
+	res = &domain.ProvisionedServiceSpec{IsAsync: false, AlreadyExists: false, DashboardURL: "", OperationData: ""}
+	return res, err
 }
 
 func (s *S3Provider) Deprovision(ctx context.Context, deprovisionData provideriface.DeprovisionData) (
-	operationData string, isAsync bool, err error) {
+	res *domain.DeprovisionServiceSpec, err error) {
 
 	err = s.client.DeleteBucket(deprovisionData.InstanceID)
+	res = &domain.DeprovisionServiceSpec{IsAsync: false, OperationData: ""}
 	if err == s3.ErrNoSuchResources {
-		return "", false, brokerapi.ErrInstanceDoesNotExist
+		return res, apiresponses.ErrInstanceDoesNotExist
 	}
-	return "", false, err
+	return res, err
 }
 
 func (s *S3Provider) Bind(ctx context.Context, bindData provideriface.BindData) (
-	binding brokerapi.Binding, err error) {
+	binding *domain.Binding, err error) {
 
 	bucketCredentials, err := s.client.AddUserToBucket(bindData)
 	if err != nil {
-		return brokerapi.Binding{}, err
+		return &domain.Binding{}, err
 	}
 
-	return brokerapi.Binding{
+	return &domain.Binding{
 		IsAsync:     false,
 		Credentials: bucketCredentials,
 	}, nil
 }
 
 func (s *S3Provider) Unbind(ctx context.Context, unbindData provideriface.UnbindData) (
-	unbinding brokerapi.UnbindSpec, err error) {
+	unbinding *domain.UnbindSpec, err error) {
 
 	err = s.client.RemoveUserFromBucketAndDeleteUser(unbindData.BindingID, unbindData.InstanceID)
 	if err != nil {
 		if err == s3.ErrNoSuchResources {
-			return brokerapi.UnbindSpec{}, brokerapi.ErrBindingDoesNotExist
+			return &domain.UnbindSpec{}, apiresponses.ErrBindingDoesNotExist
 		}
-		return brokerapi.UnbindSpec{}, err
+		return &domain.UnbindSpec{}, err
 	}
-	return brokerapi.UnbindSpec{
+	return &domain.UnbindSpec{
 		IsAsync: false,
 	}, nil
 }
@@ -69,11 +71,11 @@ func (s *S3Provider) Unbind(ctx context.Context, unbindData provideriface.Unbind
 var ErrUpdateNotSupported = errors.New("Updating the S3 bucket is currently not supported")
 
 func (s *S3Provider) Update(ctx context.Context, updateData provideriface.UpdateData) (
-	operationData string, isAsync bool, err error) {
-	return "", false, ErrUpdateNotSupported
+	res *domain.UpdateServiceSpec, err error) {
+		return &domain.UpdateServiceSpec{IsAsync: false,DashboardURL: "", OperationData: ""}, ErrUpdateNotSupported
 }
 
 func (s *S3Provider) LastOperation(ctx context.Context, lastOperationData provideriface.LastOperationData) (
-	state brokerapi.LastOperationState, description string, err error) {
-	return brokerapi.Succeeded, "Last operation polling not required. All operations are synchronous.", nil
+	state *domain.LastOperation, err error) {
+	return &domain.LastOperation{State: domain.Succeeded, Description: "Last operation polling not required. All operations are synchronous."}, nil
 }

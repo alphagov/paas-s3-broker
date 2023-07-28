@@ -63,7 +63,11 @@ func main() {
 	//   --filter '{"Not": {"Tags": {"Key": "tenant", "Values": [""]}}}' \
 	//   --metrics UnblendedCost \
 	//   --group-by Type=TAG,Key=chargeable_entity
-	costExplorer := costexplorer.New(session.New())
+	SDKSession, err := session.NewSession()
+	if err != nil {
+		log.Fatalln(err)
+	}
+	costExplorer := costexplorer.New(SDKSession)
 	costAndUsageInput := costexplorer.GetCostAndUsageInput{
 		Filter: &costexplorer.Expression{
 			Not: &costexplorer.Expression{
@@ -74,7 +78,7 @@ func main() {
 			},
 		},
 		Granularity: aws.String(costexplorer.GranularityMonthly),
-		GroupBy: []*costexplorer.GroupDefinition{&costexplorer.GroupDefinition{
+		GroupBy: []*costexplorer.GroupDefinition{{
 			Key:  aws.String("chargeable_entity"),
 			Type: aws.String(costexplorer.GroupDefinitionTypeTag),
 		}},
