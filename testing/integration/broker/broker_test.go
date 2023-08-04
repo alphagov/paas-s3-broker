@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"path"
+	"reflect"
 	"sync"
 	"time"
 
@@ -24,6 +25,7 @@ import (
 	"github.com/alphagov/paas-s3-broker/s3"
 	"github.com/alphagov/paas-s3-broker/testing/integration/helpers"
 	"github.com/alphagov/paas-service-broker-base/broker"
+	base_provider "github.com/alphagov/paas-service-broker-base/provider"
 	brokertesting "github.com/alphagov/paas-service-broker-base/testing"
 	"github.com/pivotal-cf/brokerapi"
 	uuid "github.com/satori/go.uuid"
@@ -35,6 +37,10 @@ const (
 
 type BindingResponse struct {
 	Credentials map[string]interface{} `json:"credentials"`
+}
+
+func isType(a, b interface{}) bool {
+	return reflect.TypeOf(a) == reflect.TypeOf(b)
 }
 
 var _ = Describe("Broker", func() {
@@ -58,6 +64,45 @@ var _ = Describe("Broker", func() {
 
 		res := brokerTester.Deprovision(instanceID, serviceID, planID, ASYNC_ALLOWED)
 		Expect(res.Code).To(Equal(http.StatusGone))
+	})
+
+	It("should match the types used in the s3 provider", func() {
+		file, err := os.Open("../../fixtures/config.json")
+		Expect(err).ToNot(HaveOccurred())
+		defer file.Close()
+
+		config, err := broker.NewConfig(file)
+		Expect(err).ToNot(HaveOccurred())
+
+		config.API.Locket.SkipVerify = true
+		config.API.Locket.Address = mockLocket.ListenAddress
+		config.API.Locket.CACertFile = path.Join(locketFixtures.Filepath, "locket-server.cert.pem")
+		config.API.Locket.ClientCertFile = path.Join(locketFixtures.Filepath, "locket-client.cert.pem")
+		config.API.Locket.ClientKeyFile = path.Join(locketFixtures.Filepath, "locket-client.key.pem")
+
+		s3ClientConfig, err := s3.NewS3ClientConfig(config.Provider)
+		Expect(err).ToNot(HaveOccurred())
+
+		s3ClientConfig.IpRestrictionPolicyARN = *BrokerSuiteData.LocalhostIAMPolicyArn
+		Expect(s3ClientConfig.IpRestrictionPolicyARN).To(HavePrefix("arn:aws:iam::"))
+
+		logger := lager.NewLogger("s3-service-broker-test")
+		logger.RegisterSink(lager.NewWriterSink(GinkgoWriter, config.API.LagerLogLevel))
+
+		sess := session.Must(session.NewSession(&aws.Config{Region: aws.String(s3ClientConfig.AWSRegion)}))
+		s3Client := s3.NewS3Client(s3ClientConfig, aws_s3.New(sess), iam.New(sess), logger, context.Background())
+
+		s3Provider := provider.NewS3Provider(s3Client)
+
+		serviceBroker, err := broker.New(config, s3Provider, logger)
+		Expect(err).ToNot(HaveOccurred())
+
+		Expect(isType(base_provider.ServiceProvider.Bind, serviceBroker.Provider.Bind)).To(Equal(true))
+		Expect(isType(base_provider.ServiceProvider.Unbind, serviceBroker.Provider.Unbind)).To(Equal(true))
+		Expect(isType(base_provider.ServiceProvider.Provision, serviceBroker.Provider.Provision)).To(Equal(true))
+		Expect(isType(base_provider.ServiceProvider.Deprovision, serviceBroker.Provider.Deprovision)).To(Equal(true))
+		Expect(isType(base_provider.ServiceProvider.Update, serviceBroker.Provider.Update)).To(Equal(true))
+		Expect(isType(base_provider.ServiceProvider.LastOperation, serviceBroker.Provider.LastOperation)).To(Equal(true))
 	})
 
 	It("should manage the lifecycle of an S3 bucket", func() {
