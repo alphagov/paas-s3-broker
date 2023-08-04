@@ -7,7 +7,6 @@ import (
 	"net/http"
 	"os"
 	"path"
-	"reflect"
 	"sync"
 	"time"
 
@@ -37,10 +36,6 @@ const (
 
 type BindingResponse struct {
 	Credentials map[string]interface{} `json:"credentials"`
-}
-
-func isType(a, b interface{}) bool {
-	return reflect.TypeOf(a) == reflect.TypeOf(b)
 }
 
 var _ = Describe("Broker", func() {
@@ -97,12 +92,12 @@ var _ = Describe("Broker", func() {
 		serviceBroker, err := broker.New(config, s3Provider, logger)
 		Expect(err).ToNot(HaveOccurred())
 
-		Expect(isType(base_provider.ServiceProvider.Bind, serviceBroker.Provider.Bind)).To(Equal(true))
-		Expect(isType(base_provider.ServiceProvider.Unbind, serviceBroker.Provider.Unbind)).To(Equal(true))
-		Expect(isType(base_provider.ServiceProvider.Provision, serviceBroker.Provider.Provision)).To(Equal(true))
-		Expect(isType(base_provider.ServiceProvider.Deprovision, serviceBroker.Provider.Deprovision)).To(Equal(true))
-		Expect(isType(base_provider.ServiceProvider.Update, serviceBroker.Provider.Update)).To(Equal(true))
-		Expect(isType(base_provider.ServiceProvider.LastOperation, serviceBroker.Provider.LastOperation)).To(Equal(true))
+		Expect(serviceBroker.Provider.Bind).To(BeEquivalentTo(base_provider.ServiceProvider.Bind))
+		Expect(serviceBroker.Provider.Unbind).To(BeEquivalentTo(base_provider.ServiceProvider.Unbind))
+		Expect(serviceBroker.Provider.Provision).To(BeEquivalentTo(base_provider.ServiceProvider.Provision))
+		Expect(serviceBroker.Provider.Deprovision).To(BeEquivalentTo(base_provider.ServiceProvider.Deprovision))
+		Expect(serviceBroker.Provider.Update).To(BeEquivalentTo(base_provider.ServiceProvider.Update))
+		Expect(serviceBroker.Provider.LastOperation).To(BeEquivalentTo(base_provider.ServiceProvider.LastOperation))
 	})
 
 	It("should manage the lifecycle of an S3 bucket", func() {
