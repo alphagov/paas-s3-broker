@@ -60,49 +60,6 @@ var _ = Describe("Broker", func() {
 		Expect(res.Code).To(Equal(http.StatusGone))
 	})
 
-	It("should match the types used in the s3 provider", func() {
-		file, err := os.Open("../../fixtures/config.json")
-		Expect(err).ToNot(HaveOccurred())
-		defer file.Close()
-
-		config, err := broker.NewConfig(file)
-		Expect(err).ToNot(HaveOccurred())
-
-		config.API.Locket.SkipVerify = true
-		config.API.Locket.Address = mockLocket.ListenAddress
-		config.API.Locket.CACertFile = path.Join(locketFixtures.Filepath, "locket-server.cert.pem")
-		config.API.Locket.ClientCertFile = path.Join(locketFixtures.Filepath, "locket-client.cert.pem")
-		config.API.Locket.ClientKeyFile = path.Join(locketFixtures.Filepath, "locket-client.key.pem")
-
-		s3ClientConfig, err := s3.NewS3ClientConfig(config.Provider)
-		Expect(err).ToNot(HaveOccurred())
-
-		s3ClientConfig.IpRestrictionPolicyARN = *BrokerSuiteData.LocalhostIAMPolicyArn
-		Expect(s3ClientConfig.IpRestrictionPolicyARN).To(HavePrefix("arn:aws:iam::"))
-
-		logger := lager.NewLogger("s3-service-broker-test")
-		logger.RegisterSink(lager.NewWriterSink(GinkgoWriter, config.API.LagerLogLevel))
-
-		sess := session.Must(session.NewSession(&aws.Config{Region: aws.String(s3ClientConfig.AWSRegion)}))
-		s3Client := s3.NewS3Client(s3ClientConfig, aws_s3.New(sess), iam.New(sess), logger, context.Background())
-
-		s3Provider := provider.NewS3Provider(s3Client)
-
-		serviceBroker, err := broker.New(config, s3Provider, logger)
-		Expect(err).ToNot(HaveOccurred())
-
-		_, asyncbinderimplemented := serviceBroker.AsyncBinderImplemented()
-		_, asyncprovisionerimplemented := serviceBroker.AsyncProvisionerImplemented()
-		_, binderimplemented := serviceBroker.BinderImplemented()
-		_, provisionerimplemented := serviceBroker.ProvisionerImplemented()
-		_, updaterimplemented := serviceBroker.UpdaterImplemented()
-		Expect(asyncbinderimplemented).To(BeTrue())
-		Expect(asyncprovisionerimplemented).To(BeTrue())
-		Expect(binderimplemented).To(BeTrue())
-		Expect(provisionerimplemented).To(BeTrue())
-		Expect(updaterimplemented).To(BeTrue())
-	})
-
 	It("should manage the lifecycle of an S3 bucket", func() {
 		By("initialising")
 		s3ClientConfig, brokerTester := initialise(*BrokerSuiteData.LocalhostIAMPolicyArn)
@@ -486,6 +443,18 @@ func initialise(IAMPolicyARN string) (*s3.Config, brokertesting.BrokerTester) {
 
 	serviceBroker, err := broker.New(config, s3Provider, logger)
 	Expect(err).ToNot(HaveOccurred())
+
+	_, asyncbinderimplemented := serviceBroker.AsyncBinderImplemented()
+	_, asyncprovisionerimplemented := serviceBroker.AsyncProvisionerImplemented()
+	_, binderimplemented := serviceBroker.BinderImplemented()
+	_, provisionerimplemented := serviceBroker.ProvisionerImplemented()
+	_, updaterimplemented := serviceBroker.UpdaterImplemented()
+	Expect(asyncbinderimplemented).To(BeFalse())
+	Expect(asyncprovisionerimplemented).To(BeFalse())
+	Expect(binderimplemented).To(BeTrue())
+	Expect(provisionerimplemented).To(BeTrue())
+	Expect(updaterimplemented).To(BeFalse())
+
 	brokerAPI := broker.NewAPI(serviceBroker, logger, config)
 
 	return s3ClientConfig, brokertesting.New(brokerapi.BrokerCredentials{
