@@ -450,7 +450,7 @@ func initialise(IAMPolicyARN string) (*s3.Config, brokertesting.BrokerTester) {
 	_, provisionerimplemented := serviceBroker.ProvisionerImplemented()
 	_, updaterimplemented := serviceBroker.UpdaterImplemented()
 	Expect(asyncbinderimplemented).To(BeFalse())
-	Expect(asyncprovisionerimplemented).To(BeFalse())
+	Expect(asyncprovisionerimplemented).To(BeTrue())
 	Expect(binderimplemented).To(BeTrue())
 	Expect(provisionerimplemented).To(BeTrue())
 	Expect(updaterimplemented).To(BeFalse())
