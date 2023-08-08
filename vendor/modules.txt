@@ -1,13 +1,13 @@
 # code.cloudfoundry.org/cfhttp/v2 v2.0.0
 ## explicit
 code.cloudfoundry.org/cfhttp/v2
-# code.cloudfoundry.org/clock v0.0.0-20180518195852-02e53af36e6c
+# code.cloudfoundry.org/clock v1.0.0
 ## explicit
 code.cloudfoundry.org/clock
-# code.cloudfoundry.org/consuladapter v0.0.0-20190222031846-a0ec466a22b6
+# code.cloudfoundry.org/consuladapter v0.0.0-20200131002136-ac1daf48ba97
 ## explicit
 code.cloudfoundry.org/consuladapter
-# code.cloudfoundry.org/diego-logging-client v0.0.0-20190918155030-cd01d2d2c629
+# code.cloudfoundry.org/diego-logging-client v0.0.0-20200130234554-60ef08820a45
 ## explicit
 code.cloudfoundry.org/diego-logging-client
 # code.cloudfoundry.org/go-diodes v0.0.0-20190809170250-f77fb823c7ee
@@ -23,7 +23,7 @@ code.cloudfoundry.org/gofileutils/fileutils
 # code.cloudfoundry.org/lager v2.0.0+incompatible
 ## explicit
 code.cloudfoundry.org/lager
-# code.cloudfoundry.org/locket v0.0.0-20191127212858-571765e813ca
+# code.cloudfoundry.org/locket v0.0.0-20200509160055-68bb3033b039
 ## explicit
 code.cloudfoundry.org/locket
 code.cloudfoundry.org/locket/grpcserver
@@ -31,20 +31,20 @@ code.cloudfoundry.org/locket/models
 # code.cloudfoundry.org/rfc5424 v0.0.0-20180905210152-236a6d29298a
 ## explicit
 code.cloudfoundry.org/rfc5424
-# code.cloudfoundry.org/tlsconfig v0.0.0-20191220232943-2819aba30e10
+# code.cloudfoundry.org/tlsconfig v0.0.0-20200131000646-bbe0f8da39b3
 ## explicit; go 1.13
 code.cloudfoundry.org/tlsconfig
 # github.com/Masterminds/semver v1.4.2
 ## explicit
 github.com/Masterminds/semver
-# github.com/alphagov/paas-service-broker-base v0.6.0
+# github.com/alphagov/paas-service-broker-base v0.10.1-0.20230808135942-719955381ab5
 ## explicit; go 1.13
 github.com/alphagov/paas-service-broker-base/broker
 github.com/alphagov/paas-service-broker-base/provider
 github.com/alphagov/paas-service-broker-base/testing
 github.com/alphagov/paas-service-broker-base/testing/mock_locket_server
-# github.com/armon/go-metrics v0.0.0-20180917152333-f0300d1749da
-## explicit
+# github.com/armon/go-metrics v0.3.4
+## explicit; go 1.12
 github.com/armon/go-metrics
 # github.com/aws/aws-sdk-go v1.27.1
 ## explicit
@@ -95,6 +95,9 @@ github.com/aws/aws-sdk-go/service/sts/stsiface
 # github.com/cloudfoundry-community/go-cfclient v0.0.0-20190808214049-35bcce23fc5f
 ## explicit
 github.com/cloudfoundry-community/go-cfclient
+# github.com/fatih/color v1.9.0
+## explicit; go 1.13
+github.com/fatih/color
 # github.com/go-task/slim-sprig v0.0.0-20210107165309-348f09dbbbc0
 ## explicit; go 1.13
 github.com/go-task/slim-sprig
@@ -115,38 +118,47 @@ github.com/google/pprof/profile
 # github.com/google/uuid v1.3.0
 ## explicit
 github.com/google/uuid
-# github.com/gorilla/mux v1.7.1
-## explicit
+# github.com/gorilla/mux v1.8.0
+## explicit; go 1.12
 github.com/gorilla/mux
-# github.com/hashicorp/consul/api v1.3.0
+# github.com/hashicorp/consul/api v1.6.0
 ## explicit; go 1.12
 github.com/hashicorp/consul/api
 # github.com/hashicorp/go-cleanhttp v0.5.1
 ## explicit
 github.com/hashicorp/go-cleanhttp
-# github.com/hashicorp/go-immutable-radix v1.0.0
+# github.com/hashicorp/go-hclog v0.14.1
+## explicit; go 1.13
+github.com/hashicorp/go-hclog
+# github.com/hashicorp/go-immutable-radix v1.2.0
 ## explicit
 github.com/hashicorp/go-immutable-radix
-# github.com/hashicorp/go-rootcerts v1.0.0
-## explicit
+# github.com/hashicorp/go-rootcerts v1.0.2
+## explicit; go 1.12
 github.com/hashicorp/go-rootcerts
-# github.com/hashicorp/golang-lru v0.5.0
-## explicit
+# github.com/hashicorp/golang-lru v0.5.4
+## explicit; go 1.12
 github.com/hashicorp/golang-lru/simplelru
-# github.com/hashicorp/serf v0.8.2
-## explicit
+# github.com/hashicorp/serf v0.9.4
+## explicit; go 1.12
 github.com/hashicorp/serf/coordinate
 # github.com/jmespath/go-jmespath v0.0.0-20180206201540-c2b33e8439af
 ## explicit
 github.com/jmespath/go-jmespath
+# github.com/mattn/go-colorable v0.1.7
+## explicit; go 1.13
+github.com/mattn/go-colorable
+# github.com/mattn/go-isatty v0.0.12
+## explicit; go 1.12
+github.com/mattn/go-isatty
 # github.com/mattn/go-runewidth v0.0.7
 ## explicit; go 1.9
 github.com/mattn/go-runewidth
-# github.com/mitchellh/go-homedir v1.0.0
+# github.com/mitchellh/go-homedir v1.1.0
 ## explicit
 github.com/mitchellh/go-homedir
-# github.com/mitchellh/mapstructure v1.1.2
-## explicit
+# github.com/mitchellh/mapstructure v1.3.3
+## explicit; go 1.14
 github.com/mitchellh/mapstructure
 # github.com/nu7hatch/gouuid v0.0.0-20131221200532-179d4d0c4d8d
 ## explicit
@@ -188,7 +200,7 @@ github.com/onsi/gomega/matchers/support/goraph/edge
 github.com/onsi/gomega/matchers/support/goraph/node
 github.com/onsi/gomega/matchers/support/goraph/util
 github.com/onsi/gomega/types
-# github.com/pborman/uuid v1.2.0
+# github.com/pborman/uuid v1.2.1
 ## explicit
 github.com/pborman/uuid
 # github.com/phayes/freeport v0.0.0-20180830031419-95f893ade6f2
@@ -203,7 +215,7 @@ github.com/pivotal-cf/brokerapi/domain/apiresponses
 github.com/pivotal-cf/brokerapi/handlers
 github.com/pivotal-cf/brokerapi/middlewares
 github.com/pivotal-cf/brokerapi/utils
-# github.com/pkg/errors v0.8.1
+# github.com/pkg/errors v0.9.1
 ## explicit
 github.com/pkg/errors
 # github.com/satori/go.uuid v1.2.0

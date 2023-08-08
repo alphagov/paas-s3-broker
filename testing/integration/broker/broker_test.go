@@ -24,7 +24,6 @@ import (
 	"github.com/alphagov/paas-s3-broker/s3"
 	"github.com/alphagov/paas-s3-broker/testing/integration/helpers"
 	"github.com/alphagov/paas-service-broker-base/broker"
-	base_provider "github.com/alphagov/paas-service-broker-base/provider"
 	brokertesting "github.com/alphagov/paas-service-broker-base/testing"
 	"github.com/pivotal-cf/brokerapi"
 	uuid "github.com/satori/go.uuid"
@@ -92,13 +91,16 @@ var _ = Describe("Broker", func() {
 		serviceBroker, err := broker.New(config, s3Provider, logger)
 		Expect(err).ToNot(HaveOccurred())
 
-		Expect(fmt.Sprintf("%T", serviceBroker.Provider.Bind)).To(Equal(fmt.Sprintf("%T", base_provider.ServiceProvider.Bind)))
-		// Expect(serviceBroker.Provider.Bind).Should(BeEquivalentTo(base_provider.ServiceProvider.Bind))
-		// Expect(serviceBroker.Provider.Unbind).Should(BeEquivalentTo(base_provider.ServiceProvider.Unbind))
-		// Expect(serviceBroker.Provider.Provision).Should(BeEquivalentTo(base_provider.ServiceProvider.Provision))
-		// Expect(serviceBroker.Provider.Deprovision).Should(BeEquivalentTo(base_provider.ServiceProvider.Deprovision))
-		// Expect(serviceBroker.Provider.Update).Should(BeEquivalentTo(base_provider.ServiceProvider.Update))
-		// Expect(serviceBroker.Provider.LastOperation).Should(BeEquivalentTo(base_provider.ServiceProvider.LastOperation))
+		_, asyncbinderimplemented := serviceBroker.AsyncBinderImplemented()
+		_, asyncprovisionerimplemented := serviceBroker.AsyncProvisionerImplemented()
+		_, binderimplemented := serviceBroker.BinderImplemented()
+		_, provisionerimplemented := serviceBroker.ProvisionerImplemented()
+		_, updaterimplemented := serviceBroker.UpdaterImplemented()
+		Expect(asyncbinderimplemented).To(BeTrue())
+		Expect(asyncprovisionerimplemented).To(BeTrue())
+		Expect(binderimplemented).To(BeTrue())
+		Expect(provisionerimplemented).To(BeTrue())
+		Expect(updaterimplemented).To(BeTrue())
 	})
 
 	It("should manage the lifecycle of an S3 bucket", func() {
