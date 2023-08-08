@@ -465,7 +465,7 @@ var _ = Describe("Client", func() {
 				}, nil)
 				iamAPI.ListAttachedUserPoliciesReturnsOnCall(0, &iam.ListAttachedUserPoliciesOutput{
 					AttachedPolicies: []*iam.AttachedPolicy{
-						&iam.AttachedPolicy{
+						{
 							PolicyArn:  aws.String("foo"),
 							PolicyName: aws.String("bar"),
 						},
@@ -642,7 +642,7 @@ var _ = Describe("Client", func() {
 			}, nil)
 			iamAPI.ListAttachedUserPoliciesReturns(&iam.ListAttachedUserPoliciesOutput{
 				AttachedPolicies: []*iam.AttachedPolicy{
-					&iam.AttachedPolicy{
+					{
 						PolicyArn:  aws.String("foo"),
 						PolicyName: aws.String("bar"),
 					},
@@ -1006,7 +1006,7 @@ var _ = Describe("Client", func() {
 				iamAPI.ListAccessKeysReturns(&iam.ListAccessKeysOutput{}, nil)
 				iamAPI.ListAttachedUserPoliciesReturns(&iam.ListAttachedUserPoliciesOutput{
 					AttachedPolicies: []*iam.AttachedPolicy{
-						&iam.AttachedPolicy{
+						{
 							PolicyArn:  aws.String("foo"),
 							PolicyName: aws.String("bar"),
 						},
