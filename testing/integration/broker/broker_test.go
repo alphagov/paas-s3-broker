@@ -453,7 +453,7 @@ func initialise(IAMPolicyARN string) (*s3.Config, brokertesting.BrokerTester) {
 	Expect(asyncprovisionerimplemented).To(BeTrue())
 	Expect(binderimplemented).To(BeTrue())
 	Expect(provisionerimplemented).To(BeTrue())
-	Expect(updaterimplemented).To(BeFalse())
+	Expect(updaterimplemented).To(BeTrue())
 
 	brokerAPI := broker.NewAPI(serviceBroker, logger, config)
 
