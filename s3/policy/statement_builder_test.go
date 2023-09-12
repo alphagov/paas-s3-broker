@@ -2,6 +2,7 @@ package policy_test
 
 import (
 	"encoding/json"
+
 	"github.com/alphagov/paas-s3-broker/s3/policy"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/iam"

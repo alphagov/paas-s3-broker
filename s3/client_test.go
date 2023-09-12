@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/alphagov/paas-s3-broker/s3/policy"
-	"github.com/pivotal-cf/brokerapi"
+	"github.com/pivotal-cf/brokerapi/domain"
 
 	"code.cloudfoundry.org/lager"
 	"github.com/alphagov/paas-s3-broker/s3"
@@ -69,7 +69,7 @@ var _ = Describe("Client", func() {
 		It("sets the s3 public access block by default", func() {
 			pd := provider.ProvisionData{
 				InstanceID: "test-instance-id",
-				Details: brokerapi.ProvisionDetails{
+				Details: domain.ProvisionDetails{
 					RawParameters: nil,
 				},
 			}
@@ -79,7 +79,7 @@ var _ = Describe("Client", func() {
 		It("disables the s3 public access block when private", func() {
 			pd := provider.ProvisionData{
 				InstanceID: "test-instance-id",
-				Details: brokerapi.ProvisionDetails{
+				Details: domain.ProvisionDetails{
 					RawParameters: json.RawMessage(`{"public_bucket": false}`),
 				},
 			}
@@ -89,7 +89,7 @@ var _ = Describe("Client", func() {
 		It("deletes the s3 public access block when public", func() {
 			pd := provider.ProvisionData{
 				InstanceID: "test-instance-id",
-				Details: brokerapi.ProvisionDetails{
+				Details: domain.ProvisionDetails{
 					RawParameters: json.RawMessage(`{"public_bucket": true}`),
 				},
 			}
@@ -100,7 +100,7 @@ var _ = Describe("Client", func() {
 		It("creates a public bucket when specified", func() {
 			pd := provider.ProvisionData{
 				InstanceID: "test-instance-id",
-				Details: brokerapi.ProvisionDetails{
+				Details: domain.ProvisionDetails{
 					RawParameters: json.RawMessage(`{"public_bucket": true}`),
 				},
 			}
@@ -118,7 +118,7 @@ var _ = Describe("Client", func() {
 		It("creates a private bucket when specified", func() {
 			pd := provider.ProvisionData{
 				InstanceID: "test-instance-id",
-				Details: brokerapi.ProvisionDetails{
+				Details: domain.ProvisionDetails{
 					RawParameters: json.RawMessage(`{"public_bucket": false}`),
 				},
 			}
@@ -130,7 +130,7 @@ var _ = Describe("Client", func() {
 		It("creates a private bucket by default", func() {
 			pd := provider.ProvisionData{
 				InstanceID: "test-instance-id",
-				Details: brokerapi.ProvisionDetails{
+				Details: domain.ProvisionDetails{
 					RawParameters: nil,
 				},
 			}
@@ -142,12 +142,12 @@ var _ = Describe("Client", func() {
 		It("tags the bucket appropriately", func() {
 			pd := provider.ProvisionData{
 				InstanceID: "test-instance-id",
-				Details: brokerapi.ProvisionDetails{
+				Details: domain.ProvisionDetails{
 					RawParameters:    nil,
 					OrganizationGUID: "test-org-guid",
 					SpaceGUID:        "test-space-guid",
 				},
-				Plan: brokerapi.ServicePlan{
+				Plan: domain.ServicePlan{
 					ID: "test-plan-guid",
 				},
 			}
@@ -168,12 +168,12 @@ var _ = Describe("Client", func() {
 		It("deletes the bucket if tagging fails", func() {
 			pd := provider.ProvisionData{
 				InstanceID: "test-instance-id",
-				Details: brokerapi.ProvisionDetails{
+				Details: domain.ProvisionDetails{
 					RawParameters:    nil,
 					OrganizationGUID: "test-org-guid",
 					SpaceGUID:        "test-space-guid",
 				},
-				Plan: brokerapi.ServicePlan{
+				Plan: domain.ServicePlan{
 					ID: "test-plan-guid",
 				},
 			}
@@ -248,7 +248,7 @@ var _ = Describe("Client", func() {
 			bindData := provider.BindData{
 				InstanceID: "test-instance-id",
 				BindingID:  "test-binding-id",
-				Details: brokerapi.BindDetails{
+				Details: domain.BindDetails{
 					RawParameters: json.RawMessage(`{"permissions": "read-write-banana"}`),
 				},
 			}
@@ -261,7 +261,7 @@ var _ = Describe("Client", func() {
 			bindData := provider.BindData{
 				InstanceID: "test-instance-id",
 				BindingID:  "test-binding-id",
-				Details: brokerapi.BindDetails{
+				Details: domain.BindDetails{
 					RawParameters: json.RawMessage(`{"permissions": "read-only"}`),
 				},
 			}
@@ -319,7 +319,7 @@ var _ = Describe("Client", func() {
 			bindData := provider.BindData{
 				InstanceID: "test-instance-id",
 				BindingID:  "test-binding-id",
-				Details: brokerapi.BindDetails{
+				Details: domain.BindDetails{
 					RawParameters: json.RawMessage(`{"permissions": "invalid-perms"}`),
 				},
 			}
@@ -350,7 +350,7 @@ var _ = Describe("Client", func() {
 				It("attaches the IP-Restriction policy", func() {
 					bindData := provider.BindData{
 						BindingID: "test-instance-id",
-						Details: brokerapi.BindDetails{
+						Details: domain.BindDetails{
 							RawParameters: nil,
 						},
 					}
@@ -367,7 +367,7 @@ var _ = Describe("Client", func() {
 				It("attaches the IP-Restriction policy", func() {
 					bindData := provider.BindData{
 						BindingID: "test-instance-id",
-						Details: brokerapi.BindDetails{
+						Details: domain.BindDetails{
 							RawParameters: json.RawMessage(`{"allow_external_access": false}`),
 						},
 					}
@@ -386,7 +386,7 @@ var _ = Describe("Client", func() {
 			It("does not attach the IP-Restriction policy", func() {
 				bindData := provider.BindData{
 					BindingID: "test-instance-id",
-					Details: brokerapi.BindDetails{
+					Details: domain.BindDetails{
 						RawParameters: json.RawMessage(`{"allow_external_access": true}`),
 					},
 				}
@@ -465,7 +465,7 @@ var _ = Describe("Client", func() {
 				}, nil)
 				iamAPI.ListAttachedUserPoliciesReturnsOnCall(0, &iam.ListAttachedUserPoliciesOutput{
 					AttachedPolicies: []*iam.AttachedPolicy{
-						&iam.AttachedPolicy{
+						{
 							PolicyArn:  aws.String("foo"),
 							PolicyName: aws.String("bar"),
 						},
@@ -642,7 +642,7 @@ var _ = Describe("Client", func() {
 			}, nil)
 			iamAPI.ListAttachedUserPoliciesReturns(&iam.ListAttachedUserPoliciesOutput{
 				AttachedPolicies: []*iam.AttachedPolicy{
-					&iam.AttachedPolicy{
+					{
 						PolicyArn:  aws.String("foo"),
 						PolicyName: aws.String("bar"),
 					},
@@ -1006,7 +1006,7 @@ var _ = Describe("Client", func() {
 				iamAPI.ListAccessKeysReturns(&iam.ListAccessKeysOutput{}, nil)
 				iamAPI.ListAttachedUserPoliciesReturns(&iam.ListAttachedUserPoliciesOutput{
 					AttachedPolicies: []*iam.AttachedPolicy{
-						&iam.AttachedPolicy{
+						{
 							PolicyArn:  aws.String("foo"),
 							PolicyName: aws.String("bar"),
 						},

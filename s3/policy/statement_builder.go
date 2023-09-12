@@ -3,13 +3,14 @@ package policy
 import (
 	"encoding/json"
 	"fmt"
+
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/iam"
 )
 
 type Statement struct {
 	Effect    string    `json:"Effect"`
-	Action    Actions  `json:"Action"`
+	Action    Actions   `json:"Action"`
 	Resource  []string  `json:"Resource"`
 	Principal Principal `json:"Principal"`
 }
@@ -22,11 +23,12 @@ type Statement struct {
 // and Go's type system is no expressive enough
 // to support that.
 type Actions []string
-func (this *Actions) UnmarshalJSON(b []byte) error {
+
+func (a *Actions) UnmarshalJSON(b []byte) error {
 	var actions []string
 	err := json.Unmarshal(b, &actions)
 	if err == nil {
-		*this = actions
+		*a = actions
 		return nil
 	}
 	var singleAction string
@@ -34,7 +36,7 @@ func (this *Actions) UnmarshalJSON(b []byte) error {
 	if newerr != nil {
 		return newerr
 	}
-	*this = Actions{singleAction}
+	*a = Actions{singleAction}
 	return nil
 }
 

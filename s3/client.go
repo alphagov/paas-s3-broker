@@ -30,7 +30,7 @@ var (
 	ErrNoSuchResources = errors.New("no such resources found")
 )
 
-//go:generate counterfeiter -o fakes/fake_s3_client.go . Client
+//go:generate go run github.com/maxbrunsfeld/counterfeiter/v6 -o fakes/fake_s3_client.go . Client
 type Client interface {
 	CreateBucket(provisionData provider.ProvisionData) error
 	DeleteBucket(name string) error
@@ -538,10 +538,6 @@ func (s *S3Client) tagBucket(instanceID string, tags []*s3.Tag) (output *s3.PutB
 	}
 	result, err := s.s3Client.PutBucketTagging(&createTagsInput)
 	return result, err
-}
-
-func (s *S3Client) buildBucketArns(bucketName string) (wildcardArn, bareArn string) {
-	return fmt.Sprintf("arn:aws:s3:::%s/*", bucketName), fmt.Sprintf("arn:aws:s3:::%s", bucketName)
 }
 
 func (s *S3Client) buildBucketName(instanceID string) string {
