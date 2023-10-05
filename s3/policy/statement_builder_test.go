@@ -26,8 +26,9 @@ var _ = Describe("StatementBuilder", func() {
 			"s3:GetObject",
 			"s3:GetBucketLocation",
 			"s3:GetBucketCORS",
-			"s3:ListBucket"),
-		)
+			"s3:ListBucket",
+			"s3:GetObjectTagging",
+		))
 	})
 
 	It("should build a statement that gives read and write permissions", func() {
@@ -49,8 +50,8 @@ var _ = Describe("StatementBuilder", func() {
 			"s3:GetObject",
 			"s3:PutObject",
 			"s3:DeleteObject",
-		),
-		)
+			"s3:GetObjectTagging",
+		))
 	})
 })
 
