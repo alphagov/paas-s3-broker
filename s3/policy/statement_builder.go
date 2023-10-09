@@ -68,6 +68,7 @@ func (ReadOnlyPermissions) Actions() []string {
 		"s3:ListBucket",
 		"s3:GetBucketCORS",
 		"s3:GetObject",
+		"s3:GetObjectTagging",
 	}
 }
 
@@ -86,6 +87,7 @@ func (ReadWritePermissions) Actions() []string {
 		"s3:GetObject",
 		"s3:PutObject",
 		"s3:DeleteObject",
+		"s3:GetObjectTagging",
 	}
 }
 
