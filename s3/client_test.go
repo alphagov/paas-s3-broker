@@ -34,7 +34,6 @@ var _ = Describe("Client", func() {
 	BeforeEach(func() {
 		s3API = &fakeClient.FakeS3API{}
 		iamAPI = &fakeClient.FakeIAMAPI{}
-		logger = lager.NewLogger("s3-service-broker-test")
 		s3ClientConfig = &s3.Config{
 			AWSRegion:              "eu-west-2",
 			ResourcePrefix:         "test-bucket-prefix-",
@@ -43,6 +42,10 @@ var _ = Describe("Client", func() {
 			Timeout:                2 * time.Second,
 			IpRestrictionPolicyARN: "test-ip-restriction-policy-arn",
 		}
+	})
+
+	JustBeforeEach(func() {
+		logger = lager.NewLogger("s3-service-broker-test")
 		s3Client = s3.NewS3Client(
 			s3ClientConfig,
 			s3API,
@@ -51,6 +54,7 @@ var _ = Describe("Client", func() {
 			context.Background(),
 		)
 	})
+
 	Describe("CreateBucket", func() {
 		It("enables encryption at rest", func() {
 			pd := provider.ProvisionData{}
@@ -214,6 +218,23 @@ var _ = Describe("Client", func() {
 
 			By("creating a user")
 			Expect(iamAPI.CreateUserCallCount()).To(Equal(1))
+			createUserInput := iamAPI.CreateUserArgsForCall(0)
+			Expect(createUserInput.UserName).To(HaveValue(Equal("test-bucket-prefix-test-binding-id")))
+			Expect(createUserInput.Path).To(HaveValue(Equal("/test-iam-path/")))
+			Expect(createUserInput.Tags).To(Equal([]*iam.Tag{
+				{
+					Key:   aws.String("service_instance_guid"),
+					Value: aws.String("test-instance-id"),
+				},
+				{
+					Key:   aws.String("created_by"),
+					Value: aws.String("paas-s3-broker"),
+				},
+				{
+					Key:   aws.String("deploy_env"),
+					Value: aws.String("test-env"),
+				},
+			}))
 
 			By("creating access keys for the user")
 			Expect(iamAPI.CreateAccessKeyCallCount()).To(Equal(1))
@@ -244,7 +265,7 @@ var _ = Describe("Client", func() {
 			}))
 		})
 
-		It("returns an error if the permissions requested aren't known", func() {
+		It("handles unknown permissions", func() {
 			bindData := provider.BindData{
 				InstanceID: "test-instance-id",
 				BindingID:  "test-binding-id",
@@ -254,10 +275,17 @@ var _ = Describe("Client", func() {
 			}
 
 			_, err := s3Client.AddUserToBucket(bindData)
-			Expect(err).To(HaveOccurred())
+
+			By("Not creating a user", func() {
+				Expect(iamAPI.CreateUserCallCount()).To(Equal(0))
+			})
+
+			By("returning an error", func() {
+				Expect(err).To(HaveOccurred())
+			})
 		})
 
-		It("creates a policy with the requested permissions", func() {
+		It("creates a bucket policy with the requested permissions", func() {
 			bindData := provider.BindData{
 				InstanceID: "test-instance-id",
 				BindingID:  "test-binding-id",
@@ -270,6 +298,9 @@ var _ = Describe("Client", func() {
 
 			By("creating a user")
 			Expect(iamAPI.CreateUserCallCount()).To(Equal(1))
+			createUserInput := iamAPI.CreateUserArgsForCall(0)
+			Expect(createUserInput.UserName).To(HaveValue(Equal("test-bucket-prefix-test-binding-id")))
+			Expect(createUserInput.Path).To(HaveValue(Equal("/test-iam-path/")))
 
 			By("creating access keys for the user")
 			Expect(iamAPI.CreateAccessKeyCallCount()).To(Equal(1))
@@ -300,7 +331,7 @@ var _ = Describe("Client", func() {
 			}))
 		})
 
-		It("does not create a policy with the bad permissions", func() {
+		It("does not create a bucket policy with the bad permissions", func() {
 			// Set up fake API
 			iamAPI.CreateUserReturnsOnCall(0, &iam.CreateUserOutput{
 				User: &iam.User{
@@ -327,25 +358,89 @@ var _ = Describe("Client", func() {
 			Expect(err).To(HaveOccurred())
 		})
 
-		Context("when failing to AttachUserPolicy", func() {
-			It("deletes the user", func() {
-				expectedError := errors.New("attaching user policy failed. lul.")
-				iamAPI.AttachUserPolicyReturnsOnCall(0, &iam.AttachUserPolicyOutput{}, expectedError)
-				iamAPI.ListAccessKeysReturnsOnCall(0, &iam.ListAccessKeysOutput{}, nil)
-				iamAPI.ListAttachedUserPoliciesReturnsOnCall(0, &iam.ListAttachedUserPoliciesOutput{}, nil)
+		Context("when a common user policy ARN is configured", func () {
+			BeforeEach(func () {
+				s3ClientConfig.CommonUserPolicyARN = "test-common-user-policy-arn"
+			})
+
+			It("attaches the common user policy", func() {
 				bindData := provider.BindData{
 					InstanceID: "test-instance-id",
 					BindingID:  "test-binding-id",
+					Details: domain.BindDetails{
+						RawParameters: nil,
+					},
 				}
 				_, err := s3Client.AddUserToBucket(bindData)
-				Expect(iamAPI.AttachUserPolicyCallCount()).To(Equal(1))
-				Expect(err).To(HaveOccurred())
-				Expect(err).To(Equal(expectedError))
-				Expect(iamAPI.DeleteUserCallCount()).To(Equal(1))
+				Expect(err).ToNot(HaveOccurred())
+
+				Expect(iamAPI.CreateUserCallCount()).To(Equal(1))
+				createUserInput := iamAPI.CreateUserArgsForCall(0)
+				Expect(iamAPI.AttachUserPolicyCallCount()).To(BeNumerically(">", 0))
+				attachPolicyArgs := iamAPI.AttachUserPolicyArgsForCall(0)
+
+				Expect(createUserInput.UserName).To(HaveValue(Equal("test-bucket-prefix-test-binding-id")))
+				Expect(createUserInput.Path).To(HaveValue(Equal("/test-iam-path/")))
+
+				Expect(attachPolicyArgs.PolicyArn).To(HaveValue(Equal("test-common-user-policy-arn")))
+				Expect(attachPolicyArgs.UserName).To(HaveValue(Equal(*createUserInput.UserName)))
+			})
+
+			Context("when AttachUserPolicy fails", func() {
+				var expectedError error
+
+				BeforeEach(func () {
+					expectedError = errors.New("attaching user policy failed. lul.")
+					iamAPI.AttachUserPolicyReturnsOnCall(0, &iam.AttachUserPolicyOutput{}, expectedError)
+					iamAPI.ListAccessKeysReturnsOnCall(0, &iam.ListAccessKeysOutput{}, nil)
+					iamAPI.ListAttachedUserPoliciesReturnsOnCall(0, &iam.ListAttachedUserPoliciesOutput{}, nil)
+				})
+
+				It("deletes the user", func() {
+					bindData := provider.BindData{
+						InstanceID: "test-instance-id",
+						BindingID:  "test-binding-id",
+					}
+					_, err := s3Client.AddUserToBucket(bindData)
+					Expect(err).To(HaveOccurred())
+					Expect(err).To(Equal(expectedError))
+
+					Expect(iamAPI.AttachUserPolicyCallCount()).To(Equal(1))
+					Expect(iamAPI.DeleteAccessKeyCallCount()).To(Equal(0))
+					Expect(iamAPI.DetachUserPolicyCallCount()).To(Equal(0))
+					Expect(iamAPI.DeleteUserCallCount()).To(Equal(1))
+				})
 			})
 		})
 
+
 		Context("when not allowing external access", func() {
+			Context("when failing to AttachUserPolicy", func() {
+				var expectedError error
+
+				BeforeEach(func () {
+					expectedError = errors.New("attaching user policy failed. lul.")
+					iamAPI.AttachUserPolicyReturnsOnCall(0, &iam.AttachUserPolicyOutput{}, expectedError)
+					iamAPI.ListAccessKeysReturnsOnCall(0, &iam.ListAccessKeysOutput{}, nil)
+					iamAPI.ListAttachedUserPoliciesReturnsOnCall(0, &iam.ListAttachedUserPoliciesOutput{}, nil)
+				})
+
+				It("deletes the user", func() {
+					bindData := provider.BindData{
+						InstanceID: "test-instance-id",
+						BindingID:  "test-binding-id",
+					}
+					_, err := s3Client.AddUserToBucket(bindData)
+					Expect(err).To(HaveOccurred())
+					Expect(err).To(Equal(expectedError))
+
+					Expect(iamAPI.AttachUserPolicyCallCount()).To(Equal(1))
+					Expect(iamAPI.DeleteAccessKeyCallCount()).To(Equal(0))
+					Expect(iamAPI.DetachUserPolicyCallCount()).To(Equal(0))
+					Expect(iamAPI.DeleteUserCallCount()).To(Equal(1))
+				})
+			})
+
 			Context("by omitting the parameter", func() {
 				It("attaches the IP-Restriction policy", func() {
 					bindData := provider.BindData{
@@ -363,6 +458,7 @@ var _ = Describe("Client", func() {
 					Expect(*attachPolicyArgs.UserName).To(Equal(*createUserInput.UserName))
 				})
 			})
+
 			Context("by setting the parameter to false", func() {
 				It("attaches the IP-Restriction policy", func() {
 					bindData := provider.BindData{
@@ -378,6 +474,52 @@ var _ = Describe("Client", func() {
 
 					Expect(*attachPolicyArgs.PolicyArn).To(Equal(s3ClientConfig.IpRestrictionPolicyARN))
 					Expect(*attachPolicyArgs.UserName).To(Equal(*createUserInput.UserName))
+				})
+			})
+
+			Context("when a common user policy ARN was configured", func () {
+				BeforeEach(func () {
+					s3ClientConfig.CommonUserPolicyARN = "test-common-user-policy-arn"
+				})
+
+				Context("when failing to AttachUserPolicy for the IP-restriction policy", func() {
+					var expectedError error
+
+					BeforeEach(func () {
+						expectedError = errors.New("attaching user policy failed. lul.")
+						iamAPI.AttachUserPolicyReturnsOnCall(1, &iam.AttachUserPolicyOutput{}, expectedError)
+						iamAPI.ListAccessKeysReturnsOnCall(0, &iam.ListAccessKeysOutput{}, nil)
+						iamAPI.ListAttachedUserPoliciesReturnsOnCall(0, &iam.ListAttachedUserPoliciesOutput{
+							AttachedPolicies: []*iam.AttachedPolicy{
+								&iam.AttachedPolicy{
+									PolicyArn: aws.String("arn:aws:blah:blah:some-common-iam-policy-arn"),
+									PolicyName: aws.String("my-common-iam-policy"),
+								},
+							},
+							IsTruncated: aws.Bool(false),
+						}, nil)
+					})
+
+					It("deletes the user", func() {
+						bindData := provider.BindData{
+							InstanceID: "test-instance-id",
+							BindingID:  "test-binding-id",
+						}
+						_, err := s3Client.AddUserToBucket(bindData)
+						Expect(err).To(HaveOccurred())
+						Expect(err).To(Equal(expectedError))
+
+						Expect(iamAPI.AttachUserPolicyCallCount()).To(Equal(2))
+						attachPolicyArgs := iamAPI.AttachUserPolicyArgsForCall(0)
+						Expect(iamAPI.DeleteAccessKeyCallCount()).To(Equal(0))
+						Expect(iamAPI.DetachUserPolicyCallCount()).To(Equal(1))
+
+						detachPolicyArgs := iamAPI.DetachUserPolicyArgsForCall(0)
+						Expect(*detachPolicyArgs.PolicyArn).To(HaveValue(Equal("arn:aws:blah:blah:some-common-iam-policy-arn")))
+						Expect(*detachPolicyArgs.UserName).To(Equal(*attachPolicyArgs.UserName))
+
+						Expect(iamAPI.DeleteUserCallCount()).To(Equal(1))
+					})
 				})
 			})
 		})
