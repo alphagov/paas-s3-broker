@@ -31,10 +31,16 @@ var (
 	locketFixtures  mock_locket_server.LocketFixtures
 )
 
+const (
+	ipRestrictionPolicyTemplatePath = "../../fixtures/test_s3_broker_ip_restriction_iam_policy.json.tpl"
+	userCommonPolicyTemplatePath = "../../fixtures/test_s3_broker_user_common.json.tpl"
+)
+
 type SuiteData struct {
-	LocalhostIAMPolicyArn *string
-	EgressIPIAMPolicyARN  *string
-	AWSRegion             string
+	LocalhostIAMPolicyARN  *string
+	EgressIPIAMPolicyARN   *string
+	UserCommonIAMPolicyARN *string
+	AWSRegion              string
 }
 
 func TestBroker(t *testing.T) {
@@ -56,6 +62,7 @@ var _ = BeforeSuite(func() {
 	iamClient := iam.New(sess)
 	createLocalhostIAMPolicyOutput := createLocalhostPolicy(iamClient)
 	createEgressIPIAMPolicyOutput := createEgressIPPolicy(iamClient)
+	createUserCommonIAMPolicyOutput := createUserCommonPolicy(iamClient)
 
 	// Start test Locket server
 	locketFixtures, err = mock_locket_server.SetupLocketFixtures()
@@ -65,8 +72,9 @@ var _ = BeforeSuite(func() {
 	mockLocket.Start(mockLocket.Logger, mockLocket.ListenAddress, mockLocket.Certificate)
 
 	BrokerSuiteData = SuiteData{
-		LocalhostIAMPolicyArn: createLocalhostIAMPolicyOutput.Policy.Arn,
+		LocalhostIAMPolicyARN: createLocalhostIAMPolicyOutput.Policy.Arn,
 		EgressIPIAMPolicyARN:  createEgressIPIAMPolicyOutput.Policy.Arn,
+		UserCommonIAMPolicyARN:  createUserCommonIAMPolicyOutput.Policy.Arn,
 		AWSRegion:             s3ClientConfig.AWSRegion,
 	}
 })
@@ -80,7 +88,11 @@ var _ = AfterSuite(func() {
 	sess := session.Must(session.NewSession(&aws.Config{Region: aws.String(BrokerSuiteData.AWSRegion)}))
 	iamClient := iam.New(sess)
 
-	for _, arn := range []*string{BrokerSuiteData.LocalhostIAMPolicyArn, BrokerSuiteData.EgressIPIAMPolicyARN} {
+	for _, arn := range []*string{
+		BrokerSuiteData.LocalhostIAMPolicyARN,
+		BrokerSuiteData.EgressIPIAMPolicyARN,
+		BrokerSuiteData.UserCommonIAMPolicyARN,
+	} {
 		if arn != nil {
 			_, err := iamClient.DeletePolicy(&iam.DeletePolicyInput{
 				PolicyArn: arn,
@@ -92,7 +104,11 @@ var _ = AfterSuite(func() {
 })
 
 func createLocalhostPolicy(iamClient iamiface.IAMAPI) *iam.CreatePolicyOutput {
-	policyString, err := generatePolicy("127.0.0.1/32")
+	policyString, err := generatePolicy(
+		ipRestrictionPolicyTemplatePath,
+		map[string]string{"ip": "127.0.0.1/32"},
+	)
+	Expect(err).ToNot(HaveOccurred())
 
 	uniqPolicyName := fmt.Sprintf("TestS3BrokerIpRestrictionLocalhost-%s", uuid.NewV4())
 	createDefaultIAMPolicyOutput, err := iamClient.CreatePolicy(&iam.CreatePolicyInput{
@@ -104,6 +120,7 @@ func createLocalhostPolicy(iamClient iamiface.IAMAPI) *iam.CreatePolicyOutput {
 
 	return createDefaultIAMPolicyOutput
 }
+
 func createEgressIPPolicy(iamClient *iam.IAM) *iam.CreatePolicyOutput {
 	resp, err := http.Get("https://wtfismyip.com/text")
 	Expect(err).ToNot(HaveOccurred())
@@ -113,7 +130,10 @@ func createEgressIPPolicy(iamClient *iam.IAM) *iam.CreatePolicyOutput {
 	Expect(err).ToNot(HaveOccurred())
 
 	ip := strings.TrimSpace(string(body))
-	policyString, err := generatePolicy(fmt.Sprintf("%s/32", ip))
+	policyString, err := generatePolicy(
+		ipRestrictionPolicyTemplatePath,
+		map[string]string{"ip": fmt.Sprintf("%s/32", ip)},
+	)
 	Expect(err).ToNot(HaveOccurred())
 
 	uniqPolicyName := fmt.Sprintf("TestS3BrokerIpRestriction%s-%s", ip, uuid.NewV4())
@@ -127,15 +147,33 @@ func createEgressIPPolicy(iamClient *iam.IAM) *iam.CreatePolicyOutput {
 	return createEgressIPIAMPolicyOutput
 }
 
-func generatePolicy(ip string) (*string, error) {
-	t, err := template.ParseFiles("../../fixtures/test_s3_broker_ip_restriction_iam_policy.json.tpl")
+func createUserCommonPolicy(iamClient *iam.IAM) *iam.CreatePolicyOutput {
+	policyString, err := generatePolicy(
+		userCommonPolicyTemplatePath,
+		map[string]string{},
+	)
+	Expect(err).ToNot(HaveOccurred())
+
+	uniqPolicyName := fmt.Sprintf("TestS3BrokerUserCommon-%s", uuid.NewV4())
+	createUserCommonIAMPolicyOutput, err := iamClient.CreatePolicy(&iam.CreatePolicyInput{
+		Description:    aws.String("Integration Test S3 Broker User Common Policy"),
+		PolicyDocument: policyString,
+		PolicyName:     aws.String(uniqPolicyName),
+	})
+	Expect(err).NotTo(HaveOccurred())
+
+	return createUserCommonIAMPolicyOutput
+}
+
+func generatePolicy(templatePath string, context map[string]string) (*string, error) {
+	t, err := template.ParseFiles(templatePath)
 	if err != nil {
 		return nil, err
 	}
 
 	buffer := bytes.Buffer{}
 	bufferWriter := io.Writer(&buffer)
-	err = t.Execute(bufferWriter, map[string]string{"ip": ip})
+	err = t.Execute(bufferWriter, context)
 
 	if err != nil {
 		return nil, err
