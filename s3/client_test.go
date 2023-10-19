@@ -221,6 +221,7 @@ var _ = Describe("Client", func() {
 			createUserInput := iamAPI.CreateUserArgsForCall(0)
 			Expect(createUserInput.UserName).To(HaveValue(Equal("test-bucket-prefix-test-binding-id")))
 			Expect(createUserInput.Path).To(HaveValue(Equal("/test-iam-path/")))
+			Expect(createUserInput.PermissionsBoundary).To(BeNil())
 			Expect(createUserInput.Tags).To(Equal([]*iam.Tag{
 				{
 					Key:   aws.String("service_instance_guid"),
@@ -301,6 +302,7 @@ var _ = Describe("Client", func() {
 			createUserInput := iamAPI.CreateUserArgsForCall(0)
 			Expect(createUserInput.UserName).To(HaveValue(Equal("test-bucket-prefix-test-binding-id")))
 			Expect(createUserInput.Path).To(HaveValue(Equal("/test-iam-path/")))
+			Expect(createUserInput.PermissionsBoundary).To(BeNil())
 
 			By("creating access keys for the user")
 			Expect(iamAPI.CreateAccessKeyCallCount()).To(Equal(1))
@@ -381,6 +383,7 @@ var _ = Describe("Client", func() {
 
 				Expect(createUserInput.UserName).To(HaveValue(Equal("test-bucket-prefix-test-binding-id")))
 				Expect(createUserInput.Path).To(HaveValue(Equal("/test-iam-path/")))
+				Expect(createUserInput.PermissionsBoundary).To(BeNil())
 
 				Expect(attachPolicyArgs.PolicyArn).To(HaveValue(Equal("test-common-user-policy-arn")))
 				Expect(attachPolicyArgs.UserName).To(HaveValue(Equal(*createUserInput.UserName)))
@@ -410,6 +413,31 @@ var _ = Describe("Client", func() {
 					Expect(iamAPI.DetachUserPolicyCallCount()).To(Equal(0))
 					Expect(iamAPI.DeleteUserCallCount()).To(Equal(1))
 				})
+			})
+		})
+
+		Context("when a permissions boundary is configured", func() {
+			BeforeEach(func () {
+				s3ClientConfig.PermissionsBoundaryARN = "test-permissions-boundary-arn"
+			})
+
+			It("creates the user with the provided permissions boundary", func() {
+				bindData := provider.BindData{
+					InstanceID: "test-instance-id",
+					BindingID:  "test-binding-id",
+				}
+				_, err := s3Client.AddUserToBucket(bindData)
+				Expect(err).ToNot(HaveOccurred())
+
+				Expect(iamAPI.CreateUserCallCount()).To(Equal(1))
+				Expect(iamAPI.CreateAccessKeyCallCount()).To(Equal(1))
+				Expect(s3API.GetBucketPolicyCallCount()).To(Equal(1))
+				Expect(s3API.PutBucketPolicyCallCount()).To(Equal(1))
+
+				createUserInput := iamAPI.CreateUserArgsForCall(0)
+				Expect(createUserInput.UserName).To(HaveValue(Equal("test-bucket-prefix-test-binding-id")))
+				Expect(createUserInput.Path).To(HaveValue(Equal("/test-iam-path/")))
+				Expect(createUserInput.PermissionsBoundary).To(HaveValue(Equal("test-permissions-boundary-arn")))
 			})
 		})
 

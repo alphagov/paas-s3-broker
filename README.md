@@ -136,6 +136,11 @@ a policy such as:
 Notably excluding the platform's own AWS account to prevent it from granting
 it access to any other resources in the platform's account.
 
+A policy ARN can be supplied in the `iam_user_permissions_boundary_arn`
+option which will be applied as a permissions boundary for created binding
+users. This can be used as an extra level of assurance that created users
+abilities will be limited.
+
 ## Running
 
 Minimal example:
@@ -159,6 +164,7 @@ The following options can be added to the configuration file:
 | `iam_user_path`                     | empty string  | string | it should be in "/path/" format                                            |
 | `iam_ip_restriction_policy_arn`     | empty string  | string | an AWS ARN of the IP restriction policy                                    |
 | `iam_common_user_policy_arn`        | empty string  | string | an AWS ARN of an IAM policy to attach to all created users                 |
+| `iam_user_permissions_boundary_arn` | empty string  | string | an AWS ARN of an IAM policy apply as created users' permissions boundary   |
 
 ## Testing
 

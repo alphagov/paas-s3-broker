@@ -53,6 +53,7 @@ type Config struct {
 	DeployEnvironment      string `json:"deploy_env"`
 	IpRestrictionPolicyARN string `json:"iam_ip_restriction_policy_arn"`
 	CommonUserPolicyARN    string `json:"iam_common_user_policy_arn"`
+	PermissionsBoundaryARN string `json:"iam_user_permissions_boundary_arn"`
 	Timeout                time.Duration
 }
 
@@ -71,6 +72,7 @@ type S3Client struct {
 	iamUserPath            string
 	ipRestrictionPolicyArn string
 	commonUserPolicyArn    string
+	permissionsBoundaryArn string
 	awsRegion              string
 	deployEnvironment      string
 	timeout                time.Duration
@@ -106,6 +108,7 @@ func NewS3Client(
 		iamUserPath:            fmt.Sprintf("/%s/", strings.Trim(config.IAMUserPath, "/")),
 		ipRestrictionPolicyArn: config.IpRestrictionPolicyARN,
 		commonUserPolicyArn:    config.CommonUserPolicyARN,
+		permissionsBoundaryArn: config.PermissionsBoundaryARN,
 		awsRegion:              config.AWSRegion,
 		deployEnvironment:      config.DeployEnvironment,
 		timeout:                timeout,
@@ -326,6 +329,9 @@ func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredential
 		Path:     aws.String(s.iamUserPath),
 		UserName: aws.String(username),
 		Tags:     userTags,
+	}
+	if s.permissionsBoundaryArn != "" {
+		user.PermissionsBoundary = aws.String(s.permissionsBoundaryArn)
 	}
 	logger.Info("create-user", lager.Data{"bucket": fullBucketName, "user": user})
 	createUserOutput, err := s.iamClient.CreateUser(user)
