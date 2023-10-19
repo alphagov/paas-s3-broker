@@ -98,6 +98,15 @@ func AssertCodeCommitListARTemplatesAccess(creds s3.BucketCredentials, region st
 	}, 10*time.Second).ShouldNot(HaveOccurred())
 }
 
+func AssertNoCodeCommitListARTemplatesAccess(creds s3.BucketCredentials, region string) {
+	ccClient := codeCommitClientFromCredentials(creds, region)
+
+	Consistently(func() error {
+		_, err := ccClient.ListApprovalRuleTemplates(&codecommit.ListApprovalRuleTemplatesInput{})
+
+		return err
+	}, 5*time.Second, 500*time.Millisecond).Should(MatchError(ContainSubstring("AccessDenied")))
+}
 
 func WriteTempFile(creds s3.BucketCredentials, bucketPrefix, bucketName, region string) {
 	s3Client := s3ClientFromCredentials(creds, region)

@@ -34,12 +34,14 @@ var (
 const (
 	ipRestrictionPolicyTemplatePath = "../../fixtures/test_s3_broker_ip_restriction_iam_policy.json.tpl"
 	userCommonPolicyTemplatePath = "../../fixtures/test_s3_broker_user_common.json.tpl"
+	permissionsBoundaryTemplatePath = "../../fixtures/test_s3_broker_permissions_boundary.json.tpl"
 )
 
 type SuiteData struct {
 	LocalhostIAMPolicyARN  *string
 	EgressIPIAMPolicyARN   *string
 	UserCommonIAMPolicyARN *string
+	PermissionsBoundaryIAMPolicyARN *string
 	AWSRegion              string
 }
 
@@ -63,6 +65,7 @@ var _ = BeforeSuite(func() {
 	createLocalhostIAMPolicyOutput := createLocalhostPolicy(iamClient)
 	createEgressIPIAMPolicyOutput := createEgressIPPolicy(iamClient)
 	createUserCommonIAMPolicyOutput := createUserCommonPolicy(iamClient)
+	createPermissionsBoundaryIAMPolicyOutput := createPermissionsBoundaryPolicy(iamClient)
 
 	// Start test Locket server
 	locketFixtures, err = mock_locket_server.SetupLocketFixtures()
@@ -75,6 +78,7 @@ var _ = BeforeSuite(func() {
 		LocalhostIAMPolicyARN: createLocalhostIAMPolicyOutput.Policy.Arn,
 		EgressIPIAMPolicyARN:  createEgressIPIAMPolicyOutput.Policy.Arn,
 		UserCommonIAMPolicyARN:  createUserCommonIAMPolicyOutput.Policy.Arn,
+		PermissionsBoundaryIAMPolicyARN: createPermissionsBoundaryIAMPolicyOutput.Policy.Arn,
 		AWSRegion:             s3ClientConfig.AWSRegion,
 	}
 })
@@ -92,6 +96,7 @@ var _ = AfterSuite(func() {
 		BrokerSuiteData.LocalhostIAMPolicyARN,
 		BrokerSuiteData.EgressIPIAMPolicyARN,
 		BrokerSuiteData.UserCommonIAMPolicyARN,
+		BrokerSuiteData.PermissionsBoundaryIAMPolicyARN,
 	} {
 		if arn != nil {
 			_, err := iamClient.DeletePolicy(&iam.DeletePolicyInput{
@@ -163,6 +168,24 @@ func createUserCommonPolicy(iamClient *iam.IAM) *iam.CreatePolicyOutput {
 	Expect(err).NotTo(HaveOccurred())
 
 	return createUserCommonIAMPolicyOutput
+}
+
+func createPermissionsBoundaryPolicy(iamClient *iam.IAM) *iam.CreatePolicyOutput {
+	policyString, err := generatePolicy(
+		permissionsBoundaryTemplatePath,
+		map[string]string{},
+	)
+	Expect(err).ToNot(HaveOccurred())
+
+	uniqPolicyName := fmt.Sprintf("TestS3BrokerPermissionsBoundary-%s", uuid.NewV4())
+	createPermissionsBoundaryIAMPolicyOutput, err := iamClient.CreatePolicy(&iam.CreatePolicyInput{
+		Description:    aws.String("Integration Test S3 Broker Permissions Boundary"),
+		PolicyDocument: policyString,
+		PolicyName:     aws.String(uniqPolicyName),
+	})
+	Expect(err).NotTo(HaveOccurred())
+
+	return createPermissionsBoundaryIAMPolicyOutput
 }
 
 func generatePolicy(templatePath string, context map[string]string) (*string, error) {
