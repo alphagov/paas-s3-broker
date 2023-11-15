@@ -108,6 +108,39 @@ Here is an example bucket policy the broker will apply:
 }
 ```
 
+An additional policy can be supplied in the `iam_common_user_policy_arn`
+configuration option and this policy will be applied to all users the broker
+creates. Great care should be taken that this policy doesn't inadvertantly
+grant more privileges than desired. The intended use of this feature was
+to allow the IAM users to copy between buckets in other AWS accounts using
+a policy such as:
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "s3:*",
+            "Resource": "*",
+            "Condition": {
+                "StringNotEquals": {
+                    "aws:ResourceAccount": "<platform-account-id>"
+                }
+            }
+        }
+    ]
+}
+```
+
+Notably excluding the platform's own AWS account to prevent it from granting
+it access to any other resources in the platform's account.
+
+A policy ARN can be supplied in the `iam_user_permissions_boundary_arn`
+option which will be applied as a permissions boundary for created binding
+users. This can be used as an extra level of assurance that created users
+abilities will be limited.
+
 ## Running
 
 Minimal example:
@@ -120,16 +153,19 @@ go run main.go -config examples/config.json
 
 The following options can be added to the configuration file:
 
-| Field                            | Default value | Type   | Values                                                                     |
-| -------------------------------- | ------------- | ------ | -------------------------------------------------------------------------- |
-| `basic_auth_username`            | empty string  | string | any non-empty string                                                       |
-| `basic_auth_password`            | empty string  | string | any non-empty string                                                       |
-| `port`                           | 3000          | string | any free port                                                              |
-| `log_level`                      | debug         | string | debug,info,error,fatal                                                     |
-| `aws_region`                     | empty string  | string | any [AWS region](https://docs.aws.amazon.com/general/latest/gr/rande.html) |
-| `bucket_prefix`                  | empty string  | string | any                                                                        |
-| `iam_user_path`                  | empty string  | string | it should be in "/path/" format                                            |
-| `iam_ip_restriction_policy_arn`  | empty string  | string | an AWS ARN of the IP restriction policy                                    |
+| Field                               | Default value | Type   | Values                                                                     |
+| ----------------------------------- | ------------- | ------ | -------------------------------------------------------------------------- |
+| `basic_auth_username`               | empty string  | string | any non-empty string                                                       |
+| `basic_auth_password`               | empty string  | string | any non-empty string                                                       |
+| `port`                              | 3000          | string | any free port                                                              |
+| `log_level`                         | debug         | string | debug,info,error,fatal                                                     |
+| `aws_region`                        | empty string  | string | any [AWS region](https://docs.aws.amazon.com/general/latest/gr/rande.html) |
+| `bucket_prefix`                     | empty string  | string | any                                                                        |
+| `iam_user_path`                     | empty string  | string | it should be in "/path/" format                                            |
+| `iam_ip_restriction_policy_arn`     | empty string  | string | an AWS ARN of the IP restriction policy                                    |
+| `iam_common_user_policy_arn`        | empty string  | string | an AWS ARN of an IAM policy to attach to all created users                 |
+| `iam_user_permissions_boundary_arn` | empty string  | string | an AWS ARN of an IAM policy apply as created users' permissions boundary   |
+
 ## Testing
 
 Run unit tests with:

@@ -52,6 +52,8 @@ type Config struct {
 	IAMUserPath            string `json:"iam_user_path"`
 	DeployEnvironment      string `json:"deploy_env"`
 	IpRestrictionPolicyARN string `json:"iam_ip_restriction_policy_arn"`
+	CommonUserPolicyARN    string `json:"iam_common_user_policy_arn"`
+	PermissionsBoundaryARN string `json:"iam_user_permissions_boundary_arn"`
 	Timeout                time.Duration
 }
 
@@ -69,6 +71,8 @@ type S3Client struct {
 	bucketPrefix           string
 	iamUserPath            string
 	ipRestrictionPolicyArn string
+	commonUserPolicyArn    string
+	permissionsBoundaryArn string
 	awsRegion              string
 	deployEnvironment      string
 	timeout                time.Duration
@@ -103,6 +107,8 @@ func NewS3Client(
 		bucketPrefix:           config.ResourcePrefix,
 		iamUserPath:            fmt.Sprintf("/%s/", strings.Trim(config.IAMUserPath, "/")),
 		ipRestrictionPolicyArn: config.IpRestrictionPolicyARN,
+		commonUserPolicyArn:    config.CommonUserPolicyARN,
+		permissionsBoundaryArn: config.PermissionsBoundaryARN,
 		awsRegion:              config.AWSRegion,
 		deployEnvironment:      config.DeployEnvironment,
 		timeout:                timeout,
@@ -324,6 +330,9 @@ func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredential
 		UserName: aws.String(username),
 		Tags:     userTags,
 	}
+	if s.permissionsBoundaryArn != "" {
+		user.PermissionsBoundary = aws.String(s.permissionsBoundaryArn)
+	}
 	logger.Info("create-user", lager.Data{"bucket": fullBucketName, "user": user})
 	createUserOutput, err := s.iamClient.CreateUser(user)
 	if err != nil {
@@ -344,14 +353,33 @@ func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredential
 		return BucketCredentials{}, err
 	}
 
+	if s.commonUserPolicyArn != "" {
+		logger.Info("add-common-user-policy", lager.Data{
+			"bucket": fullBucketName,
+			"user": username,
+		})
+		_, err = s.iamClient.AttachUserPolicy(&iam.AttachUserPolicyInput{
+			PolicyArn: aws.String(s.commonUserPolicyArn),
+			UserName:  aws.String(username),
+		})
+		if err != nil {
+			logger.Error("add-common-user-policy", err)
+			s.deleteUserWithoutError(username)
+			return BucketCredentials{}, err
+		}
+	}
+
 	if !bindParams.AllowExternalAccess {
-		logger.Info("allow-external-access", lager.Data{"bucket": fullBucketName})
+		logger.Info("disallow-external-access", lager.Data{
+			"bucket": fullBucketName,
+			"user": username,
+		})
 		_, err = s.iamClient.AttachUserPolicy(&iam.AttachUserPolicyInput{
 			PolicyArn: aws.String(s.ipRestrictionPolicyArn),
 			UserName:  aws.String(username),
 		})
 		if err != nil {
-			logger.Error("allow-external-access", err)
+			logger.Error("disallow-external-access", err)
 			s.deleteUserWithoutError(username)
 			return BucketCredentials{}, err
 		}

@@ -54,7 +54,7 @@ var _ = Describe("Broker", func() {
 	})
 
 	It("should return a 410 response when trying to delete a non-existent instance", func() {
-		_, brokerTester := initialise(*BrokerSuiteData.LocalhostIAMPolicyArn)
+		_, brokerTester := initialise(*BrokerSuiteData.LocalhostIAMPolicyARN, "", "")
 
 		res := brokerTester.Deprovision(instanceID, serviceID, planID, ASYNC_ALLOWED)
 		Expect(res.Code).To(Equal(http.StatusGone))
@@ -62,7 +62,7 @@ var _ = Describe("Broker", func() {
 
 	It("should manage the lifecycle of an S3 bucket", func() {
 		By("initialising")
-		s3ClientConfig, brokerTester := initialise(*BrokerSuiteData.LocalhostIAMPolicyArn)
+		s3ClientConfig, brokerTester := initialise(*BrokerSuiteData.LocalhostIAMPolicyARN, "", "")
 
 		By("Provisioning")
 		res := brokerTester.Provision(instanceID, brokertesting.RequestBody{
@@ -134,7 +134,7 @@ var _ = Describe("Broker", func() {
 
 	It("manages public buckets correctly", func() {
 		By("initialising")
-		s3ClientConfig, brokerTester := initialise(*BrokerSuiteData.LocalhostIAMPolicyArn)
+		s3ClientConfig, brokerTester := initialise(*BrokerSuiteData.LocalhostIAMPolicyARN, "", "")
 
 		By("provisioning a public bucket")
 		res := brokerTester.Provision(instanceID, brokertesting.RequestBody{
@@ -177,7 +177,7 @@ var _ = Describe("Broker", func() {
 
 	It("manages private buckets correctly", func() {
 		By("initialising")
-		s3ClientConfig, brokerTester := initialise(*BrokerSuiteData.LocalhostIAMPolicyArn)
+		s3ClientConfig, brokerTester := initialise(*BrokerSuiteData.LocalhostIAMPolicyARN, "", "")
 
 		By("provisioning a private bucket")
 		res := brokerTester.Provision(instanceID, brokertesting.RequestBody{
@@ -223,7 +223,7 @@ var _ = Describe("Broker", func() {
 	Context("With an IAM policy that does not include the IP the test is running from", func() {
 		It("should create credentials that cannot be used", func() { //these integration tests are run from concourse, which do not use the NAT gateways
 			By("initialising")
-			s3ClientConfig, brokerTester := initialise(*BrokerSuiteData.LocalhostIAMPolicyArn)
+			s3ClientConfig, brokerTester := initialise(*BrokerSuiteData.LocalhostIAMPolicyARN, "", "")
 
 			By("provisioning a private bucket")
 			res := brokerTester.Provision(instanceID, brokertesting.RequestBody{
@@ -277,7 +277,7 @@ var _ = Describe("Broker", func() {
 	Context("With an IAM policy that includes the IP the test is running from", func() {
 		It("should create credentials that can be used", func() { //these integration tests are run from concourse, which do not use the NAT gateways
 			By("initialising")
-			s3ClientConfig, brokerTester := initialise(*BrokerSuiteData.EgressIPIAMPolicyARN)
+			s3ClientConfig, brokerTester := initialise(*BrokerSuiteData.EgressIPIAMPolicyARN, "", "")
 
 			By("provisioning a private bucket")
 			res := brokerTester.Provision(instanceID, brokertesting.RequestBody{
@@ -327,10 +327,130 @@ var _ = Describe("Broker", func() {
 		})
 	})
 
+	Context("with a common user policy configured", func() {
+		var s3ClientConfig *s3.Config
+		var brokerTester brokertesting.BrokerTester
+		BeforeEach(func() {
+			s3ClientConfig, brokerTester = initialise(
+				*BrokerSuiteData.LocalhostIAMPolicyARN,
+				*BrokerSuiteData.UserCommonIAMPolicyARN,
+				"",
+			)
+		})
+
+		Context("with a provisioned bucket", func() {
+			BeforeEach(func() {
+				res := brokerTester.Provision(instanceID, brokertesting.RequestBody{
+					ServiceID: serviceID,
+					PlanID:    planID,
+					Parameters: &brokertesting.ConfigurationValues{
+						"public_bucket": false,
+					},
+				}, ASYNC_ALLOWED)
+				Expect(res.Code).To(Equal(http.StatusCreated))
+
+				DeferCleanup(func() {
+					helpers.DeprovisionService(brokerTester, instanceID, serviceID, planID)
+				})
+			})
+
+			Context("with a binding", func() {
+				var binding1Creds s3.BucketCredentials
+
+				BeforeEach(func() {
+					res := brokerTester.Bind(instanceID, binding1ID, brokertesting.RequestBody{
+						ServiceID: serviceID,
+						PlanID:    planID,
+						Parameters: &brokertesting.ConfigurationValues{
+							"permissions": "read-write",
+							"allow_external_access": true,
+						},
+					}, ASYNC_ALLOWED)
+					Expect(res.Code).To(Equal(http.StatusCreated))
+					binding1Creds = extractCredentials(res)
+
+					DeferCleanup(func() {
+						helpers.Unbind(brokerTester, instanceID, serviceID, planID, binding1ID)
+					})
+				})
+
+				It("is able to perform actions allowed by the common user policy", func() {
+					// in real life we're likely to use the common user policy
+					// to grant permissions in other aws accounts, but that's
+					// very awkward to set up for integration tests, so instead
+					// the test policy grants some trivial access to an unrelated
+					// aws service that policies would otherwise not allow.
+					helpers.AssertCodeCommitListReposAccess(binding1Creds, s3ClientConfig.AWSRegion)
+					helpers.AssertCodeCommitListARTemplatesAccess(binding1Creds, s3ClientConfig.AWSRegion)
+				})
+			})
+		})
+	})
+
+	Context("with a permissions boundary configured", func() {
+		var s3ClientConfig *s3.Config
+		var brokerTester brokertesting.BrokerTester
+		BeforeEach(func() {
+			s3ClientConfig, brokerTester = initialise(
+				*BrokerSuiteData.LocalhostIAMPolicyARN,
+				*BrokerSuiteData.UserCommonIAMPolicyARN,
+				*BrokerSuiteData.PermissionsBoundaryIAMPolicyARN,
+			)
+		})
+
+		Context("with a provisioned bucket", func() {
+			BeforeEach(func() {
+				res := brokerTester.Provision(instanceID, brokertesting.RequestBody{
+					ServiceID: serviceID,
+					PlanID:    planID,
+					Parameters: &brokertesting.ConfigurationValues{
+						"public_bucket": false,
+					},
+				}, ASYNC_ALLOWED)
+				Expect(res.Code).To(Equal(http.StatusCreated))
+
+				DeferCleanup(func() {
+					helpers.DeprovisionService(brokerTester, instanceID, serviceID, planID)
+				})
+			})
+
+			Context("with a binding", func() {
+				var binding1Creds s3.BucketCredentials
+
+				BeforeEach(func() {
+					res := brokerTester.Bind(instanceID, binding1ID, brokertesting.RequestBody{
+						ServiceID: serviceID,
+						PlanID:    planID,
+						Parameters: &brokertesting.ConfigurationValues{
+							"permissions": "read-write",
+							"allow_external_access": true,
+						},
+					}, ASYNC_ALLOWED)
+					Expect(res.Code).To(Equal(http.StatusCreated))
+					binding1Creds = extractCredentials(res)
+
+					DeferCleanup(func() {
+						helpers.Unbind(brokerTester, instanceID, serviceID, planID, binding1ID)
+					})
+				})
+
+				It("is able to perform appropriate actions", func() {
+					By("accessing actions granted by the common user policy", func() {
+						helpers.AssertCodeCommitListReposAccess(binding1Creds, s3ClientConfig.AWSRegion)
+					})
+
+					By("failing to access actions denied by the permissions boundary", func() {
+						helpers.AssertNoCodeCommitListARTemplatesAccess(binding1Creds, s3ClientConfig.AWSRegion)
+					})
+				})
+			})
+		})
+	})
+
 	Context("Parallel operation", func() {
 		It("manages public buckets correctly", func() {
 			By("initialising")
-			_, brokerTester := initialise(*BrokerSuiteData.LocalhostIAMPolicyArn)
+			_, brokerTester := initialise(*BrokerSuiteData.LocalhostIAMPolicyARN, "", "")
 
 			By("provisioning a public bucket")
 			res := brokerTester.Provision(instanceID, brokertesting.RequestBody{
@@ -413,7 +533,11 @@ var _ = Describe("Broker", func() {
 	})
 })
 
-func initialise(IAMPolicyARN string) (*s3.Config, brokertesting.BrokerTester) {
+func initialise(
+	ipRestrictionPolicyARN string,
+	commonUserPolicyARN string,
+	permissionsBoundaryARN string,
+) (*s3.Config, brokertesting.BrokerTester) {
 	file, err := os.Open("../../fixtures/config.json")
 	Expect(err).ToNot(HaveOccurred())
 	defer file.Close()
@@ -430,8 +554,11 @@ func initialise(IAMPolicyARN string) (*s3.Config, brokertesting.BrokerTester) {
 	s3ClientConfig, err := s3.NewS3ClientConfig(config.Provider)
 	Expect(err).ToNot(HaveOccurred())
 
-	s3ClientConfig.IpRestrictionPolicyARN = IAMPolicyARN
+	s3ClientConfig.IpRestrictionPolicyARN = ipRestrictionPolicyARN
 	Expect(s3ClientConfig.IpRestrictionPolicyARN).To(HavePrefix("arn:aws:iam::"))
+
+	s3ClientConfig.CommonUserPolicyARN = commonUserPolicyARN
+	s3ClientConfig.PermissionsBoundaryARN = permissionsBoundaryARN
 
 	logger := lager.NewLogger("s3-service-broker-test")
 	logger.RegisterSink(lager.NewWriterSink(GinkgoWriter, config.API.LagerLogLevel))

@@ -14,6 +14,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
 	awsS3 "github.com/aws/aws-sdk-go/service/s3"
+	"github.com/aws/aws-sdk-go/service/codecommit"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 )
@@ -24,12 +25,7 @@ const (
 )
 
 func AssertBucketReadWriteAccess(creds s3.BucketCredentials, bucketPrefix, bucketName, region string) {
-	sess := session.Must(session.NewSession(&aws.Config{
-		Region:      aws.String(region),
-		Credentials: credentials.NewStaticCredentials(creds.AWSAccessKeyID, creds.AWSSecretAccessKey, ""),
-	}))
-	s3Client := awsS3.New(sess)
-
+	s3Client := s3ClientFromCredentials(creds, region)
 	bucketName = bucketPrefix + bucketName
 
 	Eventually(func() error {
@@ -50,12 +46,7 @@ func AssertBucketReadWriteAccess(creds s3.BucketCredentials, bucketPrefix, bucke
 }
 
 func AssertNoBucketAccess(creds s3.BucketCredentials, bucketPrefix, bucketName, region string) {
-	sess := session.Must(session.NewSession(&aws.Config{
-		Region:      aws.String(region),
-		Credentials: credentials.NewStaticCredentials(creds.AWSAccessKeyID, creds.AWSSecretAccessKey, ""),
-	}))
-	s3Client := awsS3.New(sess)
-
+	s3Client := s3ClientFromCredentials(creds, region)
 	bucketName = bucketPrefix + bucketName
 
 	Consistently(func() error {
@@ -69,12 +60,7 @@ func AssertNoBucketAccess(creds s3.BucketCredentials, bucketPrefix, bucketName, 
 }
 
 func AssertBucketReadOnlyAccess(creds s3.BucketCredentials, bucketPrefix, bucketName, region string) {
-	sess := session.Must(session.NewSession(&aws.Config{
-		Region:      aws.String(region),
-		Credentials: credentials.NewStaticCredentials(creds.AWSAccessKeyID, creds.AWSSecretAccessKey, ""),
-	}))
-	s3Client := awsS3.New(sess)
-
+	s3Client := s3ClientFromCredentials(creds, region)
 	bucketName = bucketPrefix + bucketName
 
 	Eventually(func() error {
@@ -92,13 +78,38 @@ func AssertBucketReadOnlyAccess(creds s3.BucketCredentials, bucketPrefix, bucket
 	}, 10*time.Second).Should(HaveOccurred())
 }
 
-func WriteTempFile(creds s3.BucketCredentials, bucketPrefix, bucketName, region string) {
-	sess := session.Must(session.NewSession(&aws.Config{
-		Region:      aws.String(region),
-		Credentials: credentials.NewStaticCredentials(creds.AWSAccessKeyID, creds.AWSSecretAccessKey, ""),
-	}))
+func AssertCodeCommitListReposAccess(creds s3.BucketCredentials, region string) {
+	ccClient := codeCommitClientFromCredentials(creds, region)
 
-	s3Client := awsS3.New(sess)
+	Eventually(func() error {
+		_, err := ccClient.ListRepositories(&codecommit.ListRepositoriesInput{})
+
+		return err
+	}, 10*time.Second).ShouldNot(HaveOccurred())
+}
+
+func AssertCodeCommitListARTemplatesAccess(creds s3.BucketCredentials, region string) {
+	ccClient := codeCommitClientFromCredentials(creds, region)
+
+	Eventually(func() error {
+		_, err := ccClient.ListApprovalRuleTemplates(&codecommit.ListApprovalRuleTemplatesInput{})
+
+		return err
+	}, 10*time.Second).ShouldNot(HaveOccurred())
+}
+
+func AssertNoCodeCommitListARTemplatesAccess(creds s3.BucketCredentials, region string) {
+	ccClient := codeCommitClientFromCredentials(creds, region)
+
+	Consistently(func() error {
+		_, err := ccClient.ListApprovalRuleTemplates(&codecommit.ListApprovalRuleTemplatesInput{})
+
+		return err
+	}, 5*time.Second, 500*time.Millisecond).Should(MatchError(ContainSubstring("AccessDenied")))
+}
+
+func WriteTempFile(creds s3.BucketCredentials, bucketPrefix, bucketName, region string) {
+	s3Client := s3ClientFromCredentials(creds, region)
 	bucketName = bucketPrefix + bucketName
 
 	Eventually(func() error {
@@ -107,12 +118,7 @@ func WriteTempFile(creds s3.BucketCredentials, bucketPrefix, bucketName, region 
 }
 
 func DeleteTempFile(creds s3.BucketCredentials, bucketPrefix, bucketName, region string) {
-	sess := session.Must(session.NewSession(&aws.Config{
-		Region:      aws.String(region),
-		Credentials: credentials.NewStaticCredentials(creds.AWSAccessKeyID, creds.AWSSecretAccessKey, ""),
-	}))
-
-	s3Client := awsS3.New(sess)
+	s3Client := s3ClientFromCredentials(creds, region)
 	bucketName = bucketPrefix + bucketName
 
 	Eventually(func() error {
@@ -140,6 +146,22 @@ func Unbind(brokerTester brokertesting.BrokerTester, instanceID string, serviceI
 		Expect(code).To(BeNumerically("<", 500))
 		return code
 	}, 10*time.Second).Should(Equal(http.StatusGone))
+}
+
+func s3ClientFromCredentials(creds s3.BucketCredentials, region string) *awsS3.S3 {
+	sess := session.Must(session.NewSession(&aws.Config{
+		Region:      aws.String(region),
+		Credentials: credentials.NewStaticCredentials(creds.AWSAccessKeyID, creds.AWSSecretAccessKey, ""),
+	}))
+	return awsS3.New(sess)
+}
+
+func codeCommitClientFromCredentials(creds s3.BucketCredentials, region string) *codecommit.CodeCommit {
+	sess := session.Must(session.NewSession(&aws.Config{
+		Region:      aws.String(region),
+		Credentials: credentials.NewStaticCredentials(creds.AWSAccessKeyID, creds.AWSSecretAccessKey, ""),
+	}))
+	return codecommit.New(sess)
 }
 
 func createS3Object(s3Client *awsS3.S3, content string, bucketName string) error {
