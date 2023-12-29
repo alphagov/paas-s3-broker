@@ -14,4 +14,15 @@ run:
     - -c
     - |
       cd repo
+
+      AWS_ACCOUNT_ID=$(curl http://169.254.169.254/latest/dynamic/instance-identity/document \
+        | grep accountId \
+        | awk '{print $3}' \
+        | sed 's/"//g'\
+        | sed 's/,//g' \
+      )
+      export TEST_PERMISSIONS_BOUNDARY_ARN="arn:aws:iam::${AWS_ACCOUNT_ID}:policy/TestS3BrokerUserPermissionsBoundary"
+      export TEST_CP_PERMISSIONS_BOUNDARY_ARN="arn:aws:iam::${AWS_ACCOUNT_ID}:policy/TestCommonPolicyS3BrokerUserPermissionsBoundary"
+      export PERMISSIONS_BOUNDARY_ARN="arn:aws:iam::${AWS_ACCOUNT_ID}:policy/S3BrokerUserPermissionsBoundary"
+
       make test

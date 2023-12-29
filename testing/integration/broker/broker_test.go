@@ -54,7 +54,7 @@ var _ = Describe("Broker", func() {
 	})
 
 	It("should return a 410 response when trying to delete a non-existent instance", func() {
-		_, brokerTester := initialise(*BrokerSuiteData.LocalhostIAMPolicyARN, "", "")
+		_, brokerTester := initialise(*BrokerSuiteData.LocalhostIAMPolicyARN, "", BrokerSuiteData.PermissionsBoundaryIAMPolicyARN)
 
 		res := brokerTester.Deprovision(instanceID, serviceID, planID, ASYNC_ALLOWED)
 		Expect(res.Code).To(Equal(http.StatusGone))
@@ -62,7 +62,7 @@ var _ = Describe("Broker", func() {
 
 	It("should manage the lifecycle of an S3 bucket", func() {
 		By("initialising")
-		s3ClientConfig, brokerTester := initialise(*BrokerSuiteData.LocalhostIAMPolicyARN, "", "")
+		s3ClientConfig, brokerTester := initialise(*BrokerSuiteData.LocalhostIAMPolicyARN, "", BrokerSuiteData.PermissionsBoundaryIAMPolicyARN)
 
 		By("Provisioning")
 		res := brokerTester.Provision(instanceID, brokertesting.RequestBody{
@@ -134,7 +134,7 @@ var _ = Describe("Broker", func() {
 
 	It("manages public buckets correctly", func() {
 		By("initialising")
-		s3ClientConfig, brokerTester := initialise(*BrokerSuiteData.LocalhostIAMPolicyARN, "", "")
+		s3ClientConfig, brokerTester := initialise(*BrokerSuiteData.LocalhostIAMPolicyARN, "", BrokerSuiteData.PermissionsBoundaryIAMPolicyARN)
 
 		By("provisioning a public bucket")
 		res := brokerTester.Provision(instanceID, brokertesting.RequestBody{
@@ -177,7 +177,7 @@ var _ = Describe("Broker", func() {
 
 	It("manages private buckets correctly", func() {
 		By("initialising")
-		s3ClientConfig, brokerTester := initialise(*BrokerSuiteData.LocalhostIAMPolicyARN, "", "")
+		s3ClientConfig, brokerTester := initialise(*BrokerSuiteData.LocalhostIAMPolicyARN, "", BrokerSuiteData.PermissionsBoundaryIAMPolicyARN)
 
 		By("provisioning a private bucket")
 		res := brokerTester.Provision(instanceID, brokertesting.RequestBody{
@@ -223,7 +223,7 @@ var _ = Describe("Broker", func() {
 	Context("With an IAM policy that does not include the IP the test is running from", func() {
 		It("should create credentials that cannot be used", func() { //these integration tests are run from concourse, which do not use the NAT gateways
 			By("initialising")
-			s3ClientConfig, brokerTester := initialise(*BrokerSuiteData.LocalhostIAMPolicyARN, "", "")
+			s3ClientConfig, brokerTester := initialise(*BrokerSuiteData.LocalhostIAMPolicyARN, "", BrokerSuiteData.PermissionsBoundaryIAMPolicyARN)
 
 			By("provisioning a private bucket")
 			res := brokerTester.Provision(instanceID, brokertesting.RequestBody{
@@ -277,7 +277,7 @@ var _ = Describe("Broker", func() {
 	Context("With an IAM policy that includes the IP the test is running from", func() {
 		It("should create credentials that can be used", func() { //these integration tests are run from concourse, which do not use the NAT gateways
 			By("initialising")
-			s3ClientConfig, brokerTester := initialise(*BrokerSuiteData.EgressIPIAMPolicyARN, "", "")
+			s3ClientConfig, brokerTester := initialise(*BrokerSuiteData.EgressIPIAMPolicyARN, "", BrokerSuiteData.PermissionsBoundaryIAMPolicyARN)
 
 			By("provisioning a private bucket")
 			res := brokerTester.Provision(instanceID, brokertesting.RequestBody{
@@ -334,7 +334,7 @@ var _ = Describe("Broker", func() {
 			s3ClientConfig, brokerTester = initialise(
 				*BrokerSuiteData.LocalhostIAMPolicyARN,
 				*BrokerSuiteData.UserCommonIAMPolicyARN,
-				"",
+				BrokerSuiteData.TestCommonPolicyPermissionsBoundaryIAMPolicyARN,
 			)
 		})
 
@@ -362,7 +362,7 @@ var _ = Describe("Broker", func() {
 						ServiceID: serviceID,
 						PlanID:    planID,
 						Parameters: &brokertesting.ConfigurationValues{
-							"permissions": "read-write",
+							"permissions":           "read-write",
 							"allow_external_access": true,
 						},
 					}, ASYNC_ALLOWED)
@@ -394,7 +394,7 @@ var _ = Describe("Broker", func() {
 			s3ClientConfig, brokerTester = initialise(
 				*BrokerSuiteData.LocalhostIAMPolicyARN,
 				*BrokerSuiteData.UserCommonIAMPolicyARN,
-				*BrokerSuiteData.PermissionsBoundaryIAMPolicyARN,
+				BrokerSuiteData.TestPermissionsBoundaryIAMPolicyARN,
 			)
 		})
 
@@ -422,7 +422,7 @@ var _ = Describe("Broker", func() {
 						ServiceID: serviceID,
 						PlanID:    planID,
 						Parameters: &brokertesting.ConfigurationValues{
-							"permissions": "read-write",
+							"permissions":           "read-write",
 							"allow_external_access": true,
 						},
 					}, ASYNC_ALLOWED)
@@ -450,7 +450,7 @@ var _ = Describe("Broker", func() {
 	Context("Parallel operation", func() {
 		It("manages public buckets correctly", func() {
 			By("initialising")
-			_, brokerTester := initialise(*BrokerSuiteData.LocalhostIAMPolicyARN, "", "")
+			_, brokerTester := initialise(*BrokerSuiteData.LocalhostIAMPolicyARN, "", BrokerSuiteData.PermissionsBoundaryIAMPolicyARN)
 
 			By("provisioning a public bucket")
 			res := brokerTester.Provision(instanceID, brokertesting.RequestBody{
