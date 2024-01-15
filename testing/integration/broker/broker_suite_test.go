@@ -33,16 +33,19 @@ var (
 
 const (
 	ipRestrictionPolicyTemplatePath = "../../fixtures/test_s3_broker_ip_restriction_iam_policy.json.tpl"
-	userCommonPolicyTemplatePath = "../../fixtures/test_s3_broker_user_common.json.tpl"
+	userCommonPolicyTemplatePath    = "../../fixtures/test_s3_broker_user_common.json.tpl"
 	permissionsBoundaryTemplatePath = "../../fixtures/test_s3_broker_permissions_boundary.json.tpl"
 )
 
 type SuiteData struct {
-	LocalhostIAMPolicyARN  *string
-	EgressIPIAMPolicyARN   *string
-	UserCommonIAMPolicyARN *string
-	PermissionsBoundaryIAMPolicyARN *string
-	AWSRegion              string
+	LocalhostIAMPolicyARN                           *string
+	EgressIPIAMPolicyARN                            *string
+	UserCommonIAMPolicyARN                          *string
+	TestPermissionsBoundaryIAMPolicyARN             string
+	TestCommonPolicyPermissionsBoundaryIAMPolicyARN string
+	PermissionsBoundaryIAMPolicyARN                 string
+
+	AWSRegion string
 }
 
 func TestBroker(t *testing.T) {
@@ -65,7 +68,23 @@ var _ = BeforeSuite(func() {
 	createLocalhostIAMPolicyOutput := createLocalhostPolicy(iamClient)
 	createEgressIPIAMPolicyOutput := createEgressIPPolicy(iamClient)
 	createUserCommonIAMPolicyOutput := createUserCommonPolicy(iamClient)
-	createPermissionsBoundaryIAMPolicyOutput := createPermissionsBoundaryPolicy(iamClient)
+	testPermissionsBoundryArn := ""
+	if val, present := os.LookupEnv("TEST_PERMISSIONS_BOUNDARY_ARN"); present && val != "" {
+		testPermissionsBoundryArn = val
+	} else {
+		createPermissionsBoundaryIAMPolicyOutput := createPermissionsBoundaryPolicy(iamClient)
+		testPermissionsBoundryArn = *createPermissionsBoundaryIAMPolicyOutput.Policy.Arn
+	}
+
+	testCommonPolicyPermissionsBoundaryArn := ""
+	if val, present := os.LookupEnv("TEST_CP_PERMISSIONS_BOUNDARY_ARN"); present && val != "" {
+		testCommonPolicyPermissionsBoundaryArn = val
+	}
+
+	permissionsBounaryArn := ""
+	if val, present := os.LookupEnv("PERMISSIONS_BOUNDARY_ARN"); present && val != "" {
+		permissionsBounaryArn = val
+	}
 
 	// Start test Locket server
 	locketFixtures, err = mock_locket_server.SetupLocketFixtures()
@@ -75,11 +94,13 @@ var _ = BeforeSuite(func() {
 	mockLocket.Start(mockLocket.Logger, mockLocket.ListenAddress, mockLocket.Certificate)
 
 	BrokerSuiteData = SuiteData{
-		LocalhostIAMPolicyARN: createLocalhostIAMPolicyOutput.Policy.Arn,
-		EgressIPIAMPolicyARN:  createEgressIPIAMPolicyOutput.Policy.Arn,
-		UserCommonIAMPolicyARN:  createUserCommonIAMPolicyOutput.Policy.Arn,
-		PermissionsBoundaryIAMPolicyARN: createPermissionsBoundaryIAMPolicyOutput.Policy.Arn,
-		AWSRegion:             s3ClientConfig.AWSRegion,
+		LocalhostIAMPolicyARN:                           createLocalhostIAMPolicyOutput.Policy.Arn,
+		EgressIPIAMPolicyARN:                            createEgressIPIAMPolicyOutput.Policy.Arn,
+		UserCommonIAMPolicyARN:                          createUserCommonIAMPolicyOutput.Policy.Arn,
+		TestPermissionsBoundaryIAMPolicyARN:             testPermissionsBoundryArn,
+		TestCommonPolicyPermissionsBoundaryIAMPolicyARN: testCommonPolicyPermissionsBoundaryArn,
+		PermissionsBoundaryIAMPolicyARN:                 permissionsBounaryArn,
+		AWSRegion:                                       s3ClientConfig.AWSRegion,
 	}
 })
 
@@ -96,11 +117,20 @@ var _ = AfterSuite(func() {
 		BrokerSuiteData.LocalhostIAMPolicyARN,
 		BrokerSuiteData.EgressIPIAMPolicyARN,
 		BrokerSuiteData.UserCommonIAMPolicyARN,
-		BrokerSuiteData.PermissionsBoundaryIAMPolicyARN,
 	} {
 		if arn != nil {
 			_, err := iamClient.DeletePolicy(&iam.DeletePolicyInput{
 				PolicyArn: arn,
+			})
+
+			Expect(err).NotTo(HaveOccurred())
+		}
+	}
+
+	if val, present := os.LookupEnv("TEST_PERMISSIONS_BOUNDARY_ARN"); !present || val == "" {
+		if BrokerSuiteData.TestPermissionsBoundaryIAMPolicyARN != "" {
+			_, err := iamClient.DeletePolicy(&iam.DeletePolicyInput{
+				PolicyArn: aws.String(BrokerSuiteData.TestPermissionsBoundaryIAMPolicyARN),
 			})
 
 			Expect(err).NotTo(HaveOccurred())
