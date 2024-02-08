@@ -570,6 +570,17 @@ func initialise(
 
 	serviceBroker, err := broker.New(config, s3Provider, logger)
 	Expect(err).ToNot(HaveOccurred())
+
+	_, asyncbinderimplemented := serviceBroker.AsyncBinderImplemented()
+	_, asyncprovisionerimplemented := serviceBroker.AsyncProvisionerImplemented()
+	_, binderimplemented := serviceBroker.BinderImplemented()
+	_, provisionerimplemented := serviceBroker.ProvisionerImplemented()
+	_, updaterimplemented := serviceBroker.UpdaterImplemented()
+	Expect(asyncbinderimplemented).To(BeFalse())
+	Expect(asyncprovisionerimplemented).To(BeTrue())
+	Expect(binderimplemented).To(BeTrue())
+	Expect(provisionerimplemented).To(BeTrue())
+	Expect(updaterimplemented).To(BeTrue())
 	brokerAPI := broker.NewAPI(serviceBroker, logger, config)
 
 	return s3ClientConfig, brokertesting.New(brokerapi.BrokerCredentials{

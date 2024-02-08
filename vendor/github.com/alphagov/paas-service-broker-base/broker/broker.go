@@ -59,13 +59,38 @@ func New(config Config, serviceProvider provider.Provider, logger lager.Logger) 
 	return b, nil
 }
 
+func (b *Broker) BinderImplemented() (provider.Binder, bool) {
+	binder, ok := b.Provider.(provider.Binder)
+	return binder, ok
+}
+
+func (b *Broker) AsyncBinderImplemented() (provider.AsyncBinder, bool) {
+	asyncbinder, ok := b.Provider.(provider.AsyncBinder)
+	return asyncbinder, ok
+}
+
+func (b *Broker) ProvisionerImplemented() (provider.Provisioner, bool) {
+	provisioner, ok := b.Provider.(provider.Provisioner)
+	return provisioner, ok
+}
+
+func (b *Broker) AsyncProvisionerImplemented() (provider.AsyncProvisioner, bool) {
+	asyncprovisioner, ok := b.Provider.(provider.AsyncProvisioner)
+	return asyncprovisioner, ok
+}
+
+func (b *Broker) UpdaterImplemented() (provider.Updater, bool) {
+	updater, ok := b.Provider.(provider.Updater)
+	return updater, ok
+}
+
 func (b *Broker) Services(ctx context.Context) ([]domain.Service, error) {
 	services := []domain.Service{}
 	for _, svc := range b.config.Catalog.Catalog.Services {
-		if _, ok := b.Provider.(provider.Binder); ok {
+		if _, ok := b.BinderImplemented(); ok {
 			svc.Bindable = true
 		}
-		if _, ok := b.Provider.(provider.AsyncBinder); ok {
+		if _, ok := b.AsyncBinderImplemented(); ok {
 			svc.BindingsRetrievable = true
 		}
 		services = append(services, svc)
@@ -115,7 +140,7 @@ func (b *Broker) Provision(
 		Plan:       plan,
 	}
 
-	provisioner, ok := b.Provider.(provider.Provisioner)
+	provisioner, ok := b.ProvisionerImplemented()
 	if !ok {
 		return domain.ProvisionedServiceSpec{}, ErrNotImplemented
 	}
@@ -127,7 +152,7 @@ func (b *Broker) Provision(
 	if res == nil {
 		return domain.ProvisionedServiceSpec{}, ErrNilResponse
 	}
-	if _, asyncImplemented := b.Provider.(provider.AsyncProvisioner); res.IsAsync && !asyncImplemented {
+	if _, asyncImplemented := b.AsyncProvisionerImplemented(); res.IsAsync && !asyncImplemented {
 		return domain.ProvisionedServiceSpec{}, ErrAsyncProvisionNotImplemented
 	}
 
@@ -183,7 +208,7 @@ func (b *Broker) Deprovision(
 		Details:    details,
 	}
 
-	provisioner, ok := b.Provider.(provider.Provisioner)
+	provisioner, ok := b.ProvisionerImplemented()
 	if !ok {
 		return domain.DeprovisionServiceSpec{}, ErrNotImplemented
 	}
@@ -194,7 +219,7 @@ func (b *Broker) Deprovision(
 	if res == nil {
 		return domain.DeprovisionServiceSpec{}, ErrNilResponse
 	}
-	if _, asyncImplemented := b.Provider.(provider.AsyncProvisioner); res.IsAsync && !asyncImplemented {
+	if _, asyncImplemented := b.AsyncProvisionerImplemented(); res.IsAsync && !asyncImplemented {
 		return domain.DeprovisionServiceSpec{}, ErrAsyncProvisionNotImplemented
 	}
 
@@ -237,7 +262,7 @@ func (b *Broker) Bind(
 		AsyncAllowed: asyncAllowed,
 	}
 
-	binder, ok := b.Provider.(provider.Binder)
+	binder, ok := b.BinderImplemented()
 	if !ok {
 		return domain.Binding{}, ErrNotImplemented
 	}
@@ -248,7 +273,7 @@ func (b *Broker) Bind(
 	if res == nil {
 		return domain.Binding{}, ErrNilResponse
 	}
-	if _, asyncImplemented := b.Provider.(provider.AsyncBinder); res.IsAsync && !asyncImplemented {
+	if _, asyncImplemented := b.AsyncBinderImplemented(); res.IsAsync && !asyncImplemented {
 		return domain.Binding{}, ErrAsyncBindNotImplemented
 	}
 
@@ -290,7 +315,7 @@ func (b *Broker) Unbind(
 		AsyncAllowed: asyncAllowed,
 	}
 
-	binder, ok := b.Provider.(provider.Binder)
+	binder, ok := b.BinderImplemented()
 	if !ok {
 		return domain.UnbindSpec{}, ErrNotImplemented
 	}
@@ -301,7 +326,7 @@ func (b *Broker) Unbind(
 	if res == nil {
 		return domain.UnbindSpec{}, ErrNilResponse
 	}
-	if _, asyncImplemented := b.Provider.(provider.AsyncBinder); res.IsAsync && !asyncImplemented {
+	if _, asyncImplemented := b.AsyncBinderImplemented(); res.IsAsync && !asyncImplemented {
 		return domain.UnbindSpec{}, ErrAsyncBindNotImplemented
 	}
 
@@ -332,7 +357,7 @@ func (b *Broker) GetBinding(
 		BindingID:  bindingID,
 	}
 
-	binder, ok := b.Provider.(provider.AsyncBinder)
+	binder, ok := b.AsyncBinderImplemented()
 	if !ok {
 		return domain.GetBindingSpec{}, ErrNotImplemented
 	}
@@ -398,7 +423,7 @@ func (b *Broker) Update(
 		Plan:       plan,
 	}
 
-	updater, ok := b.Provider.(provider.Updater)
+	updater, ok := b.UpdaterImplemented()
 	if !ok {
 		return domain.UpdateServiceSpec{}, ErrNotImplemented
 	}
@@ -437,7 +462,7 @@ func (b *Broker) LastOperation(
 		PollDetails: pollDetails,
 	}
 
-	provisioner, ok := b.Provider.(provider.AsyncProvisioner)
+	provisioner, ok := b.AsyncProvisionerImplemented()
 	if !ok {
 		return domain.LastOperation{}, ErrNotImplemented
 	}
@@ -478,7 +503,7 @@ func (b *Broker) LastBindingOperation(
 		PollDetails: pollDetails,
 	}
 
-	binder, ok := b.Provider.(provider.AsyncBinder)
+	binder, ok := b.AsyncBinderImplemented()
 	if !ok {
 		return domain.LastOperation{}, ErrNotImplemented
 	}
