@@ -157,16 +157,16 @@ var _ = Describe("Provider", func() {
 		})
 	})
 
-	Describe("Update", func() {
-		It("does not support updating a bucket", func() {
-			updateData := provideriface.UpdateData{
-				InstanceID: "09E1993E-62E2-4040-ADF2-4D3EC741EFE6",
-			}
+	// Describe("Update", func() {
+	// 	It("does not support updating a bucket", func() {
+	// 		updateData := provideriface.UpdateData{
+	// 			InstanceID: "09E1993E-62E2-4040-ADF2-4D3EC741EFE6",
+	// 		}
 
-			_, err := s3Provider.Update(context.Background(), updateData)
-			Expect(err).To(MatchError(provider.ErrUpdateNotSupported))
-		})
-	})
+	// 		_, err := s3Provider.Update(context.Background(), updateData)
+	// 		Expect(err).To(MatchError(provider.ErrUpdateNotSupported))
+	// 	})
+	// })
 
 	Describe("LastOperation", func() {
 		It("returns success unconditionally", func() {

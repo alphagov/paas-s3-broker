@@ -34,6 +34,7 @@ var (
 type Client interface {
 	CreateBucket(provisionData provider.ProvisionData) error
 	DeleteBucket(name string) error
+	VersionBucket(name string, status string) error
 	AddUserToBucket(bindData provider.BindData) (BucketCredentials, error)
 	RemoveUserFromBucketAndDeleteUser(bindingID, bucketName string) error
 }
@@ -285,6 +286,24 @@ func (s *S3Client) DeleteBucket(name string) error {
 	return err
 }
 
+func (s *S3Client) VersionBucket(name string, status string) error {
+	logger := s.logger.Session("version-bucket")
+	fullBucketName := s.buildBucketName(name)
+
+	logger.Info("version-bucket", lager.Data{"bucket": fullBucketName})
+	_, err := s.s3Client.PutBucketVersioning(&s3.PutBucketVersioningInput{
+		Bucket: aws.String(fullBucketName),
+		VersioningConfiguration: &s3.VersioningConfiguration{
+			Status: aws.String(status),
+		}})
+	if err != nil {
+		logger.Error("version-bucket", err)
+		if awsErr, ok := err.(awserr.Error); ok && awsErr.Code() == "NoSuchBucket" {
+			return ErrNoSuchResources
+		}
+	}
+	return err
+}
 func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredentials, error) {
 	logger := s.logger.Session("add-user-to-bucket")
 	var permissions policy.Permissions = policy.ReadWritePermissions{}
@@ -356,7 +375,7 @@ func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredential
 	if s.commonUserPolicyArn != "" {
 		logger.Info("add-common-user-policy", lager.Data{
 			"bucket": fullBucketName,
-			"user": username,
+			"user":   username,
 		})
 		_, err = s.iamClient.AttachUserPolicy(&iam.AttachUserPolicyInput{
 			PolicyArn: aws.String(s.commonUserPolicyArn),
@@ -372,7 +391,7 @@ func (s *S3Client) AddUserToBucket(bindData provider.BindData) (BucketCredential
 	if !bindParams.AllowExternalAccess {
 		logger.Info("disallow-external-access", lager.Data{
 			"bucket": fullBucketName,
-			"user": username,
+			"user":   username,
 		})
 		_, err = s.iamClient.AttachUserPolicy(&iam.AttachUserPolicyInput{
 			PolicyArn: aws.String(s.ipRestrictionPolicyArn),
