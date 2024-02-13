@@ -28,6 +28,7 @@ const (
 
 var (
 	ErrNoSuchResources = errors.New("no such resources found")
+	ErrWrongParams     = errors.New("wrong parameter data")
 )
 
 //go:generate go run github.com/maxbrunsfeld/counterfeiter/v6 -o fakes/fake_s3_client.go . Client
@@ -291,6 +292,15 @@ func (s *S3Client) VersionBucket(name string, status string) error {
 	fullBucketName := s.buildBucketName(name)
 
 	logger.Info("version-bucket", lager.Data{"bucket": fullBucketName})
+
+	switch status {
+	case s3.BucketVersioningStatusEnabled, s3.BucketVersioningStatusSuspended:
+	default:
+		logger.Error("version-bucket", ErrWrongParams)
+		return ErrWrongParams
+
+	}
+
 	_, err := s.s3Client.PutBucketVersioning(&s3.PutBucketVersioningInput{
 		Bucket: aws.String(fullBucketName),
 		VersioningConfiguration: &s3.VersioningConfiguration{
