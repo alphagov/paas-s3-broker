@@ -37,7 +37,7 @@ code.cloudfoundry.org/tlsconfig
 # github.com/Masterminds/semver v1.4.2
 ## explicit
 github.com/Masterminds/semver
-# github.com/alphagov/paas-service-broker-base v0.11.0
+# github.com/alphagov/paas-service-broker-base v0.12.0
 ## explicit; go 1.13
 github.com/alphagov/paas-service-broker-base/broker
 github.com/alphagov/paas-service-broker-base/provider
