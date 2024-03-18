@@ -2,6 +2,7 @@ package provider
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 
 	"github.com/alphagov/paas-s3-broker/s3"
@@ -70,9 +71,24 @@ func (s *S3Provider) Unbind(ctx context.Context, unbindData provideriface.Unbind
 
 var ErrUpdateNotSupported = errors.New("Updating the S3 bucket is currently not supported")
 
+type S3UpdateParams struct {
+	VersioningStatus *string `json:"versioning_status,omitempty"`
+}
+
 func (s *S3Provider) Update(ctx context.Context, updateData provideriface.UpdateData) (
 	res *domain.UpdateServiceSpec, err error) {
-		return &domain.UpdateServiceSpec{IsAsync: false,DashboardURL: "", OperationData: ""}, ErrUpdateNotSupported
+	params := S3UpdateParams{}
+	if updateData.Details.RawParameters != nil {
+		if err := json.Unmarshal(updateData.Details.RawParameters, &params); err != nil {
+			return nil, err
+		}
+	}
+
+	err = s.client.VersionBucket(updateData.InstanceID, *params.VersioningStatus)
+	if err != nil {
+		return nil, err
+	}
+	return &domain.UpdateServiceSpec{IsAsync: false, OperationData: "update"}, nil
 }
 
 func (s *S3Provider) LastOperation(ctx context.Context, lastOperationData provideriface.LastOperationData) (

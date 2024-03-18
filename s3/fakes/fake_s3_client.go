@@ -56,6 +56,18 @@ type FakeClient struct {
 	removeUserFromBucketAndDeleteUserReturnsOnCall map[int]struct {
 		result1 error
 	}
+	VersionBucketStub        func(string, string) error
+	versionBucketMutex       sync.RWMutex
+	versionBucketArgsForCall []struct {
+		arg1 string
+		arg2 string
+	}
+	versionBucketReturns struct {
+		result1 error
+	}
+	versionBucketReturnsOnCall map[int]struct {
+		result1 error
+	}
 	invocations      map[string][][]interface{}
 	invocationsMutex sync.RWMutex
 }
@@ -304,6 +316,67 @@ func (fake *FakeClient) RemoveUserFromBucketAndDeleteUserReturnsOnCall(i int, re
 	}{result1}
 }
 
+func (fake *FakeClient) VersionBucket(arg1 string, arg2 string) error {
+	fake.versionBucketMutex.Lock()
+	ret, specificReturn := fake.versionBucketReturnsOnCall[len(fake.versionBucketArgsForCall)]
+	fake.versionBucketArgsForCall = append(fake.versionBucketArgsForCall, struct {
+		arg1 string
+		arg2 string
+	}{arg1, arg2})
+	fake.recordInvocation("VersionBucket", []interface{}{arg1, arg2})
+	fake.versionBucketMutex.Unlock()
+	if fake.VersionBucketStub != nil {
+		return fake.VersionBucketStub(arg1, arg2)
+	}
+	if specificReturn {
+		return ret.result1
+	}
+	fakeReturns := fake.versionBucketReturns
+	return fakeReturns.result1
+}
+
+func (fake *FakeClient) VersionBucketCallCount() int {
+	fake.versionBucketMutex.RLock()
+	defer fake.versionBucketMutex.RUnlock()
+	return len(fake.versionBucketArgsForCall)
+}
+
+func (fake *FakeClient) VersionBucketCalls(stub func(string, string) error) {
+	fake.versionBucketMutex.Lock()
+	defer fake.versionBucketMutex.Unlock()
+	fake.VersionBucketStub = stub
+}
+
+func (fake *FakeClient) VersionBucketArgsForCall(i int) (string, string) {
+	fake.versionBucketMutex.RLock()
+	defer fake.versionBucketMutex.RUnlock()
+	argsForCall := fake.versionBucketArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2
+}
+
+func (fake *FakeClient) VersionBucketReturns(result1 error) {
+	fake.versionBucketMutex.Lock()
+	defer fake.versionBucketMutex.Unlock()
+	fake.VersionBucketStub = nil
+	fake.versionBucketReturns = struct {
+		result1 error
+	}{result1}
+}
+
+func (fake *FakeClient) VersionBucketReturnsOnCall(i int, result1 error) {
+	fake.versionBucketMutex.Lock()
+	defer fake.versionBucketMutex.Unlock()
+	fake.VersionBucketStub = nil
+	if fake.versionBucketReturnsOnCall == nil {
+		fake.versionBucketReturnsOnCall = make(map[int]struct {
+			result1 error
+		})
+	}
+	fake.versionBucketReturnsOnCall[i] = struct {
+		result1 error
+	}{result1}
+}
+
 func (fake *FakeClient) Invocations() map[string][][]interface{} {
 	fake.invocationsMutex.RLock()
 	defer fake.invocationsMutex.RUnlock()
@@ -315,6 +388,8 @@ func (fake *FakeClient) Invocations() map[string][][]interface{} {
 	defer fake.deleteBucketMutex.RUnlock()
 	fake.removeUserFromBucketAndDeleteUserMutex.RLock()
 	defer fake.removeUserFromBucketAndDeleteUserMutex.RUnlock()
+	fake.versionBucketMutex.RLock()
+	defer fake.versionBucketMutex.RUnlock()
 	copiedInvocations := map[string][][]interface{}{}
 	for key, value := range fake.invocations {
 		copiedInvocations[key] = value

@@ -158,13 +158,17 @@ var _ = Describe("Provider", func() {
 	})
 
 	Describe("Update", func() {
-		It("does not support updating a bucket", func() {
+		It("does support updating a bucket", func() {
 			updateData := provideriface.UpdateData{
 				InstanceID: "09E1993E-62E2-4040-ADF2-4D3EC741EFE6",
+				Details: domain.UpdateDetails{
+					RawParameters: []byte(`{"versioning_status": "Enabled"}`),
+			    },
 			}
 
-			_, err := s3Provider.Update(context.Background(), updateData)
-			Expect(err).To(MatchError(provider.ErrUpdateNotSupported))
+			state, err := s3Provider.Update(context.Background(), updateData)
+			Expect(err).NotTo(HaveOccurred())
+			Expect(state.OperationData).To(Equal("update"))
 		})
 	})
 

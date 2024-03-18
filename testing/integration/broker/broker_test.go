@@ -175,6 +175,62 @@ var _ = Describe("Broker", func() {
 		Expect(resp.StatusCode).To(Equal(http.StatusOK))
 	})
 
+	It("enables versioning to buckets correctly", func() {
+		By("initialising")
+		s3ClientConfig, brokerTester := initialise(*BrokerSuiteData.LocalhostIAMPolicyARN, "", BrokerSuiteData.PermissionsBoundaryIAMPolicyARN)
+
+		By("provisioning a bucket")
+		res := brokerTester.Provision(instanceID, brokertesting.RequestBody{
+			ServiceID:  serviceID,
+			PlanID:     planID,
+			Parameters: &brokertesting.ConfigurationValues{"public_bucket": false},
+		}, ASYNC_ALLOWED)
+		Expect(res.Code).To(Equal(http.StatusCreated))
+
+		defer helpers.DeprovisionService(brokerTester, instanceID, serviceID, planID)
+
+		By("Enabling versioning")
+		parameters := map[string]interface{}{
+			"versioning_status": "Enabled",
+		}
+		res = brokerTester.Update(instanceID, brokertesting.RequestBody{
+			Parameters: &parameters,
+		}, false)
+		Expect(res.Code).To(Equal(http.StatusAccepted))
+
+		By("binding an app as a read-write user")
+		res = brokerTester.Bind(instanceID, binding2ID, brokertesting.RequestBody{
+			ServiceID: serviceID,
+			PlanID:    planID,
+			Parameters: &brokertesting.ConfigurationValues{
+				"permissions": "read-write",
+				// We must allow external access with these credentials, because the tests do not run from a diego cell
+				"allow_external_access": true,
+			},
+		}, ASYNC_ALLOWED)
+		Expect(res.Code).To(Equal(http.StatusCreated))
+		defer helpers.Unbind(brokerTester, instanceID, serviceID, planID, binding2ID)
+
+		By("asserting the credentials returned work for both reading and writing")
+		readWriteBindingCreds := extractCredentials(res)
+		helpers.AssertBucketReadWriteAccess(readWriteBindingCreds, s3ClientConfig.ResourcePrefix, instanceID, s3ClientConfig.AWSRegion)
+
+		By("writing temp file to the bucket")
+		helpers.WriteTempFile(readWriteBindingCreds, s3ClientConfig.ResourcePrefix, instanceID, s3ClientConfig.AWSRegion)
+		defer func() {
+			helpers.DeleteTempFile(readWriteBindingCreds, s3ClientConfig.ResourcePrefix, instanceID, s3ClientConfig.AWSRegion)
+		}()
+
+		By("Disabling versioning")
+		parameters = map[string]interface{}{
+			"versioning_status": "Suspended",
+		}
+		res = brokerTester.Update(instanceID, brokertesting.RequestBody{
+			Parameters: &parameters,
+		}, false)
+		Expect(res.Code).To(Equal(http.StatusAccepted))
+	})
+
 	It("manages private buckets correctly", func() {
 		By("initialising")
 		s3ClientConfig, brokerTester := initialise(*BrokerSuiteData.LocalhostIAMPolicyARN, "", BrokerSuiteData.PermissionsBoundaryIAMPolicyARN)
