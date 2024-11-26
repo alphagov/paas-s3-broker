@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/alphagov/paas-s3-broker/s3/policy"
-	"github.com/pivotal-cf/brokerapi/domain"
+	"github.com/pivotal-cf/brokerapi/v10/domain"
 
 	"code.cloudfoundry.org/lager"
 	"github.com/alphagov/paas-s3-broker/s3"

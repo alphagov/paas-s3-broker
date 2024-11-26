@@ -25,7 +25,7 @@ import (
 	"github.com/alphagov/paas-s3-broker/testing/integration/helpers"
 	"github.com/alphagov/paas-service-broker-base/broker"
 	brokertesting "github.com/alphagov/paas-service-broker-base/testing"
-	"github.com/pivotal-cf/brokerapi"
+	"github.com/pivotal-cf/brokerapi/v10"
 	uuid "github.com/satori/go.uuid"
 )
 

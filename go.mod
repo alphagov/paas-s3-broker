@@ -9,7 +9,7 @@ require (
 	github.com/olekukonko/tablewriter v0.0.4
 	github.com/onsi/ginkgo/v2 v2.22.0
 	github.com/onsi/gomega v1.36.0
-	github.com/pivotal-cf/brokerapi v6.4.2+incompatible
+	github.com/pivotal-cf/brokerapi/v10 v10.2.0
 	github.com/satori/go.uuid v1.2.0
 )
 
@@ -26,13 +26,11 @@ require (
 	github.com/google/go-cmp v0.6.0 // indirect
 	github.com/google/pprof v0.0.0-20241122213907-cbe949e5a41b // indirect
 	github.com/google/uuid v1.6.0 // indirect
-	github.com/gorilla/mux v1.8.0 // indirect
 	github.com/jmespath/go-jmespath v0.0.0-20180206201540-c2b33e8439af // indirect
 	github.com/mattn/go-runewidth v0.0.7 // indirect
 	github.com/openzipkin/zipkin-go v0.4.3 // indirect
 	github.com/pborman/uuid v1.2.1 // indirect
 	github.com/phayes/freeport v0.0.0-20220201140144-74d24b5ae9f5 // indirect
-	github.com/pivotal-cf/brokerapi/v10 v10.2.0 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/tedsuo/ifrit v0.0.0-20230516164442-7862c310ad26 // indirect
 	golang.org/x/mod v0.22.0 // indirect
