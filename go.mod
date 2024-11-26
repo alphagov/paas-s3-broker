@@ -1,7 +1,7 @@
 module github.com/alphagov/paas-s3-broker
 
 require (
-	code.cloudfoundry.org/lager v2.0.0+incompatible
+	code.cloudfoundry.org/lager/v3 v3.16.0
 	github.com/alphagov/paas-service-broker-base v0.13.0
 	github.com/aws/aws-sdk-go v1.27.1
 	github.com/cloudfoundry-community/go-cfclient v0.0.0-20190808214049-35bcce23fc5f
@@ -15,7 +15,6 @@ require (
 
 require (
 	code.cloudfoundry.org/gofileutils v0.0.0-20170111115228-4d0c80011a0f // indirect
-	code.cloudfoundry.org/lager/v3 v3.16.0 // indirect
 	code.cloudfoundry.org/locket v0.0.0-20241029002438-07ee8ada566a // indirect
 	code.cloudfoundry.org/tlsconfig v0.10.0 // indirect
 	github.com/Masterminds/semver v1.4.2 // indirect

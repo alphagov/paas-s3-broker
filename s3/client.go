@@ -9,7 +9,7 @@ import (
 
 	"strings"
 
-	"code.cloudfoundry.org/lager"
+	"code.cloudfoundry.org/lager/v3"
 	"github.com/alphagov/paas-s3-broker/s3/policy"
 	"github.com/alphagov/paas-service-broker-base/provider"
 	"github.com/aws/aws-sdk-go/aws"

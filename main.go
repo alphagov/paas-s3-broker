@@ -12,7 +12,7 @@ import (
 	"net"
 	"net/http"
 
-	"code.cloudfoundry.org/lager"
+	"code.cloudfoundry.org/lager/v3"
 	"github.com/alphagov/paas-s3-broker/provider"
 	"github.com/alphagov/paas-s3-broker/s3"
 	"github.com/alphagov/paas-service-broker-base/broker"

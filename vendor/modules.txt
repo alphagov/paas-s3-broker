@@ -1,9 +1,6 @@
 # code.cloudfoundry.org/gofileutils v0.0.0-20170111115228-4d0c80011a0f
 ## explicit
 code.cloudfoundry.org/gofileutils/fileutils
-# code.cloudfoundry.org/lager v2.0.0+incompatible
-## explicit
-code.cloudfoundry.org/lager
 # code.cloudfoundry.org/lager/v3 v3.16.0
 ## explicit; go 1.22.0
 code.cloudfoundry.org/lager/v3

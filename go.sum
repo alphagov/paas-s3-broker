@@ -596,8 +596,6 @@ code.cloudfoundry.org/gofileutils v0.0.0-20170111115228-4d0c80011a0f h1:UrKzEwTg
 code.cloudfoundry.org/gofileutils v0.0.0-20170111115228-4d0c80011a0f/go.mod h1:sk5LnIjB/nIEU7yP5sDQExVm62wu0pBh3yrElngUisI=
 code.cloudfoundry.org/inigo v0.0.0-20200810212058-8c6981a34177 h1:0waDxMoELzZKIPm5CSIVCqaeJkO9FnYY1BJk9mdAt/A=
 code.cloudfoundry.org/inigo v0.0.0-20200810212058-8c6981a34177/go.mod h1:1ZB1JCh2FAp+SqX79ve6dc8YREvbsziULEOncAilX4Q=
-code.cloudfoundry.org/lager v2.0.0+incompatible h1:WZwDKDB2PLd/oL+USK4b4aEjUymIej9My2nUQ9oWEwQ=
-code.cloudfoundry.org/lager v2.0.0+incompatible/go.mod h1:O2sS7gKP3HM2iemG+EnwvyNQK7pTSC6Foi4QiMp9sSk=
 code.cloudfoundry.org/lager/v3 v3.16.0 h1:v7LnlPN+6tiLmE4qHLP4FHRwywRoG3cNE43vIS35O2E=
 code.cloudfoundry.org/lager/v3 v3.16.0/go.mod h1:BBAP7NdUAZLLhJhcbjFWX4w4uNpDWgSMMAPc6lX/wT0=
 code.cloudfoundry.org/locket v0.0.0-20241029002438-07ee8ada566a h1:7sWm/KOnlSRFgKP8sKUc28qbbFv0xIcUa4JkHoDGT7U=
