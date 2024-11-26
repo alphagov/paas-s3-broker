@@ -3,7 +3,7 @@ package provider
 import (
 	"context"
 
-	"github.com/pivotal-cf/brokerapi/domain"
+	"github.com/pivotal-cf/brokerapi/v10/domain"
 )
 
 type Provider interface{}

@@ -16,7 +16,7 @@ import (
 	"fmt"
 	"sync"
 
-	"code.cloudfoundry.org/lager"
+	"code.cloudfoundry.org/lager/v3"
 	"code.cloudfoundry.org/locket/grpcserver"
 	"code.cloudfoundry.org/locket/models"
 	"github.com/phayes/freeport"

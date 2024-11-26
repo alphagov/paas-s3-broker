@@ -9,11 +9,11 @@ import (
 
 	"errors"
 
-	"code.cloudfoundry.org/lager"
+	"code.cloudfoundry.org/lager/v3"
 	locket_models "code.cloudfoundry.org/locket/models"
 	"github.com/alphagov/paas-service-broker-base/provider"
-	"github.com/pivotal-cf/brokerapi/domain"
-	"github.com/pivotal-cf/brokerapi/domain/apiresponses"
+	"github.com/pivotal-cf/brokerapi/v10/domain"
+	"github.com/pivotal-cf/brokerapi/v10/domain/apiresponses"
 )
 
 var (
@@ -343,6 +343,7 @@ func (b *Broker) GetBinding(
 	ctx context.Context,
 	instanceID string,
 	bindingID string,
+	details domain.FetchBindingDetails,
 ) (domain.GetBindingSpec, error) {
 	b.logger.Debug("get-binding-start", lager.Data{
 		"instance-id": instanceID,
@@ -524,7 +525,7 @@ func (b *Broker) LastBindingOperation(
 	return *res, nil
 }
 
-func (b *Broker) GetInstance(ctx context.Context, instanceID string) (domain.GetInstanceDetailsSpec, error) {
+func (b *Broker) GetInstance(ctx context.Context, instanceID string, details domain.FetchInstanceDetails) (domain.GetInstanceDetailsSpec, error) {
 	return domain.GetInstanceDetailsSpec{}, errors.New("not implemented")
 }
 

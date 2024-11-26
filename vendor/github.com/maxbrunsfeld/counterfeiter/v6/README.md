@@ -1,4 +1,4 @@
-# `counterfeiter` [![Build Status](https://travis-ci.org/maxbrunsfeld/counterfeiter.svg?branch=master)](https://travis-ci.org/maxbrunsfeld/counterfeiter) [![Build status](https://ci.appveyor.com/api/projects/status/0j2v7pt06lp9yanm/branch/master?svg=true)](https://ci.appveyor.com/project/maxbrunsfeld/counterfeiter/branch/master)
+# `counterfeiter` [![GitHub Actions](https://github.com/maxbrunsfeld/counterfeiter/actions/workflows/go.yml/badge.svg)](https://github.com/maxbrunsfeld/counterfeiter/actions/workflows/go.yml) [![Go Report Card](https://goreportcard.com/badge/github.com/maxbrunsfeld/counterfeiter/v6)](https://goreportcard.com/report/github.com/maxbrunsfeld/counterfeiter/v6) [![GoDoc](https://godoc.org/github.com/maxbrunsfeld/counterfeiter/v6?status.svg)](https://godoc.org/github.com/maxbrunsfeld/counterfeiter/v6)
 
 When writing unit-tests for an object, it is often useful to have fake implementations
 of the object's collaborators. In go, such fake implementations cannot be generated
@@ -16,20 +16,20 @@ If you are having problems with `counterfeiter` and are not using a supported ve
 
 ### Using `counterfeiter`
 
-We recommend you use [`go modules`](https://blog.golang.org/using-go-modules) when working with counterfeiter.
+⚠️ Please use [`go modules`](https://blog.golang.org/using-go-modules) when working with counterfeiter.
 
 Typically, `counterfeiter` is used in `go generate` directives. It can be frustrating when you change your interface declaration and suddenly all of your generated code is suddenly out-of-date. The best practice here is to use the [`go generate` command](https://blog.golang.org/generate) to make it easier to keep your test doubles up to date.
 
 #### Step 1 - Create `tools.go`
 
-You can take a dependency on tools by creating a `tools.go` file, as described in [How can I track tool dependencies for a module?](https://github.com/golang/go/wiki/Modules#how-can-i-track-tool-dependencies-for-a-module). This ensures that everyone working with your module is using the same version of each tool you use.
+You can take a dependency on tools by creating a `tools.go` file, as described in [How can I track tool dependencies for a module?](https://go.dev/wiki/Modules#how-can-i-track-tool-dependencies-for-a-module). This ensures that everyone working with your module is using the same version of each tool you use.
 
 ```shell
 $ cat tools/tools.go
 ```
 
 ```go
-// +build tools
+//go:build tools
 
 package tools
 
@@ -116,7 +116,8 @@ $ go run github.com/maxbrunsfeld/counterfeiter/v6
 
 USAGE
 	counterfeiter
-		[-generate] [-o <output-path>] [-p] [--fake-name <fake-name>]
+		[-generate>] [-o <output-path>] [-p] [--fake-name <fake-name>]
+		[-header <header-file>]
 		[<source-path>] <interface> [-]
 ```
 
@@ -125,12 +126,13 @@ USAGE
 This is unnecessary if you're using the approach described above, but does allow you to invoke `counterfeiter` in your shell _outside_ of a module:
 
 ```shell
-$ GO111MODULE=off go get -u github.com/maxbrunsfeld/counterfeiter
-$ counterfeiter
+$ go install github.com/maxbrunsfeld/counterfeiter/v6
+$ ~/go/bin/counterfeiter
 
 USAGE
 	counterfeiter
-		[-generate] [-o <output-path>] [-p] [--fake-name <fake-name>]
+		[-generate>] [-o <output-path>] [-p] [--fake-name <fake-name>]
+		[-header <header-file>]
 		[<source-path>] <interface> [-]
 ```
 
@@ -157,7 +159,7 @@ Wrote `FakeMySpecialInterface` to `path/to/foo/foofakes/fake_my_special_interfac
 
 ### Using Test Doubles In Your Tests
 
-Instantiate fakes`:
+Instantiate fakes:
 
 ```go
 import "my-repo/path/to/foo/foofakes"

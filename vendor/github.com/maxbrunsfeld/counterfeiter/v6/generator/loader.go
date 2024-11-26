@@ -23,14 +23,15 @@ func (f *Fake) loadPackages(c Cacher, workingDir string) error {
 	}
 	importPath := f.TargetPackage
 	if !filepath.IsAbs(importPath) {
-		bp, err := build.Import(f.TargetPackage, workingDir, build.FindOnly)
+		ctx := getBuildContext(workingDir)
+		bp, err := ctx.Import(f.TargetPackage, workingDir, build.FindOnly)
 		if err != nil {
 			return err
 		}
 		importPath = bp.ImportPath
 	}
 	p, err := packages.Load(&packages.Config{
-		Mode:  packages.NeedName | packages.NeedFiles | packages.NeedImports | packages.NeedDeps | packages.NeedTypes,
+		Mode:  packages.NeedName | packages.NeedFiles | packages.NeedImports | packages.NeedDeps | packages.NeedTypes | packages.NeedTypesInfo,
 		Dir:   workingDir,
 		Tests: true,
 	}, importPath)
@@ -129,10 +130,10 @@ func (f *Fake) addImportsFor(typ types.Type) {
 		f.addImportsFor(t.Elem())
 	case *types.Chan:
 		f.addImportsFor(t.Elem())
+	case *types.Alias:
+		f.addImportsForNamedType(t)
 	case *types.Named:
-		if t.Obj() != nil && t.Obj().Pkg() != nil {
-			f.Imports.Add(t.Obj().Pkg().Name(), t.Obj().Pkg().Path())
-		}
+		f.addImportsForNamedType(t)
 	case *types.Slice:
 		f.addImportsFor(t.Elem())
 	case *types.Array:
@@ -147,5 +148,18 @@ func (f *Fake) addImportsFor(typ types.Type) {
 		}
 	default:
 		log.Printf("!!! WARNING: Missing case for type %s\n", reflect.TypeOf(typ).String())
+	}
+}
+
+func (f *Fake) addImportsForNamedType(t interface {
+	Obj() *types.TypeName
+	TypeArgs() *types.TypeList
+}) {
+	if t.Obj() != nil && t.Obj().Pkg() != nil {
+		typeArgs := t.TypeArgs()
+		for i := 0; i < typeArgs.Len(); i++ {
+			f.addImportsFor(typeArgs.At(i))
+		}
+		f.Imports.Add(t.Obj().Pkg().Name(), t.Obj().Pkg().Path())
 	}
 }
