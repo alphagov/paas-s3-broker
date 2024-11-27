@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"code.cloudfoundry.org/lager"
+	"code.cloudfoundry.org/lager/v3"
 	"code.cloudfoundry.org/locket"
 	locket_models "code.cloudfoundry.org/locket/models"
 	"google.golang.org/grpc"

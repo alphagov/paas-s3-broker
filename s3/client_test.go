@@ -8,9 +8,9 @@ import (
 	"time"
 
 	"github.com/alphagov/paas-s3-broker/s3/policy"
-	"github.com/pivotal-cf/brokerapi/domain"
+	"github.com/pivotal-cf/brokerapi/v10/domain"
 
-	"code.cloudfoundry.org/lager"
+	"code.cloudfoundry.org/lager/v3"
 	"github.com/alphagov/paas-s3-broker/s3"
 	fakeClient "github.com/alphagov/paas-s3-broker/s3/fakes"
 	"github.com/alphagov/paas-service-broker-base/provider"

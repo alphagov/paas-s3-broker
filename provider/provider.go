@@ -6,8 +6,8 @@ import (
 
 	"github.com/alphagov/paas-s3-broker/s3"
 	provideriface "github.com/alphagov/paas-service-broker-base/provider"
-	"github.com/pivotal-cf/brokerapi/domain"
-	"github.com/pivotal-cf/brokerapi/domain/apiresponses"
+	"github.com/pivotal-cf/brokerapi/v10/domain"
+	"github.com/pivotal-cf/brokerapi/v10/domain/apiresponses"
 )
 
 type S3Provider struct {
